@@ -31,18 +31,20 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
       {/* Page header */}
-      <div className="mb-2 flex items-center gap-3">
-        <BookOpen size={28} className="text-bmj-red" aria-hidden="true" />
-        <h1 className="font-display text-5xl text-bmj-white">
-          Weekend Briefing
-        </h1>
-      </div>
+      <header>
+        <div className="mb-2 flex items-center gap-3">
+          <BookOpen size={28} className="text-bmj-red" aria-hidden="true" />
+          <h1 className="font-display text-5xl text-bmj-white">
+            Weekend Briefing
+          </h1>
+        </div>
 
-      <p className="mb-4 font-body text-base italic text-bmj-tan">
-        A weekly dispatch on the politics, philosophy, and health of the Black male experience.
-      </p>
+        <p className="mb-4 font-body text-base italic text-bmj-tan">
+          A weekly dispatch on the politics, philosophy, and health of the Black male experience.
+        </p>
 
-      <StarDivider className="mb-12" />
+        <StarDivider className="mb-12" />
+      </header>
 
       {/* Briefing list */}
       {visible.length === 0 ? (
