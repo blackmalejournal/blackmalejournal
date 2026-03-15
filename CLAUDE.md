@@ -1,0 +1,83 @@
+# THE BLACK MALE JOURNAL — Project Instructions
+
+## What This Project Is
+A full-stack website for The Black Male Journal, an independent media house and revolutionary
+masculinist platform. Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Supabase,
+and Stripe. Deployed on Vercel.
+
+## Brand System — NEVER deviate from these values
+Colors (use CSS variables from src/styles/brand.css):
+- --bmj-black: #0D0C0B (backgrounds)
+- --bmj-cream: #E8DCC8 (primary text on dark)
+- --bmj-red: #C0281F (accents, star icon, borders)
+- --bmj-amber: #C8852A (quote cards, highlights)
+- --bmj-brown: #3B2417 (secondary backgrounds)
+- --bmj-tan: #B8986A (metadata, dates)
+- --bmj-white: #F2EDE4 (maximum contrast text)
+
+Fonts (loaded via next/font/google):
+- Display/Headlines: Bebas Neue — always ALL-CAPS
+- Body: Libre Baskerville — editorial serif
+- Labels: Oswald — caps, wide tracking
+- Mono: IBM Plex Mono — dates, issue numbers
+
+PROHIBITED: pastels, gradients, purple, blue, neon, rounded corners > 4px,
+drop shadows, glassmorphism, or any "modern SaaS" aesthetic.
+
+Visual: Vintage propaganda poster + newspaper grid + Black Panther pamphlet energy.
+Textures: grain overlay on all sections, halftone dots on images.
+
+## Three Lenses (Content Taxonomy)
+All articles and content are categorized under exactly one lens:
+- health — physical/mental wellness, martial arts, discipline
+- philosophy — purpose, identity, masculinity, mindset
+- politics — power, policy, systems, community organizing
+
+## Architecture Rules
+- App Router only (no pages/ directory)
+- All routes under src/app/(public)/ for public pages
+- Auth routes under src/app/(auth)/
+- API routes under src/app/api/
+- Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /layout/ (nav, footer), /portal/ (member area)
+- Content files: src/content/articles/*.mdx and src/content/briefings/*.mdx
+- Lib: src/lib/supabase/, src/lib/stripe/, src/lib/analytics/
+
+## Code Style
+- Use TypeScript strict mode
+- Tailwind for all styling — no CSS modules, no styled-components
+- Use CSS variables (var(--bmj-*)) for all brand colors in Tailwind config
+- Server Components by default, "use client" only when needed
+- Zod for all form validation and API input validation
+- Use lucide-react for icons
+- Framer Motion for page transitions and scroll animations only — keep it subtle
+
+## Content Model
+- Articles: title, slug, lens, tags[], excerpt, body (MDX), featured, access_tier (free|basic|premium), author, cover_image, published_at
+- Briefings: issue_number, title, slug, sections (JSON array of {title, body}), access_tier, cover_image, published_at
+- Members: email, tier (free|basic|premium), stripe_customer_id, stripe_subscription_id
+
+## Access Tiers
+- free: all public articles, briefing previews, video gallery, academy
+- basic: full briefing archive, select handbooks, member forum access
+- premium: everything — all handbooks, downloads, private content, early access
+
+## File Naming
+- Components: PascalCase (ArticleCard.tsx)
+- Pages: lowercase with hyphens if needed
+- Utilities: camelCase
+- MDX content: kebab-case (weekend-briefing-001.mdx)
+
+## Git Commits
+Follow conventional commits: feat:, fix:, chore:, docs:, style:, refactor:, test:
+Example: "feat: add Weekend Briefing archive page with lens filter"
+
+## Testing
+- Verify `npm run build` passes before any commit
+- Check TypeScript with `npx tsc --noEmit`
+- Visual check: every page must look correct at 375px (mobile) and 1440px (desktop)
+
+## Important Notes
+- Weekend Briefing is the flagship content format — it gets special design treatment
+- The Chairman is the sole author for now — default all author fields to "The Chairman"
+- Star motif from the logo is used as section dividers (horizontal rule replacement)
+- All images should have grain/halftone treatment applied via CSS
