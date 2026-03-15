@@ -11,6 +11,15 @@ export function ArticleBody({ body }: ArticleBodyProps) {
   return (
     <div className="mx-auto max-w-article space-y-6">
       {paragraphs.map((para, i) => {
+        // H3 heading
+        if (para.startsWith('### ')) {
+          return (
+            <h3 key={i} className="mt-8 font-display text-xl text-bmj-white">
+              {para.slice(4)}
+            </h3>
+          );
+        }
+        // H2 heading
         if (para.startsWith('## ')) {
           return (
             <h2 key={i} className="mt-10 font-display text-2xl text-bmj-white">
@@ -18,6 +27,7 @@ export function ArticleBody({ body }: ArticleBodyProps) {
             </h2>
           );
         }
+        // H1 heading
         if (para.startsWith('# ')) {
           return (
             <h2 key={i} className="mt-12 font-display text-3xl text-bmj-white">

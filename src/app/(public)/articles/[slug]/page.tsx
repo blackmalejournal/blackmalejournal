@@ -3,7 +3,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
+import { getArticleBySlug, getArticles, getMemberById } from '@/lib/supabase/queries';
+import { createClient } from '@/lib/supabase/server';
+import { calculateReadingTime } from '@/lib/utils';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
@@ -43,8 +45,23 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
+  // Access check (must happen before body enters the JSX tree)
+  const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
   const isFree = article.access_tier === 'free';
-  const readingTime = Math.ceil(article.body.split(' ').length / 200);
+  let hasAccess = isFree;
+
+  if (!isFree) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const member = await getMemberById(user.id);
+      if (member) {
+        hasAccess = TIER_RANK[member.tier] >= TIER_RANK[article.access_tier];
+      }
+    }
+  }
+
+  const readingTime = calculateReadingTime(article.body);
 
   const related = await getArticles({ lens: article.lens, limit: 4 });
   const relatedFiltered = related
@@ -87,7 +104,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             By {article.author}
           </span>
           <span className="font-mono text-xs text-bmj-tan/60">
-            {formattedDate} · {Math.max(1, readingTime)} min read
+            {formattedDate} · {readingTime} min read
           </span>
         </div>
 
@@ -109,12 +126,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       {/* Article body */}
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
-        {isFree ? (
+        {hasAccess ? (
           <ArticleBody body={article.body} />
         ) : (
-          <PaywallGate requiredTier={article.access_tier} previewBody={previewBody}>
-            <ArticleBody body={article.body} />
-          </PaywallGate>
+          <PaywallGate requiredTier={article.access_tier} previewBody={previewBody} />
         )}
       </div>
 
@@ -134,7 +149,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 slug={a.slug}
                 lens={a.lens}
                 excerpt={a.excerpt}
-                readingTime={Math.ceil(a.body.split(' ').length / 200)}
+                readingTime={calculateReadingTime(a.body)}
                 publishedAt={a.published_at}
                 coverImage={a.cover_image}
                 isPremium={a.access_tier !== 'free'}

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { getArticles } from '@/lib/supabase/queries';
-import { extractTags } from '@/lib/utils';
+import { extractTags, calculateReadingTime } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
@@ -28,7 +29,8 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
     ? (rawLens as Lens)
     : undefined;
   const activeTag = tag ?? null;
-  const page = Math.max(1, parseInt(rawPage ?? '1', 10));
+  const parsedPage = parseInt(rawPage ?? '1', 10);
+  const page = Math.max(1, isNaN(parsedPage) ? 1 : parsedPage);
 
   // Fetch one extra to know if there's a next page
   const articles = await getArticles({
@@ -55,10 +57,10 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
 
       {/* Filters */}
       <div className="mb-8 space-y-4">
-        <Suspense>
+        <Suspense fallback={<div className="h-10 border-b border-bmj-tan/20" />}>
           <LensFilterTabs activeLens={activeLens ?? 'all'} />
         </Suspense>
-        <Suspense>
+        <Suspense fallback={<div className="h-8" />}>
           <TagFilterRow tags={tags} activeTag={activeTag} />
         </Suspense>
       </div>
@@ -81,7 +83,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                 slug={article.slug}
                 lens={article.lens}
                 excerpt={article.excerpt}
-                readingTime={Math.ceil(article.body.split(' ').length / 200)}
+                readingTime={calculateReadingTime(article.body)}
                 publishedAt={article.published_at}
                 coverImage={article.cover_image}
                 isPremium={article.access_tier !== 'free'}
@@ -91,7 +93,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
 
           {hasMore && (
             <div className="mt-12 text-center">
-              <a
+              <Link
                 href={`/articles?${new URLSearchParams({
                   ...(activeLens ? { lens: activeLens } : {}),
                   ...(activeTag ? { tag: activeTag } : {}),
@@ -100,7 +102,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                 className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
               >
                 Load More
-              </a>
+              </Link>
             </div>
           )}
         </>

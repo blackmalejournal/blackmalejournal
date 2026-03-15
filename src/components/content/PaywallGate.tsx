@@ -1,36 +1,13 @@
+// src/components/content/PaywallGate.tsx
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
-import { getMemberById } from '@/lib/supabase/queries';
 import type { AccessTier } from '@/lib/supabase/types';
-
-const TIER_RANK: Record<AccessTier, number> = {
-  free: 0,
-  basic: 1,
-  premium: 2,
-};
 
 interface PaywallGateProps {
   requiredTier: AccessTier;
   previewBody: string;
-  children: React.ReactNode; // Full article body rendered when user has access
 }
 
-export async function PaywallGate({ requiredTier, previewBody, children }: PaywallGateProps) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  let userTierRank = -1;
-  if (user) {
-    const member = await getMemberById(user.id);
-    if (member) userTierRank = TIER_RANK[member.tier];
-  }
-
-  const hasAccess = userTierRank >= TIER_RANK[requiredTier];
-
-  if (hasAccess) return <>{children}</>;
-
+export function PaywallGate({ requiredTier, previewBody }: PaywallGateProps) {
   const tierLabel = requiredTier === 'basic' ? 'Basic' : 'Premium';
 
   return (
