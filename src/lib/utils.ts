@@ -1,7 +1,7 @@
 // src/lib/utils.ts
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import type { Lens } from '@/lib/supabase/types';
+import type { Article, Lens } from '@/lib/supabase/types';
 
 // Merges Tailwind classes safely — conditional classes without specificity conflicts.
 // Usage: cn('base-class', isActive && 'active-class', className)
@@ -83,4 +83,13 @@ export function getLensEmoji(lens: Lens): string {
     politics: '🖤',
   };
   return map[lens];
+}
+
+// Returns a sorted, de-duplicated list of all tags across the given articles.
+export function extractTags(articles: Article[]): string[] {
+  const set = new Set<string>();
+  for (const a of articles) {
+    for (const t of a.tags) set.add(t);
+  }
+  return Array.from(set).sort();
 }
