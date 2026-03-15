@@ -1,3 +1,80 @@
+/* src/app/globals.css */
+@import "../styles/brand.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Base layer overrides ─────────────────────────────────── */
+@layer base {
+  body {
+    background-color: var(--bmj-black);
+    color: var(--bmj-cream);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--bmj-white);
+  }
+
+  a {
+    color: var(--bmj-red);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+
+  ::selection {
+    background-color: var(--bmj-red);
+    color: var(--bmj-white);
+  }
+}
+
+/* ─── Utility classes ──────────────────────────────────────── */
+@layer utilities {
+  /* Film grain overlay — apply to a positioned container */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: var(--texture-url);
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Image halftone treatment */
+  .halftone {
+    filter: contrast(1.2) grayscale(0.3);
+    mix-blend-mode: multiply;
+  }
+
+  /* Accent borders */
+  .accent-border-top {
+    border-top: 3px solid var(--bmj-red);
+  }
+
+  .accent-border-bottom {
+    border-bottom: 3px solid var(--bmj-red);
+  }
+
+  /* Lens color classes */
+  .lens-health {
+    color: var(--bmj-amber);
+  }
+
+  .lens-philosophy {
+    color: var(--bmj-tan);
+  }
+
+  .lens-politics {
+    color: var(--bmj-red);
+  }
+}
