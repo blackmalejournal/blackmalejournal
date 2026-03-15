@@ -30,6 +30,7 @@ export function FeaturedArticles({ articles }: FeaturedArticlesProps) {
                 readingTime={calculateReadingTime(article.body)}
                 publishedAt={article.published_at}
                 coverImage={article.cover_image ?? undefined}
+                isPremium={article.access_tier !== 'free'}
               />
             ))}
           </div>
