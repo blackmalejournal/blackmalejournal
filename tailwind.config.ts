@@ -1,14 +1,42 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bmj: {
+          black:  "#0D0C0B",
+          cream:  "#E8DCC8",
+          red:    "#C0281F",
+          amber:  "#C8852A",
+          brown:  "#3B2417",
+          tan:    "#B8986A",
+          white:  "#F2EDE4",
+        },
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "Bebas Neue", "sans-serif"],
+        body:    ["var(--font-body)",    "Libre Baskerville", "serif"],
+        label:   ["var(--font-label)",   "Oswald", "sans-serif"],
+        mono:    ["var(--font-mono)",    "IBM Plex Mono", "monospace"],
+      },
+      maxWidth: {
+        content: "1200px",
+        article: "720px",
+        wide:    "1440px",
+      },
+      backgroundImage: {
+        "grain-texture": "var(--texture-url)",
+      },
+    },
   },
   plugins: [],
-} satisfies Config
+};
+
+export default config;
 
