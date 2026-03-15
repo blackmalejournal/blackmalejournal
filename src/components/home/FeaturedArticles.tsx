@@ -28,6 +28,7 @@ export function FeaturedArticles({ articles }: FeaturedArticlesProps) {
                 lens={article.lens}
                 excerpt={article.excerpt}
                 readingTime={calculateReadingTime(article.body)}
+                publishedAt={article.published_at}
                 coverImage={article.cover_image ?? undefined}
               />
             ))}
