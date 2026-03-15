@@ -13,10 +13,11 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
   const isPremium = briefing.access_tier !== 'free';
 
   return (
-    <article className="group relative border-l-4 border-bmj-red bg-bmj-brown transition-colors duration-200 hover:bg-bmj-brown/80">
+    <article className="group relative border-l-4 border-bmj-red bg-bmj-brown transition-colors duration-200 hover:border-bmj-red">
       <Link
         href={`/briefings/${briefing.slug}`}
         className="block p-6 no-underline sm:p-8"
+        aria-label={briefing.title}
       >
         {/* Issue + date row */}
         <div className="mb-3 flex items-center gap-4">
