@@ -142,7 +142,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
         {hasAccess ? (
           // Full access: render all sections
-          <div className="space-y-0">
+          <>
             {briefing.sections.map((section, index) => (
               <div key={index}>
                 {index > 0 && <StarDivider className="my-10" />}
@@ -160,7 +160,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
                 </section>
               </div>
             ))}
-          </div>
+          </>
         ) : (
           // Gated: show first section only + paywall
           <div>
