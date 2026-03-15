@@ -18,6 +18,7 @@ export function ShareButton() {
 
   return (
     <button
+      type="button"
       onClick={handleCopy}
       className="flex items-center gap-2 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
       aria-label="Copy link to this page"
