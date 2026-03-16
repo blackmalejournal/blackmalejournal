@@ -19,6 +19,7 @@ const NAV_LINKS = [
   { label: 'Resources', href: '/resources' },
   { label: 'Video', href: '/video' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'Contact', href: '/contact' },
 ];
 

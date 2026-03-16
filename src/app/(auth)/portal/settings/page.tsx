@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { getMemberById } from '@/lib/supabase/queries';
-import { TierBadge } from '@/components/portal/TierBadge';
+import { SubscriptionManager } from '@/components/portal/SubscriptionManager';
 import { SettingsForm } from './SettingsForm';
 import { signOut } from '../../actions';
 
@@ -87,20 +87,10 @@ export default async function SettingsPage({
         <h2 className="mb-4 font-display text-2xl text-bmj-white">
           SUBSCRIPTION
         </h2>
-        <div className="flex items-center gap-4">
-          <TierBadge tier={tier} />
-          <span className="font-body text-sm text-bmj-cream/70">
-            Current plan
-          </span>
-        </div>
-        {tier !== 'premium' && (
-          <Link
-            href="/signup?tier=premium"
-            className="mt-4 inline-block bg-bmj-red px-6 py-2 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
-          >
-            Upgrade
-          </Link>
-        )}
+        <SubscriptionManager
+          tier={tier}
+          hasSubscription={!!member?.stripe_subscription_id}
+        />
       </section>
 
       {/* Log Out */}

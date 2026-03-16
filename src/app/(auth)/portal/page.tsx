@@ -34,7 +34,12 @@ const TIER_ACCESS: Record<MemberTier, string[]> = {
   ],
 };
 
-export default async function PortalPage() {
+interface PortalPageProps {
+  searchParams: Promise<{ checkout?: string }>;
+}
+
+export default async function PortalPage({ searchParams }: PortalPageProps) {
+  const params = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
@@ -72,6 +77,22 @@ export default async function PortalPage() {
         </div>
       </div>
 
+      {params.checkout === 'success' && (
+        <div className="mb-6 border border-bmj-amber/40 bg-bmj-amber/10 p-4">
+          <p className="font-body text-sm text-bmj-amber">
+            Welcome aboard. Your subscription is active.
+          </p>
+        </div>
+      )}
+
+      {params.checkout === 'cancelled' && (
+        <div className="mb-6 border border-bmj-tan/30 bg-bmj-tan/5 p-4">
+          <p className="font-body text-sm text-bmj-tan">
+            Checkout was cancelled. No charges were made.
+          </p>
+        </div>
+      )}
+
       <StarDivider />
 
       {/* Your Access */}
@@ -105,7 +126,7 @@ export default async function PortalPage() {
               : 'Upgrade to Premium for complete access to everything.'}
           </p>
           <Link
-            href="/signup?tier=premium"
+            href="/pricing"
             className="inline-block bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
           >
             Upgrade Now

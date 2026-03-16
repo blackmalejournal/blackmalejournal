@@ -1,0 +1,38 @@
+import { NextResponse } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
+import { createCheckoutSession } from '@/lib/stripe/helpers';
+
+export async function POST(request: Request) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user || !user.email) {
+    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+  }
+
+  let body: { tier?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
+
+  const tier = body.tier;
+
+  if (tier !== 'basic' && tier !== 'premium') {
+    return NextResponse.json({ error: 'Invalid tier' }, { status: 400 });
+  }
+
+  try {
+    const url = await createCheckoutSession(user.id, user.email, tier);
+    return NextResponse.json({ url });
+  } catch (err) {
+    console.error('[checkout]', err);
+    return NextResponse.json(
+      { error: 'Failed to create checkout session' },
+      { status: 500 },
+    );
+  }
+}
