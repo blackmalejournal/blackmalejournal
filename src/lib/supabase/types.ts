@@ -67,6 +67,19 @@ export type Course = {
   created_at: string;
 };
 
+export type Dispatch = {
+  id: string;
+  title: string;
+  slug: string;
+  lens: Lens;
+  excerpt: string;
+  body: string;
+  author: string;
+  cover_image: string | null;
+  published_at: string;
+  created_at: string;
+};
+
 export type NewsletterSubscriber = {
   id: string;
   email: string;
@@ -113,6 +126,12 @@ export type Database = {
         Row: Course;
         Insert: Omit<Course, 'id' | 'created_at'>;
         Update: Partial<Omit<Course, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      dispatches: {
+        Row: Dispatch;
+        Insert: Omit<Dispatch, 'id' | 'created_at'>;
+        Update: Partial<Omit<Dispatch, 'id' | 'created_at'>>;
         Relationships: [];
       };
       newsletter_subscribers: {

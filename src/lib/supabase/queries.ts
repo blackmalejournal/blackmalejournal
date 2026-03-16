@@ -8,6 +8,7 @@ import type {
   Article,
   Briefing,
   Course,
+  Dispatch,
   Member,
   MemberTier,
   Lens,
@@ -287,4 +288,38 @@ export async function submitContactForm(data: {
   if (error) {
     console.error('[submitContactForm]', error.message);
   }
+}
+
+// ── Dispatches ──────────────────────────────────────────────────────────────
+
+export async function getDispatches(
+  options: { limit?: number; offset?: number } = {},
+): Promise<Dispatch[]> {
+  const { limit = 20, offset = 0 } = options;
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('dispatches')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error('[getDispatches]', error.message);
+    return [];
+  }
+  return (data ?? []) as Dispatch[];
+}
+
+export async function getDispatchBySlug(
+  slug: string,
+): Promise<Dispatch | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('dispatches')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) return null;
+  return data as Dispatch;
 }

@@ -1,0 +1,97 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { getDispatchBySlug } from '@/lib/supabase/queries';
+import { formatDate } from '@/lib/utils';
+import { LensBadge } from '@/components/brand/LensBadge';
+import { StarDivider } from '@/components/ui/StarDivider';
+import { ArticleBody } from '@/components/content/ArticleBody';
+import { ShareButton } from '@/components/ui/ShareButton';
+
+interface DispatchPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata(
+  { params }: DispatchPageProps,
+): Promise<Metadata> {
+  const { slug } = await params;
+  const dispatch = await getDispatchBySlug(slug);
+  if (!dispatch) return { title: 'Dispatch Not Found' };
+
+  return {
+    title: dispatch.title,
+    description: dispatch.excerpt,
+    openGraph: {
+      title: dispatch.title,
+      description: dispatch.excerpt,
+      images: dispatch.cover_image ? [{ url: dispatch.cover_image }] : [],
+    },
+    twitter: {
+      card: 'summary',
+      title: dispatch.title,
+      description: dispatch.excerpt,
+    },
+  };
+}
+
+export default async function DispatchPage({ params }: DispatchPageProps) {
+  const { slug } = await params;
+  const dispatch = await getDispatchBySlug(slug);
+  if (!dispatch) notFound();
+
+  return (
+    <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
+      {/* Back link */}
+      <Link
+        href="/blog"
+        className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
+      >
+        &larr; All Dispatches
+      </Link>
+
+      {/* Header */}
+      <header className="mt-8">
+        <div className="mb-4 flex items-center gap-4">
+          <LensBadge lens={dispatch.lens} />
+          <span className="font-mono text-xs text-bmj-tan/60">
+            {formatDate(dispatch.published_at)}
+          </span>
+        </div>
+
+        <h1 className="mb-4 font-display text-4xl leading-tight text-bmj-white sm:text-5xl">
+          {dispatch.title}
+        </h1>
+
+        <p className="mb-6 font-body text-lg italic leading-relaxed text-bmj-tan">
+          {dispatch.excerpt}
+        </p>
+
+        <div className="accent-border-bottom mb-0 pb-0" />
+      </header>
+
+      {/* Cover image (optional) */}
+      {dispatch.cover_image && (
+        <div className="relative mt-8 aspect-[16/9] overflow-hidden bg-bmj-black">
+          <Image
+            src={dispatch.cover_image}
+            alt={dispatch.title}
+            fill
+            className="halftone object-cover"
+            priority
+          />
+        </div>
+      )}
+
+      {/* Body */}
+      <div className="py-12">
+        <ArticleBody body={dispatch.body} />
+      </div>
+
+      {/* Share */}
+      <StarDivider className="mb-6" />
+      <ShareButton />
+    </div>
+  );
+}
