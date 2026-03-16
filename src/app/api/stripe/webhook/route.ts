@@ -57,7 +57,7 @@ export async function POST(request: Request) {
           })
           .eq('id', userId);
 
-        console.log(`[webhook] checkout.session.completed: user=${userId} tier=${tier}`);
+        console.info(`[webhook] checkout.session.completed: user=${userId} tier=${tier}`);
         break;
       }
 
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
         // moved to past_due/unpaid/incomplete, don't change the tier here —
         // let subscription.deleted handle the downgrade if it comes to that.
         if (subscription.status !== 'active') {
-          console.log(`[webhook] subscription.updated: customer=${customerId} status=${subscription.status} — skipping tier change`);
+          console.info(`[webhook] subscription.updated: customer=${customerId} status=${subscription.status} — skipping tier change`);
           break;
         }
 
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
           .update({ tier: newTier })
           .eq('stripe_customer_id', customerId);
 
-        console.log(`[webhook] subscription.updated: customer=${customerId} tier=${newTier}`);
+        console.info(`[webhook] subscription.updated: customer=${customerId} tier=${newTier}`);
         break;
       }
 
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
           })
           .eq('stripe_customer_id', customerId);
 
-        console.log(`[webhook] subscription.deleted: customer=${customerId} downgraded to free`);
+        console.info(`[webhook] subscription.deleted: customer=${customerId} downgraded to free`);
         break;
       }
 
@@ -128,7 +128,7 @@ export async function POST(request: Request) {
       }
 
       default:
-        console.log(`[webhook] Unhandled event: ${event.type}`);
+        console.info(`[webhook] Unhandled event: ${event.type}`);
     }
   } catch (err) {
     console.error(`[webhook] Error processing ${event.type}:`, err);
