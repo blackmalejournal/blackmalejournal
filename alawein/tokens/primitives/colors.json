@@ -1,0 +1,2797 @@
+{
+  "bmj-black": {
+    "value": "#0D0C0B",
+    "category": "neutral",
+    "description": "Primary background"
+  },
+  "bmj-red": {
+    "value": "#C0281F",
+    "category": "accent",
+    "description": "Primary accent"
+  },
+  "bmj-cream": {
+    "value": "#E8DCC8",
+    "category": "neutral",
+    "description": "Primary text"
+  },
+  "bmj-amber": {
+    "value": "#C8852A",
+    "category": "accent",
+    "description": "Highlights"
+  },
+  "bmj-brown": {
+    "value": "#3B2417",
+    "category": "neutral",
+    "description": "Secondary bg"
+  },
+  "bmj-tan": {
+    "value": "#B8986A",
+    "category": "neutral",
+    "description": "Metadata"
+  },
+  "bmj-white": {
+    "value": "#F2EDE4",
+    "category": "neutral",
+    "description": "High contrast"
+  },
+  "gray-000": {
+    "value": "#000000",
+    "category": "neutral"
+  },
+  "gray-001": {
+    "value": "#050505",
+    "category": "neutral"
+  },
+  "gray-002": {
+    "value": "#0a0a0a",
+    "category": "neutral"
+  },
+  "gray-003": {
+    "value": "#0f0f0f",
+    "category": "neutral"
+  },
+  "gray-004": {
+    "value": "#141414",
+    "category": "neutral"
+  },
+  "gray-005": {
+    "value": "#191919",
+    "category": "neutral"
+  },
+  "gray-006": {
+    "value": "#1e1e1e",
+    "category": "neutral"
+  },
+  "gray-007": {
+    "value": "#232323",
+    "category": "neutral"
+  },
+  "gray-008": {
+    "value": "#282828",
+    "category": "neutral"
+  },
+  "gray-009": {
+    "value": "#2d2d2d",
+    "category": "neutral"
+  },
+  "gray-010": {
+    "value": "#323232",
+    "category": "neutral"
+  },
+  "gray-011": {
+    "value": "#373737",
+    "category": "neutral"
+  },
+  "gray-012": {
+    "value": "#3c3c3c",
+    "category": "neutral"
+  },
+  "gray-013": {
+    "value": "#414141",
+    "category": "neutral"
+  },
+  "gray-014": {
+    "value": "#464646",
+    "category": "neutral"
+  },
+  "gray-015": {
+    "value": "#4b4b4b",
+    "category": "neutral"
+  },
+  "gray-016": {
+    "value": "#505050",
+    "category": "neutral"
+  },
+  "gray-017": {
+    "value": "#555555",
+    "category": "neutral"
+  },
+  "gray-018": {
+    "value": "#5a5a5a",
+    "category": "neutral"
+  },
+  "gray-019": {
+    "value": "#5f5f5f",
+    "category": "neutral"
+  },
+  "gray-020": {
+    "value": "#646464",
+    "category": "neutral"
+  },
+  "gray-021": {
+    "value": "#696969",
+    "category": "neutral"
+  },
+  "gray-022": {
+    "value": "#6e6e6e",
+    "category": "neutral"
+  },
+  "gray-023": {
+    "value": "#737373",
+    "category": "neutral"
+  },
+  "gray-024": {
+    "value": "#787878",
+    "category": "neutral"
+  },
+  "gray-025": {
+    "value": "#7d7d7d",
+    "category": "neutral"
+  },
+  "gray-026": {
+    "value": "#828282",
+    "category": "neutral"
+  },
+  "gray-027": {
+    "value": "#878787",
+    "category": "neutral"
+  },
+  "gray-028": {
+    "value": "#8c8c8c",
+    "category": "neutral"
+  },
+  "gray-029": {
+    "value": "#919191",
+    "category": "neutral"
+  },
+  "gray-030": {
+    "value": "#969696",
+    "category": "neutral"
+  },
+  "gray-031": {
+    "value": "#9b9b9b",
+    "category": "neutral"
+  },
+  "gray-032": {
+    "value": "#a0a0a0",
+    "category": "neutral"
+  },
+  "gray-033": {
+    "value": "#a5a5a5",
+    "category": "neutral"
+  },
+  "gray-034": {
+    "value": "#aaaaaa",
+    "category": "neutral"
+  },
+  "gray-035": {
+    "value": "#afafaf",
+    "category": "neutral"
+  },
+  "gray-036": {
+    "value": "#b4b4b4",
+    "category": "neutral"
+  },
+  "gray-037": {
+    "value": "#b9b9b9",
+    "category": "neutral"
+  },
+  "gray-038": {
+    "value": "#bebebe",
+    "category": "neutral"
+  },
+  "gray-039": {
+    "value": "#c3c3c3",
+    "category": "neutral"
+  },
+  "gray-040": {
+    "value": "#c8c8c8",
+    "category": "neutral"
+  },
+  "gray-041": {
+    "value": "#cdcdcd",
+    "category": "neutral"
+  },
+  "gray-042": {
+    "value": "#d2d2d2",
+    "category": "neutral"
+  },
+  "gray-043": {
+    "value": "#d7d7d7",
+    "category": "neutral"
+  },
+  "gray-044": {
+    "value": "#dcdcdc",
+    "category": "neutral"
+  },
+  "gray-045": {
+    "value": "#e1e1e1",
+    "category": "neutral"
+  },
+  "gray-046": {
+    "value": "#e6e6e6",
+    "category": "neutral"
+  },
+  "gray-047": {
+    "value": "#ebebeb",
+    "category": "neutral"
+  },
+  "gray-048": {
+    "value": "#f0f0f0",
+    "category": "neutral"
+  },
+  "gray-049": {
+    "value": "#f5f5f5",
+    "category": "neutral"
+  },
+  "semantic-success-100": {
+    "value": "#931871",
+    "category": "semantic"
+  },
+  "semantic-success-200": {
+    "value": "#cc59cb",
+    "category": "semantic"
+  },
+  "semantic-success-300": {
+    "value": "#a93001",
+    "category": "semantic"
+  },
+  "semantic-success-400": {
+    "value": "#04384a",
+    "category": "semantic"
+  },
+  "semantic-success-500": {
+    "value": "#4df6db",
+    "category": "semantic"
+  },
+  "semantic-success-600": {
+    "value": "#2fc2e0",
+    "category": "semantic"
+  },
+  "semantic-success-700": {
+    "value": "#4a01c2",
+    "category": "semantic"
+  },
+  "semantic-success-800": {
+    "value": "#239aae",
+    "category": "semantic"
+  },
+  "semantic-success-900": {
+    "value": "#e809bc",
+    "category": "semantic"
+  },
+  "semantic-success-1000": {
+    "value": "#5cf5c4",
+    "category": "semantic"
+  },
+  "semantic-error-100": {
+    "value": "#78c7dd",
+    "category": "semantic"
+  },
+  "semantic-error-200": {
+    "value": "#d39c51",
+    "category": "semantic"
+  },
+  "semantic-error-300": {
+    "value": "#c79bcc",
+    "category": "semantic"
+  },
+  "semantic-error-400": {
+    "value": "#f163e0",
+    "category": "semantic"
+  },
+  "semantic-error-500": {
+    "value": "#9e7f3c",
+    "category": "semantic"
+  },
+  "semantic-error-600": {
+    "value": "#8091fd",
+    "category": "semantic"
+  },
+  "semantic-error-700": {
+    "value": "#f2d85a",
+    "category": "semantic"
+  },
+  "semantic-error-800": {
+    "value": "#d79d90",
+    "category": "semantic"
+  },
+  "semantic-error-900": {
+    "value": "#809c30",
+    "category": "semantic"
+  },
+  "semantic-error-1000": {
+    "value": "#0109c2",
+    "category": "semantic"
+  },
+  "semantic-warning-100": {
+    "value": "#bb161f",
+    "category": "semantic"
+  },
+  "semantic-warning-200": {
+    "value": "#6a9a1f",
+    "category": "semantic"
+  },
+  "semantic-warning-300": {
+    "value": "#3f6c65",
+    "category": "semantic"
+  },
+  "semantic-warning-400": {
+    "value": "#0d1aac",
+    "category": "semantic"
+  },
+  "semantic-warning-500": {
+    "value": "#23c31d",
+    "category": "semantic"
+  },
+  "semantic-warning-600": {
+    "value": "#c2f289",
+    "category": "semantic"
+  },
+  "semantic-warning-700": {
+    "value": "#979940",
+    "category": "semantic"
+  },
+  "semantic-warning-800": {
+    "value": "#e356e8",
+    "category": "semantic"
+  },
+  "semantic-warning-900": {
+    "value": "#7056d3",
+    "category": "semantic"
+  },
+  "semantic-warning-1000": {
+    "value": "#0cfd1d",
+    "category": "semantic"
+  },
+  "semantic-info-100": {
+    "value": "#160b62",
+    "category": "semantic"
+  },
+  "semantic-info-200": {
+    "value": "#c44706",
+    "category": "semantic"
+  },
+  "semantic-info-300": {
+    "value": "#3e9053",
+    "category": "semantic"
+  },
+  "semantic-info-400": {
+    "value": "#1d96c9",
+    "category": "semantic"
+  },
+  "semantic-info-500": {
+    "value": "#a17148",
+    "category": "semantic"
+  },
+  "semantic-info-600": {
+    "value": "#7363b1",
+    "category": "semantic"
+  },
+  "semantic-info-700": {
+    "value": "#0ea629",
+    "category": "semantic"
+  },
+  "semantic-info-800": {
+    "value": "#fa5284",
+    "category": "semantic"
+  },
+  "semantic-info-900": {
+    "value": "#75d220",
+    "category": "semantic"
+  },
+  "semantic-info-1000": {
+    "value": "#672e47",
+    "category": "semantic"
+  },
+  "accent-red-10": {
+    "value": "#d0e518",
+    "category": "accent"
+  },
+  "accent-red-20": {
+    "value": "#6f94d5",
+    "category": "accent"
+  },
+  "accent-red-30": {
+    "value": "#d9c609",
+    "category": "accent"
+  },
+  "accent-red-40": {
+    "value": "#c0c354",
+    "category": "accent"
+  },
+  "accent-red-50": {
+    "value": "#ae9b14",
+    "category": "accent"
+  },
+  "accent-red-60": {
+    "value": "#732b61",
+    "category": "accent"
+  },
+  "accent-red-70": {
+    "value": "#b44042",
+    "category": "accent"
+  },
+  "accent-red-80": {
+    "value": "#9aa458",
+    "category": "accent"
+  },
+  "accent-red-90": {
+    "value": "#e57ec8",
+    "category": "accent"
+  },
+  "accent-red-100": {
+    "value": "#3e7096",
+    "category": "accent"
+  },
+  "accent-red-110": {
+    "value": "#09d2bb",
+    "category": "accent"
+  },
+  "accent-red-120": {
+    "value": "#e63b6c",
+    "category": "accent"
+  },
+  "accent-red-130": {
+    "value": "#9d75ec",
+    "category": "accent"
+  },
+  "accent-red-140": {
+    "value": "#2b11a6",
+    "category": "accent"
+  },
+  "accent-red-150": {
+    "value": "#6fa8ed",
+    "category": "accent"
+  },
+  "accent-red-160": {
+    "value": "#eea586",
+    "category": "accent"
+  },
+  "accent-red-170": {
+    "value": "#edc41d",
+    "category": "accent"
+  },
+  "accent-red-180": {
+    "value": "#6e8280",
+    "category": "accent"
+  },
+  "accent-red-190": {
+    "value": "#2fbccd",
+    "category": "accent"
+  },
+  "accent-red-200": {
+    "value": "#ddfeba",
+    "category": "accent"
+  },
+  "accent-red-210": {
+    "value": "#5d6dc1",
+    "category": "accent"
+  },
+  "accent-red-220": {
+    "value": "#a96d53",
+    "category": "accent"
+  },
+  "accent-red-230": {
+    "value": "#f2536b",
+    "category": "accent"
+  },
+  "accent-red-240": {
+    "value": "#5dcf69",
+    "category": "accent"
+  },
+  "accent-red-250": {
+    "value": "#f50a61",
+    "category": "accent"
+  },
+  "accent-red-260": {
+    "value": "#05817e",
+    "category": "accent"
+  },
+  "accent-red-270": {
+    "value": "#c44cdb",
+    "category": "accent"
+  },
+  "accent-red-280": {
+    "value": "#00152b",
+    "category": "accent"
+  },
+  "accent-red-290": {
+    "value": "#d3600f",
+    "category": "accent"
+  },
+  "accent-red-300": {
+    "value": "#a08174",
+    "category": "accent"
+  },
+  "accent-red-310": {
+    "value": "#01cb94",
+    "category": "accent"
+  },
+  "accent-red-320": {
+    "value": "#f62483",
+    "category": "accent"
+  },
+  "accent-red-330": {
+    "value": "#957ee6",
+    "category": "accent"
+  },
+  "accent-red-340": {
+    "value": "#29050e",
+    "category": "accent"
+  },
+  "accent-red-350": {
+    "value": "#bf995d",
+    "category": "accent"
+  },
+  "accent-red-360": {
+    "value": "#56ca79",
+    "category": "accent"
+  },
+  "accent-red-370": {
+    "value": "#8b5d58",
+    "category": "accent"
+  },
+  "accent-red-380": {
+    "value": "#f995e5",
+    "category": "accent"
+  },
+  "accent-red-390": {
+    "value": "#37f86c",
+    "category": "accent"
+  },
+  "accent-red-400": {
+    "value": "#8b3c1b",
+    "category": "accent"
+  },
+  "accent-red-410": {
+    "value": "#40e9a7",
+    "category": "accent"
+  },
+  "accent-red-420": {
+    "value": "#903a70",
+    "category": "accent"
+  },
+  "accent-red-430": {
+    "value": "#d3f755",
+    "category": "accent"
+  },
+  "accent-red-440": {
+    "value": "#72b7b1",
+    "category": "accent"
+  },
+  "accent-red-450": {
+    "value": "#e0ade7",
+    "category": "accent"
+  },
+  "accent-red-460": {
+    "value": "#dccf71",
+    "category": "accent"
+  },
+  "accent-red-470": {
+    "value": "#909690",
+    "category": "accent"
+  },
+  "accent-red-480": {
+    "value": "#2b17d0",
+    "category": "accent"
+  },
+  "accent-red-490": {
+    "value": "#1ff471",
+    "category": "accent"
+  },
+  "accent-red-500": {
+    "value": "#d962f1",
+    "category": "accent"
+  },
+  "accent-amber-10": {
+    "value": "#6b2620",
+    "category": "accent"
+  },
+  "accent-amber-20": {
+    "value": "#29372b",
+    "category": "accent"
+  },
+  "accent-amber-30": {
+    "value": "#b0d375",
+    "category": "accent"
+  },
+  "accent-amber-40": {
+    "value": "#68be83",
+    "category": "accent"
+  },
+  "accent-amber-50": {
+    "value": "#3b528f",
+    "category": "accent"
+  },
+  "accent-amber-60": {
+    "value": "#c106c6",
+    "category": "accent"
+  },
+  "accent-amber-70": {
+    "value": "#c0dfa3",
+    "category": "accent"
+  },
+  "accent-amber-80": {
+    "value": "#b2acc6",
+    "category": "accent"
+  },
+  "accent-amber-90": {
+    "value": "#6b0ff5",
+    "category": "accent"
+  },
+  "accent-amber-100": {
+    "value": "#f5814b",
+    "category": "accent"
+  },
+  "accent-amber-110": {
+    "value": "#3e3165",
+    "category": "accent"
+  },
+  "accent-amber-120": {
+    "value": "#e1b951",
+    "category": "accent"
+  },
+  "accent-amber-130": {
+    "value": "#ce1485",
+    "category": "accent"
+  },
+  "accent-amber-140": {
+    "value": "#e51e36",
+    "category": "accent"
+  },
+  "accent-amber-150": {
+    "value": "#789d8a",
+    "category": "accent"
+  },
+  "accent-amber-160": {
+    "value": "#26f823",
+    "category": "accent"
+  },
+  "accent-amber-170": {
+    "value": "#53ca05",
+    "category": "accent"
+  },
+  "accent-amber-180": {
+    "value": "#db5ab6",
+    "category": "accent"
+  },
+  "accent-amber-190": {
+    "value": "#633f45",
+    "category": "accent"
+  },
+  "accent-amber-200": {
+    "value": "#ae71f5",
+    "category": "accent"
+  },
+  "accent-amber-210": {
+    "value": "#d58f9d",
+    "category": "accent"
+  },
+  "accent-amber-220": {
+    "value": "#6aac3f",
+    "category": "accent"
+  },
+  "accent-amber-230": {
+    "value": "#212131",
+    "category": "accent"
+  },
+  "accent-amber-240": {
+    "value": "#9086e3",
+    "category": "accent"
+  },
+  "accent-amber-250": {
+    "value": "#ebe28d",
+    "category": "accent"
+  },
+  "accent-amber-260": {
+    "value": "#4b2e50",
+    "category": "accent"
+  },
+  "accent-amber-270": {
+    "value": "#f507a7",
+    "category": "accent"
+  },
+  "accent-amber-280": {
+    "value": "#e73c8b",
+    "category": "accent"
+  },
+  "accent-amber-290": {
+    "value": "#5680fe",
+    "category": "accent"
+  },
+  "accent-amber-300": {
+    "value": "#4e5df1",
+    "category": "accent"
+  },
+  "accent-amber-310": {
+    "value": "#ab71f6",
+    "category": "accent"
+  },
+  "accent-amber-320": {
+    "value": "#bf09eb",
+    "category": "accent"
+  },
+  "accent-amber-330": {
+    "value": "#5a3ef0",
+    "category": "accent"
+  },
+  "accent-amber-340": {
+    "value": "#e7f25f",
+    "category": "accent"
+  },
+  "accent-amber-350": {
+    "value": "#b3463b",
+    "category": "accent"
+  },
+  "accent-amber-360": {
+    "value": "#110956",
+    "category": "accent"
+  },
+  "accent-amber-370": {
+    "value": "#f966ad",
+    "category": "accent"
+  },
+  "accent-amber-380": {
+    "value": "#7cfca0",
+    "category": "accent"
+  },
+  "accent-amber-390": {
+    "value": "#0dfb3b",
+    "category": "accent"
+  },
+  "accent-amber-400": {
+    "value": "#4fd85f",
+    "category": "accent"
+  },
+  "accent-amber-410": {
+    "value": "#c99ccc",
+    "category": "accent"
+  },
+  "accent-amber-420": {
+    "value": "#92551b",
+    "category": "accent"
+  },
+  "accent-amber-430": {
+    "value": "#85dde5",
+    "category": "accent"
+  },
+  "accent-amber-440": {
+    "value": "#3daac6",
+    "category": "accent"
+  },
+  "accent-amber-450": {
+    "value": "#17603d",
+    "category": "accent"
+  },
+  "accent-amber-460": {
+    "value": "#c11b05",
+    "category": "accent"
+  },
+  "accent-amber-470": {
+    "value": "#5a82ba",
+    "category": "accent"
+  },
+  "accent-amber-480": {
+    "value": "#b15de1",
+    "category": "accent"
+  },
+  "accent-amber-490": {
+    "value": "#900b0a",
+    "category": "accent"
+  },
+  "accent-amber-500": {
+    "value": "#af9da4",
+    "category": "accent"
+  },
+  "accent-blue-10": {
+    "value": "#9f513c",
+    "category": "accent"
+  },
+  "accent-blue-20": {
+    "value": "#664df0",
+    "category": "accent"
+  },
+  "accent-blue-30": {
+    "value": "#db682b",
+    "category": "accent"
+  },
+  "accent-blue-40": {
+    "value": "#261db9",
+    "category": "accent"
+  },
+  "accent-blue-50": {
+    "value": "#91888a",
+    "category": "accent"
+  },
+  "accent-blue-60": {
+    "value": "#00fea3",
+    "category": "accent"
+  },
+  "accent-blue-70": {
+    "value": "#9e085b",
+    "category": "accent"
+  },
+  "accent-blue-80": {
+    "value": "#e9f686",
+    "category": "accent"
+  },
+  "accent-blue-90": {
+    "value": "#d5d436",
+    "category": "accent"
+  },
+  "accent-blue-100": {
+    "value": "#1817aa",
+    "category": "accent"
+  },
+  "accent-blue-110": {
+    "value": "#3f8d67",
+    "category": "accent"
+  },
+  "accent-blue-120": {
+    "value": "#4526f0",
+    "category": "accent"
+  },
+  "accent-blue-130": {
+    "value": "#b9515e",
+    "category": "accent"
+  },
+  "accent-blue-140": {
+    "value": "#ed7ef3",
+    "category": "accent"
+  },
+  "accent-blue-150": {
+    "value": "#b67e6d",
+    "category": "accent"
+  },
+  "accent-blue-160": {
+    "value": "#500921",
+    "category": "accent"
+  },
+  "accent-blue-170": {
+    "value": "#14461d",
+    "category": "accent"
+  },
+  "accent-blue-180": {
+    "value": "#cdaadc",
+    "category": "accent"
+  },
+  "accent-blue-190": {
+    "value": "#ae029a",
+    "category": "accent"
+  },
+  "accent-blue-200": {
+    "value": "#b63c92",
+    "category": "accent"
+  },
+  "accent-blue-210": {
+    "value": "#ec51d8",
+    "category": "accent"
+  },
+  "accent-blue-220": {
+    "value": "#32ed36",
+    "category": "accent"
+  },
+  "accent-blue-230": {
+    "value": "#6249b1",
+    "category": "accent"
+  },
+  "accent-blue-240": {
+    "value": "#b50981",
+    "category": "accent"
+  },
+  "accent-blue-250": {
+    "value": "#323fbb",
+    "category": "accent"
+  },
+  "accent-blue-260": {
+    "value": "#5c6f65",
+    "category": "accent"
+  },
+  "accent-blue-270": {
+    "value": "#9a38e9",
+    "category": "accent"
+  },
+  "accent-blue-280": {
+    "value": "#d78979",
+    "category": "accent"
+  },
+  "accent-blue-290": {
+    "value": "#5bb645",
+    "category": "accent"
+  },
+  "accent-blue-300": {
+    "value": "#0cbb14",
+    "category": "accent"
+  },
+  "accent-blue-310": {
+    "value": "#473a6b",
+    "category": "accent"
+  },
+  "accent-blue-320": {
+    "value": "#36ce96",
+    "category": "accent"
+  },
+  "accent-blue-330": {
+    "value": "#ed9c44",
+    "category": "accent"
+  },
+  "accent-blue-340": {
+    "value": "#21856f",
+    "category": "accent"
+  },
+  "accent-blue-350": {
+    "value": "#38b885",
+    "category": "accent"
+  },
+  "accent-blue-360": {
+    "value": "#c50a0c",
+    "category": "accent"
+  },
+  "accent-blue-370": {
+    "value": "#525ffb",
+    "category": "accent"
+  },
+  "accent-blue-380": {
+    "value": "#d88d31",
+    "category": "accent"
+  },
+  "accent-blue-390": {
+    "value": "#1d2f4f",
+    "category": "accent"
+  },
+  "accent-blue-400": {
+    "value": "#7ed9e2",
+    "category": "accent"
+  },
+  "accent-blue-410": {
+    "value": "#e4fef0",
+    "category": "accent"
+  },
+  "accent-blue-420": {
+    "value": "#3c95c5",
+    "category": "accent"
+  },
+  "accent-blue-430": {
+    "value": "#d9ac47",
+    "category": "accent"
+  },
+  "accent-blue-440": {
+    "value": "#2a7005",
+    "category": "accent"
+  },
+  "accent-blue-450": {
+    "value": "#a5ca80",
+    "category": "accent"
+  },
+  "accent-blue-460": {
+    "value": "#64282d",
+    "category": "accent"
+  },
+  "accent-blue-470": {
+    "value": "#5bb336",
+    "category": "accent"
+  },
+  "accent-blue-480": {
+    "value": "#168df8",
+    "category": "accent"
+  },
+  "accent-blue-490": {
+    "value": "#5b802d",
+    "category": "accent"
+  },
+  "accent-blue-500": {
+    "value": "#6c8ff3",
+    "category": "accent"
+  },
+  "accent-green-10": {
+    "value": "#638680",
+    "category": "accent"
+  },
+  "accent-green-20": {
+    "value": "#8c9f3a",
+    "category": "accent"
+  },
+  "accent-green-30": {
+    "value": "#ba6d0c",
+    "category": "accent"
+  },
+  "accent-green-40": {
+    "value": "#a3c974",
+    "category": "accent"
+  },
+  "accent-green-50": {
+    "value": "#67c676",
+    "category": "accent"
+  },
+  "accent-green-60": {
+    "value": "#aa34fa",
+    "category": "accent"
+  },
+  "accent-green-70": {
+    "value": "#fa744f",
+    "category": "accent"
+  },
+  "accent-green-80": {
+    "value": "#6c2e42",
+    "category": "accent"
+  },
+  "accent-green-90": {
+    "value": "#3b4c23",
+    "category": "accent"
+  },
+  "accent-green-100": {
+    "value": "#dbf512",
+    "category": "accent"
+  },
+  "accent-green-110": {
+    "value": "#119f8b",
+    "category": "accent"
+  },
+  "accent-green-120": {
+    "value": "#f9aaeb",
+    "category": "accent"
+  },
+  "accent-green-130": {
+    "value": "#e875fb",
+    "category": "accent"
+  },
+  "accent-green-140": {
+    "value": "#dcaeb4",
+    "category": "accent"
+  },
+  "accent-green-150": {
+    "value": "#d5f276",
+    "category": "accent"
+  },
+  "accent-green-160": {
+    "value": "#f413f1",
+    "category": "accent"
+  },
+  "accent-green-170": {
+    "value": "#797c86",
+    "category": "accent"
+  },
+  "accent-green-180": {
+    "value": "#e5ba3d",
+    "category": "accent"
+  },
+  "accent-green-190": {
+    "value": "#87d31f",
+    "category": "accent"
+  },
+  "accent-green-200": {
+    "value": "#5b996e",
+    "category": "accent"
+  },
+  "accent-green-210": {
+    "value": "#011547",
+    "category": "accent"
+  },
+  "accent-green-220": {
+    "value": "#a340e9",
+    "category": "accent"
+  },
+  "accent-green-230": {
+    "value": "#a1f8f9",
+    "category": "accent"
+  },
+  "accent-green-240": {
+    "value": "#ec6b04",
+    "category": "accent"
+  },
+  "accent-green-250": {
+    "value": "#8da2a0",
+    "category": "accent"
+  },
+  "accent-green-260": {
+    "value": "#8286c9",
+    "category": "accent"
+  },
+  "accent-green-270": {
+    "value": "#1e70ee",
+    "category": "accent"
+  },
+  "accent-green-280": {
+    "value": "#e4674e",
+    "category": "accent"
+  },
+  "accent-green-290": {
+    "value": "#95892a",
+    "category": "accent"
+  },
+  "accent-green-300": {
+    "value": "#03b896",
+    "category": "accent"
+  },
+  "accent-green-310": {
+    "value": "#8a5fcf",
+    "category": "accent"
+  },
+  "accent-green-320": {
+    "value": "#a1ef95",
+    "category": "accent"
+  },
+  "accent-green-330": {
+    "value": "#3200f4",
+    "category": "accent"
+  },
+  "accent-green-340": {
+    "value": "#eb1d20",
+    "category": "accent"
+  },
+  "accent-green-350": {
+    "value": "#5fb66c",
+    "category": "accent"
+  },
+  "accent-green-360": {
+    "value": "#688fab",
+    "category": "accent"
+  },
+  "accent-green-370": {
+    "value": "#d18a0c",
+    "category": "accent"
+  },
+  "accent-green-380": {
+    "value": "#0e3827",
+    "category": "accent"
+  },
+  "accent-green-390": {
+    "value": "#8a2712",
+    "category": "accent"
+  },
+  "accent-green-400": {
+    "value": "#6950a5",
+    "category": "accent"
+  },
+  "accent-green-410": {
+    "value": "#26a523",
+    "category": "accent"
+  },
+  "accent-green-420": {
+    "value": "#5abd59",
+    "category": "accent"
+  },
+  "accent-green-430": {
+    "value": "#1dc11c",
+    "category": "accent"
+  },
+  "accent-green-440": {
+    "value": "#572e71",
+    "category": "accent"
+  },
+  "accent-green-450": {
+    "value": "#832629",
+    "category": "accent"
+  },
+  "accent-green-460": {
+    "value": "#cb2063",
+    "category": "accent"
+  },
+  "accent-green-470": {
+    "value": "#9f85b5",
+    "category": "accent"
+  },
+  "accent-green-480": {
+    "value": "#b846fd",
+    "category": "accent"
+  },
+  "accent-green-490": {
+    "value": "#0e0170",
+    "category": "accent"
+  },
+  "accent-green-500": {
+    "value": "#48fb7f",
+    "category": "accent"
+  },
+  "accent-purple-10": {
+    "value": "#bda4f1",
+    "category": "accent"
+  },
+  "accent-purple-20": {
+    "value": "#f571fb",
+    "category": "accent"
+  },
+  "accent-purple-30": {
+    "value": "#a3552b",
+    "category": "accent"
+  },
+  "accent-purple-40": {
+    "value": "#5ddb27",
+    "category": "accent"
+  },
+  "accent-purple-50": {
+    "value": "#675f2a",
+    "category": "accent"
+  },
+  "accent-purple-60": {
+    "value": "#ea4c26",
+    "category": "accent"
+  },
+  "accent-purple-70": {
+    "value": "#f990a7",
+    "category": "accent"
+  },
+  "accent-purple-80": {
+    "value": "#4c05ee",
+    "category": "accent"
+  },
+  "accent-purple-90": {
+    "value": "#893687",
+    "category": "accent"
+  },
+  "accent-purple-100": {
+    "value": "#b3c976",
+    "category": "accent"
+  },
+  "accent-purple-110": {
+    "value": "#72af1a",
+    "category": "accent"
+  },
+  "accent-purple-120": {
+    "value": "#bde8d0",
+    "category": "accent"
+  },
+  "accent-purple-130": {
+    "value": "#2e35eb",
+    "category": "accent"
+  },
+  "accent-purple-140": {
+    "value": "#9f3921",
+    "category": "accent"
+  },
+  "accent-purple-150": {
+    "value": "#08e6bd",
+    "category": "accent"
+  },
+  "accent-purple-160": {
+    "value": "#9dda1d",
+    "category": "accent"
+  },
+  "accent-purple-170": {
+    "value": "#58912d",
+    "category": "accent"
+  },
+  "accent-purple-180": {
+    "value": "#e7d9f3",
+    "category": "accent"
+  },
+  "accent-purple-190": {
+    "value": "#7254bb",
+    "category": "accent"
+  },
+  "accent-purple-200": {
+    "value": "#f5db73",
+    "category": "accent"
+  },
+  "accent-purple-210": {
+    "value": "#794d05",
+    "category": "accent"
+  },
+  "accent-purple-220": {
+    "value": "#6a2235",
+    "category": "accent"
+  },
+  "accent-purple-230": {
+    "value": "#c23b92",
+    "category": "accent"
+  },
+  "accent-purple-240": {
+    "value": "#80173b",
+    "category": "accent"
+  },
+  "accent-purple-250": {
+    "value": "#65e77b",
+    "category": "accent"
+  },
+  "accent-purple-260": {
+    "value": "#c7425d",
+    "category": "accent"
+  },
+  "accent-purple-270": {
+    "value": "#d90a3c",
+    "category": "accent"
+  },
+  "accent-purple-280": {
+    "value": "#9a7ce0",
+    "category": "accent"
+  },
+  "accent-purple-290": {
+    "value": "#a33b3b",
+    "category": "accent"
+  },
+  "accent-purple-300": {
+    "value": "#5a7bfa",
+    "category": "accent"
+  },
+  "accent-purple-310": {
+    "value": "#1ab9d5",
+    "category": "accent"
+  },
+  "accent-purple-320": {
+    "value": "#12fa78",
+    "category": "accent"
+  },
+  "accent-purple-330": {
+    "value": "#26b1a8",
+    "category": "accent"
+  },
+  "accent-purple-340": {
+    "value": "#0c693c",
+    "category": "accent"
+  },
+  "accent-purple-350": {
+    "value": "#cc8b41",
+    "category": "accent"
+  },
+  "accent-purple-360": {
+    "value": "#ef657b",
+    "category": "accent"
+  },
+  "accent-purple-370": {
+    "value": "#b2a5b4",
+    "category": "accent"
+  },
+  "accent-purple-380": {
+    "value": "#913845",
+    "category": "accent"
+  },
+  "accent-purple-390": {
+    "value": "#4356c6",
+    "category": "accent"
+  },
+  "accent-purple-400": {
+    "value": "#a51aa8",
+    "category": "accent"
+  },
+  "accent-purple-410": {
+    "value": "#7ed724",
+    "category": "accent"
+  },
+  "accent-purple-420": {
+    "value": "#08e137",
+    "category": "accent"
+  },
+  "accent-purple-430": {
+    "value": "#cbf982",
+    "category": "accent"
+  },
+  "accent-purple-440": {
+    "value": "#95c200",
+    "category": "accent"
+  },
+  "accent-purple-450": {
+    "value": "#6fba27",
+    "category": "accent"
+  },
+  "accent-purple-460": {
+    "value": "#071efb",
+    "category": "accent"
+  },
+  "accent-purple-470": {
+    "value": "#326ca0",
+    "category": "accent"
+  },
+  "accent-purple-480": {
+    "value": "#29b202",
+    "category": "accent"
+  },
+  "accent-purple-490": {
+    "value": "#f7f2b0",
+    "category": "accent"
+  },
+  "accent-purple-500": {
+    "value": "#8da7a8",
+    "category": "accent"
+  },
+  "accent-orange-10": {
+    "value": "#73c425",
+    "category": "accent"
+  },
+  "accent-orange-20": {
+    "value": "#7063a4",
+    "category": "accent"
+  },
+  "accent-orange-30": {
+    "value": "#5d2bd0",
+    "category": "accent"
+  },
+  "accent-orange-40": {
+    "value": "#9fc55a",
+    "category": "accent"
+  },
+  "accent-orange-50": {
+    "value": "#256989",
+    "category": "accent"
+  },
+  "accent-orange-60": {
+    "value": "#e58597",
+    "category": "accent"
+  },
+  "accent-orange-70": {
+    "value": "#12c079",
+    "category": "accent"
+  },
+  "accent-orange-80": {
+    "value": "#555764",
+    "category": "accent"
+  },
+  "accent-orange-90": {
+    "value": "#eb7c6a",
+    "category": "accent"
+  },
+  "accent-orange-100": {
+    "value": "#0df73b",
+    "category": "accent"
+  },
+  "accent-orange-110": {
+    "value": "#e5dee3",
+    "category": "accent"
+  },
+  "accent-orange-120": {
+    "value": "#0db9c9",
+    "category": "accent"
+  },
+  "accent-orange-130": {
+    "value": "#df9579",
+    "category": "accent"
+  },
+  "accent-orange-140": {
+    "value": "#157915",
+    "category": "accent"
+  },
+  "accent-orange-150": {
+    "value": "#d5331f",
+    "category": "accent"
+  },
+  "accent-orange-160": {
+    "value": "#ee54fb",
+    "category": "accent"
+  },
+  "accent-orange-170": {
+    "value": "#ddf4e6",
+    "category": "accent"
+  },
+  "accent-orange-180": {
+    "value": "#556d4c",
+    "category": "accent"
+  },
+  "accent-orange-190": {
+    "value": "#845b37",
+    "category": "accent"
+  },
+  "accent-orange-200": {
+    "value": "#5ae0f8",
+    "category": "accent"
+  },
+  "accent-orange-210": {
+    "value": "#d91211",
+    "category": "accent"
+  },
+  "accent-orange-220": {
+    "value": "#acc483",
+    "category": "accent"
+  },
+  "accent-orange-230": {
+    "value": "#325e4a",
+    "category": "accent"
+  },
+  "accent-orange-240": {
+    "value": "#a082e3",
+    "category": "accent"
+  },
+  "accent-orange-250": {
+    "value": "#588395",
+    "category": "accent"
+  },
+  "accent-orange-260": {
+    "value": "#7df316",
+    "category": "accent"
+  },
+  "accent-orange-270": {
+    "value": "#2e3893",
+    "category": "accent"
+  },
+  "accent-orange-280": {
+    "value": "#634019",
+    "category": "accent"
+  },
+  "accent-orange-290": {
+    "value": "#bcebab",
+    "category": "accent"
+  },
+  "accent-orange-300": {
+    "value": "#907346",
+    "category": "accent"
+  },
+  "accent-orange-310": {
+    "value": "#69c57f",
+    "category": "accent"
+  },
+  "accent-orange-320": {
+    "value": "#370989",
+    "category": "accent"
+  },
+  "accent-orange-330": {
+    "value": "#66a892",
+    "category": "accent"
+  },
+  "accent-orange-340": {
+    "value": "#9fb250",
+    "category": "accent"
+  },
+  "accent-orange-350": {
+    "value": "#967572",
+    "category": "accent"
+  },
+  "accent-orange-360": {
+    "value": "#824286",
+    "category": "accent"
+  },
+  "accent-orange-370": {
+    "value": "#4ed53e",
+    "category": "accent"
+  },
+  "accent-orange-380": {
+    "value": "#624ee6",
+    "category": "accent"
+  },
+  "accent-orange-390": {
+    "value": "#d79f85",
+    "category": "accent"
+  },
+  "accent-orange-400": {
+    "value": "#7fe067",
+    "category": "accent"
+  },
+  "accent-orange-410": {
+    "value": "#6deb3f",
+    "category": "accent"
+  },
+  "accent-orange-420": {
+    "value": "#4ca8a0",
+    "category": "accent"
+  },
+  "accent-orange-430": {
+    "value": "#426a02",
+    "category": "accent"
+  },
+  "accent-orange-440": {
+    "value": "#83515a",
+    "category": "accent"
+  },
+  "accent-orange-450": {
+    "value": "#6e82f8",
+    "category": "accent"
+  },
+  "accent-orange-460": {
+    "value": "#f7a2d7",
+    "category": "accent"
+  },
+  "accent-orange-470": {
+    "value": "#6e698b",
+    "category": "accent"
+  },
+  "accent-orange-480": {
+    "value": "#6c84cd",
+    "category": "accent"
+  },
+  "accent-orange-490": {
+    "value": "#2a4df0",
+    "category": "accent"
+  },
+  "accent-orange-500": {
+    "value": "#6a7def",
+    "category": "accent"
+  },
+  "vintage-sepia-10": {
+    "value": "#ce3e44",
+    "category": "neutral"
+  },
+  "vintage-sepia-20": {
+    "value": "#722b31",
+    "category": "accent"
+  },
+  "vintage-sepia-30": {
+    "value": "#d95f95",
+    "category": "neutral"
+  },
+  "vintage-sepia-40": {
+    "value": "#b46f8f",
+    "category": "accent"
+  },
+  "vintage-sepia-50": {
+    "value": "#2601cc",
+    "category": "neutral"
+  },
+  "vintage-sepia-60": {
+    "value": "#4a58d7",
+    "category": "accent"
+  },
+  "vintage-sepia-70": {
+    "value": "#e238ce",
+    "category": "neutral"
+  },
+  "vintage-sepia-80": {
+    "value": "#9a54db",
+    "category": "accent"
+  },
+  "vintage-sepia-90": {
+    "value": "#6d635b",
+    "category": "neutral"
+  },
+  "vintage-sepia-100": {
+    "value": "#c98d3f",
+    "category": "accent"
+  },
+  "vintage-sepia-110": {
+    "value": "#971f69",
+    "category": "neutral"
+  },
+  "vintage-sepia-120": {
+    "value": "#6abbe9",
+    "category": "accent"
+  },
+  "vintage-sepia-130": {
+    "value": "#617638",
+    "category": "neutral"
+  },
+  "vintage-sepia-140": {
+    "value": "#5784d2",
+    "category": "accent"
+  },
+  "vintage-sepia-150": {
+    "value": "#2aff92",
+    "category": "neutral"
+  },
+  "vintage-sepia-160": {
+    "value": "#d50be6",
+    "category": "accent"
+  },
+  "vintage-sepia-170": {
+    "value": "#f7c123",
+    "category": "neutral"
+  },
+  "vintage-sepia-180": {
+    "value": "#85df86",
+    "category": "accent"
+  },
+  "vintage-sepia-190": {
+    "value": "#c1738c",
+    "category": "neutral"
+  },
+  "vintage-sepia-200": {
+    "value": "#42d9c7",
+    "category": "accent"
+  },
+  "vintage-sepia-210": {
+    "value": "#0e66e1",
+    "category": "neutral"
+  },
+  "vintage-sepia-220": {
+    "value": "#6e1583",
+    "category": "accent"
+  },
+  "vintage-sepia-230": {
+    "value": "#5b2554",
+    "category": "neutral"
+  },
+  "vintage-sepia-240": {
+    "value": "#846844",
+    "category": "accent"
+  },
+  "vintage-sepia-250": {
+    "value": "#dd675b",
+    "category": "neutral"
+  },
+  "vintage-sepia-260": {
+    "value": "#129186",
+    "category": "accent"
+  },
+  "vintage-sepia-270": {
+    "value": "#69c986",
+    "category": "neutral"
+  },
+  "vintage-sepia-280": {
+    "value": "#2c1b9e",
+    "category": "accent"
+  },
+  "vintage-sepia-290": {
+    "value": "#42a34f",
+    "category": "neutral"
+  },
+  "vintage-sepia-300": {
+    "value": "#e8ec60",
+    "category": "accent"
+  },
+  "vintage-sepia-310": {
+    "value": "#ba369b",
+    "category": "neutral"
+  },
+  "vintage-sepia-320": {
+    "value": "#3f35bc",
+    "category": "accent"
+  },
+  "vintage-sepia-330": {
+    "value": "#9d91d7",
+    "category": "neutral"
+  },
+  "vintage-sepia-340": {
+    "value": "#66dcbb",
+    "category": "accent"
+  },
+  "vintage-sepia-350": {
+    "value": "#b4bcbb",
+    "category": "neutral"
+  },
+  "vintage-sepia-360": {
+    "value": "#18e897",
+    "category": "accent"
+  },
+  "vintage-sepia-370": {
+    "value": "#1bb43d",
+    "category": "neutral"
+  },
+  "vintage-sepia-380": {
+    "value": "#dab840",
+    "category": "accent"
+  },
+  "vintage-sepia-390": {
+    "value": "#2d0125",
+    "category": "neutral"
+  },
+  "vintage-sepia-400": {
+    "value": "#5d3906",
+    "category": "accent"
+  },
+  "vintage-sepia-410": {
+    "value": "#23bb3a",
+    "category": "neutral"
+  },
+  "vintage-sepia-420": {
+    "value": "#901b73",
+    "category": "accent"
+  },
+  "vintage-sepia-430": {
+    "value": "#adeb0b",
+    "category": "neutral"
+  },
+  "vintage-sepia-440": {
+    "value": "#d0a5e1",
+    "category": "accent"
+  },
+  "vintage-sepia-450": {
+    "value": "#5a5dc4",
+    "category": "neutral"
+  },
+  "vintage-sepia-460": {
+    "value": "#808bae",
+    "category": "accent"
+  },
+  "vintage-sepia-470": {
+    "value": "#6b756e",
+    "category": "neutral"
+  },
+  "vintage-sepia-480": {
+    "value": "#156e75",
+    "category": "accent"
+  },
+  "vintage-sepia-490": {
+    "value": "#eef0a6",
+    "category": "neutral"
+  },
+  "vintage-sepia-500": {
+    "value": "#525c73",
+    "category": "accent"
+  },
+  "propaganda-10": {
+    "value": "#e7b355",
+    "category": "neutral"
+  },
+  "propaganda-20": {
+    "value": "#48c3df",
+    "category": "accent"
+  },
+  "propaganda-30": {
+    "value": "#cf61df",
+    "category": "neutral"
+  },
+  "propaganda-40": {
+    "value": "#8f9e67",
+    "category": "accent"
+  },
+  "propaganda-50": {
+    "value": "#7d82eb",
+    "category": "neutral"
+  },
+  "propaganda-60": {
+    "value": "#e4d2ed",
+    "category": "accent"
+  },
+  "propaganda-70": {
+    "value": "#065435",
+    "category": "neutral"
+  },
+  "propaganda-80": {
+    "value": "#e46c4f",
+    "category": "accent"
+  },
+  "propaganda-90": {
+    "value": "#e27e99",
+    "category": "neutral"
+  },
+  "propaganda-100": {
+    "value": "#8951e0",
+    "category": "accent"
+  },
+  "propaganda-110": {
+    "value": "#4a057d",
+    "category": "neutral"
+  },
+  "propaganda-120": {
+    "value": "#b520f0",
+    "category": "accent"
+  },
+  "propaganda-130": {
+    "value": "#284015",
+    "category": "neutral"
+  },
+  "propaganda-140": {
+    "value": "#6cfb3d",
+    "category": "accent"
+  },
+  "propaganda-150": {
+    "value": "#a5851d",
+    "category": "neutral"
+  },
+  "propaganda-160": {
+    "value": "#46eb4a",
+    "category": "accent"
+  },
+  "propaganda-170": {
+    "value": "#a00447",
+    "category": "neutral"
+  },
+  "propaganda-180": {
+    "value": "#efd327",
+    "category": "accent"
+  },
+  "propaganda-190": {
+    "value": "#6767c3",
+    "category": "neutral"
+  },
+  "propaganda-200": {
+    "value": "#3fb2cb",
+    "category": "accent"
+  },
+  "propaganda-210": {
+    "value": "#3ca70c",
+    "category": "neutral"
+  },
+  "propaganda-220": {
+    "value": "#c475e2",
+    "category": "accent"
+  },
+  "propaganda-230": {
+    "value": "#9e91e2",
+    "category": "neutral"
+  },
+  "propaganda-240": {
+    "value": "#bcc741",
+    "category": "accent"
+  },
+  "propaganda-250": {
+    "value": "#ad79c6",
+    "category": "neutral"
+  },
+  "propaganda-260": {
+    "value": "#d3d3a6",
+    "category": "accent"
+  },
+  "propaganda-270": {
+    "value": "#ccab08",
+    "category": "neutral"
+  },
+  "propaganda-280": {
+    "value": "#547ba4",
+    "category": "accent"
+  },
+  "propaganda-290": {
+    "value": "#482825",
+    "category": "neutral"
+  },
+  "propaganda-300": {
+    "value": "#ac8fc8",
+    "category": "accent"
+  },
+  "propaganda-310": {
+    "value": "#1bd74b",
+    "category": "neutral"
+  },
+  "propaganda-320": {
+    "value": "#bfb86d",
+    "category": "accent"
+  },
+  "propaganda-330": {
+    "value": "#614fe5",
+    "category": "neutral"
+  },
+  "propaganda-340": {
+    "value": "#52e042",
+    "category": "accent"
+  },
+  "propaganda-350": {
+    "value": "#450e96",
+    "category": "neutral"
+  },
+  "propaganda-360": {
+    "value": "#368e86",
+    "category": "accent"
+  },
+  "propaganda-370": {
+    "value": "#16edd0",
+    "category": "neutral"
+  },
+  "propaganda-380": {
+    "value": "#0e15f2",
+    "category": "accent"
+  },
+  "propaganda-390": {
+    "value": "#d976e6",
+    "category": "neutral"
+  },
+  "propaganda-400": {
+    "value": "#443dc8",
+    "category": "accent"
+  },
+  "propaganda-410": {
+    "value": "#2e54a3",
+    "category": "neutral"
+  },
+  "propaganda-420": {
+    "value": "#101ee0",
+    "category": "accent"
+  },
+  "propaganda-430": {
+    "value": "#69e090",
+    "category": "neutral"
+  },
+  "propaganda-440": {
+    "value": "#3b1702",
+    "category": "accent"
+  },
+  "propaganda-450": {
+    "value": "#35450e",
+    "category": "neutral"
+  },
+  "propaganda-460": {
+    "value": "#5c538a",
+    "category": "accent"
+  },
+  "propaganda-470": {
+    "value": "#7090c7",
+    "category": "neutral"
+  },
+  "propaganda-480": {
+    "value": "#0de6ce",
+    "category": "accent"
+  },
+  "propaganda-490": {
+    "value": "#eff7b0",
+    "category": "neutral"
+  },
+  "propaganda-500": {
+    "value": "#fe71bd",
+    "category": "accent"
+  },
+  "earth-brown-10": {
+    "value": "#e97031",
+    "category": "neutral"
+  },
+  "earth-brown-20": {
+    "value": "#7980d8",
+    "category": "accent"
+  },
+  "earth-brown-30": {
+    "value": "#bc8741",
+    "category": "neutral"
+  },
+  "earth-brown-40": {
+    "value": "#0c4625",
+    "category": "accent"
+  },
+  "earth-brown-50": {
+    "value": "#559d6f",
+    "category": "neutral"
+  },
+  "earth-brown-60": {
+    "value": "#0491ae",
+    "category": "accent"
+  },
+  "earth-brown-70": {
+    "value": "#923f78",
+    "category": "neutral"
+  },
+  "earth-brown-80": {
+    "value": "#fa8877",
+    "category": "accent"
+  },
+  "earth-brown-90": {
+    "value": "#9033c5",
+    "category": "neutral"
+  },
+  "earth-brown-100": {
+    "value": "#a048be",
+    "category": "accent"
+  },
+  "earth-brown-110": {
+    "value": "#17b562",
+    "category": "neutral"
+  },
+  "earth-brown-120": {
+    "value": "#6a27d1",
+    "category": "accent"
+  },
+  "earth-brown-130": {
+    "value": "#250cea",
+    "category": "neutral"
+  },
+  "earth-brown-140": {
+    "value": "#191014",
+    "category": "accent"
+  },
+  "earth-brown-150": {
+    "value": "#05cac8",
+    "category": "neutral"
+  },
+  "earth-brown-160": {
+    "value": "#944546",
+    "category": "accent"
+  },
+  "earth-brown-170": {
+    "value": "#ce87b1",
+    "category": "neutral"
+  },
+  "earth-brown-180": {
+    "value": "#fddf70",
+    "category": "accent"
+  },
+  "earth-brown-190": {
+    "value": "#36dd6f",
+    "category": "neutral"
+  },
+  "earth-brown-200": {
+    "value": "#743e3b",
+    "category": "accent"
+  },
+  "earth-brown-210": {
+    "value": "#2f369e",
+    "category": "neutral"
+  },
+  "earth-brown-220": {
+    "value": "#521479",
+    "category": "accent"
+  },
+  "earth-brown-230": {
+    "value": "#087a00",
+    "category": "neutral"
+  },
+  "earth-brown-240": {
+    "value": "#4ae94b",
+    "category": "accent"
+  },
+  "earth-brown-250": {
+    "value": "#fb8560",
+    "category": "neutral"
+  },
+  "earth-brown-260": {
+    "value": "#b39737",
+    "category": "accent"
+  },
+  "earth-brown-270": {
+    "value": "#bf394f",
+    "category": "neutral"
+  },
+  "earth-brown-280": {
+    "value": "#e000c2",
+    "category": "accent"
+  },
+  "earth-brown-290": {
+    "value": "#ab305f",
+    "category": "neutral"
+  },
+  "earth-brown-300": {
+    "value": "#1776dc",
+    "category": "accent"
+  },
+  "earth-brown-310": {
+    "value": "#a91201",
+    "category": "neutral"
+  },
+  "earth-brown-320": {
+    "value": "#2e1318",
+    "category": "accent"
+  },
+  "earth-brown-330": {
+    "value": "#835c5b",
+    "category": "neutral"
+  },
+  "earth-brown-340": {
+    "value": "#4ab36f",
+    "category": "accent"
+  },
+  "earth-brown-350": {
+    "value": "#9816ca",
+    "category": "neutral"
+  },
+  "earth-brown-360": {
+    "value": "#9943b1",
+    "category": "accent"
+  },
+  "earth-brown-370": {
+    "value": "#e967c2",
+    "category": "neutral"
+  },
+  "earth-brown-380": {
+    "value": "#f398ae",
+    "category": "accent"
+  },
+  "earth-brown-390": {
+    "value": "#29eb0c",
+    "category": "neutral"
+  },
+  "earth-brown-400": {
+    "value": "#a18f70",
+    "category": "accent"
+  },
+  "earth-brown-410": {
+    "value": "#1ca0e7",
+    "category": "neutral"
+  },
+  "earth-brown-420": {
+    "value": "#3cebe6",
+    "category": "accent"
+  },
+  "earth-brown-430": {
+    "value": "#b1c09c",
+    "category": "neutral"
+  },
+  "earth-brown-440": {
+    "value": "#8acf69",
+    "category": "accent"
+  },
+  "earth-brown-450": {
+    "value": "#36943d",
+    "category": "neutral"
+  },
+  "earth-brown-460": {
+    "value": "#de6e41",
+    "category": "accent"
+  },
+  "earth-brown-470": {
+    "value": "#070c39",
+    "category": "neutral"
+  },
+  "earth-brown-480": {
+    "value": "#25b343",
+    "category": "accent"
+  },
+  "earth-brown-490": {
+    "value": "#3bfbf9",
+    "category": "neutral"
+  },
+  "earth-brown-500": {
+    "value": "#741eb4",
+    "category": "accent"
+  },
+  "paper-white-10": {
+    "value": "#0f3b2e",
+    "category": "neutral"
+  },
+  "paper-white-20": {
+    "value": "#2e08b6",
+    "category": "accent"
+  },
+  "paper-white-30": {
+    "value": "#506366",
+    "category": "neutral"
+  },
+  "paper-white-40": {
+    "value": "#1cf2a6",
+    "category": "accent"
+  },
+  "paper-white-50": {
+    "value": "#e4e54e",
+    "category": "neutral"
+  },
+  "paper-white-60": {
+    "value": "#71ccf4",
+    "category": "accent"
+  },
+  "paper-white-70": {
+    "value": "#1d7414",
+    "category": "neutral"
+  },
+  "paper-white-80": {
+    "value": "#a13246",
+    "category": "accent"
+  },
+  "paper-white-90": {
+    "value": "#9522cf",
+    "category": "neutral"
+  },
+  "paper-white-100": {
+    "value": "#d18f22",
+    "category": "accent"
+  },
+  "paper-white-110": {
+    "value": "#94faf9",
+    "category": "neutral"
+  },
+  "paper-white-120": {
+    "value": "#1530dc",
+    "category": "accent"
+  },
+  "paper-white-130": {
+    "value": "#b73149",
+    "category": "neutral"
+  },
+  "paper-white-140": {
+    "value": "#123b5d",
+    "category": "accent"
+  },
+  "paper-white-150": {
+    "value": "#b630f7",
+    "category": "neutral"
+  },
+  "paper-white-160": {
+    "value": "#ca91d4",
+    "category": "accent"
+  },
+  "paper-white-170": {
+    "value": "#5cc80f",
+    "category": "neutral"
+  },
+  "paper-white-180": {
+    "value": "#365105",
+    "category": "accent"
+  },
+  "paper-white-190": {
+    "value": "#394bd8",
+    "category": "neutral"
+  },
+  "paper-white-200": {
+    "value": "#26710a",
+    "category": "accent"
+  },
+  "paper-white-210": {
+    "value": "#52dc8c",
+    "category": "neutral"
+  },
+  "paper-white-220": {
+    "value": "#70ec8d",
+    "category": "accent"
+  },
+  "paper-white-230": {
+    "value": "#d5231a",
+    "category": "neutral"
+  },
+  "paper-white-240": {
+    "value": "#7bd704",
+    "category": "accent"
+  },
+  "paper-white-250": {
+    "value": "#2647a0",
+    "category": "neutral"
+  },
+  "paper-white-260": {
+    "value": "#f60f66",
+    "category": "accent"
+  },
+  "paper-white-270": {
+    "value": "#8073d0",
+    "category": "neutral"
+  },
+  "paper-white-280": {
+    "value": "#a5761f",
+    "category": "accent"
+  },
+  "paper-white-290": {
+    "value": "#6be3d8",
+    "category": "neutral"
+  },
+  "paper-white-300": {
+    "value": "#330157",
+    "category": "accent"
+  },
+  "paper-white-310": {
+    "value": "#940ffd",
+    "category": "neutral"
+  },
+  "paper-white-320": {
+    "value": "#06679f",
+    "category": "accent"
+  },
+  "paper-white-330": {
+    "value": "#41f31b",
+    "category": "neutral"
+  },
+  "paper-white-340": {
+    "value": "#fe8adc",
+    "category": "accent"
+  },
+  "paper-white-350": {
+    "value": "#0ddb9d",
+    "category": "neutral"
+  },
+  "paper-white-360": {
+    "value": "#567f5a",
+    "category": "accent"
+  },
+  "paper-white-370": {
+    "value": "#67d2dc",
+    "category": "neutral"
+  },
+  "paper-white-380": {
+    "value": "#0af2ae",
+    "category": "accent"
+  },
+  "paper-white-390": {
+    "value": "#502570",
+    "category": "neutral"
+  },
+  "paper-white-400": {
+    "value": "#3ab144",
+    "category": "accent"
+  },
+  "paper-white-410": {
+    "value": "#be7f94",
+    "category": "neutral"
+  },
+  "paper-white-420": {
+    "value": "#852909",
+    "category": "accent"
+  },
+  "paper-white-430": {
+    "value": "#33d525",
+    "category": "neutral"
+  },
+  "paper-white-440": {
+    "value": "#eeb4b5",
+    "category": "accent"
+  },
+  "paper-white-450": {
+    "value": "#0b5547",
+    "category": "neutral"
+  },
+  "paper-white-460": {
+    "value": "#9ec6a8",
+    "category": "accent"
+  },
+  "paper-white-470": {
+    "value": "#07580f",
+    "category": "neutral"
+  },
+  "paper-white-480": {
+    "value": "#8e93ab",
+    "category": "accent"
+  },
+  "paper-white-490": {
+    "value": "#c7c44b",
+    "category": "neutral"
+  },
+  "paper-white-500": {
+    "value": "#a7146b",
+    "category": "accent"
+  },
+  "ink-black-10": {
+    "value": "#25cb5e",
+    "category": "neutral"
+  },
+  "ink-black-20": {
+    "value": "#429835",
+    "category": "accent"
+  },
+  "ink-black-30": {
+    "value": "#0d01fa",
+    "category": "neutral"
+  },
+  "ink-black-40": {
+    "value": "#371292",
+    "category": "accent"
+  },
+  "ink-black-50": {
+    "value": "#ba9b76",
+    "category": "neutral"
+  },
+  "ink-black-60": {
+    "value": "#1bbe33",
+    "category": "accent"
+  },
+  "ink-black-70": {
+    "value": "#e751ad",
+    "category": "neutral"
+  },
+  "ink-black-80": {
+    "value": "#36ff07",
+    "category": "accent"
+  },
+  "ink-black-90": {
+    "value": "#2cac4f",
+    "category": "neutral"
+  },
+  "ink-black-100": {
+    "value": "#f741f4",
+    "category": "accent"
+  },
+  "ink-black-110": {
+    "value": "#47f1ac",
+    "category": "neutral"
+  },
+  "ink-black-120": {
+    "value": "#682395",
+    "category": "accent"
+  },
+  "ink-black-130": {
+    "value": "#6d222c",
+    "category": "neutral"
+  },
+  "ink-black-140": {
+    "value": "#822b82",
+    "category": "accent"
+  },
+  "ink-black-150": {
+    "value": "#9d2698",
+    "category": "neutral"
+  },
+  "ink-black-160": {
+    "value": "#f8c72c",
+    "category": "accent"
+  },
+  "ink-black-170": {
+    "value": "#4b7562",
+    "category": "neutral"
+  },
+  "ink-black-180": {
+    "value": "#898aef",
+    "category": "accent"
+  },
+  "ink-black-190": {
+    "value": "#2d3cf3",
+    "category": "neutral"
+  },
+  "ink-black-200": {
+    "value": "#55a817",
+    "category": "accent"
+  },
+  "ink-black-210": {
+    "value": "#390a84",
+    "category": "neutral"
+  },
+  "ink-black-220": {
+    "value": "#058e60",
+    "category": "accent"
+  },
+  "ink-black-230": {
+    "value": "#f10c2a",
+    "category": "neutral"
+  },
+  "ink-black-240": {
+    "value": "#67dc2c",
+    "category": "accent"
+  },
+  "ink-black-250": {
+    "value": "#e0e9b6",
+    "category": "neutral"
+  },
+  "ink-black-260": {
+    "value": "#479cd3",
+    "category": "accent"
+  },
+  "ink-black-270": {
+    "value": "#535a2d",
+    "category": "neutral"
+  },
+  "ink-black-280": {
+    "value": "#72a3e6",
+    "category": "accent"
+  },
+  "ink-black-290": {
+    "value": "#cb485f",
+    "category": "neutral"
+  },
+  "ink-black-300": {
+    "value": "#1b2fcf",
+    "category": "accent"
+  },
+  "ink-black-310": {
+    "value": "#881746",
+    "category": "neutral"
+  },
+  "ink-black-320": {
+    "value": "#fb352d",
+    "category": "accent"
+  },
+  "ink-black-330": {
+    "value": "#dd5896",
+    "category": "neutral"
+  },
+  "ink-black-340": {
+    "value": "#bcccf2",
+    "category": "accent"
+  },
+  "ink-black-350": {
+    "value": "#14bd76",
+    "category": "neutral"
+  },
+  "ink-black-360": {
+    "value": "#823dfb",
+    "category": "accent"
+  },
+  "ink-black-370": {
+    "value": "#7549f9",
+    "category": "neutral"
+  },
+  "ink-black-380": {
+    "value": "#69e20a",
+    "category": "accent"
+  },
+  "ink-black-390": {
+    "value": "#41f086",
+    "category": "neutral"
+  },
+  "ink-black-400": {
+    "value": "#104b74",
+    "category": "accent"
+  },
+  "ink-black-410": {
+    "value": "#7abbe3",
+    "category": "neutral"
+  },
+  "ink-black-420": {
+    "value": "#a7301a",
+    "category": "accent"
+  },
+  "ink-black-430": {
+    "value": "#8b599a",
+    "category": "neutral"
+  },
+  "ink-black-440": {
+    "value": "#ba4b98",
+    "category": "accent"
+  },
+  "ink-black-450": {
+    "value": "#3f28a3",
+    "category": "neutral"
+  },
+  "ink-black-460": {
+    "value": "#502cb9",
+    "category": "accent"
+  },
+  "ink-black-470": {
+    "value": "#74268b",
+    "category": "neutral"
+  },
+  "ink-black-480": {
+    "value": "#a42f76",
+    "category": "accent"
+  },
+  "ink-black-490": {
+    "value": "#1d418d",
+    "category": "neutral"
+  },
+  "ink-black-500": {
+    "value": "#2c7dd2",
+    "category": "accent"
+  },
+  "textured-10": {
+    "value": "#60dc1e",
+    "category": "neutral"
+  },
+  "textured-20": {
+    "value": "#a1c2b5",
+    "category": "accent"
+  },
+  "textured-30": {
+    "value": "#ff06eb",
+    "category": "neutral"
+  },
+  "textured-40": {
+    "value": "#59e76b",
+    "category": "accent"
+  },
+  "textured-50": {
+    "value": "#db0746",
+    "category": "neutral"
+  },
+  "textured-60": {
+    "value": "#d6315f",
+    "category": "accent"
+  },
+  "textured-70": {
+    "value": "#9d4dec",
+    "category": "neutral"
+  },
+  "textured-80": {
+    "value": "#f86996",
+    "category": "accent"
+  },
+  "textured-90": {
+    "value": "#6f77b1",
+    "category": "neutral"
+  },
+  "textured-100": {
+    "value": "#cd9b63",
+    "category": "accent"
+  },
+  "textured-110": {
+    "value": "#dc75a2",
+    "category": "neutral"
+  },
+  "textured-120": {
+    "value": "#d73976",
+    "category": "accent"
+  },
+  "textured-130": {
+    "value": "#6b42da",
+    "category": "neutral"
+  },
+  "textured-140": {
+    "value": "#651e81",
+    "category": "accent"
+  },
+  "textured-150": {
+    "value": "#fdfae4",
+    "category": "neutral"
+  },
+  "textured-160": {
+    "value": "#6a1379",
+    "category": "accent"
+  },
+  "textured-170": {
+    "value": "#49b6ab",
+    "category": "neutral"
+  },
+  "textured-180": {
+    "value": "#b9bf5c",
+    "category": "accent"
+  },
+  "textured-190": {
+    "value": "#48feaf",
+    "category": "neutral"
+  },
+  "textured-200": {
+    "value": "#26e85d",
+    "category": "accent"
+  },
+  "textured-210": {
+    "value": "#93ac4f",
+    "category": "neutral"
+  },
+  "textured-220": {
+    "value": "#c10ee8",
+    "category": "accent"
+  },
+  "textured-230": {
+    "value": "#b77525",
+    "category": "neutral"
+  },
+  "textured-240": {
+    "value": "#915c55",
+    "category": "accent"
+  },
+  "textured-250": {
+    "value": "#62916c",
+    "category": "neutral"
+  },
+  "textured-260": {
+    "value": "#603eee",
+    "category": "accent"
+  },
+  "textured-270": {
+    "value": "#ba1906",
+    "category": "neutral"
+  },
+  "textured-280": {
+    "value": "#667655",
+    "category": "accent"
+  },
+  "textured-290": {
+    "value": "#a00aea",
+    "category": "neutral"
+  },
+  "textured-300": {
+    "value": "#845861",
+    "category": "accent"
+  },
+  "textured-310": {
+    "value": "#cbe123",
+    "category": "neutral"
+  },
+  "textured-320": {
+    "value": "#58a7a7",
+    "category": "accent"
+  },
+  "textured-330": {
+    "value": "#299bd1",
+    "category": "neutral"
+  },
+  "textured-340": {
+    "value": "#acca55",
+    "category": "accent"
+  },
+  "textured-350": {
+    "value": "#ea1997",
+    "category": "neutral"
+  },
+  "textured-360": {
+    "value": "#621c59",
+    "category": "accent"
+  },
+  "textured-370": {
+    "value": "#b50bc3",
+    "category": "neutral"
+  },
+  "textured-380": {
+    "value": "#b933de",
+    "category": "accent"
+  },
+  "textured-390": {
+    "value": "#f6282a",
+    "category": "neutral"
+  },
+  "textured-400": {
+    "value": "#a9916d",
+    "category": "accent"
+  },
+  "textured-410": {
+    "value": "#82bb7f",
+    "category": "neutral"
+  },
+  "textured-420": {
+    "value": "#f62630",
+    "category": "accent"
+  },
+  "textured-430": {
+    "value": "#35f74e",
+    "category": "neutral"
+  },
+  "textured-440": {
+    "value": "#a6184c",
+    "category": "accent"
+  },
+  "textured-450": {
+    "value": "#0bee0f",
+    "category": "neutral"
+  },
+  "textured-460": {
+    "value": "#cb0682",
+    "category": "accent"
+  },
+  "textured-470": {
+    "value": "#ef73ff",
+    "category": "neutral"
+  },
+  "textured-480": {
+    "value": "#75e6ce",
+    "category": "accent"
+  },
+  "textured-490": {
+    "value": "#4a1083",
+    "category": "neutral"
+  },
+  "textured-500": {
+    "value": "#1d3fe6",
+    "category": "accent"
+  }
+}
