@@ -1,13 +1,17 @@
-// src/components/content/PaywallGate.tsx
 import Link from 'next/link';
 import type { AccessTier } from '@/lib/supabase/types';
 
 interface PaywallGateProps {
   requiredTier: AccessTier;
   previewBody: string;
+  isLoggedIn?: boolean;
 }
 
-export function PaywallGate({ requiredTier, previewBody }: PaywallGateProps) {
+export function PaywallGate({
+  requiredTier,
+  previewBody,
+  isLoggedIn = false,
+}: PaywallGateProps) {
   const tierLabel = requiredTier === 'basic' ? 'Basic' : 'Premium';
 
   return (
@@ -16,7 +20,7 @@ export function PaywallGate({ requiredTier, previewBody }: PaywallGateProps) {
       <div className="relative">
         <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
           {previewBody}
-          <span aria-hidden="true">…</span>
+          <span aria-hidden="true">&hellip;</span>
         </p>
         <div
           className="absolute inset-0 bg-gradient-to-b from-transparent to-bmj-black"
@@ -30,24 +34,30 @@ export function PaywallGate({ requiredTier, previewBody }: PaywallGateProps) {
           Members Only
         </p>
         <h3 className="mb-4 font-display text-2xl text-bmj-white">
-          This article is for {tierLabel} members
+          {isLoggedIn
+            ? `Upgrade to ${tierLabel} to read this`
+            : `This article is for ${tierLabel} members`}
         </h3>
         <p className="mb-6 font-body text-sm text-bmj-cream/70">
-          Upgrade to read the full article and all {tierLabel.toLowerCase()} content.
+          {isLoggedIn
+            ? `Your current plan doesn\u2019t include ${tierLabel.toLowerCase()} content. Upgrade to unlock.`
+            : `Upgrade to read the full article and all ${tierLabel.toLowerCase()} content.`}
         </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
             href={`/signup?tier=${requiredTier}`}
             className="inline-block bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-85"
           >
-            Subscribe — {tierLabel}
+            {isLoggedIn ? `Upgrade — ${tierLabel}` : `Subscribe — ${tierLabel}`}
           </Link>
-          <Link
-            href="/login"
-            className="font-body text-sm text-bmj-tan underline hover:text-bmj-cream"
-          >
-            Already a member? Log in
-          </Link>
+          {!isLoggedIn && (
+            <Link
+              href="/login"
+              className="font-body text-sm text-bmj-tan underline hover:text-bmj-cream"
+            >
+              Already a member? Log in
+            </Link>
+          )}
         </div>
       </div>
     </div>

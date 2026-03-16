@@ -118,7 +118,7 @@ export type Database = {
       };
       members: {
         Row: Member;
-        Insert: Omit<Member, 'id' | 'created_at'>;
+        Insert: Omit<Member, 'created_at'>;
         Update: Partial<Omit<Member, 'id' | 'created_at'>>;
         Relationships: [];
       };

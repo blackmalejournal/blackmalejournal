@@ -1,31 +1,40 @@
-// src/components/layout/Navbar.tsx
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
-import { MobileMenu } from "./MobileMenu";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu } from 'lucide-react';
+import { MobileMenu } from './MobileMenu';
+import { UserDropdown } from './UserDropdown';
+
+export type NavUser = {
+  email: string;
+  displayName?: string;
+} | null;
 
 const NAV_LINKS = [
-  { label: "Home",      href: "/" },
-  { label: "About",     href: "/about" },
-  { label: "Academy",   href: "/academy" },
-  { label: "Resources", href: "/resources" },
-  { label: "Video",     href: "/video" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Contact",   href: "/contact" },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Academy', href: '/academy' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Video', href: '/video' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
-export function Navbar() {
+interface NavbarProps {
+  user?: NavUser;
+}
+
+export function Navbar({ user = null }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -33,19 +42,17 @@ export function Navbar() {
       <header
         className={`accent-border-bottom sticky top-0 z-50 transition-all duration-200 ${
           isScrolled
-            ? "bg-bmj-black/95 backdrop-blur-sm"
-            : "bg-bmj-black"
+            ? 'bg-bmj-black/95 backdrop-blur-sm'
+            : 'bg-bmj-black'
         }`}
       >
         <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4">
-
           {/* Logo / Wordmark */}
           <Link
             href="/"
             className="flex items-center gap-3 no-underline"
             aria-label="The Black Male Journal — Home"
           >
-            {/* Star mark (placeholder until Chairman provides SVG assets) */}
             <svg
               width="32"
               height="32"
@@ -75,8 +82,8 @@ export function Navbar() {
                       href={link.href}
                       className={`font-label text-xs uppercase tracking-widest transition-colors no-underline ${
                         isActive
-                          ? "border-b-2 border-bmj-red text-bmj-white pb-0.5"
-                          : "text-bmj-cream hover:text-bmj-white"
+                          ? 'border-b-2 border-bmj-red text-bmj-white pb-0.5'
+                          : 'text-bmj-cream hover:text-bmj-white'
                       }`}
                     >
                       {link.label}
@@ -87,14 +94,31 @@ export function Navbar() {
             </ul>
           </nav>
 
-          {/* Right side — JOIN + hamburger */}
+          {/* Right side — auth-aware */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/signup"
-              className="hidden bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90 sm:block"
-            >
-              Join
-            </Link>
+            {user ? (
+              <div className="hidden sm:block">
+                <UserDropdown
+                  email={user.email}
+                  displayName={user.displayName}
+                />
+              </div>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="hidden font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:text-bmj-white sm:block"
+                >
+                  Log In
+                </Link>
+                <Link
+                  href="/signup"
+                  className="hidden bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90 sm:block"
+                >
+                  Join
+                </Link>
+              </>
+            )}
 
             <button
               onClick={() => setMobileOpen(true)}
@@ -109,7 +133,11 @@ export function Navbar() {
         </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu
+        isOpen={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        user={user}
+      />
     </>
   );
 }

@@ -7,6 +7,7 @@ import {
   IBM_Plex_Mono,
 } from "next/font/google";
 import "@/styles/globals.css";
+import { createClient } from "@/lib/supabase/server";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -48,11 +49,23 @@ export const metadata: Metadata = {
     "Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const navUser = user
+    ? {
+        email: user.email ?? "",
+        displayName: user.user_metadata?.display_name as string | undefined,
+      }
+    : null;
+
   const fontVars = [
     bebasNeue.variable,
     libreBaskerville.variable,
@@ -63,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontVars}>
       <body className="grain flex min-h-screen flex-col bg-bmj-black text-bmj-cream">
-        <Navbar />
+        <Navbar user={navUser} />
         <main className="flex-1">{children}</main>
         <Footer />
         {/* Plausible analytics — uncomment when domain is live */}

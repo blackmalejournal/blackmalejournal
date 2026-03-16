@@ -1,8 +1,10 @@
-// src/proxy.ts
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-export async function proxy(request: NextRequest) {
+const PROTECTED_PREFIXES = ['/portal'];
+const AUTH_PAGES = ['/login', '/signup'];
+
+export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -26,15 +28,33 @@ export async function proxy(request: NextRequest) {
     },
   );
 
-  // Refreshes expiring tokens and writes the updated session to cookies.
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { pathname } = request.nextUrl;
+
+  // Protect portal routes — redirect to login
+  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
+  if (isProtected && !user) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = '/login';
+    loginUrl.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Redirect authenticated users away from auth pages
+  if (user && AUTH_PAGES.includes(pathname)) {
+    const portalUrl = request.nextUrl.clone();
+    portalUrl.pathname = '/portal';
+    return NextResponse.redirect(portalUrl);
+  }
 
   return supabaseResponse;
 }
 
 export const config = {
   matcher: [
-    // Skip Next.js internals, static files, and images.
     '/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

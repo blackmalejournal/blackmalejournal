@@ -1,33 +1,35 @@
-// src/components/layout/MobileMenu.tsx
-"use client";
+'use client';
 
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { X, Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { X, Instagram, Youtube, Linkedin, Twitter } from 'lucide-react';
+import { signOut } from '@/app/(auth)/actions';
+import type { NavUser } from './Navbar';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  user?: NavUser;
 }
 
 const NAV_LINKS = [
-  { label: "Home",      href: "/" },
-  { label: "About",     href: "/about" },
-  { label: "Academy",   href: "/academy" },
-  { label: "Resources", href: "/resources" },
-  { label: "Video",     href: "/video" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Contact",   href: "/contact" },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Academy', href: '/academy' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Video', href: '/video' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const SOCIAL_LINKS = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube,   href: "#", label: "YouTube" },
-  { icon: Linkedin,  href: "#", label: "LinkedIn" },
-  { icon: Twitter,   href: "#", label: "Twitter / X" },
+  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Youtube, href: '#', label: 'YouTube' },
+  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Twitter, href: '#', label: 'Twitter / X' },
 ];
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -50,10 +52,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            initial={{ x: "100%" }}
+            initial={{ x: '100%' }}
             animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
             className="fixed right-0 top-0 z-50 flex h-full w-full flex-col bg-bmj-black px-8 py-6"
           >
             {/* Close button */}
@@ -78,16 +80,47 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   </Link>
                 </li>
               ))}
+              {user && (
+                <li>
+                  <Link
+                    href="/portal"
+                    onClick={onClose}
+                    className="font-display text-5xl uppercase tracking-wide text-bmj-amber transition-colors hover:text-bmj-red"
+                  >
+                    Portal
+                  </Link>
+                </li>
+              )}
             </ul>
 
-            {/* JOIN CTA */}
-            <Link
-              href="/signup"
-              onClick={onClose}
-              className="mb-8 block bg-bmj-red py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
-            >
-              Join
-            </Link>
+            {/* Auth CTA */}
+            {user ? (
+              <form action={signOut} className="mb-8">
+                <button
+                  type="submit"
+                  className="block w-full border border-bmj-red py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-red transition-colors hover:bg-bmj-red hover:text-bmj-white"
+                >
+                  Log Out
+                </button>
+              </form>
+            ) : (
+              <div className="mb-8 flex flex-col gap-3">
+                <Link
+                  href="/signup"
+                  onClick={onClose}
+                  className="block bg-bmj-red py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+                >
+                  Join
+                </Link>
+                <Link
+                  href="/login"
+                  onClick={onClose}
+                  className="block border border-bmj-tan/30 py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                >
+                  Log In
+                </Link>
+              </div>
+            )}
 
             {/* Socials */}
             <div className="flex gap-6 pb-4">

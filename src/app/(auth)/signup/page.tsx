@@ -1,0 +1,51 @@
+import type { Metadata } from 'next';
+import { SignupForm } from './SignupForm';
+
+export const metadata: Metadata = {
+  title: 'Join the Movement',
+};
+
+interface SignupPageProps {
+  searchParams: Promise<{ error?: string; tier?: string }>;
+}
+
+const KNOWN_ERRORS: Record<string, string> = {
+  'User already registered': 'An account with this email already exists.',
+  'Password should be at least 6 characters': 'Password must be at least 6 characters.',
+};
+
+const VALID_TIERS = new Set(['free', 'basic', 'premium']);
+
+function resolveError(raw: string | undefined): string | undefined {
+  if (!raw) return undefined;
+  return KNOWN_ERRORS[raw] ?? 'Something went wrong. Please try again.';
+}
+
+export default async function SignupPage({ searchParams }: SignupPageProps) {
+  const params = await searchParams;
+  const error = resolveError(params.error);
+  const tier = VALID_TIERS.has(params.tier ?? '') ? params.tier : undefined;
+
+  return (
+    <div className="flex min-h-[80vh] items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="mb-8 text-center">
+          <h1 className="mb-2 font-display text-4xl text-bmj-white">
+            JOIN THE MOVEMENT
+          </h1>
+          <p className="font-body text-sm text-bmj-tan">
+            Create your account. Access the archive.
+          </p>
+        </div>
+
+        {error && (
+          <div className="mb-6 border border-bmj-red/40 bg-bmj-red/10 p-4">
+            <p className="font-body text-sm text-bmj-red">{error}</p>
+          </div>
+        )}
+
+        <SignupForm preselectedTier={tier} />
+      </div>
+    </div>
+  );
+}

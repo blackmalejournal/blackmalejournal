@@ -49,10 +49,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
   const isFree = article.access_tier === 'free';
   let hasAccess = isFree;
+  let user = null;
 
   if (!isFree) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user: authUser } } = await supabase.auth.getUser();
+    user = authUser;
     if (user) {
       const member = await getMemberById(user.id);
       if (member) {
@@ -129,7 +131,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         {hasAccess ? (
           <ArticleBody body={article.body} />
         ) : (
-          <PaywallGate requiredTier={article.access_tier} previewBody={previewBody} />
+          <PaywallGate
+            requiredTier={article.access_tier}
+            previewBody={previewBody}
+            isLoggedIn={!!user}
+          />
         )}
       </div>
 
