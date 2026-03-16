@@ -1,3 +1,19 @@
+function renderInlineMarks(text: string): React.ReactNode {
+  const parts = text.split(/(<mark>.*?<\/mark>)/g)
+  if (parts.length === 1) return text
+  return parts.map((part, i) => {
+    const match = part.match(/^<mark>(.*?)<\/mark>$/)
+    if (match) {
+      return (
+        <mark key={i} className="marker">
+          {match[1]}
+        </mark>
+      )
+    }
+    return part
+  })
+}
+
 interface ArticleBodyProps {
   body: string;
 }
@@ -41,13 +57,13 @@ export function ArticleBody({ body }: ArticleBodyProps) {
               key={i}
               className="border-l-4 border-bmj-red bg-bmj-amber/10 px-6 py-4 font-body text-lg italic text-bmj-amber"
             >
-              {para.slice(2)}
+              {renderInlineMarks(para.slice(2))}
             </blockquote>
           );
         }
         return (
           <p key={i} className="font-body text-lg leading-[1.8] text-bmj-cream/90">
-            {para}
+            {renderInlineMarks(para)}
           </p>
         );
       })}

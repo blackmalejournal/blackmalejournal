@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import QuoteCard from "@/components/content/QuoteCard";
 
 interface Quote {
   text: string;
@@ -47,16 +48,7 @@ export function RotatingQuote() {
 
   return (
     <section className="bg-bmj-brown py-24">
-      <div className="mx-auto max-w-article px-6 text-center">
-        {/* Decorative opening quotation mark */}
-        <div
-          aria-hidden="true"
-          className="mb-6 font-display text-8xl text-bmj-red"
-          style={{ lineHeight: "0.8" }}
-        >
-          &ldquo;
-        </div>
-
+      <div className="mx-auto max-w-article px-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -65,14 +57,11 @@ export function RotatingQuote() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
           >
-            <blockquote>
-              <p className="font-body text-xl italic leading-relaxed text-bmj-cream md:text-2xl">
-                {QUOTES[index].text}
-              </p>
-              <footer className="mt-6 font-label text-xs uppercase tracking-[0.3em] text-bmj-tan">
-                — {QUOTES[index].attribution}
-              </footer>
-            </blockquote>
+            <QuoteCard
+              quote={QUOTES[index].text}
+              attribution={QUOTES[index].attribution}
+              lens="philosophy"
+            />
           </motion.div>
         </AnimatePresence>
 

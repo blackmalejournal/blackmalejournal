@@ -1,9 +1,8 @@
 // src/app/(public)/briefings/[slug]/page.tsx
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
-import { BookOpen } from 'lucide-react';
+import MagazineCoverHero from '@/components/content/MagazineCoverHero';
 import {
   getBriefingBySlug,
   getBriefingByIssue,
@@ -110,46 +109,13 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         </Link>
       </div>
 
-      {/* Briefing header */}
-      <header className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
-        {/* Label row */}
-        <div className="mb-4 flex items-center gap-3">
-          <BookOpen size={20} className="text-bmj-red" aria-hidden="true" />
-          <span className="font-label text-sm uppercase tracking-[0.3em] text-bmj-tan">
-            Weekend Briefing
-          </span>
-        </div>
-
-        {/* Issue + date */}
-        <div className="mb-6 flex flex-wrap items-center gap-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-bmj-tan">
-            {issueLabel}
-          </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
-            {formatDate(briefing.published_at)}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h1 className="mb-6 font-display text-5xl leading-tight text-bmj-white sm:text-6xl lg:text-7xl">
-          {briefing.title}
-        </h1>
-
-        <div className="accent-border-bottom mb-0 pb-0" />
-      </header>
-
-      {/* Cover image */}
-      {briefing.cover_image && (
-        <div className="relative mt-8 h-64 w-full overflow-hidden sm:h-96 lg:h-[32rem]">
-          <Image
-            src={briefing.cover_image}
-            alt={briefing.title}
-            fill
-            className="halftone object-cover"
-            priority
-          />
-        </div>
-      )}
+      {/* Magazine cover hero */}
+      <MagazineCoverHero
+        title={briefing.title}
+        date={formatDate(briefing.published_at)}
+        issueNumber={briefing.issue_number}
+        coverImageUrl={briefing.cover_image || "/placeholder-briefing.jpg"}
+      />
 
       {/* Sections */}
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">

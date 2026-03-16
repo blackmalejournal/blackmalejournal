@@ -5,6 +5,7 @@ import { getArticles } from '@/lib/supabase/queries';
 import { extractTags, calculateReadingTime } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
+import NewspaperGrid from '@/components/content/NewspaperGrid';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
 import type { Lens } from '@/lib/supabase/types';
@@ -86,21 +87,45 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {visible.map((article) => (
-              <ArticleCard
-                key={article.id}
-                title={article.title}
-                slug={article.slug}
-                lens={article.lens}
-                excerpt={article.excerpt}
-                readingTime={calculateReadingTime(article.body)}
-                publishedAt={article.published_at}
-                coverImage={article.cover_image}
-                isPremium={article.access_tier !== 'free'}
-              />
-            ))}
-          </div>
+          {visible.length >= 3 && (
+            <NewspaperGrid articles={visible.slice(0, 3)} />
+          )}
+
+          {visible.length > 3 && (
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {visible.slice(3).map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  title={article.title}
+                  slug={article.slug}
+                  lens={article.lens}
+                  excerpt={article.excerpt}
+                  readingTime={calculateReadingTime(article.body)}
+                  publishedAt={article.published_at}
+                  coverImage={article.cover_image}
+                  isPremium={article.access_tier !== 'free'}
+                />
+              ))}
+            </div>
+          )}
+
+          {visible.length > 0 && visible.length < 3 && (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {visible.map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  title={article.title}
+                  slug={article.slug}
+                  lens={article.lens}
+                  excerpt={article.excerpt}
+                  readingTime={calculateReadingTime(article.body)}
+                  publishedAt={article.published_at}
+                  coverImage={article.cover_image}
+                  isPremium={article.access_tier !== 'free'}
+                />
+              ))}
+            </div>
+          )}
 
           {hasMore && (
             <div className="mt-12 text-center">

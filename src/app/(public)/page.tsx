@@ -6,6 +6,7 @@ import { BriefingPreview } from "@/components/home/BriefingPreview";
 import { FeaturedArticles } from "@/components/home/FeaturedArticles";
 import { RotatingQuote } from "@/components/home/RotatingQuote";
 import { JoinCTA } from "@/components/home/JoinCTA";
+import PosterBlock from "@/components/content/PosterBlock";
 import { getLatestBriefing, getFeaturedArticles } from "@/lib/supabase/queries";
 
 export const metadata: Metadata = {
@@ -35,6 +36,12 @@ export default async function HomePage() {
       <HeroBanner />
       <ThreeLenses />
       <BriefingPreview briefing={briefing} />
+      <PosterBlock
+        title="The Architecture of Power"
+        lens="politics"
+        excerpt="A deep analysis of institutional power dynamics and the deliberate architecture of disenfranchisement."
+        linkUrl="/articles"
+      />
       <FeaturedArticles articles={articles} />
       <RotatingQuote />
       <JoinCTA />

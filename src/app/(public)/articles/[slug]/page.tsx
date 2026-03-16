@@ -13,6 +13,7 @@ import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
+import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -133,7 +134,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             src={article.cover_image}
             alt={article.title}
             fill
-            className="halftone object-cover"
+            className="halftone-heavy object-cover"
             priority
           />
         </div>
@@ -142,7 +143,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Article body */}
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
         {hasAccess ? (
-          <ArticleBody body={article.body} />
+          <PullQuoteSidebar body={article.body}>
+            <ArticleBody body={article.body} />
+          </PullQuoteSidebar>
         ) : (
           <PaywallGate
             requiredTier={article.access_tier}

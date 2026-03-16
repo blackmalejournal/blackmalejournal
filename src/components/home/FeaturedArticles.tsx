@@ -1,7 +1,6 @@
 // src/components/home/FeaturedArticles.tsx
-import { ArticleCard } from "@/components/content/ArticleCard";
 import { StarDivider } from "@/components/ui/StarDivider";
-import { calculateReadingTime } from "@/lib/utils";
+import NewspaperGrid from "@/components/content/NewspaperGrid";
 import type { Article } from "@/lib/supabase/types";
 
 interface FeaturedArticlesProps {
@@ -19,21 +18,7 @@ export function FeaturedArticles({ articles }: FeaturedArticlesProps) {
         </h2>
 
         {articles.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {articles.map((article) => (
-              <ArticleCard
-                key={article.slug}
-                title={article.title}
-                slug={article.slug}
-                lens={article.lens}
-                excerpt={article.excerpt}
-                readingTime={calculateReadingTime(article.body)}
-                publishedAt={article.published_at}
-                coverImage={article.cover_image ?? undefined}
-                isPremium={article.access_tier !== 'free'}
-              />
-            ))}
-          </div>
+          <NewspaperGrid articles={articles} />
         ) : (
           <p className="text-center font-body text-base text-bmj-cream/50">
             Featured articles coming soon.
