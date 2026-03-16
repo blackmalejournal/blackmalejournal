@@ -1,0 +1,469 @@
+import { createMockSupabaseClient, type MockSupabaseClient } from '../helpers/supabase-mock';
+import {
+  mockArticle,
+  mockArticlePhilosophy,
+  mockBriefing,
+  mockMember,
+  mockMemberPremium,
+  mockCourse,
+  mockDispatch,
+} from '../helpers/fixtures';
+
+// ── Module-level mock ────────────────────────────────────────────────────────
+let mockClient: MockSupabaseClient;
+
+jest.mock('@/lib/supabase/server', () => ({
+  createClient: jest.fn(() => {
+    // Return the current mockClient (reassigned per-test when needed)
+    return Promise.resolve(mockClient);
+  }),
+}));
+
+// Suppress console.error noise from expected error paths
+jest.spyOn(console, 'error').mockImplementation(() => {});
+
+import {
+  getArticles,
+  getArticleBySlug,
+  getFeaturedArticles,
+  getLatestArticles,
+  getBriefings,
+  getBriefingBySlug,
+  getLatestBriefing,
+  getBriefingByIssue,
+  getMemberById,
+  getMemberByEmail,
+  updateMemberTier,
+  getCourses,
+  getCourseBySlug,
+  subscribeToNewsletter,
+  unsubscribeFromNewsletter,
+  submitContactForm,
+  getDispatches,
+  getDispatchBySlug,
+} from '@/lib/supabase/queries';
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+/** Reset mock client to a fresh success state before each test */
+function resetClient(overrides: { data?: unknown; error?: { message: string } | null } = {}) {
+  mockClient = createMockSupabaseClient(overrides);
+}
+
+/** Swap the mock chain to return an error for the current client */
+function setError(message = 'test error') {
+  resetClient({ error: { message } });
+}
+
+/** Swap the mock chain to return specific data */
+function setData(data: unknown) {
+  resetClient({ data });
+}
+
+// ── Setup ────────────────────────────────────────────────────────────────────
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  // Re-apply the console.error spy after clearAllMocks wipes it
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+  resetClient();
+});
+
+// ── Articles ─────────────────────────────────────────────────────────────────
+
+describe('getArticles', () => {
+  it('returns articles on success', async () => {
+    setData([mockArticle]);
+    const result = await getArticles();
+    expect(result).toEqual([mockArticle]);
+    expect(mockClient.from).toHaveBeenCalledWith('articles');
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getArticles();
+    expect(result).toEqual([]);
+  });
+
+  it('applies lens filter', async () => {
+    setData([mockArticlePhilosophy]);
+    await getArticles({ lens: 'philosophy' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'philosophy');
+  });
+
+  it('applies tag filter', async () => {
+    setData([mockArticle]);
+    await getArticles({ tag: 'discipline' });
+    expect(mockClient._queryChain.contains).toHaveBeenCalledWith('tags', ['discipline']);
+  });
+
+  it('applies tier filter', async () => {
+    setData([mockArticle]);
+    await getArticles({ tier: 'free' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('access_tier', 'free');
+  });
+
+  it('calls order and range with defaults', async () => {
+    setData([]);
+    await getArticles();
+    expect(mockClient._queryChain.order).toHaveBeenCalledWith('published_at', { ascending: false });
+    expect(mockClient._queryChain.range).toHaveBeenCalledWith(0, 19);
+  });
+});
+
+describe('getArticleBySlug', () => {
+  it('returns article on success', async () => {
+    resetClient({ data: mockArticle });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockArticle, error: null });
+    const result = await getArticleBySlug('discipline-morning-routines');
+    expect(result).toEqual(mockArticle);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'discipline-morning-routines');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getArticleBySlug('nonexistent');
+    expect(result).toBeNull();
+  });
+});
+
+describe('getFeaturedArticles', () => {
+  it('returns featured articles', async () => {
+    setData([mockArticle]);
+    const result = await getFeaturedArticles();
+    expect(result).toEqual([mockArticle]);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('featured', true);
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getFeaturedArticles();
+    expect(result).toEqual([]);
+  });
+
+  it('passes custom limit', async () => {
+    setData([]);
+    await getFeaturedArticles(5);
+    expect(mockClient._queryChain.limit).toHaveBeenCalledWith(5);
+  });
+});
+
+describe('getLatestArticles', () => {
+  it('returns latest articles', async () => {
+    setData([mockArticle]);
+    const result = await getLatestArticles();
+    expect(result).toEqual([mockArticle]);
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getLatestArticles();
+    expect(result).toEqual([]);
+  });
+});
+
+// ── Briefings ────────────────────────────────────────────────────────────────
+
+describe('getBriefings', () => {
+  it('returns briefings on success', async () => {
+    setData([mockBriefing]);
+    const result = await getBriefings();
+    expect(result).toEqual([mockBriefing]);
+    expect(mockClient.from).toHaveBeenCalledWith('briefings');
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getBriefings();
+    expect(result).toEqual([]);
+  });
+});
+
+describe('getBriefingBySlug', () => {
+  it('returns briefing on success', async () => {
+    resetClient({ data: mockBriefing });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockBriefing, error: null });
+    const result = await getBriefingBySlug('weekend-briefing-001');
+    expect(result).toEqual(mockBriefing);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'weekend-briefing-001');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getBriefingBySlug('nonexistent');
+    expect(result).toBeNull();
+  });
+});
+
+describe('getLatestBriefing', () => {
+  it('returns latest briefing', async () => {
+    resetClient({ data: mockBriefing });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockBriefing, error: null });
+    const result = await getLatestBriefing();
+    expect(result).toEqual(mockBriefing);
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getLatestBriefing();
+    expect(result).toBeNull();
+  });
+});
+
+describe('getBriefingByIssue', () => {
+  it('returns briefing by issue number', async () => {
+    resetClient({ data: mockBriefing });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockBriefing, error: null });
+    const result = await getBriefingByIssue(1);
+    expect(result).toEqual(mockBriefing);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('issue_number', 1);
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getBriefingByIssue(999);
+    expect(result).toBeNull();
+  });
+});
+
+// ── Members ──────────────────────────────────────────────────────────────────
+
+describe('getMemberById', () => {
+  it('returns member on success', async () => {
+    resetClient({ data: mockMember });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockMember, error: null });
+    const result = await getMemberById('mem-1');
+    expect(result).toEqual(mockMember);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('id', 'mem-1');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getMemberById('nonexistent');
+    expect(result).toBeNull();
+  });
+});
+
+describe('getMemberByEmail', () => {
+  it('returns member on success', async () => {
+    resetClient({ data: mockMember });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockMember, error: null });
+    const result = await getMemberByEmail('member@example.com');
+    expect(result).toEqual(mockMember);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('email', 'member@example.com');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getMemberByEmail('nonexistent@example.com');
+    expect(result).toBeNull();
+  });
+});
+
+describe('updateMemberTier', () => {
+  it('updates tier without stripe data', async () => {
+    resetClient();
+    await updateMemberTier('mem-1', 'basic');
+    expect(mockClient.from).toHaveBeenCalledWith('members');
+    expect(mockClient._queryChain.update).toHaveBeenCalledWith({ tier: 'basic' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('id', 'mem-1');
+  });
+
+  it('updates tier with stripe data', async () => {
+    resetClient();
+    await updateMemberTier('mem-1', 'premium', {
+      customerId: 'cus_premium456',
+      subscriptionId: 'sub_premium456',
+    });
+    expect(mockClient._queryChain.update).toHaveBeenCalledWith({
+      tier: 'premium',
+      stripe_customer_id: 'cus_premium456',
+      stripe_subscription_id: 'sub_premium456',
+    });
+  });
+
+  it('logs error on failure', async () => {
+    setError('update failed');
+    await updateMemberTier('mem-1', 'basic');
+    expect(console.error).toHaveBeenCalled();
+  });
+});
+
+// ── Courses ──────────────────────────────────────────────────────────────────
+
+describe('getCourses', () => {
+  it('returns courses on success', async () => {
+    setData([mockCourse]);
+    const result = await getCourses();
+    expect(result).toEqual([mockCourse]);
+    expect(mockClient.from).toHaveBeenCalledWith('courses');
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getCourses();
+    expect(result).toEqual([]);
+  });
+
+  it('applies category filter', async () => {
+    setData([mockCourse]);
+    await getCourses({ category: 'martial-arts' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('category', 'martial-arts');
+  });
+
+  it('applies published filter', async () => {
+    setData([mockCourse]);
+    await getCourses({ published: true });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('published', true);
+  });
+});
+
+describe('getCourseBySlug', () => {
+  it('returns course on success', async () => {
+    resetClient({ data: mockCourse });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockCourse, error: null });
+    const result = await getCourseBySlug('martial-arts-fundamentals');
+    expect(result).toEqual(mockCourse);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'martial-arts-fundamentals');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getCourseBySlug('nonexistent');
+    expect(result).toBeNull();
+  });
+});
+
+// ── Newsletter ───────────────────────────────────────────────────────────────
+
+describe('subscribeToNewsletter', () => {
+  it('upserts subscriber successfully', async () => {
+    resetClient();
+    await subscribeToNewsletter('test@example.com', 'homepage');
+    expect(mockClient.from).toHaveBeenCalledWith('newsletter_subscribers');
+    expect(mockClient._queryChain.upsert).toHaveBeenCalledWith(
+      { email: 'test@example.com', source: 'homepage', unsubscribed_at: null },
+      { onConflict: 'email' },
+    );
+  });
+
+  it('defaults source to null', async () => {
+    resetClient();
+    await subscribeToNewsletter('test@example.com');
+    expect(mockClient._queryChain.upsert).toHaveBeenCalledWith(
+      { email: 'test@example.com', source: null, unsubscribed_at: null },
+      { onConflict: 'email' },
+    );
+  });
+
+  it('throws on error', async () => {
+    setError('subscribe failed');
+    await expect(subscribeToNewsletter('test@example.com')).rejects.toEqual({ message: 'subscribe failed' });
+  });
+});
+
+describe('unsubscribeFromNewsletter', () => {
+  it('updates unsubscribed_at', async () => {
+    resetClient();
+    await unsubscribeFromNewsletter('test@example.com');
+    expect(mockClient.from).toHaveBeenCalledWith('newsletter_subscribers');
+    expect(mockClient._queryChain.update).toHaveBeenCalled();
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('email', 'test@example.com');
+  });
+
+  it('logs error on failure', async () => {
+    setError('unsubscribe failed');
+    await unsubscribeFromNewsletter('test@example.com');
+    expect(console.error).toHaveBeenCalled();
+  });
+});
+
+// ── Contact ──────────────────────────────────────────────────────────────────
+
+describe('submitContactForm', () => {
+  it('inserts contact form data', async () => {
+    resetClient();
+    await submitContactForm({
+      name: 'John',
+      email: 'john@example.com',
+      subject: 'Test',
+      message: 'Hello',
+    });
+    expect(mockClient.from).toHaveBeenCalledWith('contact_submissions');
+    expect(mockClient._queryChain.insert).toHaveBeenCalledWith({
+      name: 'John',
+      email: 'john@example.com',
+      subject: 'Test',
+      message: 'Hello',
+    });
+  });
+
+  it('defaults subject to null', async () => {
+    resetClient();
+    await submitContactForm({
+      name: 'John',
+      email: 'john@example.com',
+      message: 'Hello',
+    });
+    expect(mockClient._queryChain.insert).toHaveBeenCalledWith({
+      name: 'John',
+      email: 'john@example.com',
+      subject: null,
+      message: 'Hello',
+    });
+  });
+
+  it('throws on error', async () => {
+    setError('insert failed');
+    await expect(
+      submitContactForm({ name: 'John', email: 'john@example.com', message: 'Hello' }),
+    ).rejects.toEqual({ message: 'insert failed' });
+  });
+});
+
+// ── Dispatches ───────────────────────────────────────────────────────────────
+
+describe('getDispatches', () => {
+  it('returns dispatches on success', async () => {
+    setData([mockDispatch]);
+    const result = await getDispatches();
+    expect(result).toEqual([mockDispatch]);
+    expect(mockClient.from).toHaveBeenCalledWith('dispatches');
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getDispatches();
+    expect(result).toEqual([]);
+  });
+
+  it('applies range with defaults', async () => {
+    setData([]);
+    await getDispatches();
+    expect(mockClient._queryChain.range).toHaveBeenCalledWith(0, 19);
+  });
+});
+
+describe('getDispatchBySlug', () => {
+  it('returns dispatch on success', async () => {
+    resetClient({ data: mockDispatch });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockDispatch, error: null });
+    const result = await getDispatchBySlug('reclaiming-narrative');
+    expect(result).toEqual(mockDispatch);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'reclaiming-narrative');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getDispatchBySlug('nonexistent');
+    expect(result).toBeNull();
+  });
+});
