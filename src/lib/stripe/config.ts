@@ -1,5 +1,4 @@
 import Stripe from 'stripe';
-import type { MemberTier } from '@/lib/supabase/types';
 
 // Lazy singleton — avoids evaluating process.env at module load time,
 // which would fail during `next build` when env vars may not be available.

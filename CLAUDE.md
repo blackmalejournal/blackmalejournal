@@ -72,9 +72,14 @@ Follow conventional commits: feat:, fix:, chore:, docs:, style:, refactor:, test
 Example: "feat: add Weekend Briefing archive page with lens filter"
 
 ## Testing
+- Run `npm test` — 354 unit/integration tests across 50 suites (Jest with jsdom)
+- Run `npm run test:watch` — Jest watch mode for development
+- Run `npm test -- --coverage` — Coverage report
+- Run `npm run test:e2e` — E2E tests with Playwright (chromium)
 - Verify `npm run build` passes before any commit
 - Check TypeScript with `npx tsc --noEmit`
 - Visual check: every page must look correct at 375px (mobile) and 1440px (desktop)
+- **CI/CD:** GitHub Actions validates all tests + lint + build on every commit and PR
 
 ## Important Notes
 - Weekend Briefing is the flagship content format — it gets special design treatment
