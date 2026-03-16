@@ -4,7 +4,7 @@ interface TributeCardProps {
   name: string
   honorific?: string
   dates: string
-  imageUrl: string
+  imageUrl?: string
   description?: string
 }
 
@@ -17,13 +17,15 @@ export default function TributeCard({
 }: TributeCardProps) {
   return (
     <div className="flex flex-col overflow-hidden sm:flex-row">
-      <div className="relative h-48 w-full sm:h-auto sm:w-2/5">
-        <Image
-          src={imageUrl}
-          alt={name}
-          fill
-          className="object-cover grayscale contrast-[1.2]"
-        />
+      <div className="relative h-48 w-full bg-bmj-brown sm:h-auto sm:w-2/5">
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            className="object-cover grayscale contrast-[1.2]"
+          />
+        )}
       </div>
       <div className="flex flex-1 flex-col justify-center border-bmj-red bg-bmj-black p-6 sm:border-l-[3px] sm:p-8">
         <span className="font-label text-xs uppercase tracking-widest text-bmj-tan">

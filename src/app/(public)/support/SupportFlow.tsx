@@ -10,10 +10,10 @@ const PRESETS = [
 ];
 
 const IMPACT_LABELS: Record<number, string> = {
-  5: 'Keeps the platform running',
-  15: 'Produces one Weekend Briefing',
-  25: 'Funds a full week of dispatches',
-  50: 'Sponsors original investigations',
+  5: 'Covers hosting, domain, and infrastructure for one month',
+  15: 'Funds one Weekend Briefing — research, writing, and publication',
+  25: 'Supports a full week of articles, dispatches, and briefing production',
+  50: 'Funds deep investigative reporting and original documentary research',
 };
 
 const BRAND_SYMBOLS = ['\u2605', '\u270A', '\u2726'];
