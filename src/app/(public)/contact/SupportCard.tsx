@@ -1,11 +1,5 @@
+import Link from 'next/link';
 import { Heart } from 'lucide-react';
-
-const SUPPORT_PLATFORMS = [
-  { label: 'Patreon', href: '#', description: 'Monthly support' },
-  { label: 'PayPal', href: '#', description: 'One-time or recurring' },
-  { label: 'CashApp', href: '#', description: '$BlackMaleJournal' },
-  { label: 'Venmo', href: '#', description: '@BlackMaleJournal' },
-];
 
 export function SupportCard() {
   return (
@@ -20,23 +14,31 @@ export function SupportCard() {
         The Black Male Journal runs on community support. Every contribution
         fuels independent media for Black men.
       </p>
-      <div className="grid grid-cols-2 gap-3">
-        {SUPPORT_PLATFORMS.map((platform) => (
-          <a
-            key={platform.label}
-            href={platform.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-bmj-tan/20 bg-bmj-black px-4 py-3 text-center transition-colors hover:border-bmj-red/40"
-          >
-            <span className="block font-label text-xs uppercase tracking-widest text-bmj-cream">
-              {platform.label}
-            </span>
-            <span className="mt-1 block font-mono text-[10px] text-bmj-tan/60">
-              {platform.description}
-            </span>
-          </a>
-        ))}
+
+      <Link
+        href="/support"
+        className="mb-4 block bg-bmj-red py-3 text-center font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+      >
+        Fund the Mission
+      </Link>
+
+      <div className="flex justify-between text-center">
+        <div>
+          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-tan/60">
+            CashApp
+          </span>
+          <span className="font-mono text-xs text-bmj-cream">
+            $BlackMaleJournal
+          </span>
+        </div>
+        <div>
+          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-tan/60">
+            Venmo
+          </span>
+          <span className="font-mono text-xs text-bmj-cream">
+            @BlackMaleJournal
+          </span>
+        </div>
       </div>
     </div>
   );
