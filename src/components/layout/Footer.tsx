@@ -1,5 +1,6 @@
 // src/components/layout/Footer.tsx
 import Link from "next/link";
+import { NewsletterForm } from './NewsletterForm';
 import { Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
 
 const NAV_LINKS = [
@@ -23,6 +24,7 @@ const SUPPORT_LINKS = [
   { label: "Patreon",  href: "#" },
   { label: "PayPal",   href: "#" },
   { label: "CashApp",  href: "#" },
+  { label: "Venmo",    href: "#" },
 ];
 
 export function Footer() {
@@ -117,27 +119,7 @@ export function Footer() {
             <h4 className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Newsletter
             </h4>
-            <form
-              className="flex flex-col gap-2"
-              aria-label="Newsletter signup"
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="border border-bmj-tan/30 bg-bmj-black px-4 py-2 font-mono text-sm text-bmj-cream placeholder-bmj-tan/50 outline-none focus:border-bmj-red"
-              />
-              <button
-                type="submit"
-                className="bg-bmj-red px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm source="footer" />
           </div>
         </div>
 

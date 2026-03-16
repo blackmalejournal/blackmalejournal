@@ -254,6 +254,7 @@ export async function subscribeToNewsletter(
 
   if (error) {
     console.error('[subscribeToNewsletter]', error.message);
+    throw error;
   }
 }
 
@@ -287,6 +288,7 @@ export async function submitContactForm(data: {
 
   if (error) {
     console.error('[submitContactForm]', error.message);
+    throw error;
   }
 }
 
