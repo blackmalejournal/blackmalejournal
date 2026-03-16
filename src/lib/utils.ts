@@ -93,3 +93,16 @@ export function extractTags(articles: Article[]): string[] {
   }
   return Array.from(set).sort();
 }
+
+// Maps course category slugs to display labels.
+const CATEGORY_LABELS: Record<string, string> = {
+  'martial-arts': 'Martial Arts',
+  'mental-health': 'Mental Health',
+  'relationships': 'Relationships',
+  'purpose': 'Purpose',
+  'branding': 'Branding',
+};
+
+export function getCategoryLabel(category: string): string {
+  return CATEGORY_LABELS[category] ?? category;
+}
