@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   title: 'Video',
   description:
     'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+  openGraph: {
+    title: 'Video',
+    description:
+      'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Video',
+    description:
+      'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+  },
 };
 
 export default function VideoPage() {

@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { getArticleBySlug, getArticles, getMemberById } from '@/lib/supabase/queries';
 import { createClient } from '@/lib/supabase/server';
 import { calculateReadingTime } from '@/lib/utils';
+import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
@@ -79,6 +81,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className="mx-auto max-w-wide">
+      <JsonLd
+        data={articleJsonLd({
+          title: article.title,
+          description: article.excerpt,
+          url: `${SITE_URL}/articles/${article.slug}`,
+          imageUrl: article.cover_image,
+          publishedAt: article.published_at,
+          author: article.author,
+        })}
+      />
+
       {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Link

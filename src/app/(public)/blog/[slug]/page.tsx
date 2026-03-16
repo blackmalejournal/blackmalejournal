@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getDispatchBySlug } from '@/lib/supabase/queries';
 import { formatDate } from '@/lib/utils';
+import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleBody } from '@/components/content/ArticleBody';
@@ -29,7 +31,7 @@ export async function generateMetadata(
       images: dispatch.cover_image ? [{ url: dispatch.cover_image }] : [],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: dispatch.title,
       description: dispatch.excerpt,
     },
@@ -43,6 +45,17 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
 
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
+      <JsonLd
+        data={articleJsonLd({
+          title: dispatch.title,
+          description: dispatch.excerpt,
+          url: `${SITE_URL}/blog/${dispatch.slug}`,
+          imageUrl: dispatch.cover_image,
+          publishedAt: dispatch.published_at,
+          author: dispatch.author,
+        })}
+      />
+
       {/* Back link */}
       <Link
         href="/blog"

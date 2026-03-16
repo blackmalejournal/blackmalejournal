@@ -11,6 +11,8 @@ import {
 } from '@/lib/supabase/queries';
 import { createClient } from '@/lib/supabase/server';
 import { formatDate } from '@/lib/utils';
+import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { PaywallGate } from '@/components/content/PaywallGate';
@@ -87,6 +89,17 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
 
   return (
     <div className="mx-auto max-w-wide">
+      <JsonLd
+        data={articleJsonLd({
+          title: `Weekend Briefing ${issueLabel}: ${briefing.title}`,
+          description:
+            briefing.sections[0]?.body.slice(0, 160) ?? briefing.title,
+          url: `${SITE_URL}/briefings/${briefing.slug}`,
+          imageUrl: briefing.cover_image,
+          publishedAt: briefing.published_at,
+        })}
+      />
+
       {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Link

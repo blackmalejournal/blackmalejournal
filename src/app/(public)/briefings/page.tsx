@@ -9,6 +9,17 @@ export const metadata: Metadata = {
   title: 'Weekend Briefing',
   description:
     'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+  openGraph: {
+    title: 'Weekend Briefing',
+    description:
+      'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Weekend Briefing',
+    description:
+      'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+  },
 };
 
 const PAGE_SIZE = 10;

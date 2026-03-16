@@ -2,9 +2,20 @@ import type { Metadata } from "next";
 import { StarDivider } from "@/components/ui/StarDivider";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | The Black Male Journal",
+  title: "Terms of Service",
   description:
     "Terms and conditions for using The Black Male Journal platform.",
+  openGraph: {
+    title: "Terms of Service",
+    description:
+      "Terms and conditions for using The Black Male Journal platform.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms of Service",
+    description:
+      "Terms and conditions for using The Black Male Journal platform.",
+  },
 };
 
 export default function TermsOfServicePage() {

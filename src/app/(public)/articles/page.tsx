@@ -13,6 +13,17 @@ export const metadata: Metadata = {
   title: 'Articles',
   description:
     'Long-form articles on health, philosophy, and politics for Black men.',
+  openGraph: {
+    title: 'Articles',
+    description:
+      'Long-form articles on health, philosophy, and politics for Black men.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Articles',
+    description:
+      'Long-form articles on health, philosophy, and politics for Black men.',
+  },
 };
 
 const VALID_LENSES = new Set<string>(['health', 'philosophy', 'politics']);

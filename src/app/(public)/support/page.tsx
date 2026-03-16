@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   title: 'Support the Mission',
   description:
     'Fund independent media for Black men. No corporate sponsors. No advertisers. Just us.',
+  openGraph: {
+    title: 'Support the Mission',
+    description:
+      'Fund independent media for Black men. No corporate sponsors. No advertisers. Just us.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Support the Mission',
+    description:
+      'Fund independent media for Black men. No corporate sponsors. No advertisers. Just us.',
+  },
 };
 
 interface SupportPageProps {

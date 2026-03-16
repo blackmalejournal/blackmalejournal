@@ -8,6 +8,19 @@ import type { MemberTier } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Pricing',
+  description:
+    'Join the movement. Membership plans for The Black Male Journal — free, basic, and premium tiers.',
+  openGraph: {
+    title: 'Pricing',
+    description:
+      'Join the movement. Membership plans for The Black Male Journal — free, basic, and premium tiers.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pricing',
+    description:
+      'Join the movement. Membership plans for The Black Male Journal — free, basic, and premium tiers.',
+  },
 };
 
 const TIERS = [

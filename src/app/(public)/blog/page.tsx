@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   title: 'Dispatches',
   description:
     'Short dispatches, updates, and commentary from The Chairman.',
+  openGraph: {
+    title: 'Dispatches',
+    description:
+      'Short dispatches, updates, and commentary from The Chairman.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dispatches',
+    description:
+      'Short dispatches, updates, and commentary from The Chairman.',
+  },
 };
 
 const PAGE_SIZE = 10;

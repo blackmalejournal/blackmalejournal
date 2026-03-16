@@ -20,6 +20,17 @@ export async function generateMetadata(
   return {
     title: course.title,
     description: course.description,
+    openGraph: {
+      title: course.title,
+      description: course.description,
+      images: course.cover_image ? [{ url: course.cover_image }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image' as const,
+      title: course.title,
+      description: course.description,
+      images: course.cover_image ? [course.cover_image] : [],
+    },
   };
 }
 

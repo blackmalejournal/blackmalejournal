@@ -2,9 +2,20 @@ import type { Metadata } from "next";
 import { StarDivider } from "@/components/ui/StarDivider";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | The Black Male Journal",
+  title: "Privacy Policy",
   description:
     "How The Black Male Journal collects, uses, and protects your data.",
+  openGraph: {
+    title: "Privacy Policy",
+    description:
+      "How The Black Male Journal collects, uses, and protects your data.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy",
+    description:
+      "How The Black Male Journal collects, uses, and protects your data.",
+  },
 };
 
 export default function PrivacyPolicyPage() {

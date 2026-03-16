@@ -14,6 +14,17 @@ export const metadata: Metadata = {
   title: 'Connect',
   description:
     'Reach the Chairman. Contact The Black Male Journal for inquiries, collaborations, and press.',
+  openGraph: {
+    title: 'Connect',
+    description:
+      'Reach the Chairman. Contact The Black Male Journal for inquiries, collaborations, and press.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Connect',
+    description:
+      'Reach the Chairman. Contact The Black Male Journal for inquiries, collaborations, and press.',
+  },
 };
 
 const SOCIAL_LINKS = [

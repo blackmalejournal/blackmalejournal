@@ -10,6 +10,17 @@ export const metadata: Metadata = {
   title: 'Academy',
   description:
     'Structured learning for the disciplined man. Master your body, mind, and mission.',
+  openGraph: {
+    title: 'Academy',
+    description:
+      'Structured learning for the disciplined man. Master your body, mind, and mission.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Academy',
+    description:
+      'Structured learning for the disciplined man. Master your body, mind, and mission.',
+  },
 };
 
 const VALID_CATEGORIES = new Set<string>([
