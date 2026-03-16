@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getArticleBySlug, getArticles, getMemberById } from '@/lib/supabase/queries';
-import { createClient } from '@/lib/supabase/server';
+import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
+import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { SITE_URL, articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -48,23 +48,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
-  // Access check (must happen before body enters the JSX tree)
-  const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
-  const isFree = article.access_tier === 'free';
-  let hasAccess = isFree;
-  let user = null;
-
-  if (!isFree) {
-    const supabase = await createClient();
-    const { data: { user: authUser } } = await supabase.auth.getUser();
-    user = authUser;
-    if (user) {
-      const member = await getMemberById(user.id);
-      if (member) {
-        hasAccess = TIER_RANK[member.tier] >= TIER_RANK[article.access_tier];
-      }
-    }
-  }
+  const { hasAccess, user } = await checkContentAccess(article.access_tier);
 
   const readingTime = calculateReadingTime(article.body);
 

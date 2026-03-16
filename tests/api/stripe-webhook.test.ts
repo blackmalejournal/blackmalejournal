@@ -7,6 +7,7 @@ const mockStripe = {
 };
 jest.mock('@/lib/stripe/config', () => ({
   getStripe: () => mockStripe,
+  getWebhookSecret: jest.fn(),
   getTierFromPriceId: jest.fn((priceId: string) => {
     if (priceId === 'price_basic') return 'basic';
     if (priceId === 'price_premium') return 'premium';

@@ -8,7 +8,7 @@ import { ArticleCard } from '@/components/content/ArticleCard';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
-import type { Lens } from '@/lib/supabase/types';
+import type { Article, Lens } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Articles',
@@ -32,6 +32,26 @@ const PAGE_SIZE = 9;
 
 interface ArticlesPageProps {
   searchParams: Promise<{ lens?: string; tag?: string; page?: string }>;
+}
+
+function ArticleCardGrid({ articles }: { articles: Article[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {articles.map((article) => (
+        <ArticleCard
+          key={article.id}
+          title={article.title}
+          slug={article.slug}
+          lens={article.lens}
+          excerpt={article.excerpt}
+          readingTime={calculateReadingTime(article.body)}
+          publishedAt={article.published_at}
+          coverImage={article.cover_image}
+          isPremium={article.access_tier !== 'free'}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default async function ArticlesPage({ searchParams }: ArticlesPageProps) {
@@ -61,6 +81,10 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
     : await getArticles({ limit: 200 });
   const tags = extractTags(allArticles);
 
+  // Split visible articles into newspaper grid (first 3) and standard grid (rest)
+  const newspaperArticles = visible.slice(0, 3);
+  const remainingArticles = visible.slice(3);
+
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
       {/* Page header */}
@@ -87,43 +111,15 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
         </div>
       ) : (
         <>
-          {visible.length >= 3 && (
-            <NewspaperGrid articles={visible.slice(0, 3)} />
+          {newspaperArticles.length >= 3 ? (
+            <NewspaperGrid articles={newspaperArticles} />
+          ) : (
+            <ArticleCardGrid articles={newspaperArticles} />
           )}
 
-          {visible.length > 3 && (
-            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {visible.slice(3).map((article) => (
-                <ArticleCard
-                  key={article.id}
-                  title={article.title}
-                  slug={article.slug}
-                  lens={article.lens}
-                  excerpt={article.excerpt}
-                  readingTime={calculateReadingTime(article.body)}
-                  publishedAt={article.published_at}
-                  coverImage={article.cover_image}
-                  isPremium={article.access_tier !== 'free'}
-                />
-              ))}
-            </div>
-          )}
-
-          {visible.length > 0 && visible.length < 3 && (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {visible.map((article) => (
-                <ArticleCard
-                  key={article.id}
-                  title={article.title}
-                  slug={article.slug}
-                  lens={article.lens}
-                  excerpt={article.excerpt}
-                  readingTime={calculateReadingTime(article.body)}
-                  publishedAt={article.published_at}
-                  coverImage={article.cover_image}
-                  isPremium={article.access_tier !== 'free'}
-                />
-              ))}
+          {remainingArticles.length > 0 && (
+            <div className="mt-6">
+              <ArticleCardGrid articles={remainingArticles} />
             </div>
           )}
 

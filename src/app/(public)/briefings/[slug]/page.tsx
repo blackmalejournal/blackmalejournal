@@ -6,15 +6,15 @@ import MagazineCoverHero from '@/components/content/MagazineCoverHero';
 import {
   getBriefingBySlug,
   getBriefingByIssue,
-  getMemberById,
 } from '@/lib/supabase/queries';
-import { createClient } from '@/lib/supabase/server';
+import { checkContentAccess } from '@/lib/supabase/access';
 import { formatDate } from '@/lib/utils';
 import { SITE_URL, articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { PaywallGate } from '@/components/content/PaywallGate';
+import type { Briefing } from '@/lib/supabase/types';
 
 interface BriefingPageProps {
   params: Promise<{ slug: string }>;
@@ -48,6 +48,55 @@ export async function generateMetadata(
   };
 }
 
+function IssueNavigation({
+  prev,
+  next,
+}: {
+  prev: Briefing | null;
+  next: Briefing | null;
+}) {
+  return (
+    <nav
+      aria-label="Issue navigation"
+      className="mx-auto max-w-content border-t border-bmj-tan/20 px-4 py-10 sm:px-6 lg:px-8"
+    >
+      <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        {prev ? (
+          <Link
+            href={`/briefings/${prev.slug}`}
+            className="group flex flex-col no-underline"
+          >
+            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+              ← Previous Issue
+            </span>
+            <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
+              {prev.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+
+        {next ? (
+          <Link
+            href={`/briefings/${next.slug}`}
+            className="group flex flex-col items-start text-left no-underline sm:items-end sm:text-right"
+          >
+            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+              Next Issue →
+            </span>
+            <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
+              {next.title}
+            </span>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
+    </nav>
+  );
+}
+
 export default async function BriefingPage({ params }: BriefingPageProps) {
   const { slug } = await params;
 
@@ -61,24 +110,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
     getBriefingByIssue(briefing.issue_number + 1),
   ]);
 
-  // Access check — same TIER_RANK pattern as article page
-  const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
-  const isFree = briefing.access_tier === 'free';
-  let hasAccess = isFree;
-
-  if (!isFree) {
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) {
-      const member = await getMemberById(user.id);
-      if (member) {
-        hasAccess =
-          TIER_RANK[member.tier] >= TIER_RANK[briefing.access_tier];
-      }
-    }
-  }
+  const { hasAccess } = await checkContentAccess(briefing.access_tier);
 
   const issueLabel = `No. ${String(briefing.issue_number).padStart(3, '0')}`;
   // PaywallGate preview: first 300 chars of section[1] body if available, else section[0]
@@ -171,45 +203,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         <ShareButton />
       </div>
 
-      {/* Prev / Next navigation */}
-      <nav
-        aria-label="Issue navigation"
-        className="mx-auto max-w-content border-t border-bmj-tan/20 px-4 py-10 sm:px-6 lg:px-8"
-      >
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-          {prevBriefing ? (
-            <Link
-              href={`/briefings/${prevBriefing.slug}`}
-              className="group flex flex-col no-underline"
-            >
-              <span className="mb-1 font-mono text-xs text-bmj-tan/60">
-                ← Previous Issue
-              </span>
-              <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
-                {prevBriefing.title}
-              </span>
-            </Link>
-          ) : (
-            <span />
-          )}
-
-          {nextBriefing ? (
-            <Link
-              href={`/briefings/${nextBriefing.slug}`}
-              className="group flex flex-col items-start text-left no-underline sm:items-end sm:text-right"
-            >
-              <span className="mb-1 font-mono text-xs text-bmj-tan/60">
-                Next Issue →
-              </span>
-              <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
-                {nextBriefing.title}
-              </span>
-            </Link>
-          ) : (
-            <span />
-          )}
-        </div>
-      </nav>
+      <IssueNavigation prev={prevBriefing} next={nextBriefing} />
     </div>
   );
 }

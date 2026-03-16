@@ -25,6 +25,12 @@ export function getPriceIdForTier(tier: 'basic' | 'premium'): string {
   return id;
 }
 
+export function getWebhookSecret(): string {
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) throw new Error('STRIPE_WEBHOOK_SECRET is not configured');
+  return secret;
+}
+
 export function getTierFromPriceId(priceId: string): 'basic' | 'premium' | null {
   const basic = process.env.STRIPE_BASIC_PRICE_ID;
   const premium = process.env.STRIPE_PREMIUM_PRICE_ID;

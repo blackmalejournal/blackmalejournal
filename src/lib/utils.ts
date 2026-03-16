@@ -106,3 +106,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 export function getCategoryLabel(category: string): string {
   return CATEGORY_LABELS[category] ?? category;
 }
+
+// Adjusts amount so recipient receives the original after Stripe's 2.9% + $0.30 fee.
+export function calculateFeeAdjustedAmount(amount: number): number {
+  return Math.ceil(((amount + 0.30) / (1 - 0.029)) * 100) / 100;
+}
