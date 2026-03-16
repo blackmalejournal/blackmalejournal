@@ -81,3 +81,14 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - The Chairman is the sole author for now — default all author fields to "The Chairman"
 - Star motif from the logo is used as section dividers (horizontal rule replacement)
 - All images should have grain/halftone treatment applied via CSS
+
+## Operations & Infrastructure
+- Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md
+- Environment variable reference: docs/ops/env-vars.md (canonical source of truth)
+- When adding a new environment variable: add it to docs/ops/env-vars.md first, then set it in Vercel
+- Never commit .env files, API keys, or credentials — .gitignore must cover .env*
+- Only NEXT_PUBLIC_ prefix for values safe to expose in client bundles (Supabase URL/anon key, site URL, WhatsApp link)
+- Server-only secrets (Stripe secret key, Supabase service role key, Resend key) must NEVER have NEXT_PUBLIC_ prefix
+- Org accounts use founder@ or role aliases on the org domain — never personal email for service accounts
+- Run /secrets-audit before deploys, /backup-check weekly, /env-audit after adding new integrations
+- Run /domain-setup once when the custom domain is purchased (consolidates all domain-dependent tasks)
