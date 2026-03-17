@@ -140,6 +140,17 @@ export type ContactSubmission = {
   submitted_at: string;
 };
 
+// ── Search ───────────────────────────────────────────────────────────────────
+
+export type SearchResult = {
+  type: 'article' | 'briefing' | 'handbook' | 'dispatch';
+  title: string;
+  slug: string;
+  excerpt: string;
+  lens?: Lens;
+  publishedAt: string;
+};
+
 // ── Database generic (required by @supabase/supabase-js typed client) ─────────
 // Maps table names to their Row/Insert/Update shapes so every
 // supabase.from('articles').select() call returns Article[] automatically.
