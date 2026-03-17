@@ -443,7 +443,9 @@ export async function searchContent(
   if (!query || query.trim().length < 2) return [];
 
   const supabase = await createClient();
-  const term = `%${query.trim()}%`;
+  // Escape LIKE wildcards to prevent % or _ from matching all rows
+  const escaped = query.trim().replace(/[%_\\]/g, '\\$&');
+  const term = `%${escaped}%`;
 
   const [articles, briefings, handbooks, dispatches] = await Promise.all([
     supabase

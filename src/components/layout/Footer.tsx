@@ -133,13 +133,13 @@ export function Footer() {
           <div className="flex gap-6">
             <Link
               href="/privacy"
-              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-tan"
+              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-tan"
+              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Terms of Service
             </Link>
