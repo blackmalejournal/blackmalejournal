@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "family": "earth",
+    "variant": "light",
+    "name": "Earth Light",
+    "description": "Natural, grounding tones - browns, tans, and earthy accents for wellness and philosophy content"
+  },
+  "colors": {
+    "primary": {
+      "value": "#C8852A",
+      "description": "Primary accent - BMJ amber"
+    },
+    "secondary": {
+      "value": "#B8986A",
+      "description": "Secondary accent - earth tan"
+    },
+    "background": {
+      "value": "#FEFCF8",
+      "description": "Primary background - natural cream"
+    },
+    "surface": {
+      "value": "#FFFFFF",
+      "description": "Surface background - white"
+    },
+    "text": {
+      "value": "#2A1F15",
+      "description": "Primary text - dark brown"
+    },
+    "textSecondary": {
+      "value": "#6B5344",
+      "description": "Secondary text - medium brown"
+    },
+    "border": {
+      "value": "#C8852A",
+      "description": "Border color - earth amber"
+    },
+    "borderLight": {
+      "value": "#E8D5C4",
+      "description": "Light border - subtle"
+    },
+    "accent": {
+      "value": "#B8986A",
+      "description": "Accent color - earth tan"
+    },
+    "success": {
+      "value": "#6B9E7C",
+      "description": "Success state - sage green"
+    },
+    "error": {
+      "value": "#A85C4A",
+      "description": "Error state - earth red"
+    },
+    "warning": {
+      "value": "#C8852A",
+      "description": "Warning state - earth amber"
+    },
+    "info": {
+      "value": "#8BA5A0",
+      "description": "Info state - muted blue"
+    }
+  },
+  "typography": {
+    "fontDisplay": {
+      "value": "Bebas Neue",
+      "description": "Display font - headlines"
+    },
+    "fontBody": {
+      "value": "Libre Baskerville",
+      "description": "Body font - editorial serif"
+    },
+    "fontLabel": {
+      "value": "Oswald",
+      "description": "Label font - caps"
+    },
+    "fontMono": {
+      "value": "IBM Plex Mono",
+      "description": "Monospace font"
+    },
+    "sizeDisplay": {
+      "value": "48px",
+      "description": "Display text size"
+    },
+    "sizeHeading": {
+      "value": "32px",
+      "description": "Heading text size"
+    },
+    "sizeSubheading": {
+      "value": "24px",
+      "description": "Subheading text size"
+    },
+    "sizeBody": {
+      "value": "16px",
+      "description": "Body text size"
+    },
+    "sizeSmall": {
+      "value": "14px",
+      "description": "Small text size"
+    },
+    "weightBold": {
+      "value": "700",
+      "description": "Bold weight"
+    },
+    "weightRegular": {
+      "value": "400",
+      "description": "Regular weight"
+    },
+    "lineHeightTight": {
+      "value": "1.2",
+      "description": "Tight line height"
+    },
+    "lineHeightNormal": {
+      "value": "1.5",
+      "description": "Normal line height"
+    },
+    "lineHeightRelaxed": {
+      "value": "1.8",
+      "description": "Relaxed line height"
+    }
+  },
+  "spacing": {
+    "space0": {
+      "value": "0px",
+      "description": "No spacing"
+    },
+    "space1": {
+      "value": "8px",
+      "description": "Extra small spacing"
+    },
+    "space2": {
+      "value": "16px",
+      "description": "Small spacing"
+    },
+    "space3": {
+      "value": "24px",
+      "description": "Medium spacing"
+    },
+    "space4": {
+      "value": "32px",
+      "description": "Large spacing"
+    },
+    "space5": {
+      "value": "40px",
+      "description": "Extra large spacing"
+    },
+    "space6": {
+      "value": "48px",
+      "description": "2XL spacing"
+    },
+    "space7": {
+      "value": "56px",
+      "description": "3XL spacing"
+    },
+    "space8": {
+      "value": "64px",
+      "description": "4XL spacing"
+    },
+    "gapSmall": {
+      "value": "8px",
+      "description": "Small gap"
+    },
+    "gapMedium": {
+      "value": "16px",
+      "description": "Medium gap"
+    },
+    "gapLarge": {
+      "value": "24px",
+      "description": "Large gap"
+    },
+    "paddingSmall": {
+      "value": "12px",
+      "description": "Small padding"
+    },
+    "paddingMedium": {
+      "value": "16px",
+      "description": "Medium padding"
+    },
+    "paddingLarge": {
+      "value": "24px",
+      "description": "Large padding"
+    }
+  }
+}

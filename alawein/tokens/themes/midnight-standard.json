@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "family": "midnight",
+    "variant": "standard",
+    "name": "Midnight Standard",
+    "description": "Deep, sophisticated dark theme - navy and midnight blues with amber accents"
+  },
+  "colors": {
+    "primary": { "value": "#0B1929", "description": "Primary - deep navy" },
+    "secondary": { "value": "#1A3A52", "description": "Secondary - medium navy" },
+    "background": { "value": "#0D1117", "description": "Background - near black" },
+    "surface": { "value": "#161B22", "description": "Surface - dark gray" },
+    "text": { "value": "#E8E8E8", "description": "Text - off white" },
+    "textSecondary": { "value": "#999999", "description": "Secondary text - gray" },
+    "border": { "value": "#30363D", "description": "Border - dark gray" },
+    "borderLight": { "value": "#21262D", "description": "Light border" },
+    "accent": { "value": "#FFB703", "description": "Accent - amber" },
+    "success": { "value": "#3FB950", "description": "Success - green" },
+    "error": { "value": "#F85149", "description": "Error - red" },
+    "warning": { "value": "#D29922", "description": "Warning - golden" },
+    "info": { "value": "#79C0FF", "description": "Info - light blue" }
+  },
+  "typography": {
+    "fontDisplay": { "value": "Bebas Neue", "description": "Display font" },
+    "fontBody": { "value": "Libre Baskerville", "description": "Body font" },
+    "fontLabel": { "value": "Oswald", "description": "Label font" },
+    "fontMono": { "value": "IBM Plex Mono", "description": "Monospace" },
+    "sizeDisplay": { "value": "48px", "description": "Display size" },
+    "sizeHeading": { "value": "32px", "description": "Heading size" },
+    "sizeSubheading": { "value": "24px", "description": "Subheading size" },
+    "sizeBody": { "value": "16px", "description": "Body size" },
+    "sizeSmall": { "value": "14px", "description": "Small size" },
+    "weightBold": { "value": "700", "description": "Bold weight" },
+    "weightRegular": { "value": "400", "description": "Regular weight" },
+    "lineHeightTight": { "value": "1.2", "description": "Tight leading" },
+    "lineHeightNormal": { "value": "1.5", "description": "Normal leading" },
+    "lineHeightRelaxed": { "value": "1.8", "description": "Relaxed leading" }
+  },
+  "spacing": {
+    "space0": { "value": "0px", "description": "None" },
+    "space1": { "value": "8px", "description": "XS" },
+    "space2": { "value": "16px", "description": "S" },
+    "space3": { "value": "24px", "description": "M" },
+    "space4": { "value": "32px", "description": "L" },
+    "space5": { "value": "40px", "description": "XL" },
+    "space6": { "value": "48px", "description": "2XL" },
+    "space7": { "value": "56px", "description": "3XL" },
+    "space8": { "value": "64px", "description": "4XL" },
+    "gapSmall": { "value": "8px", "description": "Small gap" },
+    "gapMedium": { "value": "16px", "description": "Medium gap" },
+    "gapLarge": { "value": "24px", "description": "Large gap" },
+    "paddingSmall": { "value": "12px", "description": "Small padding" },
+    "paddingMedium": { "value": "16px", "description": "Medium padding" },
+    "paddingLarge": { "value": "24px", "description": "Large padding" }
+  }
+}

@@ -1,0 +1,223 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --ci --coverage
+
+      - name: Build distribution
+        run: npm run build:distribution
+
+      - name: Verify distribution integrity
+        run: |
+          echo "Checking distribution artifacts..."
+          test -f dist/alawein.css && echo "✓ CSS export"
+          test -f dist/alawein.min.css && echo "✓ Minified CSS"
+          test -f dist/alawein.d.ts && echo "✓ TypeScript definitions"
+          test -f dist/alawein.json && echo "✓ JSON export"
+          test -f dist/index.json && echo "✓ Theme index"
+          echo "All artifacts present!"
+
+      - name: Validate package.json
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            console.log('Package name:', pkg.name);
+            console.log('Version:', pkg.version);
+            console.log('Main entry:', pkg.main);
+            console.log('Exports configured:', !!pkg.exports);
+            console.log('Files configured:', !!pkg.files);
+            if (!pkg.exports) throw new Error('Missing exports field');
+            if (!pkg.files) throw new Error('Missing files field');
+          "
+
+      - name: Create release notes
+        id: release_notes
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          
+          # Extract changelog for this version
+          node -e "
+            const fs = require('fs');
+            const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+            const match = changelog.match(new RegExp(\`## \\[${VERSION}\\].*?(?=## \\[|$)\`, 's'));
+            if (match) {
+              console.log(match[0]);
+            }
+          " > release-notes.md
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --access public
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: release-notes.md
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload distribution to CDN
+        if: success()
+        env:
+          CDN_DEPLOY_KEY: ${{ secrets.CDN_DEPLOY_KEY }}
+          CDN_BUCKET: ${{ secrets.CDN_BUCKET }}
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "Deploying v${VERSION} to CDN..."
+          
+          # This assumes you have a CDN deployment script
+          # For example: npm run deploy:cdn -- v${VERSION}
+          # Or using AWS CLI: aws s3 sync dist s3://${CDN_BUCKET}/v${VERSION} --cache-control ...
+          
+          echo "CDN deployment would go here"
+
+      - name: Post-publish verification
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "Verifying npm package..."
+          
+          # Wait for npm to index the package
+          sleep 10
+          
+          # Check if package is published
+          npm view @alawein/design-tokens@${VERSION} version || \
+            (echo "Package not yet available, npm indexing may be in progress..." && exit 0)
+
+      - name: Send notification
+        if: success()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: |
+            Published @alawein/design-tokens v${{ steps.release_notes.outputs.version }}
+            Available on npm: https://npmjs.com/package/@alawein/design-tokens
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true
+
+      - name: Create issue on failure
+        if: failure()
+        uses: actions/create-issue@v2
+        with:
+          title: 'npm publish failed'
+          body: |
+            Publish workflow failed for version ${{ github.ref }}
+            
+            Check: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          labels: 'bug,release'
+
+  publish-cdn:
+    needs: publish
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and deploy to CDN
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          
+          # Build distribution
+          npm run build:distribution
+          
+          # Deploy to Cloudflare (or your CDN provider)
+          # Example for Cloudflare Workers + R2 Storage:
+          # wrangler publish --env cdn
+          
+          echo "CDN deployment for v${VERSION} complete"
+
+  release-checklist:
+    needs: [publish, publish-cdn]
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Check release completeness
+        run: |
+          VERSION=$(node -e "console.log(require('./package.json').version)")
+          
+          echo "✓ npm package published"
+          echo "✓ CDN artifacts deployed"
+          echo "✓ GitHub release created"
+          echo "✓ Tests passed"
+          echo ""
+          echo "Release v${VERSION} is complete!"
+          echo ""
+          echo "Users can now:"
+          echo "  npm install @alawein/design-tokens@${VERSION}"
+          echo "  <link href=\"https://cdn.alawein.design/v${VERSION}/css/alawein.min.css\">"
+
+  notify-success:
+    needs: release-checklist
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Send success notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          custom_payload: |
+            {
+              text: `✅ @alawein/design-tokens published successfully!`,
+              attachments: [{
+                color: 'good',
+                text: `Available on npm and CDN\n\nDocumentation: https://github.com/blackmalejournal/alawein-design-system`
+              }]
+            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true

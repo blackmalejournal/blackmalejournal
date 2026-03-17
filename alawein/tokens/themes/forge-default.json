@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "family": "forge",
+    "variant": "default",
+    "name": "Forge Default",
+    "description": "Industrial neutral theme - cool grays with steel blue accents"
+  },
+  "colors": {
+    "primary": { "value": "#4A6B8A", "description": "Primary - steel blue" },
+    "secondary": { "value": "#666C75", "description": "Secondary - dark gray" },
+    "background": { "value": "#1A1D23", "description": "Background - near-black" },
+    "surface": { "value": "#262A32", "description": "Surface - dark gray" },
+    "text": { "value": "#E8EAED", "description": "Text - off-white" },
+    "textSecondary": { "value": "#A0A8B0", "description": "Secondary text - cool gray" },
+    "border": { "value": "#3A4048", "description": "Border - medium gray" },
+    "borderLight": { "value": "#2A2E36", "description": "Light border - dark gray" },
+    "accent": { "value": "#4A6B8A", "description": "Accent color - steel blue" },
+    "success": { "value": "#6BA876", "description": "Success - industrial green" },
+    "error": { "value": "#A86B6B", "description": "Error - industrial red" },
+    "warning": { "value": "#B89A6B", "description": "Warning - industrial amber" },
+    "info": { "value": "#6B8FA0", "description": "Info - industrial blue" }
+  },
+  "typography": {
+    "fontDisplay": { "value": "Bebas Neue", "description": "Display font" },
+    "fontBody": { "value": "Libre Baskerville", "description": "Body font" },
+    "fontLabel": { "value": "Oswald", "description": "Label font" },
+    "fontMono": { "value": "IBM Plex Mono", "description": "Monospace" },
+    "sizeDisplay": { "value": "48px", "description": "Display size" },
+    "sizeHeading": { "value": "32px", "description": "Heading size" },
+    "sizeSubheading": { "value": "24px", "description": "Subheading size" },
+    "sizeBody": { "value": "16px", "description": "Body size" },
+    "sizeSmall": { "value": "14px", "description": "Small size" },
+    "weightBold": { "value": "700", "description": "Bold weight" },
+    "weightRegular": { "value": "400", "description": "Regular weight" },
+    "lineHeightTight": { "value": "1.2", "description": "Tight leading" },
+    "lineHeightNormal": { "value": "1.5", "description": "Normal leading" },
+    "lineHeightRelaxed": { "value": "1.8", "description": "Relaxed leading" }
+  },
+  "spacing": {
+    "space0": { "value": "0px", "description": "None" },
+    "space1": { "value": "8px", "description": "XS" },
+    "space2": { "value": "16px", "description": "S" },
+    "space3": { "value": "24px", "description": "M" },
+    "space4": { "value": "32px", "description": "L" },
+    "space5": { "value": "40px", "description": "XL" },
+    "space6": { "value": "48px", "description": "2XL" },
+    "space7": { "value": "56px", "description": "3XL" },
+    "space8": { "value": "64px", "description": "4XL" },
+    "gapSmall": { "value": "8px", "description": "Small gap" },
+    "gapMedium": { "value": "16px", "description": "Medium gap" },
+    "gapLarge": { "value": "24px", "description": "Large gap" },
+    "paddingSmall": { "value": "12px", "description": "Small padding" },
+    "paddingMedium": { "value": "16px", "description": "Medium padding" },
+    "paddingLarge": { "value": "24px", "description": "Large padding" }
+  }
+}
