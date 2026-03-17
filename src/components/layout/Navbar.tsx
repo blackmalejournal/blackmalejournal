@@ -88,6 +88,7 @@ export function Navbar({ user = null }: NavbarProps) {
                           ? 'border-b-2 border-bmj-red text-bmj-white pb-0.5'
                           : 'text-bmj-cream hover:text-bmj-white'
                       }`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {link.label}
                     </Link>
