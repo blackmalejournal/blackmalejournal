@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 
 jest.mock('next/navigation', () => ({
   usePathname: () => '/',
+  useRouter: () => ({ push: jest.fn() }),
 }));
 
 jest.mock('@/app/(auth)/actions', () => ({
