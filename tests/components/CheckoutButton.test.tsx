@@ -66,4 +66,14 @@ describe('CheckoutButton', () => {
     });
     consoleSpy.mockRestore();
   });
+
+  it('has role="status" on loading text for screen readers', async () => {
+    (global.fetch as jest.Mock).mockReturnValueOnce(new Promise(() => {}));
+    render(<CheckoutButton tier="basic">Upgrade</CheckoutButton>);
+    fireEvent.click(screen.getByRole('button'));
+    await waitFor(() => {
+      const statusElement = screen.getByRole('status');
+      expect(statusElement).toHaveTextContent('Redirecting...');
+    });
+  });
 });
