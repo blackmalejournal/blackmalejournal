@@ -67,6 +67,19 @@ export type Course = {
   created_at: string;
 };
 
+export type Lesson = {
+  id: string;
+  course_id: string;
+  title: string;
+  slug: string;
+  order_number: number;
+  body: string;
+  video_url: string | null;
+  duration: number;
+  published: boolean;
+  created_at: string;
+};
+
 export type Dispatch = {
   id: string;
   title: string;
@@ -141,6 +154,12 @@ export type Database = {
         Row: Course;
         Insert: Omit<Course, 'id' | 'created_at'>;
         Update: Partial<Omit<Course, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      lessons: {
+        Row: Lesson;
+        Insert: Omit<Lesson, 'id' | 'created_at'>;
+        Update: Partial<Omit<Lesson, 'id' | 'created_at'>>;
         Relationships: [];
       };
       dispatches: {

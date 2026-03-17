@@ -10,6 +10,7 @@ import type {
   Course,
   Dispatch,
   Handbook,
+  Lesson,
   Member,
   MemberTier,
   Lens,
@@ -237,6 +238,41 @@ export async function getCourseBySlug(slug: string): Promise<Course | null> {
 
   if (error) return null;
   return data as Course;
+}
+
+// ── Lessons ──────────────────────────────────────────────────────────────
+
+export async function getLessonsByCourse(courseId: string): Promise<Lesson[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('course_id', courseId)
+    .eq('published', true)
+    .order('order_number', { ascending: true });
+
+  if (error) {
+    console.error('[getLessonsByCourse]', error.message);
+    return [];
+  }
+  return (data ?? []) as Lesson[];
+}
+
+export async function getLessonBySlug(
+  courseId: string,
+  lessonSlug: string,
+): Promise<Lesson | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('course_id', courseId)
+    .eq('slug', lessonSlug)
+    .eq('published', true)
+    .single();
+
+  if (error) return null;
+  return data as Lesson;
 }
 
 // ── Newsletter ────────────────────────────────────────────────────────────────
