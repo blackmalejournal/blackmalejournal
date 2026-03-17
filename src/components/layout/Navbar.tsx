@@ -137,7 +137,7 @@ export function Navbar({ user = null }: NavbarProps) {
                 </Link>
                 <Link
                   href="/signup"
-                  className="hidden bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90 sm:block"
+                  className="hidden btn-primary sm:block"
                 >
                   Join
                 </Link>

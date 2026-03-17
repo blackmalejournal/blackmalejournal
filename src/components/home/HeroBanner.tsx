@@ -64,7 +64,7 @@ export function HeroBanner() {
           <div className="mt-12">
             <Link
               href="/briefings"
-              className="inline-block bg-bmj-red px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
+              className="inline-block btn-primary btn-lg"
             >
               Read the Latest Briefing
             </Link>
