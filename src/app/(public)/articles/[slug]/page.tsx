@@ -2,7 +2,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
 import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
@@ -11,6 +10,7 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleCard } from '@/components/content/ArticleCard';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
@@ -77,14 +77,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         })}
       />
 
-      {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
-        <Link
-          href="/articles"
-          className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
-        >
-          ← Back to Articles
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Articles', href: '/articles' },
+            { label: article.title },
+          ]}
+        />
       </div>
 
       {/* Article header */}

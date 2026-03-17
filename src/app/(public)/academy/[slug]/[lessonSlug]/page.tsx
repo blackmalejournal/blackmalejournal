@@ -9,6 +9,7 @@ import {
 import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 
@@ -65,18 +66,13 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   return (
     <div className="mx-auto max-w-article px-4 py-16 sm:px-6 lg:px-8">
-      {/* Breadcrumb */}
-      <nav className="mb-8 flex items-center gap-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
-        <Link href="/academy" className="hover:text-bmj-cream">
-          Academy
-        </Link>
-        <span aria-hidden="true">/</span>
-        <Link href={`/academy/${course.slug}`} className="hover:text-bmj-cream">
-          {course.title}
-        </Link>
-        <span aria-hidden="true">/</span>
-        <span className="text-bmj-cream">Lesson {paddedNumber}</span>
-      </nav>
+      <Breadcrumbs
+        items={[
+          { label: 'Academy', href: '/academy' },
+          { label: course.title, href: `/academy/${course.slug}` },
+          { label: `Lesson ${paddedNumber}` },
+        ]}
+      />
 
       {/* Header */}
       <header>
