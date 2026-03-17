@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getCourseBySlug } from '@/lib/supabase/queries';
+import { getCourseBySlug, getLessonsByCourse } from '@/lib/supabase/queries';
+import { checkContentAccess } from '@/lib/supabase/access';
 import { getCategoryLabel } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { LessonCard } from '@/components/content/LessonCard';
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -39,6 +41,14 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseBySlug(slug);
   if (!course) notFound();
 
+  const lessons = course.published
+    ? await getLessonsByCourse(course.id)
+    : [];
+
+  const { hasAccess } = course.access_tier === 'free'
+    ? { hasAccess: true }
+    : await checkContentAccess(course.access_tier);
+
   return (
     <div className="mx-auto max-w-article px-4 py-16 sm:px-6 lg:px-8">
       <span className="inline-block rounded-sm border border-bmj-tan/40 px-2 py-0.5 font-label text-xs uppercase tracking-widest text-bmj-tan">
@@ -67,18 +77,45 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
       <StarDivider className="my-10" />
 
-      <p className="font-body italic text-bmj-tan">
-        {course.published
-          ? 'Lessons coming soon.'
-          : 'This course is currently in development. Check back soon.'}
-      </p>
+      {/* Lessons or status message */}
+      {!course.published ? (
+        <p className="font-body italic text-bmj-tan">
+          This course is currently in development. Check back soon.
+        </p>
+      ) : lessons.length === 0 ? (
+        <p className="font-body italic text-bmj-tan">
+          Lessons are being prepared. Check back soon.
+        </p>
+      ) : (
+        <section>
+          <h2 className="mb-6 font-display text-2xl text-bmj-white">
+            LESSONS ({lessons.length})
+          </h2>
+          <div className="space-y-3">
+            {lessons.map((lesson) => (
+              <LessonCard
+                key={lesson.id}
+                title={lesson.title}
+                slug={lesson.slug}
+                courseSlug={course.slug}
+                orderNumber={lesson.order_number}
+                duration={lesson.duration}
+                hasAccess={hasAccess}
+                hasVideo={!!lesson.video_url}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
-      <Link
-        href="/academy"
-        className="mt-8 inline-block font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
-      >
-        &larr; Back to Academy
-      </Link>
+      <div className="mt-10">
+        <Link
+          href="/academy"
+          className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
+        >
+          &larr; Back to Academy
+        </Link>
+      </div>
     </div>
   );
 }

@@ -67,6 +67,19 @@ export type Course = {
   created_at: string;
 };
 
+export type Lesson = {
+  id: string;
+  course_id: string;
+  title: string;
+  slug: string;
+  order_number: number;
+  body: string;
+  video_url: string | null;
+  duration: number;
+  published: boolean;
+  created_at: string;
+};
+
 export type Dispatch = {
   id: string;
   title: string;
@@ -91,6 +104,21 @@ export type Handbook = {
   author: string;
   cover_image: string | null;
   file_url: string | null;
+  published_at: string;
+  created_at: string;
+};
+
+export type Download = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  file_url: string;
+  file_type: string;
+  file_size: number;
+  access_tier: AccessTier;
+  cover_image: string | null;
   published_at: string;
   created_at: string;
 };
@@ -143,6 +171,12 @@ export type Database = {
         Update: Partial<Omit<Course, 'id' | 'created_at'>>;
         Relationships: [];
       };
+      lessons: {
+        Row: Lesson;
+        Insert: Omit<Lesson, 'id' | 'created_at'>;
+        Update: Partial<Omit<Lesson, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
       dispatches: {
         Row: Dispatch;
         Insert: Omit<Dispatch, 'id' | 'created_at'>;
@@ -153,6 +187,12 @@ export type Database = {
         Row: Handbook;
         Insert: Omit<Handbook, 'id' | 'created_at'>;
         Update: Partial<Omit<Handbook, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      downloads: {
+        Row: Download;
+        Insert: Omit<Download, 'id' | 'created_at'>;
+        Update: Partial<Omit<Download, 'id' | 'created_at'>>;
         Relationships: [];
       };
       newsletter_subscribers: {

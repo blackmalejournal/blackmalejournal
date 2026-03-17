@@ -9,7 +9,9 @@ import type {
   Briefing,
   Course,
   Dispatch,
+  Download,
   Handbook,
+  Lesson,
   Member,
   MemberTier,
   Lens,
@@ -239,6 +241,41 @@ export async function getCourseBySlug(slug: string): Promise<Course | null> {
   return data as Course;
 }
 
+// ── Lessons ──────────────────────────────────────────────────────────────
+
+export async function getLessonsByCourse(courseId: string): Promise<Lesson[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('course_id', courseId)
+    .eq('published', true)
+    .order('order_number', { ascending: true });
+
+  if (error) {
+    console.error('[getLessonsByCourse]', error.message);
+    return [];
+  }
+  return (data ?? []) as Lesson[];
+}
+
+export async function getLessonBySlug(
+  courseId: string,
+  lessonSlug: string,
+): Promise<Lesson | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('course_id', courseId)
+    .eq('slug', lessonSlug)
+    .eq('published', true)
+    .single();
+
+  if (error) return null;
+  return data as Lesson;
+}
+
 // ── Newsletter ────────────────────────────────────────────────────────────────
 
 export async function subscribeToNewsletter(
@@ -365,4 +402,32 @@ export async function getHandbookBySlug(slug: string): Promise<Handbook | null> 
 
   if (error) return null;
   return data as Handbook;
+}
+
+// ── Downloads ─────────────────────────────────────────────────────────────
+
+export async function getDownloads(
+  options: {
+    category?: string;
+    limit?: number;
+    offset?: number;
+  } = {},
+): Promise<Download[]> {
+  const { category, limit = 40, offset = 0 } = options;
+  const supabase = await createClient();
+
+  let query = supabase
+    .from('downloads')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (category) query = query.eq('category', category);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getDownloads]', error.message);
+    return [];
+  }
+  return (data ?? []) as Download[];
 }
