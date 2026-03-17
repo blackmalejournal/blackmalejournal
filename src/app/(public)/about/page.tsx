@@ -106,7 +106,7 @@ export default function AboutPage() {
       <div className="space-y-8">
         <div>
           <p className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
-            Ancestors &amp; Architects
+            Intellectual Lineage &amp; Architects
           </p>
           <h2 className="mb-8 font-display text-4xl uppercase text-bmj-white md:text-5xl">
             We Honor Those Who Built the Road
