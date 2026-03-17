@@ -66,7 +66,7 @@ function IssueNavigation({
             href={`/briefings/${prev.slug}`}
             className="group flex flex-col no-underline"
           >
-            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+            <span className="mb-1 font-mono text-xs text-bmj-tan">
               ← Previous Issue
             </span>
             <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
@@ -82,7 +82,7 @@ function IssueNavigation({
             href={`/briefings/${next.slug}`}
             className="group flex flex-col items-start text-left no-underline sm:items-end sm:text-right"
           >
-            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+            <span className="mb-1 font-mono text-xs text-bmj-tan">
               Next Issue →
             </span>
             <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">

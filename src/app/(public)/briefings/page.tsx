@@ -61,7 +61,7 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
       {visible.length === 0 ? (
         <div className="py-24 text-center">
           <p className="font-label text-bmj-tan">No briefings published yet.</p>
-          <p className="mt-2 font-body text-sm text-bmj-tan/60">
+          <p className="mt-2 font-body text-sm text-bmj-tan">
             The first dispatch is being prepared.
           </p>
         </div>

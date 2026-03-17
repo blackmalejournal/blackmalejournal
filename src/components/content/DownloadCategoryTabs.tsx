@@ -47,7 +47,7 @@ export function DownloadCategoryTabs({ activeCategory }: DownloadCategoryTabsPro
               'whitespace-nowrap pb-3 font-label text-sm uppercase tracking-widest transition-colors',
               isActive
                 ? 'border-b-2 border-bmj-red text-bmj-white'
-                : 'text-bmj-tan/60 hover:text-bmj-cream',
+                : 'text-bmj-tan hover:text-bmj-cream',
             ].join(' ')}
           >
             {tab.label}

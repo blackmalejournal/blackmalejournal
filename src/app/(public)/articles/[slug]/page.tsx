@@ -103,7 +103,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <span className="font-label text-xs uppercase tracking-widest text-bmj-cream/80">
             By {article.author}
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
         </div>

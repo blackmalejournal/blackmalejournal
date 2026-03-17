@@ -99,7 +99,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
           <span className="font-label text-xs uppercase tracking-widest text-bmj-cream/80">
             By {handbook.author}
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
         </div>

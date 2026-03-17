@@ -80,14 +80,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
       {/* Header */}
       <header>
-        <span className="font-mono text-sm text-bmj-tan/60">
+        <span className="font-mono text-sm text-bmj-tan">
           Lesson {paddedNumber}
         </span>
         <h1 className="mt-2 font-display text-4xl leading-tight text-bmj-white sm:text-5xl">
           {lesson.title}
         </h1>
         <div className="mt-4 flex flex-wrap items-center gap-4">
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {readingTime} min read
             {lesson.duration > 0 && ` · ${lesson.duration} min video`}
           </span>

@@ -105,7 +105,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
       {visible.length === 0 ? (
         <div className="py-24 text-center">
           <p className="font-label text-bmj-tan">No articles found.</p>
-          <p className="mt-2 font-body text-sm text-bmj-tan/60">
+          <p className="mt-2 font-body text-sm text-bmj-tan">
             Try selecting a different lens or clearing the tag filter.
           </p>
         </div>
