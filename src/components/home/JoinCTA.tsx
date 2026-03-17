@@ -16,13 +16,13 @@ export function JoinCTA() {
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
             href="/signup"
-            className="border border-bmj-cream px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-white hover:text-bmj-white"
+            className="btn-secondary btn-lg"
           >
             Subscribe Free
           </Link>
           <Link
             href="/signup?tier=premium"
-            className="bg-bmj-red px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
+            className="btn-primary btn-lg"
           >
             Go Premium
           </Link>

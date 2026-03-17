@@ -45,7 +45,7 @@ export function LessonCard({
             </span>
           )}
           {duration > 0 && (
-            <span className="flex items-center gap-1 font-mono text-xs text-bmj-tan/60">
+            <span className="flex items-center gap-1 font-mono text-xs text-bmj-cream/80">
               <Clock size={10} />
               {duration} min
             </span>

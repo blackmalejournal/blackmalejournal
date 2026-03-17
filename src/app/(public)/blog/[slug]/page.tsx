@@ -68,7 +68,7 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
       <header className="mt-8">
         <div className="mb-4 flex items-center gap-4">
           <LensBadge lens={dispatch.lens} />
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {formatDate(dispatch.published_at)}
           </span>
         </div>

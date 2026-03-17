@@ -27,7 +27,7 @@ export default function TermsOfServicePage() {
       <h1 className="mb-4 font-display text-5xl uppercase text-bmj-white md:text-6xl">
         TERMS OF SERVICE
       </h1>
-      <p className="mb-10 font-mono text-xs text-bmj-tan/60">
+      <p className="mb-10 font-mono text-xs text-bmj-tan">
         Last updated: March 15, 2026
       </p>
 

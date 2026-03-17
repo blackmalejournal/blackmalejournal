@@ -60,7 +60,7 @@ export function SubscriptionManager({
       </div>
 
       {hasSubscription && (
-        <p className="mt-2 font-mono text-xs text-bmj-tan/60">
+        <p className="mt-2 font-mono text-xs text-bmj-tan">
           Subscription active
         </p>
       )}

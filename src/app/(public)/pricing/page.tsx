@@ -127,7 +127,7 @@ export default async function PricingPage() {
                   Current Plan
                 </span>
               ) : currentTier === 'premium' ? (
-                <span className="inline-block w-full border border-bmj-tan/20 px-6 py-3 text-center font-label text-xs uppercase tracking-widest text-bmj-tan/40">
+                <span className="inline-block w-full border border-bmj-tan/20 px-6 py-3 text-center font-label text-xs uppercase tracking-widest text-bmj-tan">
                   Included in Premium
                 </span>
               ) : user ? (

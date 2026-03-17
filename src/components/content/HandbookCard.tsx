@@ -74,7 +74,7 @@ export function HandbookCard({
           </p>
 
           <div className="mt-4 flex items-center border-t border-bmj-tan/20 pt-3">
-            <span className="font-mono text-xs text-bmj-tan/60">
+            <span className="font-mono text-xs text-bmj-cream/80">
               {formatDate(publishedAt)}
             </span>
           </div>

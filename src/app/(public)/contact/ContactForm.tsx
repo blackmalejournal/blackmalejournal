@@ -72,6 +72,8 @@ export function ContactForm() {
     );
   }
 
+  const hasError = status === 'error';
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
@@ -86,6 +88,8 @@ export function ContactForm() {
           name="name"
           type="text"
           required
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? 'contact-form-error' : undefined}
           className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
           placeholder="Your name"
         />
@@ -103,6 +107,8 @@ export function ContactForm() {
           name="email"
           type="email"
           required
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? 'contact-form-error' : undefined}
           className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
           placeholder="you@example.com"
         />
@@ -120,6 +126,8 @@ export function ContactForm() {
           name="subject"
           required
           defaultValue=""
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? 'contact-form-error' : undefined}
           className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream focus:border-bmj-red focus:outline-none"
         >
           <option value="" disabled className="text-bmj-tan/50">
@@ -146,13 +154,21 @@ export function ContactForm() {
           required
           rows={6}
           minLength={10}
+          aria-invalid={hasError || undefined}
+          aria-describedby={hasError ? 'contact-form-error' : undefined}
           className="w-full resize-none border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
           placeholder="What's on your mind?"
         />
       </div>
 
-      {status === 'error' && (
-        <p className="font-mono text-xs text-bmj-red">{errorMsg}</p>
+      {hasError && (
+        <p
+          id="contact-form-error"
+          className="font-mono text-xs text-bmj-red"
+          role="alert"
+        >
+          {errorMsg}
+        </p>
       )}
 
       <button

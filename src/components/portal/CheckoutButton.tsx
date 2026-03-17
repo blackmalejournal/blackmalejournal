@@ -40,7 +40,11 @@ export function CheckoutButton({ tier, className, children }: CheckoutButtonProp
       disabled={loading}
       className={className}
     >
-      {loading ? 'Redirecting...' : children}
+      {loading ? (
+        <span role="status">Redirecting...</span>
+      ) : (
+        children
+      )}
     </button>
   );
 }

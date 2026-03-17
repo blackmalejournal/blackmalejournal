@@ -8,6 +8,7 @@ import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -73,14 +74,13 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
           { name: handbook.title, url: `${SITE_URL}/handbooks/${handbook.slug}` },
         ])}
       />
-      {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
-        <Link
-          href="/handbooks"
-          className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
-        >
-          ← Back to Handbooks
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Handbooks', href: '/handbooks' },
+            { label: handbook.title },
+          ]}
+        />
       </div>
 
       {/* Header */}
@@ -99,7 +99,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
           <span className="font-label text-xs uppercase tracking-widest text-bmj-cream/80">
             By {handbook.author}
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
         </div>

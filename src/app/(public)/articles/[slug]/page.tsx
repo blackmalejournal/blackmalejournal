@@ -2,15 +2,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
 import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { SITE_URL, articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
-import { StarDivider } from '@/components/ui/StarDivider';
-import { ArticleCard } from '@/components/content/ArticleCard';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { RelatedArticles } from '@/components/content/RelatedArticles';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
@@ -77,14 +76,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         })}
       />
 
-      {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
-        <Link
-          href="/articles"
-          className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
-        >
-          ← Back to Articles
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Articles', href: '/articles' },
+            { label: article.title },
+          ]}
+        />
       </div>
 
       {/* Article header */}
@@ -103,7 +101,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <span className="font-label text-xs uppercase tracking-widest text-bmj-cream/80">
             By {article.author}
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
         </div>
@@ -139,31 +137,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
       </div>
 
-      <StarDivider className="mx-auto max-w-content px-4 sm:px-6 lg:px-8" />
-
-      {/* Related articles */}
-      {relatedFiltered.length > 0 && (
-        <section className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
-          <h2 className="mb-8 font-display text-2xl text-bmj-white">
-            More from {article.lens.charAt(0).toUpperCase() + article.lens.slice(1)}
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {relatedFiltered.map((a) => (
-              <ArticleCard
-                key={a.id}
-                title={a.title}
-                slug={a.slug}
-                lens={a.lens}
-                excerpt={a.excerpt}
-                readingTime={calculateReadingTime(a.body)}
-                publishedAt={a.published_at}
-                coverImage={a.cover_image}
-                isPremium={a.access_tier !== 'free'}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+      <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
+        <RelatedArticles articles={relatedFiltered} lens={article.lens} />
+      </div>
     </div>
   );
 }

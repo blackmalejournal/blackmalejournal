@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { Menu, Search } from 'lucide-react';
 import { MobileMenu } from './MobileMenu';
 import { UserDropdown } from './UserDropdown';
+import { SearchDialog } from '@/components/ui/SearchDialog';
 
 export type NavUser = {
   email: string;
@@ -32,12 +33,24 @@ interface NavbarProps {
 export function Navbar({ user = null }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
@@ -88,6 +101,7 @@ export function Navbar({ user = null }: NavbarProps) {
                           ? 'border-b-2 border-bmj-red text-bmj-white pb-0.5'
                           : 'text-bmj-cream hover:text-bmj-white'
                       }`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {link.label}
                     </Link>
@@ -99,6 +113,13 @@ export function Navbar({ user = null }: NavbarProps) {
 
           {/* Right side — auth-aware */}
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search (Ctrl+K)"
+              className="hidden text-bmj-cream transition-opacity hover:opacity-70 lg:block"
+            >
+              <Search size={18} aria-hidden="true" />
+            </button>
             {user ? (
               <div className="hidden sm:block">
                 <UserDropdown
@@ -116,7 +137,7 @@ export function Navbar({ user = null }: NavbarProps) {
                 </Link>
                 <Link
                   href="/signup"
-                  className="hidden bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90 sm:block"
+                  className="hidden btn-primary sm:block"
                 >
                   Join
                 </Link>
@@ -141,6 +162,7 @@ export function Navbar({ user = null }: NavbarProps) {
         onClose={() => setMobileOpen(false)}
         user={user}
       />
+      <SearchDialog isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
