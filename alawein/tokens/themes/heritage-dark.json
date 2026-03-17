@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "family": "heritage",
+    "variant": "dark",
+    "name": "Heritage Dark",
+    "description": "Black Panther era inspired - revolutionary dark theme with vibrant reds and creams"
+  },
+  "colors": {
+    "primary": {
+      "value": "#FF6B6B",
+      "description": "Primary accent - bright red"
+    },
+    "secondary": {
+      "value": "#E8DCC8",
+      "description": "Secondary accent - cream"
+    },
+    "background": {
+      "value": "#0D0C0B",
+      "description": "Primary background - BMJ black"
+    },
+    "surface": {
+      "value": "#1A1915",
+      "description": "Surface background - dark"
+    },
+    "text": {
+      "value": "#E8DCC8",
+      "description": "Primary text - cream"
+    },
+    "textSecondary": {
+      "value": "#AAAAAA",
+      "description": "Secondary text - light gray"
+    },
+    "border": {
+      "value": "#FF6B6B",
+      "description": "Border color - bright red"
+    },
+    "borderLight": {
+      "value": "#333333",
+      "description": "Light border - subtle dark"
+    },
+    "accent": {
+      "value": "#FFB703",
+      "description": "Accent color - amber"
+    },
+    "success": {
+      "value": "#66BB6A",
+      "description": "Success state - green"
+    },
+    "error": {
+      "value": "#FF6B6B",
+      "description": "Error state - bright red"
+    },
+    "warning": {
+      "value": "#FFB703",
+      "description": "Warning state - amber"
+    },
+    "info": {
+      "value": "#42A5F5",
+      "description": "Info state - light blue"
+    }
+  },
+  "typography": {
+    "fontDisplay": {
+      "value": "Bebas Neue",
+      "description": "Display font - headlines"
+    },
+    "fontBody": {
+      "value": "Libre Baskerville",
+      "description": "Body font - editorial serif"
+    },
+    "fontLabel": {
+      "value": "Oswald",
+      "description": "Label font - caps"
+    },
+    "fontMono": {
+      "value": "IBM Plex Mono",
+      "description": "Monospace font"
+    },
+    "sizeDisplay": {
+      "value": "48px",
+      "description": "Display text size"
+    },
+    "sizeHeading": {
+      "value": "32px",
+      "description": "Heading text size"
+    },
+    "sizeSubheading": {
+      "value": "24px",
+      "description": "Subheading text size"
+    },
+    "sizeBody": {
+      "value": "16px",
+      "description": "Body text size"
+    },
+    "sizeSmall": {
+      "value": "14px",
+      "description": "Small text size"
+    },
+    "weightBold": {
+      "value": "700",
+      "description": "Bold weight"
+    },
+    "weightRegular": {
+      "value": "400",
+      "description": "Regular weight"
+    },
+    "lineHeightTight": {
+      "value": "1.2",
+      "description": "Tight line height"
+    },
+    "lineHeightNormal": {
+      "value": "1.5",
+      "description": "Normal line height"
+    },
+    "lineHeightRelaxed": {
+      "value": "1.8",
+      "description": "Relaxed line height"
+    }
+  },
+  "spacing": {
+    "space0": {
+      "value": "0px",
+      "description": "No spacing"
+    },
+    "space1": {
+      "value": "8px",
+      "description": "Extra small spacing"
+    },
+    "space2": {
+      "value": "16px",
+      "description": "Small spacing"
+    },
+    "space3": {
+      "value": "24px",
+      "description": "Medium spacing"
+    },
+    "space4": {
+      "value": "32px",
+      "description": "Large spacing"
+    },
+    "space5": {
+      "value": "40px",
+      "description": "Extra large spacing"
+    },
+    "space6": {
+      "value": "48px",
+      "description": "2XL spacing"
+    },
+    "space7": {
+      "value": "56px",
+      "description": "3XL spacing"
+    },
+    "space8": {
+      "value": "64px",
+      "description": "4XL spacing"
+    },
+    "gapSmall": {
+      "value": "8px",
+      "description": "Small gap"
+    },
+    "gapMedium": {
+      "value": "16px",
+      "description": "Medium gap"
+    },
+    "gapLarge": {
+      "value": "24px",
+      "description": "Large gap"
+    },
+    "paddingSmall": {
+      "value": "12px",
+      "description": "Small padding"
+    },
+    "paddingMedium": {
+      "value": "16px",
+      "description": "Medium padding"
+    },
+    "paddingLarge": {
+      "value": "24px",
+      "description": "Large padding"
+    }
+  }
+}
