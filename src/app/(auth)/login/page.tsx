@@ -3,6 +3,16 @@ import { LoginForm } from './LoginForm';
 
 export const metadata: Metadata = {
   title: 'Log In',
+  description: 'Log in to The Black Male Journal to access your member portal, premium content, and the full archive.',
+  openGraph: {
+    title: 'Log In',
+    description: 'Log in to The Black Male Journal to access your member portal, premium content, and the full archive.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Log In',
+    description: 'Log in to The Black Male Journal to access your member portal, premium content, and the full archive.',
+  },
 };
 
 interface LoginPageProps {

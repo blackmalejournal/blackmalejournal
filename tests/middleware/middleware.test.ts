@@ -160,7 +160,7 @@ describe('config.matcher', () => {
   });
 
   it('does NOT match static asset paths', () => {
-    expect(matcherRegex.test('/logo.png')).toBe(false);
+    expect(matcherRegex.test('/logo.svg')).toBe(false);
     expect(matcherRegex.test('/icon.svg')).toBe(false);
     expect(matcherRegex.test('/photo.jpg')).toBe(false);
     expect(matcherRegex.test('/image.webp')).toBe(false);

@@ -7,6 +7,8 @@ import { checkContentAccess } from '@/lib/supabase/access';
 import { getCategoryLabel } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { LessonCard } from '@/components/content/LessonCard';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -51,6 +53,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   return (
     <div className="mx-auto max-w-article px-4 py-16 sm:px-6 lg:px-8">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Academy', url: `${SITE_URL}/academy` },
+          { name: course.title, url: `${SITE_URL}/academy/${course.slug}` },
+        ])}
+      />
       <span className="inline-block rounded-sm border border-bmj-tan/40 px-2 py-0.5 font-label text-xs uppercase tracking-widest text-bmj-tan">
         {getCategoryLabel(course.category)}
       </span>

@@ -10,6 +10,8 @@ import type { MemberTier } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Member Portal',
+  description: 'Your member dashboard. View your access tier, latest content, and manage your subscription.',
+  robots: { index: false, follow: false },
 };
 
 const TIER_ACCESS: Record<MemberTier, string[]> = {

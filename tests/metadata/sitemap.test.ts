@@ -6,12 +6,16 @@ const mockGetArticles = jest.fn();
 const mockGetBriefings = jest.fn();
 const mockGetCourses = jest.fn();
 const mockGetDispatches = jest.fn();
+const mockGetHandbooks = jest.fn();
+const mockGetLessonsByCourse = jest.fn();
 
 jest.mock('@/lib/supabase/queries', () => ({
   getArticles: (...args: unknown[]) => mockGetArticles(...args),
   getBriefings: (...args: unknown[]) => mockGetBriefings(...args),
   getCourses: (...args: unknown[]) => mockGetCourses(...args),
   getDispatches: (...args: unknown[]) => mockGetDispatches(...args),
+  getHandbooks: (...args: unknown[]) => mockGetHandbooks(...args),
+  getLessonsByCourse: (...args: unknown[]) => mockGetLessonsByCourse(...args),
 }));
 
 import sitemap from '@/app/sitemap';
@@ -22,10 +26,12 @@ beforeEach(() => {
   mockGetBriefings.mockResolvedValue([]);
   mockGetCourses.mockResolvedValue([]);
   mockGetDispatches.mockResolvedValue([]);
+  mockGetHandbooks.mockResolvedValue([]);
+  mockGetLessonsByCourse.mockResolvedValue([]);
 });
 
 describe('sitemap.ts', () => {
-  it('includes all 11 static pages', async () => {
+  it('includes all 15 static pages', async () => {
     const result = await sitemap();
 
     const urls = result.map((entry) => entry.url);
@@ -35,6 +41,10 @@ describe('sitemap.ts', () => {
     expect(urls).toContain('https://blackmalejournal.com/academy');
     expect(urls).toContain('https://blackmalejournal.com/video');
     expect(urls).toContain('https://blackmalejournal.com/blog');
+    expect(urls).toContain('https://blackmalejournal.com/about');
+    expect(urls).toContain('https://blackmalejournal.com/handbooks');
+    expect(urls).toContain('https://blackmalejournal.com/downloads');
+    expect(urls).toContain('https://blackmalejournal.com/resources');
     expect(urls).toContain('https://blackmalejournal.com/pricing');
     expect(urls).toContain('https://blackmalejournal.com/contact');
     expect(urls).toContain('https://blackmalejournal.com/support');
@@ -88,6 +98,33 @@ describe('sitemap.ts', () => {
     expect(urls).toContain('https://blackmalejournal.com/blog/weekly-dispatch-5');
   });
 
+  it('includes dynamic handbook entries under /handbooks/', async () => {
+    mockGetHandbooks.mockResolvedValue([
+      { slug: 'discipline-codex', published_at: '2026-03-01' },
+    ]);
+
+    const result = await sitemap();
+    const urls = result.map((entry) => entry.url);
+
+    expect(urls).toContain('https://blackmalejournal.com/handbooks/discipline-codex');
+  });
+
+  it('includes dynamic lesson entries under /academy/[course]/[lesson]', async () => {
+    mockGetCourses.mockResolvedValue([
+      { id: 'c1', slug: 'combat-discipline', created_at: '2026-01-01' },
+    ]);
+    mockGetLessonsByCourse.mockResolvedValue([
+      { slug: 'morning-protocol' },
+      { slug: 'bodyweight-mastery' },
+    ]);
+
+    const result = await sitemap();
+    const urls = result.map((entry) => entry.url);
+
+    expect(urls).toContain('https://blackmalejournal.com/academy/combat-discipline/morning-protocol');
+    expect(urls).toContain('https://blackmalejournal.com/academy/combat-discipline/bodyweight-mastery');
+  });
+
   it('calls queries with correct params', async () => {
     await sitemap();
 
@@ -95,5 +132,6 @@ describe('sitemap.ts', () => {
     expect(mockGetBriefings).toHaveBeenCalledWith({ limit: 200 });
     expect(mockGetCourses).toHaveBeenCalledWith({ published: true });
     expect(mockGetDispatches).toHaveBeenCalledWith({ limit: 500 });
+    expect(mockGetHandbooks).toHaveBeenCalledWith({ limit: 200 });
   });
 });

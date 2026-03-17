@@ -27,11 +27,17 @@ export async function generateMetadata(
   if (!lesson) return { title: 'Lesson Not Found' };
 
   const title = `${lesson.title} — ${course.title}`;
+  const images = course.cover_image ? [{ url: course.cover_image }] : [];
   return {
     title,
     description: course.description,
-    openGraph: { title, description: course.description },
-    twitter: { card: 'summary', title, description: course.description },
+    openGraph: { title, description: course.description, images },
+    twitter: {
+      card: 'summary_large_image' as const,
+      title,
+      description: course.description,
+      images: course.cover_image ? [course.cover_image] : [],
+    },
   };
 }
 

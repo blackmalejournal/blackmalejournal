@@ -3,6 +3,16 @@ import { SignupForm } from './SignupForm';
 
 export const metadata: Metadata = {
   title: 'Join the Movement',
+  description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+  openGraph: {
+    title: 'Join the Movement',
+    description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Join the Movement',
+    description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+  },
 };
 
 interface SignupPageProps {

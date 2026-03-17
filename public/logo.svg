@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#0D0C0B"/>
+  <polygon points="100,20 120,75 180,75 130,110 150,165 100,135 50,165 70,110 20,75 80,75" fill="#C0281F"/>
+  <text x="100" y="192" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#E8DCC8" letter-spacing="4">BMJ</text>
+</svg>

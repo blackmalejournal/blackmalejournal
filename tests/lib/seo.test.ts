@@ -20,7 +20,7 @@ describe('organizationJsonLd', () => {
 
   it('includes logo URL derived from SITE_URL', () => {
     const result = organizationJsonLd();
-    expect(result.logo).toBe(`${SITE_URL}/logo.png`);
+    expect(result.logo).toBe(`${SITE_URL}/logo.svg`);
   });
 
   it('includes founder as The Chairman', () => {
@@ -69,7 +69,7 @@ describe('articleJsonLd', () => {
   it('includes publisher with logo', () => {
     const result = articleJsonLd(baseOpts);
     expect(result.publisher.name).toBe(SITE_NAME);
-    expect(result.publisher.logo.url).toBe(`${SITE_URL}/logo.png`);
+    expect(result.publisher.logo.url).toBe(`${SITE_URL}/logo.svg`);
   });
 });
 

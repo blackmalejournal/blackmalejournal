@@ -10,6 +10,8 @@ import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { articleJsonLd, breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
 interface HandbookPageProps {
   params: Promise<{ slug: string }>;
@@ -55,6 +57,22 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
 
   return (
     <div className="mx-auto max-w-wide">
+      <JsonLd
+        data={articleJsonLd({
+          title: handbook.title,
+          description: handbook.description,
+          url: `${SITE_URL}/handbooks/${handbook.slug}`,
+          imageUrl: handbook.cover_image,
+          publishedAt: handbook.published_at,
+          author: handbook.author,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Handbooks', url: `${SITE_URL}/handbooks` },
+          { name: handbook.title, url: `${SITE_URL}/handbooks/${handbook.slug}` },
+        ])}
+      />
       {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Link

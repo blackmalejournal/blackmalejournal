@@ -6,6 +6,7 @@ import {
   Oswald,
   IBM_Plex_Mono,
 } from "next/font/google";
+import Script from "next/script";
 import "@/styles/globals.css";
 import { createClient } from "@/lib/supabase/server";
 import { Navbar } from "@/components/layout/Navbar";
@@ -61,6 +62,10 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
   },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default async function RootLayout({
@@ -97,12 +102,13 @@ export default async function RootLayout({
         <Navbar user={navUser} />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
-        {/* Plausible analytics — uncomment when domain is live */}
-        {/* <Script
-          defer
-          data-domain="blackmalejournal.com"
-          src="https://plausible.io/js/plausible.js"
-        /> */}
+        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
+          <Script
+            defer
+            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+            src="https://plausible.io/js/script.js"
+          />
+        )}
       </body>
     </html>
   );

@@ -9,6 +9,8 @@ import { signOut } from '../../actions';
 
 export const metadata: Metadata = {
   title: 'Settings',
+  description: 'Manage your profile, subscription, and account settings.',
+  robots: { index: false, follow: false },
 };
 
 interface SettingsPageProps {
