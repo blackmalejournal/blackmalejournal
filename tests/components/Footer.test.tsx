@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { Footer } from '@/components/layout/Footer';
 
 describe('Footer', () => {
@@ -12,7 +12,8 @@ describe('Footer', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Academy')).toBeInTheDocument();
-    expect(screen.getByText('Blog')).toBeInTheDocument();
+    expect(screen.getByText('Downloads')).toBeInTheDocument();
+    expect(screen.getByText('Resources')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 
@@ -27,6 +28,30 @@ describe('Footer', () => {
   it('renders copyright text', () => {
     render(<Footer />);
     expect(screen.getByText(/2026 The Black Male Journal/)).toBeInTheDocument();
+  });
+});
+
+describe('Footer navigation', () => {
+  it('renders 6 footer nav links including Contact', () => {
+    render(<Footer />);
+    const nav = screen.getByRole('navigation', { name: /footer/i });
+    const links = within(nav).getAllByRole('link');
+    expect(links).toHaveLength(6);
+  });
+
+  it('includes Contact in footer nav', () => {
+    render(<Footer />);
+    const nav = screen.getByRole('navigation', { name: /footer/i });
+    expect(within(nav).getByRole('link', { name: 'Contact' })).toBeInTheDocument();
+  });
+
+  it('does NOT include Handbooks, Video, Blog, or Pricing in footer nav', () => {
+    render(<Footer />);
+    const nav = screen.getByRole('navigation', { name: /footer/i });
+    expect(within(nav).queryByRole('link', { name: 'Handbooks' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Video' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Blog' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Pricing' })).not.toBeInTheDocument();
   });
 });
 

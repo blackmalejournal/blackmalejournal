@@ -2,18 +2,7 @@
 import Link from "next/link";
 import { NewsletterForm } from './NewsletterForm';
 import { Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
-
-const NAV_LINKS = [
-  { label: "Home",      href: "/" },
-  { label: "About",     href: "/about" },
-  { label: "Academy",   href: "/academy" },
-  { label: "Handbooks", href: "/handbooks" },
-  { label: "Downloads", href: "/downloads" },
-  { label: "Resources", href: "/resources" },
-  { label: "Video",     href: "/video" },
-  { label: "Blog",      href: "/blog" },
-  { label: "Contact",   href: "/contact" },
-];
+import { FOOTER_NAV_LINKS } from '@/lib/nav';
 
 const SOCIAL_LINKS = [
   { icon: Instagram, href: "#", label: "Instagram" },
@@ -101,7 +90,7 @@ export function Footer() {
               Navigate
             </h3>
             <ul className="flex flex-col gap-2">
-              {NAV_LINKS.map((link) => (
+              {FOOTER_NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
