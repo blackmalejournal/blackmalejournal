@@ -2,7 +2,7 @@
 
 ## What This Project Is
 A full-stack website for The Black Male Journal, an independent media house and revolutionary
-masculinist platform. Built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Supabase,
+masculinist platform. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS, Supabase,
 and Stripe. Deployed on Vercel.
 
 ## Brand System — NEVER deviate from these values
@@ -38,9 +38,9 @@ All articles and content are categorized under exactly one lens:
 - All routes under src/app/(public)/ for public pages
 - Auth routes under src/app/(auth)/
 - API routes under src/app/api/
-- Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /layout/ (nav, footer), /portal/ (member area)
-- Content files: src/content/articles/*.mdx and src/content/briefings/*.mdx
-- Lib: src/lib/supabase/, src/lib/stripe/, src/lib/analytics/
+- Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /home/ (homepage sections), /layout/ (nav, footer), /portal/ (member area), /seo/ (metadata, structured data)
+- Content: database-driven via Supabase (articles, briefings, handbooks, downloads, courses, lessons)
+- Lib: src/lib/supabase/, src/lib/stripe/, src/lib/content/
 
 ## Code Style
 - Use TypeScript strict mode
@@ -52,7 +52,7 @@ All articles and content are categorized under exactly one lens:
 - Framer Motion for page transitions and scroll animations only — keep it subtle
 
 ## Content Model
-- Articles: title, slug, lens, tags[], excerpt, body (MDX), featured, access_tier (free|basic|premium), author, cover_image, published_at
+- Articles: title, slug, lens, tags[], excerpt, body, featured, access_tier (free|basic|premium), author, cover_image, published_at
 - Briefings: issue_number, title, slug, sections (JSON array of {title, body}), access_tier, cover_image, published_at
 - Members: email, tier (free|basic|premium), stripe_customer_id, stripe_subscription_id
 
@@ -65,14 +65,14 @@ All articles and content are categorized under exactly one lens:
 - Components: PascalCase (ArticleCard.tsx)
 - Pages: lowercase with hyphens if needed
 - Utilities: camelCase
-- MDX content: kebab-case (weekend-briefing-001.mdx)
+- Database slugs: kebab-case (e.g., weekend-briefing-001)
 
 ## Git Commits
 Follow conventional commits: feat:, fix:, chore:, docs:, style:, refactor:, test:
 Example: "feat: add Weekend Briefing archive page with lens filter"
 
 ## Testing
-- Run `npm test` — 354 unit/integration tests across 50 suites (Jest with jsdom)
+- Run `npm test` — Jest with jsdom (72 test files)
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
