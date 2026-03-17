@@ -9,6 +9,7 @@ import type {
   Briefing,
   Course,
   Dispatch,
+  Handbook,
   Member,
   MemberTier,
   Lens,
@@ -324,4 +325,44 @@ export async function getDispatchBySlug(
 
   if (error) return null;
   return data as Dispatch;
+}
+
+// ── Handbooks ─────────────────────────────────────────────────────────────
+
+export async function getHandbooks(
+  options: {
+    lens?: Lens;
+    limit?: number;
+    offset?: number;
+  } = {},
+): Promise<Handbook[]> {
+  const { lens, limit = 20, offset = 0 } = options;
+  const supabase = await createClient();
+
+  let query = supabase
+    .from('handbooks')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (lens) query = query.eq('lens', lens);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getHandbooks]', error.message);
+    return [];
+  }
+  return (data ?? []) as Handbook[];
+}
+
+export async function getHandbookBySlug(slug: string): Promise<Handbook | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('handbooks')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) return null;
+  return data as Handbook;
 }
