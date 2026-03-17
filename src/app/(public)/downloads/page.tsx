@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { getDownloads, getMemberById } from '@/lib/supabase/queries';
 import { createClient } from '@/lib/supabase/server';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { DownloadCard } from '@/components/content/DownloadCard';
 import { DownloadCategoryTabs } from '@/components/content/DownloadCategoryTabs';
 
@@ -70,9 +71,12 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
       </div>
 
       {downloads.length === 0 ? (
-        <div className="py-24 text-center">
-          <p className="font-label text-bmj-tan">No downloads available yet.</p>
-        </div>
+        <EmptyState
+          heading="No downloads available"
+          description="Downloadable resources are on the way. Check back soon."
+          actionLabel="Browse articles"
+          actionHref="/articles"
+        />
       ) : (
         <div className="space-y-4">
           {downloads.map((dl) => {
