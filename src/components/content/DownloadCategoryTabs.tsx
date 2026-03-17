@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
-type DownloadCat = 'template' | 'worksheet' | 'guide' | 'toolkit' | 'all';
+type DownloadCat = 'template' | 'worksheet' | 'guide' | 'toolkit' | 'handbook' | 'all';
 
 type Tab = { label: string; value: DownloadCat };
 
@@ -12,6 +12,7 @@ const TABS: Tab[] = [
   { label: 'Worksheets', value: 'worksheet' },
   { label: 'Guides', value: 'guide' },
   { label: 'Toolkits', value: 'toolkit' },
+  { label: 'Handbooks', value: 'handbook' },
 ];
 
 interface DownloadCategoryTabsProps {
