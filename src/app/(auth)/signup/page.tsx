@@ -38,13 +38,13 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center px-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-4xl">
         <div className="mb-8 text-center">
           <h1 className="mb-2 font-display text-4xl text-bmj-white">
             JOIN THE MOVEMENT
           </h1>
           <p className="font-body text-sm text-bmj-tan">
-            Create your account. Access the archive.
+            Choose your membership. Access the archive.
           </p>
         </div>
 
