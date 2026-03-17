@@ -1,0 +1,34 @@
+import Link from 'next/link';
+
+interface EmptyStateProps {
+  heading: string;
+  description: string;
+  actionLabel?: string;
+  actionHref?: string;
+}
+
+export function EmptyState({ heading, description, actionLabel, actionHref }: EmptyStateProps) {
+  return (
+    <div className="flex flex-col items-center py-20 text-center">
+      <svg
+        width="48" height="48" viewBox="0 0 32 32" fill="none"
+        xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="mb-6 opacity-20"
+      >
+        <path
+          d="M16 0L19.6 11.6H32L21.8 18.4L25.4 30L16 23.2L6.6 30L10.2 18.4L0 11.6H12.4L16 0Z"
+          fill="var(--bmj-tan)"
+        />
+      </svg>
+      <h2 className="font-display text-2xl text-bmj-white">{heading}</h2>
+      <p className="mt-2 max-w-md font-body text-sm text-bmj-tan">{description}</p>
+      {actionLabel && actionHref && (
+        <Link
+          href={actionHref}
+          className="mt-6 border border-bmj-tan/30 px-6 py-2 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
+        >
+          {actionLabel}
+        </Link>
+      )}
+    </div>
+  );
+}
