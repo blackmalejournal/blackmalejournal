@@ -3,14 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { signup } from '../actions';
-import { TierSelector } from './TierSelector';
+import { TierSelector, type TierId } from './TierSelector';
 
 interface SignupFormProps {
-  preselectedTier?: string;
+  preselectedTier?: TierId;
 }
 
 export function SignupForm({ preselectedTier }: SignupFormProps) {
-  const [selectedTier, setSelectedTier] = useState(preselectedTier ?? 'free');
+  const [selectedTier, setSelectedTier] = useState<TierId>(preselectedTier ?? 'free');
 
   return (
     <div className="space-y-8">

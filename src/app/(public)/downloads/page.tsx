@@ -46,11 +46,14 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
 
   const isHandbookCategory = activeCategory === 'handbook';
 
-  // Fetch appropriate data based on category
-  const downloads = isHandbookCategory ? [] : await getDownloads({ category: activeCategory });
-  const handbooks = (isHandbookCategory || !activeCategory)
-    ? await getHandbooks({})
-    : [];
+  // Fetch appropriate data based on category (parallel when both needed)
+  const needsDownloads = !isHandbookCategory;
+  const needsHandbooks = isHandbookCategory || !activeCategory;
+
+  const [downloads, handbooks] = await Promise.all([
+    needsDownloads ? getDownloads({ category: activeCategory }) : Promise.resolve([]),
+    needsHandbooks ? getHandbooks({}) : Promise.resolve([]),
+  ]);
 
   // Determine the user's tier with a single auth + member lookup
   const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };

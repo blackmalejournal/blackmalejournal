@@ -1,8 +1,10 @@
 'use client';
 
+export type TierId = 'free' | 'basic' | 'premium';
+
 interface TierSelectorProps {
-  selectedTier: string;
-  onSelect: (tier: string) => void;
+  selectedTier: TierId;
+  onSelect: (tier: TierId) => void;
 }
 
 const TIERS = [
