@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "family": "special-edition",
+    "category": "accessibility",
+    "variant": "reduced-motion",
+    "name": "Reduced Motion",
+    "description": "Accessible theme for users preferring reduced motion - eliminates animations and transitions while maintaining visual hierarchy"
+  },
+  "colors": {
+    "primary": { "value": "#2C3E50", "description": "Primary - deep slate blue" },
+    "secondary": { "value": "#34495E", "description": "Secondary - medium slate" },
+    "background": { "value": "#ECF0F1", "description": "Background - light gray" },
+    "surface": { "value": "#E8EAED", "description": "Surface - soft white" },
+    "text": { "value": "#2C3E50", "description": "Text - dark slate" },
+    "textSecondary": { "value": "#7F8C8D", "description": "Secondary text - gray" },
+    "border": { "value": "#BDC3C7", "description": "Border - light gray" },
+    "borderLight": { "value": "#D5DBDB", "description": "Light border - very light gray" },
+    "accent": { "value": "#E67E22", "description": "Accent - warm orange" },
+    "success": { "value": "#27AE60", "description": "Success - forest green" },
+    "error": { "value": "#C0392B", "description": "Error - dark red" },
+    "warning": { "value": "#F39C12", "description": "Warning - golden orange" },
+    "info": { "value": "#3498DB", "description": "Info - bright blue" }
+  },
+  "typography": {
+    "fontDisplay": { "value": "Bebas Neue", "description": "Display font" },
+    "fontBody": { "value": "Libre Baskerville", "description": "Body font" },
+    "fontLabel": { "value": "Oswald", "description": "Label font" },
+    "fontMono": { "value": "IBM Plex Mono", "description": "Monospace" },
+    "sizeDisplay": { "value": "48px", "description": "Display size" },
+    "sizeHeading": { "value": "32px", "description": "Heading size" },
+    "sizeSubheading": { "value": "24px", "description": "Subheading size" },
+    "sizeBody": { "value": "16px", "description": "Body size" },
+    "sizeSmall": { "value": "14px", "description": "Small size" },
+    "weightBold": { "value": "700", "description": "Bold weight" },
+    "weightRegular": { "value": "400", "description": "Regular weight" },
+    "lineHeightTight": { "value": "1.2", "description": "Tight leading" },
+    "lineHeightNormal": { "value": "1.5", "description": "Normal leading" },
+    "lineHeightRelaxed": { "value": "1.8", "description": "Relaxed leading" }
+  },
+  "spacing": {
+    "space0": { "value": "0px", "description": "None" },
+    "space1": { "value": "8px", "description": "XS" },
+    "space2": { "value": "16px", "description": "S" },
+    "space3": { "value": "24px", "description": "M" },
+    "space4": { "value": "32px", "description": "L" },
+    "space5": { "value": "40px", "description": "XL" },
+    "space6": { "value": "48px", "description": "2XL" },
+    "space7": { "value": "56px", "description": "3XL" },
+    "space8": { "value": "64px", "description": "4XL" },
+    "gapSmall": { "value": "8px", "description": "Small gap" },
+    "gapMedium": { "value": "16px", "description": "Medium gap" },
+    "gapLarge": { "value": "24px", "description": "Large gap" },
+    "paddingSmall": { "value": "12px", "description": "Small padding" },
+    "paddingMedium": { "value": "16px", "description": "Medium padding" },
+    "paddingLarge": { "value": "24px", "description": "Large padding" }
+  }
+}
