@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { X, Instagram, Youtube, Linkedin, Twitter } from 'lucide-react';
 import { signOut } from '@/app/(auth)/actions';
+import { HEADER_NAV_LINKS } from '@/lib/nav';
 import type { NavUser } from './Navbar';
 
 interface MobileMenuProps {
@@ -11,19 +12,6 @@ interface MobileMenuProps {
   onClose: () => void;
   user?: NavUser;
 }
-
-const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Academy', href: '/academy' },
-  { label: 'Handbooks', href: '/handbooks' },
-  { label: 'Downloads', href: '/downloads' },
-  { label: 'Resources', href: '/resources' },
-  { label: 'Video', href: '/video' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Contact', href: '/contact' },
-];
 
 const SOCIAL_LINKS = [
   { icon: Instagram, href: '#', label: 'Instagram' },
@@ -72,7 +60,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
 
             {/* Nav links */}
             <ul className="flex flex-1 flex-col gap-6">
-              {NAV_LINKS.map((link) => (
+              {HEADER_NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
