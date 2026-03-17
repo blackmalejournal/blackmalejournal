@@ -16,6 +16,7 @@ import type {
   MemberTier,
   Lens,
   AccessTier,
+  SearchResult,
 } from '@/lib/supabase/types';
 
 // ── Articles ──────────────────────────────────────────────────────────────────
@@ -430,4 +431,62 @@ export async function getDownloads(
     return [];
   }
   return (data ?? []) as Download[];
+}
+
+// ── Search ──────────────────────────────────────────────────────────────────
+
+export async function searchContent(
+  query: string,
+  options: { limit?: number } = {},
+): Promise<SearchResult[]> {
+  const { limit = 20 } = options;
+  if (!query || query.trim().length < 2) return [];
+
+  const supabase = await createClient();
+  const term = `%${query.trim()}%`;
+
+  const [articles, briefings, handbooks, dispatches] = await Promise.all([
+    supabase
+      .from('articles')
+      .select('title, slug, excerpt, lens, published_at')
+      .or(`title.ilike.${term},excerpt.ilike.${term}`)
+      .order('published_at', { ascending: false })
+      .limit(limit),
+    supabase
+      .from('briefings')
+      .select('title, slug, published_at')
+      .ilike('title', term)
+      .order('published_at', { ascending: false })
+      .limit(limit),
+    supabase
+      .from('handbooks')
+      .select('title, slug, description, lens, published_at')
+      .or(`title.ilike.${term},description.ilike.${term}`)
+      .order('published_at', { ascending: false })
+      .limit(limit),
+    supabase
+      .from('dispatches')
+      .select('title, slug, excerpt, lens, published_at')
+      .or(`title.ilike.${term},excerpt.ilike.${term}`)
+      .order('published_at', { ascending: false })
+      .limit(limit),
+  ]);
+
+  const results: SearchResult[] = [];
+
+  for (const row of (articles.data ?? []) as { title: string; slug: string; excerpt: string; lens: Lens; published_at: string }[]) {
+    results.push({ type: 'article', title: row.title, slug: row.slug, excerpt: row.excerpt, lens: row.lens, publishedAt: row.published_at });
+  }
+  for (const row of (briefings.data ?? []) as { title: string; slug: string; published_at: string }[]) {
+    results.push({ type: 'briefing', title: row.title, slug: row.slug, excerpt: '', publishedAt: row.published_at });
+  }
+  for (const row of (handbooks.data ?? []) as { title: string; slug: string; description: string; lens: Lens; published_at: string }[]) {
+    results.push({ type: 'handbook', title: row.title, slug: row.slug, excerpt: row.description, lens: row.lens, publishedAt: row.published_at });
+  }
+  for (const row of (dispatches.data ?? []) as { title: string; slug: string; excerpt: string; lens: Lens; published_at: string }[]) {
+    results.push({ type: 'dispatch', title: row.title, slug: row.slug, excerpt: row.excerpt, lens: row.lens, publishedAt: row.published_at });
+  }
+
+  results.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+  return results.slice(0, limit);
 }
