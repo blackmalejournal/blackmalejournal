@@ -21,10 +21,10 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
       >
         {/* Issue + date row */}
         <div className="mb-3 flex items-center gap-4">
-          <span className="font-mono text-xs uppercase tracking-widest text-bmj-tan">
+          <span className="font-mono text-xs uppercase tracking-widest text-bmj-cream/80">
             {issueLabel}
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-cream/80">
             {formatDate(briefing.published_at)}
           </span>
           {isPremium && (
@@ -42,7 +42,7 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
 
         {/* First section title as preview */}
         {previewText && (
-          <p className="font-label text-sm uppercase tracking-wider text-bmj-tan/70">
+          <p className="font-label text-sm uppercase tracking-wider text-bmj-cream/80">
             {previewText}
           </p>
         )}

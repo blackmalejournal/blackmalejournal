@@ -27,7 +27,7 @@ export function DispatchCard({
       >
         <div className="mb-3 flex items-center gap-4">
           <LensBadge lens={lens} />
-          <span className="font-mono text-xs text-bmj-tan/60">
+          <span className="font-mono text-xs text-bmj-cream/80">
             {formatDate(publishedAt)}
           </span>
         </div>

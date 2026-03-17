@@ -127,19 +127,19 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-10 border-t border-bmj-tan/20 pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-xs text-bmj-tan/60">
+          <p className="font-mono text-xs text-bmj-tan">
             © 2026 The Black Male Journal. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
               href="/privacy"
-              className="font-mono text-xs text-bmj-tan/60 no-underline transition-colors hover:text-bmj-tan"
+              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="font-mono text-xs text-bmj-tan/60 no-underline transition-colors hover:text-bmj-tan"
+              className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Terms of Service
             </Link>

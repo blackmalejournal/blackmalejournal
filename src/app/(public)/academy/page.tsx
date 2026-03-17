@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { getCourses } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { CourseCard } from '@/components/content/CourseCard';
 import { CategoryFilterTabs } from '@/components/content/CategoryFilterTabs';
 import type { CourseCategory } from '@/lib/supabase/types';
@@ -62,9 +63,10 @@ export default async function AcademyPage({ searchParams }: AcademyPageProps) {
       </div>
 
       {courses.length === 0 ? (
-        <div className="py-24 text-center">
-          <p className="font-label text-bmj-tan">No courses available yet.</p>
-        </div>
+        <EmptyState
+          heading="Courses coming soon"
+          description="The Academy is being built. New courses on discipline, purpose, and mastery are on the way."
+        />
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (

@@ -24,7 +24,7 @@ export function SupportCard() {
 
       <div className="flex justify-between text-center">
         <div>
-          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-tan/60">
+          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-cream/80">
             CashApp
           </span>
           <span className="font-mono text-xs text-bmj-cream">
@@ -32,7 +32,7 @@ export function SupportCard() {
           </span>
         </div>
         <div>
-          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-tan/60">
+          <span className="block font-label text-[10px] uppercase tracking-widest text-bmj-cream/80">
             Venmo
           </span>
           <span className="font-mono text-xs text-bmj-cream">

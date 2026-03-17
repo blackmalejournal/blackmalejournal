@@ -79,4 +79,33 @@ describe('NewsletterForm', () => {
       expect(screen.queryByPlaceholderText('your@email.com')).not.toBeInTheDocument();
     });
   });
+
+  it('shows error for invalid email on blur', async () => {
+    render(<NewsletterForm />);
+    const input = screen.getByPlaceholderText('your@email.com');
+    fireEvent.change(input, { target: { value: 'notanemail' } });
+    fireEvent.blur(input);
+    expect(await screen.findByRole('alert')).toHaveTextContent(/valid email/i);
+  });
+
+  it('clears error when valid email entered', async () => {
+    render(<NewsletterForm />);
+    const input = screen.getByPlaceholderText('your@email.com');
+    fireEvent.change(input, { target: { value: 'notanemail' } });
+    fireEvent.blur(input);
+    expect(await screen.findByRole('alert')).toBeInTheDocument();
+    fireEvent.change(input, { target: { value: 'test@example.com' } });
+    fireEvent.blur(input);
+    await waitFor(() => {
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+  });
+
+  it('has aria-invalid when validation error exists', () => {
+    render(<NewsletterForm />);
+    const input = screen.getByPlaceholderText('your@email.com');
+    fireEvent.change(input, { target: { value: 'bad' } });
+    fireEvent.blur(input);
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+  });
 });

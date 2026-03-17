@@ -87,10 +87,10 @@ export function ArticleCard({
         </p>
 
         <div className="mt-4 flex items-center justify-between border-t border-bmj-tan/20 pt-4">
-          <span className="font-mono text-xs text-bmj-tan">
+          <span className="font-mono text-xs text-bmj-cream/80">
             {Math.max(1, readingTime)} min read
           </span>
-          <span className="font-mono text-xs text-bmj-tan/60">{formattedDate}</span>
+          <span className="font-mono text-xs text-bmj-cream/80">{formattedDate}</span>
         </div>
       </div>
     </article>

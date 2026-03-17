@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { getHandbooks } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { HandbookCard } from '@/components/content/HandbookCard';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import type { Lens } from '@/lib/supabase/types';
@@ -54,9 +55,12 @@ export default async function HandbooksPage({ searchParams }: HandbooksPageProps
       </div>
 
       {handbooks.length === 0 ? (
-        <div className="py-24 text-center">
-          <p className="font-label text-bmj-tan">No handbooks available yet.</p>
-        </div>
+        <EmptyState
+          heading="No handbooks yet"
+          description="Handbooks are comprehensive guides on health, philosophy, and politics. New releases coming soon."
+          actionLabel="Browse articles"
+          actionHref="/articles"
+        />
       ) : (
         <div className="space-y-6">
           {handbooks.map((handbook) => (

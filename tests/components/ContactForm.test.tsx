@@ -72,4 +72,15 @@ describe('ContactForm', () => {
     fireEvent.submit(screen.getByRole('button', { name: /send message/i }));
     expect(await screen.findByText('Network error. Please try again.')).toBeInTheDocument();
   });
+
+  it('shows error with role=alert when submission fails', async () => {
+    (global.fetch as jest.Mock).mockResolvedValueOnce({
+      ok: false,
+      json: () => Promise.resolve({ error: 'Server error occurred' }),
+    });
+    render(<ContactForm />);
+    fireEvent.submit(screen.getByRole('button', { name: /send message/i }));
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveTextContent('Server error occurred');
+  });
 });

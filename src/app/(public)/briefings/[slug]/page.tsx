@@ -13,6 +13,7 @@ import { SITE_URL, articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import type { Briefing } from '@/lib/supabase/types';
 
@@ -66,7 +67,7 @@ function IssueNavigation({
             href={`/briefings/${prev.slug}`}
             className="group flex flex-col no-underline"
           >
-            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+            <span className="mb-1 font-mono text-xs text-bmj-tan">
               ← Previous Issue
             </span>
             <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
@@ -82,7 +83,7 @@ function IssueNavigation({
             href={`/briefings/${next.slug}`}
             className="group flex flex-col items-start text-left no-underline sm:items-end sm:text-right"
           >
-            <span className="mb-1 font-mono text-xs text-bmj-tan/60">
+            <span className="mb-1 font-mono text-xs text-bmj-tan">
               Next Issue →
             </span>
             <span className="font-display text-xl text-bmj-cream transition-opacity group-hover:opacity-75">
@@ -131,14 +132,13 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         })}
       />
 
-      {/* Back link */}
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
-        <Link
-          href="/briefings"
-          className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
-        >
-          ← All Briefings
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Briefings', href: '/briefings' },
+            { label: briefing.title },
+          ]}
+        />
       </div>
 
       {/* Magazine cover hero */}

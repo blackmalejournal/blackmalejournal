@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/Navbar';
 
 jest.mock('next/navigation', () => ({
   usePathname: () => '/',
+  useRouter: () => ({ push: jest.fn() }),
 }));
 
 jest.mock('@/app/(auth)/actions', () => ({
@@ -35,5 +36,17 @@ describe('Navbar', () => {
     expect(screen.getByLabelText('The Black Male Journal — Home')).toBeInTheDocument();
     expect(screen.getByLabelText('Main navigation')).toBeInTheDocument();
     expect(screen.getByLabelText('Open navigation menu')).toBeInTheDocument();
+  });
+
+  it('sets aria-current="page" on active Home link', () => {
+    render(<Navbar />);
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    expect(homeLink).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('does not set aria-current on inactive links', () => {
+    render(<Navbar />);
+    const aboutLink = screen.getByRole('link', { name: 'About' });
+    expect(aboutLink).not.toHaveAttribute('aria-current');
   });
 });

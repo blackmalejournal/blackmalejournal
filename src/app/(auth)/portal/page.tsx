@@ -154,7 +154,7 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
               <h3 className="font-display text-xl text-bmj-white">
                 {article.title}
               </h3>
-              <p className="mt-1 font-mono text-xs text-bmj-tan/60">
+              <p className="mt-1 font-mono text-xs text-bmj-tan">
                 {formatDate(article.published_at)}
               </p>
             </Link>
