@@ -6,11 +6,47 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsx scripts/build-tokens.ts",
+    "build:distribution": "tsx scripts/build-distribution.ts",
     "validate": "tsx scripts/validate-themes.ts",
     "test": "jest",
     "docs": "tsx scripts/generate-docs.ts",
     "release": "tsx scripts/release.ts"
   },
+  "files": [
+    "dist",
+    "tokens",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens": "./tokens/",
+    "./themes": "./tokens/themes/",
+    "./registry": "./tokens/themes/theme-registry.json",
+    "./css": "./dist/alawein.css",
+    "./css-minified": "./dist/alawein.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackmalejournal/alawein-design-system"
+  },
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "themes",
+    "typography",
+    "colors",
+    "spacing",
+    "css-variables",
+    "accessibility",
+    "semantic-tokens"
+  ],
+  "author": "The Black Male Journal",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.0.0",
     "@types/node": "^20.0.0",
