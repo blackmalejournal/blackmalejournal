@@ -7,24 +7,12 @@ import { Menu, Search } from 'lucide-react';
 import { MobileMenu } from './MobileMenu';
 import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
+import { HEADER_NAV_LINKS } from '@/lib/nav';
 
 export type NavUser = {
   email: string;
   displayName?: string;
 } | null;
-
-const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Academy', href: '/academy' },
-  { label: 'Handbooks', href: '/handbooks' },
-  { label: 'Downloads', href: '/downloads' },
-  { label: 'Resources', href: '/resources' },
-  { label: 'Video', href: '/video' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Contact', href: '/contact' },
-];
 
 interface NavbarProps {
   user?: NavUser;
@@ -90,7 +78,7 @@ export function Navbar({ user = null }: NavbarProps) {
           {/* Desktop nav */}
           <nav aria-label="Main navigation" className="hidden lg:block">
             <ul className="flex items-center gap-6">
-              {NAV_LINKS.map((link) => {
+              {HEADER_NAV_LINKS.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <li key={link.href}>
