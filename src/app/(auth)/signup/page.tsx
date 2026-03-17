@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { SignupForm } from './SignupForm';
+import type { TierId } from './TierSelector';
 
 export const metadata: Metadata = {
   title: 'Join the Movement',
@@ -34,17 +35,17 @@ function resolveError(raw: string | undefined): string | undefined {
 export default async function SignupPage({ searchParams }: SignupPageProps) {
   const params = await searchParams;
   const error = resolveError(params.error);
-  const tier = VALID_TIERS.has(params.tier ?? '') ? params.tier : undefined;
+  const tier = VALID_TIERS.has(params.tier ?? '') ? (params.tier as TierId) : undefined;
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center px-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-4xl">
         <div className="mb-8 text-center">
           <h1 className="mb-2 font-display text-4xl text-bmj-white">
             JOIN THE MOVEMENT
           </h1>
           <p className="font-body text-sm text-bmj-tan">
-            Create your account. Access the archive.
+            Choose your membership. Access the archive.
           </p>
         </div>
 

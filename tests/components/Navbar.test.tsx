@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { Navbar } from '@/components/layout/Navbar';
 
 jest.mock('next/navigation', () => ({
@@ -48,5 +48,33 @@ describe('Navbar', () => {
     render(<Navbar />);
     const aboutLink = screen.getByRole('link', { name: 'About' });
     expect(aboutLink).not.toHaveAttribute('aria-current');
+  });
+});
+
+describe('Navbar simplified navigation', () => {
+  it('renders exactly 5 nav links', () => {
+    render(<Navbar />);
+    const nav = screen.getByRole('navigation', { name: /main/i });
+    const links = within(nav).getAllByRole('link');
+    expect(links).toHaveLength(5);
+  });
+
+  it('renders Home, About, Academy, Downloads, Resources', () => {
+    render(<Navbar />);
+    expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Academy' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Downloads' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Resources' })).toBeInTheDocument();
+  });
+
+  it('does NOT render Handbooks, Video, Blog, Pricing, or Contact in nav', () => {
+    render(<Navbar />);
+    const nav = screen.getByRole('navigation', { name: /main/i });
+    expect(within(nav).queryByRole('link', { name: 'Handbooks' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Video' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Blog' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Pricing' })).not.toBeInTheDocument();
+    expect(within(nav).queryByRole('link', { name: 'Contact' })).not.toBeInTheDocument();
   });
 });

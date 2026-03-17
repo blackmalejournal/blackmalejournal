@@ -33,3 +33,34 @@ describe('SignupForm', () => {
     expect(link).toHaveAttribute('href', '/login');
   });
 });
+
+describe('SignupForm with tier selector', () => {
+  it('renders TierSelector above the form', () => {
+    render(<SignupForm />);
+    expect(screen.getByText('FREE')).toBeInTheDocument();
+    expect(screen.getByText('BASIC')).toBeInTheDocument();
+    expect(screen.getByText('PREMIUM')).toBeInTheDocument();
+  });
+
+  it('defaults to free tier when no preselectedTier', () => {
+    render(<SignupForm />);
+    const freeCard = screen.getByText('FREE').closest('[data-tier]');
+    expect(freeCard).toHaveAttribute('data-selected', 'true');
+  });
+
+  it('preselects the tier from props', () => {
+    render(<SignupForm preselectedTier="premium" />);
+    const premiumCard = screen.getByText('PREMIUM').closest('[data-tier]');
+    expect(premiumCard).toHaveAttribute('data-selected', 'true');
+  });
+
+  it('shows payment redirect notice for paid tiers', () => {
+    render(<SignupForm preselectedTier="basic" />);
+    expect(screen.getByText(/directed to payment/i)).toBeInTheDocument();
+  });
+
+  it('does not show payment notice for free tier', () => {
+    render(<SignupForm preselectedTier="free" />);
+    expect(screen.queryByText(/directed to payment/i)).not.toBeInTheDocument();
+  });
+});

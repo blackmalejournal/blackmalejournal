@@ -16,7 +16,8 @@ describe('MobileMenu', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Academy')).toBeInTheDocument();
-    expect(screen.getByText('Contact')).toBeInTheDocument();
+    expect(screen.getByText('Downloads')).toBeInTheDocument();
+    expect(screen.getByText('Resources')).toBeInTheDocument();
   });
 
   it('shows Portal link and Log Out button when user is provided', () => {
@@ -43,5 +44,24 @@ describe('MobileMenu', () => {
     render(<MobileMenu isOpen={true} onClose={onClose} />);
     fireEvent.click(screen.getByLabelText('Close navigation menu'));
     expect(onClose).toHaveBeenCalled();
+  });
+});
+
+describe('MobileMenu simplified navigation', () => {
+  it('renders exactly 5 nav links when open', () => {
+    render(<MobileMenu isOpen={true} onClose={jest.fn()} />);
+    const navLabels = ['Home', 'About', 'Academy', 'Downloads', 'Resources'];
+    navLabels.forEach((label) => {
+      expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
+    });
+  });
+
+  it('does NOT render removed nav items', () => {
+    render(<MobileMenu isOpen={true} onClose={jest.fn()} />);
+    expect(screen.queryByRole('link', { name: 'Handbooks' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Video' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Blog' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Pricing' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Contact' })).not.toBeInTheDocument();
   });
 });

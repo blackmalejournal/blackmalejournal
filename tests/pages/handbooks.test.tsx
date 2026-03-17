@@ -1,23 +1,25 @@
-jest.mock('@/lib/supabase/queries', () => ({
-  getHandbooks: jest.fn(),
+import { redirect } from 'next/navigation';
+
+jest.mock('next/navigation', () => ({
+  redirect: jest.fn(),
 }));
 
-import { getHandbooks } from '@/lib/supabase/queries';
+jest.mock('@/lib/supabase/queries', () => ({
+  getHandbooks: jest.fn().mockResolvedValue([]),
+}));
+jest.mock('@/components/ui/StarDivider', () => ({ StarDivider: () => null }));
+jest.mock('@/components/ui/EmptyState', () => ({ EmptyState: () => null }));
+jest.mock('@/components/content/HandbookCard', () => ({ HandbookCard: () => null }));
+jest.mock('@/components/content/LensFilterTabs', () => ({ LensFilterTabs: () => null }));
 
-describe('Handbooks Page', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+describe('HandbooksPage redirect', () => {
+  it('redirects to /downloads?category=handbook', async () => {
+    const { default: HandbooksPage } = await import(
+      '@/app/(public)/handbooks/page'
+    );
 
-  it('calls getHandbooks with lens filter', async () => {
-    (getHandbooks as jest.Mock).mockResolvedValue([]);
-    await getHandbooks({ lens: 'health' });
-    expect(getHandbooks).toHaveBeenCalledWith({ lens: 'health' });
-  });
+    HandbooksPage();
 
-  it('calls getHandbooks without filter for all', async () => {
-    (getHandbooks as jest.Mock).mockResolvedValue([]);
-    await getHandbooks({});
-    expect(getHandbooks).toHaveBeenCalledWith({});
+    expect(redirect).toHaveBeenCalledWith('/downloads?category=handbook');
   });
 });

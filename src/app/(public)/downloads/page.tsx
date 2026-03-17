@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import { getDownloads, getMemberById } from '@/lib/supabase/queries';
+import { getDownloads, getHandbooks, getMemberById } from '@/lib/supabase/queries';
+import { HandbookCard } from '@/components/content/HandbookCard';
 import { createClient } from '@/lib/supabase/server';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -29,6 +30,7 @@ const VALID_CATEGORIES = new Set<string>([
   'worksheet',
   'guide',
   'toolkit',
+  'handbook',
 ]);
 
 interface DownloadsPageProps {
@@ -42,7 +44,16 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
     ? rawCategory!
     : undefined;
 
-  const downloads = await getDownloads({ category: activeCategory });
+  const isHandbookCategory = activeCategory === 'handbook';
+
+  // Fetch appropriate data based on category (parallel when both needed)
+  const needsDownloads = !isHandbookCategory;
+  const needsHandbooks = isHandbookCategory || !activeCategory;
+
+  const [downloads, handbooks] = await Promise.all([
+    needsDownloads ? getDownloads({ category: activeCategory }) : Promise.resolve([]),
+    needsHandbooks ? getHandbooks({}) : Promise.resolve([]),
+  ]);
 
   // Determine the user's tier with a single auth + member lookup
   const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
@@ -70,7 +81,7 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
         </Suspense>
       </div>
 
-      {downloads.length === 0 ? (
+      {downloads.length === 0 && handbooks.length === 0 ? (
         <EmptyState
           heading="No downloads available"
           description="Downloadable resources are on the way. Check back soon."
@@ -79,25 +90,57 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
         />
       ) : (
         <div className="space-y-4">
-          {downloads.map((dl) => {
-            const requiredRank = TIER_RANK[dl.access_tier] ?? 0;
-            const userHasAccess = userTierRank >= requiredRank;
+          {/* Handbook cards (when handbook tab or All tab) */}
+          {handbooks.length > 0 && (
+            <div className="space-y-6">
+              {!isHandbookCategory && handbooks.length > 0 && downloads.length > 0 && (
+                <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+                  Handbooks
+                </p>
+              )}
+              {handbooks.map((handbook) => (
+                <HandbookCard
+                  key={handbook.id}
+                  title={handbook.title}
+                  slug={handbook.slug}
+                  lens={handbook.lens}
+                  description={handbook.description}
+                  accessTier={handbook.access_tier}
+                  publishedAt={handbook.published_at}
+                  coverImage={handbook.cover_image}
+                />
+              ))}
+            </div>
+          )}
 
-            return (
-              <DownloadCard
-                key={dl.id}
-                title={dl.title}
-                slug={dl.slug}
-                description={dl.description}
-                category={dl.category}
-                fileType={dl.file_type}
-                fileSize={dl.file_size}
-                accessTier={dl.access_tier}
-                hasAccess={userHasAccess}
-                fileUrl={dl.file_url}
-              />
-            );
-          })}
+          {/* Download cards */}
+          {downloads.length > 0 && (
+            <div className="space-y-4">
+              {!isHandbookCategory && handbooks.length > 0 && (
+                <p className="mt-8 font-label text-xs uppercase tracking-widest text-bmj-tan">
+                  Downloads
+                </p>
+              )}
+              {downloads.map((dl) => {
+                const requiredRank = TIER_RANK[dl.access_tier] ?? 0;
+                const userHasAccess = userTierRank >= requiredRank;
+                return (
+                  <DownloadCard
+                    key={dl.id}
+                    title={dl.title}
+                    slug={dl.slug}
+                    description={dl.description}
+                    category={dl.category}
+                    fileType={dl.file_type}
+                    fileSize={dl.file_size}
+                    accessTier={dl.access_tier}
+                    hasAccess={userHasAccess}
+                    fileUrl={dl.file_url}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>
