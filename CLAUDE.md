@@ -87,6 +87,26 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Star motif from the logo is used as section dividers (horizontal rule replacement)
 - All images should have grain/halftone treatment applied via CSS
 
+## Design System (@alawein/tokens)
+
+The BMJ design system has been consolidated into the unified Alawein token system:
+
+- **Location:** `@alawein/tokens` (published to npm)
+- **Themes:** 29 comprehensive JSON-based themes (Dawn Primary for BMJ aesthetic)
+- **Tokens:** Colors, typography, spacing, animations with semantic naming
+- **Documentation:**
+  - API & Usage: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/README.md
+  - Architecture: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/ARCHITECTURE.md
+  - Publishing: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/PUBLISH.md
+- **Migration Guide:** docs/design-system-consolidation.md (see section on mapping BMJ colors to Alawein tokens)
+- **CSS Import:** `import '@alawein/tokens/dist/themes.css'`
+- **Token Mapping:**
+  - Old: `--bmj-black` → New: `--color-background`
+  - Old: `--bmj-white` → New: `--color-text`
+  - Old: `--bmj-red` → New: `--color-accent`
+  - Old: `--bmj-amber` → New: `--color-primary`
+  - See consolidation ADR for complete mapping
+
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md
 - Environment variable reference: docs/ops/env-vars.md (canonical source of truth)
