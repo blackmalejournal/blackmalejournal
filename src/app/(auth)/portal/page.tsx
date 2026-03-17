@@ -182,6 +182,12 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
         >
           Academy
         </Link>
+        <Link
+          href="/handbooks"
+          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
+        >
+          Handbooks
+        </Link>
       </div>
     </div>
   );

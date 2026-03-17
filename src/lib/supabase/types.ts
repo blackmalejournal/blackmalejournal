@@ -80,6 +80,21 @@ export type Dispatch = {
   created_at: string;
 };
 
+export type Handbook = {
+  id: string;
+  title: string;
+  slug: string;
+  lens: Lens;
+  description: string;
+  body: string;
+  access_tier: AccessTier;
+  author: string;
+  cover_image: string | null;
+  file_url: string | null;
+  published_at: string;
+  created_at: string;
+};
+
 export type NewsletterSubscriber = {
   id: string;
   email: string;
@@ -132,6 +147,12 @@ export type Database = {
         Row: Dispatch;
         Insert: Omit<Dispatch, 'id' | 'created_at'>;
         Update: Partial<Omit<Dispatch, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      handbooks: {
+        Row: Handbook;
+        Insert: Omit<Handbook, 'id' | 'created_at'>;
+        Update: Partial<Omit<Handbook, 'id' | 'created_at'>>;
         Relationships: [];
       };
       newsletter_subscribers: {
