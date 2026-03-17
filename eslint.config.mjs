@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Separate package with its own lint config
+    "alawein/**",
   ]),
   // Relax rules for test files — require() inside jest.mock() factories is standard Jest.
   {
