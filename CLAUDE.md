@@ -5,6 +5,17 @@ A full-stack website for The Black Male Journal, an independent media house and 
 masculinist platform. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS, Supabase,
 and Stripe. Deployed on Vercel.
 
+## Quick Start
+```bash
+npm install
+npm run dev          # Development server (Next.js 16)
+npm run build        # Production build
+npm run lint         # ESLint
+npm test             # Jest unit/integration tests
+npm run test:e2e     # Playwright E2E tests
+npx tsc --noEmit     # TypeScript check
+```
+
 ## Brand System — NEVER deviate from these values
 Colors (use CSS variables from src/styles/brand.css):
 - --bmj-black: #0D0C0B (backgrounds)
@@ -42,6 +53,16 @@ All articles and content are categorized under exactly one lens:
 - Content: database-driven via Supabase (articles, briefings, handbooks, downloads, courses, lessons)
 - Lib: src/lib/supabase/, src/lib/stripe/, src/lib/content/
 
+## Key Files
+- `src/app/layout.tsx` — Root layout, font loading, global providers
+- `src/middleware.ts` — Auth middleware (Supabase session handling)
+- `src/lib/supabase/queries.ts` — All database query functions
+- `src/lib/supabase/access.ts` — Tier-based content access control
+- `src/lib/stripe/config.ts` — Stripe configuration
+- `src/styles/brand.css` — CSS custom properties (--bmj-* variables)
+- `tailwind.config.ts` — Tailwind theme extending brand tokens
+- `supabase/config.toml` — Local Supabase configuration
+
 ## Code Style
 - Use TypeScript strict mode
 - Tailwind for all styling — no CSS modules, no styled-components
@@ -71,6 +92,12 @@ All articles and content are categorized under exactly one lens:
 Follow conventional commits: feat:, fix:, chore:, docs:, style:, refactor:, test:
 Example: "feat: add Weekend Briefing archive page with lens filter"
 
+## Database (Supabase)
+- Migrations: `supabase/migrations/`
+- Seed data: `supabase/seed-*.sql` (courses, dispatches, downloads, handbooks, lessons)
+- Seed scripts: `scripts/seed.ts` (single table), `scripts/seed-all.ts` (all tables)
+- Run seeds: `npx tsx scripts/seed-all.ts`
+
 ## Testing
 - Run `npm test` — Jest with jsdom (72 test files)
 - Run `npm run test:watch` — Jest watch mode for development
@@ -78,6 +105,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
 - Verify `npm run build` passes before any commit
 - Check TypeScript with `npx tsc --noEmit`
+- Run `npm run lint` — ESLint checks
 - Visual check: every page must look correct at 375px (mobile) and 1440px (desktop)
 - **CI/CD:** GitHub Actions validates all tests + lint + build on every commit and PR
 
