@@ -9,6 +9,7 @@ import type {
   Briefing,
   Course,
   Dispatch,
+  Download,
   Handbook,
   Lesson,
   Member,
@@ -401,4 +402,32 @@ export async function getHandbookBySlug(slug: string): Promise<Handbook | null> 
 
   if (error) return null;
   return data as Handbook;
+}
+
+// ── Downloads ─────────────────────────────────────────────────────────────
+
+export async function getDownloads(
+  options: {
+    category?: string;
+    limit?: number;
+    offset?: number;
+  } = {},
+): Promise<Download[]> {
+  const { category, limit = 40, offset = 0 } = options;
+  const supabase = await createClient();
+
+  let query = supabase
+    .from('downloads')
+    .select('*')
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (category) query = query.eq('category', category);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getDownloads]', error.message);
+    return [];
+  }
+  return (data ?? []) as Download[];
 }

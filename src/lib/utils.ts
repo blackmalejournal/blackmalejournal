@@ -111,3 +111,24 @@ export function getCategoryLabel(category: string): string {
 export function calculateFeeAdjustedAmount(amount: number): number {
   return Math.ceil(((amount + 0.30) / (1 - 0.029)) * 100) / 100;
 }
+
+// Maps download category slugs to display labels.
+const DOWNLOAD_CATEGORY_LABELS: Record<string, string> = {
+  template: 'Template',
+  worksheet: 'Worksheet',
+  guide: 'Guide',
+  toolkit: 'Toolkit',
+  general: 'General',
+};
+
+export function getDownloadCategoryLabel(category: string): string {
+  return DOWNLOAD_CATEGORY_LABELS[category] ?? category;
+}
+
+// Formats file size in bytes to human-readable string (KB, MB).
+export function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 B';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}

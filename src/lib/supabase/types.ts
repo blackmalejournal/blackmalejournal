@@ -108,6 +108,21 @@ export type Handbook = {
   created_at: string;
 };
 
+export type Download = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  file_url: string;
+  file_type: string;
+  file_size: number;
+  access_tier: AccessTier;
+  cover_image: string | null;
+  published_at: string;
+  created_at: string;
+};
+
 export type NewsletterSubscriber = {
   id: string;
   email: string;
@@ -172,6 +187,12 @@ export type Database = {
         Row: Handbook;
         Insert: Omit<Handbook, 'id' | 'created_at'>;
         Update: Partial<Omit<Handbook, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      downloads: {
+        Row: Download;
+        Insert: Omit<Download, 'id' | 'created_at'>;
+        Update: Partial<Omit<Download, 'id' | 'created_at'>>;
         Relationships: [];
       };
       newsletter_subscribers: {
