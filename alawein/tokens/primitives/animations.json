@@ -1,0 +1,134 @@
+{
+  "durations": {
+    "instant": {
+      "value": "100ms",
+      "description": "Instant animation - very quick micro-interactions"
+    },
+    "fast": {
+      "value": "200ms",
+      "description": "Fast animation - button clicks, toggles"
+    },
+    "normal": {
+      "value": "300ms",
+      "description": "Normal animation - standard transitions"
+    },
+    "slow": {
+      "value": "500ms",
+      "description": "Slow animation - attention-grabbing effects"
+    },
+    "slower": {
+      "value": "800ms",
+      "description": "Slower animation - page transitions"
+    },
+    "slowest": {
+      "value": "1200ms",
+      "description": "Slowest animation - hero section entrances"
+    },
+    "extended": {
+      "value": "1600ms",
+      "description": "Extended animation - complex multi-step animations"
+    },
+    "long": {
+      "value": "2000ms",
+      "description": "Long animation - full-page animations"
+    }
+  },
+  "timings": {
+    "entrance": {
+      "value": "fade-in slide-up",
+      "description": "Entrance animation - elements appearing"
+    },
+    "exit": {
+      "value": "fade-out slide-down",
+      "description": "Exit animation - elements disappearing"
+    },
+    "attention": {
+      "value": "pulse bounce",
+      "description": "Attention animation - drawing focus"
+    },
+    "transition": {
+      "value": "smooth-fade cross-fade",
+      "description": "Transition animation - between states"
+    },
+    "scroll": {
+      "value": "parallax scroll-reveal",
+      "description": "Scroll animation - on-scroll effects"
+    },
+    "hover": {
+      "value": "scale-up color-shift",
+      "description": "Hover animation - interactive feedback"
+    }
+  },
+  "easings": {
+    "linear": {
+      "value": "linear",
+      "description": "Linear easing - constant speed"
+    },
+    "easeIn": {
+      "value": "cubic-bezier(0.42, 0, 1, 1)",
+      "description": "Ease-in - slow start, fast end"
+    },
+    "easeOut": {
+      "value": "cubic-bezier(0, 0, 0.58, 1)",
+      "description": "Ease-out - fast start, slow end"
+    },
+    "easeInOut": {
+      "value": "cubic-bezier(0.42, 0, 0.58, 1)",
+      "description": "Ease-in-out - slow start and end"
+    },
+    "sharp": {
+      "value": "cubic-bezier(0.33, 0.66, 0.66, 1)",
+      "description": "Sharp easing - snappy feel"
+    },
+    "smooth": {
+      "value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "description": "Smooth easing - natural motion"
+    },
+    "bounce": {
+      "value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      "description": "Bounce easing - playful effect"
+    }
+  },
+  "keyframes": {
+    "fadeIn": {
+      "value": "0% { opacity: 0 } to { opacity: 1 }",
+      "description": "Fade in - opacity from 0 to 1"
+    },
+    "fadeOut": {
+      "value": "0% { opacity: 1 } to { opacity: 0 }",
+      "description": "Fade out - opacity from 1 to 0"
+    },
+    "slideUp": {
+      "value": "0% { transform: translateY(20px); opacity: 0 } to { transform: translateY(0); opacity: 1 }",
+      "description": "Slide up - movement with fade"
+    },
+    "slideDown": {
+      "value": "0% { transform: translateY(-20px); opacity: 0 } to { transform: translateY(0); opacity: 1 }",
+      "description": "Slide down - downward entrance"
+    },
+    "slideRight": {
+      "value": "0% { transform: translateX(-20px); opacity: 0 } to { transform: translateX(0); opacity: 1 }",
+      "description": "Slide right - rightward entrance"
+    },
+    "pulse": {
+      "value": "0% { opacity: 1 } 50% { opacity: 0.5 } to { opacity: 1 }",
+      "description": "Pulse - attention-grabbing opacity change"
+    },
+    "bounce": {
+      "value": "0%, 100% { transform: translateY(0) } 50% { transform: translateY(-10px) }",
+      "description": "Bounce - up and down motion"
+    },
+    "scaleUp": {
+      "value": "0% { transform: scale(0.95) } to { transform: scale(1) }",
+      "description": "Scale up - growth animation"
+    },
+    "rotate": {
+      "value": "0% { transform: rotate(0deg) } to { transform: rotate(360deg) }",
+      "description": "Rotate - full rotation"
+    },
+    "shake": {
+      "value": "0%, 100% { transform: translateX(0) } 25% { transform: translateX(-2px) } 75% { transform: translateX(2px) }",
+      "description": "Shake - attention effect"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "family": "hybrid",
+    "variant": "dawn-wisdom",
+    "name": "Dawn + Wisdom",
+    "description": "Energetic learning and growth - bright dawn accents with scholarly purple foundation",
+    "parentFamilies": ["dawn", "wisdom"]
+  },
+  "colors": {
+    "primary": { "value": "#5B4B8A", "description": "Primary - scholarly purple" },
+    "secondary": { "value": "#E8956B", "description": "Secondary - energetic coral" },
+    "background": { "value": "#F8F4E6", "description": "Background - soft cream" },
+    "surface": { "value": "#F0E8D8", "description": "Surface - pale cream" },
+    "text": { "value": "#3D2817", "description": "Text - dark brown" },
+    "textSecondary": { "value": "#8B7355", "description": "Secondary text - warm gray-brown" },
+    "border": { "value": "#D9B8A0", "description": "Border - warm taupe" },
+    "borderLight": { "value": "#EAD9CC", "description": "Light border - subtle cream" },
+    "accent": { "value": "#D4AF37", "description": "Accent - scholarly gold" },
+    "success": { "value": "#7BA370", "description": "Success - muted green" },
+    "error": { "value": "#D97966", "description": "Error - soft red" },
+    "warning": { "value": "#D4AF37", "description": "Warning - gold" },
+    "info": { "value": "#96A8C8", "description": "Info - soft blue" }
+  },
+  "typography": {
+    "fontDisplay": { "value": "Bebas Neue", "description": "Display font" },
+    "fontBody": { "value": "Libre Baskerville", "description": "Body font" },
+    "fontLabel": { "value": "Oswald", "description": "Label font" },
+    "fontMono": { "value": "IBM Plex Mono", "description": "Monospace" },
+    "sizeDisplay": { "value": "48px", "description": "Display size" },
+    "sizeHeading": { "value": "32px", "description": "Heading size" },
+    "sizeSubheading": { "value": "24px", "description": "Subheading size" },
+    "sizeBody": { "value": "16px", "description": "Body size" },
+    "sizeSmall": { "value": "14px", "description": "Small size" },
+    "weightBold": { "value": "700", "description": "Bold weight" },
+    "weightRegular": { "value": "400", "description": "Regular weight" },
+    "lineHeightTight": { "value": "1.2", "description": "Tight leading" },
+    "lineHeightNormal": { "value": "1.5", "description": "Normal leading" },
+    "lineHeightRelaxed": { "value": "1.8", "description": "Relaxed leading" }
+  },
+  "spacing": {
+    "space0": { "value": "0px", "description": "None" },
+    "space1": { "value": "8px", "description": "XS" },
+    "space2": { "value": "16px", "description": "S" },
+    "space3": { "value": "24px", "description": "M" },
+    "space4": { "value": "32px", "description": "L" },
+    "space5": { "value": "40px", "description": "XL" },
+    "space6": { "value": "48px", "description": "2XL" },
+    "space7": { "value": "56px", "description": "3XL" },
+    "space8": { "value": "64px", "description": "4XL" },
+    "gapSmall": { "value": "8px", "description": "Small gap" },
+    "gapMedium": { "value": "16px", "description": "Medium gap" },
+    "gapLarge": { "value": "24px", "description": "Large gap" },
+    "paddingSmall": { "value": "12px", "description": "Small padding" },
+    "paddingMedium": { "value": "16px", "description": "Medium padding" },
+    "paddingLarge": { "value": "24px", "description": "Large padding" }
+  }
+}

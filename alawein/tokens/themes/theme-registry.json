@@ -1,0 +1,291 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-03-16T00:00:00Z",
+  "description": "Central registry and distribution manifest for all Alawein design system themes",
+  "families": {
+    "midnight": {
+      "count": 2,
+      "description": "Deep, sophisticated dark themes with navy and amber accents",
+      "variants": [
+        {
+          "name": "midnight-standard",
+          "description": "Standard midnight theme with navy blues and amber accents",
+          "path": "midnight-standard.json",
+          "category": "base"
+        },
+        {
+          "name": "midnight-high-contrast",
+          "description": "High contrast variant for accessibility (WCAG AAA)",
+          "path": "special-editions/midnight-high-contrast.json",
+          "category": "accessibility"
+        }
+      ]
+    },
+    "dawn": {
+      "count": 2,
+      "description": "Light, fresh themes with warm sunrise tones",
+      "variants": [
+        {
+          "name": "dawn-primary",
+          "description": "Primary dawn theme with warm peachy tones",
+          "path": "dawn-primary.json",
+          "category": "base"
+        },
+        {
+          "name": "dawn-soft",
+          "description": "Softer variant with muted pastels",
+          "path": "dawn-soft.json",
+          "category": "base"
+        }
+      ]
+    },
+    "wisdom": {
+      "count": 2,
+      "description": "Balanced themes with earthy intellectual aesthetic",
+      "variants": [
+        {
+          "name": "wisdom-light",
+          "description": "Light variant with cream and sage",
+          "path": "wisdom-light.json",
+          "category": "base"
+        },
+        {
+          "name": "wisdom-dark",
+          "description": "Dark variant with forest green and gold",
+          "path": "wisdom-dark.json",
+          "category": "base"
+        }
+      ]
+    },
+    "forge": {
+      "count": 2,
+      "description": "Industrial, bold themes with strong contrast",
+      "variants": [
+        {
+          "name": "forge-default",
+          "description": "Default forge theme with steel grays and rust accents",
+          "path": "forge-default.json",
+          "category": "base"
+        },
+        {
+          "name": "forge-industrial",
+          "description": "Industrial variant with raw metal aesthetic",
+          "path": "forge-industrial.json",
+          "category": "hybrid"
+        }
+      ]
+    },
+    "legacy": {
+      "count": 2,
+      "description": "Nostalgic themes inspired by vintage designs",
+      "variants": [
+        {
+          "name": "legacy-warm",
+          "description": "Warm vintage palette with sepia and cream",
+          "path": "legacy-warm.json",
+          "category": "base"
+        },
+        {
+          "name": "legacy-cool",
+          "description": "Cool vintage palette with slate and ivory",
+          "path": "legacy-cool.json",
+          "category": "base"
+        }
+      ]
+    },
+    "vibrant": {
+      "count": 2,
+      "description": "Energetic, saturated themes with bold colors",
+      "variants": [
+        {
+          "name": "vibrant-bold",
+          "description": "Maximum saturation with bright primary colors",
+          "path": "vibrant-bold.json",
+          "category": "base"
+        },
+        {
+          "name": "vibrant-dark",
+          "description": "Vibrant colors on dark background",
+          "path": "vibrant-dark.json",
+          "category": "base"
+        }
+      ]
+    },
+    "earth": {
+      "count": 2,
+      "description": "Natural, grounded themes with earth tones",
+      "variants": [
+        {
+          "name": "earth-primary",
+          "description": "Primary earth theme with clay and terracotta",
+          "path": "earth-primary.json",
+          "category": "base"
+        },
+        {
+          "name": "earth-neutral",
+          "description": "Neutral earth variant with natural grays and browns",
+          "path": "earth-neutral.json",
+          "category": "hybrid"
+        }
+      ]
+    },
+    "heritage": {
+      "count": 2,
+      "description": "Cultural themes celebrating heritage and identity",
+      "variants": [
+        {
+          "name": "heritage-gold",
+          "description": "Rich gold and burgundy palette honoring tradition",
+          "path": "heritage-gold.json",
+          "category": "base"
+        },
+        {
+          "name": "heritage-deep",
+          "description": "Deep jewel tones with cultural significance",
+          "path": "heritage-deep.json",
+          "category": "hybrid"
+        }
+      ]
+    }
+  },
+  "specialEditions": {
+    "accessibility": {
+      "count": 4,
+      "description": "Specialized themes for accessibility compliance and colorblind safety",
+      "variants": [
+        {
+          "name": "high-contrast",
+          "description": "WCAG AAA compliant high contrast theme (pure black/white with bright accents)",
+          "path": "special-editions/high-contrast.json",
+          "wcagLevel": "AAA",
+          "contrast": "7:1 minimum"
+        },
+        {
+          "name": "deuteranopia-safe",
+          "description": "Safe for deuteranopia (green-blind) colorblindness using blue/yellow/purple",
+          "path": "special-editions/deuteranopia-safe.json",
+          "colorblindSafe": true,
+          "colorblindType": "deuteranopia"
+        },
+        {
+          "name": "protanopia-safe",
+          "description": "Safe for protanopia (red-blind) colorblindness using blue/brown/yellow",
+          "path": "special-editions/protanopia-safe.json",
+          "colorblindSafe": true,
+          "colorblindType": "protanopia"
+        },
+        {
+          "name": "reduced-motion",
+          "description": "Theme for users sensitive to motion with calm, grounded color palette",
+          "path": "special-editions/reduced-motion.json",
+          "reducedMotion": true
+        }
+      ]
+    },
+    "seasonal": {
+      "count": 4,
+      "description": "Evocative seasonal themes that shift throughout the year",
+      "variants": [
+        {
+          "name": "spring-renewal",
+          "description": "Fresh spring theme with soft greens and pastels evoking renewal",
+          "path": "special-editions/spring-renewal.json",
+          "season": "spring",
+          "mood": "renewal, growth, freshness"
+        },
+        {
+          "name": "summer-fire",
+          "description": "Warm summer theme with reds, oranges, and golds evoking energy and heat",
+          "path": "special-editions/summer-fire.json",
+          "season": "summer",
+          "mood": "warmth, energy, brightness"
+        },
+        {
+          "name": "autumn-harvest",
+          "description": "Rich autumn theme with earth tones evoking abundance and change",
+          "path": "special-editions/autumn-harvest.json",
+          "season": "autumn",
+          "mood": "abundance, change, warmth"
+        },
+        {
+          "name": "winter-silence",
+          "description": "Cool winter theme with blues and whites evoking serenity and stillness",
+          "path": "special-editions/winter-silence.json",
+          "season": "winter",
+          "mood": "serenity, stillness, contemplation"
+        }
+      ]
+    }
+  },
+  "categories": {
+    "base": {
+      "count": 12,
+      "description": "Core family themes representing primary design direction"
+    },
+    "hybrid": {
+      "count": 5,
+      "description": "Hybrid themes that blend multiple family characteristics"
+    },
+    "accessibility": {
+      "count": 4,
+      "description": "Specialized themes for accessibility compliance"
+    },
+    "seasonal": {
+      "count": 4,
+      "description": "Seasonal variations on the design system"
+    }
+  },
+  "exports": {
+    "cssVariables": {
+      "format": ".css",
+      "description": "CSS custom property definitions",
+      "pattern": "dist/themes/*.css",
+      "example": ".theme-midnight-standard { --alawein-color-primary: #0B1929; ... }"
+    },
+    "typescript": {
+      "format": ".d.ts",
+      "description": "TypeScript type definitions for IDE autocomplete and type safety",
+      "pattern": "dist/types/*.d.ts",
+      "example": "export interface MidnightStandardTheme { colors: { ... } }"
+    },
+    "json": {
+      "format": ".json",
+      "description": "JSON token files for programmatic access",
+      "pattern": "dist/themes/*.json",
+      "example": "{ \"metadata\": {...}, \"colors\": {...} }"
+    },
+    "esm": {
+      "format": ".js",
+      "description": "ES module exports for build tool integration",
+      "pattern": "dist/esm/**/*.js",
+      "example": "export const midnightStandard = { ... };"
+    }
+  },
+  "distribution": {
+    "npm": {
+      "package": "@alawein/design-tokens",
+      "registry": "https://registry.npmjs.org",
+      "description": "Published to npm for easy installation",
+      "installation": "npm install @alawein/design-tokens"
+    },
+    "cdn": {
+      "url": "https://cdn.alawein.design/tokens/",
+      "description": "CDN delivery for direct browser consumption",
+      "usage": "<link rel='stylesheet' href='https://cdn.alawein.design/tokens/v1.0.0/midnight-standard.css'>"
+    }
+  },
+  "compatibility": {
+    "browsers": ["Chrome 90+", "Firefox 88+", "Safari 14+", "Edge 90+"],
+    "cssVariableSupport": true,
+    "cssGridSupport": true,
+    "cssFlexboxSupport": true
+  },
+  "metadata": {
+    "totalThemes": 25,
+    "totalFamilies": 8,
+    "lastUpdated": "2026-03-16T00:00:00Z",
+    "maintainers": ["Alawein Design Team"],
+    "repository": "https://github.com/alawein/design-system",
+    "documentation": "https://alawein.design/docs/tokens"
+  }
+}

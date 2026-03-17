@@ -1,0 +1,106 @@
+{
+  "success": {
+    "50": {
+      "value": "#F0F7F0",
+      "description": "Success background - lightest shade"
+    },
+    "100": {
+      "value": "#D9EFD9",
+      "description": "Success background - very light"
+    },
+    "500": {
+      "value": "#4CAF50",
+      "description": "Success primary - default shade"
+    },
+    "700": {
+      "value": "#2E7D32",
+      "description": "Success emphasis - darker"
+    },
+    "900": {
+      "value": "#1B5E20",
+      "description": "Success strong - darkest shade"
+    },
+    "border": {
+      "value": "#43A047",
+      "description": "Success border - medium contrast"
+    }
+  },
+  "error": {
+    "50": {
+      "value": "#FFEBEE",
+      "description": "Error background - lightest shade"
+    },
+    "100": {
+      "value": "#FFCDD2",
+      "description": "Error background - very light"
+    },
+    "500": {
+      "value": "#C0281F",
+      "description": "Error primary - BMJ red"
+    },
+    "700": {
+      "value": "#8B1D0A",
+      "description": "Error emphasis - darker"
+    },
+    "900": {
+      "value": "#5A0D05",
+      "description": "Error strong - darkest shade"
+    },
+    "border": {
+      "value": "#D32F2F",
+      "description": "Error border - medium contrast"
+    }
+  },
+  "warning": {
+    "50": {
+      "value": "#FFF8E1",
+      "description": "Warning background - lightest shade"
+    },
+    "100": {
+      "value": "#FFECB3",
+      "description": "Warning background - very light"
+    },
+    "500": {
+      "value": "#C8852A",
+      "description": "Warning primary - BMJ amber"
+    },
+    "700": {
+      "value": "#8B6425",
+      "description": "Warning emphasis - darker"
+    },
+    "900": {
+      "value": "#5A3D1A",
+      "description": "Warning strong - darkest shade"
+    },
+    "border": {
+      "value": "#D9A125",
+      "description": "Warning border - medium contrast"
+    }
+  },
+  "info": {
+    "50": {
+      "value": "#E3F2FD",
+      "description": "Info background - lightest shade"
+    },
+    "100": {
+      "value": "#BBDEFB",
+      "description": "Info background - very light"
+    },
+    "500": {
+      "value": "#2196F3",
+      "description": "Info primary - standard blue"
+    },
+    "700": {
+      "value": "#1565C0",
+      "description": "Info emphasis - darker"
+    },
+    "900": {
+      "value": "#0D47A1",
+      "description": "Info strong - darkest shade"
+    },
+    "border": {
+      "value": "#42A5F5",
+      "description": "Info border - medium contrast"
+    }
+  }
+}
