@@ -29,3 +29,25 @@ describe('Footer', () => {
     expect(screen.getByText(/2026 The Black Male Journal/)).toBeInTheDocument();
   });
 });
+
+describe('Footer support links', () => {
+  it('renders Patreon under "Support the Work" heading', () => {
+    render(<Footer />);
+    expect(screen.getByText('Support the Work')).toBeInTheDocument();
+    const patreonLink = screen.getByRole('link', { name: /Patreon/i });
+    expect(patreonLink).toHaveAttribute('href', 'https://patreon.com/BlackMaleJournal');
+  });
+
+  it('renders Patreon description text', () => {
+    render(<Footer />);
+    expect(screen.getByText(/Join the Inner Circle/i)).toBeInTheDocument();
+  });
+
+  it('groups PayPal, CashApp, Venmo under "Direct Support"', () => {
+    render(<Footer />);
+    expect(screen.getByText('Direct Support')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /PayPal/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /CashApp/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Venmo/i })).toBeInTheDocument();
+  });
+});

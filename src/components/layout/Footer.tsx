@@ -22,11 +22,10 @@ const SOCIAL_LINKS = [
   { icon: Twitter,   href: "#", label: "Twitter / X" },
 ];
 
-const SUPPORT_LINKS = [
-  { label: "Patreon",  href: "#" },
-  { label: "PayPal",   href: "#" },
-  { label: "CashApp",  href: "#" },
-  { label: "Venmo",    href: "#" },
+const DIRECT_SUPPORT_LINKS = [
+  { label: "PayPal",   href: "https://paypal.me/BlackMaleJournal" },
+  { label: "CashApp",  href: "https://cash.app/$BlackMaleJournal" },
+  { label: "Venmo",    href: "https://venmo.com/BlackMaleJournal" },
 ];
 
 export function Footer() {
@@ -60,19 +59,39 @@ export function Footer() {
               health, philosophy, and politics for Black men.
             </p>
 
-            {/* Support links */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              {SUPPORT_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {link.label}
-                </a>
-              ))}
+            {/* Patreon — patronage channel */}
+            <div className="pt-2">
+              <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
+                Support the Work
+              </p>
+              <a
+                href="https://patreon.com/BlackMaleJournal"
+                className="inline-block border border-bmj-amber/40 bg-bmj-amber/10 px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-amber transition-colors hover:bg-bmj-amber/20"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Patreon — Join the Inner Circle
+              </a>
+            </div>
+
+            {/* Direct support */}
+            <div className="pt-2">
+              <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
+                Direct Support
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {DIRECT_SUPPORT_LINKS.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
