@@ -1,0 +1,369 @@
+{
+  "families": {
+    "heritage": {
+      "name": "Heritage",
+      "description": "Black Panther era inspired - bold, revolutionary aesthetics with deep blacks and militant reds",
+      "category": "cultural",
+      "baseThemes": [
+        {
+          "id": "heritage-light",
+          "name": "Heritage Light",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#C0281F"
+            },
+            "background": {
+              "value": "#F2EDE4"
+            },
+            "text": {
+              "value": "#0D0C0B"
+            }
+          }
+        },
+        {
+          "id": "heritage-dark",
+          "name": "Heritage Dark",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#FF6B6B"
+            },
+            "background": {
+              "value": "#0D0C0B"
+            },
+            "text": {
+              "value": "#E8DCC8"
+            }
+          }
+        }
+      ]
+    },
+    "earth": {
+      "name": "Earth",
+      "description": "Natural, grounding tones - browns, tans, and earthy accents for wellness and philosophy",
+      "category": "neutral",
+      "baseThemes": [
+        {
+          "id": "earth-light",
+          "name": "Earth Light",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#C8852A"
+            },
+            "background": {
+              "value": "#FEFCF8"
+            },
+            "accent": {
+              "value": "#B8986A"
+            }
+          }
+        },
+        {
+          "id": "earth-dark",
+          "name": "Earth Dark",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#D9A125"
+            },
+            "background": {
+              "value": "#2A1F15"
+            },
+            "accent": {
+              "value": "#C8852A"
+            }
+          }
+        }
+      ]
+    },
+    "midnight": {
+      "name": "Midnight",
+      "description": "Deep, sophisticated dark theme - navy and midnight blues with amber accents",
+      "category": "monochromatic",
+      "baseThemes": [
+        {
+          "id": "midnight-standard",
+          "name": "Midnight Standard",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#0B1929"
+            },
+            "accent": {
+              "value": "#FFB703"
+            },
+            "background": {
+              "value": "#0D1117"
+            }
+          }
+        },
+        {
+          "id": "midnight-high-contrast",
+          "name": "Midnight High Contrast",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#000000"
+            },
+            "accent": {
+              "value": "#FFEA00"
+            },
+            "background": {
+              "value": "#050505"
+            }
+          }
+        }
+      ]
+    },
+    "dawn": {
+      "name": "Dawn",
+      "description": "Light, energetic theme - crisp whites with warm orange and coral accents",
+      "category": "analogous",
+      "baseThemes": [
+        {
+          "id": "dawn-primary",
+          "name": "Dawn Primary",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#FF6B35"
+            },
+            "background": {
+              "value": "#FFFBF5"
+            },
+            "text": {
+              "value": "#1A1A1A"
+            }
+          }
+        },
+        {
+          "id": "dawn-soft",
+          "name": "Dawn Soft",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#FF8C42"
+            },
+            "background": {
+              "value": "#FFF9F0"
+            },
+            "text": {
+              "value": "#2D2D2D"
+            }
+          }
+        }
+      ]
+    },
+    "wisdom": {
+      "name": "Wisdom",
+      "description": "Scholarly, refined theme - deep purples and golds for philosophy and education content",
+      "category": "complementary",
+      "baseThemes": [
+        {
+          "id": "wisdom-light",
+          "name": "Wisdom Light",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#5B4B8A"
+            },
+            "accent": {
+              "value": "#D4AF37"
+            },
+            "background": {
+              "value": "#F8F4E6"
+            }
+          }
+        },
+        {
+          "id": "wisdom-dark",
+          "name": "Wisdom Dark",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#8B7AB8"
+            },
+            "accent": {
+              "value": "#E8C547"
+            },
+            "background": {
+              "value": "#1F1929"
+            }
+          }
+        }
+      ]
+    },
+    "forge": {
+      "name": "Forge",
+      "description": "Intense, strength-focused theme - steel grays and crimson for martial and physical content",
+      "category": "monochromatic",
+      "baseThemes": [
+        {
+          "id": "forge-default",
+          "name": "Forge Default",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#8B0000"
+            },
+            "secondary": {
+              "value": "#404040"
+            },
+            "background": {
+              "value": "#F5F5F5"
+            }
+          }
+        },
+        {
+          "id": "forge-industrial",
+          "name": "Forge Industrial",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#DC143C"
+            },
+            "secondary": {
+              "value": "#2F4F4F"
+            },
+            "background": {
+              "value": "#0F0F0F"
+            }
+          }
+        }
+      ]
+    },
+    "legacy": {
+      "name": "Legacy",
+      "description": "Vintage newspaper aesthetic - sepia, cream, and ink for archival and historical content",
+      "category": "seasonal",
+      "baseThemes": [
+        {
+          "id": "legacy-warm",
+          "name": "Legacy Warm",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#5D3A1A"
+            },
+            "background": {
+              "value": "#F4EFE3"
+            },
+            "text": {
+              "value": "#2A2420"
+            }
+          }
+        },
+        {
+          "id": "legacy-cool",
+          "name": "Legacy Cool",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#3A4A5A"
+            },
+            "background": {
+              "value": "#E8E4D9"
+            },
+            "text": {
+              "value": "#1F1F23"
+            }
+          }
+        }
+      ]
+    },
+    "vibrant": {
+      "name": "Vibrant",
+      "description": "Modern, saturated colors - neon and high-energy palette for announcements and highlights",
+      "category": "triadic",
+      "baseThemes": [
+        {
+          "id": "vibrant-bold",
+          "name": "Vibrant Bold",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#FF0080"
+            },
+            "secondary": {
+              "value": "#00D9FF"
+            },
+            "accent": {
+              "value": "#FFFF00"
+            }
+          }
+        },
+        {
+          "id": "vibrant-dark",
+          "name": "Vibrant Dark",
+          "semanticOverrides": {
+            "primary": {
+              "value": "#FF1493"
+            },
+            "secondary": {
+              "value": "#00FFFF"
+            },
+            "background": {
+              "value": "#0A0E27"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "hybrids": [
+    {
+      "id": "heritage-earth",
+      "name": "Heritage + Earth",
+      "parentFamilies": ["heritage", "earth"],
+      "description": "Combines revolutionary spirit with natural grounding"
+    },
+    {
+      "id": "dawn-wisdom",
+      "name": "Dawn + Wisdom",
+      "parentFamilies": ["dawn", "wisdom"],
+      "description": "Energetic learning and growth"
+    },
+    {
+      "id": "forge-legacy",
+      "name": "Forge + Legacy",
+      "parentFamilies": ["forge", "legacy"],
+      "description": "Strength rooted in history"
+    },
+    {
+      "id": "midnight-vibrant",
+      "name": "Midnight + Vibrant",
+      "parentFamilies": ["midnight", "vibrant"],
+      "description": "Sophisticated with modern energy"
+    },
+    {
+      "id": "earth-midnight",
+      "name": "Earth + Midnight",
+      "parentFamilies": ["earth", "midnight"],
+      "description": "Natural tones in deep darkness"
+    }
+  ],
+  "specialEditions": [
+    {
+      "id": "highcontrast",
+      "name": "High Contrast",
+      "baseFamily": "midnight",
+      "purpose": "Accessibility - WCAG AAA compliance",
+      "adjustments": "Maximum contrast ratios"
+    },
+    {
+      "id": "colorblind-deuteranopia",
+      "name": "Colorblind - Deuteranopia",
+      "baseFamily": "heritage",
+      "purpose": "Red-green colorblind friendly",
+      "adjustments": "Shifted to blue-yellow palette"
+    },
+    {
+      "id": "colorblind-protanopia",
+      "name": "Colorblind - Protanopia",
+      "baseFamily": "heritage",
+      "purpose": "Red-green colorblind friendly",
+      "adjustments": "Shifted to blue-yellow palette"
+    },
+    {
+      "id": "reduced-motion",
+      "name": "Reduced Motion",
+      "baseFamily": "dawn",
+      "purpose": "Accessibility - minimal animations",
+      "adjustments": "No transitions, instant state changes"
+    }
+  ],
+  "metadata": {
+    "totalFamilies": 8,
+    "totalThemes": 27,
+    "version": "1.0.0",
+    "lastUpdated": "2026-03-16",
+    "author": "Alawein Design System"
+  }
+}
