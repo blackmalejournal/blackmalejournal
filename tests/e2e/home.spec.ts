@@ -8,7 +8,7 @@ test.describe('Home Page', () => {
 
   test('has navigation links', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('nav')).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
   });
 
   test('has footer', async ({ page }) => {
