@@ -48,6 +48,19 @@ describe('PageHeader', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Weekend Briefing');
   });
 
+  test('applies label-specific classes to h1 when both label and icon are present', () => {
+    render(
+      <PageHeader
+        title="Weekend Briefing"
+        label="Flagship"
+        icon={<span data-testid="test-icon">icon</span>}
+      />,
+    );
+    const h1 = screen.getByRole('heading', { level: 1 });
+    expect(h1.className).toContain('uppercase');
+    expect(h1.className).toContain('md:text-7xl');
+  });
+
   test('renders StarDivider', () => {
     render(<PageHeader title="Articles" />);
     expect(screen.getByRole('separator', { hidden: true })).toBeInTheDocument();

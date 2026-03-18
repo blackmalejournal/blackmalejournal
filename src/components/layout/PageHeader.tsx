@@ -24,6 +24,9 @@ export function PageHeader({
   className = "",
 }: PageHeaderProps) {
   const hasLabel = Boolean(label);
+  const h1Classes = `font-display text-5xl text-bmj-white${
+    hasLabel ? " uppercase md:text-7xl" : ""
+  }`;
 
   return (
     <header className={className}>
@@ -36,16 +39,10 @@ export function PageHeader({
       {icon ? (
         <div className="mb-2 flex items-center gap-3">
           {icon}
-          <h1 className="font-display text-5xl text-bmj-white">{title}</h1>
+          <h1 className={h1Classes}>{title}</h1>
         </div>
       ) : (
-        <h1
-          className={`font-display text-5xl text-bmj-white${
-            hasLabel ? " uppercase md:text-7xl" : ""
-          }`}
-        >
-          {title}
-        </h1>
+        <h1 className={h1Classes}>{title}</h1>
       )}
 
       {description && (
