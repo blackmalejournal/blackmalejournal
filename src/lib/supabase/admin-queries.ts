@@ -13,6 +13,9 @@ import type {
   Handbook,
   Lens,
   AccessTier,
+  Member,
+  MemberTier,
+  MemberRole,
 } from '@/lib/supabase/types';
 
 // ── Articles ──────────────────────────────────────────────────────────────────
@@ -773,6 +776,53 @@ export async function deleteHandbook(id: string): Promise<boolean> {
     return false;
   }
   return true;
+}
+
+// ── Members ────────────────────────────────────────────────────────────────────
+
+/**
+ * List all members with optional tier/role filtering. For the admin member list.
+ */
+export async function getAllMembers(options?: {
+  tier?: MemberTier;
+  role?: MemberRole;
+  limit?: number;
+  offset?: number;
+}): Promise<Member[]> {
+  const { tier, role, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('members')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (tier) query = query.eq('tier', tier);
+  if (role) query = query.eq('role', role);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllMembers]', error.message);
+    return [];
+  }
+  return (data ?? []) as Member[];
+}
+
+/**
+ * Get total member count for the admin dashboard.
+ */
+export async function getMemberCount(): Promise<number> {
+  const supabase = createAdminClient();
+  const { count, error } = await supabase
+    .from('members')
+    .select('id', { count: 'exact', head: true });
+
+  if (error) {
+    console.error('[getMemberCount]', error.message);
+    return 0;
+  }
+  return count ?? 0;
 }
 
 // ── Dashboard counts ──────────────────────────────────────────────────────────
