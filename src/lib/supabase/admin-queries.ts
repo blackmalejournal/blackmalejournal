@@ -7,6 +7,7 @@ import type {
   Article,
   Briefing,
   BriefingSection,
+  ContactSubmission,
   ContentStatus,
   Dispatch,
   Download,
@@ -16,6 +17,7 @@ import type {
   Member,
   MemberTier,
   MemberRole,
+  NewsletterSubscriber,
 } from '@/lib/supabase/types';
 
 // ── Articles ──────────────────────────────────────────────────────────────────
@@ -823,6 +825,61 @@ export async function getMemberCount(): Promise<number> {
     return 0;
   }
   return count ?? 0;
+}
+
+// ── Contact Submissions ───────────────────────────────────────────────────────
+
+/**
+ * List all contact form submissions ordered by newest first.
+ */
+export async function getAllContactSubmissions(options?: {
+  limit?: number;
+  offset?: number;
+}): Promise<ContactSubmission[]> {
+  const { limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  const { data, error } = await supabase
+    .from('contact_submissions')
+    .select('*')
+    .order('submitted_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error('[getAllContactSubmissions]', error.message);
+    return [];
+  }
+  return (data ?? []) as ContactSubmission[];
+}
+
+// ── Newsletter Subscribers ─────────────────────────────────────────────────────
+
+/**
+ * List newsletter subscribers with optional active/unsubscribed filter.
+ */
+export async function getAllSubscribers(options?: {
+  active?: boolean;
+  limit?: number;
+  offset?: number;
+}): Promise<NewsletterSubscriber[]> {
+  const { active, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('newsletter_subscribers')
+    .select('*')
+    .order('subscribed_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (active === true) query = query.is('unsubscribed_at', null);
+  if (active === false) query = query.not('unsubscribed_at', 'is', null);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllSubscribers]', error.message);
+    return [];
+  }
+  return (data ?? []) as NewsletterSubscriber[];
 }
 
 // ── Dashboard counts ──────────────────────────────────────────────────────────
