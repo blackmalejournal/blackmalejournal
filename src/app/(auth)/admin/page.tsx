@@ -41,6 +41,34 @@ export default async function AdminDashboardPage() {
       draft: null,
       href: '/admin/downloads',
     },
+    {
+      label: 'Handbooks',
+      total: counts.handbooks.total,
+      published: counts.handbooks.published,
+      draft: counts.handbooks.draft,
+      href: '/admin/handbooks',
+    },
+    {
+      label: 'Members',
+      total: counts.members.total,
+      published: null,
+      draft: null,
+      href: '/admin/members',
+    },
+    {
+      label: 'Messages',
+      total: counts.messages.total,
+      published: null,
+      draft: null,
+      href: '/admin/messages',
+    },
+    {
+      label: 'Subscribers',
+      total: counts.subscribers.total,
+      published: null,
+      draft: null,
+      href: '/admin/subscribers',
+    },
   ] as const;
 
   return (
@@ -112,11 +140,32 @@ export default async function AdminDashboardPage() {
             New Article
           </Link>
           <Link
+            href="/admin/briefings/new"
+            className="inline-flex items-center gap-2 border border-bmj-tan/40 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-tan/70"
+          >
+            <Plus size={16} />
+            New Briefing
+          </Link>
+          <Link
             href="/admin/dispatches/new"
             className="inline-flex items-center gap-2 border border-bmj-tan/40 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-tan/70"
           >
             <Plus size={16} />
             New Dispatch
+          </Link>
+          <Link
+            href="/admin/handbooks/new"
+            className="inline-flex items-center gap-2 border border-bmj-tan/40 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-tan/70"
+          >
+            <Plus size={16} />
+            New Handbook
+          </Link>
+          <Link
+            href="/admin/downloads/new"
+            className="inline-flex items-center gap-2 border border-bmj-tan/40 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-tan/70"
+          >
+            <Plus size={16} />
+            New Download
           </Link>
         </div>
       </section>

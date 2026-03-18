@@ -893,6 +893,10 @@ export async function getContentCounts(): Promise<{
   briefings: { total: number; published: number; draft: number };
   dispatches: { total: number; published: number; draft: number };
   downloads: { total: number };
+  handbooks: { total: number; published: number; draft: number };
+  members: { total: number };
+  messages: { total: number };
+  subscribers: { total: number };
 }> {
   const supabase = createAdminClient();
 
@@ -907,6 +911,12 @@ export async function getContentCounts(): Promise<{
     dispatchesPublished,
     dispatchesDraft,
     downloadsTotal,
+    handbooksTotal,
+    handbooksPublished,
+    handbooksDraft,
+    membersTotal,
+    messagesTotal,
+    subscribersTotal,
   ] = await Promise.all([
     supabase.from('articles').select('id', { count: 'exact', head: true }),
     supabase.from('articles').select('id', { count: 'exact', head: true }).eq('status', 'published'),
@@ -918,6 +928,12 @@ export async function getContentCounts(): Promise<{
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'published'),
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
     supabase.from('downloads').select('id', { count: 'exact', head: true }),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }).eq('status', 'published'),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
+    supabase.from('members').select('id', { count: 'exact', head: true }),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+    supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).is('unsubscribed_at', null),
   ]);
 
   return {
@@ -938,6 +954,20 @@ export async function getContentCounts(): Promise<{
     },
     downloads: {
       total: downloadsTotal.count ?? 0,
+    },
+    handbooks: {
+      total: handbooksTotal.count ?? 0,
+      published: handbooksPublished.count ?? 0,
+      draft: handbooksDraft.count ?? 0,
+    },
+    members: {
+      total: membersTotal.count ?? 0,
+    },
+    messages: {
+      total: messagesTotal.count ?? 0,
+    },
+    subscribers: {
+      total: subscribersTotal.count ?? 0,
     },
   };
 }

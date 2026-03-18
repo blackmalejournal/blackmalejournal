@@ -6,6 +6,10 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
     briefings: { total: 5, published: 4, draft: 1 },
     dispatches: { total: 8, published: 6, draft: 2 },
     downloads: { total: 15 },
+    handbooks: { total: 3, published: 2, draft: 1 },
+    members: { total: 42 },
+    messages: { total: 7 },
+    subscribers: { total: 99 },
   }),
 }));
 
