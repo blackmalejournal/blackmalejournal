@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { headers } from 'next/headers';
 import { submitContactForm } from '@/lib/supabase/queries';
 import { Resend } from 'resend';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 500 });
 
 const contactSchema = z.object({
   name: z.string().min(1, 'Name is required').max(100),
@@ -11,6 +15,13 @@ const contactSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const headerList = await headers();
+  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const { success } = limiter.check(5, ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

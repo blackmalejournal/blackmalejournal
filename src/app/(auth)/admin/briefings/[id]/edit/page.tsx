@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { getBriefingById } from '@/lib/supabase/admin-queries';
 import { BriefingForm } from '../../BriefingForm';
 import { updateBriefingAction } from '../../actions';
+import { DeleteButton } from '@/components/admin/DeleteButton';
+import { deleteBriefingAction } from '../../delete-action';
 
 export const metadata: Metadata = {
   title: 'Edit Briefing — Admin',
@@ -26,6 +28,12 @@ export default async function EditBriefingPage({ params }: EditBriefingPageProps
       <h1 className="mb-2 font-display text-4xl text-bmj-white">EDIT BRIEFING</h1>
       <p className="mb-8 font-mono text-xs text-bmj-tan">ID: {briefing.id}</p>
       <BriefingForm briefing={briefing} action={updateBriefingAction} />
+      <div className="mt-8">
+        <DeleteButton
+          action={deleteBriefingAction.bind(null, briefing.id)}
+          itemName="briefing"
+        />
+      </div>
     </div>
   );
 }

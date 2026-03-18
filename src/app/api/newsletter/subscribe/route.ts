@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { headers } from 'next/headers';
 import { subscribeToNewsletter } from '@/lib/supabase/queries';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 500 });
 
 const subscribeSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -8,6 +12,13 @@ const subscribeSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  const headerList = await headers();
+  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const { success } = limiter.check(5, ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

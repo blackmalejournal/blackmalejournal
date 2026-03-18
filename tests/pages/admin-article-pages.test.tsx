@@ -26,6 +26,16 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
 
+// Mock delete-action to avoid server-only next/cache imports in jsdom.
+jest.mock('@/app/(auth)/admin/articles/delete-action', () => ({
+  deleteArticleAction: jest.fn(),
+}));
+
+// Mock DeleteButton to avoid hooks issues in server component tests.
+jest.mock('@/components/admin/DeleteButton', () => ({
+  DeleteButton: () => <div data-testid="delete-button" />,
+}));
+
 // Mock ArticleForm to avoid hooks issues in server component tests.
 // The ArticleForm itself is tested in admin-article-form.test.tsx.
 jest.mock('@/app/(auth)/admin/articles/ArticleForm', () => ({

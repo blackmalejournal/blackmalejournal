@@ -8,6 +8,10 @@ import {
   BookOpen,
   PenLine,
   Download,
+  BookMarked,
+  Users,
+  MessageSquare,
+  Mail,
 } from 'lucide-react';
 import { BrandMark } from '@/components/brand/BrandMark';
 
@@ -17,6 +21,10 @@ const NAV_ITEMS = [
   { href: '/admin/briefings', label: 'Briefings', icon: BookOpen },
   { href: '/admin/dispatches', label: 'Dispatches', icon: PenLine },
   { href: '/admin/downloads', label: 'Downloads', icon: Download },
+  { href: '/admin/handbooks', label: 'Handbooks', icon: BookMarked },
+  { href: '/admin/members', label: 'Members', icon: Users },
+  { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
+  { href: '/admin/subscribers', label: 'Subscribers', icon: Mail },
 ] as const;
 
 interface AdminNavProps {

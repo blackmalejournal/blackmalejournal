@@ -263,13 +263,16 @@ describe('getContentCounts', () => {
 
     // Override from() to return different count values per call
     let callIndex = 0;
-    const counts = [10, 5, 3, 8, 4, 2, 6, 3, 1, 15]; // articles(total,pub,draft), briefings(...), dispatches(...), downloads
+    // articles(total,pub,draft), briefings(total,pub,draft), dispatches(total,pub,draft),
+    // downloads(total), handbooks(total,pub,draft), members(total), messages(total), subscribers(total)
+    const counts = [10, 5, 3, 8, 4, 2, 6, 3, 1, 15, 7, 5, 2, 42, 9, 99];
     mockClient.from = jest.fn().mockImplementation(() => {
       const idx = callIndex++;
       const chain = { ...mockClient._queryChain };
       // Make the chain thenable with count
       chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: counts[idx] }));
       chain.eq = jest.fn().mockReturnValue(chain);
+      chain.is = jest.fn().mockReturnValue(chain);
       chain.select = jest.fn().mockReturnValue(chain);
       return chain;
     });
@@ -280,6 +283,10 @@ describe('getContentCounts', () => {
       briefings: { total: 8, published: 4, draft: 2 },
       dispatches: { total: 6, published: 3, draft: 1 },
       downloads: { total: 15 },
+      handbooks: { total: 7, published: 5, draft: 2 },
+      members: { total: 42 },
+      messages: { total: 9 },
+      subscribers: { total: 99 },
     });
   });
 
@@ -290,6 +297,7 @@ describe('getContentCounts', () => {
       const chain = { ...mockClient._queryChain };
       chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: null }));
       chain.eq = jest.fn().mockReturnValue(chain);
+      chain.is = jest.fn().mockReturnValue(chain);
       chain.select = jest.fn().mockReturnValue(chain);
       return chain;
     });
@@ -300,6 +308,10 @@ describe('getContentCounts', () => {
       briefings: { total: 0, published: 0, draft: 0 },
       dispatches: { total: 0, published: 0, draft: 0 },
       downloads: { total: 0 },
+      handbooks: { total: 0, published: 0, draft: 0 },
+      members: { total: 0 },
+      messages: { total: 0 },
+      subscribers: { total: 0 },
     });
   });
 
@@ -312,6 +324,7 @@ describe('getContentCounts', () => {
       const chain = { ...mockClient._queryChain };
       chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: 0 }));
       chain.eq = jest.fn().mockReturnValue(chain);
+      chain.is = jest.fn().mockReturnValue(chain);
       chain.select = jest.fn().mockReturnValue(chain);
       return chain;
     });
@@ -321,5 +334,9 @@ describe('getContentCounts', () => {
     expect(tablesCalled).toContain('briefings');
     expect(tablesCalled).toContain('dispatches');
     expect(tablesCalled).toContain('downloads');
+    expect(tablesCalled).toContain('handbooks');
+    expect(tablesCalled).toContain('members');
+    expect(tablesCalled).toContain('contact_submissions');
+    expect(tablesCalled).toContain('newsletter_subscribers');
   });
 });

@@ -7,11 +7,17 @@ import type {
   Article,
   Briefing,
   BriefingSection,
+  ContactSubmission,
   ContentStatus,
   Dispatch,
   Download,
+  Handbook,
   Lens,
   AccessTier,
+  Member,
+  MemberTier,
+  MemberRole,
+  NewsletterSubscriber,
 } from '@/lib/supabase/types';
 
 // ── Articles ──────────────────────────────────────────────────────────────────
@@ -616,6 +622,266 @@ export async function deleteDownload(id: string): Promise<boolean> {
   return true;
 }
 
+// ── Handbooks ──────────────────────────────────────────────────────────────────
+
+/**
+ * List all handbooks (including drafts). For the admin handbook list.
+ */
+export async function getAllHandbooks(options?: {
+  status?: ContentStatus;
+  lens?: Lens;
+  limit?: number;
+  offset?: number;
+}): Promise<Handbook[]> {
+  const { status, lens, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('handbooks')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (status) query = query.eq('status', status);
+  if (lens) query = query.eq('lens', lens);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllHandbooks]', error.message);
+    return [];
+  }
+  return (data ?? []) as Handbook[];
+}
+
+/**
+ * Get a single handbook by UUID. For the admin edit page.
+ */
+export async function getHandbookById(id: string): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('handbooks')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getHandbookById]', error.message);
+    return null;
+  }
+  return data as Handbook;
+}
+
+/**
+ * Insert a new handbook.
+ * Auto-sets published_at to now when status is 'published' and no date provided.
+ */
+export async function createHandbook(data: {
+  title: string;
+  slug: string;
+  lens: Lens;
+  description: string;
+  body: string;
+  access_tier: AccessTier;
+  status: ContentStatus;
+  author: string;
+  cover_image?: string | null;
+  file_url?: string | null;
+  published_at?: string | null;
+}): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+
+  const published_at =
+    data.status === 'published' && !data.published_at
+      ? new Date().toISOString()
+      : (data.published_at ?? null);
+
+  const { data: created, error } = await supabase
+    .from('handbooks')
+    .insert({
+      title: data.title,
+      slug: data.slug,
+      lens: data.lens,
+      description: data.description,
+      body: data.body,
+      access_tier: data.access_tier,
+      status: data.status,
+      author: data.author,
+      cover_image: data.cover_image ?? null,
+      file_url: data.file_url ?? null,
+      published_at: published_at as string,
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[createHandbook]', error.message);
+    return null;
+  }
+  return created as Handbook;
+}
+
+/**
+ * Update an existing handbook by UUID.
+ * Auto-sets published_at to now when status changes to 'published' and no date provided.
+ */
+export async function updateHandbook(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    lens: Lens;
+    description: string;
+    body: string;
+    access_tier: AccessTier;
+    status: ContentStatus;
+    author: string;
+    cover_image: string | null;
+    file_url: string | null;
+    published_at: string;
+  }>,
+): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+
+  const payload = { ...data };
+
+  // Auto-set published_at when transitioning to published
+  if (payload.status === 'published' && !('published_at' in payload)) {
+    payload.published_at = new Date().toISOString();
+  }
+
+  const { data: updated, error } = await supabase
+    .from('handbooks')
+    .update(payload)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateHandbook]', error.message);
+    return null;
+  }
+  return updated as Handbook;
+}
+
+/**
+ * Hard-delete a handbook by UUID.
+ */
+export async function deleteHandbook(id: string): Promise<boolean> {
+  const supabase = createAdminClient();
+  const { error } = await supabase
+    .from('handbooks')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('[deleteHandbook]', error.message);
+    return false;
+  }
+  return true;
+}
+
+// ── Members ────────────────────────────────────────────────────────────────────
+
+/**
+ * List all members with optional tier/role filtering. For the admin member list.
+ */
+export async function getAllMembers(options?: {
+  tier?: MemberTier;
+  role?: MemberRole;
+  limit?: number;
+  offset?: number;
+}): Promise<Member[]> {
+  const { tier, role, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('members')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (tier) query = query.eq('tier', tier);
+  if (role) query = query.eq('role', role);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllMembers]', error.message);
+    return [];
+  }
+  return (data ?? []) as Member[];
+}
+
+/**
+ * Get total member count for the admin dashboard.
+ */
+export async function getMemberCount(): Promise<number> {
+  const supabase = createAdminClient();
+  const { count, error } = await supabase
+    .from('members')
+    .select('id', { count: 'exact', head: true });
+
+  if (error) {
+    console.error('[getMemberCount]', error.message);
+    return 0;
+  }
+  return count ?? 0;
+}
+
+// ── Contact Submissions ───────────────────────────────────────────────────────
+
+/**
+ * List all contact form submissions ordered by newest first.
+ */
+export async function getAllContactSubmissions(options?: {
+  limit?: number;
+  offset?: number;
+}): Promise<ContactSubmission[]> {
+  const { limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  const { data, error } = await supabase
+    .from('contact_submissions')
+    .select('*')
+    .order('submitted_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) {
+    console.error('[getAllContactSubmissions]', error.message);
+    return [];
+  }
+  return (data ?? []) as ContactSubmission[];
+}
+
+// ── Newsletter Subscribers ─────────────────────────────────────────────────────
+
+/**
+ * List newsletter subscribers with optional active/unsubscribed filter.
+ */
+export async function getAllSubscribers(options?: {
+  active?: boolean;
+  limit?: number;
+  offset?: number;
+}): Promise<NewsletterSubscriber[]> {
+  const { active, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('newsletter_subscribers')
+    .select('*')
+    .order('subscribed_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (active === true) query = query.is('unsubscribed_at', null);
+  if (active === false) query = query.not('unsubscribed_at', 'is', null);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllSubscribers]', error.message);
+    return [];
+  }
+  return (data ?? []) as NewsletterSubscriber[];
+}
+
 // ── Dashboard counts ──────────────────────────────────────────────────────────
 
 /**
@@ -627,6 +893,10 @@ export async function getContentCounts(): Promise<{
   briefings: { total: number; published: number; draft: number };
   dispatches: { total: number; published: number; draft: number };
   downloads: { total: number };
+  handbooks: { total: number; published: number; draft: number };
+  members: { total: number };
+  messages: { total: number };
+  subscribers: { total: number };
 }> {
   const supabase = createAdminClient();
 
@@ -641,6 +911,12 @@ export async function getContentCounts(): Promise<{
     dispatchesPublished,
     dispatchesDraft,
     downloadsTotal,
+    handbooksTotal,
+    handbooksPublished,
+    handbooksDraft,
+    membersTotal,
+    messagesTotal,
+    subscribersTotal,
   ] = await Promise.all([
     supabase.from('articles').select('id', { count: 'exact', head: true }),
     supabase.from('articles').select('id', { count: 'exact', head: true }).eq('status', 'published'),
@@ -652,6 +928,12 @@ export async function getContentCounts(): Promise<{
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'published'),
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
     supabase.from('downloads').select('id', { count: 'exact', head: true }),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }).eq('status', 'published'),
+    supabase.from('handbooks').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
+    supabase.from('members').select('id', { count: 'exact', head: true }),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+    supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).is('unsubscribed_at', null),
   ]);
 
   return {
@@ -672,6 +954,20 @@ export async function getContentCounts(): Promise<{
     },
     downloads: {
       total: downloadsTotal.count ?? 0,
+    },
+    handbooks: {
+      total: handbooksTotal.count ?? 0,
+      published: handbooksPublished.count ?? 0,
+      draft: handbooksDraft.count ?? 0,
+    },
+    members: {
+      total: membersTotal.count ?? 0,
+    },
+    messages: {
+      total: messagesTotal.count ?? 0,
+    },
+    subscribers: {
+      total: subscribersTotal.count ?? 0,
     },
   };
 }

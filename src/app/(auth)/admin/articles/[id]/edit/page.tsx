@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { getArticleById } from '@/lib/supabase/admin-queries';
 import { ArticleForm } from '../../ArticleForm';
 import { updateArticleAction } from '../../actions';
+import { DeleteButton } from '@/components/admin/DeleteButton';
+import { deleteArticleAction } from '../../delete-action';
 
 export const metadata: Metadata = {
   title: 'Edit Article — Admin',
@@ -26,6 +28,12 @@ export default async function EditArticlePage({ params }: EditArticlePageProps) 
       <h1 className="mb-2 font-display text-4xl text-bmj-white">EDIT ARTICLE</h1>
       <p className="mb-8 font-mono text-xs text-bmj-tan">ID: {article.id}</p>
       <ArticleForm article={article} action={updateArticleAction} />
+      <div className="mt-8">
+        <DeleteButton
+          action={deleteArticleAction.bind(null, article.id)}
+          itemName="article"
+        />
+      </div>
     </div>
   );
 }
