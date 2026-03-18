@@ -8,19 +8,19 @@ import { BrandMark } from "@/components/brand/BrandMark";
 export function HeroBanner() {
   const prefersReduced = useReducedMotion();
 
-  const instant = { duration: 0 };
+  const instant = { duration: 0 } as const;
   const fadeIn = prefersReduced
     ? { initial: { opacity: 1 }, transition: instant }
-    : { initial: { opacity: 0 }, transition: { duration: 0.5, ease: "easeOut" } };
+    : { initial: { opacity: 0 }, transition: { duration: 0.5, ease: "easeOut" as const } };
   const slideUp30 = prefersReduced
     ? { initial: { opacity: 1 }, transition: instant }
-    : { initial: { opacity: 0, y: 30 }, transition: { duration: 0.7, ease: "easeOut" } };
+    : { initial: { opacity: 0, y: 30 }, transition: { duration: 0.7, ease: "easeOut" as const } };
   const slideUp20 = prefersReduced
     ? { initial: { opacity: 1 }, transition: instant }
-    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.2, ease: "easeOut" } };
+    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.2, ease: "easeOut" as const } };
   const slideUp20delayed = prefersReduced
     ? { initial: { opacity: 1 }, transition: instant }
-    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.4, ease: "easeOut" } };
+    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.4, ease: "easeOut" as const } };
 
   return (
     <section className="relative flex min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden bg-bmj-black">
