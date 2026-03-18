@@ -375,6 +375,22 @@ export async function getDispatchBySlug(
   return data as Dispatch;
 }
 
+export async function getLatestDispatches(limit = 3): Promise<Dispatch[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('dispatches')
+    .select('*')
+    .eq('status', 'published')
+    .order('published_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('[getLatestDispatches]', error.message);
+    return [];
+  }
+  return (data ?? []) as Dispatch[];
+}
+
 // ── Handbooks ─────────────────────────────────────────────────────────────
 
 export async function getHandbooks(

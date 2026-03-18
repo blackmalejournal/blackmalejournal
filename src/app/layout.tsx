@@ -14,6 +14,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, organizationJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 /*
  * Highrise — display/headline font (replaces Bebas Neue)
@@ -116,7 +117,9 @@ export default async function RootLayout({
           Skip to main content
         </a>
         <Navbar user={navUser} />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <BackToTop />
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (

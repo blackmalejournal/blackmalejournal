@@ -3,11 +3,17 @@ import type { Metadata } from "next";
 import { HeroBanner } from "@/components/home/HeroBanner";
 import { ThreeLenses } from "@/components/home/ThreeLenses";
 import { BriefingPreview } from "@/components/home/BriefingPreview";
-import { FeaturedArticles } from "@/components/home/FeaturedArticles";
+import { FeaturedCarousel } from "@/components/home/FeaturedCarousel";
+import { LatestDispatches } from "@/components/home/LatestDispatches";
 import { RotatingQuote } from "@/components/home/RotatingQuote";
 import { JoinCTA } from "@/components/home/JoinCTA";
+import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import PosterBlock from "@/components/content/PosterBlock";
-import { getLatestBriefing, getFeaturedArticles } from "@/lib/supabase/queries";
+import {
+  getLatestBriefing,
+  getFeaturedArticles,
+  getLatestDispatches,
+} from "@/lib/supabase/queries";
 
 export const metadata: Metadata = {
   description:
@@ -26,25 +32,41 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [briefing, articles] = await Promise.all([
+  const [briefing, articles, dispatches] = await Promise.all([
     getLatestBriefing(),
-    getFeaturedArticles(3),
+    getFeaturedArticles(5),
+    getLatestDispatches(3),
   ]);
 
   return (
     <>
       <HeroBanner />
-      <ThreeLenses />
-      <BriefingPreview briefing={briefing} />
-      <PosterBlock
-        title="The Architecture of Power"
-        lens="politics"
-        excerpt="A deep analysis of institutional power dynamics and the deliberate architecture of disenfranchisement."
-        linkUrl="/articles"
-      />
-      <FeaturedArticles articles={articles} />
-      <RotatingQuote />
-      <JoinCTA />
+      <ScrollReveal>
+        <ThreeLenses />
+      </ScrollReveal>
+      <ScrollReveal>
+        <BriefingPreview briefing={briefing} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <PosterBlock
+          title="The Architecture of Power"
+          lens="politics"
+          excerpt="A deep analysis of institutional power dynamics and the deliberate architecture of disenfranchisement."
+          linkUrl="/articles"
+        />
+      </ScrollReveal>
+      <ScrollReveal>
+        <LatestDispatches dispatches={dispatches} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FeaturedCarousel articles={articles} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <RotatingQuote />
+      </ScrollReveal>
+      <ScrollReveal>
+        <JoinCTA />
+      </ScrollReveal>
     </>
   );
 }
