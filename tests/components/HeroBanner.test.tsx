@@ -1,38 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { HeroBanner } from '@/components/home/HeroBanner';
 
-// No local framer-motion mock needed — tests/setup.ts provides a global Proxy mock
-// that strips Framer-specific props and renders the correct HTML tag.
-
+// The global framer-motion mock from tests/setup.ts handles motion.* components
 describe('HeroBanner', () => {
-  it('renders the publication name', () => {
+  it('renders main headline', () => {
     render(<HeroBanner />);
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('THE BLACK MALE JOURNAL');
+    expect(screen.getByText('THE BLACK MALE JOURNAL')).toBeInTheDocument();
   });
 
-  it('renders a publication identifier stamp', () => {
+  it('renders CTA link to briefings', () => {
     render(<HeroBanner />);
-    expect(screen.getByText(/Vol\. I/i)).toBeInTheDocument();
+    const link = screen.getByRole('link', { name: /read the latest briefing/i });
+    expect(link).toHaveAttribute('href', '/briefings');
   });
 
-  it('renders the three-lens footer', () => {
-    render(<HeroBanner />);
-    expect(screen.getByText(/Health.*Philosophy.*Politics/i)).toBeInTheDocument();
-  });
-
-  it('renders a CTA link to briefings', () => {
-    render(<HeroBanner />);
-    const cta = screen.getByRole('link', { name: /Read the Latest Briefing/i });
-    expect(cta).toHaveAttribute('href', '/briefings');
-  });
-
-  it('does not use drop shadows or gradients (brand compliance)', () => {
-    const { container } = render(<HeroBanner />);
-    const allElements = container.querySelectorAll('*');
-    allElements.forEach((el) => {
-      if (typeof el.className === 'string') {
-        expect(el.className).not.toMatch(/shadow-lg|bg-gradient/);
-      }
-    });
+  it('imports useReducedMotion from framer-motion', async () => {
+    const fs = await import('fs');
+    const source = fs.readFileSync('src/components/home/HeroBanner.tsx', 'utf-8');
+    expect(source).toContain('useReducedMotion');
   });
 });

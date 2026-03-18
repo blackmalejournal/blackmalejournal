@@ -1,11 +1,27 @@
 // src/components/home/HeroBanner.tsx
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
 
 export function HeroBanner() {
+  const prefersReduced = useReducedMotion();
+
+  const instant = { duration: 0 };
+  const fadeIn = prefersReduced
+    ? { initial: { opacity: 1 }, transition: instant }
+    : { initial: { opacity: 0 }, transition: { duration: 0.5, ease: "easeOut" } };
+  const slideUp30 = prefersReduced
+    ? { initial: { opacity: 1 }, transition: instant }
+    : { initial: { opacity: 0, y: 30 }, transition: { duration: 0.7, ease: "easeOut" } };
+  const slideUp20 = prefersReduced
+    ? { initial: { opacity: 1 }, transition: instant }
+    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.2, ease: "easeOut" } };
+  const slideUp20delayed = prefersReduced
+    ? { initial: { opacity: 1 }, transition: instant }
+    : { initial: { opacity: 0, y: 20 }, transition: { duration: 0.6, delay: 0.4, ease: "easeOut" } };
+
   return (
     <section className="relative flex min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden bg-bmj-black">
       {/* Large brand mark watermark — low opacity background texture */}
@@ -20,9 +36,9 @@ export function HeroBanner() {
       <div className="relative z-10 mx-auto max-w-content px-6 py-24 text-center">
         {/* Publication identifier — declaration, not just a brand name */}
         <motion.p
-          initial={{ opacity: 0 }}
+          initial={fadeIn.initial}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={fadeIn.transition}
           className="mb-6 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan"
         >
           Vol. I &nbsp;&middot;&nbsp; Est. MMXXV &nbsp;&middot;&nbsp; Independent
@@ -30,9 +46,9 @@ export function HeroBanner() {
 
         {/* Main headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={slideUp30.initial}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={slideUp30.transition}
           className="font-display text-6xl leading-none tracking-wide text-bmj-white sm:text-7xl md:text-9xl"
         >
           THE BLACK MALE JOURNAL
@@ -40,9 +56,9 @@ export function HeroBanner() {
 
         {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={slideUp20.initial}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          transition={slideUp20.transition}
           className="mt-6 font-body text-base italic text-bmj-cream/70 md:text-xl"
         >
           Independent Media House · Revolutionary Masculinist Platform
@@ -50,9 +66,9 @@ export function HeroBanner() {
 
         {/* Rule + mission + three-lens footer + CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={slideUp20delayed.initial}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          transition={slideUp20delayed.transition}
         >
           <div className="mx-auto my-8 h-[3px] w-32 bg-bmj-red" />
 
