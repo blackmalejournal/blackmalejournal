@@ -14,6 +14,7 @@ jest.mock('framer-motion', () => {
         }),
     }),
     useInView: jest.fn(() => true),
+    useReducedMotion: jest.fn(() => false),
   };
 });
 
@@ -44,5 +45,17 @@ describe('ScrollReveal', () => {
     );
     expect(screen.getByTestId('motion-section')).toBeInTheDocument();
     expect(screen.getByText('Section content')).toBeInTheDocument();
+  });
+
+  it('still renders children when not in view', () => {
+    const { useInView } = require('framer-motion');
+    (useInView as jest.Mock).mockReturnValueOnce(false);
+
+    render(
+      <ScrollReveal>
+        <p>Hidden content</p>
+      </ScrollReveal>,
+    );
+    expect(screen.getByText('Hidden content')).toBeInTheDocument();
   });
 });
