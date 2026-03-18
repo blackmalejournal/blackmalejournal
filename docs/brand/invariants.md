@@ -11,7 +11,15 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 ### Color
 - **Core palette only:** `#0D0C0B` (black), `#E8DCC8` (cream), `#F2EDE4` (white), `#C0281F` (red)
 - **Secondaries (use sparingly):** `#C8852A` (amber), `#3B2417` (brown), `#B8986A` (tan)
-- **PROHIBITED:** pastels, gradients, purple, blue, neon, any color not in the brand.css palette
+- **Sectional accents (use only when tied to a specific content domain):**
+  - `#F0DDBC` (paper) — lighter paper ground for card backgrounds
+  - `#1C130E` (deep-black) — heavier typographic weight
+  - `#712414` (crimson) — politics/philosophy accent
+  - `#5D3F2E` (medium-brown) — culture/editorial accent
+  - `#416100` (olive) — health/wellness accent
+  - `#C77A0E` (gold) — finance/business accent
+  - `#554978` (purple) — technology accent (**deferred until taxonomy expansion**)
+- **PROHIBITED:** pastels, gradients, blue, neon, any color not in the brand.css palette
 - Red is for urgency and command — accents, CTAs, active states, section breaks
 
 ### Typography
@@ -20,6 +28,15 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 - **Oswald** for labels, buttons, metadata labels — `font-label`, uppercase, tracked wide
 - **IBM Plex Mono** for dates, issue numbers, publication identifiers — `font-mono`
 - No system fonts, no other Google Fonts, no CSS font stacks with fallbacks as primary typefaces
+
+### Logo System
+- **Primary logo:** Wordmark with journal/book icon — used in OG images, about page, print
+- **Secondary logo:** #BMJ with book icon — used for social media, compact spaces
+- **Submark:** Book icon only (star + pen nib) — used for watermarks, small marks
+- **Favicon:** Star + pen nib — derived from submark, simplified for 16x16/32x32
+- **BrandMark component** (`src/components/brand/BrandMark.tsx`) is the canonical inline SVG — use it instead of inline SVG paths in components
+- Logo files: `public/logos/` (PNG variants), `public/favicon.svg`, `public/logo.svg`
+- **Tagline:** "Speak the Truth. Navigate the Consequences." — displayed in Navbar (desktop) and Footer
 
 ### Surfaces & Effects
 - **NO drop shadows** — `shadow-*` Tailwind classes are prohibited on brand components
@@ -43,7 +60,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 
 ### Prohibited Patterns
 - Lifestyle photography (smiling, aspirational, consumer-coded)
-- Generic UI icons (checkmarks, thumbs up, heart, star rating) — use the brand star motif
+- Generic UI icons (checkmarks, thumbs up, heart, star rating) — use the brand mark motif
 - Hover states that soften the design (color lightening, opacity reduction on text) — hover states should increase visual weight or clarity
 - "Cards" with rounded corners, soft shadows, or white backgrounds
 - Generic SaaS button patterns (pill shapes, icon-only buttons without context)
@@ -80,6 +97,9 @@ The BMJ color palette is defined in both `src/styles/brand.css` (CSS variables) 
 | OG image | `public/og-image.svg` |
 | Placeholder cover | `public/placeholder-cover.svg` |
 | Logo / favicon | `public/logo.svg`, `public/favicon.svg` |
+| Logo assets (PNG) | `public/logos/` |
+| Brand mark component | `src/components/brand/BrandMark.tsx` |
 | Image treatment component | `src/components/ui/TreatedImage.tsx` |
 | Star divider | `src/components/ui/StarDivider.tsx` |
+| Palette reference image | `docs/brand/bmj-palettes-reference.png` |
 | Full art direction spec | `docs/brand/art-direction-spec.md` |
