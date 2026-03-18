@@ -9,6 +9,7 @@ import type {
   BriefingSection,
   ContentStatus,
   Dispatch,
+  Download,
   Lens,
   AccessTier,
 } from '@/lib/supabase/types';
@@ -468,6 +469,148 @@ export async function deleteDispatch(id: string): Promise<boolean> {
 
   if (error) {
     console.error('[deleteDispatch]', error.message);
+    return false;
+  }
+  return true;
+}
+
+// ── Downloads ──────────────────────────────────────────────────────────────────
+
+/**
+ * List all downloads. For the admin download list.
+ */
+export async function getAllDownloads(options?: {
+  category?: string;
+  limit?: number;
+  offset?: number;
+}): Promise<Download[]> {
+  const { category, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('downloads')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (category) query = query.eq('category', category);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllDownloads]', error.message);
+    return [];
+  }
+  return (data ?? []) as Download[];
+}
+
+/**
+ * Get a single download by UUID. For the admin edit page.
+ */
+export async function getDownloadById(id: string): Promise<Download | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('downloads')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getDownloadById]', error.message);
+    return null;
+  }
+  return data as Download;
+}
+
+/**
+ * Insert a new download.
+ * Auto-sets published_at to now if not provided.
+ */
+export async function createDownload(data: {
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  file_url: string;
+  file_type: string;
+  file_size: number;
+  access_tier: AccessTier;
+  cover_image?: string | null;
+  published_at?: string | null;
+}): Promise<Download | null> {
+  const supabase = createAdminClient();
+
+  const published_at = data.published_at ?? new Date().toISOString();
+
+  const { data: created, error } = await supabase
+    .from('downloads')
+    .insert({
+      title: data.title,
+      slug: data.slug,
+      description: data.description,
+      category: data.category,
+      file_url: data.file_url,
+      file_type: data.file_type,
+      file_size: data.file_size,
+      access_tier: data.access_tier,
+      cover_image: data.cover_image ?? null,
+      published_at,
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[createDownload]', error.message);
+    return null;
+  }
+  return created as Download;
+}
+
+/**
+ * Update an existing download by UUID.
+ */
+export async function updateDownload(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    description: string;
+    category: string;
+    file_url: string;
+    file_type: string;
+    file_size: number;
+    access_tier: AccessTier;
+    cover_image: string | null;
+    published_at: string;
+  }>,
+): Promise<Download | null> {
+  const supabase = createAdminClient();
+
+  const { data: updated, error } = await supabase
+    .from('downloads')
+    .update(data)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateDownload]', error.message);
+    return null;
+  }
+  return updated as Download;
+}
+
+/**
+ * Hard-delete a download by UUID.
+ */
+export async function deleteDownload(id: string): Promise<boolean> {
+  const supabase = createAdminClient();
+  const { error } = await supabase
+    .from('downloads')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('[deleteDownload]', error.message);
     return false;
   }
   return true;
