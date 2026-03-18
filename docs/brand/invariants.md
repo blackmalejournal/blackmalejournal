@@ -23,11 +23,12 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 - Red is for urgency and command — accents, CTAs, active states, section breaks
 
 ### Typography
-- **Bebas Neue** for ALL display/headline text — always uppercase, always `font-display`
-- **Libre Baskerville** for body copy — `font-body`, never used for headlines
-- **Oswald** for labels, buttons, metadata labels — `font-label`, uppercase, tracked wide
-- **IBM Plex Mono** for dates, issue numbers, publication identifiers — `font-mono`
-- No system fonts, no other Google Fonts, no CSS font stacks with fallbacks as primary typefaces
+- **Highrise** for ALL display/headline text — always uppercase, always `font-display` (self-hosted, DEMO license — needs commercial purchase)
+- **Linux Libertine** for body copy — `font-body`, never used for headlines (self-hosted, GPL+OFL — free)
+- **Oswald** for labels, buttons, metadata labels — `font-label`, uppercase, tracked wide (Google Fonts)
+- **IBM Plex Mono** for dates, issue numbers, publication identifiers — `font-mono` (Google Fonts)
+- Font files and license status: `public/fonts/LICENSES.md`
+- No system fonts, no unauthorized font stacks with fallbacks as primary typefaces
 
 ### Logo System
 - **Primary logo:** Wordmark with journal/book icon — used in OG images, about page, print
@@ -102,4 +103,5 @@ The BMJ color palette is defined in both `src/styles/brand.css` (CSS variables) 
 | Image treatment component | `src/components/ui/TreatedImage.tsx` |
 | Star divider | `src/components/ui/StarDivider.tsx` |
 | Palette reference image | `docs/brand/bmj-palettes-reference.png` |
+| Font files & licenses | `public/fonts/`, `public/fonts/LICENSES.md` |
 | Full art direction spec | `docs/brand/art-direction-spec.md` |

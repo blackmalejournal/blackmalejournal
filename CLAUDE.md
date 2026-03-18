@@ -39,11 +39,12 @@ Sectional accent colors (wired in CSS, used only when tied to a content domain):
 - --bmj-gold: #C77A0E (finance/business)
 - --bmj-purple: #554978 (technology — deferred until taxonomy expansion)
 
-Fonts (loaded via next/font/google):
-- Display/Headlines: Bebas Neue — always ALL-CAPS
-- Body: Libre Baskerville — editorial serif
-- Labels: Oswald — caps, wide tracking
-- Mono: IBM Plex Mono — dates, issue numbers
+Fonts:
+- Display/Headlines: Highrise (self-hosted, next/font/local) — always ALL-CAPS. LICENSE: PERSONAL USE DEMO — needs commercial purchase
+- Body: Linux Libertine (self-hosted, next/font/local) — editorial serif. LICENSE: GPL+OFL (free)
+- Labels: Oswald (next/font/google) — caps, wide tracking
+- Mono: IBM Plex Mono (next/font/google) — dates, issue numbers
+- Font files: public/fonts/ — see public/fonts/LICENSES.md for license status
 
 PROHIBITED: pastels, gradients, blue, neon, purple outside its designated section context,
 rounded corners > 4px, drop shadows, glassmorphism, or any "modern SaaS" aesthetic.

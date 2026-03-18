@@ -91,9 +91,9 @@ algorithmic.
 - Strong typographic scale contrast — headlines frame content ideologically, not merely label it
 - Type belongs to posters, banners, issue covers, and movement press — not product marketing or app UI
 
-Current stack: Bebas Neue (display), Libre Baskerville (body), Oswald (labels), IBM Plex Mono (dates).
-Font migration to designer-proposed stack (Highrise, Linux Libertine, Parkson, MADE TOMMY) is deferred
-pending commercial license acquisition — see Decision 9.
+Current stack: Highrise (display, self-hosted), Linux Libertine (body, self-hosted), Oswald (labels, Google), IBM Plex Mono (dates, Google).
+Highrise is loaded from a PERSONAL USE DEMO — commercial license purchase required for production (see Decision 9).
+Linux Libertine is GPL+OFL — free for commercial use. Parkson and MADE TOMMY remain available in the designer package but are not currently in use.
 
 ## Image Direction
 
@@ -166,4 +166,4 @@ editorially absolute.
 6. Tagline adopted — "Speak the Truth. Navigate the Consequences." (2026-03-17)
 7. Logo mark updated — journal/book icon with star + pen nib, replacing flat five-pointed star (2026-03-17)
 8. Expanded accent palette (7 new colors) wired at CSS level; sectional component use deferred to taxonomy plan (2026-03-17)
-9. Font changes deferred pending commercial license acquisition for Highrise, Parkson, and MADE TOMMY (2026-03-17)
+9. Highrise and Linux Libertine adopted as display/body fonts (2026-03-17). Highrise is DEMO license — commercial purchase required from Indieground Design before production launch. Linux Libertine is GPL+OFL (free). Parkson and MADE TOMMY available but not in use.
