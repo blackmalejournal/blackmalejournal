@@ -3,28 +3,18 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { BrandMark } from "@/components/brand/BrandMark";
 
 export function HeroBanner() {
   return (
     <section className="relative flex min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden bg-bmj-black">
-      {/* Large star watermark — low opacity background texture */}
+      {/* Large brand mark watermark — low opacity background texture */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         style={{ opacity: 0.025 }}
       >
-        <svg
-          width="700"
-          height="700"
-          viewBox="0 0 32 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M16 0L19.6 11.6H32L21.8 18.4L25.4 30L16 23.2L6.6 30L10.2 18.4L0 11.6H12.4L16 0Z"
-            fill="var(--bmj-cream)"
-          />
-        </svg>
+        <BrandMark size={700} color="var(--bmj-cream)" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-content px-6 py-24 text-center">

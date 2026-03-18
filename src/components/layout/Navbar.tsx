@@ -7,6 +7,7 @@ import { Menu, Search } from 'lucide-react';
 import { MobileMenu } from './MobileMenu';
 import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
 
 export type NavUser = {
@@ -57,19 +58,7 @@ export function Navbar({ user = null }: NavbarProps) {
             className="flex items-center gap-3 no-underline"
             aria-label="The Black Male Journal — Home"
           >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M16 0L19.6 11.6H32L21.8 18.4L25.4 30L16 23.2L6.6 30L10.2 18.4L0 11.6H12.4L16 0Z"
-                fill="var(--bmj-red)"
-              />
-            </svg>
+            <BrandMark size={32} color="var(--bmj-red)" />
             <span className="font-display text-xl tracking-wider text-bmj-white">
               The Black Male Journal
             </span>

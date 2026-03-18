@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { BrandMark } from "@/components/brand/BrandMark"
 
 interface PosterBlockProps {
   title: string
@@ -41,14 +42,8 @@ export default function PosterBlock({
           />
         )}
 
-        {/* Star motif */}
-        <svg
-          className="absolute right-6 top-6 z-10 h-8 w-8"
-          viewBox="0 0 24 24"
-          fill="var(--bmj-red)"
-        >
-          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-        </svg>
+        {/* Brand mark motif */}
+        <BrandMark size={32} color="var(--bmj-red)" className="absolute right-6 top-6 z-10" />
 
         {/* Content overlay */}
         <div className="relative z-10 w-full p-6 sm:p-10">
