@@ -4,6 +4,11 @@ jest.mock('@/lib/supabase/queries', () => ({
   subscribeToNewsletter: (...args: unknown[]) => mockSubscribe(...args),
 }));
 
+let _ipCounter = 0;
+jest.mock('next/headers', () => ({
+  headers: () => Promise.resolve(new Map([['x-forwarded-for', `10.0.0.${++_ipCounter}`]])),
+}));
+
 import { POST } from '@/app/api/newsletter/subscribe/route';
 
 function makeRequest(body: unknown) {

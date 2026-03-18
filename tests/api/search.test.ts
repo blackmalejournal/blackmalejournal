@@ -1,4 +1,9 @@
 /** @jest-environment node */
+let _ipCounter = 0;
+jest.mock('next/headers', () => ({
+  headers: () => Promise.resolve(new Map([['x-forwarded-for', `10.0.0.${++_ipCounter}`]])),
+}));
+
 import { GET } from '@/app/api/search/route';
 
 jest.mock('@/lib/supabase/queries', () => ({
