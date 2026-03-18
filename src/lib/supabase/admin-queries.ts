@@ -10,6 +10,7 @@ import type {
   ContentStatus,
   Dispatch,
   Download,
+  Handbook,
   Lens,
   AccessTier,
 } from '@/lib/supabase/types';
@@ -611,6 +612,164 @@ export async function deleteDownload(id: string): Promise<boolean> {
 
   if (error) {
     console.error('[deleteDownload]', error.message);
+    return false;
+  }
+  return true;
+}
+
+// ── Handbooks ──────────────────────────────────────────────────────────────────
+
+/**
+ * List all handbooks (including drafts). For the admin handbook list.
+ */
+export async function getAllHandbooks(options?: {
+  status?: ContentStatus;
+  lens?: Lens;
+  limit?: number;
+  offset?: number;
+}): Promise<Handbook[]> {
+  const { status, lens, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('handbooks')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (status) query = query.eq('status', status);
+  if (lens) query = query.eq('lens', lens);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getAllHandbooks]', error.message);
+    return [];
+  }
+  return (data ?? []) as Handbook[];
+}
+
+/**
+ * Get a single handbook by UUID. For the admin edit page.
+ */
+export async function getHandbookById(id: string): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('handbooks')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getHandbookById]', error.message);
+    return null;
+  }
+  return data as Handbook;
+}
+
+/**
+ * Insert a new handbook.
+ * Auto-sets published_at to now when status is 'published' and no date provided.
+ */
+export async function createHandbook(data: {
+  title: string;
+  slug: string;
+  lens: Lens;
+  description: string;
+  body: string;
+  access_tier: AccessTier;
+  status: ContentStatus;
+  author: string;
+  cover_image?: string | null;
+  file_url?: string | null;
+  published_at?: string | null;
+}): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+
+  const published_at =
+    data.status === 'published' && !data.published_at
+      ? new Date().toISOString()
+      : (data.published_at ?? null);
+
+  const { data: created, error } = await supabase
+    .from('handbooks')
+    .insert({
+      title: data.title,
+      slug: data.slug,
+      lens: data.lens,
+      description: data.description,
+      body: data.body,
+      access_tier: data.access_tier,
+      status: data.status,
+      author: data.author,
+      cover_image: data.cover_image ?? null,
+      file_url: data.file_url ?? null,
+      published_at: published_at as string,
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[createHandbook]', error.message);
+    return null;
+  }
+  return created as Handbook;
+}
+
+/**
+ * Update an existing handbook by UUID.
+ * Auto-sets published_at to now when status changes to 'published' and no date provided.
+ */
+export async function updateHandbook(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    lens: Lens;
+    description: string;
+    body: string;
+    access_tier: AccessTier;
+    status: ContentStatus;
+    author: string;
+    cover_image: string | null;
+    file_url: string | null;
+    published_at: string;
+  }>,
+): Promise<Handbook | null> {
+  const supabase = createAdminClient();
+
+  const payload = { ...data };
+
+  // Auto-set published_at when transitioning to published
+  if (payload.status === 'published' && !('published_at' in payload)) {
+    payload.published_at = new Date().toISOString();
+  }
+
+  const { data: updated, error } = await supabase
+    .from('handbooks')
+    .update(payload)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateHandbook]', error.message);
+    return null;
+  }
+  return updated as Handbook;
+}
+
+/**
+ * Hard-delete a handbook by UUID.
+ */
+export async function deleteHandbook(id: string): Promise<boolean> {
+  const supabase = createAdminClient();
+  const { error } = await supabase
+    .from('handbooks')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('[deleteHandbook]', error.message);
     return false;
   }
   return true;
