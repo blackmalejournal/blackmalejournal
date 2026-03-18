@@ -44,7 +44,7 @@ export default function QuoteCard({
           </div>
         )}
         <div className="flex-1">
-          <span className="font-display text-6xl leading-none text-bmj-red">
+          <span className={`font-display text-6xl leading-none ${textColor}`}>
             &ldquo;
           </span>
           <blockquote
@@ -52,7 +52,7 @@ export default function QuoteCard({
           >
             {quote}
           </blockquote>
-          <div className="mt-4 h-0.5 w-10 bg-bmj-red" />
+          <div className={`mt-4 h-0.5 w-10 ${textColor.replace('text-', 'bg-')}`} />
           <p
             className={`mt-2 font-label text-xs uppercase tracking-widest ${textColor} opacity-70`}
           >

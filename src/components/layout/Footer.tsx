@@ -49,7 +49,7 @@ export function Footer() {
               </p>
               <a
                 href="https://patreon.com/BlackMaleJournal"
-                className="inline-block border border-bmj-amber/40 bg-bmj-amber/10 px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-amber transition-colors hover:bg-bmj-amber/20"
+                className="inline-block border border-bmj-amber/40 bg-bmj-amber/10 px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:bg-bmj-amber/20"
                 target="_blank"
                 rel="noopener noreferrer"
               >

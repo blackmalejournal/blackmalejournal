@@ -1,9 +1,9 @@
 import type { Lens } from '@/lib/supabase/types';
 
 const LENS_STYLES: Record<Lens, string> = {
-  health:     'bg-bmj-red    text-bmj-white',
+  health:     'bg-bmj-red    text-bmj-white border border-bmj-cream/30',
   philosophy: 'bg-bmj-amber  text-bmj-black',
-  politics:   'bg-bmj-crimson text-bmj-white',
+  politics:   'bg-bmj-crimson text-bmj-white border border-bmj-cream/30',
 };
 
 const LENS_LABELS: Record<Lens, string> = {
