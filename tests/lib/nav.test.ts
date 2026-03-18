@@ -6,9 +6,9 @@ describe('Navigation constants', () => {
       expect(HEADER_NAV_LINKS).toHaveLength(5);
     });
 
-    it('contains Home, About, Academy, Downloads, Resources', () => {
+    it('contains Home, About, Academy, Downloads, Library', () => {
       const labels = HEADER_NAV_LINKS.map((l) => l.label);
-      expect(labels).toEqual(['Home', 'About', 'Academy', 'Downloads', 'Resources']);
+      expect(labels).toEqual(['Home', 'About', 'Academy', 'Downloads', 'Library']);
     });
 
     it('does NOT contain Handbooks, Video, Blog, Pricing, or Contact', () => {

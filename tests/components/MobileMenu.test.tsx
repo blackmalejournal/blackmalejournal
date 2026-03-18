@@ -17,7 +17,7 @@ describe('MobileMenu', () => {
     expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Academy')).toBeInTheDocument();
     expect(screen.getByText('Downloads')).toBeInTheDocument();
-    expect(screen.getByText('Resources')).toBeInTheDocument();
+    expect(screen.getByText('Library')).toBeInTheDocument();
   });
 
   it('shows Portal link and Log Out button when user is provided', () => {
@@ -50,7 +50,7 @@ describe('MobileMenu', () => {
 describe('MobileMenu simplified navigation', () => {
   it('renders exactly 5 nav links when open', () => {
     render(<MobileMenu isOpen={true} onClose={jest.fn()} />);
-    const navLabels = ['Home', 'About', 'Academy', 'Downloads', 'Resources'];
+    const navLabels = ['Home', 'About', 'Academy', 'Downloads', 'Library'];
     navLabels.forEach((label) => {
       expect(screen.getByRole('link', { name: label })).toBeInTheDocument();
     });

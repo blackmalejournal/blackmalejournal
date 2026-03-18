@@ -44,7 +44,7 @@ describe('sitemap.ts', () => {
     expect(urls).toContain('https://blackmalejournal.com/about');
     expect(urls).toContain('https://blackmalejournal.com/handbooks');
     expect(urls).toContain('https://blackmalejournal.com/downloads');
-    expect(urls).toContain('https://blackmalejournal.com/resources');
+    expect(urls).toContain('https://blackmalejournal.com/library');
     expect(urls).toContain('https://blackmalejournal.com/pricing');
     expect(urls).toContain('https://blackmalejournal.com/contact');
     expect(urls).toContain('https://blackmalejournal.com/support');

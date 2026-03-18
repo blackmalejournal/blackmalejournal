@@ -59,13 +59,13 @@ describe('Navbar simplified navigation', () => {
     expect(links).toHaveLength(5);
   });
 
-  it('renders Home, About, Academy, Downloads, Resources', () => {
+  it('renders Home, About, Academy, Downloads, Library', () => {
     render(<Navbar />);
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Academy' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Downloads' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Resources' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Library' })).toBeInTheDocument();
   });
 
   it('displays the brand tagline', () => {

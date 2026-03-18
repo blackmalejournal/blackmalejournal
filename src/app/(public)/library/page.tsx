@@ -4,17 +4,17 @@ import { BookOpen, FileText, Zap, GraduationCap, Play } from "lucide-react";
 import { StarDivider } from "@/components/ui/StarDivider";
 
 export const metadata: Metadata = {
-  title: "Resources",
+  title: "Library",
   description:
     "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   openGraph: {
-    title: "Resources",
+    title: "Library",
     description:
       "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Resources",
+    title: "Library",
     description:
       "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   },
@@ -68,7 +68,7 @@ const lenses = [
   { label: "Politics", href: "/articles?lens=politics" },
 ];
 
-export default function ResourcesPage() {
+export default function LibraryPage() {
   return (
     <>
       <section className="mx-auto max-w-content px-6 py-16">
@@ -76,7 +76,7 @@ export default function ResourcesPage() {
           Content Library
         </p>
         <h1 className="mb-4 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-          Resources
+          Library
         </h1>
         <p className="max-w-xl font-body text-sm leading-relaxed text-bmj-cream/70">
           Everything published under The Black Male Journal banner — in one

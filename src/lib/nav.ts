@@ -12,7 +12,7 @@ export const HEADER_NAV_LINKS: NavLink[] = [
   { label: 'About', href: '/about' },
   { label: 'Academy', href: '/academy' },
   { label: 'Downloads', href: '/downloads' },
-  { label: 'Resources', href: '/resources' },
+  { label: 'Library', href: '/library' },
 ];
 
 /**
