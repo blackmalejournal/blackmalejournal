@@ -1,0 +1,174 @@
+import { render, screen } from '@testing-library/react';
+import type { Article } from '@/lib/supabase/types';
+
+const mockArticle: Article = {
+  id: 'abc-123',
+  title: 'Test Article Title',
+  slug: 'test-article-title',
+  lens: 'philosophy',
+  tags: ['discipline', 'mindset'],
+  excerpt: 'A short excerpt.',
+  body: 'Full article body content here.',
+  featured: true,
+  access_tier: 'premium',
+  status: 'published',
+  author: 'The Chairman',
+  cover_image: 'covers/test.webp',
+  published_at: '2026-01-15T00:00:00Z',
+  created_at: '2026-01-10T00:00:00Z',
+};
+
+const mockNotFound = jest.fn();
+
+jest.mock('next/navigation', () => ({
+  notFound: (...args: unknown[]) => mockNotFound(...args),
+  redirect: jest.fn(),
+  useRouter: jest.fn(),
+}));
+
+// Mock ArticleForm to avoid hooks issues in server component tests.
+// The ArticleForm itself is tested in admin-article-form.test.tsx.
+jest.mock('@/app/(auth)/admin/articles/ArticleForm', () => ({
+  ArticleForm: ({ article, action }: { article?: Article; action: unknown }) => (
+    <div data-testid="article-form">
+      <span data-testid="form-mode">{article ? 'edit' : 'create'}</span>
+      <span data-testid="form-action">{typeof action}</span>
+      {article && <span data-testid="form-article-id">{article.id}</span>}
+      <button type="submit">{article ? 'Update Article' : 'Create Article'}</button>
+    </div>
+  ),
+}));
+
+// ── New Article Page ──────────────────────────────────────────────────────────
+
+describe('NewArticlePage', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  it('renders "NEW ARTICLE" heading', async () => {
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      createArticleAction: jest.fn(),
+    }));
+
+    const { default: NewArticlePage } = await import(
+      '@/app/(auth)/admin/articles/new/page'
+    );
+    render(NewArticlePage());
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'NEW ARTICLE' }),
+    ).toBeInTheDocument();
+  });
+
+  it('renders ArticleForm in create mode', async () => {
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      createArticleAction: jest.fn(),
+    }));
+
+    const { default: NewArticlePage } = await import(
+      '@/app/(auth)/admin/articles/new/page'
+    );
+    render(NewArticlePage());
+
+    expect(screen.getByTestId('article-form')).toBeInTheDocument();
+    expect(screen.getByTestId('form-mode')).toHaveTextContent('create');
+    expect(
+      screen.getByRole('button', { name: /create article/i }),
+    ).toBeInTheDocument();
+  });
+});
+
+// ── Edit Article Page ─────────────────────────────────────────────────────────
+
+describe('EditArticlePage', () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+  });
+
+  it('renders "EDIT ARTICLE" heading when article exists', async () => {
+    jest.mock('@/lib/supabase/admin-queries', () => ({
+      getArticleById: jest.fn().mockResolvedValue(mockArticle),
+    }));
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      updateArticleAction: jest.fn(),
+    }));
+
+    const { default: EditArticlePage } = await import(
+      '@/app/(auth)/admin/articles/[id]/edit/page'
+    );
+    const result = await EditArticlePage({
+      params: Promise.resolve({ id: 'abc-123' }),
+    });
+    render(result);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'EDIT ARTICLE' }),
+    ).toBeInTheDocument();
+  });
+
+  it('shows article ID', async () => {
+    jest.mock('@/lib/supabase/admin-queries', () => ({
+      getArticleById: jest.fn().mockResolvedValue(mockArticle),
+    }));
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      updateArticleAction: jest.fn(),
+    }));
+
+    const { default: EditArticlePage } = await import(
+      '@/app/(auth)/admin/articles/[id]/edit/page'
+    );
+    const result = await EditArticlePage({
+      params: Promise.resolve({ id: 'abc-123' }),
+    });
+    render(result);
+
+    expect(screen.getByText('ID: abc-123')).toBeInTheDocument();
+  });
+
+  it('renders ArticleForm in edit mode with "Update Article" button', async () => {
+    jest.mock('@/lib/supabase/admin-queries', () => ({
+      getArticleById: jest.fn().mockResolvedValue(mockArticle),
+    }));
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      updateArticleAction: jest.fn(),
+    }));
+
+    const { default: EditArticlePage } = await import(
+      '@/app/(auth)/admin/articles/[id]/edit/page'
+    );
+    const result = await EditArticlePage({
+      params: Promise.resolve({ id: 'abc-123' }),
+    });
+    render(result);
+
+    expect(screen.getByTestId('form-mode')).toHaveTextContent('edit');
+    expect(screen.getByTestId('form-article-id')).toHaveTextContent('abc-123');
+    expect(
+      screen.getByRole('button', { name: /update article/i }),
+    ).toBeInTheDocument();
+  });
+
+  it('calls notFound() when article is null', async () => {
+    jest.mock('@/lib/supabase/admin-queries', () => ({
+      getArticleById: jest.fn().mockResolvedValue(null),
+    }));
+    jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+      updateArticleAction: jest.fn(),
+    }));
+
+    const { default: EditArticlePage } = await import(
+      '@/app/(auth)/admin/articles/[id]/edit/page'
+    );
+
+    await EditArticlePage({
+      params: Promise.resolve({ id: 'nonexistent' }),
+    }).catch(() => {
+      // notFound() may throw — that's expected
+    });
+
+    expect(mockNotFound).toHaveBeenCalled();
+  });
+});
