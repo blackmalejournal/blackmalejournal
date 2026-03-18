@@ -10,6 +10,8 @@ export type Lens = 'health' | 'philosophy' | 'politics';
 export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
 export type AccessTier = 'free' | 'basic' | 'premium';
 export type MemberTier = 'free' | 'basic' | 'premium';
+export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived' | 'withdrawn';
+export type MemberRole = 'member' | 'editor' | 'admin';
 
 export type BriefingSection = {
   title: string;
@@ -28,6 +30,7 @@ export type Article = {
   body: string;
   featured: boolean;
   access_tier: AccessTier;
+  status: ContentStatus;
   author: string;
   cover_image: string | null;
   published_at: string;
@@ -41,6 +44,7 @@ export type Briefing = {
   slug: string;
   sections: BriefingSection[];
   access_tier: AccessTier;
+  status: ContentStatus;
   cover_image: string | null;
   published_at: string;
   created_at: string;
@@ -50,6 +54,7 @@ export type Member = {
   id: string;
   email: string;
   tier: MemberTier;
+  role: MemberRole;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   created_at: string;
@@ -87,6 +92,7 @@ export type Dispatch = {
   lens: Lens;
   excerpt: string;
   body: string;
+  status: ContentStatus;
   author: string;
   cover_image: string | null;
   published_at: string;
@@ -101,6 +107,7 @@ export type Handbook = {
   description: string;
   body: string;
   access_tier: AccessTier;
+  status: ContentStatus;
   author: string;
   cover_image: string | null;
   file_url: string | null;
