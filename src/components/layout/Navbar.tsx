@@ -59,9 +59,14 @@ export function Navbar({ user = null }: NavbarProps) {
             aria-label="The Black Male Journal — Home"
           >
             <BrandMark size={32} color="var(--bmj-red)" />
-            <span className="font-display text-xl tracking-wider text-bmj-white">
-              The Black Male Journal
-            </span>
+            <div className="flex flex-col">
+              <span className="font-display text-xl tracking-wider text-bmj-white">
+                The Black Male Journal
+              </span>
+              <span className="hidden lg:block font-label text-[10px] uppercase tracking-[0.2em] text-bmj-tan">
+                Speak the Truth. Navigate the Consequences.
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav */}

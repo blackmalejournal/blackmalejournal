@@ -28,9 +28,14 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <BrandMark size={28} color="var(--bmj-red)" />
-              <span className="font-display text-lg tracking-wider text-bmj-white">
-                The Black Male Journal
-              </span>
+              <div className="flex flex-col">
+                <span className="font-display text-lg tracking-wider text-bmj-white">
+                  The Black Male Journal
+                </span>
+                <p className="font-label text-xs uppercase tracking-[0.15em] text-bmj-tan/70 mt-1">
+                  Speak the Truth. Navigate the Consequences.
+                </p>
+              </div>
             </div>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
               Independent media house. Revolutionary masculinist platform covering
