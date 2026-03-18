@@ -29,4 +29,20 @@ describe('PaywallGate', () => {
     const subscribeLink = screen.getByRole('link', { name: /Subscribe/ });
     expect(subscribeLink).toHaveAttribute('href', '/signup?tier=premium');
   });
+
+  it('does not use gradient overlay (brand compliance)', () => {
+    const { container } = render(<PaywallGate {...defaultProps} />);
+    const allClassNames = Array.from(container.querySelectorAll('*'))
+      .map((el) => el.className)
+      .join(' ');
+    expect(allClassNames).not.toMatch(/bg-gradient/);
+  });
+
+  it('renders a StarDivider editorial break between preview and CTA', () => {
+    const { container } = render(<PaywallGate {...defaultProps} />);
+    // StarDivider renders role="separator" with aria-hidden="true"
+    // Use container.querySelector (DOM query, not accessibility tree) to find it
+    const separator = container.querySelector('[role="separator"]');
+    expect(separator).toBeInTheDocument();
+  });
 });

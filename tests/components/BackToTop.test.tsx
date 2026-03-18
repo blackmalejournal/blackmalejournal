@@ -30,4 +30,14 @@ describe('BackToTop', () => {
     fireEvent.click(screen.getByRole('button', { name: /back to top/i }));
     expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
   });
+
+  test('does not use drop shadows (brand compliance)', () => {
+    render(<BackToTop />);
+    act(() => {
+      Object.defineProperty(window, 'scrollY', { value: 500, writable: true, configurable: true });
+      window.dispatchEvent(new Event('scroll'));
+    });
+    const button = screen.getByRole('button', { name: /back to top/i });
+    expect(button.className).not.toMatch(/shadow/);
+  });
 });

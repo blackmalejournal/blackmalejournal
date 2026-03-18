@@ -57,7 +57,7 @@ export function ThreeLenses() {
             <Link
               key={lens.slug}
               href={`/articles?lens=${lens.slug}`}
-              className={`group block bg-bmj-brown p-8 no-underline transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_0_0_1px_var(--bmj-red)] ${lens.borderClass}`}
+              className={`group block border border-transparent bg-bmj-brown p-8 no-underline transition-all duration-200 hover:-translate-y-1 hover:border-bmj-red ${lens.borderClass}`}
             >
               <p className={`mb-2 font-label text-xs uppercase tracking-widest ${lens.textClass}`}>
                 {lens.label}

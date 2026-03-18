@@ -28,6 +28,16 @@ export function HeroBanner() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-content px-6 py-24 text-center">
+        {/* Publication identifier — declaration, not just a brand name */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mb-6 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan"
+        >
+          Vol. I &nbsp;&middot;&nbsp; Est. MMXXV &nbsp;&middot;&nbsp; Independent
+        </motion.p>
+
         {/* Main headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -48,17 +58,21 @@ export function HeroBanner() {
           Independent Media House · Revolutionary Masculinist Platform
         </motion.p>
 
-        {/* Red accent line + mission + CTA */}
+        {/* Rule + mission + three-lens footer + CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
         >
-          <div className="mx-auto my-8 h-px w-24 bg-bmj-red" />
+          <div className="mx-auto my-8 h-[3px] w-32 bg-bmj-red" />
 
           <p className="mx-auto max-w-2xl font-body text-base leading-relaxed text-bmj-cream/70 md:text-lg">
             We chronicle the full complexity of Black male life — mind, body, and power. No
             apology. No dilution. This is the record of men who choose to be deliberate.
+          </p>
+
+          <p className="mt-4 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan/60">
+            Health &nbsp;&middot;&nbsp; Philosophy &nbsp;&middot;&nbsp; Politics
           </p>
 
           <div className="mt-12">
