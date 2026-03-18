@@ -76,7 +76,7 @@ export function ArticleCard({
         <h3 className="mb-3 line-clamp-2 font-display text-xl leading-tight text-bmj-white">
           <Link
             href={`/articles/${slug}`}
-            className="no-underline transition-opacity hover:opacity-75"
+            className="text-bmj-white no-underline"
           >
             {title}
           </Link>

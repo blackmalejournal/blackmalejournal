@@ -32,7 +32,7 @@ export function DispatchCard({
           </span>
         </div>
 
-        <h3 className="mb-3 font-display text-2xl leading-tight text-bmj-white transition-opacity group-hover:opacity-80 sm:text-3xl">
+        <h3 className="mb-3 font-display text-2xl leading-tight text-bmj-white sm:text-3xl">
           {title}
         </h3>
 

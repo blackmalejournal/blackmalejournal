@@ -36,7 +36,7 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-3 font-display text-3xl leading-tight text-bmj-white transition-opacity group-hover:opacity-80 sm:text-4xl">
+        <h3 className="mb-3 font-display text-3xl leading-tight text-bmj-white sm:text-4xl">
           {briefing.title}
         </h3>
 
