@@ -24,7 +24,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 
 ### Typography
 - **Highrise** for ALL display/headline text — always uppercase, always `font-display` (self-hosted, DEMO license — needs commercial purchase)
-- **Linux Libertine** for body copy — `font-body`, never used for headlines (self-hosted, GPL+OFL — free)
+- **Libre Baskerville** for body copy — `font-body`, never used for headlines (Google Fonts, SIL OFL — free)
 - **Oswald** for labels, buttons, metadata labels — `font-label`, uppercase, tracked wide (Google Fonts)
 - **IBM Plex Mono** for dates, issue numbers, publication identifiers — `font-mono` (Google Fonts)
 - Font files and license status: `public/fonts/LICENSES.md`

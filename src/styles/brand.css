@@ -24,7 +24,7 @@
 
   /* Font family references (values set by next/font CSS variables) */
   --font-display: var(--font-bebas-neue), 'Highrise', 'Bebas Neue', sans-serif;
-  --font-body:    var(--font-libre-baskerville), 'Linux Libertine', 'Libre Baskerville', serif;
+  --font-body:    var(--font-libre-baskerville), 'Libre Baskerville', 'Linux Libertine', serif;
   --font-label:   var(--font-oswald), 'Oswald', sans-serif;
   --font-mono:    var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
 

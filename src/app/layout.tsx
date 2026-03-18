@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import {
   Oswald,
   IBM_Plex_Mono,
+  Libre_Baskerville,
 } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
@@ -31,16 +32,13 @@ const highrise = localFont({
 });
 
 /*
- * Linux Libertine — body/editorial serif (replaces Libre Baskerville)
- * LICENSE: GPL with font exception + OFL — free for commercial use
+ * Libre Baskerville — body/editorial serif (restored from earlier system)
+ * LICENSE: SIL Open Font License — free for commercial use
  */
-const linuxLibertine = localFont({
-  src: [
-    { path: "../../public/fonts/linux-libertine-regular.ttf", weight: "400", style: "normal" },
-    { path: "../../public/fonts/linux-libertine-italic.ttf", weight: "400", style: "italic" },
-    { path: "../../public/fonts/linux-libertine-bold.ttf", weight: "700", style: "normal" },
-    { path: "../../public/fonts/linux-libertine-bold-italic.ttf", weight: "700", style: "italic" },
-  ],
+const libreBaskerville = Libre_Baskerville({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
   variable: "--font-libre-baskerville",
   display: "swap",
 });
@@ -105,7 +103,7 @@ export default async function RootLayout({
 
   const fontVars = [
     highrise.variable,
-    linuxLibertine.variable,
+    libreBaskerville.variable,
     oswald.variable,
     ibmPlexMono.variable,
   ].join(" ");

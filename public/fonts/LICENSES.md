@@ -9,13 +9,13 @@
 - **Status:** NEEDS COMMERCIAL LICENSE PURCHASE
 - **Replaces:** Bebas Neue (Google Fonts, free)
 
-## Linux Libertine (Body/Editorial)
-- **Files:** linux-libertine-regular.ttf, linux-libertine-bold.ttf, linux-libertine-italic.ttf, linux-libertine-bold-italic.ttf
-- **Designer:** Philipp H. Poll / Libertine Open Fonts Project
-- **License:** GPL with Font Exception + SIL Open Font License (OFL)
+## Libre Baskerville (Body/Editorial)
+- **Source:** Google Fonts (loaded via next/font/google)
+- **Designer:** Impallari Type
+- **License:** SIL Open Font License (OFL)
 - **Commercial Use:** FREE — no restrictions
 - **Status:** CLEARED FOR PRODUCTION
-- **Replaces:** Libre Baskerville (Google Fonts, free)
+- **Replaces:** Linux Libertine (self-hosted, GPL+OFL — removed for poor screen hinting)
 
 ## Oswald (Labels/Buttons)
 - **Source:** Google Fonts (loaded via next/font/google)

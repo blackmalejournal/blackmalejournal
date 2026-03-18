@@ -41,7 +41,7 @@ Sectional accent colors (wired in CSS, used only when tied to a content domain):
 
 Fonts:
 - Display/Headlines: Highrise (self-hosted, next/font/local) — always ALL-CAPS. LICENSE: PERSONAL USE DEMO — needs commercial purchase
-- Body: Linux Libertine (self-hosted, next/font/local) — editorial serif. LICENSE: GPL+OFL (free)
+- Body: Libre Baskerville (next/font/google) — editorial serif. LICENSE: SIL OFL (free)
 - Labels: Oswald (next/font/google) — caps, wide tracking
 - Mono: IBM Plex Mono (next/font/google) — dates, issue numbers
 - Font files: public/fonts/ — see public/fonts/LICENSES.md for license status
