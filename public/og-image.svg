@@ -11,10 +11,10 @@
   <!-- Brand mark watermark — star + pen nib, low opacity -->
   <g opacity="0.08" transform="translate(510, 100)">
     <!-- Pen nib -->
-    <path d="M90 0 C81 27 68.4 36 63 50.4 L90 39.6 L117 50.4 C111.6 36 99 27 90 0Z" fill="#712414"/>
+    <path d="M90 0 C81 27 68.4 36 63 50.4 L90 39.6 L117 50.4 C111.6 36 99 27 90 0Z" fill="#E8DCC8"/>
     <circle cx="90" cy="32.4" r="5.4" fill="#F2EDE4"/>
     <!-- Star body -->
-    <path d="M90 50.4 L109.8 104.4 L171 104.4 L120.6 133.2 L140.4 180 L90 158.4 L39.6 180 L59.4 133.2 L9 104.4 L70.2 104.4 Z" fill="#712414"/>
+    <path d="M90 50.4 L109.8 104.4 L171 104.4 L120.6 133.2 L140.4 180 L90 158.4 L39.6 180 L59.4 133.2 L9 104.4 L70.2 104.4 Z" fill="#E8DCC8"/>
   </g>
 
   <!-- Publication name -->

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { LensBadge } from '@/components/brand/LensBadge';
 import type { Lens } from '@/lib/supabase/types';
 
@@ -47,20 +48,7 @@ export function ArticleCard({
           />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              className="opacity-10"
-            >
-              <path
-                d="M16 0L19.6 11.6H32L21.8 18.4L25.4 30L16 23.2L6.6 30L10.2 18.4L0 11.6H12.4L16 0Z"
-                fill="var(--bmj-cream)"
-              />
-            </svg>
+            <BrandMark size={48} color="var(--bmj-cream)" className="opacity-20" />
           </div>
         )}
         {isPremium && (
