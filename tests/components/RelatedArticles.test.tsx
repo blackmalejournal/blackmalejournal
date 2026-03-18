@@ -6,6 +6,7 @@ const mockArticles = [
     id: '1', title: 'Related Article 1', slug: 'related-1', lens: 'health' as const,
     excerpt: 'An excerpt', tags: [], body: 'Body text for reading time',
     featured: false, access_tier: 'free' as const, author: 'The Chairman',
+    status: 'published' as const,
     cover_image: null, published_at: '2026-01-01', created_at: '2026-01-01',
   },
 ];

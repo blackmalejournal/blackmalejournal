@@ -1,4 +1,4 @@
-import type { Article, Briefing, Member, Course, Dispatch } from '@/lib/supabase/types';
+import type { Article, Briefing, Member, Course, Dispatch, Handbook } from '@/lib/supabase/types';
 
 export const mockArticle: Article = {
   id: 'art-1',
@@ -10,6 +10,7 @@ export const mockArticle: Article = {
   body: 'Full article body content here.\n\n## Section One\n\nParagraph text.',
   featured: true,
   access_tier: 'free',
+  status: 'published',
   author: 'The Chairman',
   cover_image: '/images/morning.jpg',
   published_at: '2026-03-01T00:00:00Z',
@@ -54,6 +55,7 @@ export const mockBriefing: Briefing = {
     { title: 'Deep Dive', body: 'In-depth analysis.' },
   ],
   access_tier: 'free',
+  status: 'published',
   cover_image: '/images/briefing-001.jpg',
   published_at: '2026-03-01T00:00:00Z',
   created_at: '2026-02-28T00:00:00Z',
@@ -72,6 +74,7 @@ export const mockMember: Member = {
   id: 'mem-1',
   email: 'member@example.com',
   tier: 'free',
+  role: 'member',
   stripe_customer_id: null,
   stripe_subscription_id: null,
   created_at: '2026-01-01T00:00:00Z',
@@ -115,6 +118,22 @@ export const mockCourseUnpublished: Course = {
   published: false,
 };
 
+export const mockHandbook: Handbook = {
+  id: 'hb-1',
+  title: 'The Discipline Handbook',
+  slug: 'discipline-handbook',
+  lens: 'health',
+  description: 'A complete guide to building daily discipline.',
+  body: 'Full handbook body content.',
+  access_tier: 'basic',
+  status: 'published',
+  author: 'The Chairman',
+  cover_image: '/images/discipline-handbook.jpg',
+  file_url: null,
+  published_at: '2026-03-10T00:00:00Z',
+  created_at: '2026-03-09T00:00:00Z',
+};
+
 export const mockDispatch: Dispatch = {
   id: 'dsp-1',
   title: 'Reclaiming Your Narrative',
@@ -122,6 +141,7 @@ export const mockDispatch: Dispatch = {
   lens: 'philosophy',
   excerpt: 'The media tells one story. You must tell another.',
   body: 'Full dispatch body content.',
+  status: 'published',
   author: 'The Chairman',
   cover_image: null,
   published_at: '2026-03-05T00:00:00Z',

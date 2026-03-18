@@ -7,6 +7,7 @@ import {
   mockMemberPremium,
   mockCourse,
   mockDispatch,
+  mockHandbook,
 } from '../helpers/fixtures';
 
 // ── Module-level mock ────────────────────────────────────────────────────────
@@ -41,6 +42,8 @@ import {
   submitContactForm,
   getDispatches,
   getDispatchBySlug,
+  getHandbooks,
+  getHandbookBySlug,
 } from '@/lib/supabase/queries';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -77,6 +80,7 @@ describe('getArticles', () => {
     const result = await getArticles();
     expect(result).toEqual([mockArticle]);
     expect(mockClient.from).toHaveBeenCalledWith('articles');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns empty array on error', async () => {
@@ -118,6 +122,7 @@ describe('getArticleBySlug', () => {
     const result = await getArticleBySlug('discipline-morning-routines');
     expect(result).toEqual(mockArticle);
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'discipline-morning-routines');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns null on error', async () => {
@@ -134,6 +139,7 @@ describe('getFeaturedArticles', () => {
     const result = await getFeaturedArticles();
     expect(result).toEqual([mockArticle]);
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('featured', true);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns empty array on error', async () => {
@@ -154,6 +160,7 @@ describe('getLatestArticles', () => {
     setData([mockArticle]);
     const result = await getLatestArticles();
     expect(result).toEqual([mockArticle]);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns empty array on error', async () => {
@@ -171,6 +178,7 @@ describe('getBriefings', () => {
     const result = await getBriefings();
     expect(result).toEqual([mockBriefing]);
     expect(mockClient.from).toHaveBeenCalledWith('briefings');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns empty array on error', async () => {
@@ -187,6 +195,7 @@ describe('getBriefingBySlug', () => {
     const result = await getBriefingBySlug('weekend-briefing-001');
     expect(result).toEqual(mockBriefing);
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'weekend-briefing-001');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns null on error', async () => {
@@ -203,6 +212,7 @@ describe('getLatestBriefing', () => {
     mockClient._queryChain.single.mockResolvedValue({ data: mockBriefing, error: null });
     const result = await getLatestBriefing();
     expect(result).toEqual(mockBriefing);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns null on error', async () => {
@@ -220,6 +230,7 @@ describe('getBriefingByIssue', () => {
     const result = await getBriefingByIssue(1);
     expect(result).toEqual(mockBriefing);
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('issue_number', 1);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns null on error', async () => {
@@ -436,6 +447,7 @@ describe('getDispatches', () => {
     const result = await getDispatches();
     expect(result).toEqual([mockDispatch]);
     expect(mockClient.from).toHaveBeenCalledWith('dispatches');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns empty array on error', async () => {
@@ -458,12 +470,61 @@ describe('getDispatchBySlug', () => {
     const result = await getDispatchBySlug('reclaiming-narrative');
     expect(result).toEqual(mockDispatch);
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'reclaiming-narrative');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
   });
 
   it('returns null on error', async () => {
     resetClient();
     mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
     const result = await getDispatchBySlug('nonexistent');
+    expect(result).toBeNull();
+  });
+});
+
+// ── Handbooks ─────────────────────────────────────────────────────────────────
+
+describe('getHandbooks', () => {
+  it('returns handbooks on success', async () => {
+    setData([mockHandbook]);
+    const result = await getHandbooks();
+    expect(result).toEqual([mockHandbook]);
+    expect(mockClient.from).toHaveBeenCalledWith('handbooks');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getHandbooks();
+    expect(result).toEqual([]);
+  });
+
+  it('applies lens filter', async () => {
+    setData([mockHandbook]);
+    await getHandbooks({ lens: 'health' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'health');
+  });
+
+  it('applies range with defaults', async () => {
+    setData([]);
+    await getHandbooks();
+    expect(mockClient._queryChain.range).toHaveBeenCalledWith(0, 19);
+  });
+});
+
+describe('getHandbookBySlug', () => {
+  it('returns handbook on success', async () => {
+    resetClient({ data: mockHandbook });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockHandbook, error: null });
+    const result = await getHandbookBySlug('discipline-handbook');
+    expect(result).toEqual(mockHandbook);
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('slug', 'discipline-handbook');
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('status', 'published');
+  });
+
+  it('returns null on error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
+    const result = await getHandbookBySlug('nonexistent');
     expect(result).toBeNull();
   });
 });
