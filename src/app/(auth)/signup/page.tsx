@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { SignupForm } from './SignupForm';
 import type { TierId } from './TierSelector';
 
@@ -41,6 +42,9 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
     <div className="flex min-h-[80vh] items-center justify-center px-4">
       <div className="w-full max-w-4xl">
         <div className="mb-8 text-center">
+          <div className="mb-4 flex justify-center">
+            <BrandMark size={48} color="var(--bmj-red)" />
+          </div>
           <h1 className="mb-2 font-display text-4xl text-bmj-white">
             JOIN THE MOVEMENT
           </h1>

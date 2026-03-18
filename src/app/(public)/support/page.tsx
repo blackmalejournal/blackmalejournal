@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { SupportFlow } from './SupportFlow';
 import { AlternativeMethods } from './AlternativeMethods';
@@ -47,6 +48,9 @@ export default async function SupportPage({ searchParams }: SupportPageProps) {
         </div>
       )}
 
+      <div className="mb-6">
+        <BrandMark size={40} color="var(--bmj-red)" />
+      </div>
       <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
         Fund the Mission
       </h1>
