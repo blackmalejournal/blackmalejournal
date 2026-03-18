@@ -146,7 +146,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         title={briefing.title}
         date={formatDate(briefing.published_at)}
         issueNumber={briefing.issue_number}
-        coverImageUrl={briefing.cover_image || "/placeholder-briefing.jpg"}
+        coverImageUrl={briefing.cover_image || "/placeholder-cover.svg"}
       />
 
       {/* Sections */}

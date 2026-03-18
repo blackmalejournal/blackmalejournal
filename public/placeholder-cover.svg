@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0D0C0B"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="#C0281F"/>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="626" width="1200" height="4" fill="#C0281F"/>
+
+  <!-- Diagonal texture lines (subtle) -->
+  <line x1="0" y1="200" x2="200" y2="0" stroke="#1a1816" stroke-width="1"/>
+  <line x1="0" y1="400" x2="400" y2="0" stroke="#1a1816" stroke-width="1"/>
+  <line x1="0" y1="630" x2="630" y2="0" stroke="#1a1816" stroke-width="1"/>
+  <line x1="200" y1="630" x2="830" y2="0" stroke="#1a1816" stroke-width="1"/>
+  <line x1="400" y1="630" x2="1030" y2="0" stroke="#1a1816" stroke-width="1"/>
+  <line x1="600" y1="630" x2="1200" y2="30" stroke="#1a1816" stroke-width="1"/>
+  <line x1="800" y1="630" x2="1200" y2="230" stroke="#1a1816" stroke-width="1"/>
+  <line x1="1000" y1="630" x2="1200" y2="430" stroke="#1a1816" stroke-width="1"/>
+
+  <!-- Star — centered at (600, 270), outer R=70, inner r=29 -->
+  <polygon
+    points="600,200 617,247 666,249 628,278 641,326 600,298 559,326 572,278 534,249 583,247"
+    fill="#C0281F"
+  />
+
+  <!-- Eyebrow label -->
+  <text
+    x="600" y="380"
+    text-anchor="middle"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="14"
+    letter-spacing="8"
+    fill="#B8986A"
+  >THE BLACK MALE JOURNAL</text>
+
+  <!-- Horizontal rule -->
+  <rect x="500" y="395" width="200" height="1" fill="#C0281F" opacity="0.6"/>
+
+  <!-- Placeholder label -->
+  <text
+    x="600" y="445"
+    text-anchor="middle"
+    font-family="Impact, 'Arial Black', sans-serif"
+    font-size="36"
+    letter-spacing="6"
+    fill="#F2EDE4"
+    opacity="0.4"
+  >COVER IMAGE</text>
+</svg>
