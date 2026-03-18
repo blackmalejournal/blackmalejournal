@@ -1,5 +1,11 @@
 import '@testing-library/jest-dom';
 
+// Mock next/cache (server-only — not available in jsdom)
+jest.mock('next/cache', () => ({
+  revalidatePath: jest.fn(),
+  revalidateTag: jest.fn(),
+}));
+
 // Suppress jsdom "not implemented: navigation" console.error messages
 function isJsdomNavError(arg: unknown): boolean {
   if (typeof arg !== 'object' || arg === null) return false;

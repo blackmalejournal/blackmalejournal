@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { getDownloadById } from '@/lib/supabase/admin-queries';
 import { DownloadForm } from '../../DownloadForm';
 import { updateDownloadAction } from '../../actions';
+import { DeleteButton } from '@/components/admin/DeleteButton';
+import { deleteDownloadAction } from '../../delete-action';
 
 export const metadata: Metadata = {
   title: 'Edit Download — Admin',
@@ -26,6 +28,12 @@ export default async function EditDownloadPage({ params }: EditDownloadPageProps
       <h1 className="mb-2 font-display text-4xl text-bmj-white">EDIT DOWNLOAD</h1>
       <p className="mb-8 font-mono text-xs text-bmj-tan">ID: {download.id}</p>
       <DownloadForm download={download} action={updateDownloadAction} />
+      <div className="mt-8">
+        <DeleteButton
+          action={deleteDownloadAction.bind(null, download.id)}
+          itemName="download"
+        />
+      </div>
     </div>
   );
 }
