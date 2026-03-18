@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { NewsletterForm } from './NewsletterForm';
 import { Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
+import { BrandMark } from '@/components/brand/BrandMark';
 import { FOOTER_NAV_LINKS } from '@/lib/nav';
 
 const SOCIAL_LINKS = [
@@ -26,22 +27,15 @@ export function Footer() {
           {/* Column 1 — Brand */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M16 0L19.6 11.6H32L21.8 18.4L25.4 30L16 23.2L6.6 30L10.2 18.4L0 11.6H12.4L16 0Z"
-                  fill="var(--bmj-red)"
-                />
-              </svg>
-              <span className="font-display text-lg tracking-wider text-bmj-white">
-                The Black Male Journal
-              </span>
+              <BrandMark size={28} color="var(--bmj-red)" />
+              <div className="flex flex-col">
+                <span className="font-display text-lg tracking-wider text-bmj-white">
+                  The Black Male Journal
+                </span>
+                <p className="font-label text-xs uppercase tracking-[0.15em] text-bmj-tan/70 mt-1">
+                  Speak the Truth. Navigate the Consequences.
+                </p>
+              </div>
             </div>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
               Independent media house. Revolutionary masculinist platform covering

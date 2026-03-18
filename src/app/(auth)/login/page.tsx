@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { LoginForm } from './LoginForm';
 
 export const metadata: Metadata = {
@@ -48,6 +49,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <div className="flex min-h-[80vh] items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
+          <div className="mb-4 flex justify-center">
+            <BrandMark size={48} color="var(--bmj-red)" />
+          </div>
           <h1 className="mb-2 font-display text-4xl text-bmj-white">LOG IN</h1>
           <p className="font-body text-sm text-bmj-tan">
             Welcome back to the movement.

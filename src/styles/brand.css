@@ -3,6 +3,7 @@
 
 /* Color palette */
 :root {
+  /* ─── Core palette (unchanged) ─── */
   --bmj-black:  #0D0C0B;
   --bmj-cream:  #E8DCC8;
   --bmj-red:    #C0281F;
@@ -11,9 +12,19 @@
   --bmj-tan:    #B8986A;
   --bmj-white:  #F2EDE4;
 
+  /* ─── Expanded accent palette (from designer package 2026-03-17) ─── */
+  /* These are sectional/thematic accents — use sparingly per art-direction-spec.md */
+  --bmj-paper:        #F0DDBC;  /* Lighter paper ground — backgrounds, cards */
+  --bmj-deep-black:   #1C130E;  /* Near-black — heavier typographic weight */
+  --bmj-crimson:      #712414;  /* Deep crimson — politics/philosophy accent */
+  --bmj-medium-brown: #5D3F2E;  /* Medium brown — culture/editorial accent */
+  --bmj-olive:        #416100;  /* Olive green — health/wellness accent */
+  --bmj-gold:         #C77A0E;  /* Warm gold — finance/business accent */
+  --bmj-purple:       #554978;  /* Muted purple — technology accent (use with restraint) */
+
   /* Font family references (values set by next/font CSS variables) */
-  --font-display: var(--font-bebas-neue), 'Bebas Neue', sans-serif;
-  --font-body:    var(--font-libre-baskerville), 'Libre Baskerville', serif;
+  --font-display: var(--font-bebas-neue), 'Highrise', 'Bebas Neue', sans-serif;
+  --font-body:    var(--font-libre-baskerville), 'Linux Libertine', 'Libre Baskerville', serif;
   --font-label:   var(--font-oswald), 'Oswald', sans-serif;
   --font-mono:    var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
 

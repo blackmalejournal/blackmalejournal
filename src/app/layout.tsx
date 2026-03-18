@@ -1,8 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import {
-  Bebas_Neue,
-  Libre_Baskerville,
   Oswald,
   IBM_Plex_Mono,
 } from "next/font/google";
@@ -15,17 +14,33 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, organizationJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
+/*
+ * Highrise — display/headline font (replaces Bebas Neue)
+ * LICENSE: PERSONAL USE DEMO — commercial license required from Indieground Design
+ * Purchase at: https://indieground.net/product/highrise-font/
+ * Using the Condensed variant as the primary display weight (closest to Bebas Neue character)
+ */
+const highrise = localFont({
+  src: [
+    { path: "../../public/fonts/highrise-regular.otf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/highrise-condensed.otf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/highrise-bold.otf", weight: "700", style: "normal" },
+  ],
   variable: "--font-bebas-neue",
   display: "swap",
 });
 
-const libreBaskerville = Libre_Baskerville({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
+/*
+ * Linux Libertine — body/editorial serif (replaces Libre Baskerville)
+ * LICENSE: GPL with font exception + OFL — free for commercial use
+ */
+const linuxLibertine = localFont({
+  src: [
+    { path: "../../public/fonts/linux-libertine-regular.ttf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/linux-libertine-italic.ttf", weight: "400", style: "italic" },
+    { path: "../../public/fonts/linux-libertine-bold.ttf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/linux-libertine-bold-italic.ttf", weight: "700", style: "italic" },
+  ],
   variable: "--font-libre-baskerville",
   display: "swap",
 });
@@ -89,8 +104,8 @@ export default async function RootLayout({
     : null;
 
   const fontVars = [
-    bebasNeue.variable,
-    libreBaskerville.variable,
+    highrise.variable,
+    linuxLibertine.variable,
     oswald.variable,
     ibmPlexMono.variable,
   ].join(" ");

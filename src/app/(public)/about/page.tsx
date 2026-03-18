@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { BrandMark } from '@/components/brand/BrandMark';
 import TributeCard from '@/components/content/TributeCard';
 
 export const metadata: Metadata = {
@@ -23,6 +25,21 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <section className="mx-auto max-w-content px-6 py-16">
+
+      {/* Brand header with primary logo */}
+      <div className="mb-12 flex flex-col items-center text-center">
+        <Image
+          src="/logos/primary-color.png"
+          alt="The Black Male Journal"
+          width={400}
+          height={160}
+          className="mb-8 halftone"
+          priority
+        />
+        <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-bmj-tan">
+          Speak the Truth. Navigate the Consequences.
+        </p>
+      </div>
 
       <div className="max-w-article">
         <p className="mb-4 font-mono text-xs uppercase tracking-widest text-bmj-tan">

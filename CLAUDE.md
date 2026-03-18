@@ -17,26 +17,41 @@ npx tsc --noEmit     # TypeScript check
 ```
 
 ## Brand System — NEVER deviate from these values
-Colors (use CSS variables from src/styles/brand.css):
+
+Tagline: "Speak the Truth. Navigate the Consequences."
+Logo: Journal/book icon with star + pen nib (see public/logos/ for all variants)
+
+Core colors (use CSS variables from src/styles/brand.css):
 - --bmj-black: #0D0C0B (backgrounds)
 - --bmj-cream: #E8DCC8 (primary text on dark)
-- --bmj-red: #C0281F (accents, star icon, borders)
+- --bmj-red: #C0281F (accents, brand mark, borders)
 - --bmj-amber: #C8852A (quote cards, highlights)
 - --bmj-brown: #3B2417 (secondary backgrounds)
 - --bmj-tan: #B8986A (metadata, dates)
 - --bmj-white: #F2EDE4 (maximum contrast text)
 
-Fonts (loaded via next/font/google):
-- Display/Headlines: Bebas Neue — always ALL-CAPS
-- Body: Libre Baskerville — editorial serif
-- Labels: Oswald — caps, wide tracking
-- Mono: IBM Plex Mono — dates, issue numbers
+Sectional accent colors (wired in CSS, used only when tied to a content domain):
+- --bmj-paper: #F0DDBC (lighter paper ground)
+- --bmj-deep-black: #1C130E (heavier typographic weight)
+- --bmj-crimson: #712414 (politics/philosophy)
+- --bmj-medium-brown: #5D3F2E (culture/editorial)
+- --bmj-olive: #416100 (health/wellness)
+- --bmj-gold: #C77A0E (finance/business)
+- --bmj-purple: #554978 (technology — deferred until taxonomy expansion)
 
-PROHIBITED: pastels, gradients, purple, blue, neon, rounded corners > 4px,
-drop shadows, glassmorphism, or any "modern SaaS" aesthetic.
+Fonts:
+- Display/Headlines: Highrise (self-hosted, next/font/local) — always ALL-CAPS. LICENSE: PERSONAL USE DEMO — needs commercial purchase
+- Body: Linux Libertine (self-hosted, next/font/local) — editorial serif. LICENSE: GPL+OFL (free)
+- Labels: Oswald (next/font/google) — caps, wide tracking
+- Mono: IBM Plex Mono (next/font/google) — dates, issue numbers
+- Font files: public/fonts/ — see public/fonts/LICENSES.md for license status
 
-Visual: Vintage propaganda poster + newspaper grid + Black Panther pamphlet energy.
+PROHIBITED: pastels, gradients, blue, neon, purple outside its designated section context,
+rounded corners > 4px, drop shadows, glassmorphism, or any "modern SaaS" aesthetic.
+
+Visual: Militant print-driven editorial system — revolutionary newspapers, political posters, movement literature.
 Textures: grain overlay on all sections, halftone dots on images.
+Brand mark: Use `<BrandMark />` from `src/components/brand/BrandMark.tsx` for all inline star+pen motifs.
 
 ## Three Lenses (Content Taxonomy)
 All articles and content are categorized under exactly one lens:
@@ -112,7 +127,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 ## Important Notes
 - Weekend Briefing is the flagship content format — it gets special design treatment
 - The Chairman is the sole author for now — default all author fields to "The Chairman"
-- Star motif from the logo is used as section dividers (horizontal rule replacement)
+- Brand mark (star + pen nib) is used as section dividers via `<StarDivider />` and `<BrandMark />`
 - All images should have grain/halftone treatment applied via CSS
 
 ## Design System (@alawein/tokens)

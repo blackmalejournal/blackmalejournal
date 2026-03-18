@@ -1,5 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <rect width="200" height="200" fill="#0D0C0B"/>
-  <polygon points="100,20 120,75 180,75 130,110 150,165 100,135 50,165 70,110 20,75 80,75" fill="#C0281F"/>
+  <!-- Pen nib -->
+  <path d="M100 20 C90 50 76 60 70 84 L100 70 L130 84 C124 60 110 50 100 20Z" fill="#1C130E"/>
+  <circle cx="100" cy="54" r="6" fill="#F2EDE4"/>
+  <!-- Star body -->
+  <path d="M100 84 L122 144 L190 144 L134 174 L156 200 L100 176 L44 200 L66 174 L10 144 L78 144 Z" fill="#C0281F"/>
   <text x="100" y="192" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="16" fill="#E8DCC8" letter-spacing="4">BMJ</text>
 </svg>

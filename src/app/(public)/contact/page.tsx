@@ -7,6 +7,7 @@ import {
   Linkedin,
   Twitter,
 } from 'lucide-react';
+import { BrandMark } from '@/components/brand/BrandMark';
 import { ContactForm } from './ContactForm';
 import { SupportCard } from './SupportCard';
 
@@ -39,6 +40,9 @@ const whatsappHref = process.env.NEXT_PUBLIC_WHATSAPP_LINK ?? '#';
 export default function ContactPage() {
   return (
     <section className="mx-auto max-w-content px-6 py-16">
+      <div className="mb-6">
+        <BrandMark size={40} color="var(--bmj-red)" />
+      </div>
       <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
         Connect
       </h1>

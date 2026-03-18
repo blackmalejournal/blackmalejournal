@@ -68,6 +68,11 @@ describe('Navbar simplified navigation', () => {
     expect(screen.getByRole('link', { name: 'Resources' })).toBeInTheDocument();
   });
 
+  it('displays the brand tagline', () => {
+    render(<Navbar />);
+    expect(screen.getByText(/Speak the Truth/i)).toBeInTheDocument();
+  });
+
   it('does NOT render Handbooks, Video, Blog, Pricing, or Contact in nav', () => {
     render(<Navbar />);
     const nav = screen.getByRole('navigation', { name: /main/i });

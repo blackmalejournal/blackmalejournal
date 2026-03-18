@@ -10,13 +10,21 @@ const config: Config = {
     extend: {
       colors: {
         bmj: {
-          black:  "#0D0C0B",
-          cream:  "#E8DCC8",
-          red:    "#C0281F",
-          amber:  "#C8852A",
-          brown:  "#3B2417",
-          tan:    "#B8986A",
-          white:  "#F2EDE4",
+          black:         "#0D0C0B",
+          cream:         "#E8DCC8",
+          red:           "#C0281F",
+          amber:         "#C8852A",
+          brown:         "#3B2417",
+          tan:           "#B8986A",
+          white:         "#F2EDE4",
+          // Expanded accent palette
+          paper:         "#F0DDBC",
+          "deep-black":  "#1C130E",
+          crimson:       "#712414",
+          "medium-brown":"#5D3F2E",
+          olive:         "#416100",
+          gold:          "#C77A0E",
+          purple:        "#554978",
         },
       },
       fontFamily: {

@@ -1,3 +1,5 @@
+import { BrandMark } from "@/components/brand/BrandMark";
+
 interface StarDividerProps {
   className?: string;
 }
@@ -12,21 +14,8 @@ export function StarDivider({ className = "" }: StarDividerProps) {
       {/* Left line */}
       <div className="flex-1 border-t border-bmj-tan/40" />
 
-      {/* Star */}
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="mx-3 shrink-0"
-        aria-hidden="true"
-      >
-        <path
-          d="M8 0L9.8 5.8H16L10.9 9.2L12.7 15L8 11.6L3.3 15L5.1 9.2L0 5.8H6.2L8 0Z"
-          fill="var(--bmj-red)"
-        />
-      </svg>
+      {/* Brand mark */}
+      <BrandMark size={16} color="var(--bmj-red)" className="mx-3 shrink-0" />
 
       {/* Right line */}
       <div className="flex-1 border-t border-bmj-tan/40" />
