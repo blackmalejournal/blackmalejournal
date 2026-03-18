@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { AccessTier } from '@/lib/supabase/types';
+import { StarDivider } from '@/components/ui/StarDivider';
 
 interface PaywallGateProps {
   requiredTier: AccessTier;
@@ -16,20 +17,17 @@ export function PaywallGate({
 
   return (
     <div>
-      {/* Preview text */}
-      <div className="relative">
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
-          {previewBody}
-          <span aria-hidden="true">&hellip;</span>
-        </p>
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-transparent to-bmj-black"
-          aria-hidden="true"
-        />
-      </div>
+      {/* Preview text — hard cutoff, no gradient fade */}
+      <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+        {previewBody}
+        <span aria-hidden="true">&hellip;</span>
+      </p>
+
+      {/* Editorial break — consistent with the site's section divider language */}
+      <StarDivider className="my-8" />
 
       {/* CTA */}
-      <div className="mt-8 border border-bmj-red/40 bg-bmj-brown p-8 text-center">
+      <div className="border border-bmj-red/40 bg-bmj-brown p-8 text-center">
         <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
           Members Only
         </p>
