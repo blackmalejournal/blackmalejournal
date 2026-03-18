@@ -128,7 +128,7 @@ export async function updateArticle(
     featured: boolean;
     author: string;
     cover_image: string | null;
-    published_at: string | null;
+    published_at: string;
   }>,
 ): Promise<Article | null> {
   const supabase = createAdminClient();

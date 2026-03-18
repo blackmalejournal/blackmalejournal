@@ -40,15 +40,13 @@ function parseTags(raw: string): string[] {
 
 // ── Create ──────────────────────────────────────────────────────────────────────
 
-export async function createArticleAction(
-  formData: FormData,
-): Promise<{ success: boolean; error?: string; articleId?: string }> {
+export async function createArticleAction(formData: FormData): Promise<void> {
   const raw = Object.fromEntries(formData.entries());
 
   const parsed = articleSchema.safeParse(raw);
   if (!parsed.success) {
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    return { success: false, error: firstError };
+    redirect(`/admin/articles/new?error=${encodeURIComponent(firstError)}`);
   }
 
   const { title, slug, lens, tags, excerpt, body, access_tier, status, featured, cover_image } =
@@ -71,7 +69,7 @@ export async function createArticleAction(
   });
 
   if (!article) {
-    return { success: false, error: 'Failed to create article' };
+    redirect('/admin/articles/new?error=Failed+to+create+article');
   }
 
   revalidatePath('/admin/articles');
@@ -80,12 +78,10 @@ export async function createArticleAction(
 
 // ── Update ──────────────────────────────────────────────────────────────────────
 
-export async function updateArticleAction(
-  formData: FormData,
-): Promise<{ success: boolean; error?: string }> {
+export async function updateArticleAction(formData: FormData): Promise<void> {
   const id = formData.get('id') as string;
   if (!id) {
-    return { success: false, error: 'Article ID is required' };
+    redirect('/admin/articles?error=Article+ID+is+required');
   }
 
   const raw = Object.fromEntries(formData.entries());
@@ -93,7 +89,7 @@ export async function updateArticleAction(
   const parsed = articleSchema.safeParse(raw);
   if (!parsed.success) {
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    return { success: false, error: firstError };
+    redirect(`/admin/articles/${id}/edit?error=${encodeURIComponent(firstError)}`);
   }
 
   const { title, slug, lens, tags, excerpt, body, access_tier, status, featured, cover_image } =
@@ -116,7 +112,7 @@ export async function updateArticleAction(
   });
 
   if (!article) {
-    return { success: false, error: 'Failed to update article' };
+    redirect(`/admin/articles/${id}/edit?error=Failed+to+update+article`);
   }
 
   revalidatePath('/admin/articles');
