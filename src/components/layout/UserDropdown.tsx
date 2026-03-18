@@ -37,7 +37,7 @@ export function UserDropdown({ email, displayName }: UserDropdownProps) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-48 border border-bmj-tan/20 bg-bmj-brown shadow-lg">
+        <div className="absolute right-0 top-full mt-2 w-48 border border-bmj-tan/40 bg-bmj-brown">
           <div className="border-b border-bmj-tan/20 px-4 py-3">
             <p className="truncate font-label text-xs uppercase tracking-widest text-bmj-tan">
               {displayName || email}

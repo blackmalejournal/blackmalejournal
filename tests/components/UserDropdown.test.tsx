@@ -41,4 +41,15 @@ describe('UserDropdown', () => {
     rerender(<UserDropdown email="test@example.com" />);
     expect(screen.getByText('T')).toBeInTheDocument();
   });
+
+  it('does not use drop shadows on dropdown menu (brand compliance)', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<UserDropdown {...defaultProps} />);
+    await user.click(screen.getByRole('button'));
+    const allClassNames = Array.from(container.querySelectorAll('*'))
+      .map((el) => el.className)
+      .filter((cn) => typeof cn === 'string')
+      .join(' ');
+    expect(allClassNames).not.toMatch(/shadow/);
+  });
 });

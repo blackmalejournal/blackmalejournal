@@ -23,7 +23,7 @@ export default function TributeCard({
             src={imageUrl}
             alt={name}
             fill
-            className="object-cover grayscale contrast-[1.2]"
+            className="halftone-heavy object-cover"
           />
         )}
       </div>
