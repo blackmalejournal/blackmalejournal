@@ -169,6 +169,7 @@ describe('extractTags', () => {
     body: '',
     featured: false,
     access_tier: 'free',
+    status: 'published',
     author: 'The Chairman',
     cover_image: null,
     published_at: '2026-01-01',

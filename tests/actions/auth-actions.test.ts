@@ -183,6 +183,7 @@ describe('signup', () => {
       id: 'user-456',
       email: 'new@example.com',
       tier: 'free',
+      role: 'member',
       stripe_customer_id: null,
       stripe_subscription_id: null,
     });

@@ -44,6 +44,7 @@ export async function signup(formData: FormData) {
       id: data.user.id,
       email,
       tier: 'free' as const,
+      role: 'member' as const,
       stripe_customer_id: null,
       stripe_subscription_id: null,
     });

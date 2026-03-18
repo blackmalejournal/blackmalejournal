@@ -9,6 +9,7 @@ const baseBriefing: Briefing = {
   slug: 'weekend-briefing-001',
   sections: [{ title: 'First Section', body: 'Body text' }],
   access_tier: 'free',
+  status: 'published',
   cover_image: null,
   published_at: '2026-03-01T00:00:00Z',
   created_at: '2026-03-01T00:00:00Z',
