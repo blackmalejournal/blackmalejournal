@@ -1,4 +1,4 @@
-import type { Article, Briefing, Member, Course, Dispatch } from '@/lib/supabase/types';
+import type { Article, Briefing, Member, Course, Dispatch, Handbook } from '@/lib/supabase/types';
 
 export const mockArticle: Article = {
   id: 'art-1',
@@ -116,6 +116,22 @@ export const mockCourseUnpublished: Course = {
   title: 'Advanced Combat',
   slug: 'advanced-combat',
   published: false,
+};
+
+export const mockHandbook: Handbook = {
+  id: 'hb-1',
+  title: 'The Discipline Handbook',
+  slug: 'discipline-handbook',
+  lens: 'health',
+  description: 'A complete guide to building daily discipline.',
+  body: 'Full handbook body content.',
+  access_tier: 'basic',
+  status: 'published',
+  author: 'The Chairman',
+  cover_image: '/images/discipline-handbook.jpg',
+  file_url: null,
+  published_at: '2026-03-10T00:00:00Z',
+  created_at: '2026-03-09T00:00:00Z',
 };
 
 export const mockDispatch: Dispatch = {

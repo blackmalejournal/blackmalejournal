@@ -36,6 +36,7 @@ export async function getArticles(
   let query = supabase
     .from('articles')
     .select('*')
+    .eq('status', 'published')
     .order('published_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -57,6 +58,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     .from('articles')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (error) return null;
@@ -69,6 +71,7 @@ export async function getFeaturedArticles(limit = 3): Promise<Article[]> {
     .from('articles')
     .select('*')
     .eq('featured', true)
+    .eq('status', 'published')
     .order('published_at', { ascending: false })
     .limit(limit);
 
@@ -84,6 +87,7 @@ export async function getLatestArticles(limit = 10): Promise<Article[]> {
   const { data, error } = await supabase
     .from('articles')
     .select('*')
+    .eq('status', 'published')
     .order('published_at', { ascending: false })
     .limit(limit);
 
@@ -104,6 +108,7 @@ export async function getBriefings(
   const { data, error } = await supabase
     .from('briefings')
     .select('*')
+    .eq('status', 'published')
     .order('issue_number', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -122,6 +127,7 @@ export async function getBriefingBySlug(
     .from('briefings')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (error) return null;
@@ -133,6 +139,7 @@ export async function getLatestBriefing(): Promise<Briefing | null> {
   const { data, error } = await supabase
     .from('briefings')
     .select('*')
+    .eq('status', 'published')
     .order('issue_number', { ascending: false })
     .limit(1)
     .single();
@@ -149,6 +156,7 @@ export async function getBriefingByIssue(
     .from('briefings')
     .select('*')
     .eq('issue_number', issueNumber)
+    .eq('status', 'published')
     .single();
 
   if (error) return null;
@@ -341,6 +349,7 @@ export async function getDispatches(
   const { data, error } = await supabase
     .from('dispatches')
     .select('*')
+    .eq('status', 'published')
     .order('published_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -359,6 +368,7 @@ export async function getDispatchBySlug(
     .from('dispatches')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (error) return null;
@@ -380,6 +390,7 @@ export async function getHandbooks(
   let query = supabase
     .from('handbooks')
     .select('*')
+    .eq('status', 'published')
     .order('published_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -399,6 +410,7 @@ export async function getHandbookBySlug(slug: string): Promise<Handbook | null> 
     .from('handbooks')
     .select('*')
     .eq('slug', slug)
+    .eq('status', 'published')
     .single();
 
   if (error) return null;
@@ -451,24 +463,28 @@ export async function searchContent(
     supabase
       .from('articles')
       .select('title, slug, excerpt, lens, published_at')
+      .eq('status', 'published')
       .or(`title.ilike.${term},excerpt.ilike.${term}`)
       .order('published_at', { ascending: false })
       .limit(limit),
     supabase
       .from('briefings')
       .select('title, slug, published_at')
+      .eq('status', 'published')
       .ilike('title', term)
       .order('published_at', { ascending: false })
       .limit(limit),
     supabase
       .from('handbooks')
       .select('title, slug, description, lens, published_at')
+      .eq('status', 'published')
       .or(`title.ilike.${term},description.ilike.${term}`)
       .order('published_at', { ascending: false })
       .limit(limit),
     supabase
       .from('dispatches')
       .select('title, slug, excerpt, lens, published_at')
+      .eq('status', 'published')
       .or(`title.ilike.${term},excerpt.ilike.${term}`)
       .order('published_at', { ascending: false })
       .limit(limit),
