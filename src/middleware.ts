@@ -1,7 +1,8 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-const PROTECTED_PREFIXES = ['/portal'];
+const PROTECTED_PREFIXES = ['/portal', '/admin'];
+const ADMIN_PREFIXES = ['/admin'];
 const AUTH_PAGES = ['/login', '/signup'];
 
 export async function middleware(request: NextRequest) {
@@ -41,6 +42,23 @@ export async function middleware(request: NextRequest) {
     loginUrl.pathname = '/login';
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
+  }
+
+  // Protect admin routes — require admin or editor role
+  const isAdmin = ADMIN_PREFIXES.some((p) => pathname.startsWith(p));
+  if (isAdmin && user) {
+    const { data: member } = await supabase
+      .from('members')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (!member || (member.role !== 'admin' && member.role !== 'editor')) {
+      const portalUrl = request.nextUrl.clone();
+      portalUrl.pathname = '/portal';
+      portalUrl.searchParams.set('error', 'unauthorized');
+      return NextResponse.redirect(portalUrl);
+    }
   }
 
   // Redirect authenticated users away from auth pages
