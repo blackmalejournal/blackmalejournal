@@ -35,7 +35,7 @@ export function ScrollReveal({
   as = 'div',
   threshold = 0.15,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: threshold });
   const prefersReducedMotion = useReducedMotion();
 
