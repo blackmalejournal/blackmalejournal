@@ -35,7 +35,7 @@ export function ArticleCard({
   });
 
   return (
-    <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-all duration-200 hover:-translate-y-1 hover:border-bmj-red/40">
+    <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-all duration-300 hover:-translate-y-1 hover:border-bmj-red/40">
       {/* Cover image */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
         {coverImage ? (
