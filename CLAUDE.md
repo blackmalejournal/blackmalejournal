@@ -132,30 +132,23 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 
 ## Design System (@alawein/tokens)
 
-The BMJ design system has been consolidated into the unified Alawein token system:
+BMJ currently renders from its local brand tokens:
 
-- **Location:** `@alawein/tokens` (published to npm)
-- **Themes:** 29 comprehensive JSON-based themes (Dawn Primary for BMJ aesthetic)
-- **Tokens:** Colors, typography, spacing, animations with semantic naming
-- **Documentation:**
-  - API & Usage: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/README.md
-  - Architecture: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/ARCHITECTURE.md
-  - Publishing: https://github.com/alawein/alawein/tree/main/_devkit/packages/@alawein/tokens/PUBLISH.md
-- **Migration Guide:** docs/design-system-consolidation.md (see section on mapping BMJ colors to Alawein tokens)
-- **CSS Import:** `import '@alawein/tokens/dist/themes.css'`
-- **Token Mapping:**
-  - Old: `--bmj-black` → New: `--color-background`
-  - Old: `--bmj-white` → New: `--color-text`
-  - Old: `--bmj-red` → New: `--color-accent`
-  - Old: `--bmj-amber` → New: `--color-primary`
-  - See consolidation ADR for complete mapping
+- **Runtime source of truth:** `src/styles/brand.css`
+- **Imported by:** `src/styles/globals.css`
+- **Mirrored in Tailwind:** `tailwind.config.ts`
+- **Brand guardrail:** `docs/brand/invariants.md`
+
+`@alawein/tokens` exists as an adjacent Alawein workstream, but it is not the runtime token source for this app today. Do not replace BMJ imports with `@alawein/tokens/dist/themes.css` unless the migration gate in `docs/brand/invariants.md` has been satisfied.
+
+`docs/design-system-consolidation.md` documents the proposed migration path and token mapping work, not the current application wiring.
 
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md
 - Environment variable reference: docs/ops/env-vars.md (canonical source of truth)
 - When adding a new environment variable: add it to docs/ops/env-vars.md first, then set it in Vercel
 - Never commit .env files, API keys, or credentials — .gitignore must cover .env*
-- Only NEXT_PUBLIC_ prefix for values safe to expose in client bundles (Supabase URL/anon key, site URL, WhatsApp link)
+- Only NEXT_PUBLIC_ prefix for values safe to expose in client bundles (Supabase URL/anon key, site URL, WhatsApp link, Plausible domain)
 - Server-only secrets (Stripe secret key, Supabase service role key, Resend key) must NEVER have NEXT_PUBLIC_ prefix
 - Org accounts use founder@ or role aliases on the org domain — never personal email for service accounts
 - Run /secrets-audit before deploys, /backup-check weekly, /env-audit after adding new integrations

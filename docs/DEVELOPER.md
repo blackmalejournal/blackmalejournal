@@ -70,11 +70,11 @@ npm run secrets:check # Scan for leaked secrets
 
 ## Environment Variables
 
-See [docs/ops/env-vars.md](ops/env-vars.md) for the canonical list of all 13 environment variables.
+See [docs/ops/env-vars.md](ops/env-vars.md) for the canonical environment variable list.
 
 ## Architecture
 
-### App Router (Next.js 14)
+### App Router (Next.js 16)
 
 - `src/app/(public)/` — Public pages (articles, briefings, academy, etc.)
 - `src/app/(auth)/` — Auth pages (login, signup) and portal
@@ -105,7 +105,7 @@ All content is categorized under one of three **lenses**:
 
 ### Brand System
 
-Colors, fonts, and visual guidelines are defined in `CLAUDE.md` and `src/styles/brand.css`. Never deviate from the brand system.
+Colors, fonts, and visual guidelines are defined in `CLAUDE.md`, `docs/brand/invariants.md`, and `src/styles/brand.css`. Never deviate from the brand system.
 
 ### File Naming
 

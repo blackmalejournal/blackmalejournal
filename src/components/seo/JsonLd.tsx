@@ -13,7 +13,7 @@ export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger -- Safe: JSON.stringify of static data
+      // Safe: JSON.stringify of static data for a non-executable JSON-LD script tag
       dangerouslySetInnerHTML={{ __html: serialized }}
     />
   );
