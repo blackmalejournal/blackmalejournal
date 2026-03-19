@@ -1,15 +1,19 @@
 # Design System Consolidation (ADR-2026-03)
 
 **Date:** 2026-03-16
-**Status:** ACCEPTED
+**Status:** PROPOSED
 **Author:** Alawein Design Team
 **Issue:** Design system duplication and maintenance burden
 
 ## 1. Decision
 
-Consolidate the Black Male Journal brand design system (BMJ custom colors in `src/styles/brand.css`) with the Alawein unified design token system, migrating to `@alawein/tokens` as the single source of truth for all design tokens across the organization.
+Document a proposed migration path from BMJ's local design tokens in `src/styles/brand.css` to the Alawein unified token system. Until that migration is implemented and verified, `src/styles/brand.css` remains the source of truth for the running BMJ application.
 
 ## 2. Context
+
+### Current State
+
+BMJ currently imports its local tokens via `src/styles/globals.css` and mirrors them in `tailwind.config.ts`. The `@alawein/tokens` package and the `alawein/` workspace exist in this repository, but BMJ has not been wired to consume them at runtime yet.
 
 ### Background
 
@@ -81,7 +85,7 @@ BMJ's original design (warm, editorial aesthetic) maps to **Dawn Primary Theme**
 - Created ARCHITECTURE.md describing structure and build process
 - Created PUBLISH.md with release procedures
 - Created this ADR documenting decision and migration path
-- Updated root CLAUDE.md with reference to @alawein/tokens
+- Updated root CLAUDE.md with migration context and current-state guidance
 
 ### Phase 4: Migration Path (PLANNED)
 See section 6 below for detailed migration timeline.

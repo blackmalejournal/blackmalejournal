@@ -36,13 +36,14 @@
 |----------|-------|---------|-------------|
 | `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Production URL (e.g., `https://blackmalejournal.com` or `https://blackmalejournal.vercel.app`) |
 | `NEXT_PUBLIC_WHATSAPP_LINK` | Client | `contact/page.tsx` | WhatsApp contact link |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Client | `layout.tsx` | Optional Plausible domain. When set, the analytics script is injected into the root layout. |
 
 ---
 
 ## Rules
 
 1. **Never commit `.env` files** — `.gitignore` must include `.env*`
-2. **`NEXT_PUBLIC_` prefix** means the value is bundled into client-side JavaScript and visible to users. Only use this prefix for values that are safe to expose (Supabase URL, anon key, site URL, WhatsApp link).
+2. **`NEXT_PUBLIC_` prefix** means the value is bundled into client-side JavaScript and visible to users. Only use this prefix for values that are safe to expose (Supabase URL, anon key, site URL, WhatsApp link, Plausible domain).
 3. **Server-only variables** (Stripe secret key, Supabase service role key, Resend key) must NEVER have the `NEXT_PUBLIC_` prefix.
 4. **Vercel scoping:** Set env vars for Production, Preview, and Development environments separately in the Vercel dashboard. Some values differ per environment (e.g., `NEXT_PUBLIC_SITE_URL`, `STRIPE_WEBHOOK_SECRET`).
 5. **Rotation:** Rotate all secret keys annually, or immediately if compromised.
@@ -60,6 +61,6 @@
 
 ## Total Count
 
-- **13 variables** (4 client-safe, 9 server-only)
-- **3 required services:** Supabase (3), Stripe (4), Site Config (2) = 9 minimum for the app to function
-- **1 optional service:** Resend (3) + WhatsApp (1) = 4 for full functionality
+- **13 variables** (5 client-safe, 8 server-only)
+- **Required for the core app:** Supabase (3), Stripe (4), site URL (1)
+- **Optional integrations:** Resend (3), WhatsApp (1), Plausible (1)
