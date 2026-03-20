@@ -49,3 +49,7 @@ next-env.d.ts
 
 # git worktrees
 .worktrees/
+
+# Test artifacts
+playwright-report/
+test-results/

@@ -13,6 +13,10 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 
+function isDirectVideoFile(url: string): boolean {
+  return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url);
+}
+
 interface LessonPageProps {
   params: Promise<{ slug: string; lessonSlug: string }>;
 }
@@ -96,15 +100,24 @@ export default async function LessonPage({ params }: LessonPageProps) {
       {/* Video embed */}
       {hasAccess && lesson.video_url && (
         <div className="relative mb-10 aspect-video overflow-hidden bg-bmj-black">
-          <iframe
-            src={lesson.video_url}
-            title={lesson.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer"
-            className="absolute inset-0 h-full w-full"
-          />
+          {isDirectVideoFile(lesson.video_url) ? (
+            <video
+              src={lesson.video_url}
+              controls
+              preload="metadata"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <iframe
+              src={lesson.video_url}
+              title={lesson.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              className="absolute inset-0 h-full w-full"
+            />
+          )}
         </div>
       )}
 
@@ -116,6 +129,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           requiredTier={course.access_tier}
           previewBody={previewBody}
           isLoggedIn={!!user}
+          nextHref={`/academy/${course.slug}/${lesson.slug}`}
         />
       )}
 

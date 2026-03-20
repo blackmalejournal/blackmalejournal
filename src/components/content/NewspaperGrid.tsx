@@ -58,7 +58,7 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
         <Link
           key={article.slug}
           href={`/articles/${article.slug}`}
-          className={`group border-t-2 bg-bmj-brown p-4 transition-all duration-300 hover:-translate-y-0.5 hover:bg-bmj-brown/80 ${lensBorderColors[article.lens]}`}
+          className={`group border-t-2 bg-bmj-brown p-4 transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-bmj-brown/80 ${lensBorderColors[article.lens]}`}
         >
           <LensBadge lens={article.lens} />
           <h3 className="mt-2 font-display text-lg text-bmj-white sm:text-xl">

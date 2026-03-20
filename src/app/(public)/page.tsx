@@ -15,6 +15,8 @@ import {
   getLatestDispatches,
 } from "@/lib/supabase/queries";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   description:
     "Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.",

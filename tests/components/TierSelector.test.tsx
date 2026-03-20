@@ -41,6 +41,6 @@ describe('TierSelector', () => {
     render(<TierSelector selectedTier="free" onSelect={jest.fn()} />);
     expect(screen.getByText('Public articles')).toBeInTheDocument();
     expect(screen.getByText('Full Weekend Briefing archive')).toBeInTheDocument();
-    expect(screen.getByText('Direct line to The Chairman')).toBeInTheDocument();
+    expect(screen.getByText('Priority access to new releases')).toBeInTheDocument();
   });
 });

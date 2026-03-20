@@ -5,6 +5,8 @@ import { getBriefings } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { BriefingCard } from '@/components/content/BriefingCard';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: 'Weekend Briefing',
   description:

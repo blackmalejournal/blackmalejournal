@@ -64,24 +64,48 @@ const TIER_TABS: { label: string; value: string | undefined }[] = [
   { label: 'Premium', value: 'premium' },
 ];
 
+const ROLE_FILTERS: { label: string; value: string | undefined }[] = [
+  { label: 'All Roles', value: undefined },
+  { label: 'Members', value: 'member' },
+  { label: 'Editors', value: 'editor' },
+  { label: 'Admins', value: 'admin' },
+];
+
 interface MembersAdminPageProps {
-  searchParams: Promise<{ tier?: string }>;
+  searchParams: Promise<{ tier?: string; role?: string; q?: string; error?: string; message?: string }>;
 }
 
 export default async function MembersAdminPage({
   searchParams,
 }: MembersAdminPageProps) {
-  const { tier } = await searchParams;
+  const { tier, role, q, error, message } = await searchParams;
 
   const validTiers: MemberTier[] = ['free', 'basic', 'premium'];
+  const validRoles: MemberRole[] = ['member', 'editor', 'admin'];
   const activeTier = validTiers.includes(tier as MemberTier)
     ? (tier as MemberTier)
     : undefined;
+  const activeRole = validRoles.includes(role as MemberRole)
+    ? (role as MemberRole)
+    : undefined;
 
   const [members, totalCount] = await Promise.all([
-    getAllMembers(activeTier ? { tier: activeTier } : undefined),
+    getAllMembers({
+      tier: activeTier,
+      role: activeRole,
+      query: q,
+    }),
     getMemberCount(),
   ]);
+
+  function makeHref(nextTier?: string, nextRole = activeRole, nextQuery = q) {
+    const params = new URLSearchParams();
+    if (nextTier) params.set('tier', nextTier);
+    if (nextRole) params.set('role', nextRole);
+    if (nextQuery) params.set('q', nextQuery);
+    const query = params.toString();
+    return query ? `/admin/members?${query}` : '/admin/members';
+  }
 
   return (
     <div>
@@ -95,6 +119,18 @@ export default async function MembersAdminPage({
         </p>
       </div>
 
+      {error && (
+        <div className="mt-6 border border-bmj-red/40 bg-bmj-red/10 p-4">
+          <p className="font-body text-sm text-bmj-red">{error}</p>
+        </div>
+      )}
+
+      {message && (
+        <div className="mt-6 border border-bmj-amber/40 bg-bmj-amber/10 p-4">
+          <p className="font-body text-sm text-bmj-amber">{message}</p>
+        </div>
+      )}
+
       {/* Tier filter tabs */}
       <nav
         aria-label="Tier filter"
@@ -107,11 +143,7 @@ export default async function MembersAdminPage({
           return (
             <Link
               key={tab.label}
-              href={
-                tab.value
-                  ? `/admin/members?tier=${tab.value}`
-                  : '/admin/members'
-              }
+              href={makeHref(tab.value)}
               className={`pb-3 font-label text-xs uppercase tracking-widest transition-colors ${
                 isActive
                   ? 'border-b-2 border-bmj-red text-bmj-white'
@@ -123,6 +155,54 @@ export default async function MembersAdminPage({
           );
         })}
       </nav>
+
+      <form className="mt-6 grid grid-cols-1 gap-4 border border-bmj-tan/20 bg-bmj-brown p-4 lg:grid-cols-[1fr_220px_auto]">
+        <div>
+          <label htmlFor="q" className="mb-1 block font-label text-xs uppercase tracking-widest text-bmj-tan">
+            Search Email
+          </label>
+          <input
+            id="q"
+            name="q"
+            type="text"
+            defaultValue={q ?? ''}
+            placeholder="chairman@example.com"
+            className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+          />
+        </div>
+        <div>
+          <label htmlFor="role" className="mb-1 block font-label text-xs uppercase tracking-widest text-bmj-tan">
+            Role
+          </label>
+          <select
+            id="role"
+            name="role"
+            defaultValue={activeRole ?? ''}
+            className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream focus:border-bmj-red focus:outline-none"
+          >
+            {ROLE_FILTERS.map((filter) => (
+              <option key={filter.label} value={filter.value ?? ''}>
+                {filter.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex items-end gap-3">
+          {activeTier && <input type="hidden" name="tier" value={activeTier} />}
+          <button
+            type="submit"
+            className="bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+          >
+            Filter
+          </button>
+          <Link
+            href="/admin/members"
+            className="border border-bmj-tan/30 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+          >
+            Reset
+          </Link>
+        </div>
+      </form>
 
       {/* Member list */}
       <div className="mt-6">
@@ -149,6 +229,12 @@ export default async function MembersAdminPage({
                     Joined {formatDate(member.created_at)}
                   </p>
                 </div>
+                <Link
+                  href={`/admin/members/${member.id}`}
+                  className="ml-4 shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
+                >
+                  Manage
+                </Link>
               </li>
             ))}
           </ul>

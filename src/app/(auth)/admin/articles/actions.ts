@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createArticle, updateArticle } from '@/lib/supabase/admin-queries';
+import { requireAdminActor } from '@/lib/admin-auth';
 
 // ── Zod schema ──────────────────────────────────────────────────────────────────
 
@@ -41,6 +42,7 @@ function parseTags(raw: string): string[] {
 // ── Create ──────────────────────────────────────────────────────────────────────
 
 export async function createArticleAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const raw = Object.fromEntries(formData.entries());
 
   const parsed = articleSchema.safeParse(raw);
@@ -79,6 +81,7 @@ export async function createArticleAction(formData: FormData): Promise<void> {
 // ── Update ──────────────────────────────────────────────────────────────────────
 
 export async function updateArticleAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const id = formData.get('id') as string;
   if (!id) {
     redirect('/admin/articles?error=Article+ID+is+required');

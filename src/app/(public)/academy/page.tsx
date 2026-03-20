@@ -7,6 +7,8 @@ import { CourseCard } from '@/components/content/CourseCard';
 import { CategoryFilterTabs } from '@/components/content/CategoryFilterTabs';
 import type { CourseCategory } from '@/lib/supabase/types';
 
+export const revalidate = 300;
+
 export const metadata: Metadata = {
   title: 'Academy',
   description:

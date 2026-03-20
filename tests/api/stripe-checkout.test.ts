@@ -74,7 +74,12 @@ describe('POST /api/stripe/checkout', () => {
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.url).toBe('https://checkout.stripe.com/session_123');
-    expect(mockCreateCheckoutSession).toHaveBeenCalledWith('u1', 'test@example.com', 'basic');
+    expect(mockCreateCheckoutSession).toHaveBeenCalledWith(
+      'u1',
+      'test@example.com',
+      'basic',
+      '/portal',
+    );
   });
 
   it('returns 200 with url for premium tier', async () => {
@@ -83,7 +88,28 @@ describe('POST /api/stripe/checkout', () => {
     expect(res.status).toBe(200);
     const json = await res.json();
     expect(json.url).toBeDefined();
-    expect(mockCreateCheckoutSession).toHaveBeenCalledWith('u1', 'test@example.com', 'premium');
+    expect(mockCreateCheckoutSession).toHaveBeenCalledWith(
+      'u1',
+      'test@example.com',
+      'premium',
+      '/portal',
+    );
+  });
+
+  it('passes a normalized return path to createCheckoutSession', async () => {
+    mockAuthUser({ id: 'u1', email: 'test@example.com' });
+
+    const res = await POST(
+      makeRequest({ tier: 'basic', returnTo: '/articles/return-here?ref=paywall' }),
+    );
+
+    expect(res.status).toBe(200);
+    expect(mockCreateCheckoutSession).toHaveBeenCalledWith(
+      'u1',
+      'test@example.com',
+      'basic',
+      '/articles/return-here?ref=paywall',
+    );
   });
 
   it('returns 500 when createCheckoutSession throws', async () => {

@@ -34,7 +34,7 @@ describe('DownloadCard', () => {
   it('shows download link when user has access', () => {
     render(<DownloadCard {...defaultProps} hasAccess />);
     const link = screen.getByRole('link', { name: /Download/i });
-    expect(link).toHaveAttribute('href', 'https://example.com/file.pdf');
+    expect(link).toHaveAttribute('href', '/api/downloads/morning-routine-template');
   });
 
   it('shows upgrade link when user has no access', () => {

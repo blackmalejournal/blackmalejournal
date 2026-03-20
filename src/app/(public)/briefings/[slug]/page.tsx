@@ -111,7 +111,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
     getBriefingByIssue(briefing.issue_number + 1),
   ]);
 
-  const { hasAccess } = await checkContentAccess(briefing.access_tier);
+  const { hasAccess, user } = await checkContentAccess(briefing.access_tier);
 
   const issueLabel = `No. ${String(briefing.issue_number).padStart(3, '0')}`;
   // PaywallGate preview: first 300 chars of section[1] body if available, else section[0]
@@ -192,6 +192,8 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
             <PaywallGate
               requiredTier={briefing.access_tier}
               previewBody={paywallPreview}
+              isLoggedIn={!!user}
+              nextHref={`/briefings/${briefing.slug}`}
             />
           </div>
         )}

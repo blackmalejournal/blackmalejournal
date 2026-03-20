@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Dispatch } from '@/lib/supabase/types';
+import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
       className="bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
     >
       {pending
-        ? 'Saving...'
+        ? 'Saving…'
         : isEdit
           ? 'Update Dispatch'
           : 'Create Dispatch'}
@@ -180,16 +181,14 @@ export function DispatchForm({ dispatch, action }: DispatchFormProps) {
 
         {/* Cover Image */}
         <div>
-          <label htmlFor="cover_image" className={labelClass}>
-            Cover Image URL
-          </label>
-          <input
-            id="cover_image"
+          <StorageUploadField
+            bucket="covers"
+            folder="dispatches"
+            label="Cover Image"
             name="cover_image"
-            type="text"
             defaultValue={dispatch?.cover_image ?? ''}
-            className={inputClass}
-            placeholder="covers/my-dispatch.webp"
+            placeholder="https://cdn.example.com/dispatch-cover.webp"
+            accept="image/png,image/jpeg,image/webp"
           />
         </div>
 

@@ -3,8 +3,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { login, signInWithMagicLink } from '../actions';
+import { withQuery } from '@/lib/paths';
 
-export function LoginForm() {
+interface LoginFormProps {
+  nextHref?: string;
+}
+
+export function LoginForm({ nextHref }: LoginFormProps) {
   const [mode, setMode] = useState<'password' | 'magic'>('password');
 
   return (
@@ -37,6 +42,7 @@ export function LoginForm() {
 
       {mode === 'password' ? (
         <form action={login} className="space-y-4">
+          {nextHref && <input type="hidden" name="next" value={nextHref} />}
           <div>
             <label
               htmlFor="email"
@@ -49,7 +55,9 @@ export function LoginForm() {
               name="email"
               type="email"
               required
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="email"
+              spellCheck={false}
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
@@ -66,7 +74,8 @@ export function LoginForm() {
               name="password"
               type="password"
               required
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="current-password"
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="••••••••"
             />
           </div>
@@ -80,6 +89,7 @@ export function LoginForm() {
         </form>
       ) : (
         <form action={signInWithMagicLink} className="space-y-4">
+          {nextHref && <input type="hidden" name="next" value={nextHref} />}
           <div>
             <label
               htmlFor="magic-email"
@@ -92,7 +102,9 @@ export function LoginForm() {
               name="email"
               type="email"
               required
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="email"
+              spellCheck={false}
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
@@ -108,7 +120,10 @@ export function LoginForm() {
 
       <p className="mt-6 text-center font-body text-sm text-bmj-tan">
         Don&apos;t have an account?{' '}
-        <Link href="/signup" className="text-bmj-red hover:text-bmj-cream">
+        <Link
+          href={withQuery('/signup', { next: nextHref })}
+          className="text-bmj-red hover:text-bmj-cream"
+        >
           Join the movement &rarr;
         </Link>
       </p>

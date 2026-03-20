@@ -45,7 +45,7 @@ export function Navbar({ user = null }: NavbarProps) {
   return (
     <>
       <header
-        className={`accent-border-bottom sticky top-0 z-50 transition-all duration-200 ${
+        className={`accent-border-bottom sticky top-0 z-50 transition-[background-color,backdrop-filter] duration-200 ${
           isScrolled
             ? 'bg-bmj-black/95 backdrop-blur-sm'
             : 'bg-bmj-black'

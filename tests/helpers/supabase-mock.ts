@@ -3,7 +3,28 @@ type SupabaseResult = { data: unknown; error: null } | { data: null; error: { me
 function createChainableMock(resolvedValue: SupabaseResult = { data: [], error: null }) {
   const chain: Record<string, jest.Mock> = {};
 
-  const methods = ['select', 'insert', 'update', 'upsert', 'delete', 'eq', 'neq', 'contains', 'order', 'limit', 'range', 'single', 'maybeSingle'];
+  const methods = [
+    'select',
+    'insert',
+    'update',
+    'upsert',
+    'delete',
+    'eq',
+    'neq',
+    'contains',
+    'order',
+    'limit',
+    'range',
+    'single',
+    'maybeSingle',
+    'in',
+    'lte',
+    'gte',
+    'ilike',
+    'or',
+    'is',
+    'not',
+  ];
 
   for (const method of methods) {
     chain[method] = jest.fn().mockReturnValue(chain);

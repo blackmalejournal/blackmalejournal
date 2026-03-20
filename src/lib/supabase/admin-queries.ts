@@ -8,17 +8,27 @@ import type {
   Briefing,
   BriefingSection,
   ContactSubmission,
+  ContactSubmissionStatus,
   ContentStatus,
+  Course,
   Dispatch,
   Download,
   Handbook,
   Lens,
+  Lesson,
   AccessTier,
   Member,
   MemberTier,
   MemberRole,
   NewsletterSubscriber,
 } from '@/lib/supabase/types';
+
+function buildSearchPattern(raw?: string): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  return `%${trimmed.replace(/[%_\\]/g, '\\$&')}%`;
+}
 
 // ── Articles ──────────────────────────────────────────────────────────────────
 
@@ -780,30 +790,266 @@ export async function deleteHandbook(id: string): Promise<boolean> {
   return true;
 }
 
+// ── Courses ────────────────────────────────────────────────────────────────────
+
+export async function getAllCourses(options?: {
+  published?: boolean;
+  category?: string;
+  query?: string;
+  limit?: number;
+  offset?: number;
+}): Promise<Course[]> {
+  const { published, category, query, limit = 50, offset = 0 } = options ?? {};
+  const supabase = createAdminClient();
+  const searchPattern = buildSearchPattern(query);
+
+  let search = supabase
+    .from('courses')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (published !== undefined) search = search.eq('published', published);
+  if (category) search = search.eq('category', category);
+  if (searchPattern) {
+    search = search.or(`title.ilike.${searchPattern},description.ilike.${searchPattern}`);
+  }
+
+  const { data, error } = await search;
+  if (error) {
+    console.error('[getAllCourses]', error.message);
+    return [];
+  }
+  return (data ?? []) as Course[];
+}
+
+export async function getCourseById(id: string): Promise<Course | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('courses')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getCourseById]', error.message);
+    return null;
+  }
+  return data as Course;
+}
+
+export async function createCourse(data: {
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  access_tier: AccessTier;
+  published: boolean;
+  cover_image?: string | null;
+}): Promise<Course | null> {
+  const supabase = createAdminClient();
+  const { data: created, error } = await supabase
+    .from('courses')
+    .insert({
+      title: data.title,
+      slug: data.slug,
+      description: data.description,
+      category: data.category,
+      access_tier: data.access_tier,
+      published: data.published,
+      cover_image: data.cover_image ?? null,
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[createCourse]', error.message);
+    return null;
+  }
+  return created as Course;
+}
+
+export async function updateCourse(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    description: string;
+    category: string;
+    access_tier: AccessTier;
+    published: boolean;
+    cover_image: string | null;
+  }>,
+): Promise<Course | null> {
+  const supabase = createAdminClient();
+  const { data: updated, error } = await supabase
+    .from('courses')
+    .update(data)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateCourse]', error.message);
+    return null;
+  }
+  return updated as Course;
+}
+
+export async function deleteCourse(id: string): Promise<boolean> {
+  const supabase = createAdminClient();
+  const { error: lessonError } = await supabase
+    .from('lessons')
+    .delete()
+    .eq('course_id', id);
+
+  if (lessonError) {
+    console.error('[deleteCourse:lessons]', lessonError.message);
+    return false;
+  }
+
+  const { error } = await supabase
+    .from('courses')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('[deleteCourse]', error.message);
+    return false;
+  }
+  return true;
+}
+
+// ── Lessons ────────────────────────────────────────────────────────────────────
+
+export async function getLessonsForAdminCourse(courseId: string): Promise<Lesson[]> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('course_id', courseId)
+    .order('order_number', { ascending: true });
+
+  if (error) {
+    console.error('[getLessonsForAdminCourse]', error.message);
+    return [];
+  }
+  return (data ?? []) as Lesson[];
+}
+
+export async function getLessonById(id: string): Promise<Lesson | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('lessons')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getLessonById]', error.message);
+    return null;
+  }
+  return data as Lesson;
+}
+
+export async function createLesson(data: {
+  course_id: string;
+  title: string;
+  slug: string;
+  order_number: number;
+  body: string;
+  video_url?: string | null;
+  duration: number;
+  published: boolean;
+}): Promise<Lesson | null> {
+  const supabase = createAdminClient();
+  const { data: created, error } = await supabase
+    .from('lessons')
+    .insert({
+      course_id: data.course_id,
+      title: data.title,
+      slug: data.slug,
+      order_number: data.order_number,
+      body: data.body,
+      video_url: data.video_url ?? null,
+      duration: data.duration,
+      published: data.published,
+    })
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[createLesson]', error.message);
+    return null;
+  }
+  return created as Lesson;
+}
+
+export async function updateLesson(
+  id: string,
+  data: Partial<{
+    title: string;
+    slug: string;
+    order_number: number;
+    body: string;
+    video_url: string | null;
+    duration: number;
+    published: boolean;
+  }>,
+): Promise<Lesson | null> {
+  const supabase = createAdminClient();
+  const { data: updated, error } = await supabase
+    .from('lessons')
+    .update(data)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateLesson]', error.message);
+    return null;
+  }
+  return updated as Lesson;
+}
+
+export async function deleteLesson(id: string): Promise<boolean> {
+  const supabase = createAdminClient();
+  const { error } = await supabase
+    .from('lessons')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.error('[deleteLesson]', error.message);
+    return false;
+  }
+  return true;
+}
+
 // ── Members ────────────────────────────────────────────────────────────────────
 
-/**
- * List all members with optional tier/role filtering. For the admin member list.
- */
 export async function getAllMembers(options?: {
   tier?: MemberTier;
   role?: MemberRole;
+  query?: string;
   limit?: number;
   offset?: number;
 }): Promise<Member[]> {
-  const { tier, role, limit = 50, offset = 0 } = options ?? {};
+  const { tier, role, query, limit = 50, offset = 0 } = options ?? {};
   const supabase = createAdminClient();
+  const searchPattern = buildSearchPattern(query);
 
-  let query = supabase
+  let search = supabase
     .from('members')
     .select('*')
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
-  if (tier) query = query.eq('tier', tier);
-  if (role) query = query.eq('role', role);
+  if (tier) search = search.eq('tier', tier);
+  if (role) search = search.eq('role', role);
+  if (searchPattern) search = search.ilike('email', searchPattern);
 
-  const { data, error } = await query;
+  const { data, error } = await search;
   if (error) {
     console.error('[getAllMembers]', error.message);
     return [];
@@ -811,9 +1057,54 @@ export async function getAllMembers(options?: {
   return (data ?? []) as Member[];
 }
 
-/**
- * Get total member count for the admin dashboard.
- */
+export async function getAdminMemberById(id: string): Promise<Member | null> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from('members')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('[getAdminMemberById]', error.message);
+    return null;
+  }
+  return data as Member;
+}
+
+export async function updateAdminMember(
+  id: string,
+  data: Partial<Pick<Member, 'tier' | 'role'>>,
+): Promise<Member | null> {
+  const supabase = createAdminClient();
+  const { data: updated, error } = await supabase
+    .from('members')
+    .update(data)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateAdminMember]', error.message);
+    return null;
+  }
+  return updated as Member;
+}
+
+export async function countAdminMembers(): Promise<number> {
+  const supabase = createAdminClient();
+  const { count, error } = await supabase
+    .from('members')
+    .select('id', { count: 'exact', head: true })
+    .eq('role', 'admin');
+
+  if (error) {
+    console.error('[countAdminMembers]', error.message);
+    return 0;
+  }
+  return count ?? 0;
+}
+
 export async function getMemberCount(): Promise<number> {
   const supabase = createAdminClient();
   const { count, error } = await supabase
@@ -829,22 +1120,30 @@ export async function getMemberCount(): Promise<number> {
 
 // ── Contact Submissions ───────────────────────────────────────────────────────
 
-/**
- * List all contact form submissions ordered by newest first.
- */
 export async function getAllContactSubmissions(options?: {
+  status?: ContactSubmissionStatus;
+  query?: string;
   limit?: number;
   offset?: number;
 }): Promise<ContactSubmission[]> {
-  const { limit = 50, offset = 0 } = options ?? {};
+  const { status, query, limit = 50, offset = 0 } = options ?? {};
   const supabase = createAdminClient();
+  const searchPattern = buildSearchPattern(query);
 
-  const { data, error } = await supabase
+  let search = supabase
     .from('contact_submissions')
     .select('*')
     .order('submitted_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
+  if (status) search = search.eq('status', status);
+  if (searchPattern) {
+    search = search.or(
+      `name.ilike.${searchPattern},email.ilike.${searchPattern},subject.ilike.${searchPattern},message.ilike.${searchPattern},internal_notes.ilike.${searchPattern}`,
+    );
+  }
+
+  const { data, error } = await search;
   if (error) {
     console.error('[getAllContactSubmissions]', error.message);
     return [];
@@ -852,34 +1151,104 @@ export async function getAllContactSubmissions(options?: {
   return (data ?? []) as ContactSubmission[];
 }
 
+export async function updateContactSubmission(
+  id: string,
+  data: {
+    status: ContactSubmissionStatus;
+    internal_notes?: string | null;
+    handled_by?: string | null;
+  },
+): Promise<ContactSubmission | null> {
+  const supabase = createAdminClient();
+  const payload = {
+    status: data.status,
+    internal_notes: data.internal_notes?.trim() || null,
+    handled_by: data.handled_by ?? null,
+    handled_at: data.status === 'new' ? null : new Date().toISOString(),
+  };
+
+  const { data: updated, error } = await supabase
+    .from('contact_submissions')
+    .update(payload)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('[updateContactSubmission]', error.message);
+    return null;
+  }
+  return updated as ContactSubmission;
+}
+
+export async function getContactSubmissionCounts(): Promise<Record<ContactSubmissionStatus, number> & { total: number }> {
+  const supabase = createAdminClient();
+  const [total, nextNew, inProgress, resolved, spam] = await Promise.all([
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }).eq('status', 'in_progress'),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }).eq('status', 'resolved'),
+    supabase.from('contact_submissions').select('id', { count: 'exact', head: true }).eq('status', 'spam'),
+  ]);
+
+  return {
+    total: total.count ?? 0,
+    new: nextNew.count ?? 0,
+    in_progress: inProgress.count ?? 0,
+    resolved: resolved.count ?? 0,
+    spam: spam.count ?? 0,
+  };
+}
+
 // ── Newsletter Subscribers ─────────────────────────────────────────────────────
 
-/**
- * List newsletter subscribers with optional active/unsubscribed filter.
- */
 export async function getAllSubscribers(options?: {
   active?: boolean;
+  query?: string;
   limit?: number;
   offset?: number;
 }): Promise<NewsletterSubscriber[]> {
-  const { active, limit = 50, offset = 0 } = options ?? {};
+  const { active, query, limit = 50, offset = 0 } = options ?? {};
   const supabase = createAdminClient();
+  const searchPattern = buildSearchPattern(query);
 
-  let query = supabase
+  let search = supabase
     .from('newsletter_subscribers')
     .select('*')
     .order('subscribed_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
-  if (active === true) query = query.is('unsubscribed_at', null);
-  if (active === false) query = query.not('unsubscribed_at', 'is', null);
+  if (active === true) search = search.is('unsubscribed_at', null);
+  if (active === false) search = search.not('unsubscribed_at', 'is', null);
+  if (searchPattern) {
+    search = search.or(`email.ilike.${searchPattern},source.ilike.${searchPattern}`);
+  }
 
-  const { data, error } = await query;
+  const { data, error } = await search;
   if (error) {
     console.error('[getAllSubscribers]', error.message);
     return [];
   }
   return (data ?? []) as NewsletterSubscriber[];
+}
+
+export async function getSubscriberCounts(): Promise<{
+  total: number;
+  active: number;
+  unsubscribed: number;
+}> {
+  const supabase = createAdminClient();
+  const [total, active, unsubscribed] = await Promise.all([
+    supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }),
+    supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).is('unsubscribed_at', null),
+    supabase.from('newsletter_subscribers').select('id', { count: 'exact', head: true }).not('unsubscribed_at', 'is', null),
+  ]);
+
+  return {
+    total: total.count ?? 0,
+    active: active.count ?? 0,
+    unsubscribed: unsubscribed.count ?? 0,
+  };
 }
 
 // ── Dashboard counts ──────────────────────────────────────────────────────────
@@ -891,6 +1260,7 @@ export async function getAllSubscribers(options?: {
 export async function getContentCounts(): Promise<{
   articles: { total: number; published: number; draft: number };
   briefings: { total: number; published: number; draft: number };
+  courses: { total: number; published: number; draft: number };
   dispatches: { total: number; published: number; draft: number };
   downloads: { total: number };
   handbooks: { total: number; published: number; draft: number };
@@ -907,6 +1277,9 @@ export async function getContentCounts(): Promise<{
     briefingsTotal,
     briefingsPublished,
     briefingsDraft,
+    coursesTotal,
+    coursesPublished,
+    coursesDraft,
     dispatchesTotal,
     dispatchesPublished,
     dispatchesDraft,
@@ -924,6 +1297,9 @@ export async function getContentCounts(): Promise<{
     supabase.from('briefings').select('id', { count: 'exact', head: true }),
     supabase.from('briefings').select('id', { count: 'exact', head: true }).eq('status', 'published'),
     supabase.from('briefings').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
+    supabase.from('courses').select('id', { count: 'exact', head: true }),
+    supabase.from('courses').select('id', { count: 'exact', head: true }).eq('published', true),
+    supabase.from('courses').select('id', { count: 'exact', head: true }).eq('published', false),
     supabase.from('dispatches').select('id', { count: 'exact', head: true }),
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'published'),
     supabase.from('dispatches').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
@@ -946,6 +1322,11 @@ export async function getContentCounts(): Promise<{
       total: briefingsTotal.count ?? 0,
       published: briefingsPublished.count ?? 0,
       draft: briefingsDraft.count ?? 0,
+    },
+    courses: {
+      total: coursesTotal.count ?? 0,
+      published: coursesPublished.count ?? 0,
+      draft: coursesDraft.count ?? 0,
     },
     dispatches: {
       total: dispatchesTotal.count ?? 0,

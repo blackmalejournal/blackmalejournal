@@ -83,6 +83,9 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
     apple: "/logo.svg",
   },
+  other: {
+    "theme-color": "#0D0C0B",
+  },
 };
 
 export default async function RootLayout({

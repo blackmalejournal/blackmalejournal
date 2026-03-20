@@ -19,7 +19,7 @@ export function DispatchCard({
   publishedAt,
 }: DispatchCardProps) {
   return (
-    <article className="group border-l-4 border-bmj-red bg-bmj-brown transition-all duration-300 hover:-translate-y-0.5 hover:border-bmj-cream">
+    <article className="group border-l-4 border-bmj-red bg-bmj-brown transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-bmj-cream">
       <Link
         href={`/blog/${slug}`}
         className="block p-6 no-underline sm:p-8"

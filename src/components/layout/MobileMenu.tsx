@@ -47,7 +47,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-            className="fixed right-0 top-0 z-50 flex h-full w-full flex-col bg-bmj-black px-8 py-6"
+            className="fixed right-0 top-0 z-50 flex h-full w-full flex-col overflow-y-auto overscroll-contain bg-bmj-black px-8 py-6"
           >
             {/* Close button */}
             <button

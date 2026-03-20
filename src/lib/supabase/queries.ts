@@ -19,6 +19,17 @@ import type {
   SearchResult,
 } from '@/lib/supabase/types';
 
+const PUBLIC_CONTENT_STATUSES = ['published', 'scheduled'] as const;
+
+function applyPublicContentVisibility<TQuery extends {
+  in: (column: string, values: readonly string[]) => TQuery;
+  lte: (column: string, value: string) => TQuery;
+}>(query: TQuery, nowIso = new Date().toISOString()): TQuery {
+  return query
+    .in('status', PUBLIC_CONTENT_STATUSES)
+    .lte('published_at', nowIso);
+}
+
 // ── Articles ──────────────────────────────────────────────────────────────────
 
 export async function getArticles(
@@ -32,13 +43,13 @@ export async function getArticles(
 ): Promise<Article[]> {
   const { lens, tag, limit = 20, offset = 0, tier } = options;
   const supabase = await createClient();
+  const nowIso = new Date().toISOString();
 
-  let query = supabase
+  let query = applyPublicContentVisibility(supabase
     .from('articles')
     .select('*')
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .range(offset, offset + limit - 1), nowIso);
 
   if (lens) query = query.eq('lens', lens);
   if (tag) query = query.contains('tags', [tag]);
@@ -54,11 +65,10 @@ export async function getArticles(
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
     .select('*')
-    .eq('slug', slug)
-    .eq('status', 'published')
+    .eq('slug', slug))
     .single();
 
   if (error) return null;
@@ -67,13 +77,12 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
 export async function getFeaturedArticles(limit = 3): Promise<Article[]> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
     .select('*')
     .eq('featured', true)
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .limit(limit);
+    .limit(limit));
 
   if (error) {
     console.error('[getFeaturedArticles]', error.message);
@@ -84,12 +93,11 @@ export async function getFeaturedArticles(limit = 3): Promise<Article[]> {
 
 export async function getLatestArticles(limit = 10): Promise<Article[]> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
     .select('*')
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .limit(limit);
+    .limit(limit));
 
   if (error) {
     console.error('[getLatestArticles]', error.message);
@@ -105,12 +113,11 @@ export async function getBriefings(
 ): Promise<Briefing[]> {
   const { limit = 20, offset = 0 } = options;
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
     .select('*')
-    .eq('status', 'published')
     .order('issue_number', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .range(offset, offset + limit - 1));
 
   if (error) {
     console.error('[getBriefings]', error.message);
@@ -123,11 +130,10 @@ export async function getBriefingBySlug(
   slug: string,
 ): Promise<Briefing | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
     .select('*')
-    .eq('slug', slug)
-    .eq('status', 'published')
+    .eq('slug', slug))
     .single();
 
   if (error) return null;
@@ -136,12 +142,11 @@ export async function getBriefingBySlug(
 
 export async function getLatestBriefing(): Promise<Briefing | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
     .select('*')
-    .eq('status', 'published')
     .order('issue_number', { ascending: false })
-    .limit(1)
+    .limit(1))
     .single();
 
   if (error) return null;
@@ -152,11 +157,10 @@ export async function getBriefingByIssue(
   issueNumber: number,
 ): Promise<Briefing | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
     .select('*')
-    .eq('issue_number', issueNumber)
-    .eq('status', 'published')
+    .eq('issue_number', issueNumber))
     .single();
 
   if (error) return null;
@@ -346,12 +350,11 @@ export async function getDispatches(
 ): Promise<Dispatch[]> {
   const { limit = 20, offset = 0 } = options;
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('dispatches')
     .select('*')
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .range(offset, offset + limit - 1));
 
   if (error) {
     console.error('[getDispatches]', error.message);
@@ -364,11 +367,10 @@ export async function getDispatchBySlug(
   slug: string,
 ): Promise<Dispatch | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('dispatches')
     .select('*')
-    .eq('slug', slug)
-    .eq('status', 'published')
+    .eq('slug', slug))
     .single();
 
   if (error) return null;
@@ -377,12 +379,11 @@ export async function getDispatchBySlug(
 
 export async function getLatestDispatches(limit = 3): Promise<Dispatch[]> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('dispatches')
     .select('*')
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .limit(limit);
+    .limit(limit));
 
   if (error) {
     console.error('[getLatestDispatches]', error.message);
@@ -403,12 +404,11 @@ export async function getHandbooks(
   const { lens, limit = 20, offset = 0 } = options;
   const supabase = await createClient();
 
-  let query = supabase
+  let query = applyPublicContentVisibility(supabase
     .from('handbooks')
     .select('*')
-    .eq('status', 'published')
     .order('published_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .range(offset, offset + limit - 1));
 
   if (lens) query = query.eq('lens', lens);
 
@@ -422,11 +422,10 @@ export async function getHandbooks(
 
 export async function getHandbookBySlug(slug: string): Promise<Handbook | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  const { data, error } = await applyPublicContentVisibility(supabase
     .from('handbooks')
     .select('*')
-    .eq('slug', slug)
-    .eq('status', 'published')
+    .eq('slug', slug))
     .single();
 
   if (error) return null;
@@ -461,6 +460,18 @@ export async function getDownloads(
   return (data ?? []) as Download[];
 }
 
+export async function getDownloadBySlug(slug: string): Promise<Download | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('downloads')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) return null;
+  return data as Download;
+}
+
 // ── Search ──────────────────────────────────────────────────────────────────
 
 export async function searchContent(
@@ -476,34 +487,30 @@ export async function searchContent(
   const term = `%${escaped}%`;
 
   const [articles, briefings, handbooks, dispatches] = await Promise.all([
-    supabase
+    applyPublicContentVisibility(supabase
       .from('articles')
       .select('title, slug, excerpt, lens, published_at')
-      .eq('status', 'published')
       .or(`title.ilike.${term},excerpt.ilike.${term}`)
       .order('published_at', { ascending: false })
-      .limit(limit),
-    supabase
+      .limit(limit)),
+    applyPublicContentVisibility(supabase
       .from('briefings')
       .select('title, slug, published_at')
-      .eq('status', 'published')
       .ilike('title', term)
       .order('published_at', { ascending: false })
-      .limit(limit),
-    supabase
+      .limit(limit)),
+    applyPublicContentVisibility(supabase
       .from('handbooks')
       .select('title, slug, description, lens, published_at')
-      .eq('status', 'published')
       .or(`title.ilike.${term},description.ilike.${term}`)
       .order('published_at', { ascending: false })
-      .limit(limit),
-    supabase
+      .limit(limit)),
+    applyPublicContentVisibility(supabase
       .from('dispatches')
       .select('title, slug, excerpt, lens, published_at')
-      .eq('status', 'published')
       .or(`title.ilike.${term},excerpt.ilike.${term}`)
       .order('published_at', { ascending: false })
-      .limit(limit),
+      .limit(limit)),
   ]);
 
   const results: SearchResult[] = [];

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import Stripe from 'stripe';
 import { getStripe } from '@/lib/stripe/config';
+import { resolveSiteUrl } from '@/lib/site-url';
 
 const donateSchema = z.object({
   amount: z.number().min(1, 'Minimum $1').max(10000, 'Maximum $10,000'),
@@ -11,9 +12,8 @@ const donateSchema = z.object({
   email: z.string().email().optional(),
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-
 export async function POST(request: Request) {
+  const siteUrl = resolveSiteUrl();
   let body: unknown;
   try {
     body = await request.json();

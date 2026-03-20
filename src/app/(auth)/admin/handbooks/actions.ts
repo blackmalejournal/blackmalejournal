@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createHandbook, updateHandbook } from '@/lib/supabase/admin-queries';
+import { requireAdminActor } from '@/lib/admin-auth';
 
 // ── Zod schema ──────────────────────────────────────────────────────────────────
 
@@ -33,6 +34,7 @@ function generateSlug(title: string): string {
 // ── Create ──────────────────────────────────────────────────────────────────────
 
 export async function createHandbookAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const raw = Object.fromEntries(formData.entries());
 
   const parsed = handbookSchema.safeParse(raw);
@@ -70,6 +72,7 @@ export async function createHandbookAction(formData: FormData): Promise<void> {
 // ── Update ──────────────────────────────────────────────────────────────────────
 
 export async function updateHandbookAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const id = formData.get('id') as string;
   if (!id) {
     redirect('/admin/handbooks?error=Handbook+ID+is+required');

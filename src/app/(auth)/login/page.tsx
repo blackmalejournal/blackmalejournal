@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { LoginForm } from './LoginForm';
+import { normalizeInternalPath } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Log In',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 interface LoginPageProps {
-  searchParams: Promise<{ error?: string; message?: string; redirect?: string }>;
+  searchParams: Promise<{ error?: string; message?: string; redirect?: string; next?: string }>;
 }
 
 const KNOWN_ERRORS: Record<string, string> = {
@@ -44,6 +45,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
   const error = resolveError(params.error);
   const message = resolveMessage(params.message);
+  const nextHref = normalizeInternalPath(params.next ?? params.redirect, '/portal');
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center px-4">
@@ -70,7 +72,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           </div>
         )}
 
-        <LoginForm />
+        <LoginForm nextHref={nextHref !== '/portal' ? nextHref : undefined} />
       </div>
     </div>
   );

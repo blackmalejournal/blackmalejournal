@@ -41,7 +41,7 @@ describe('DispatchForm', () => {
     expect(screen.getByLabelText(/excerpt/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/body/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/status/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/cover image url/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
   });
 
   it('shows "Create Dispatch" button when no dispatch provided', () => {
@@ -71,7 +71,7 @@ describe('DispatchForm', () => {
       'Full dispatch body content here.',
     );
     expect(screen.getByLabelText(/status/i)).toHaveValue('published');
-    expect(screen.getByLabelText(/cover image url/i)).toHaveValue(
+    expect(screen.getByLabelText(/cover image/i)).toHaveValue(
       'covers/test.webp',
     );
   });

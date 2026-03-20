@@ -21,10 +21,11 @@ describe('SubscriptionManager', () => {
     expect(screen.getByRole('button', { name: /upgrade to premium/i })).toBeInTheDocument();
   });
 
-  it('shows "View Plans" link for free tier', () => {
+  it('shows an immediate upgrade action for free tier', () => {
     render(<SubscriptionManager tier="free" hasSubscription={false} />);
-    expect(screen.getByText('View Plans')).toBeInTheDocument();
-    expect(screen.getByText('View Plans').closest('a')).toHaveAttribute('href', '/pricing');
+    expect(
+      screen.getByRole('button', { name: /start basic membership/i }),
+    ).toBeInTheDocument();
   });
 
   it('shows "Manage Billing" when hasSubscription is true', () => {

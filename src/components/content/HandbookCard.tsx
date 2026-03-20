@@ -28,7 +28,7 @@ export function HandbookCard({
 
   return (
     <Link href={`/handbooks/${slug}`} className="group no-underline">
-      <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-all duration-200 hover:-translate-y-1 hover:border-bmj-red/60 sm:flex-row">
+      <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/60 sm:flex-row">
         {/* Cover image or icon */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-bmj-black sm:aspect-auto sm:w-48 sm:shrink-0">
           {coverImage ? (

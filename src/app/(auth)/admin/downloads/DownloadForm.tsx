@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Download } from '@/lib/supabase/types';
+import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
       className="bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
     >
       {pending
-        ? 'Saving...'
+        ? 'Saving…'
         : isEdit
           ? 'Update Download'
           : 'Create Download'}
@@ -50,6 +51,10 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
   const [title, setTitle] = useState(download?.title ?? '');
   const [slug, setSlug] = useState(download?.slug ?? '');
   const [description, setDescription] = useState(download?.description ?? '');
+  const [fileType, setFileType] = useState(download?.file_type ?? '');
+  const [fileSize, setFileSize] = useState(
+    download?.file_size ? String(download.file_size) : '',
+  );
 
   function generateSlug(value: string): string {
     return value
@@ -160,17 +165,21 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
 
         {/* File URL (full width) */}
         <div>
-          <label htmlFor="file_url" className={labelClass}>
-            File URL
-          </label>
-          <input
-            id="file_url"
+          <StorageUploadField
+            bucket="downloads"
+            folder="downloads/files"
+            label="Download File"
             name="file_url"
-            type="text"
-            required
             defaultValue={download?.file_url ?? ''}
-            className={inputClass}
-            placeholder="downloads/my-file.pdf"
+            placeholder="downloads/files/my-file.pdf"
+            accept="application/pdf,application/epub+zip"
+            required
+            helperText="Upload the protected file first. The stored downloads path will be signed at request time."
+            onUploaded={(result) => {
+              const extension = result.name.split('.').pop()?.toLowerCase();
+              setFileType(extension || result.contentType);
+              setFileSize(String(result.size));
+            }}
           />
         </div>
 
@@ -185,7 +194,8 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
               name="file_type"
               type="text"
               required
-              defaultValue={download?.file_type ?? ''}
+              value={fileType}
+              onChange={(event) => setFileType(event.target.value)}
               className={inputClass}
               placeholder="pdf, epub, docx"
             />
@@ -201,7 +211,8 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
               type="number"
               required
               min={1}
-              defaultValue={download?.file_size ?? ''}
+              value={fileSize}
+              onChange={(event) => setFileSize(event.target.value)}
               className={inputClass}
               placeholder="1048576"
             />
@@ -210,16 +221,14 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
 
         {/* Cover Image */}
         <div>
-          <label htmlFor="cover_image" className={labelClass}>
-            Cover Image URL
-          </label>
-          <input
-            id="cover_image"
+          <StorageUploadField
+            bucket="covers"
+            folder="downloads/covers"
+            label="Cover Image"
             name="cover_image"
-            type="text"
             defaultValue={download?.cover_image ?? ''}
-            className={inputClass}
-            placeholder="covers/my-download.webp"
+            placeholder="https://cdn.example.com/download-cover.webp"
+            accept="image/png,image/jpeg,image/webp"
           />
         </div>
 

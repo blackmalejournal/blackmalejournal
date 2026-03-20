@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Handbook } from '@/lib/supabase/types';
+import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
       className="bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
     >
       {pending
-        ? 'Saving...'
+        ? 'Saving…'
         : isEdit
           ? 'Update Handbook'
           : 'Create Handbook'}
@@ -197,30 +198,27 @@ export function HandbookForm({ handbook, action }: HandbookFormProps) {
         {/* Cover Image + File URL in a row */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="cover_image" className={labelClass}>
-              Cover Image URL
-            </label>
-            <input
-              id="cover_image"
+            <StorageUploadField
+              bucket="covers"
+              folder="handbooks/covers"
+              label="Cover Image"
               name="cover_image"
-              type="text"
               defaultValue={handbook?.cover_image ?? ''}
-              className={inputClass}
-              placeholder="covers/my-handbook.webp"
+              placeholder="https://cdn.example.com/handbook-cover.webp"
+              accept="image/png,image/jpeg,image/webp"
             />
           </div>
 
           <div>
-            <label htmlFor="file_url" className={labelClass}>
-              File URL
-            </label>
-            <input
-              id="file_url"
+            <StorageUploadField
+              bucket="downloads"
+              folder="handbooks/files"
+              label="Handbook File"
               name="file_url"
-              type="text"
               defaultValue={handbook?.file_url ?? ''}
-              className={inputClass}
-              placeholder="handbooks/my-handbook.pdf"
+              placeholder="handbooks/files/my-handbook.pdf"
+              accept="application/pdf,application/epub+zip"
+              helperText="Upload a gated file first. Paste a direct file path only if you need to override it."
             />
           </div>
         </div>

@@ -133,6 +133,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             requiredTier={article.access_tier}
             previewBody={previewBody}
             isLoggedIn={!!user}
+            nextHref={`/articles/${article.slug}`}
           />
         )}
       </div>

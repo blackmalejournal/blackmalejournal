@@ -4,6 +4,8 @@ import { getDispatches } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { DispatchCard } from '@/components/content/DispatchCard';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: 'Dispatches',
   description:

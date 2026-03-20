@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 interface PageTransitionProps {
@@ -13,6 +13,11 @@ interface PageTransitionProps {
 // The enter fade alone achieves the "subtle cinematic" goal.
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
+  const prefersReduced = useReducedMotion();
+
+  if (prefersReduced) {
+    return <>{children}</>;
+  }
 
   return (
     <motion.div

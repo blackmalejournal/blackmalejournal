@@ -6,6 +6,8 @@ import { getMemberById } from '@/lib/supabase/queries';
 import { SubscriptionManager } from '@/components/portal/SubscriptionManager';
 import { SettingsForm } from './SettingsForm';
 import { signOut } from '../../actions';
+import type { PaidMemberTier } from '@/lib/supabase/types';
+import { normalizeInternalPath } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Settings',
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 interface SettingsPageProps {
-  searchParams: Promise<{ error?: string; message?: string }>;
+  searchParams: Promise<{ error?: string; message?: string; next?: string; upgrade?: string }>;
 }
 
 const KNOWN_ERRORS: Record<string, string> = {
@@ -43,6 +45,11 @@ export default async function SettingsPage({
   const params = await searchParams;
   const error = resolveError(params.error);
   const message = resolveMessage(params.message);
+  const nextHref = normalizeInternalPath(params.next, '/portal');
+  const requestedTier: PaidMemberTier | undefined =
+    params.upgrade === 'basic' || params.upgrade === 'premium'
+      ? params.upgrade
+      : undefined;
 
   const supabase = await createClient();
   const {
@@ -78,6 +85,18 @@ export default async function SettingsPage({
         </div>
       )}
 
+      {requestedTier && tier !== requestedTier && (
+        <div className="mb-6 border border-bmj-red/40 bg-bmj-red/10 p-4">
+          <p className="font-body text-sm text-bmj-cream">
+            Your account is ready. Complete checkout to activate the{' '}
+            <span className="font-label uppercase tracking-widest text-bmj-white">
+              {requestedTier}
+            </span>{' '}
+            plan.
+          </p>
+        </div>
+      )}
+
       {/* Profile */}
       <section className="mb-10 border border-bmj-tan/20 bg-bmj-brown p-8">
         <h2 className="mb-6 font-display text-2xl text-bmj-white">PROFILE</h2>
@@ -92,8 +111,26 @@ export default async function SettingsPage({
         <SubscriptionManager
           tier={tier}
           hasSubscription={!!member?.stripe_subscription_id}
+          requestedTier={requestedTier}
+          nextHref={nextHref !== '/portal' ? nextHref : undefined}
         />
       </section>
+
+      {nextHref !== '/portal' && (
+        <section className="mb-10 border border-bmj-tan/20 bg-bmj-brown p-8">
+          <h2 className="mb-4 font-display text-2xl text-bmj-white">NEXT STEP</h2>
+          <p className="mb-4 font-body text-sm text-bmj-cream/80">
+            When your access is active, continue back to the content you were trying
+            to open.
+          </p>
+          <Link
+            href={nextHref}
+            className="inline-flex items-center border border-bmj-tan/40 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+          >
+            Return to Requested Content
+          </Link>
+        </section>
+      )}
 
       {/* Log Out */}
       <section className="border border-bmj-tan/20 bg-bmj-brown p-8">

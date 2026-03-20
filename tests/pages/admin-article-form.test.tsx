@@ -47,7 +47,7 @@ describe('ArticleForm', () => {
     expect(screen.getByLabelText(/access tier/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/status/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/featured/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/cover image url/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
   });
 
   it('shows "Create Article" button when no article provided', () => {
@@ -84,7 +84,7 @@ describe('ArticleForm', () => {
     expect(screen.getByLabelText(/access tier/i)).toHaveValue('premium');
     expect(screen.getByLabelText(/status/i)).toHaveValue('published');
     expect(screen.getByLabelText(/featured/i)).toBeChecked();
-    expect(screen.getByLabelText(/cover image url/i)).toHaveValue(
+    expect(screen.getByLabelText(/cover image/i)).toHaveValue(
       'covers/test.webp',
     );
   });

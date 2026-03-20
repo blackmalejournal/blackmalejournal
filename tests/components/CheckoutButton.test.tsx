@@ -53,7 +53,6 @@ describe('CheckoutButton', () => {
   });
 
   it('handles error when no URL returned', async () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
     (global.fetch as jest.Mock).mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve({}),
@@ -61,10 +60,11 @@ describe('CheckoutButton', () => {
     render(<CheckoutButton tier="basic">Go</CheckoutButton>);
     fireEvent.click(screen.getByRole('button'));
     await waitFor(() => {
-      expect(consoleSpy).toHaveBeenCalledWith('No checkout URL returned:', {});
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Could not start checkout. Please try again.',
+      );
       expect(screen.getByRole('button')).not.toBeDisabled();
     });
-    consoleSpy.mockRestore();
   });
 
   it('has role="status" on loading text for screen readers', async () => {

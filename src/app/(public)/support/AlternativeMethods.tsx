@@ -60,7 +60,7 @@ export function AlternativeMethods() {
           Join the Inner Circle on Patreon
         </span>
         <span className="mt-1 block font-body text-xs text-bmj-cream/60">
-          Exclusive community access, early content, direct line to the Chairman
+          Early content, private resources, and direct support for the work
         </span>
       </a>
     </div>

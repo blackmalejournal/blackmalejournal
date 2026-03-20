@@ -263,9 +263,10 @@ describe('getContentCounts', () => {
 
     // Override from() to return different count values per call
     let callIndex = 0;
-    // articles(total,pub,draft), briefings(total,pub,draft), dispatches(total,pub,draft),
-    // downloads(total), handbooks(total,pub,draft), members(total), messages(total), subscribers(total)
-    const counts = [10, 5, 3, 8, 4, 2, 6, 3, 1, 15, 7, 5, 2, 42, 9, 99];
+    // articles(total,pub,draft), briefings(total,pub,draft), courses(total,published,draft),
+    // dispatches(total,pub,draft), downloads(total), handbooks(total,pub,draft),
+    // members(total), messages(total), subscribers(total)
+    const counts = [10, 5, 3, 8, 4, 2, 6, 4, 2, 15, 7, 5, 12, 7, 5, 2, 42, 9, 99];
     mockClient.from = jest.fn().mockImplementation(() => {
       const idx = callIndex++;
       const chain = { ...mockClient._queryChain };
@@ -281,8 +282,9 @@ describe('getContentCounts', () => {
     expect(result).toEqual({
       articles: { total: 10, published: 5, draft: 3 },
       briefings: { total: 8, published: 4, draft: 2 },
-      dispatches: { total: 6, published: 3, draft: 1 },
-      downloads: { total: 15 },
+      courses: { total: 6, published: 4, draft: 2 },
+      dispatches: { total: 15, published: 7, draft: 5 },
+      downloads: { total: 12 },
       handbooks: { total: 7, published: 5, draft: 2 },
       members: { total: 42 },
       messages: { total: 9 },
@@ -306,6 +308,7 @@ describe('getContentCounts', () => {
     expect(result).toEqual({
       articles: { total: 0, published: 0, draft: 0 },
       briefings: { total: 0, published: 0, draft: 0 },
+      courses: { total: 0, published: 0, draft: 0 },
       dispatches: { total: 0, published: 0, draft: 0 },
       downloads: { total: 0 },
       handbooks: { total: 0, published: 0, draft: 0 },
@@ -332,6 +335,7 @@ describe('getContentCounts', () => {
     await getContentCounts();
     expect(tablesCalled).toContain('articles');
     expect(tablesCalled).toContain('briefings');
+    expect(tablesCalled).toContain('courses');
     expect(tablesCalled).toContain('dispatches');
     expect(tablesCalled).toContain('downloads');
     expect(tablesCalled).toContain('handbooks');

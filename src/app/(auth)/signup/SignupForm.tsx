@@ -4,12 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { signup } from '../actions';
 import { TierSelector, type TierId } from './TierSelector';
+import { withQuery } from '@/lib/paths';
 
 interface SignupFormProps {
   preselectedTier?: TierId;
+  nextHref?: string;
 }
 
-export function SignupForm({ preselectedTier }: SignupFormProps) {
+export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
   const [selectedTier, setSelectedTier] = useState<TierId>(preselectedTier ?? 'free');
 
   return (
@@ -21,6 +23,7 @@ export function SignupForm({ preselectedTier }: SignupFormProps) {
       <div className="mx-auto max-w-md border border-bmj-red/20 bg-bmj-brown p-8">
         <form action={signup} className="space-y-4">
           <input type="hidden" name="tier" value={selectedTier} />
+          {nextHref && <input type="hidden" name="next" value={nextHref} />}
 
           <div>
             <label
@@ -34,7 +37,8 @@ export function SignupForm({ preselectedTier }: SignupFormProps) {
               name="displayName"
               type="text"
               required
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="name"
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="Your name"
             />
           </div>
@@ -51,7 +55,9 @@ export function SignupForm({ preselectedTier }: SignupFormProps) {
               name="email"
               type="email"
               required
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="email"
+              spellCheck={false}
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="you@example.com"
             />
           </div>
@@ -69,7 +75,8 @@ export function SignupForm({ preselectedTier }: SignupFormProps) {
               type="password"
               required
               minLength={6}
-              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+              autoComplete="new-password"
+              className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="••••••••"
             />
           </div>
@@ -95,7 +102,10 @@ export function SignupForm({ preselectedTier }: SignupFormProps) {
 
         <p className="mt-6 text-center font-body text-sm text-bmj-tan">
           Already a member?{' '}
-          <Link href="/login" className="text-bmj-red hover:text-bmj-cream">
+          <Link
+            href={withQuery('/login', { next: nextHref })}
+            className="text-bmj-red hover:text-bmj-cream"
+          >
             Log in &rarr;
           </Link>
         </p>

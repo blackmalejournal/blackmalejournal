@@ -1,19 +1,31 @@
 import Link from 'next/link';
 import type { AccessTier } from '@/lib/supabase/types';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { withQuery } from '@/lib/paths';
 
 interface PaywallGateProps {
   requiredTier: AccessTier;
   previewBody: string;
   isLoggedIn?: boolean;
+  nextHref?: string;
 }
 
 export function PaywallGate({
   requiredTier,
   previewBody,
   isLoggedIn = false,
+  nextHref,
 }: PaywallGateProps) {
   const tierLabel = requiredTier === 'basic' ? 'Basic' : 'Premium';
+  const ctaHref = isLoggedIn
+    ? withQuery('/portal/settings', {
+        upgrade: requiredTier === 'free' ? undefined : requiredTier,
+        next: nextHref,
+      })
+    : withQuery('/signup', {
+        tier: requiredTier,
+        next: nextHref,
+      });
 
   return (
     <div>
@@ -43,14 +55,14 @@ export function PaywallGate({
         </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
-            href={`/signup?tier=${requiredTier}`}
+            href={ctaHref}
             className="inline-block bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-85"
           >
             {isLoggedIn ? `Upgrade — ${tierLabel}` : `Subscribe — ${tierLabel}`}
           </Link>
           {!isLoggedIn && (
             <Link
-              href="/login"
+              href={withQuery('/login', { next: nextHref })}
               className="font-body text-sm text-bmj-tan underline hover:text-bmj-cream"
             >
               Already a member? Log in

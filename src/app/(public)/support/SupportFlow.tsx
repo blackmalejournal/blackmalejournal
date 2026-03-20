@@ -180,7 +180,7 @@ function CustomAmountInput({
           onChange={(e) => onChange(e.target.value)}
           onFocus={onFocus}
           placeholder="Other amount"
-          className="w-full bg-transparent px-2 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:outline-none"
+          className="w-full bg-transparent px-2 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:outline-none"
         />
       </div>
     </div>
@@ -227,8 +227,8 @@ function NoteInput({
         onChange={(e) => setNote(e.target.value)}
         maxLength={500}
         rows={3}
-        placeholder="A message for the Chairman..."
-        className="w-full resize-none border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+        placeholder="A message for the Chairman…"
+        className="w-full resize-none border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
       />
     </div>
   );
@@ -264,7 +264,9 @@ function NewsletterOptIn({
           value={email}
           onChange={(e) => onEmailChange(e.target.value)}
           placeholder="your@email.com"
-          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-2 font-mono text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+          autoComplete="email"
+          spellCheck={false}
+          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-2 font-mono text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
         />
       )}
     </div>

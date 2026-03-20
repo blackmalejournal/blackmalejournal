@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createDownload, updateDownload } from '@/lib/supabase/admin-queries';
+import { requireAdminActor } from '@/lib/admin-auth';
 
 // ── Zod schema ──────────────────────────────────────────────────────────────────
 
@@ -31,6 +32,7 @@ function generateSlug(title: string): string {
 // ── Create ──────────────────────────────────────────────────────────────────────
 
 export async function createDownloadAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const raw = Object.fromEntries(formData.entries());
 
   const parsed = downloadSchema.safeParse(raw);
@@ -76,6 +78,7 @@ export async function createDownloadAction(formData: FormData): Promise<void> {
 // ── Update ──────────────────────────────────────────────────────────────────────
 
 export async function updateDownloadAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const id = formData.get('id') as string;
   if (!id) {
     redirect('/admin/downloads?error=Download+ID+is+required');

@@ -1,12 +1,15 @@
 import { getStripe, getPriceIdForTier } from '@/lib/stripe/config';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+import { normalizeInternalPath, withQuery } from '@/lib/paths';
+import { resolveSiteUrl } from '@/lib/site-url';
 
 export async function createCheckoutSession(
   userId: string,
   userEmail: string,
   tier: 'basic' | 'premium',
+  returnTo?: string,
 ): Promise<string> {
+  const siteUrl = resolveSiteUrl();
+  const nextHref = normalizeInternalPath(returnTo, '/portal');
   const session = await getStripe().checkout.sessions.create({
     mode: 'subscription',
     customer_email: userEmail,
@@ -17,8 +20,14 @@ export async function createCheckoutSession(
       },
     ],
     metadata: { userId, tier },
-    success_url: `${siteUrl}/portal?checkout=success`,
-    cancel_url: `${siteUrl}/portal?checkout=cancelled`,
+    success_url: withQuery(`${siteUrl}/portal`, {
+      checkout: 'success',
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }),
+    cancel_url: withQuery(`${siteUrl}/portal`, {
+      checkout: 'cancelled',
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }),
   });
 
   if (!session.url) {
@@ -31,6 +40,7 @@ export async function createCheckoutSession(
 export async function createBillingPortalSession(
   stripeCustomerId: string,
 ): Promise<string> {
+  const siteUrl = resolveSiteUrl();
   const session = await getStripe().billingPortal.sessions.create({
     customer: stripeCustomerId,
     return_url: `${siteUrl}/portal/settings`,

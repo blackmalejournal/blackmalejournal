@@ -40,11 +40,11 @@ describe('DownloadForm', () => {
     expect(screen.getByLabelText(/slug/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/description/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/category/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/file url/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/download file/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/file type/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/file size/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/access tier/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/cover image url/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
   });
 
   it('shows "Create Download" button when no download provided', () => {
@@ -70,11 +70,11 @@ describe('DownloadForm', () => {
     expect(screen.getByLabelText(/slug/i)).toHaveValue('test-download-title');
     expect(screen.getByLabelText(/description/i)).toHaveValue('A short description.');
     expect(screen.getByLabelText(/category/i)).toHaveValue('template');
-    expect(screen.getByLabelText(/file url/i)).toHaveValue('downloads/test-file.pdf');
+    expect(screen.getByLabelText(/download file/i)).toHaveValue('downloads/test-file.pdf');
     expect(screen.getByLabelText(/file type/i)).toHaveValue('pdf');
     expect(screen.getByLabelText(/file size/i)).toHaveValue(1048576);
     expect(screen.getByLabelText(/access tier/i)).toHaveValue('free');
-    expect(screen.getByLabelText(/cover image url/i)).toHaveValue('covers/test.webp');
+    expect(screen.getByLabelText(/cover image/i)).toHaveValue('covers/test.webp');
   });
 
   it('auto-generates slug from title on blur when slug is empty', () => {

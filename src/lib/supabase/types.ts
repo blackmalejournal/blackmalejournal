@@ -10,8 +10,10 @@ export type Lens = 'health' | 'philosophy' | 'politics';
 export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
 export type AccessTier = 'free' | 'basic' | 'premium';
 export type MemberTier = 'free' | 'basic' | 'premium';
+export type PaidMemberTier = Exclude<MemberTier, 'free'>;
 export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived' | 'withdrawn';
 export type MemberRole = 'member' | 'editor' | 'admin';
+export type ContactSubmissionStatus = 'new' | 'in_progress' | 'resolved' | 'spam';
 
 export type BriefingSection = {
   title: string;
@@ -144,6 +146,10 @@ export type ContactSubmission = {
   email: string;
   subject: string | null;
   message: string;
+  status: ContactSubmissionStatus;
+  internal_notes: string | null;
+  handled_at: string | null;
+  handled_by: string | null;
   submitted_at: string;
 };
 
@@ -221,7 +227,7 @@ export type Database = {
       };
       contact_submissions: {
         Row: ContactSubmission;
-        Insert: Omit<ContactSubmission, 'id' | 'submitted_at'>;
+        Insert: Omit<ContactSubmission, 'id' | 'submitted_at' | 'status' | 'internal_notes' | 'handled_at' | 'handled_by'>;
         Update: Partial<Omit<ContactSubmission, 'id'>>;
         Relationships: [];
       };

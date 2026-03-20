@@ -28,7 +28,7 @@ export function CourseCard({
   const card = (
     <article
       className={[
-        'flex flex-col border-t-[3px] border-t-bmj-red border border-bmj-tan/20 bg-bmj-brown transition-all duration-200',
+        'flex flex-col border-t-[3px] border-t-bmj-red border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200',
         published
           ? 'hover:-translate-y-1 hover:border-bmj-red/60'
           : 'opacity-60 cursor-default',

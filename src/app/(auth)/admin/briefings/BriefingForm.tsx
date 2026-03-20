@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Briefing, BriefingSection } from '@/lib/supabase/types';
+import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ function SubmitButton({ isEdit }: { isEdit: boolean }) {
       className="bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
     >
       {pending
-        ? 'Saving...'
+        ? 'Saving…'
         : isEdit
           ? 'Update Briefing'
           : 'Create Briefing'}
@@ -183,16 +184,14 @@ export function BriefingForm({ briefing, action }: BriefingFormProps) {
 
         {/* Cover Image */}
         <div>
-          <label htmlFor="cover_image" className={labelClass}>
-            Cover Image URL
-          </label>
-          <input
-            id="cover_image"
+          <StorageUploadField
+            bucket="covers"
+            folder="briefings"
+            label="Cover Image"
             name="cover_image"
-            type="text"
             defaultValue={briefing?.cover_image ?? ''}
-            className={inputClass}
-            placeholder="covers/briefing-001.webp"
+            placeholder="https://cdn.example.com/briefing-cover.webp"
+            accept="image/png,image/jpeg,image/webp"
           />
         </div>
 

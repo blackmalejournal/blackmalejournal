@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createCheckoutSession } from '@/lib/stripe/helpers';
+import { normalizeInternalPath } from '@/lib/paths';
 
 export async function POST(request: Request) {
   const supabase = await createClient();
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
   }
 
-  let body: { tier?: string };
+  let body: { tier?: string; returnTo?: string };
   try {
     body = await request.json();
   } catch {
@@ -20,13 +21,14 @@ export async function POST(request: Request) {
   }
 
   const tier = body.tier;
+  const returnTo = normalizeInternalPath(body.returnTo, '/portal');
 
   if (tier !== 'basic' && tier !== 'premium') {
     return NextResponse.json({ error: 'Invalid tier' }, { status: 400 });
   }
 
   try {
-    const url = await createCheckoutSession(user.id, user.email, tier);
+    const url = await createCheckoutSession(user.id, user.email, tier, returnTo);
     return NextResponse.json({ url });
   } catch (err) {
     console.error('[checkout]', err);

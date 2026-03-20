@@ -28,6 +28,13 @@ export default async function AdminDashboardPage() {
       href: '/admin/briefings',
     },
     {
+      label: 'Courses',
+      total: counts.courses.total,
+      published: counts.courses.published,
+      draft: counts.courses.draft,
+      href: '/admin/courses',
+    },
+    {
       label: 'Dispatches',
       total: counts.dispatches.total,
       published: counts.dispatches.published,
@@ -152,6 +159,13 @@ export default async function AdminDashboardPage() {
           >
             <Plus size={16} />
             New Dispatch
+          </Link>
+          <Link
+            href="/admin/courses/new"
+            className="inline-flex items-center gap-2 border border-bmj-tan/40 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-tan/70"
+          >
+            <Plus size={16} />
+            New Course
           </Link>
           <Link
             href="/admin/handbooks/new"

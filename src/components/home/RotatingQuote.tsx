@@ -78,7 +78,7 @@ export function RotatingQuote() {
               aria-selected={i === index}
               aria-label={`Quote ${i + 1}`}
               onClick={() => setIndex(i)}
-              className={`h-1.5 transition-all duration-300 ${
+              className={`h-1.5 transition-[width,background-color] duration-300 ${
                 i === index
                   ? "w-6 bg-bmj-red"
                   : "w-1.5 bg-bmj-tan/40 hover:bg-bmj-tan"

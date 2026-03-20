@@ -17,13 +17,12 @@ interface DownloadCardProps {
 
 export function DownloadCard({
   title,
+  slug,
   description,
   category,
   fileType,
   fileSize,
-  accessTier,
   hasAccess,
-  fileUrl,
 }: DownloadCardProps) {
   return (
     <article className="flex items-start gap-4 border border-bmj-tan/20 bg-bmj-brown p-6 transition-colors hover:border-bmj-tan/40">
@@ -57,7 +56,7 @@ export function DownloadCard({
       <div className="shrink-0 self-center">
         {hasAccess ? (
           <a
-            href={fileUrl}
+            href={`/api/downloads/${slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-bmj-red px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"

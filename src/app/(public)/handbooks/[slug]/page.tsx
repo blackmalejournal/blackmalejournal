@@ -130,7 +130,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
             {handbook.file_url && (
               <div className="mt-10">
                 <a
-                  href={handbook.file_url}
+                  href={`/api/handbooks/${handbook.slug}/download`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
@@ -146,6 +146,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
             requiredTier={handbook.access_tier}
             previewBody={previewBody}
             isLoggedIn={!!user}
+            nextHref={`/handbooks/${handbook.slug}`}
           />
         )}
       </div>

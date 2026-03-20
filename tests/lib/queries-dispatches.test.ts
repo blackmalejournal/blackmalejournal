@@ -7,15 +7,24 @@ jest.mock('@/lib/supabase/server', () => ({
 import { createClient } from '@/lib/supabase/server';
 
 const mockSelect = jest.fn();
-const mockEq = jest.fn();
 const mockOrder = jest.fn();
 const mockLimit = jest.fn();
+const mockIn = jest.fn();
+const mockLte = jest.fn();
 
 function setupChain(data: unknown[] | null, error: { message: string } | null = null) {
-  mockLimit.mockResolvedValue({ data, error });
-  mockOrder.mockReturnValue({ limit: mockLimit });
-  mockEq.mockReturnValue({ order: mockOrder });
-  mockSelect.mockReturnValue({ eq: mockEq });
+  const chain = {
+    order: mockOrder,
+    limit: mockLimit,
+    in: mockIn,
+    lte: mockLte,
+  };
+
+  mockLte.mockImplementation(() => Promise.resolve({ data, error }));
+  mockIn.mockReturnValue(chain);
+  mockLimit.mockReturnValue(chain);
+  mockOrder.mockReturnValue(chain);
+  mockSelect.mockReturnValue(chain);
   (createClient as jest.Mock).mockResolvedValue({
     from: jest.fn(() => ({ select: mockSelect })),
   });
@@ -33,6 +42,8 @@ describe('getLatestDispatches', () => {
     const result = await getLatestDispatches();
     expect(result).toEqual(mockData);
     expect(mockLimit).toHaveBeenCalledWith(3);
+    expect(mockIn).toHaveBeenCalledWith('status', ['published', 'scheduled']);
+    expect(mockLte).toHaveBeenCalledWith('published_at', expect.any(String));
   });
 
   it('respects custom limit', async () => {

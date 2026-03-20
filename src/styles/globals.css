@@ -19,6 +19,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--bmj-white);
+    text-wrap: balance;
   }
 
   a {
@@ -177,4 +178,14 @@
 *:focus-visible {
   outline: 2px solid var(--bmj-red);
   outline-offset: 2px;
+}
+
+/* Tabular nums for monospace number columns */
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Eliminate 300ms double-tap delay on mobile */
+button, a, [role="button"] {
+  touch-action: manipulation;
 }

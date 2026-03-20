@@ -9,7 +9,7 @@ export function JoinCTA() {
         </h2>
 
         <p className="mx-auto mb-12 max-w-xl font-body text-base leading-relaxed text-bmj-cream/70 md:text-lg">
-          Get access to the Weekend Briefing, handbooks, member forums, and a growing archive built
+          Get access to the Weekend Briefing, handbooks, private resources, and a growing archive built
           for the deliberate Black man.
         </p>
 

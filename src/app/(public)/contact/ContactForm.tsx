@@ -90,7 +90,8 @@ export function ContactForm() {
           required
           aria-invalid={hasError || undefined}
           aria-describedby={hasError ? 'contact-form-error' : undefined}
-          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+          autoComplete="name"
+          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
           placeholder="Your name"
         />
       </div>
@@ -109,7 +110,9 @@ export function ContactForm() {
           required
           aria-invalid={hasError || undefined}
           aria-describedby={hasError ? 'contact-form-error' : undefined}
-          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+          autoComplete="email"
+          spellCheck={false}
+          className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
           placeholder="you@example.com"
         />
       </div>
@@ -156,7 +159,7 @@ export function ContactForm() {
           minLength={10}
           aria-invalid={hasError || undefined}
           aria-describedby={hasError ? 'contact-form-error' : undefined}
-          className="w-full resize-none border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/50 focus:border-bmj-red focus:outline-none"
+          className="w-full resize-none border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
           placeholder="What's on your mind?"
         />
       </div>
@@ -176,7 +179,7 @@ export function ContactForm() {
         disabled={status === 'loading'}
         className="w-full bg-bmj-red py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
       >
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
+        {status === 'loading' ? 'Sending…' : 'Send Message'}
       </button>
     </form>
   );

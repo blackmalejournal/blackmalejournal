@@ -4,6 +4,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
   getContentCounts: jest.fn().mockResolvedValue({
     articles: { total: 12, published: 8, draft: 4 },
     briefings: { total: 5, published: 4, draft: 1 },
+    courses: { total: 6, published: 4, draft: 2 },
     dispatches: { total: 8, published: 6, draft: 2 },
     downloads: { total: 15 },
     handbooks: { total: 3, published: 2, draft: 1 },
@@ -34,10 +35,11 @@ describe('AdminDashboardPage', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders all four content count cards', async () => {
+  it('renders key content count cards', async () => {
     await renderPage();
     expect(screen.getByText('Articles')).toBeInTheDocument();
     expect(screen.getByText('Briefings')).toBeInTheDocument();
+    expect(screen.getByText('Courses')).toBeInTheDocument();
     expect(screen.getByText('Dispatches')).toBeInTheDocument();
     expect(screen.getByText('Downloads')).toBeInTheDocument();
   });
@@ -77,6 +79,12 @@ describe('AdminDashboardPage', () => {
     await renderPage();
     const link = screen.getByRole('link', { name: /new dispatch/i });
     expect(link).toHaveAttribute('href', '/admin/dispatches/new');
+  });
+
+  it('renders "New Course" quick action link to /admin/courses/new', async () => {
+    await renderPage();
+    const link = screen.getByRole('link', { name: /new course/i });
+    expect(link).toHaveAttribute('href', '/admin/courses/new');
   });
 
   it('renders star dividers', async () => {

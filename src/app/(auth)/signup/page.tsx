@@ -2,23 +2,24 @@ import type { Metadata } from 'next';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { SignupForm } from './SignupForm';
 import type { TierId } from './TierSelector';
+import { normalizeInternalPath } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Join the Movement',
-  description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+  description: 'Create your account at The Black Male Journal. Access the archive and support independent media for Black men.',
   openGraph: {
     title: 'Join the Movement',
-    description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+    description: 'Create your account at The Black Male Journal. Access the archive and support independent media for Black men.',
   },
   twitter: {
     card: 'summary',
     title: 'Join the Movement',
-    description: 'Create your account at The Black Male Journal. Access the archive, join the community, and support independent media for Black men.',
+    description: 'Create your account at The Black Male Journal. Access the archive and support independent media for Black men.',
   },
 };
 
 interface SignupPageProps {
-  searchParams: Promise<{ error?: string; tier?: string }>;
+  searchParams: Promise<{ error?: string; tier?: string; next?: string }>;
 }
 
 const KNOWN_ERRORS: Record<string, string> = {
@@ -37,6 +38,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
   const params = await searchParams;
   const error = resolveError(params.error);
   const tier = VALID_TIERS.has(params.tier ?? '') ? (params.tier as TierId) : undefined;
+  const nextHref = normalizeInternalPath(params.next, '/portal');
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center px-4">
@@ -59,7 +61,10 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
           </div>
         )}
 
-        <SignupForm preselectedTier={tier} />
+        <SignupForm
+          preselectedTier={tier}
+          nextHref={nextHref !== '/portal' ? nextHref : undefined}
+        />
       </div>
     </div>
   );

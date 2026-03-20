@@ -11,6 +11,8 @@ import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
 import type { Article, Lens } from '@/lib/supabase/types';
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: 'Articles',
   description:

@@ -113,8 +113,8 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
             role="searchbox"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search articles, briefings, handbooks..."
-            className="flex-1 bg-transparent font-body text-sm text-bmj-cream placeholder-bmj-tan/50 outline-none"
+            placeholder="Search articles, briefings, handbooks…"
+            className="flex-1 bg-transparent font-body text-sm text-bmj-cream placeholder-bmj-tan/70 outline-none"
             aria-label="Search"
           />
           <button
@@ -125,9 +125,9 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
             <X size={18} aria-hidden="true" />
           </button>
         </div>
-        <div className="max-h-[50vh] overflow-y-auto">
+        <div className="max-h-[50vh] overflow-y-auto overscroll-contain">
           {loading && (
-            <p className="px-6 py-4 font-mono text-xs text-bmj-tan" role="status">Searching...</p>
+            <p className="px-6 py-4 font-mono text-xs text-bmj-tan" role="status">Searching…</p>
           )}
           {!loading && query.trim().length >= 2 && results.length === 0 && (
             <p className="px-6 py-8 text-center font-body text-sm text-bmj-tan">

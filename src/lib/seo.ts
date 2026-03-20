@@ -1,8 +1,9 @@
 // src/lib/seo.ts
 
+export { SITE_URL } from '@/lib/site-url';
+import { SITE_URL } from '@/lib/site-url';
+
 // ── Site constants ──────────────────────────────────────────────────────────
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://blackmalejournal.com';
 export const SITE_NAME = 'The Black Male Journal';
 export const SITE_DESCRIPTION =
   'Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.';

@@ -137,7 +137,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
                   aria-selected={i === index}
                   aria-label={`Article ${i + 1}`}
                   onClick={() => setIndex(i)}
-                  className={`h-1.5 transition-all duration-300 ${
+                  className={`h-1.5 transition-[width,background-color] duration-300 ${
                     i === index
                       ? 'w-8 bg-bmj-red'
                       : 'w-1.5 bg-bmj-tan/40 hover:bg-bmj-tan'

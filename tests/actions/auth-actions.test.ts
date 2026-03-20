@@ -48,6 +48,7 @@ import {
   updateProfile,
   updatePassword,
 } from '@/app/(auth)/actions';
+import { withQuery } from '@/lib/paths';
 
 function createFormData(fields: Record<string, string>): FormData {
   const fd = new FormData();
@@ -100,7 +101,7 @@ describe('login', () => {
     }
 
     expect(mocks.redirect).toHaveBeenCalledWith(
-      '/login?error=' + encodeURIComponent('Invalid credentials'),
+      withQuery('/login', { error: 'Invalid credentials' }),
     );
   });
 
@@ -162,7 +163,7 @@ describe('signup', () => {
     }
 
     expect(mocks.redirect).toHaveBeenCalledWith(
-      '/signup?error=' + encodeURIComponent('Email taken'),
+      withQuery('/signup', { error: 'Email taken' }),
     );
     expect(mocks.from).not.toHaveBeenCalled();
   });
@@ -224,9 +225,40 @@ describe('signup', () => {
     }
 
     expect(mocks.redirect).toHaveBeenCalledWith(
-      '/signup?error=' + encodeURIComponent('Could not create member profile'),
+      withQuery('/signup', { error: 'Could not create member profile' }),
     );
     expect(mocks.revalidatePath).not.toHaveBeenCalled();
+  });
+
+  it('redirects paid signups to portal settings with tier intent and next', async () => {
+    mocks.signUp.mockResolvedValue({
+      data: { user: { id: 'user-paid' } },
+      error: null,
+    });
+
+    try {
+      await signup(
+        createFormData({
+          ...signupData,
+          tier: 'basic',
+          next: '/articles/return-here',
+        }),
+      );
+    } catch {
+      // redirect throws
+    }
+
+    expect(mocks.insert).toHaveBeenCalledWith({
+      id: 'user-paid',
+      email: 'new@example.com',
+      tier: 'free',
+      role: 'member',
+      stripe_customer_id: null,
+      stripe_subscription_id: null,
+    });
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      '/portal/settings?upgrade=basic&next=%2Farticles%2Freturn-here',
+    );
   });
 });
 
@@ -245,7 +277,7 @@ describe('signInWithMagicLink', () => {
 
     expect(mocks.signInWithOtp).toHaveBeenCalled();
     expect(mocks.redirect).toHaveBeenCalledWith(
-      '/login?message=Check your email for the magic link',
+      withQuery('/login', { message: 'Check your email for the magic link' }),
     );
   });
 
@@ -261,7 +293,7 @@ describe('signInWithMagicLink', () => {
     }
 
     expect(mocks.redirect).toHaveBeenCalledWith(
-      '/login?error=' + encodeURIComponent('Rate limit exceeded'),
+      withQuery('/login', { error: 'Rate limit exceeded' }),
     );
   });
 
@@ -278,7 +310,7 @@ describe('signInWithMagicLink', () => {
     expect(mocks.signInWithOtp).toHaveBeenCalledWith({
       email: 'magic@example.com',
       options: {
-        emailRedirectTo: 'https://blackmalejournal.com/auth/callback',
+        emailRedirectTo: 'https://blackmalejournal.com/auth/callback?next=%2Fportal',
       },
     });
 

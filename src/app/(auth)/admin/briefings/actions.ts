@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createBriefing, updateBriefing } from '@/lib/supabase/admin-queries';
+import { requireAdminActor } from '@/lib/admin-auth';
 import type { BriefingSection } from '@/lib/supabase/types';
 
 // ── Zod schema ──────────────────────────────────────────────────────────────────
@@ -47,6 +48,7 @@ function parseSections(raw: string): BriefingSection[] | null {
 // ── Create ──────────────────────────────────────────────────────────────────────
 
 export async function createBriefingAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const raw = Object.fromEntries(formData.entries());
 
   const parsed = briefingSchema.safeParse(raw);
@@ -86,6 +88,7 @@ export async function createBriefingAction(formData: FormData): Promise<void> {
 // ── Update ──────────────────────────────────────────────────────────────────────
 
 export async function updateBriefingAction(formData: FormData): Promise<void> {
+  await requireAdminActor(['admin', 'editor']);
   const id = formData.get('id') as string;
   if (!id) {
     redirect('/admin/briefings?error=Briefing+ID+is+required');

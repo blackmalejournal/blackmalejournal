@@ -7,6 +7,7 @@ import { TierBadge } from '@/components/portal/TierBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { formatDate } from '@/lib/utils';
 import type { MemberTier } from '@/lib/supabase/types';
+import { normalizeInternalPath } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Member Portal',
@@ -25,7 +26,7 @@ const TIER_ACCESS: Record<MemberTier, string[]> = {
     'Everything in Free',
     'Full briefing archive',
     'Select handbooks',
-    'Member forum',
+    'Member resources',
   ],
   premium: [
     'Everything in Basic',
@@ -37,11 +38,12 @@ const TIER_ACCESS: Record<MemberTier, string[]> = {
 };
 
 interface PortalPageProps {
-  searchParams: Promise<{ checkout?: string }>;
+  searchParams: Promise<{ checkout?: string; next?: string }>;
 }
 
 export default async function PortalPage({ searchParams }: PortalPageProps) {
   const params = await searchParams;
+  const nextHref = normalizeInternalPath(params.next, '/portal');
   const supabase = await createClient();
   const {
     data: { user },
@@ -84,6 +86,14 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
           <p className="font-body text-sm text-bmj-amber">
             Welcome aboard. Your subscription is active.
           </p>
+          {nextHref !== '/portal' && (
+            <Link
+              href={nextHref}
+              className="mt-3 inline-flex font-label text-xs uppercase tracking-widest text-bmj-white underline underline-offset-4"
+            >
+              Continue to Requested Content
+            </Link>
+          )}
         </div>
       )}
 
@@ -92,6 +102,14 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
           <p className="font-body text-sm text-bmj-tan">
             Checkout was cancelled. No charges were made.
           </p>
+          {nextHref !== '/portal' && (
+            <Link
+              href={nextHref}
+              className="mt-3 inline-flex font-label text-xs uppercase tracking-widest text-bmj-cream underline underline-offset-4"
+            >
+              Return to Requested Content
+            </Link>
+          )}
         </div>
       )}
 

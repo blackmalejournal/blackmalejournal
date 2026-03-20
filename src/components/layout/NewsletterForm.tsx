@@ -78,6 +78,8 @@ export function NewsletterForm({ source = 'footer' }: NewsletterFormProps) {
         onBlur={() => setTouched(true)}
         placeholder="your@email.com"
         required
+        autoComplete="email"
+        spellCheck={false}
         disabled={status === 'loading'}
         aria-invalid={!!validationError || status === 'error'}
         aria-describedby={(validationError || status === 'error') ? errorId : undefined}
@@ -92,7 +94,7 @@ export function NewsletterForm({ source = 'footer' }: NewsletterFormProps) {
         disabled={status === 'loading' || !!validationError}
         className="bg-bmj-red px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
       >
-        {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+        {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
       </button>
       {(validationError || (status === 'error' && errorMsg)) && (
         <p id={errorId} className="font-mono text-xs text-bmj-red" role="alert">

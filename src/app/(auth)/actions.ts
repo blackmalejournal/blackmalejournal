@@ -1,11 +1,27 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
+import type { PaidMemberTier } from '@/lib/supabase/types';
+import { normalizeInternalPath, withQuery } from '@/lib/paths';
+import { resolveSiteUrl } from '@/lib/site-url';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
+function resolveAuthRedirect(formData: FormData): string {
+  return normalizeInternalPath(
+    (formData.get('next') as string | null) ?? (formData.get('redirect') as string | null),
+    '/portal',
+  );
+}
+
+function resolveSelectedTier(formData: FormData): 'free' | PaidMemberTier {
+  const value = formData.get('tier');
+  return value === 'basic' || value === 'premium' ? value : 'free';
+}
+
 export async function login(formData: FormData) {
   const supabase = await createClient();
+  const nextHref = resolveAuthRedirect(formData);
 
   const { error } = await supabase.auth.signInWithPassword({
     email: formData.get('email') as string,
@@ -13,11 +29,14 @@ export async function login(formData: FormData) {
   });
 
   if (error) {
-    redirect('/login?error=' + encodeURIComponent(error.message));
+    redirect(withQuery('/login', {
+      error: error.message,
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }));
   }
 
   revalidatePath('/', 'layout');
-  redirect('/portal');
+  redirect(nextHref);
 }
 
 export async function signup(formData: FormData) {
@@ -25,6 +44,8 @@ export async function signup(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
   const displayName = formData.get('displayName') as string;
+  const selectedTier = resolveSelectedTier(formData);
+  const nextHref = normalizeInternalPath(formData.get('next') as string | null, '/portal');
 
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -35,7 +56,11 @@ export async function signup(formData: FormData) {
   });
 
   if (error) {
-    redirect('/signup?error=' + encodeURIComponent(error.message));
+    redirect(withQuery('/signup', {
+      error: error.message,
+      tier: selectedTier !== 'free' ? selectedTier : undefined,
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }));
   }
 
   // Create member row linked to auth user
@@ -50,29 +75,47 @@ export async function signup(formData: FormData) {
     });
 
     if (memberInsertError) {
-      redirect('/signup?error=' + encodeURIComponent(memberInsertError.message));
+      redirect(withQuery('/signup', {
+        error: memberInsertError.message,
+        tier: selectedTier !== 'free' ? selectedTier : undefined,
+        next: nextHref !== '/portal' ? nextHref : undefined,
+      }));
     }
   }
 
   revalidatePath('/', 'layout');
+  if (selectedTier !== 'free') {
+    redirect(withQuery('/portal/settings', {
+      upgrade: selectedTier,
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }));
+  }
+
   redirect('/portal');
 }
 
 export async function signInWithMagicLink(formData: FormData) {
   const supabase = await createClient();
+  const nextHref = resolveAuthRedirect(formData);
 
   const { error } = await supabase.auth.signInWithOtp({
     email: formData.get('email') as string,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/auth/callback`,
+      emailRedirectTo: `${resolveSiteUrl()}/auth/callback?next=${encodeURIComponent(nextHref)}`,
     },
   });
 
   if (error) {
-    redirect('/login?error=' + encodeURIComponent(error.message));
+    redirect(withQuery('/login', {
+      error: error.message,
+      next: nextHref !== '/portal' ? nextHref : undefined,
+    }));
   }
 
-  redirect('/login?message=Check your email for the magic link');
+  redirect(withQuery('/login', {
+    message: 'Check your email for the magic link',
+    next: nextHref !== '/portal' ? nextHref : undefined,
+  }));
 }
 
 export async function signOut() {
