@@ -1373,5 +1373,5 @@ git push origin main       # Auto-deploys to Vercel if connected
 
 ---
 
-*Plan v2.0 — Meshal Alawein for The Black Male Journal*
+*Plan v2.0 — Meshal for The Black Male Journal*
 *Built for Claude Code CLI on Windows · Every command tested and ready to run*
