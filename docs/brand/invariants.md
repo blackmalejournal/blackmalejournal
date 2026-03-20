@@ -78,9 +78,9 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 
 ---
 
-## The @alawein/tokens Rule
+## External Token Migration Rule
 
-The BMJ color palette is defined in both `src/styles/brand.css` (CSS variables) and `alawein/tokens/primitives/colors.json` (token primitives). The CSS variables are the source of truth for the running application. If a token migration to `@alawein/tokens` is ever executed:
+The BMJ color palette in `src/styles/brand.css` is the source of truth for the running application. If BMJ ever evaluates a migration to any external token package:
 
 1. Verify that every `--bmj-*` variable maps to an identical hex value in the token output
 2. If the token theme softens, warms, or alters any color, reject the migration for that token and keep the CSS variable

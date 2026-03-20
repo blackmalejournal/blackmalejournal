@@ -8,7 +8,6 @@ module.exports = defineConfig([
     ".next/**",
     "build/**",
     "coverage/**",
-    "alawein/**",
   ]),
   {
     files: ["**/*.{ts,tsx}"],

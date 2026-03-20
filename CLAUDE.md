@@ -130,7 +130,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Brand mark (star + pen nib) is used as section dividers via `<StarDivider />` and `<BrandMark />`
 - All images should have grain/halftone treatment applied via CSS
 
-## Design System (@alawein/tokens)
+## Design System
 
 BMJ currently renders from its local brand tokens:
 
@@ -139,9 +139,9 @@ BMJ currently renders from its local brand tokens:
 - **Mirrored in Tailwind:** `tailwind.config.ts`
 - **Brand guardrail:** `docs/brand/invariants.md`
 
-`@alawein/tokens` exists as an adjacent Alawein workstream, but it is not the runtime token source for this app today. Do not replace BMJ imports with `@alawein/tokens/dist/themes.css` unless the migration gate in `docs/brand/invariants.md` has been satisfied.
+BMJ has no runtime dependency on any external shared token package. Do not replace BMJ imports with a shared token package unless a future migration is explicitly approved and verified against the brand invariants.
 
-`docs/design-system-consolidation.md` documents the proposed migration path and token mapping work, not the current application wiring.
+`docs/design-system-consolidation.md` is a historical ADR describing a superseded migration proposal. It does not describe the current application wiring.
 
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md

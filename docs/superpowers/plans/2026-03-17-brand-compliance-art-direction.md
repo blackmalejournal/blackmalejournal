@@ -46,7 +46,7 @@
 
 ## Governing Constraints
 
-1. **Brand fidelity over token standardization** — `@alawein/tokens` is acceptable only if it preserves current BMJ output exactly. If it drifts the palette toward warmth, BMJ-specific tokens override.
+1. **Brand fidelity over token standardization** — any external token package is acceptable only if it preserves current BMJ output exactly. If it drifts the palette toward warmth, BMJ-specific tokens override.
 2. **Halftone as utility first** — CSS/SVG/component-level support before preprocessed assets. `TreatedImage` is the right abstraction.
 3. **Posterized portraiture = readiness requirement** — audit whether the system can support it once content exists. Not a content failure.
 4. **Green not required now** — valid future secondary; do not wire in yet.
@@ -837,7 +837,7 @@ The art direction spec must be saved before the invariants document, which refer
 
   ## Governing Decisions (2026-03-17)
 
-  1. Brand fidelity over token standardization — @alawein/tokens is acceptable only if it preserves BMJ visual output exactly
+  1. Brand fidelity over token standardization — any external token package is acceptable only if it preserves BMJ visual output exactly
   2. Halftone as reusable implementation utility first — CSS/SVG/component-level, not preprocessed asset dependency
   3. Posterized portraiture = readiness requirement — audit system readiness, not presence of editorial assets
   4. Green not required now — valid future secondary, do not wire in yet
@@ -927,9 +927,9 @@ No tests required. Commit separately as documentation.
 
   ---
 
-  ## The @alawein/tokens Rule
+  ## External Token Migration Rule
 
-  The BMJ color palette is defined in both `src/styles/brand.css` (CSS variables) and `alawein/tokens/primitives/colors.json` (token primitives). The CSS variables are the source of truth for the running application. If a token migration to `@alawein/tokens` is ever executed:
+  The BMJ color palette in `src/styles/brand.css` is the source of truth for the running application. If BMJ ever evaluates a migration to any external token package:
 
   1. Verify that every `--bmj-*` variable maps to an identical hex value in the token output
   2. If the token theme softens, warms, or alters any color, reject the migration for that token and keep the CSS variable
@@ -1006,6 +1006,6 @@ After all tasks are complete:
 ## Deferred (out of scope for this plan)
 
 - Green secondary color token — add only when a specific editorial use case requires it
-- `@alawein/tokens` migration audit — validate hex values match before adopting; track in `docs/deferrals.md`
+- External token migration audit — validate hex values match before adopting; track in `docs/deferrals.md`
 - Posterized portraiture — `TreatedImage` is now ready; execution depends on editorial content upload
 - Article body image treatment — verify images inside `ArticleBody.tsx` use `TreatedImage` component when content is available

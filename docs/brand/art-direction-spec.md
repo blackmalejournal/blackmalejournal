@@ -158,7 +158,7 @@ editorially absolute.
 
 ## Governing Decisions
 
-1. Brand fidelity over token standardization — @alawein/tokens is acceptable only if it preserves BMJ visual output exactly
+1. Brand fidelity over token standardization — any external token package is acceptable only if it preserves BMJ visual output exactly
 2. Halftone as reusable implementation utility first — CSS/SVG/component-level, not preprocessed asset dependency
 3. Posterized portraiture = readiness requirement — audit system readiness, not presence of editorial assets
 4. Green (olive) wired at CSS level as `--bmj-olive`; component-level use deferred to taxonomy expansion plan (updated 2026-03-17, previously "Green not required now")
