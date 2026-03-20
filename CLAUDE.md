@@ -70,7 +70,7 @@ All articles and content are categorized under exactly one lens:
 
 ## Key Files
 - `src/app/layout.tsx` — Root layout, font loading, global providers
-- `src/middleware.ts` — Auth middleware (Supabase session handling)
+- `src/proxy.ts` — Auth proxy (Supabase session handling, route protection)
 - `src/lib/supabase/queries.ts` — All database query functions
 - `src/lib/supabase/access.ts` — Tier-based content access control
 - `src/lib/stripe/config.ts` — Stripe configuration

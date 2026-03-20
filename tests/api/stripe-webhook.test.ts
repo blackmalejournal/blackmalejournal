@@ -266,4 +266,16 @@ describe('POST /api/stripe/webhook', () => {
     const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
     expect(res.status).toBe(500);
   });
+
+  it('returns 500 when DB update resolves with an error payload', async () => {
+    mockEq.mockResolvedValue({ error: { message: 'Row-level policy violation' } });
+    mockConstructEvent.mockReturnValue(
+      makeEvent('customer.subscription.deleted', {
+        id: 'sub_123',
+        customer: 'cus_123',
+      }),
+    );
+    const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
+    expect(res.status).toBe(500);
+  });
 });

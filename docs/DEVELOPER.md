@@ -21,6 +21,8 @@
    npm install
    ```
 
+   If you switch between Windows and WSL/Linux/macOS on the same checkout, rerun `npm install` in the active environment before running tests or builds. Next.js ships platform-specific SWC binaries, and a `node_modules` tree installed on one OS can fail on another.
+
 3. Set up environment variables:
    ```bash
    cp .env.example .env.local

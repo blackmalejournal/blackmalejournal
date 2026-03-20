@@ -5,7 +5,7 @@ const PROTECTED_PREFIXES = ['/portal', '/admin'];
 const ADMIN_PREFIXES = ['/admin'];
 const AUTH_PAGES = ['/login', '/signup'];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(

@@ -40,7 +40,7 @@ export async function signup(formData: FormData) {
 
   // Create member row linked to auth user
   if (data.user) {
-    await supabase.from('members').insert({
+    const { error: memberInsertError } = await supabase.from('members').insert({
       id: data.user.id,
       email,
       tier: 'free' as const,
@@ -48,6 +48,10 @@ export async function signup(formData: FormData) {
       stripe_customer_id: null,
       stripe_subscription_id: null,
     });
+
+    if (memberInsertError) {
+      redirect('/signup?error=' + encodeURIComponent(memberInsertError.message));
+    }
   }
 
   revalidatePath('/', 'layout');

@@ -207,6 +207,27 @@ describe('signup', () => {
       options: { data: { display_name: 'Test User' } },
     });
   });
+
+  it('redirects to /signup?error=... when member row creation fails', async () => {
+    mocks.signUp.mockResolvedValue({
+      data: { user: { id: 'user-999' } },
+      error: null,
+    });
+    mocks.insert.mockResolvedValue({
+      error: { message: 'Could not create member profile' },
+    });
+
+    try {
+      await signup(createFormData(signupData));
+    } catch {
+      // redirect throws
+    }
+
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      '/signup?error=' + encodeURIComponent('Could not create member profile'),
+    );
+    expect(mocks.revalidatePath).not.toHaveBeenCalled();
+  });
 });
 
 // ---------------------------------------------------------------------------

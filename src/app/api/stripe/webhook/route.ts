@@ -4,10 +4,17 @@ import { getStripe, getWebhookSecret, getTierFromPriceId } from '@/lib/stripe/co
 import { createAdminClient } from '@/lib/supabase/admin';
 
 type AdminClient = ReturnType<typeof createAdminClient>;
+type MutationResult = { error?: { message?: string } | null };
 
 function resolveCustomerId(customer: string | Stripe.Customer | Stripe.DeletedCustomer | null): string | undefined {
   if (typeof customer === 'string') return customer;
   return customer?.id;
+}
+
+function assertMutationSucceeded(result: MutationResult, context: string) {
+  if (result.error) {
+    throw new Error(`${context}: ${result.error.message ?? 'Unknown Supabase error'}`);
+  }
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session, supabase: AdminClient) {
@@ -24,7 +31,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session, supabas
     ? session.subscription
     : session.subscription?.id;
 
-  await supabase
+  const result = await supabase
     .from('members')
     .update({
       tier,
@@ -32,6 +39,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session, supabas
       stripe_subscription_id: subscriptionId ?? null,
     })
     .eq('id', userId);
+  assertMutationSucceeded(result, 'Failed to update member after checkout completion');
 
   console.info(`[webhook] checkout.session.completed: user=${userId} tier=${tier}`);
 }
@@ -53,10 +61,11 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription, supa
     return;
   }
 
-  await supabase
+  const result = await supabase
     .from('members')
     .update({ tier: newTier })
     .eq('stripe_customer_id', customerId);
+  assertMutationSucceeded(result, 'Failed to update member tier after subscription update');
 
   console.info(`[webhook] subscription.updated: customer=${customerId} tier=${newTier}`);
 }
@@ -65,10 +74,11 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription, supa
   const customerId = resolveCustomerId(subscription.customer);
   if (!customerId) return;
 
-  await supabase
+  const result = await supabase
     .from('members')
     .update({ tier: 'free', stripe_subscription_id: null })
     .eq('stripe_customer_id', customerId);
+  assertMutationSucceeded(result, 'Failed to downgrade member after subscription deletion');
 
   console.info(`[webhook] subscription.deleted: customer=${customerId} downgraded to free`);
 }

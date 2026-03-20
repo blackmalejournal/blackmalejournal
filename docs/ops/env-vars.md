@@ -9,8 +9,8 @@
 
 | Variable | Scope | Used In | Description |
 |----------|-------|---------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Client + Server | `server.ts`, `client.ts`, `admin.ts`, `middleware.ts` | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Client + Server | `server.ts`, `client.ts`, `middleware.ts` | Supabase anonymous/public key |
+| `NEXT_PUBLIC_SUPABASE_URL` | Client + Server | `server.ts`, `client.ts`, `admin.ts`, `proxy.ts` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Client + Server | `server.ts`, `client.ts`, `proxy.ts` | Supabase anonymous/public key |
 | `SUPABASE_SERVICE_ROLE_KEY` | Server only | `admin.ts` (webhook handler) | Supabase service role key — bypasses RLS. Never expose to client. |
 
 ## Stripe (required — subscriptions + donations)
