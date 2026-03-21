@@ -32,11 +32,12 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 
 ### Logo System
 - **Primary logo:** Wordmark with journal/book icon — used in OG images, about page, print
-- **Secondary logo:** #BMJ with book icon — used for social media, compact spaces
+- **Alternate logo:** Compact alternate wordmark — used for social media, compact spaces
 - **Submark:** Book icon only (star + pen nib) — used for watermarks, small marks
 - **Favicon:** Star + pen nib — derived from submark, simplified for 16x16/32x32
 - **BrandMark component** (`src/components/brand/BrandMark.tsx`) is the canonical inline SVG — use it instead of inline SVG paths in components
-- Logo files: `public/logos/` (PNG variants), `public/favicon.svg`, `public/logo.svg`
+- Logo files: `public/logos/` (PNG + SVG for each variant: color, dark, light), `public/favicon.svg`, `public/logo.svg`
+- Naming convention: `{type}-{variant}.{ext}` — e.g., `primary-color.svg`, `submark-dark.png`, `favicon-red.svg`
 - **Tagline:** "Speak the Truth. Navigate the Consequences." — displayed in Navbar (desktop) and Footer
 
 ### Surfaces & Effects
