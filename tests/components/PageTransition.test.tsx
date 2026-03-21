@@ -13,6 +13,7 @@ jest.mock('framer-motion', () => ({
       </div>
     )),
   },
+  useReducedMotion: jest.fn(() => false),
 }));
 
 describe('PageTransition', () => {

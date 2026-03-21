@@ -20,7 +20,7 @@ describe('NewsletterForm', () => {
     fireEvent.change(input, { target: { value: 'test@example.com' } });
     fireEvent.submit(screen.getByRole('button', { name: /subscribe/i }));
     await waitFor(() => {
-      expect(screen.getByText('Subscribing...')).toBeInTheDocument();
+      expect(screen.getByText(/Subscribing[\u2026.]/)).toBeInTheDocument();
     });
   });
 

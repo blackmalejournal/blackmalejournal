@@ -20,7 +20,7 @@ describe('ContactForm', () => {
     render(<ContactForm />);
     fireEvent.submit(screen.getByRole('button', { name: /send message/i }));
     await waitFor(() => {
-      expect(screen.getByText('Sending...')).toBeInTheDocument();
+      expect(screen.getByText(/Sending[\u2026.]/)).toBeInTheDocument();
     });
   });
 
