@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { isValidEmailAddress, normalizeEmailAddress } from '@/lib/email';
 import { calculateFeeAdjustedAmount } from '@/lib/utils';
 
 const PRESETS = [
@@ -33,22 +34,47 @@ function useSupportSubmit() {
     subscribeNewsletter: boolean;
     newsletterEmail: string;
   }) {
+    const normalizedNewsletterEmail = normalizeEmailAddress(opts.newsletterEmail);
+
     if (opts.activeAmount < 1) {
       setErrorMsg('Please enter at least $1.');
       setStatus('error');
       return;
     }
 
+    if (opts.subscribeNewsletter) {
+      if (!normalizedNewsletterEmail) {
+        setErrorMsg('Enter an email address to join the newsletter.');
+        setStatus('error');
+        return;
+      }
+
+      if (!isValidEmailAddress(normalizedNewsletterEmail)) {
+        setErrorMsg('Enter a valid email address to join the newsletter.');
+        setStatus('error');
+        return;
+      }
+    }
+
     setStatus('loading');
     setErrorMsg('');
 
     try {
-      if (opts.subscribeNewsletter && opts.newsletterEmail) {
-        await fetch('/api/newsletter/subscribe', {
+      if (opts.subscribeNewsletter) {
+        const newsletterRes = await fetch('/api/newsletter/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: opts.newsletterEmail, source: 'support-page' }),
-        }).catch(() => {});
+          body: JSON.stringify({ email: normalizedNewsletterEmail, source: 'support-page' }),
+        });
+
+        if (!newsletterRes.ok) {
+          const newsletterData = await newsletterRes
+            .json()
+            .catch(() => ({ error: 'Could not add you to the newsletter right now.' }));
+          setErrorMsg(newsletterData.error ?? 'Could not add you to the newsletter right now.');
+          setStatus('error');
+          return;
+        }
       }
 
       const res = await fetch('/api/stripe/donate', {
@@ -59,7 +85,7 @@ function useSupportSubmit() {
           frequency: opts.frequency,
           coverFees: opts.coverFees,
           note: opts.note.trim() || undefined,
-          email: opts.newsletterEmail || undefined,
+          email: opts.subscribeNewsletter ? normalizedNewsletterEmail || undefined : undefined,
         }),
       });
 

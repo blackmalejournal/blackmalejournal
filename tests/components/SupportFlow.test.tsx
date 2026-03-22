@@ -134,4 +134,62 @@ describe('SupportFlow', () => {
       expect(fetchMock).toHaveBeenCalledWith('/api/stripe/donate', expect.anything());
     });
   });
+
+  it('shows a clear error and stops when opted-in newsletter email is invalid', async () => {
+    render(<SupportFlow />);
+    fireEvent.click(screen.getByLabelText(/subscribe to the newsletter/i));
+    const emailInput = screen.getByPlaceholderText('your@email.com');
+    fireEvent.change(emailInput, { target: { value: 'not-an-email' } });
+    fireEvent.click(screen.getByRole('button', { name: /support bmj/i }));
+
+    expect(await screen.findByText('Enter a valid email address to join the newsletter.')).toBeInTheDocument();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('does not proceed to donation when newsletter signup fails', async () => {
+    const fetchMock = global.fetch as jest.Mock;
+    fetchMock.mockResolvedValueOnce({
+      ok: false,
+      json: () => Promise.resolve({ error: 'Newsletter service unavailable' }),
+    });
+
+    render(<SupportFlow />);
+    fireEvent.click(screen.getByLabelText(/subscribe to the newsletter/i));
+    fireEvent.change(screen.getByPlaceholderText('your@email.com'), {
+      target: { value: 'test@example.com' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /support bmj/i }));
+
+    expect(await screen.findByText('Newsletter service unavailable')).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not send a hidden newsletter email to donate after opt-out', async () => {
+    const fetchMock = global.fetch as jest.Mock;
+    fetchMock.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ url: 'https://example.com/mock-checkout' }),
+    });
+
+    render(<SupportFlow />);
+    fireEvent.click(screen.getByLabelText(/subscribe to the newsletter/i));
+    fireEvent.change(screen.getByPlaceholderText('your@email.com'), {
+      target: { value: 'donor@example.com' },
+    });
+    fireEvent.click(screen.getByLabelText(/subscribe to the newsletter/i));
+    fireEvent.click(screen.getByRole('button', { name: /support bmj/i }));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith('/api/stripe/donate', expect.objectContaining({
+        method: 'POST',
+        body: JSON.stringify({
+          amount: 15,
+          frequency: 'monthly',
+          coverFees: false,
+          note: undefined,
+          email: undefined,
+        }),
+      }));
+    });
+  });
 });
