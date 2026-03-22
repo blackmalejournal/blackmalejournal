@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+import { isValidEmailAddress, normalizeEmailAddress } from '@/lib/email';
 
 interface NewsletterFormProps {
   source?: string;
 }
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function NewsletterForm({ source = 'footer' }: NewsletterFormProps) {
   const [email, setEmail] = useState('');
   const [touched, setTouched] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const normalizedEmail = normalizeEmailAddress(email);
 
-  const validationError = touched && email.length > 0 && !EMAIL_RE.test(email)
+  const validationError = touched && email.length > 0 && !isValidEmailAddress(normalizedEmail)
     ? 'Enter a valid email address.'
     : '';
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!EMAIL_RE.test(email)) {
+    if (!isValidEmailAddress(normalizedEmail)) {
       setTouched(true);
       return;
     }
@@ -31,7 +31,7 @@ export function NewsletterForm({ source = 'footer' }: NewsletterFormProps) {
       const res = await fetch('/api/newsletter/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email: normalizedEmail, source }),
       });
 
       const data = await res.json();

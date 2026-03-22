@@ -29,8 +29,10 @@ describe('TagFilterRow', () => {
     render(<TagFilterRow tags={['fitness', 'mindset']} activeTag="fitness" />);
     const activeBtn = screen.getByText('fitness');
     const inactiveBtn = screen.getByText('mindset');
-    expect(activeBtn.className).toContain('bg-bmj-red');
-    expect(inactiveBtn.className).toContain('bg-bmj-brown');
+    expect(activeBtn.className).toContain('filter-chip');
+    expect(activeBtn.className).toContain('filter-chip-active');
+    expect(inactiveBtn.className).toContain('filter-chip');
+    expect(inactiveBtn.className).toContain('filter-chip-inactive');
   });
 
   it('clicking active tag removes tag param', () => {

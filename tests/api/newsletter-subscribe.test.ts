@@ -62,6 +62,12 @@ describe('POST /api/newsletter/subscribe', () => {
     expect(mockSubscribe).toHaveBeenCalledWith('user@example.com', 'footer');
   });
 
+  it('normalizes email and blank source before subscribing', async () => {
+    const res = await POST(makeRequest({ email: '  USER@Example.COM  ', source: '   ' }));
+    expect(res.status).toBe(200);
+    expect(mockSubscribe).toHaveBeenCalledWith('user@example.com', 'website');
+  });
+
   it('returns 500 when subscribeToNewsletter throws', async () => {
     mockSubscribe.mockRejectedValue(new Error('DB error'));
     const res = await POST(makeRequest({ email: 'user@example.com' }));

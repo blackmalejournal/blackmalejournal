@@ -24,17 +24,16 @@ describe('PageHeader', () => {
     expect(screen.getByText('About')).toBeInTheDocument();
   });
 
-  test('applies uppercase md:text-7xl to h1 when label is present', () => {
+  test('applies page title styling to h1 when label is present', () => {
     render(<PageHeader title="Our Mission" label="About" />);
     const h1 = screen.getByRole('heading', { level: 1 });
-    expect(h1.className).toContain('uppercase');
-    expect(h1.className).toContain('md:text-7xl');
+    expect(h1.className).toContain('page-title');
   });
 
-  test('does not apply label-specific classes when label is absent', () => {
+  test('uses page title styling when label is absent', () => {
     render(<PageHeader title="Articles" />);
     const h1 = screen.getByRole('heading', { level: 1 });
-    expect(h1.className).not.toContain('md:text-7xl');
+    expect(h1.className).toContain('page-title');
   });
 
   test('renders icon when provided', () => {
@@ -48,7 +47,7 @@ describe('PageHeader', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Weekend Briefing');
   });
 
-  test('applies label-specific classes to h1 when both label and icon are present', () => {
+  test('applies page title styling to h1 when both label and icon are present', () => {
     render(
       <PageHeader
         title="Weekend Briefing"
@@ -57,8 +56,7 @@ describe('PageHeader', () => {
       />,
     );
     const h1 = screen.getByRole('heading', { level: 1 });
-    expect(h1.className).toContain('uppercase');
-    expect(h1.className).toContain('md:text-7xl');
+    expect(h1.className).toContain('page-title');
   });
 
   test('renders StarDivider', () => {

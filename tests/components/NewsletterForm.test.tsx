@@ -56,7 +56,7 @@ describe('NewsletterForm', () => {
     });
     render(<NewsletterForm source="hero-section" />);
     const input = screen.getByPlaceholderText('your@email.com');
-    fireEvent.change(input, { target: { value: 'test@example.com' } });
+    fireEvent.change(input, { target: { value: ' Test@Example.com ' } });
     fireEvent.submit(screen.getByRole('button', { name: /subscribe/i }));
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith('/api/newsletter/subscribe', expect.objectContaining({
