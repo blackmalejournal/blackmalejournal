@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 import { getBriefings } from '@/lib/supabase/queries';
-import { StarDivider } from '@/components/ui/StarDivider';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { BriefingCard } from '@/components/content/BriefingCard';
+import { EmptyState } from '@/components/ui/EmptyState';
 
 export const revalidate = 60;
 
@@ -42,31 +43,21 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
   const visible = briefings.slice(0, PAGE_SIZE * page);
 
   return (
-    <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
-      {/* Page header */}
-      <header>
-        <div className="mb-2 flex items-center gap-3">
-          <BookOpen size={28} className="text-bmj-red" aria-hidden="true" />
-          <h1 className="font-display text-5xl text-bmj-white">
-            Weekend Briefing
-          </h1>
-        </div>
-
-        <p className="mb-4 font-body text-base italic text-bmj-tan">
-          A weekly dispatch on the politics, philosophy, and health of the Black male experience.
-        </p>
-
-        <StarDivider className="mb-12" />
-      </header>
+    <div className="page-shell py-16">
+      <PageHeader
+        label="Flagship Publication"
+        title="Weekend Briefing"
+        icon={<BookOpen size={28} className="text-bmj-red" aria-hidden="true" />}
+        description="A weekly dispatch on the politics, philosophy, and health of the Black male experience."
+        dividerClassName="mb-12"
+      />
 
       {/* Briefing list */}
       {visible.length === 0 ? (
-        <div className="py-24 text-center">
-          <p className="font-label text-bmj-tan">No briefings published yet.</p>
-          <p className="mt-2 font-body text-sm text-bmj-tan">
-            The first dispatch is being prepared.
-          </p>
-        </div>
+        <EmptyState
+          heading="No briefings published yet"
+          description="The first dispatch is being prepared."
+        />
       ) : (
         <>
           <div className="space-y-4">
@@ -79,7 +70,7 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
             <div className="mt-12 text-center">
               <Link
                 href={`/briefings?page=${page + 1}`}
-                className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                className="btn-ghost"
               >
                 Load More
               </Link>

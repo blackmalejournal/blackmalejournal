@@ -1,4 +1,6 @@
-import Image from "next/image"
+import Image from "next/image";
+import { getLensTheme } from "@/lib/lens-theme";
+import { cn } from "@/lib/utils";
 
 interface QuoteCardProps {
   quote: string
@@ -7,29 +9,17 @@ interface QuoteCardProps {
   lens?: "health" | "philosophy" | "politics"
 }
 
-const lensColors = {
-  health: "bg-bmj-amber",
-  philosophy: "bg-bmj-tan",
-  politics: "bg-bmj-brown",
-} as const
-
-const lensTextColors = {
-  health: "text-bmj-brown",
-  philosophy: "text-bmj-brown",
-  politics: "text-bmj-cream",
-} as const
-
 export default function QuoteCard({
   quote,
   attribution,
   portraitUrl,
   lens = "health",
 }: QuoteCardProps) {
-  const bg = lensColors[lens]
-  const textColor = lensTextColors[lens]
+  const theme = getLensTheme(lens);
+  const textColor = "text-bmj-cream";
 
   return (
-    <div className={`${bg} p-6 sm:p-8`}>
+    <div className={cn(theme.accentSoftBg, "border border-bmj-tan/25 p-6 sm:p-8")}>
       <div
         className={`flex flex-col ${portraitUrl ? "sm:flex-row sm:items-center sm:gap-6" : ""}`}
       >
@@ -52,7 +42,7 @@ export default function QuoteCard({
           >
             {quote}
           </blockquote>
-          <div className={`mt-4 h-0.5 w-10 ${textColor.replace('text-', 'bg-')}`} />
+          <div className={cn("mt-4 h-0.5 w-10", theme.accentBg)} />
           <p
             className={`mt-2 font-label text-xs uppercase tracking-widest ${textColor} opacity-70`}
           >
@@ -61,5 +51,5 @@ export default function QuoteCard({
         </div>
       </div>
     </div>
-  )
+  );
 }

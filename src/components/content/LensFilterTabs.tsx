@@ -44,10 +44,10 @@ export function LensFilterTabs({ activeLens }: LensFilterTabsProps) {
             aria-selected={isActive}
             onClick={() => handleSelect(tab.value)}
             className={[
-              'pb-3 font-label text-sm uppercase tracking-widest transition-colors',
+              'filter-tab',
               isActive
                 ? 'border-b-2 border-bmj-red text-bmj-white'
-                : 'text-bmj-tan hover:text-bmj-cream',
+                : 'filter-tab-inactive',
             ].join(' ')}
           >
             {tab.label}

@@ -13,14 +13,14 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
   const isPremium = briefing.access_tier !== 'free';
 
   return (
-    <article className="group relative border-l-4 border-bmj-red bg-bmj-brown transition-colors duration-200 hover:border-bmj-red">
+    <article className="group relative card-stripe border border-bmj-tan/15 border-l-bmj-red">
       <Link
         href={`/briefings/${briefing.slug}`}
         className="block p-6 no-underline sm:p-8"
         aria-label={briefing.title}
       >
         {/* Issue + date row */}
-        <div className="mb-3 flex items-center gap-4">
+        <div className="mb-4 flex flex-wrap items-center gap-3">
           <span className="font-mono text-xs uppercase tracking-widest text-bmj-cream/80">
             {issueLabel}
           </span>
@@ -36,13 +36,13 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-3 font-display text-3xl leading-tight text-bmj-white sm:text-4xl">
+        <h3 className="mb-3 font-display text-3xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-4xl">
           {briefing.title}
         </h3>
 
         {/* First section title as preview */}
         {previewText && (
-          <p className="font-label text-sm uppercase tracking-wider text-bmj-cream/80">
+          <p className="font-label text-sm uppercase tracking-[0.16em] text-bmj-cream/78">
             {previewText}
           </p>
         )}

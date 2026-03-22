@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { compareTiers, includesTier } from '@/lib/membership';
 import { createClient } from '@/lib/supabase/server';
 import { getMemberById } from '@/lib/supabase/queries';
 import { BrandMark } from '@/components/brand/BrandMark';
-import { StarDivider } from '@/components/ui/StarDivider';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { withQuery } from '@/lib/paths';
+import type { MemberTier } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -12,11 +14,17 @@ export const metadata: Metadata = {
     'Choose the membership tier that matches your access needs at The Black Male Journal.',
 };
 
+function formatTierLabel(tier: MemberTier) {
+  return tier === 'free' ? 'Free' : tier === 'basic' ? 'Basic' : 'Premium';
+}
+
 const PLANS = [
   {
     id: 'free',
     name: 'FREE',
     price: '$0',
+    accentClass: 'border-t-bmj-tan',
+    accentTextClass: 'text-bmj-tan',
     description: 'Start with the public archive and open academy material.',
     features: [
       'Public articles',
@@ -29,6 +37,8 @@ const PLANS = [
     id: 'basic',
     name: 'BASIC',
     price: '$9',
+    accentClass: 'border-t-bmj-amber',
+    accentTextClass: 'text-bmj-amber',
     description: 'Unlock the Weekend Briefing archive and member resources.',
     features: [
       'Everything in Free',
@@ -41,6 +51,8 @@ const PLANS = [
     id: 'premium',
     name: 'PREMIUM',
     price: '$19',
+    accentClass: 'border-t-bmj-red',
+    accentTextClass: 'text-bmj-red',
     description: 'Full access to every handbook, download, and private release.',
     features: [
       'Everything in Basic',
@@ -64,45 +76,57 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
   const member = user ? await getMemberById(user.id) : null;
 
   return (
-    <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
-      <div className="max-w-3xl">
-        <div className="mb-4 flex items-center gap-4">
-          <BrandMark size={32} color="var(--bmj-red)" />
-          <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
-            Membership
-          </p>
-        </div>
-        <h1 className="font-display text-5xl text-bmj-white">CHOOSE YOUR ACCESS</h1>
-        <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-bmj-cream/80">
-          BMJ is built as an archive, briefing organ, and disciplined learning platform.
-          Choose the level of access that matches how deeply you want to enter the work.
-        </p>
-      </div>
-
-      <StarDivider className="my-8" />
+    <div className="page-shell py-16">
+      <PageHeader
+        label="Membership"
+        title="CHOOSE YOUR ACCESS"
+        icon={<BrandMark size={32} color="var(--bmj-red)" />}
+        description="BMJ is built as an archive, briefing organ, and disciplined learning platform. Choose the level of access that matches how deeply you want to enter the work."
+        dividerClassName="my-8"
+      />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {PLANS.map((plan) => {
-          const isCurrentPlan = member?.tier === plan.id;
+          const memberTier = member?.tier;
+          const isCurrentPlan = memberTier === plan.id;
+          const isIncludedPlan = memberTier
+            ? compareTiers(memberTier, plan.id) > 0
+            : false;
+          const canChoosePlan = !memberTier || !includesTier(memberTier, plan.id);
           const href = user
-            ? plan.id === 'free'
-              ? '/portal'
-              : withQuery('/portal/settings', {
-                  upgrade: plan.id,
-                  next,
-                })
+            ? withQuery('/portal/settings', {
+                upgrade: plan.id === 'free' ? undefined : plan.id,
+                next,
+              })
             : withQuery('/signup', {
                 tier: plan.id === 'free' ? undefined : plan.id,
                 next,
               });
+          const ctaClass = `mt-8 inline-flex items-center justify-center px-6 py-3 font-label text-xs uppercase tracking-[0.18em] transition-colors no-underline ${
+            isCurrentPlan || isIncludedPlan
+              ? 'border border-bmj-tan/40 text-bmj-tan'
+              : plan.id === 'premium'
+                ? 'btn-primary'
+                : 'btn-ghost'
+          }`;
+          const ctaLabel = isCurrentPlan
+            ? 'Current Plan'
+            : isIncludedPlan && memberTier
+              ? `Included in ${formatTierLabel(memberTier)}`
+              : user
+                ? `Choose ${plan.name}`
+                : plan.id === 'free'
+                  ? 'Create Free Account'
+                  : `Join ${plan.name}`;
 
           return (
             <section
               key={plan.id}
-              className="flex h-full flex-col border border-bmj-tan/30 bg-bmj-brown p-8"
+              className={`card-offer h-full p-8 ${plan.accentClass}`}
             >
-              <p className="font-display text-3xl text-bmj-white">{plan.name}</p>
-              <p className="mt-2 font-display text-5xl text-bmj-red">{plan.price}</p>
+              <p className="meta-stamp">Monthly Membership</p>
+              <p className="mt-5 font-display text-3xl text-bmj-white">{plan.name}</p>
+              <p className={`mt-2 font-display text-5xl ${plan.accentTextClass}`}>{plan.price}</p>
               <p className="mt-3 font-body text-sm leading-relaxed text-bmj-cream/75">
                 {plan.description}
               </p>
@@ -110,7 +134,7 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
               <ul className="mt-6 flex-1 space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex gap-3">
-                    <span className="text-bmj-red" aria-hidden="true">
+                    <span className={plan.accentTextClass} aria-hidden="true">
                       ★
                     </span>
                     <span className="font-body text-sm text-bmj-cream/85">{feature}</span>
@@ -118,35 +142,20 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
                 ))}
               </ul>
 
-              <Link
-                href={href}
-                className={`mt-8 inline-flex items-center justify-center px-6 py-3 font-label text-xs uppercase tracking-widest transition-colors ${
-                  isCurrentPlan
-                    ? 'border border-bmj-tan/40 text-bmj-tan'
-                    : plan.id === 'premium'
-                      ? 'bg-bmj-red text-bmj-white hover:opacity-90'
-                      : 'border border-bmj-tan/40 text-bmj-cream hover:border-bmj-red hover:text-bmj-white'
-                }`}
-              >
-                {isCurrentPlan
-                  ? 'Current Plan'
-                  : user
-                    ? plan.id === 'free'
-                      ? 'Go to Portal'
-                      : `Choose ${plan.name}`
-                    : plan.id === 'free'
-                      ? 'Create Free Account'
-                      : `Join ${plan.name}`}
-              </Link>
+              {canChoosePlan ? (
+                <Link href={href} className={ctaClass}>
+                  {ctaLabel}
+                </Link>
+              ) : (
+                <span className={ctaClass}>{ctaLabel}</span>
+              )}
             </section>
           );
         })}
       </div>
 
-      <StarDivider className="my-8" />
-
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <section className="border border-bmj-tan/20 bg-bmj-brown p-8">
+        <section className="surface-panel p-8">
           <h2 className="font-display text-2xl text-bmj-white">WHAT YOU ARE FUNDING</h2>
           <p className="mt-4 font-body text-sm leading-relaxed text-bmj-cream/80">
             Membership supports independent editorial work, member resources, and the
@@ -155,7 +164,7 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
           </p>
         </section>
 
-        <section className="border border-bmj-tan/20 bg-bmj-brown p-8">
+        <section className="surface-panel p-8">
           <h2 className="font-display text-2xl text-bmj-white">FREQUENT QUESTIONS</h2>
           <div className="mt-4 space-y-4 font-body text-sm leading-relaxed text-bmj-cream/80">
             <p>

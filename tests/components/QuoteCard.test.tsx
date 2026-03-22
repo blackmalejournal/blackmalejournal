@@ -15,10 +15,10 @@ describe('QuoteCard', () => {
 
   it('applies lens-specific background color class', () => {
     const { container, rerender } = render(<QuoteCard {...defaultProps} lens="politics" />);
-    expect(container.firstChild).toHaveClass('bg-bmj-brown');
+    expect(container.firstChild).toHaveClass('bg-bmj-red/10');
 
     rerender(<QuoteCard {...defaultProps} lens="philosophy" />);
-    expect(container.firstChild).toHaveClass('bg-bmj-tan');
+    expect(container.firstChild).toHaveClass('bg-bmj-tan/10');
   });
 
   it('renders portrait when provided', () => {
@@ -29,6 +29,6 @@ describe('QuoteCard', () => {
 
   it('defaults to health lens', () => {
     const { container } = render(<QuoteCard {...defaultProps} />);
-    expect(container.firstChild).toHaveClass('bg-bmj-amber');
+    expect(container.firstChild).toHaveClass('bg-bmj-amber/10');
   });
 });

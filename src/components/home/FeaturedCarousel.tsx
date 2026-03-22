@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { StarDivider } from '@/components/ui/StarDivider';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { PageHeader } from '@/components/layout/PageHeader';
 import type { Article } from '@/lib/supabase/types';
 
 interface FeaturedCarouselProps {
@@ -35,14 +35,19 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
   if (articles.length === 0) {
     return (
       <section className="bg-bmj-black py-20">
-        <div className="mx-auto max-w-content px-6">
-          <StarDivider className="mb-8" />
-          <h2 className="mb-12 text-center font-label text-sm uppercase tracking-[0.3em] text-bmj-tan">
-            Featured
-          </h2>
-          <p className="text-center font-body text-base text-bmj-cream/50">
-            Featured articles coming soon.
-          </p>
+        <div className="page-shell-tight">
+          <PageHeader
+            as="h2"
+            tone="section"
+            align="center"
+            title="Featured"
+            label="Editor’s Selection"
+            dividerPosition="top"
+            dividerClassName="mb-10"
+          />
+          <div className="section-empty-state">
+            <p className="section-empty-state-text">Featured articles coming soon.</p>
+          </div>
         </div>
       </section>
     );
@@ -57,14 +62,19 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
 
   return (
     <section className="bg-bmj-black py-20">
-      <div className="mx-auto max-w-content px-6">
-        <StarDivider className="mb-8" />
+      <div className="page-shell-tight">
+        <PageHeader
+          as="h2"
+          tone="section"
+          align="center"
+          title="Featured"
+          label="Editor’s Selection"
+          description="A rotating front-page feature from the archive, selected for urgency, argument, and staying power."
+          dividerPosition="top"
+          dividerClassName="mb-10"
+        />
 
-        <h2 className="mb-12 text-center font-label text-sm uppercase tracking-[0.3em] text-bmj-tan">
-          Featured
-        </h2>
-
-        <div className="relative min-h-[320px] overflow-hidden border border-bmj-tan/20 bg-bmj-brown sm:min-h-[400px]">
+        <div className="card-feature relative min-h-[320px] overflow-hidden sm:min-h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={article.id}
@@ -95,7 +105,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
               <div className="flex flex-1 flex-col justify-center p-8 sm:p-12">
                 <LensBadge lens={article.lens} className="mb-4" />
 
-                <h3 className="mb-4 font-display text-3xl leading-tight text-bmj-white sm:text-4xl">
+                <h3 className="mb-4 font-display text-3xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-4xl">
                   {article.title}
                 </h3>
 
@@ -114,7 +124,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
 
                 <Link
                   href={`/articles/${article.slug}`}
-                  className="inline-block self-start border border-bmj-red px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-red transition-colors hover:bg-bmj-red hover:text-bmj-white"
+                  className="btn-secondary self-start"
                   aria-label="Read article"
                 >
                   Read Article

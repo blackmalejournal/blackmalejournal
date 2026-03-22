@@ -53,7 +53,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
             <button
               onClick={onClose}
               aria-label="Close navigation menu"
-              className="mb-10 self-end text-bmj-cream transition-opacity hover:opacity-70"
+              className="mb-10 self-end border border-bmj-tan/20 bg-bmj-deep-black/70 p-2 text-bmj-cream transition-[border-color,color,background-color] duration-200 hover:border-bmj-red/50 hover:text-bmj-white"
             >
               <X size={28} aria-hidden="true" />
             </button>
@@ -63,12 +63,12 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
               {HEADER_NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
-                    onClick={onClose}
-                    className="font-display text-5xl uppercase tracking-wide text-bmj-white transition-colors hover:text-bmj-red"
-                  >
-                    {link.label}
-                  </Link>
+                  href={link.href}
+                  onClick={onClose}
+                  className="font-display text-5xl uppercase tracking-[0.08em] text-bmj-white transition-colors hover:text-bmj-red"
+                >
+                  {link.label}
+                </Link>
                 </li>
               ))}
               {user && (
@@ -76,7 +76,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
                   <Link
                     href="/portal"
                     onClick={onClose}
-                    className="font-display text-5xl uppercase tracking-wide text-bmj-amber transition-colors hover:text-bmj-red"
+                    className="font-display text-5xl uppercase tracking-[0.08em] text-bmj-amber transition-colors hover:text-bmj-red"
                   >
                     Portal
                   </Link>
@@ -89,7 +89,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
               <form action={signOut} className="mb-8">
                 <button
                   type="submit"
-                  className="block w-full border border-bmj-red py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-red transition-colors hover:bg-bmj-red hover:text-bmj-white"
+                  className="btn-secondary block w-full py-3 text-center text-sm"
                 >
                   Log Out
                 </button>
@@ -99,14 +99,14 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
                 <Link
                   href="/signup"
                   onClick={onClose}
-                  className="block bg-bmj-red py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+                  className="btn-primary block py-3 text-center text-sm"
                 >
                   Join
                 </Link>
                 <Link
                   href="/login"
                   onClick={onClose}
-                  className="block border border-bmj-tan/30 py-3 text-center font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                  className="btn-secondary block py-3 text-center text-sm"
                 >
                   Log In
                 </Link>

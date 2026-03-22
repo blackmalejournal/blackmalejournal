@@ -1,4 +1,5 @@
 import { StarDivider } from "@/components/ui/StarDivider";
+import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
   /** Page title — rendered as h1 */
@@ -13,6 +14,20 @@ interface PageHeaderProps {
   dividerClassName?: string;
   /** className for the outer wrapper */
   className?: string;
+  /** Render the title as h1 or h2 */
+  as?: "h1" | "h2";
+  /** Horizontal alignment */
+  align?: "left" | "center";
+  /** Visual scale */
+  tone?: "page" | "section";
+  /** Whether to show the divider */
+  showDivider?: boolean;
+  /** Whether divider renders above or below content */
+  dividerPosition?: "top" | "bottom";
+  /** Extra title classes */
+  titleClassName?: string;
+  /** Extra description classes */
+  descriptionClassName?: string;
 }
 
 export function PageHeader({
@@ -22,36 +37,59 @@ export function PageHeader({
   icon,
   dividerClassName = "mb-6",
   className = "",
+  as = "h1",
+  align = "left",
+  tone = "page",
+  showDivider = true,
+  dividerPosition = "bottom",
+  titleClassName = "",
+  descriptionClassName = "",
 }: PageHeaderProps) {
-  const hasLabel = Boolean(label);
-  const h1Classes = `font-display text-5xl text-bmj-white${
-    hasLabel ? " uppercase md:text-7xl" : ""
-  }`;
+  const TitleTag = as;
+  const titleClasses = tone === "page" ? "page-title" : "section-title";
+  const divider = showDivider ? (
+    <StarDivider className={cn(dividerPosition === "top" ? "mb-8" : "", dividerClassName)} />
+  ) : null;
 
   return (
-    <header className={className}>
+    <header
+      className={cn(
+        "flex flex-col",
+        align === "center" && "items-center text-center",
+        className,
+      )}
+    >
+      {dividerPosition === "top" && divider}
+
       {label && (
-        <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <p className="editorial-kicker">
           {label}
         </p>
       )}
 
       {icon ? (
-        <div className="mb-2 flex items-center gap-3">
+        <div
+          className={cn(
+            "mb-2 flex gap-4",
+            align === "center"
+              ? "flex-col items-center"
+              : "flex-col items-start sm:flex-row sm:items-center",
+          )}
+        >
           {icon}
-          <h1 className={h1Classes}>{title}</h1>
+          <TitleTag className={cn(titleClasses, titleClassName)}>{title}</TitleTag>
         </div>
       ) : (
-        <h1 className={h1Classes}>{title}</h1>
+        <TitleTag className={cn(titleClasses, titleClassName)}>{title}</TitleTag>
       )}
 
       {description && (
-        <p className="mt-2 max-w-xl font-body text-lg text-bmj-cream/70">
+        <p className={cn("editorial-deck mt-3", descriptionClassName)}>
           {description}
         </p>
       )}
 
-      <StarDivider className={dividerClassName} />
+      {dividerPosition === "bottom" && divider}
     </header>
   );
 }

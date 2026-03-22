@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { LensBadge } from '@/components/brand/LensBadge';
+import { getLensTheme } from '@/lib/lens-theme';
+import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
 
 interface DispatchCardProps {
@@ -18,8 +20,16 @@ export function DispatchCard({
   excerpt,
   publishedAt,
 }: DispatchCardProps) {
+  const theme = getLensTheme(lens);
+
   return (
-    <article className="group border-l-4 border-bmj-red bg-bmj-brown transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-bmj-cream">
+    <article
+      className={cn(
+        'group card-stripe border border-bmj-tan/15',
+        theme.cardBorderLeft,
+        theme.hoverBorder,
+      )}
+    >
       <Link
         href={`/blog/${slug}`}
         className="block p-6 no-underline sm:p-8"
@@ -32,7 +42,7 @@ export function DispatchCard({
           </span>
         </div>
 
-        <h3 className="mb-3 font-display text-2xl leading-tight text-bmj-white sm:text-3xl">
+        <h3 className="mb-3 font-display text-2xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-3xl">
           {title}
         </h3>
 

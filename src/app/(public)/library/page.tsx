@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, FileText, Zap, GraduationCap, Play } from "lucide-react";
-import { StarDivider } from "@/components/ui/StarDivider";
+import { BookOpen, FileText, Zap, GraduationCap, Play, type LucideIcon } from "lucide-react";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { getLensTheme } from "@/lib/lens-theme";
+import type { Lens } from "@/lib/supabase/types";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Library",
@@ -20,9 +23,19 @@ export const metadata: Metadata = {
   },
 };
 
-const hubs = [
+type LibraryHub = {
+  icon: LucideIcon;
+  lens: Lens;
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+};
+
+const hubs: LibraryHub[] = [
   {
     icon: BookOpen,
+    lens: "politics",
     label: "Flagship Publication",
     title: "Weekend Briefings",
     description:
@@ -31,6 +44,7 @@ const hubs = [
   },
   {
     icon: FileText,
+    lens: "philosophy",
     label: "Long-Form Analysis",
     title: "Articles",
     description:
@@ -39,6 +53,7 @@ const hubs = [
   },
   {
     icon: Zap,
+    lens: "health",
     label: "Short-Form Commentary",
     title: "Dispatches",
     description:
@@ -47,6 +62,7 @@ const hubs = [
   },
   {
     icon: GraduationCap,
+    lens: "health",
     label: "Structured Learning",
     title: "Academy",
     description:
@@ -55,6 +71,7 @@ const hubs = [
   },
   {
     icon: Play,
+    lens: "philosophy",
     label: "Documentary Video",
     title: "Video",
     description: "Documentary-style video content. Watch. Learn. Build.",
@@ -70,55 +87,56 @@ const lenses = [
 
 export default function LibraryPage() {
   return (
-    <>
-      <section className="mx-auto max-w-content px-6 py-16">
-        <p className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
-          Content Library
-        </p>
-        <h1 className="mb-4 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-          Library
-        </h1>
-        <p className="max-w-xl font-body text-sm leading-relaxed text-bmj-cream/70">
-          Everything published under The Black Male Journal banner — in one
-          place. Briefings, long reads, dispatches, courses, and video. Start
-          where it matters to you.
-        </p>
-      </section>
+    <div className="page-shell-tight py-16">
+      <PageHeader
+        label="Content Library"
+        title="Library"
+        description="Everything published under The Black Male Journal banner — briefings, long reads, dispatches, courses, and video."
+        dividerClassName="mb-12"
+      />
 
-      <StarDivider className="mx-auto max-w-content px-6" />
-
-      <section className="mx-auto max-w-content px-6 py-16">
-        <p className="mb-8 font-label text-xs uppercase tracking-widest text-bmj-tan">
+      <section className="py-4">
+        <p className="editorial-kicker mb-8">
           Content Sections
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {hubs.map(({ icon: Icon, label, title, description, href }) => (
-            <Link
-              key={href}
-              href={href}
-              className="group block border-t-[3px] border-bmj-red bg-bmj-brown p-8 transition-transform hover:-translate-y-1"
-            >
-              <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
-                {label}
-              </p>
-              <div className="mb-4 flex items-center gap-3">
-                <Icon className="h-5 w-5 shrink-0 text-bmj-red" strokeWidth={1.5} />
-                <h2 className="font-display text-2xl uppercase text-bmj-white">
-                  {title}
-                </h2>
-              </div>
-              <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
-                {description}
-              </p>
-            </Link>
-          ))}
+          {hubs.map(({ icon: Icon, lens, label, title, description, href }) => {
+            const theme = getLensTheme(lens);
+
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn("card-media group block p-8", theme.cardBorderTop, theme.hoverBorder)}
+              >
+                <p className={cn("mb-3 font-label text-xs uppercase tracking-widest", theme.accentText)}>
+                  {label}
+                </p>
+                <div className="mb-4 flex items-center gap-4">
+                  <span
+                    className={cn(
+                      "inline-flex h-10 w-10 items-center justify-center rounded-full",
+                      theme.accentSoftBg,
+                      theme.accentText,
+                    )}
+                  >
+                    <Icon className="h-5 w-5 shrink-0" strokeWidth={1.5} />
+                  </span>
+                  <h2 className="font-display text-2xl uppercase text-bmj-white">
+                    {title}
+                  </h2>
+                </div>
+                <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
+                  {description}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      <StarDivider className="mx-auto max-w-content px-6" />
-
-      <section className="mx-auto max-w-content px-6 py-16">
-        <p className="mb-6 font-label text-xs uppercase tracking-widest text-bmj-tan">
+      <section className="py-16">
+        <p className="editorial-kicker mb-6">
           Browse by Lens
         </p>
         <div className="flex flex-wrap gap-4">
@@ -126,7 +144,7 @@ export default function LibraryPage() {
             <Link
               key={href}
               href={href}
-              className="border border-bmj-tan/30 bg-bmj-brown px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+              className="btn-ghost"
             >
               {label}
             </Link>
@@ -134,10 +152,8 @@ export default function LibraryPage() {
         </div>
       </section>
 
-      <StarDivider className="mx-auto max-w-content px-6" />
-
-      <section className="mx-auto max-w-content px-6 py-16">
-        <p className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+      <section className="py-16">
+        <p className="editorial-kicker mb-4">
           Independent Media
         </p>
         <h2 className="mb-4 font-display text-4xl uppercase text-bmj-white md:text-5xl">
@@ -149,11 +165,11 @@ export default function LibraryPage() {
         </p>
         <Link
           href="/support"
-          className="inline-block bg-bmj-red px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-white transition-colors hover:bg-bmj-red/80"
+          className="btn-primary inline-block px-8 py-4 text-sm"
         >
           Support the Mission
         </Link>
       </section>
-    </>
+    </div>
   );
 }

@@ -103,7 +103,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
         role="dialog"
         aria-modal="true"
         aria-label="Search the journal"
-        className="relative z-10 w-full max-w-xl border border-bmj-tan/20 bg-bmj-brown"
+        className="relative z-10 w-full max-w-xl border border-bmj-tan/20 bg-bmj-deep-black"
       >
         <div className="flex items-center gap-3 border-b border-bmj-tan/20 px-6 py-4">
           <Search size={18} className="text-bmj-tan" aria-hidden="true" />
@@ -114,7 +114,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search articles, briefings, handbooks…"
-            className="flex-1 bg-transparent font-body text-sm text-bmj-cream placeholder-bmj-tan/70 outline-none"
+            className="flex-1 bg-transparent font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 outline-none"
             aria-label="Search"
           />
           <button
@@ -140,7 +140,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
               <button
                 key={`${result.type}-${result.slug}`}
                 onClick={() => handleSelect(result)}
-                className="flex w-full items-start gap-4 border-b border-bmj-tan/10 px-6 py-4 text-left transition-colors hover:bg-bmj-black/30"
+                className="flex w-full items-start gap-4 border-b border-bmj-tan/10 px-6 py-4 text-left transition-colors hover:bg-bmj-brown/40"
               >
                 <Icon size={16} className="mt-0.5 shrink-0 text-bmj-tan" aria-hidden="true" />
                 <div className="min-w-0 flex-1">
