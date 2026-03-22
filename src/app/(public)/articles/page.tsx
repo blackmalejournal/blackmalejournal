@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { getArticles } from '@/lib/supabase/queries';
 import { extractTags, calculateReadingTime } from '@/lib/utils';
-import { StarDivider } from '@/components/ui/StarDivider';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ArticleCard } from '@/components/content/ArticleCard';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
@@ -51,6 +51,7 @@ function ArticleCardGrid({ articles }: { articles: Article[] }) {
           publishedAt={article.published_at}
           coverImage={article.cover_image}
           isPremium={article.access_tier !== 'free'}
+          isFeatured={article.featured}
         />
       ))}
     </div>
@@ -89,13 +90,16 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
   const remainingArticles = visible.slice(3);
 
   return (
-    <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
-      {/* Page header */}
-      <h1 className="font-display text-5xl text-bmj-white">Articles</h1>
-      <StarDivider className="mb-6" />
+    <div className="page-shell py-16">
+      <PageHeader
+        label="The Archive"
+        title="Articles"
+        description="Long-form argument across health, philosophy, and politics. This is the slow record of the publication."
+        dividerClassName="mb-8"
+      />
 
       {/* Filters */}
-      <div className="mb-8 space-y-4">
+      <div className="surface-panel mb-8 space-y-4 p-4 sm:p-6">
         <Suspense fallback={<div className="h-10 border-b border-bmj-tan/20" />}>
           <LensFilterTabs activeLens={activeLens ?? 'all'} />
         </Suspense>
@@ -134,7 +138,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
                   ...(activeTag ? { tag: activeTag } : {}),
                   page: String(page + 1),
                 }).toString()}`}
-                className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                className="btn-ghost"
               >
                 Load More
               </Link>

@@ -35,4 +35,9 @@ describe('ArticleCard', () => {
     const link = screen.getByRole('link', { name: 'Test Article' });
     expect(link).toHaveAttribute('href', '/articles/test-article');
   });
+
+  it('shows featured label when isFeatured is true', () => {
+    render(<ArticleCard {...defaultProps} isFeatured />);
+    expect(screen.getByText('Featured')).toBeInTheDocument();
+  });
 });

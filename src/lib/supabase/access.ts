@@ -1,8 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { getMemberById } from '@/lib/supabase/queries';
+import { includesTier } from '@/lib/membership';
 import type { AccessTier } from '@/lib/supabase/types';
-
-const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
 
 /**
  * Checks whether the current user has access to content at the given tier.
@@ -24,9 +23,7 @@ export async function checkContentAccess(requiredTier: AccessTier): Promise<{
   }
 
   const member = await getMemberById(user.id);
-  const hasAccess = member
-    ? TIER_RANK[member.tier] >= TIER_RANK[requiredTier]
-    : false;
+  const hasAccess = member ? includesTier(member.tier, requiredTier) : false;
 
   return { hasAccess, user };
 }

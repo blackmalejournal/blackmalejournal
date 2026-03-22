@@ -9,6 +9,7 @@ import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
+import { cn } from '@/lib/utils';
 
 export type NavUser = {
   email: string;
@@ -47,11 +48,11 @@ export function Navbar({ user = null }: NavbarProps) {
       <header
         className={`accent-border-bottom sticky top-0 z-50 transition-[background-color,backdrop-filter] duration-200 ${
           isScrolled
-            ? 'bg-bmj-black/95 backdrop-blur-sm'
+            ? 'bg-bmj-deep-black/95 backdrop-blur-sm'
             : 'bg-bmj-black'
         }`}
       >
-        <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 lg:py-5">
           {/* Logo / Wordmark */}
           <Link
             href="/"
@@ -60,10 +61,10 @@ export function Navbar({ user = null }: NavbarProps) {
           >
             <BrandMark size={32} color="var(--bmj-red)" />
             <div className="flex flex-col">
-              <span className="font-display text-xl tracking-wider text-bmj-white">
+              <span className="font-display text-xl uppercase tracking-[0.08em] text-bmj-white">
                 The Black Male Journal
               </span>
-              <span className="hidden lg:block font-label text-[10px] uppercase tracking-[0.2em] text-bmj-tan">
+              <span className="hidden xl:block font-label text-[10px] uppercase tracking-[0.24em] text-bmj-tan">
                 Speak the Truth. Navigate the Consequences.
               </span>
             </div>
@@ -78,11 +79,7 @@ export function Navbar({ user = null }: NavbarProps) {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className={`font-label text-xs uppercase tracking-widest transition-colors no-underline ${
-                        isActive
-                          ? 'border-b-2 border-bmj-red text-bmj-white pb-0.5'
-                          : 'text-bmj-cream hover:text-bmj-white'
-                      }`}
+                      className={cn('nav-link', isActive && 'nav-link-active')}
                       aria-current={isActive ? 'page' : undefined}
                     >
                       {link.label}
@@ -98,7 +95,7 @@ export function Navbar({ user = null }: NavbarProps) {
             <button
               onClick={() => setSearchOpen(true)}
               aria-label="Search (Ctrl+K)"
-              className="hidden text-bmj-cream transition-opacity hover:opacity-70 lg:block"
+              className="hidden border border-bmj-tan/20 bg-bmj-deep-black/70 p-2 text-bmj-cream transition-[border-color,color,background-color] duration-200 hover:border-bmj-red/50 hover:text-bmj-white lg:block"
             >
               <Search size={18} aria-hidden="true" />
             </button>
@@ -113,7 +110,7 @@ export function Navbar({ user = null }: NavbarProps) {
               <>
                 <Link
                   href="/login"
-                  className="hidden font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:text-bmj-white sm:block"
+                  className="nav-link hidden sm:block"
                 >
                   Log In
                 </Link>
@@ -131,7 +128,7 @@ export function Navbar({ user = null }: NavbarProps) {
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              className="text-bmj-cream transition-opacity hover:opacity-70 lg:hidden"
+              className="border border-bmj-tan/20 bg-bmj-deep-black/70 p-2 text-bmj-cream transition-[border-color,color,background-color] duration-200 hover:border-bmj-red/50 hover:text-bmj-white lg:hidden"
             >
               <Menu size={24} aria-hidden="true" />
             </button>

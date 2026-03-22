@@ -32,6 +32,22 @@
   --grain-opacity: 0.09;
   --texture-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 
+  /* Semantic surfaces */
+  --bmj-surface-canvas: var(--bmj-black);
+  --bmj-surface-panel: var(--bmj-deep-black);
+  --bmj-surface-panel-strong: var(--bmj-brown);
+  --bmj-surface-paper: var(--bmj-paper);
+
+  /* Semantic text and rule colors */
+  --bmj-text-strong: var(--bmj-white);
+  --bmj-text-body: rgba(232, 220, 200, 0.84);
+  --bmj-text-muted: rgba(184, 152, 106, 0.82);
+  --bmj-text-subtle: rgba(184, 152, 106, 0.64);
+  --bmj-border-subtle: rgba(184, 152, 106, 0.18);
+  --bmj-border-strong: rgba(184, 152, 106, 0.32);
+  --bmj-border-command: rgba(192, 40, 31, 0.42);
+  --bmj-feature-overlay: rgba(13, 12, 11, 0.76);
+
   /* Spacing scale */
   --space-xs:  0.25rem;
   --space-sm:  0.5rem;

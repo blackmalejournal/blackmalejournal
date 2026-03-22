@@ -30,13 +30,14 @@ export function TagFilterRow({ tags, activeTag }: TagFilterRowProps) {
         const isActive = tag === activeTag;
         return (
           <button
+            type="button"
             key={tag}
             onClick={() => handleTag(tag)}
             className={[
-              'shrink-0 rounded-sm px-3 py-1 font-label text-xs uppercase tracking-wide transition-colors',
+              'filter-chip',
               isActive
-                ? 'bg-bmj-red text-bmj-white'
-                : 'bg-bmj-brown text-bmj-cream hover:bg-bmj-tan/20',
+                ? 'filter-chip-active'
+                : 'filter-chip-inactive',
             ].join(' ')}
           >
             {tag}

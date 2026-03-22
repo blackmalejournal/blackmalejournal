@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { Lock } from 'lucide-react';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { LensBadge } from '@/components/brand/LensBadge';
+import { getLensTheme } from '@/lib/lens-theme';
+import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
 
 interface ArticleCardProps {
@@ -15,6 +17,7 @@ interface ArticleCardProps {
   coverImage?: string | null;
   coverImageAlt?: string;
   isPremium?: boolean;
+  isFeatured?: boolean;
 }
 
 export function ArticleCard({
@@ -27,7 +30,9 @@ export function ArticleCard({
   coverImage,
   coverImageAlt,
   isPremium = false,
+  isFeatured = false,
 }: ArticleCardProps) {
+  const theme = getLensTheme(lens);
   const formattedDate = new Date(publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -35,7 +40,7 @@ export function ArticleCard({
   });
 
   return (
-    <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-bmj-red/40">
+    <article className={cn('group card-media', theme.cardBorderTop, theme.hoverBorder)}>
       {/* Cover image */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
         {coverImage ? (
@@ -56,12 +61,17 @@ export function ArticleCard({
             <Lock size={12} className="text-bmj-amber" />
           </div>
         )}
+        {isFeatured && (
+          <div className="absolute left-2 top-2 border border-bmj-red bg-bmj-red/90 px-2 py-1 font-label text-[10px] uppercase tracking-[0.16em] text-bmj-white">
+            Featured
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
         <LensBadge lens={lens} className="mb-3 self-start" />
 
-        <h3 className="mb-3 line-clamp-2 font-display text-xl leading-tight text-bmj-white">
+        <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-[0.04em] leading-tight text-bmj-white">
           <Link
             href={`/articles/${slug}`}
             className="text-bmj-white no-underline"
@@ -74,11 +84,11 @@ export function ArticleCard({
           {excerpt}
         </p>
 
-        <div className="mt-4 flex items-center justify-between border-t border-bmj-tan/20 pt-4">
-          <span className="font-mono text-xs text-bmj-cream/80">
+        <div className="mt-5 flex items-center justify-between border-t border-bmj-tan/20 pt-4">
+          <span className="font-mono text-xs uppercase tracking-[0.18em] text-bmj-cream/80">
             {Math.max(1, readingTime)} min read
           </span>
-          <span className="font-mono text-xs text-bmj-cream/80">{formattedDate}</span>
+          <span className="font-mono text-xs uppercase tracking-[0.18em] text-bmj-cream/80">{formattedDate}</span>
         </div>
       </div>
     </article>

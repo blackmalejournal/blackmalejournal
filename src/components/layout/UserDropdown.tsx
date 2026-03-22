@@ -31,13 +31,13 @@ export function UserDropdown({ email, displayName }: UserDropdownProps) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="true"
-        className="flex h-9 w-9 items-center justify-center bg-bmj-red font-label text-sm text-bmj-white transition-opacity hover:opacity-90"
+        className="flex h-9 w-9 items-center justify-center border border-bmj-red bg-bmj-red font-label text-sm text-bmj-white transition-[background-color,border-color,transform] duration-200 hover:-translate-y-px hover:bg-bmj-crimson"
       >
         {initial}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-48 border border-bmj-tan/40 bg-bmj-brown">
+        <div className="absolute right-0 top-full mt-2 w-48 border border-bmj-tan/30 bg-bmj-deep-black">
           <div className="border-b border-bmj-tan/20 px-4 py-3">
             <p className="truncate font-label text-xs uppercase tracking-widest text-bmj-tan">
               {displayName || email}
@@ -48,21 +48,21 @@ export function UserDropdown({ email, displayName }: UserDropdownProps) {
             <Link
               href="/portal"
               onClick={() => setOpen(false)}
-              className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-black/50 hover:text-bmj-white"
+              className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-brown/60 hover:text-bmj-white"
             >
               Portal
             </Link>
             <Link
               href="/portal/settings"
               onClick={() => setOpen(false)}
-              className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-black/50 hover:text-bmj-white"
+              className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-brown/60 hover:text-bmj-white"
             >
               Settings
             </Link>
             <form action={signOut}>
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-left font-body text-sm text-bmj-red transition-colors hover:bg-bmj-black/50"
+                className="w-full px-4 py-2 text-left font-body text-sm text-bmj-red transition-colors hover:bg-bmj-brown/60"
               >
                 Log Out
               </button>

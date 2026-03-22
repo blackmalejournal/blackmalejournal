@@ -80,8 +80,11 @@ export const metadata: Metadata = {
     images: ["/og-image.svg"],
   },
   icons: {
-    icon: "/favicon.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/logos/favicon-red.svg", type: "image/svg+xml" },
+    ],
+    apple: "/logos/primary-light.png",
   },
   other: {
     "theme-color": "#0D0C0B",

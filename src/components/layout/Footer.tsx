@@ -20,19 +20,19 @@ const DIRECT_SUPPORT_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="accent-border-top bg-bmj-brown">
+    <footer className="accent-border-top bg-bmj-deep-black">
       <div className="mx-auto max-w-content px-6 py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
 
           {/* Column 1 — Brand */}
-          <div className="flex flex-col gap-4">
+          <div className="surface-panel flex flex-col gap-4 p-6">
             <div className="flex items-center gap-3">
               <BrandMark size={28} color="var(--bmj-red)" />
               <div className="flex flex-col">
-                <span className="font-display text-lg tracking-wider text-bmj-white">
+                <span className="font-display text-lg uppercase tracking-[0.08em] text-bmj-white">
                   The Black Male Journal
                 </span>
-                <p className="font-label text-xs uppercase tracking-[0.15em] text-bmj-tan/70 mt-1">
+                <p className="mt-1 font-label text-xs uppercase tracking-[0.18em] text-bmj-tan/70">
                   Speak the Truth. Navigate the Consequences.
                 </p>
               </div>
@@ -49,7 +49,7 @@ export function Footer() {
               </p>
               <a
                 href="https://patreon.com/BlackMaleJournal"
-                className="inline-block border border-bmj-amber/40 bg-bmj-amber/10 px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:bg-bmj-amber/20"
+                className="inline-block self-start border border-bmj-amber/40 bg-bmj-amber/10 px-5 py-2 font-label text-xs uppercase tracking-[0.18em] text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-amber hover:bg-bmj-amber/20 hover:text-bmj-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -79,7 +79,7 @@ export function Footer() {
           </div>
 
           {/* Column 2 — Navigation */}
-          <nav aria-label="Footer navigation">
+          <nav aria-label="Footer navigation" className="surface-panel p-6">
             <h3 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Navigate
             </h3>
@@ -98,7 +98,7 @@ export function Footer() {
           </nav>
 
           {/* Column 3 — Connect */}
-          <div>
+          <div className="surface-panel p-6">
             <h3 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Connect
             </h3>
@@ -110,7 +110,7 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="text-bmj-tan transition-colors hover:text-bmj-cream"
+                  className="border border-bmj-tan/20 p-2 text-bmj-tan transition-[border-color,color,background-color] duration-200 hover:border-bmj-red/50 hover:bg-bmj-black/30 hover:text-bmj-cream"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -128,7 +128,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-bmj-tan/20 pt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-bmj-tan/20 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-bmj-tan">
             © 2026 The Black Male Journal. All rights reserved.
           </p>

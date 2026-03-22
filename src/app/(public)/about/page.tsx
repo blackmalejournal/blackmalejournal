@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
-import { BrandMark } from '@/components/brand/BrandMark';
 import TributeCard from '@/components/content/TributeCard';
+import { PageHeader } from '@/components/layout/PageHeader';
+import { getLensTheme } from '@/lib/lens-theme';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -23,11 +25,13 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <section className="mx-auto max-w-content px-6 py-16">
+  const healthTheme = getLensTheme('health');
+  const philosophyTheme = getLensTheme('philosophy');
+  const politicsTheme = getLensTheme('politics');
 
-      {/* Brand header with primary logo */}
-      <div className="mb-12 flex flex-col items-center text-center">
+  return (
+    <section className="page-shell-tight py-16">
+      <div className="mx-auto mb-12 flex max-w-article flex-col items-center text-center">
         <Image
           src="/logos/primary-color.png"
           alt="The Black Male Journal"
@@ -36,31 +40,20 @@ export default function AboutPage() {
           className="mb-8 halftone"
           priority
         />
-        <p className="mb-4 font-label text-xs uppercase tracking-[0.2em] text-bmj-tan">
-          Speak the Truth. Navigate the Consequences.
-        </p>
+        <PageHeader
+          align="center"
+          label="Independent Media — Est. 2024"
+          title="About The Journal"
+          description="Revolutionary masculinist media documenting Black male life through research, reflection, and defiance."
+          dividerClassName="my-10"
+        />
       </div>
-
-      <div className="max-w-article">
-        <p className="mb-4 font-mono text-xs uppercase tracking-widest text-bmj-tan">
-          Independent Media — Est. 2024
-        </p>
-        <h1 className="mb-6 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-          About
-        </h1>
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/80">
-          Revolutionary masculinist media documenting Black male life through
-          research, reflection, and defiance.
-        </p>
-      </div>
-
-      <StarDivider className="my-12" />
 
       <div className="max-w-article space-y-6">
-        <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <p className="editorial-kicker">
           The Mission
         </p>
-        <h2 className="font-display text-4xl uppercase text-bmj-white md:text-5xl">
+        <h2 className="section-title">
           Why We Exist
         </h2>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
@@ -90,10 +83,10 @@ export default function AboutPage() {
       <StarDivider className="my-12" />
 
       <div className="max-w-article space-y-6">
-        <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <p className="editorial-kicker">
           The Editor
         </p>
-        <h2 className="font-display text-4xl uppercase text-bmj-white md:text-5xl">
+        <h2 className="section-title">
           The Chairman
         </h2>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
@@ -122,10 +115,10 @@ export default function AboutPage() {
 
       <div className="space-y-8">
         <div>
-          <p className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+          <p className="editorial-kicker mb-4">
             Intellectual Lineage &amp; Architects
           </p>
-          <h2 className="mb-8 font-display text-4xl uppercase text-bmj-white md:text-5xl">
+          <h2 className="section-title mb-8">
             We Honor Those Who Built the Road
           </h2>
         </div>
@@ -149,20 +142,20 @@ export default function AboutPage() {
 
       <div className="space-y-12">
         <div>
-          <p className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+          <p className="editorial-kicker mb-4">
             The Framework
           </p>
-          <h2 className="mb-8 font-display text-4xl uppercase text-bmj-white md:text-5xl">
+          <h2 className="section-title mb-8">
             The Three Lenses
           </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <div className="border-t-2 border-bmj-red pt-6">
+          <div className={cn("card-media p-6", healthTheme.cardBorderTop, healthTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Lens I
             </p>
-            <h3 className="mb-4 font-display text-3xl uppercase text-bmj-white">
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", healthTheme.accentText)}>
               Health
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
@@ -175,11 +168,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="border-t-2 border-bmj-red pt-6">
+          <div className={cn("card-media p-6", philosophyTheme.cardBorderTop, philosophyTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Lens II
             </p>
-            <h3 className="mb-4 font-display text-3xl uppercase text-bmj-white">
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", philosophyTheme.accentText)}>
               Philosophy
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
@@ -193,11 +186,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="border-t-2 border-bmj-red pt-6">
+          <div className={cn("card-media p-6", politicsTheme.cardBorderTop, politicsTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Lens III
             </p>
-            <h3 className="mb-4 font-display text-3xl uppercase text-bmj-white">
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", politicsTheme.accentText)}>
               Politics
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
@@ -215,10 +208,10 @@ export default function AboutPage() {
       <StarDivider className="my-12" />
 
       <div className="max-w-article space-y-8">
-        <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <p className="editorial-kicker">
           Continue
         </p>
-        <h2 className="font-display text-4xl uppercase text-bmj-white md:text-5xl">
+        <h2 className="section-title">
           Enter the Archive
         </h2>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
@@ -228,25 +221,24 @@ export default function AboutPage() {
         <div className="flex flex-wrap gap-4">
           <Link
             href="/articles"
-            className="bg-bmj-red px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+            className="btn-primary px-8 py-4 text-sm"
           >
             Read Articles
           </Link>
           <Link
             href="/briefings"
-            className="border border-bmj-tan/40 px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+            className="btn-ghost px-8 py-4 text-sm"
           >
             Weekend Briefing
           </Link>
           <Link
             href="/support"
-            className="border border-bmj-tan/40 px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+            className="btn-ghost px-8 py-4 text-sm"
           >
             Support the Mission
           </Link>
         </div>
       </div>
-
     </section>
   );
 }

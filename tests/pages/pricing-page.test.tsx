@@ -87,9 +87,39 @@ describe('PricingPage', () => {
       'href',
       '/portal/settings?upgrade=premium&next=%2Farticles%2Ftest-piece',
     );
-    expect(screen.getByRole('link', { name: /Current Plan/i })).toHaveAttribute(
-      'href',
-      '/portal/settings?upgrade=basic&next=%2Farticles%2Ftest-piece',
-    );
+    expect(screen.queryByRole('link', { name: /Current Plan/i })).not.toBeInTheDocument();
+    expect(screen.getByText('Current Plan')).toBeInTheDocument();
+  });
+
+  it('does not offer lower-tier checkout paths to premium members', async () => {
+    mockCreateClient.mockResolvedValue({
+      auth: {
+        getUser: jest.fn().mockResolvedValue({
+          data: {
+            user: {
+              id: 'member-2',
+            },
+          },
+        }),
+      },
+    } as never);
+    mockGetMemberById.mockResolvedValue({
+      id: 'member-2',
+      email: 'premium@example.com',
+      tier: 'premium',
+      role: 'member',
+      stripe_customer_id: 'cus_456',
+      stripe_subscription_id: 'sub_456',
+      created_at: '2025-01-01T00:00:00.000Z',
+    });
+
+    const { default: PricingPage } = await import('@/app/(public)/pricing/page');
+
+    render(await PricingPage({ searchParams: Promise.resolve({ next: '/briefings/issue-10' }) }));
+
+    expect(screen.queryByRole('link', { name: /Choose Basic/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /Create Free Account/i })).not.toBeInTheDocument();
+    expect(screen.getAllByText('Included in Premium')).toHaveLength(2);
+    expect(screen.getByText('Current Plan')).toBeInTheDocument();
   });
 });
