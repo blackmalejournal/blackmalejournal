@@ -1,0 +1,9 @@
+{
+  "project_name": "blackmalejournal",
+  "project_type": "web-application",
+  "git_hooks": {
+    "pre-commit": "bash .claude/hooks/scope-binding-check.sh",
+    "post-commit": "bash .claude/hooks/observability-log.sh",
+    "hourly": "bash .claude/hooks/drift-detection.sh"
+  }
+}

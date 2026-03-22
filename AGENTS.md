@@ -1,0 +1,95 @@
+---
+type: normative
+authority: canonical
+audience: [agents, contributors]
+last-verified: 2026-03-22
+---
+
+# AGENTS -- The Black Male Journal Governance
+
+> **Status: Normative.** Do not modify without explicit review.
+
+This project follows the **Morphism Categorical Governance Framework**.
+
+## Governance Source
+
+| Authority | Location |
+|-----------|----------|
+| Root governance | [AGENTS.md](AGENTS.md) (this file) |
+| Project instructions | [CLAUDE.md](CLAUDE.md) |
+| Brand invariants | [docs/brand/invariants.md](docs/brand/invariants.md) |
+| Operations | [docs/ops/](docs/ops/) |
+
+## Scope
+
+This file governs the blackmalejournal repository -- a Next.js 16 web application for The Black Male Journal media platform, deployed on Vercel with Supabase backend.
+
+| Directory | Governance Level | Notes |
+|-----------|-----------------|-------|
+| `src/app/` | **Application** | Next.js App Router -- routes, layouts, API |
+| `src/components/` | **UI** | Brand components, content cards, layout |
+| `src/lib/` | **Library** | Supabase queries, Stripe config, utilities |
+| `src/styles/` | **Brand** | CSS custom properties, globals -- brand SSOT |
+| `supabase/` | **Database** | Migrations, seed data, config |
+| `tests/` | **Testing** | Jest unit tests, Playwright E2E |
+| `docs/` | **Documentation** | Operations, brand, audits |
+| `public/` | **Assets** | Logos, fonts, images |
+| `scripts/` | **Automation** | Seed scripts, utilities |
+
+## Seven Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| I-1 | One Truth Per Domain | `src/styles/brand.css` is SSOT for brand tokens; `docs/ops/env-vars.md` is SSOT for env vars |
+| I-2 | Drift Is Debt | Brand tokens in `tailwind.config.ts` must mirror `brand.css`; run `/brand-check` |
+| I-3 | Observability | Log what changed, why, who, when -- conventional commits required |
+| I-4 | Scope Binding | Changes must have clear, narrow boundaries -- one logical unit per commit |
+| I-5 | Entropy Monotonicity | Do not increase complexity without explicit justification |
+| I-6 | Refusal as Structure | Refuse scope creep -- no "while we're at it" changes |
+| I-7 | Minimal Authority | Fewest permissions needed; server-only secrets never get NEXT_PUBLIC_ prefix |
+
+## Protocol
+
+1. Read CLAUDE.md and brand invariants before structural changes
+2. State the one thing you are building
+3. Verify the path (which files, which routes)
+4. Execute incrementally
+5. Refuse scope creep
+
+## Brand Constraints (Hard Invariants)
+
+These are non-negotiable. Violation is a blocking defect:
+
+- **Color palette:** Only `--bmj-*` CSS variables from `src/styles/brand.css`
+- **Typography:** Highrise (headlines, ALL-CAPS), Libre Baskerville (body), Oswald (labels), IBM Plex Mono (dates)
+- **Prohibited:** Pastels, gradients, blue, neon, rounded corners > 4px, drop shadows, glassmorphism
+- **Aesthetic:** Militant print-driven editorial -- revolutionary newspapers, political posters
+- **Content taxonomy:** Exactly three lenses -- health, philosophy, politics
+
+## Git Workflow
+
+Branches: `feat/`, `fix/`, `docs/`, `chore/`, `test/`, `refactor/` prefixes.
+Conventional commits required: `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `test:`.
+
+## Validation Commands
+
+```bash
+npm run build         # Production build -- must pass
+npm run lint          # ESLint
+npm test              # Jest (72+ test files)
+npm run test:e2e      # Playwright E2E
+npx tsc --noEmit      # TypeScript strict check
+npm run secrets:check # Secret scanning
+```
+
+## Pre-Deploy Checklist
+
+1. `npm run build` passes
+2. `npm run lint` clean
+3. `npm test` passes
+4. `npx tsc --noEmit` passes
+5. `/secrets-audit` clean
+6. `/env-audit` clean
+7. Visual check at 375px and 1440px
+
+See [CLAUDE.md](CLAUDE.md) for full project instructions.
