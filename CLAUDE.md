@@ -16,48 +16,22 @@ npm run test:e2e     # Playwright E2E tests
 npx tsc --noEmit     # TypeScript check
 ```
 
-## Brand System — NEVER deviate from these values
+## Brand System
 
 Tagline: "Speak the Truth. Navigate the Consequences."
-Logo: Journal/book icon with star + pen nib (see public/logos/ for all variants)
+Logo: Journal/book icon with star + pen nib (see public/logos/)
+Aesthetic: Militant print-driven editorial — revolutionary newspapers, political posters.
+Full brand spec (colors, fonts, prohibited styles): `.claude/rules/brand.md`
+Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all colors.
 
-Core colors (use CSS variables from src/styles/brand.css):
-- --bmj-black: #0D0C0B (backgrounds)
-- --bmj-cream: #E8DCC8 (primary text on dark)
-- --bmj-red: #C0281F (accents, brand mark, borders)
-- --bmj-amber: #C8852A (quote cards, highlights)
-- --bmj-brown: #3B2417 (secondary backgrounds)
-- --bmj-tan: #B8986A (metadata, dates)
-- --bmj-white: #F2EDE4 (maximum contrast text)
-
-Sectional accent colors (wired in CSS, used only when tied to a content domain):
-- --bmj-paper: #F0DDBC (lighter paper ground)
-- --bmj-deep-black: #1C130E (heavier typographic weight)
-- --bmj-crimson: #712414 (politics/philosophy)
-- --bmj-medium-brown: #5D3F2E (culture/editorial)
-- --bmj-olive: #416100 (health/wellness)
-- --bmj-gold: #C77A0E (finance/business)
-- --bmj-purple: #554978 (technology — deferred until taxonomy expansion)
-
-Fonts:
-- Display/Headlines: Highrise (self-hosted, next/font/local) — always ALL-CAPS. LICENSE: PERSONAL USE DEMO — needs commercial purchase
-- Body: Libre Baskerville (next/font/google) — editorial serif. LICENSE: SIL OFL (free)
-- Labels: Oswald (next/font/google) — caps, wide tracking
-- Mono: IBM Plex Mono (next/font/google) — dates, issue numbers
-- Font files: public/fonts/ — see public/fonts/LICENSES.md for license status
-
-PROHIBITED: pastels, gradients, blue, neon, purple outside its designated section context,
-rounded corners > 4px, drop shadows, glassmorphism, or any "modern SaaS" aesthetic.
-
-Visual: Militant print-driven editorial system — revolutionary newspapers, political posters, movement literature.
-Textures: grain overlay on all sections, halftone dots on images.
-Brand mark: Use `<BrandMark />` from `src/components/brand/BrandMark.tsx` for all inline star+pen motifs.
-
-## Three Lenses (Content Taxonomy)
+## Lenses (Content Taxonomy)
 All articles and content are categorized under exactly one lens:
 - health — physical/mental wellness, martial arts, discipline
 - philosophy — purpose, identity, masculinity, mindset
 - politics — power, policy, systems, community organizing
+- culture — ideology, editorial, cultural analysis
+- entertainment — media, technology, reviews
+- commemoration — remembrance, tributes, historical markers
 
 ## Architecture Rules
 - App Router only (no pages/ directory)

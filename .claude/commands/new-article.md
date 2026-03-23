@@ -1,19 +1,19 @@
-Create a new article MDX file in src/content/articles/.
+Create a new article record for the Supabase database.
 
 Ask me for:
 1. Title
-2. Lens (health, philosophy, or politics)
+2. Lens (health, philosophy, politics, culture, entertainment, or commemoration)
 3. Tags (comma-separated)
 4. Brief excerpt (1-2 sentences)
 5. Access tier (free, basic, or premium — default free)
 6. Featured? (yes/no — default no)
 
-Then generate the file with:
+Then generate:
+- A SQL INSERT statement for the articles table matching the schema in src/lib/supabase/types.ts
 - Slug auto-generated from title (kebab-case)
-- publishedAt set to today's date in ISO format
+- published_at set to today's date in ISO format
 - author defaulted to "The Chairman"
-- Proper MDX frontmatter format
-- A starter body section with ## headings matching the BMJ editorial style
-- Reading time estimate placeholder
+- status set to "draft"
+- A starter body in markdown with ## headings matching the BMJ editorial style
 
-File naming: src/content/articles/[slug].mdx
+Output the SQL so it can be added to a seed file or run directly.

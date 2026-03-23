@@ -1,3 +1,11 @@
+---
+description: Cross-check environment variables between code and documentation
+context: fork
+allowed-tools:
+  - Read
+  - Grep
+  - Glob
+---
 Cross-check environment variables between code and documentation. Run these checks:
 
 1. Scan source code for all environment variable references
@@ -12,8 +20,8 @@ Cross-check environment variables between code and documentation. Run these chec
    - Flag any env var documented in env-vars.md but NOT referenced in code (may be stale)
 
 4. Verify scope correctness
-   - For each `NEXT_PUBLIC_` variable: confirm it is only used in client-safe contexts (no secret data)
-   - For each server-only variable: confirm it is NOT referenced in any file under `src/app/(public)/` or `src/components/` client components
+   - For each `NEXT_PUBLIC_` variable: confirm it is only used in client-safe contexts
+   - For each server-only variable: confirm it is NOT referenced in client components
 
 5. Check .env.example (if it exists)
    - Verify it lists all required variables with placeholder values
@@ -24,5 +32,5 @@ Report findings as a table:
 | Variable | In Code | In Docs | Scope Match | Status |
 |----------|---------|---------|-------------|--------|
 
-If everything is consistent, output:
+If everything is consistent:
 All environment variables are documented and correctly scoped.
