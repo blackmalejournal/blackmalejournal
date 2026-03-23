@@ -16,6 +16,7 @@ describe('LoginForm', () => {
     render(<LoginForm />);
     expect(screen.getByLabelText('Email')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter your password')).toBeInTheDocument();
   });
 
   it('switches to magic link mode on toggle', () => {

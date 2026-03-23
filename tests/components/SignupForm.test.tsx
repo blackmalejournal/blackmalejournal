@@ -11,6 +11,7 @@ describe('SignupForm', () => {
     expect(screen.getByLabelText(/display name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Create a password')).toBeInTheDocument();
   });
 
   it('shows tier preview when preselectedTier is set and not "free"', () => {

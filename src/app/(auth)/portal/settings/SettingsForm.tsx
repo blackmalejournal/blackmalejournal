@@ -47,9 +47,7 @@ export function SettingsForm({ displayName, email }: SettingsFormProps) {
 
       {/* Password form */}
       <form action={updatePassword} className="space-y-4">
-        <h3 className="font-display text-xl text-bmj-white">
-          CHANGE PASSWORD
-        </h3>
+        <h3 className="font-display text-xl text-bmj-white">CHANGE PASSWORD</h3>
         <div>
           <label
             htmlFor="password"
@@ -64,7 +62,7 @@ export function SettingsForm({ displayName, email }: SettingsFormProps) {
             required
             minLength={6}
             className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream focus:border-bmj-red focus:outline-none"
-            placeholder="••••••••"
+            placeholder="Enter a new password"
           />
         </div>
 

@@ -27,6 +27,7 @@ describe('SettingsForm', () => {
     render(<SettingsForm displayName="The Chairman" email="chairman@bmj.com" />);
     const passwordInput = screen.getByLabelText(/new password/i);
     expect(passwordInput).toHaveAttribute('minLength', '6');
+    expect(passwordInput).toHaveAttribute('placeholder', 'Enter a new password');
   });
 
   it('has "Save Changes" and "Update Password" buttons', () => {
