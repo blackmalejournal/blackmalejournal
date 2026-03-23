@@ -12,6 +12,7 @@ This lane holds the operating manuals, launch procedures, and environment contro
 ## Launch and Recovery
 
 - [launch-checklist.md](launch-checklist.md) for the pre-launch gate.
+- [launch-dashboard-checklist.md](launch-dashboard-checklist.md) for the exact external dashboard-by-dashboard launch setup.
 - [release-sequence.md](release-sequence.md) for the exact launch ordering.
 - [backup-restore.md](backup-restore.md) for backup and restore drills.
 

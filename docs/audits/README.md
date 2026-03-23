@@ -4,6 +4,7 @@ This lane indexes audit-oriented documentation in the committed BMJ docs tree.
 
 ## Audit Reports
 
+- [2026-03-22-release-readiness-and-env-audit.md](2026-03-22-release-readiness-and-env-audit.md) - release-gate results and verified external environment findings from Vercel.
 - [2026-03-22-docs-information-consolidation.md](2026-03-22-docs-information-consolidation.md) - accepted Markdown-only consolidation package for the committed docs tree.
 
 ## Current Audit References

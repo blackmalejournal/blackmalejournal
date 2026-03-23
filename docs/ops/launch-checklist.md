@@ -2,6 +2,8 @@
 
 Use this checklist before any production launch, relaunch, or major campaign push.
 
+For the exact manual dashboard work across Vercel, DNS, Supabase, Stripe, Resend, and Plausible, use [launch-dashboard-checklist.md](launch-dashboard-checklist.md).
+
 ## Application Checks
 
 1. `npm run secrets:check`

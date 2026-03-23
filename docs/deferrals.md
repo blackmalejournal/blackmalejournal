@@ -2,6 +2,8 @@
 
 Code wiring for Stripe checkout, portal redirects, Plausible, and site metadata is now in the repo. The remaining work is dashboard and environment configuration outside source control. Each entry below lists the exact external tasks that still need to be completed.
 
+For the exact future launch runbook, use [ops/launch-dashboard-checklist.md](ops/launch-dashboard-checklist.md).
+
 ---
 
 ## Stripe Integration
