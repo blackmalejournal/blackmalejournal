@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { headers } from 'next/headers';
+import { normalizeEmailAddress } from '@/lib/email';
 import { subscribeToNewsletter } from '@/lib/supabase/queries';
 import { rateLimit } from '@/lib/rate-limit';
 
@@ -26,7 +27,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const result = subscribeSchema.safeParse(body);
+  const payload = typeof body === 'object' && body !== null
+    ? body as Record<string, unknown>
+    : {};
+  const result = subscribeSchema.safeParse({
+    ...payload,
+    email: typeof payload.email === 'string'
+      ? normalizeEmailAddress(payload.email)
+      : payload.email,
+    source: typeof payload.source === 'string'
+      ? payload.source.trim()
+      : payload.source,
+  });
   if (!result.success) {
     const firstError = result.error.issues[0]?.message ?? 'Validation failed';
     return NextResponse.json({ error: firstError }, { status: 400 });
@@ -35,7 +47,7 @@ export async function POST(request: Request) {
   const { email, source } = result.data;
 
   try {
-    await subscribeToNewsletter(email, source ?? 'website');
+    await subscribeToNewsletter(email, source || 'website');
 
     return NextResponse.json({ success: true });
   } catch (err) {

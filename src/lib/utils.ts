@@ -1,6 +1,7 @@
 // src/lib/utils.ts
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { getLensTheme } from '@/lib/lens-theme';
 import type { Article, Lens } from '@/lib/supabase/types';
 
 // Merges Tailwind classes safely — conditional classes without specificity conflicts.
@@ -55,24 +56,13 @@ export type LensColors = {
 // Classes are hardcoded (not dynamic) so Tailwind includes them in the production build.
 // Usage: const { text, border } = getLensColor(article.lens)
 export function getLensColor(lens: Lens): LensColors {
-  const map: Record<Lens, LensColors> = {
-    health: {
-      text: 'text-bmj-amber',
-      border: 'border-bmj-amber',
-      bg: 'bg-bmj-amber',
-    },
-    philosophy: {
-      text: 'text-bmj-tan',
-      border: 'border-bmj-tan',
-      bg: 'bg-bmj-tan',
-    },
-    politics: {
-      text: 'text-bmj-red',
-      border: 'border-bmj-red',
-      bg: 'bg-bmj-red',
-    },
+  const theme = getLensTheme(lens);
+
+  return {
+    text: theme.accentText,
+    border: theme.accentBorder,
+    bg: theme.accentBg,
   };
-  return map[lens];
 }
 
 // Returns a single character glyph used as a lens icon.

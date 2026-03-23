@@ -1,16 +1,6 @@
 import type { Lens } from '@/lib/supabase/types';
-
-const LENS_STYLES: Record<Lens, string> = {
-  health:     'bg-bmj-red    text-bmj-white border border-bmj-cream/30',
-  philosophy: 'bg-bmj-amber  text-bmj-black',
-  politics:   'bg-bmj-crimson text-bmj-white border border-bmj-cream/30',
-};
-
-const LENS_LABELS: Record<Lens, string> = {
-  health:     'Health',
-  philosophy: 'Philosophy',
-  politics:   'Politics',
-};
+import { getLensTheme } from '@/lib/lens-theme';
+import { cn } from '@/lib/utils';
 
 interface LensBadgeProps {
   lens: Lens;
@@ -18,11 +8,17 @@ interface LensBadgeProps {
 }
 
 export function LensBadge({ lens, className = '' }: LensBadgeProps) {
+  const theme = getLensTheme(lens);
+
   return (
     <span
-      className={`inline-block rounded-sm px-2 py-0.5 font-label text-xs uppercase tracking-widest ${LENS_STYLES[lens]} ${className}`}
+      className={cn(
+        'inline-block rounded-sm px-2 py-0.5 font-label text-xs uppercase tracking-widest',
+        theme.badgeClasses,
+        className,
+      )}
     >
-      {LENS_LABELS[lens]}
+      {theme.label}
     </span>
   );
 }
