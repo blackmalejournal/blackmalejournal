@@ -2,6 +2,8 @@
 
 Use this exact order to move BMJ from code-complete to launch-ready.
 
+Use [launch-dashboard-checklist.md](launch-dashboard-checklist.md) alongside this sequence when the work moves out of the repo and into external dashboards.
+
 ## 1. Database and Seeds
 
 1. Apply all pending migrations, including [20260320000000_add-contact-submission-workflow.sql](../../supabase/migrations/20260320000000_add-contact-submission-workflow.sql).

@@ -2,6 +2,13 @@
 
 ## 2026-03-22
 
+- Added `docs/ops/launch-dashboard-checklist.md` as the exact dashboard-by-dashboard runbook for Vercel, DNS, Supabase, Stripe, Resend, and Plausible during the final BMJ launch pass.
+- Updated `docs/ops/README.md`, `docs/ops/launch-checklist.md`, `docs/ops/release-sequence.md`, `docs/deferrals.md`, and `docs/INDEX.md` to point to the new launch dashboard runbook.
+- Added `docs/audits/2026-03-22-release-readiness-and-env-audit.md` to capture BMJ release-gate results plus the verified Vercel env, deployment, and domain state.
+- Updated `docs/audits/README.md` and `docs/INDEX.md` to index the release-readiness audit note.
+- Verified the repo release gates pass: secrets scan, lint, TypeScript, Jest coverage, production build, and Playwright E2E.
+- Verified that the first Playwright pass was hanging on a stale local Node process already bound to port `3000`; after clearing it, `npm run test:e2e` passed cleanly.
+- Verified via Vercel CLI that BMJ currently lacks Stripe, Resend, Plausible, and custom-domain launch configuration in the linked Vercel project.
 - Added `docs/superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md` to define the parallel BMJ skill scaffolding, authoring waves, and validation gates.
 - Updated `docs/superpowers/plans/README.md` and `docs/INDEX.md` to index the BMJ skill batch build plan.
 - Refined `docs/superpowers/plans/2026-03-22-bmj-skill-workflow.md` after deeper repo review so the BMJ skill model now tracks the actual platform surfaces: public editorial, membership/paywall, admin CMS, audience ops, and release governance.

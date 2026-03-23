@@ -13,6 +13,7 @@ This index covers the committed documentation tree under `docs/`.
 ## Audits
 
 - [audits/README.md](audits/README.md) - audit lane index and current audit references.
+- [audits/2026-03-22-release-readiness-and-env-audit.md](audits/2026-03-22-release-readiness-and-env-audit.md) - release-gate results and current Vercel environment/domain findings.
 - [audits/2026-03-22-docs-information-consolidation.md](audits/2026-03-22-docs-information-consolidation.md) - accepted docs Markdown consolidation audit and package manifest.
 
 ## Brand
@@ -33,6 +34,7 @@ This index covers the committed documentation tree under `docs/`.
 - [ops/member-billing-sop.md](ops/member-billing-sop.md) - member billing workflow.
 - [ops/inbox-subscriber-sop.md](ops/inbox-subscriber-sop.md) - inbox and subscriber workflow.
 - [ops/launch-checklist.md](ops/launch-checklist.md) - pre-launch verification checklist.
+- [ops/launch-dashboard-checklist.md](ops/launch-dashboard-checklist.md) - exact dashboard-by-dashboard setup for the final external launch pass.
 - [ops/release-sequence.md](ops/release-sequence.md) - launch ordering and gating.
 - [ops/env-vars.md](ops/env-vars.md) - environment variable reference.
 - [ops/env-audit.md](ops/env-audit.md) - environment audit checklist.
