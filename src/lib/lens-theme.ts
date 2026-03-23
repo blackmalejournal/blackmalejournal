@@ -24,6 +24,17 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
     cardBorderLeft: 'border-l-bmj-amber',
     hoverBorder: 'hover:border-bmj-amber/60',
   },
+  philosophy: {
+    label: 'Philosophy/Identity',
+    accentText: 'text-bmj-tan',
+    accentBorder: 'border-bmj-tan',
+    accentBg: 'bg-bmj-tan',
+    accentSoftBg: 'bg-bmj-tan/10',
+    badgeClasses: 'border border-bmj-tan/40 bg-bmj-tan text-bmj-deep-black',
+    cardBorderTop: 'border-t-bmj-tan',
+    cardBorderLeft: 'border-l-bmj-tan',
+    hoverBorder: 'hover:border-bmj-tan/60',
+  },
   politics: {
     label: 'Politics/Law',
     accentText: 'text-bmj-red',
@@ -70,6 +81,9 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
   },
 };
 
-export function getLensTheme(lens: Lens): LensTheme {
-  return LENS_THEMES[lens];
+const DEFAULT_LENS_THEME = LENS_THEMES.politics;
+
+export function getLensTheme(lens: Lens | string | null | undefined): LensTheme {
+  if (!lens) return DEFAULT_LENS_THEME;
+  return (LENS_THEMES as Record<string, LensTheme>)[lens] ?? DEFAULT_LENS_THEME;
 }
