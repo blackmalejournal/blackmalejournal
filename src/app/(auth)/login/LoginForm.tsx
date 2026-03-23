@@ -76,7 +76,7 @@ export function LoginForm({ nextHref }: LoginFormProps) {
               required
               autoComplete="current-password"
               className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
-              placeholder="••••••••"
+              placeholder="Enter your password"
             />
           </div>
 
