@@ -4,7 +4,7 @@ import { DispatchCard } from '@/components/content/DispatchCard';
 const defaultProps = {
   title: 'Test Dispatch',
   slug: 'test-dispatch',
-  lens: 'philosophy' as const,
+  lens: 'culture' as const,
   excerpt: 'A short excerpt for the dispatch.',
   publishedAt: '2026-03-15T12:00:00Z',
 };
@@ -24,7 +24,7 @@ describe('DispatchCard', () => {
 
   it('shows lens badge and formatted date', () => {
     render(<DispatchCard {...defaultProps} />);
-    expect(screen.getByText('Philosophy')).toBeInTheDocument();
+    expect(screen.getByText('Culture')).toBeInTheDocument();
     expect(screen.getByText('MARCH 15, 2026')).toBeInTheDocument();
   });
 });

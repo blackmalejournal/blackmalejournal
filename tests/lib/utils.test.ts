@@ -124,7 +124,7 @@ describe('calculateReadingTime', () => {
 // ── getLensColor ──────────────────────────────────────────────────────────────
 
 describe('getLensColor', () => {
-  const lenses: Lens[] = ['health', 'philosophy', 'politics'];
+  const lenses: Lens[] = ['health', 'politics', 'culture', 'entertainment', 'commemoration'];
 
   it.each(lenses)('returns text, border, and bg for "%s"', (lens) => {
     const colors = getLensColor(lens);
@@ -137,12 +137,20 @@ describe('getLensColor', () => {
     expect(getLensColor('health').text).toBe('text-bmj-amber');
   });
 
-  it('returns tan classes for philosophy', () => {
-    expect(getLensColor('philosophy').text).toBe('text-bmj-tan');
+  it('returns tan classes for culture', () => {
+    expect(getLensColor('culture').text).toBe('text-bmj-tan');
   });
 
   it('returns red classes for politics', () => {
     expect(getLensColor('politics').text).toBe('text-bmj-red');
+  });
+
+  it('returns purple classes for entertainment', () => {
+    expect(getLensColor('entertainment').text).toBe('text-bmj-purple');
+  });
+
+  it('returns gold classes for commemoration', () => {
+    expect(getLensColor('commemoration').text).toBe('text-bmj-gold');
   });
 });
 
@@ -151,8 +159,10 @@ describe('getLensColor', () => {
 describe('getLensEmoji', () => {
   it('returns a string for each lens', () => {
     expect(typeof getLensEmoji('health')).toBe('string');
-    expect(typeof getLensEmoji('philosophy')).toBe('string');
     expect(typeof getLensEmoji('politics')).toBe('string');
+    expect(typeof getLensEmoji('culture')).toBe('string');
+    expect(typeof getLensEmoji('entertainment')).toBe('string');
+    expect(typeof getLensEmoji('commemoration')).toBe('string');
   });
 });
 

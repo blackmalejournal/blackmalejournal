@@ -5,7 +5,7 @@ const mockArticle: Article = {
   id: 'abc-123',
   title: 'Test Article Title',
   slug: 'test-article-title',
-  lens: 'philosophy',
+  lens: 'culture',
   tags: ['discipline', 'mindset'],
   excerpt: 'A short excerpt.',
   body: 'Full article body content here.',

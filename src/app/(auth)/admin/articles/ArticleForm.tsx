@@ -118,8 +118,10 @@ export function ArticleForm({ article, action }: ArticleFormProps) {
               className={selectClass}
             >
               <option value="health">Health</option>
-              <option value="philosophy">Philosophy</option>
               <option value="politics">Politics</option>
+              <option value="culture">Culture</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="commemoration">Commemoration</option>
             </select>
           </div>
 

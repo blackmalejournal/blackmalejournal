@@ -6,17 +6,17 @@ import { VideoGallery } from './VideoGallery';
 export const metadata: Metadata = {
   title: 'Video',
   description:
-    'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+    'Watch. Learn. Build. Video content from The Chairman across five lenses of Black male life.',
   openGraph: {
     title: 'Video',
     description:
-      'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+      'Watch. Learn. Build. Video content from The Chairman across five lenses of Black male life.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Video',
     description:
-      'Watch. Learn. Build. Video content from The Chairman on health, philosophy, and politics.',
+      'Watch. Learn. Build. Video content from The Chairman across five lenses of Black male life.',
   },
 };
 

@@ -6,7 +6,7 @@ import { SITE_URL } from '@/lib/site-url';
 // ── Site constants ──────────────────────────────────────────────────────────
 export const SITE_NAME = 'The Black Male Journal';
 export const SITE_DESCRIPTION =
-  'Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.';
+  'Independent media house and revolutionary masculinist platform covering five lenses of Black male life.';
 export const SITE_AUTHOR = 'The Chairman';
 
 // ── JSON-LD: Organization ───────────────────────────────────────────────────

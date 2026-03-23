@@ -27,13 +27,13 @@ export const mockArticlePremium: Article = {
   cover_image: null,
 };
 
-export const mockArticlePhilosophy: Article = {
+export const mockArticleCulture: Article = {
   ...mockArticle,
   id: 'art-3',
   title: 'Stoicism for the Modern Black Man',
   slug: 'stoicism-modern',
-  lens: 'philosophy',
-  tags: ['stoicism', 'philosophy'],
+  lens: 'culture',
+  tags: ['stoicism', 'culture'],
 };
 
 export const mockArticlePolitics: Article = {
@@ -138,7 +138,7 @@ export const mockDispatch: Dispatch = {
   id: 'dsp-1',
   title: 'Reclaiming Your Narrative',
   slug: 'reclaiming-narrative',
-  lens: 'philosophy',
+  lens: 'culture',
   excerpt: 'The media tells one story. You must tell another.',
   body: 'Full dispatch body content.',
   status: 'published',

@@ -34,8 +34,10 @@ function StatusBadge({ status }: { status: ContentStatus }) {
 
 const lensLabels: Record<string, string> = {
   health: 'Health',
-  philosophy: 'Philosophy',
   politics: 'Politics',
+  culture: 'Culture',
+  entertainment: 'Entertainment',
+  commemoration: 'Commemoration',
 };
 
 // ── Date formatter ──────────────────────────────────────────────────────────

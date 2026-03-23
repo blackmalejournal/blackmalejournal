@@ -24,7 +24,7 @@ const mockArticles = [
     cover_image: null, published_at: '2026-03-17', created_at: '2026-03-17',
   },
   {
-    id: '3', title: 'Article Three', slug: 'article-three', lens: 'philosophy' as const,
+    id: '3', title: 'Article Three', slug: 'article-three', lens: 'culture' as const,
     tags: [], excerpt: 'Excerpt three', body: 'body', featured: true,
     access_tier: 'free' as const, status: 'published' as const, author: 'The Chairman',
     cover_image: null, published_at: '2026-03-16', created_at: '2026-03-16',

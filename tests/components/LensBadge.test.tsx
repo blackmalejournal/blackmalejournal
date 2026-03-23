@@ -5,8 +5,10 @@ import type { Lens } from '@/lib/supabase/types';
 describe('LensBadge', () => {
   const lenses: { lens: Lens; label: string }[] = [
     { lens: 'health', label: 'Health' },
-    { lens: 'philosophy', label: 'Philosophy' },
     { lens: 'politics', label: 'Politics' },
+    { lens: 'culture', label: 'Culture' },
+    { lens: 'entertainment', label: 'Entertainment' },
+    { lens: 'commemoration', label: 'Commemoration' },
   ];
 
   it.each(lenses)('renders "$label" for $lens lens', ({ lens, label }) => {

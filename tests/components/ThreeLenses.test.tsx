@@ -2,11 +2,13 @@ import { render, screen } from '@testing-library/react';
 import { ThreeLenses } from '@/components/home/ThreeLenses';
 
 describe('ThreeLenses', () => {
-  it('renders all three lens cards', () => {
+  it('renders all five lens cards', () => {
     render(<ThreeLenses />);
     expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Philosophy')).toBeInTheDocument();
     expect(screen.getByText('Politics')).toBeInTheDocument();
+    expect(screen.getByText('Culture')).toBeInTheDocument();
+    expect(screen.getByText('Entertainment')).toBeInTheDocument();
+    expect(screen.getByText('Commemoration')).toBeInTheDocument();
   });
 
   it('links each lens to the correct articles filter', () => {

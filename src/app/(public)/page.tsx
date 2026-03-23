@@ -19,17 +19,17 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   description:
-    "Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.",
+    "Independent media house and revolutionary masculinist platform covering five lenses of Black male life.",
   openGraph: {
     title: "The Black Male Journal",
     description:
-      "Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.",
+      "Independent media house and revolutionary masculinist platform covering five lenses of Black male life.",
   },
   twitter: {
     card: "summary_large_image",
     title: "The Black Male Journal",
     description:
-      "Independent media house and revolutionary masculinist platform covering health, philosophy, and politics for Black men.",
+      "Independent media house and revolutionary masculinist platform covering five lenses of Black male life.",
   },
 };
 

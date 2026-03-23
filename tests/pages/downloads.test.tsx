@@ -28,7 +28,7 @@ describe('Downloads Page', () => {
         id: 'hb-1',
         title: 'Letters to a Young King',
         slug: 'letters-to-a-young-king',
-        lens: 'philosophy',
+        lens: 'culture',
         description: 'A handbook on purpose',
         access_tier: 'basic',
         published_at: '2026-01-15',

@@ -13,12 +13,14 @@ beforeEach(() => {
 });
 
 describe('LensFilterTabs', () => {
-  it('renders all 4 tabs (All, Health, Philosophy, Politics)', () => {
+  it('renders all 6 tabs (All + 5 lenses)', () => {
     render(<LensFilterTabs activeLens="all" />);
     expect(screen.getByText('All')).toBeInTheDocument();
     expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Philosophy')).toBeInTheDocument();
     expect(screen.getByText('Politics')).toBeInTheDocument();
+    expect(screen.getByText('Culture')).toBeInTheDocument();
+    expect(screen.getByText('Entertainment')).toBeInTheDocument();
+    expect(screen.getByText('Commemoration')).toBeInTheDocument();
   });
 
   it('active lens has aria-selected=true', () => {
@@ -29,8 +31,8 @@ describe('LensFilterTabs', () => {
 
   it('clicking lens calls router.push with ?lens=value', () => {
     render(<LensFilterTabs activeLens="all" />);
-    fireEvent.click(screen.getByText('Philosophy'));
-    expect(mockPush).toHaveBeenCalledWith('/articles?lens=philosophy');
+    fireEvent.click(screen.getByText('Culture'));
+    expect(mockPush).toHaveBeenCalledWith('/articles?lens=culture');
   });
 
   it('clicking "All" deletes lens param', () => {

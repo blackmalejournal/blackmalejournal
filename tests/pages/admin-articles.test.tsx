@@ -6,7 +6,7 @@ const mockArticles: Article[] = [
     id: 'art-1',
     title: 'The Discipline of Stillness',
     slug: 'the-discipline-of-stillness',
-    lens: 'philosophy',
+    lens: 'culture',
     tags: ['mindset', 'discipline'],
     excerpt: 'On the power of silence.',
     body: 'Full body text.',
@@ -109,7 +109,7 @@ describe('ArticlesAdminPage', () => {
   it('renders metadata with lens, tier, and date', async () => {
     await renderPage();
     // First article metadata
-    expect(screen.getByText(/philosophy/)).toBeInTheDocument();
+    expect(screen.getByText(/culture/i)).toBeInTheDocument();
     expect(screen.getByText(/politics/)).toBeInTheDocument();
   });
 });

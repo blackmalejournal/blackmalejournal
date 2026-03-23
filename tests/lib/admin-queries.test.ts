@@ -72,8 +72,8 @@ describe('getAllArticles', () => {
 
   it('applies lens filter', async () => {
     setData([mockArticle]);
-    await getAllArticles({ lens: 'philosophy' });
-    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'philosophy');
+    await getAllArticles({ lens: 'culture' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'culture');
   });
 
   it('applies custom limit and offset', async () => {

@@ -26,8 +26,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   const healthTheme = getLensTheme('health');
-  const philosophyTheme = getLensTheme('philosophy');
   const politicsTheme = getLensTheme('politics');
+  const cultureTheme = getLensTheme('culture');
+  const entertainmentTheme = getLensTheme('entertainment');
+  const commemorationTheme = getLensTheme('commemoration');
 
   return (
     <section className="page-shell-tight py-16">
@@ -68,9 +70,9 @@ export default function AboutPage() {
           independent media house — producing long-form analysis, weekly
           briefings, and archival commentary that treats Black men as thinkers,
           builders, and historical subjects worthy of serious study. Our work
-          operates across three domains: the body, the mind, and the system.
-          Health, philosophy, and politics. Every article, every briefing, every
-          resource we publish answers to one of these three lenses.
+          operates across five domains of Black male life.
+          Health, politics, culture, entertainment, and commemoration. Every article,
+          every briefing, every resource we publish answers to one of these five lenses.
         </p>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
           We accept no corporate sponsors. We carry no advertisers. Our
@@ -146,11 +148,11 @@ export default function AboutPage() {
             The Framework
           </p>
           <h2 className="section-title mb-8">
-            The Three Lenses
+            The Five Lenses
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div className={cn("card-media p-6", healthTheme.cardBorderTop, healthTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Lens I
@@ -168,27 +170,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className={cn("card-media p-6", philosophyTheme.cardBorderTop, philosophyTheme.hoverBorder)}>
-            <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
-              Lens II
-            </p>
-            <h3 className={cn("mb-4 font-display text-3xl uppercase", philosophyTheme.accentText)}>
-              Philosophy
-            </h3>
-            <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
-              Before a man can change his world, he must have a coherent account
-              of himself in it. This lens explores identity, purpose,
-              masculinity, moral reasoning, and the intellectual traditions that
-              have shaped Black male thought across centuries and continents.
-              Philosophy here is not academic performance — it is the ongoing,
-              demanding work of deciding who you are and refusing to let anyone
-              else decide for you.
-            </p>
-          </div>
-
           <div className={cn("card-media p-6", politicsTheme.cardBorderTop, politicsTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
-              Lens III
+              Lens II
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", politicsTheme.accentText)}>
               Politics
@@ -200,6 +184,48 @@ export default function AboutPage() {
               bear specifically on Black male life. The analysis here is cold,
               structural, and strategic. We document how systems work and how
               they can be worked — or dismantled.
+            </p>
+          </div>
+
+          <div className={cn("card-media p-6", cultureTheme.cardBorderTop, cultureTheme.hoverBorder)}>
+            <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
+              Lens III
+            </p>
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", cultureTheme.accentText)}>
+              Culture
+            </h3>
+            <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
+              Culture is where a people define themselves. This lens covers ideology,
+              identity, creative expression, and the cultural production that shapes
+              and reflects the Black male experience across generations and geographies.
+            </p>
+          </div>
+
+          <div className={cn("card-media p-6", entertainmentTheme.cardBorderTop, entertainmentTheme.hoverBorder)}>
+            <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
+              Lens IV
+            </p>
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", entertainmentTheme.accentText)}>
+              Entertainment
+            </h3>
+            <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
+              Music, film, sports, and technology — the industries that both represent
+              and exploit Black talent. We analyze the economics, the narratives, and
+              the leverage points where Black men hold more power than they are told.
+            </p>
+          </div>
+
+          <div className={cn("card-media p-6", commemorationTheme.cardBorderTop, commemorationTheme.hoverBorder)}>
+            <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
+              Lens V
+            </p>
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", commemorationTheme.accentText)}>
+              Commemoration
+            </h3>
+            <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
+              Anniversaries, milestones, and the figures who shaped Black male history.
+              Remembrance is not nostalgia — it is the strategic preservation of a
+              people&apos;s record against the institutions that would erase it.
             </p>
           </div>
         </div>

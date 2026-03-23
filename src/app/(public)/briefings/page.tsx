@@ -11,17 +11,17 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Weekend Briefing',
   description:
-    'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+    'A weekly dispatch across five lenses of the Black male experience.',
   openGraph: {
     title: 'Weekend Briefing',
     description:
-      'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+      'A weekly dispatch across five lenses of the Black male experience.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Weekend Briefing',
     description:
-      'A weekly dispatch on the politics, philosophy, and health of the Black male experience.',
+      'A weekly dispatch across five lenses of the Black male experience.',
   },
 };
 
@@ -48,7 +48,7 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
         label="Flagship Publication"
         title="Weekend Briefing"
         icon={<BookOpen size={28} className="text-bmj-red" aria-hidden="true" />}
-        description="A weekly dispatch on the politics, philosophy, and health of the Black male experience."
+        description="A weekly dispatch across five lenses of the Black male experience."
         dividerClassName="mb-12"
       />
 

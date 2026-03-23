@@ -17,7 +17,7 @@ const mockArticle: Article = {
   id: 'abc-123',
   title: 'Test Article Title',
   slug: 'test-article-title',
-  lens: 'philosophy',
+  lens: 'culture',
   tags: ['discipline', 'mindset'],
   excerpt: 'A short excerpt.',
   body: 'Full article body content here.',
@@ -71,7 +71,7 @@ describe('ArticleForm', () => {
 
     expect(screen.getByLabelText(/title/i)).toHaveValue('Test Article Title');
     expect(screen.getByLabelText(/slug/i)).toHaveValue('test-article-title');
-    expect(screen.getByLabelText(/lens/i)).toHaveValue('philosophy');
+    expect(screen.getByLabelText(/lens/i)).toHaveValue('culture');
     expect(screen.getByLabelText(/tags/i)).toHaveValue(
       'discipline, mindset',
     );

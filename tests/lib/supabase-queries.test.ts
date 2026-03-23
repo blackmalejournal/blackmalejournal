@@ -1,7 +1,7 @@
 import { createMockSupabaseClient, type MockSupabaseClient } from '../helpers/supabase-mock';
 import {
   mockArticle,
-  mockArticlePhilosophy,
+  mockArticleCulture,
   mockBriefing,
   mockMember,
   mockMemberPremium,
@@ -101,9 +101,9 @@ describe('getArticles', () => {
   });
 
   it('applies lens filter', async () => {
-    setData([mockArticlePhilosophy]);
-    await getArticles({ lens: 'philosophy' });
-    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'philosophy');
+    setData([mockArticleCulture]);
+    await getArticles({ lens: 'culture' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'culture');
   });
 
   it('applies tag filter', async () => {

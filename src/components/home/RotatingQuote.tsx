@@ -60,7 +60,7 @@ export function RotatingQuote() {
             <QuoteCard
               quote={QUOTES[index].text}
               attribution={QUOTES[index].attribution}
-              lens="philosophy"
+              lens="culture"
             />
           </motion.div>
         </AnimatePresence>
