@@ -24,7 +24,7 @@ describe('DispatchCard', () => {
 
   it('shows lens badge and formatted date', () => {
     render(<DispatchCard {...defaultProps} />);
-    expect(screen.getByText('Culture')).toBeInTheDocument();
+    expect(screen.getByText('Culture/Ideology')).toBeInTheDocument();
     expect(screen.getByText('MARCH 15, 2026')).toBeInTheDocument();
   });
 });

@@ -4,11 +4,11 @@ import type { Lens } from '@/lib/supabase/types';
 
 describe('LensBadge', () => {
   const lenses: { lens: Lens; label: string }[] = [
-    { lens: 'health', label: 'Health' },
-    { lens: 'politics', label: 'Politics' },
-    { lens: 'culture', label: 'Culture' },
-    { lens: 'entertainment', label: 'Entertainment' },
-    { lens: 'commemoration', label: 'Commemoration' },
+    { lens: 'health', label: 'Health/Wellness' },
+    { lens: 'politics', label: 'Politics/Law' },
+    { lens: 'culture', label: 'Culture/Ideology' },
+    { lens: 'entertainment', label: 'Entertainment/Technology' },
+    { lens: 'commemoration', label: 'Commemorations/Remembrance' },
   ];
 
   it.each(lenses)('renders "$label" for $lens lens', ({ lens, label }) => {
@@ -18,13 +18,13 @@ describe('LensBadge', () => {
 
   it('applies custom className', () => {
     render(<LensBadge lens="health" className="mt-2" />);
-    const el = screen.getByText('Health');
+    const el = screen.getByText('Health/Wellness');
     expect(el.className).toContain('mt-2');
   });
 
   it('renders as an inline span', () => {
     render(<LensBadge lens="politics" />);
-    const el = screen.getByText('Politics');
+    const el = screen.getByText('Politics/Law');
     expect(el.tagName).toBe('SPAN');
   });
 });

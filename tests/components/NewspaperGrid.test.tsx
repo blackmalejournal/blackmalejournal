@@ -44,7 +44,7 @@ describe('NewspaperGrid', () => {
       makeArticle('second', 'Second', 'culture'),
     ];
     render(<NewspaperGrid articles={articles} />);
-    expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Culture')).toBeInTheDocument();
+    expect(screen.getByText('Health/Wellness')).toBeInTheDocument();
+    expect(screen.getByText('Culture/Ideology')).toBeInTheDocument();
   });
 });

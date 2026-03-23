@@ -14,35 +14,35 @@ interface Lens {
 const LENSES: Lens[] = [
   {
     slug: "health",
-    label: "Health",
+    label: "Health/Wellness",
     tagline: "Body. Mind. Discipline.",
     description:
       "Physical training, mental fortitude, ancestral wellness — the full spectrum of what it means to inhabit a Black male body with intention and mastery.",
   },
   {
     slug: "politics",
-    label: "Politics",
+    label: "Politics/Law",
     tagline: "Power. Systems. Community.",
     description:
       "Power analysis, community organizing, policy critique — understanding the structures that govern Black life and strategizing how to transform them.",
   },
   {
     slug: "culture",
-    label: "Culture",
+    label: "Culture/Ideology",
     tagline: "Art. Identity. Legacy.",
     description:
       "Culture is where a people define themselves. This lens covers ideology, identity, creative expression, and the cultural production that shapes and reflects the Black male experience.",
   },
   {
     slug: "entertainment",
-    label: "Entertainment",
+    label: "Entertainment/Technology",
     tagline: "Screen. Sound. Platform.",
     description:
       "Music, film, sports, and technology — the industries that both represent and exploit Black talent. We analyze the economics, the narratives, and the leverage points.",
   },
   {
     slug: "commemoration",
-    label: "Commemoration",
+    label: "Commemorations/Remembrance",
     tagline: "History. Memory. Honor.",
     description:
       "Anniversaries, milestones, and the figures who shaped Black male history. Remembrance is not nostalgia — it is the strategic preservation of a people's record.",

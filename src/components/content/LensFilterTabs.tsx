@@ -6,12 +6,12 @@ import type { Lens } from '@/lib/supabase/types';
 type Tab = { label: string; value: Lens | 'all' };
 
 const TABS: Tab[] = [
-  { label: 'All',            value: 'all' },
-  { label: 'Health',         value: 'health' },
-  { label: 'Politics',       value: 'politics' },
-  { label: 'Culture',        value: 'culture' },
-  { label: 'Entertainment',  value: 'entertainment' },
-  { label: 'Commemoration',  value: 'commemoration' },
+  { label: 'All',                          value: 'all' },
+  { label: 'Health/Wellness',              value: 'health' },
+  { label: 'Politics/Law',                 value: 'politics' },
+  { label: 'Culture/Ideology',             value: 'culture' },
+  { label: 'Entertainment/Technology',     value: 'entertainment' },
+  { label: 'Commemorations/Remembrance',  value: 'commemoration' },
 ];
 
 interface LensFilterTabsProps {

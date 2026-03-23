@@ -16,22 +16,22 @@ describe('LensFilterTabs', () => {
   it('renders all 6 tabs (All + 5 lenses)', () => {
     render(<LensFilterTabs activeLens="all" />);
     expect(screen.getByText('All')).toBeInTheDocument();
-    expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Politics')).toBeInTheDocument();
-    expect(screen.getByText('Culture')).toBeInTheDocument();
-    expect(screen.getByText('Entertainment')).toBeInTheDocument();
-    expect(screen.getByText('Commemoration')).toBeInTheDocument();
+    expect(screen.getByText('Health/Wellness')).toBeInTheDocument();
+    expect(screen.getByText('Politics/Law')).toBeInTheDocument();
+    expect(screen.getByText('Culture/Ideology')).toBeInTheDocument();
+    expect(screen.getByText('Entertainment/Technology')).toBeInTheDocument();
+    expect(screen.getByText('Commemorations/Remembrance')).toBeInTheDocument();
   });
 
   it('active lens has aria-selected=true', () => {
     render(<LensFilterTabs activeLens="health" />);
-    expect(screen.getByText('Health')).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByText('Health/Wellness')).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByText('All')).toHaveAttribute('aria-selected', 'false');
   });
 
   it('clicking lens calls router.push with ?lens=value', () => {
     render(<LensFilterTabs activeLens="all" />);
-    fireEvent.click(screen.getByText('Culture'));
+    fireEvent.click(screen.getByText('Culture/Ideology'));
     expect(mockPush).toHaveBeenCalledWith('/articles?lens=culture');
   });
 
@@ -47,7 +47,7 @@ describe('LensFilterTabs', () => {
       new URLSearchParams('tag=fitness'),
     );
     render(<LensFilterTabs activeLens="health" />);
-    fireEvent.click(screen.getByText('Politics'));
+    fireEvent.click(screen.getByText('Politics/Law'));
     expect(mockPush).toHaveBeenCalledWith(expect.not.stringContaining('tag='));
   });
 });

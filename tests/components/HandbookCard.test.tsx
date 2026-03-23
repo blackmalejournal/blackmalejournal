@@ -37,6 +37,6 @@ describe('HandbookCard', () => {
 
   it('renders lens badge', () => {
     render(<HandbookCard {...defaultProps} />);
-    expect(screen.getByText('Health')).toBeInTheDocument();
+    expect(screen.getByText('Health/Wellness')).toBeInTheDocument();
   });
 });

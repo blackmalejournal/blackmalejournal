@@ -14,7 +14,7 @@ export type LensTheme = {
 
 export const LENS_THEMES: Record<Lens, LensTheme> = {
   health: {
-    label: 'Health',
+    label: 'Health/Wellness',
     accentText: 'text-bmj-amber',
     accentBorder: 'border-bmj-amber',
     accentBg: 'bg-bmj-amber',
@@ -25,7 +25,7 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
     hoverBorder: 'hover:border-bmj-amber/60',
   },
   politics: {
-    label: 'Politics',
+    label: 'Politics/Law',
     accentText: 'text-bmj-red',
     accentBorder: 'border-bmj-red',
     accentBg: 'bg-bmj-red',
@@ -36,7 +36,7 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
     hoverBorder: 'hover:border-bmj-red/60',
   },
   culture: {
-    label: 'Culture',
+    label: 'Culture/Ideology',
     accentText: 'text-bmj-tan',
     accentBorder: 'border-bmj-tan',
     accentBg: 'bg-bmj-tan',
@@ -47,7 +47,7 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
     hoverBorder: 'hover:border-bmj-tan/60',
   },
   entertainment: {
-    label: 'Entertainment',
+    label: 'Entertainment/Technology',
     accentText: 'text-bmj-purple',
     accentBorder: 'border-bmj-purple',
     accentBg: 'bg-bmj-purple',
@@ -58,7 +58,7 @@ export const LENS_THEMES: Record<Lens, LensTheme> = {
     hoverBorder: 'hover:border-bmj-purple/60',
   },
   commemoration: {
-    label: 'Commemoration',
+    label: 'Commemorations/Remembrance',
     accentText: 'text-bmj-gold',
     accentBorder: 'border-bmj-gold',
     accentBg: 'bg-bmj-gold',
