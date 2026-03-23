@@ -53,3 +53,7 @@ next-env.d.ts
 # Test artifacts
 playwright-report/
 test-results/
+
+# Claude Code personal overrides
+CLAUDE.local.md
+.claude/settings.local.json

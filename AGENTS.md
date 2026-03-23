@@ -2,7 +2,7 @@
 type: normative
 authority: canonical
 audience: [agents, contributors]
-last-verified: 2026-03-22
+last-verified: 2026-03-23
 ---
 
 # AGENTS -- The Black Male Journal Governance
@@ -56,40 +56,4 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 4. Execute incrementally
 5. Refuse scope creep
 
-## Brand Constraints (Hard Invariants)
-
-These are non-negotiable. Violation is a blocking defect:
-
-- **Color palette:** Only `--bmj-*` CSS variables from `src/styles/brand.css`
-- **Typography:** Highrise (headlines, ALL-CAPS), Libre Baskerville (body), Oswald (labels), IBM Plex Mono (dates)
-- **Prohibited:** Pastels, gradients, blue, neon, rounded corners > 4px, drop shadows, glassmorphism
-- **Aesthetic:** Militant print-driven editorial -- revolutionary newspapers, political posters
-- **Content taxonomy:** Exactly three lenses -- health, philosophy, politics
-
-## Git Workflow
-
-Branches: `feat/`, `fix/`, `docs/`, `chore/`, `test/`, `refactor/` prefixes.
-Conventional commits required: `feat:`, `fix:`, `chore:`, `docs:`, `style:`, `refactor:`, `test:`.
-
-## Validation Commands
-
-```bash
-npm run build         # Production build -- must pass
-npm run lint          # ESLint
-npm test              # Jest (72+ test files)
-npm run test:e2e      # Playwright E2E
-npx tsc --noEmit      # TypeScript strict check
-npm run secrets:check # Secret scanning
-```
-
-## Pre-Deploy Checklist
-
-1. `npm run build` passes
-2. `npm run lint` clean
-3. `npm test` passes
-4. `npx tsc --noEmit` passes
-5. `/secrets-audit` clean
-6. `/env-audit` clean
-7. Visual check at 375px and 1440px
-
-See [CLAUDE.md](CLAUDE.md) for full project instructions.
+See [CLAUDE.md](CLAUDE.md) for brand constraints, validation commands, content model, and architecture rules.
