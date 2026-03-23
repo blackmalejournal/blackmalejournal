@@ -22,7 +22,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: var(--weight-display);
     color: var(--bmj-white);
     text-wrap: balance;
   }
@@ -152,31 +152,23 @@
   }
 
   .editorial-kicker {
-    @apply font-label text-[11px] uppercase tracking-[0.32em] text-bmj-tan;
+    @apply font-label text-stamp uppercase tracking-label-xl text-bmj-tan;
   }
 
   .page-title {
-    @apply font-display text-5xl uppercase tracking-[0.06em] text-bmj-white sm:text-6xl lg:text-7xl;
+    @apply font-display text-5xl uppercase tracking-section text-bmj-white sm:text-6xl lg:text-7xl;
   }
 
   .section-title {
-    @apply font-display text-4xl uppercase tracking-[0.05em] text-bmj-white md:text-5xl;
-  }
-
-  .section-title-compact {
-    @apply font-display text-3xl uppercase tracking-[0.04em] text-bmj-white md:text-4xl;
+    @apply font-display text-4xl uppercase tracking-section text-bmj-white md:text-5xl;
   }
 
   .editorial-deck {
     @apply max-w-2xl font-body text-base leading-8 text-bmj-cream/80 md:text-lg;
   }
 
-  .editorial-lead {
-    @apply max-w-2xl font-body text-base leading-7 text-bmj-cream/70;
-  }
-
   .meta-stamp {
-    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-bmj-tan/80;
+    @apply font-mono text-stamp uppercase tracking-label-wide text-bmj-tan/80;
     font-variant-numeric: tabular-nums;
   }
 
@@ -245,7 +237,7 @@
   }
 
   .nav-link {
-    @apply font-label text-xs uppercase tracking-[0.18em] no-underline transition-[color,border-color] duration-200;
+    @apply font-label text-xs uppercase tracking-label no-underline transition-[color,border-color] duration-200;
     color: var(--bmj-cream);
   }
 
@@ -292,15 +284,15 @@
   }
 
   .btn-primary {
-    @apply border border-bmj-red bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-[0.18em] text-bmj-white no-underline transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:bg-bmj-crimson hover:text-bmj-white disabled:opacity-50;
+    @apply border border-bmj-red bg-bmj-red px-5 py-2 font-label text-xs uppercase tracking-label text-bmj-white no-underline transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:bg-bmj-crimson hover:text-bmj-white disabled:opacity-50;
   }
 
   .btn-secondary {
-    @apply border border-bmj-tan/40 bg-transparent px-5 py-2 font-label text-xs uppercase tracking-[0.18em] text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-red hover:bg-bmj-red/10 hover:text-bmj-white disabled:opacity-50;
+    @apply border border-bmj-tan/40 bg-transparent px-5 py-2 font-label text-xs uppercase tracking-label text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-red hover:bg-bmj-red/10 hover:text-bmj-white disabled:opacity-50;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center border border-bmj-tan/40 px-6 py-3 font-label text-xs uppercase tracking-[0.18em] text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-red hover:bg-bmj-red/10 hover:text-bmj-white;
+    @apply inline-flex items-center justify-center border border-bmj-tan/40 px-6 py-3 font-label text-xs uppercase tracking-label text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-red hover:bg-bmj-red/10 hover:text-bmj-white;
   }
 
   .btn-sm {

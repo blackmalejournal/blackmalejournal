@@ -30,7 +30,7 @@ export function PaywallGate({
   return (
     <div>
       {/* Preview text — hard cutoff, no gradient fade */}
-      <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+      <p className="font-body text-lg leading-article text-bmj-cream/90">
         {previewBody}
         <span aria-hidden="true">&hellip;</span>
       </p>

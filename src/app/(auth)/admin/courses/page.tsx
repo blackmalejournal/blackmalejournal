@@ -112,7 +112,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
               <li key={course.id} className="flex items-center justify-between border-b border-bmj-tan/10 py-4">
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-3">
-                    <span className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${
+                    <span className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${
                       course.published ? 'bg-bmj-red/20 text-bmj-red' : 'bg-bmj-tan/20 text-bmj-tan'
                     }`}>
                       {course.published ? 'published' : 'draft'}

@@ -87,23 +87,23 @@ export default async function MessagesAdminPage({ searchParams }: MessagesAdminP
 
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-5">
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Total</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Total</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.total}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">New</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">New</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.new}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">In Progress</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">In Progress</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.in_progress}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Resolved</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Resolved</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.resolved}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Spam</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Spam</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.spam}</p>
         </div>
       </div>
@@ -181,12 +181,12 @@ export default async function MessagesAdminPage({ searchParams }: MessagesAdminP
                     )}
                     <div className="mt-2 flex flex-wrap items-center gap-3">
                       <span
-                        className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${statusStyles[submission.status]}`}
+                        className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${statusStyles[submission.status]}`}
                       >
                         {submission.status.replace('_', ' ')}
                       </span>
                       {submission.handled_at && (
-                        <span className="font-mono text-[11px] text-bmj-tan">
+                        <span className="font-mono text-stamp text-bmj-tan">
                           Updated {formatDate(submission.handled_at)}
                         </span>
                       )}

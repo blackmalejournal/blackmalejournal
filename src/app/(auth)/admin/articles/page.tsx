@@ -23,7 +23,7 @@ const statusStyles: Record<ContentStatus, string> = {
 function StatusBadge({ status }: { status: ContentStatus }) {
   return (
     <span
-      className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${statusStyles[status]}`}
+      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${statusStyles[status]}`}
     >
       {status}
     </span>

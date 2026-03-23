@@ -13,7 +13,7 @@ export default function GlobalError({
     <div className="flex min-h-[calc(100vh-10rem)] flex-col items-center justify-center px-6 py-24 text-center">
       <BrandMark size={64} color="var(--bmj-red)" className="mb-8 opacity-40" />
 
-      <p className="mb-4 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan">
+      <p className="mb-4 font-mono text-xs uppercase tracking-label-max text-bmj-tan">
         Error
       </p>
 

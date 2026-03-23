@@ -145,7 +145,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
                 <Icon size={16} className="mt-0.5 shrink-0 text-bmj-tan" aria-hidden="true" />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-bmj-tan">{result.type}</span>
+                    <span className="font-mono text-micro uppercase tracking-widest text-bmj-tan">{result.type}</span>
                     {result.lens && <LensBadge lens={result.lens as Lens} />}
                   </div>
                   <p className="mt-1 font-display text-sm text-bmj-white">{result.title}</p>
@@ -158,7 +158,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
           })}
         </div>
         <div className="border-t border-bmj-tan/20 px-6 py-3">
-          <p className="font-mono text-[10px] text-bmj-tan">
+          <p className="font-mono text-micro text-bmj-tan">
             <kbd className="border border-bmj-tan/30 px-1 py-0.5 text-bmj-cream">ESC</kbd> to close
           </p>
         </div>

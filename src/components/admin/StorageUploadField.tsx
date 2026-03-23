@@ -110,7 +110,7 @@ export function StorageUploadField({
       <div className="grid grid-cols-1 gap-3 border border-bmj-tan/20 bg-bmj-black/30 p-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
           <div className="min-w-0 flex-1">
-            <label htmlFor={fileInputId} className="mb-1 block font-label text-[10px] uppercase tracking-widest text-bmj-tan">
+            <label htmlFor={fileInputId} className="mb-1 block font-label text-micro uppercase tracking-widest text-bmj-tan">
               Upload File
             </label>
             <input

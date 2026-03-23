@@ -61,19 +61,25 @@ All articles and content are categorized under exactly one lens:
 
 ## Architecture Rules
 - App Router only (no pages/ directory)
-- All routes under src/app/(public)/ for public pages
-- Auth routes under src/app/(auth)/
+- All routes under src/app/(public)/ for public pages — includes articles/, briefings/, blog/, library/, video/, academy/, downloads/, handbooks/, about/, contact/, pricing/, search/, etc.
+- Auth routes under src/app/(auth)/ — portal (members), login, signup, admin panel
+- Admin panel under src/app/(auth)/admin/ — full CRUD for articles, briefings, dispatches, courses, handbooks, downloads, members, subscribers, messages
 - API routes under src/app/api/
-- Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /home/ (homepage sections), /layout/ (nav, footer), /portal/ (member area), /seo/ (metadata, structured data)
+- Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /home/ (homepage sections), /layout/ (nav, footer), /portal/ (member area), /seo/ (metadata, structured data), /admin/ (admin panel UI), /motion/ (PageTransition, ScrollReveal)
 - Content: database-driven via Supabase (articles, briefings, handbooks, downloads, courses, lessons)
 - Lib: src/lib/supabase/, src/lib/stripe/, src/lib/content/
 
 ## Key Files
 - `src/app/layout.tsx` — Root layout, font loading, global providers
 - `src/proxy.ts` — Auth proxy (Supabase session handling, route protection)
+- `src/lib/supabase/types.ts` — All TypeScript type aliases for DB tables (Article, Briefing, Member, Dispatch, Course, etc.) — check here first when working with content
 - `src/lib/supabase/queries.ts` — All database query functions
 - `src/lib/supabase/access.ts` — Tier-based content access control
 - `src/lib/stripe/config.ts` — Stripe configuration
+- `src/lib/paths.ts` — Centralized route path constants — use these instead of hardcoding URL strings
+- `src/lib/admin-auth.ts` — Admin session helpers and auth guards
+- `src/lib/lens-theme.ts` — LENS_THEMES map (Lens → Tailwind class objects) — use for all lens-based UI styling, never hardcode lens colors inline
+- `src/lib/membership.ts` — includesTier() / compareTiers() — always use these for tier access checks, never compare tier strings directly
 - `src/styles/brand.css` — CSS custom properties (--bmj-* variables)
 - `tailwind.config.ts` — Tailwind theme extending brand tokens
 - `supabase/config.toml` — Local Supabase configuration
@@ -88,9 +94,10 @@ All articles and content are categorized under exactly one lens:
 - Framer Motion for page transitions and scroll animations only — keep it subtle
 
 ## Content Model
-- Articles: title, slug, lens, tags[], excerpt, body, featured, access_tier (free|basic|premium), author, cover_image, published_at
-- Briefings: issue_number, title, slug, sections (JSON array of {title, body}), access_tier, cover_image, published_at
-- Members: email, tier (free|basic|premium), stripe_customer_id, stripe_subscription_id
+- Articles: title, slug, lens, tags[], excerpt, body, featured, access_tier (free|basic|premium), status (draft|review|scheduled|published|archived|withdrawn), author, cover_image, published_at
+- Briefings: issue_number, title, slug, sections (JSON array of {title, body}), access_tier, status (same as Article), cover_image, published_at
+- Dispatches: title, slug, body, access_tier, status, published_at — short-form content type; see seed-dispatches.sql
+- Members: email, tier (free|basic|premium), role (member|editor|admin), stripe_customer_id, stripe_subscription_id
 
 ## Access Tiers
 - free: all public articles, briefing previews, video gallery, academy

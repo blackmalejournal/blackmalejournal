@@ -61,10 +61,10 @@ export function Navbar({ user = null }: NavbarProps) {
           >
             <BrandMark size={32} color="var(--bmj-red)" />
             <div className="flex flex-col">
-              <span className="font-display text-xl uppercase tracking-[0.08em] text-bmj-white">
+              <span className="font-display text-xl uppercase tracking-wordmark text-bmj-white">
                 The Black Male Journal
               </span>
-              <span className="hidden xl:block font-label text-[10px] uppercase tracking-[0.24em] text-bmj-tan">
+              <span className="hidden xl:block font-label text-micro uppercase tracking-label-lg text-bmj-tan">
                 Speak the Truth. Navigate the Consequences.
               </span>
             </div>

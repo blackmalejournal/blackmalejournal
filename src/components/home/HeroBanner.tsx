@@ -39,7 +39,7 @@ export function HeroBanner() {
           initial={fadeIn.initial}
           animate={{ opacity: 1 }}
           transition={fadeIn.transition}
-          className="mb-6 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan"
+          className="mb-6 font-mono text-xs uppercase tracking-label-max text-bmj-tan"
         >
           Vol. I &nbsp;&middot;&nbsp; Est. MMXXV &nbsp;&middot;&nbsp; Independent
         </motion.p>
@@ -77,7 +77,7 @@ export function HeroBanner() {
             apology. No dilution. This is the record of men who choose to be deliberate.
           </p>
 
-          <p className="mt-4 font-mono text-xs uppercase tracking-[0.4em] text-bmj-tan/60">
+          <p className="mt-4 font-label text-xs uppercase tracking-label-max text-bmj-tan/60">
             Health &nbsp;&middot;&nbsp; Philosophy &nbsp;&middot;&nbsp; Politics
           </p>
 

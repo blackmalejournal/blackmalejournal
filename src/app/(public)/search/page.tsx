@@ -62,7 +62,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               <Icon size={18} className="mt-1 shrink-0 text-bmj-tan" aria-hidden="true" />
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-bmj-tan">{result.type}</span>
+                  <span className="font-mono text-micro uppercase tracking-widest text-bmj-tan">{result.type}</span>
                   {result.lens && <LensBadge lens={result.lens as Lens} />}
                 </div>
                 <h2 className="mt-1 font-display text-xl text-bmj-white">{result.title}</h2>

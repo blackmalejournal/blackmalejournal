@@ -20,7 +20,7 @@ const tierStyles: Record<AccessTier, string> = {
 function TierBadge({ tier }: { tier: AccessTier }) {
   return (
     <span
-      className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${tierStyles[tier]}`}
+      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${tierStyles[tier]}`}
     >
       {tier}
     </span>

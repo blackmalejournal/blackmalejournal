@@ -65,7 +65,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
                   <Link
                   href={link.href}
                   onClick={onClose}
-                  className="font-display text-5xl uppercase tracking-[0.08em] text-bmj-white transition-colors hover:text-bmj-red"
+                  className="font-display text-5xl uppercase tracking-wordmark text-bmj-white transition-colors hover:text-bmj-red"
                 >
                   {link.label}
                 </Link>
@@ -76,7 +76,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
                   <Link
                     href="/portal"
                     onClick={onClose}
-                    className="font-display text-5xl uppercase tracking-[0.08em] text-bmj-amber transition-colors hover:text-bmj-red"
+                    className="font-display text-5xl uppercase tracking-wordmark text-bmj-amber transition-colors hover:text-bmj-red"
                   >
                     Portal
                   </Link>

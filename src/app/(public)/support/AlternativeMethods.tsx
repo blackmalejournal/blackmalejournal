@@ -41,7 +41,7 @@ export function AlternativeMethods() {
               <span className="block font-label text-xs uppercase tracking-widest text-bmj-cream">
                 {method.label}
               </span>
-              <span className="mt-0.5 block font-mono text-[11px] text-bmj-tan">
+              <span className="mt-0.5 block font-mono text-stamp text-bmj-tan">
                 {method.handle}
               </span>
             </div>

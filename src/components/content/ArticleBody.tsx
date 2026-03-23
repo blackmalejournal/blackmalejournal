@@ -62,7 +62,7 @@ export function ArticleBody({ body }: ArticleBodyProps) {
           );
         }
         return (
-          <p key={i} className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+          <p key={i} className="font-body text-lg leading-article text-bmj-cream/90">
             {renderInlineMarks(para)}
           </p>
         );

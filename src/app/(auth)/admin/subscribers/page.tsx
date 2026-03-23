@@ -64,15 +64,15 @@ export default async function SubscribersAdminPage({
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Total</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Total</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.total}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Active</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Active</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.active}</p>
         </div>
         <div className="border border-bmj-tan/20 bg-bmj-brown p-4">
-          <p className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Unsubscribed</p>
+          <p className="font-label text-micro uppercase tracking-widest text-bmj-tan">Unsubscribed</p>
           <p className="mt-2 font-mono text-2xl text-bmj-white">{counts.unsubscribed}</p>
         </div>
       </div>
@@ -182,7 +182,7 @@ export default async function SubscribersAdminPage({
                   </div>
                 </div>
                 {subscriber.unsubscribed_at && (
-                  <span className="ml-4 shrink-0 px-2 py-0.5 font-label text-[10px] uppercase tracking-widest text-bmj-red">
+                  <span className="ml-4 shrink-0 px-2 py-0.5 font-label text-micro uppercase tracking-widest text-bmj-red">
                     Unsubscribed
                   </span>
                 )}

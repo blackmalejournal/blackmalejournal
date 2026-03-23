@@ -65,10 +65,10 @@ export function ThreeLenses() {
                   theme.hoverBorder,
                 )}
               >
-                <p className={cn("mb-3 font-label text-xs uppercase tracking-[0.18em]", theme.accentText)}>
+                <p className={cn("mb-3 font-label text-xs uppercase tracking-label", theme.accentText)}>
                   {lens.label}
                 </p>
-                <h3 className="mb-4 font-display text-2xl uppercase tracking-[0.04em] text-bmj-white">
+                <h3 className="mb-4 font-display text-2xl uppercase tracking-display text-bmj-white">
                   {lens.tagline}
                 </h3>
                 <p className="font-body text-sm leading-relaxed text-bmj-cream/70">

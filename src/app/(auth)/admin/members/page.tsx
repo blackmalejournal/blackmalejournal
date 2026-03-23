@@ -19,7 +19,7 @@ const tierStyles: Record<MemberTier, string> = {
 function TierBadge({ tier }: { tier: MemberTier }) {
   return (
     <span
-      className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${tierStyles[tier]}`}
+      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${tierStyles[tier]}`}
     >
       {tier}
     </span>
@@ -37,7 +37,7 @@ const roleStyles: Record<MemberRole, string> = {
 function RoleBadge({ role }: { role: MemberRole }) {
   return (
     <span
-      className={`inline-block px-2 py-0.5 font-label text-[10px] uppercase tracking-widest ${roleStyles[role]}`}
+      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${roleStyles[role]}`}
     >
       {role}
     </span>

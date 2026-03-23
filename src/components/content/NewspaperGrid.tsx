@@ -46,7 +46,7 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
           style={{ backgroundColor: "var(--bmj-feature-overlay)" }}
         >
           <LensBadge lens={lead.lens} />
-          <h3 className="mt-3 font-display text-2xl uppercase tracking-[0.04em] text-bmj-white sm:text-3xl">
+          <h3 className="mt-3 font-display text-2xl uppercase tracking-display text-bmj-white sm:text-3xl">
             {lead.title}
           </h3>
           {lead.excerpt && (
@@ -72,7 +72,7 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
             )}
           >
             <LensBadge lens={article.lens} />
-            <h3 className="mt-3 font-display text-lg uppercase tracking-[0.04em] text-bmj-white sm:text-xl">
+            <h3 className="mt-3 font-display text-lg uppercase tracking-display text-bmj-white sm:text-xl">
               {article.title}
             </h3>
             {article.excerpt && (

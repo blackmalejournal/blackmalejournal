@@ -42,7 +42,7 @@ export function DispatchCard({
           </span>
         </div>
 
-        <h3 className="mb-3 font-display text-2xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-3xl">
+        <h3 className="mb-3 font-display text-2xl uppercase tracking-display leading-tight text-bmj-white sm:text-3xl">
           {title}
         </h3>
 

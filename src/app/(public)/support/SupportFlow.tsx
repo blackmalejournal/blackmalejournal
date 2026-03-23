@@ -374,7 +374,7 @@ export function SupportFlow() {
           ? 'Redirecting to checkout...'
           : `Support BMJ \u2014 $${activeAmount >= 1 ? (coverFees ? feeAdjusted.toFixed(2) : activeAmount.toFixed(2)) : '0.00'}${frequency === 'monthly' ? '/mo' : ''}`}
       </button>
-      <p className="text-center font-mono text-[10px] text-bmj-tan/50">
+      <p className="text-center font-mono text-micro text-bmj-tan/50">
         Secure payment via Stripe. Apple Pay &amp; Google Pay accepted.
       </p>
     </div>

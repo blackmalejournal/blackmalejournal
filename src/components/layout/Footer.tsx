@@ -29,10 +29,10 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <BrandMark size={28} color="var(--bmj-red)" />
               <div className="flex flex-col">
-                <span className="font-display text-lg uppercase tracking-[0.08em] text-bmj-white">
+                <span className="font-display text-lg uppercase tracking-wordmark text-bmj-white">
                   The Black Male Journal
                 </span>
-                <p className="mt-1 font-label text-xs uppercase tracking-[0.18em] text-bmj-tan/70">
+                <p className="mt-1 font-label text-xs uppercase tracking-label text-bmj-tan/70">
                   Speak the Truth. Navigate the Consequences.
                 </p>
               </div>
@@ -49,7 +49,7 @@ export function Footer() {
               </p>
               <a
                 href="https://patreon.com/BlackMaleJournal"
-                className="inline-block self-start border border-bmj-amber/40 bg-bmj-amber/10 px-5 py-2 font-label text-xs uppercase tracking-[0.18em] text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-amber hover:bg-bmj-amber/20 hover:text-bmj-white"
+                className="inline-block self-start border border-bmj-amber/40 bg-bmj-amber/10 px-5 py-2 font-label text-xs uppercase tracking-label text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-amber hover:bg-bmj-amber/20 hover:text-bmj-white"
                 target="_blank"
                 rel="noopener noreferrer"
               >

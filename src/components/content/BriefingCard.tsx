@@ -36,13 +36,13 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mb-3 font-display text-3xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-4xl">
+        <h3 className="mb-3 font-display text-3xl uppercase tracking-display leading-tight text-bmj-white sm:text-4xl">
           {briefing.title}
         </h3>
 
         {/* First section title as preview */}
         {previewText && (
-          <p className="font-label text-sm uppercase tracking-[0.16em] text-bmj-cream/78">
+          <p className="font-label text-sm uppercase tracking-label text-bmj-cream/78">
             {previewText}
           </p>
         )}

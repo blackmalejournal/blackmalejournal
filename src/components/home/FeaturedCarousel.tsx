@@ -105,7 +105,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
               <div className="flex flex-1 flex-col justify-center p-8 sm:p-12">
                 <LensBadge lens={article.lens} className="mb-4" />
 
-                <h3 className="mb-4 font-display text-3xl uppercase tracking-[0.04em] leading-tight text-bmj-white sm:text-4xl">
+                <h3 className="mb-4 font-display text-3xl uppercase tracking-display leading-tight text-bmj-white sm:text-4xl">
                   {article.title}
                 </h3>
 

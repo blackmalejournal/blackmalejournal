@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import {
+  Bebas_Neue,
   Oswald,
   IBM_Plex_Mono,
   Libre_Baskerville,
@@ -17,17 +17,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageTransition } from "@/components/motion/PageTransition";
 
 /*
- * Highrise — display/headline font (replaces Bebas Neue)
- * LICENSE: PERSONAL USE DEMO — commercial license required from Indieground Design
- * Purchase at: https://indieground.net/product/highrise-font/
- * Using the Condensed variant as the primary display weight (closest to Bebas Neue character)
+ * Bebas Neue — display/headline font
+ * LICENSE: SIL Open Font License — free for commercial use
  */
-const highrise = localFont({
-  src: [
-    { path: "../../public/fonts/highrise-regular.otf", weight: "400", style: "normal" },
-    { path: "../../public/fonts/highrise-condensed.otf", weight: "500", style: "normal" },
-    { path: "../../public/fonts/highrise-bold.otf", weight: "700", style: "normal" },
-  ],
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
   variable: "--font-bebas-neue",
   display: "swap",
 });
@@ -109,7 +104,7 @@ export default async function RootLayout({
     : null;
 
   const fontVars = [
-    highrise.variable,
+    bebasNeue.variable,
     libreBaskerville.variable,
     oswald.variable,
     ibmPlexMono.variable,

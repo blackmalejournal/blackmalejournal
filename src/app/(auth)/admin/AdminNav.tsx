@@ -81,7 +81,7 @@ export function AdminNav({ displayName, role }: AdminNavProps) {
         <p className="truncate font-mono text-xs text-bmj-cream">
           {displayName}
         </p>
-        <span className="mt-1 inline-block font-label text-[10px] uppercase tracking-widest text-bmj-tan">
+        <span className="mt-1 inline-block font-label text-micro uppercase tracking-widest text-bmj-tan">
           {role}
         </span>
       </div>

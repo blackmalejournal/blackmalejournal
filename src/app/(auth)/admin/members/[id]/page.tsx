@@ -108,21 +108,21 @@ export default async function MemberDetailPage({
           <h2 className="mb-6 font-display text-2xl text-bmj-white">ACCOUNT RECORD</h2>
           <dl className="space-y-4">
             <div>
-              <dt className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Member ID</dt>
+              <dt className="font-label text-micro uppercase tracking-widest text-bmj-tan">Member ID</dt>
               <dd className="mt-1 break-all font-mono text-sm text-bmj-cream">{member.id}</dd>
             </div>
             <div>
-              <dt className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Joined</dt>
+              <dt className="font-label text-micro uppercase tracking-widest text-bmj-tan">Joined</dt>
               <dd className="mt-1 font-mono text-sm text-bmj-cream">{formatDate(member.created_at)}</dd>
             </div>
             <div>
-              <dt className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Stripe Customer</dt>
+              <dt className="font-label text-micro uppercase tracking-widest text-bmj-tan">Stripe Customer</dt>
               <dd className="mt-1 break-all font-mono text-sm text-bmj-cream/80">
                 {member.stripe_customer_id ?? 'Not connected'}
               </dd>
             </div>
             <div>
-              <dt className="font-label text-[10px] uppercase tracking-widest text-bmj-tan">Stripe Subscription</dt>
+              <dt className="font-label text-micro uppercase tracking-widest text-bmj-tan">Stripe Subscription</dt>
               <dd className="mt-1 break-all font-mono text-sm text-bmj-cream/80">
                 {member.stripe_subscription_id ?? 'Not connected'}
               </dd>

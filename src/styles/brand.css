@@ -23,10 +23,32 @@
   --bmj-purple:       #554978;  /* Muted purple — technology accent (use with restraint) */
 
   /* Font family references (values set by next/font CSS variables) */
-  --font-display: var(--font-bebas-neue), 'Highrise', 'Bebas Neue', sans-serif;
+  --font-display: var(--font-bebas-neue), 'Bebas Neue', sans-serif;
   --font-body:    var(--font-libre-baskerville), 'Libre Baskerville', 'Linux Libertine', serif;
   --font-label:   var(--font-oswald), 'Oswald', sans-serif;
   --font-mono:    var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+
+  /* ─── Typography scale tokens ─── */
+
+  /* Tracking (letter-spacing) scale */
+  --tracking-display:   0.04em;   /* card titles, compact display headings */
+  --tracking-section:   0.06em;   /* page titles, section headers */
+  --tracking-wordmark:  0.08em;   /* logo/wordmark text */
+  --tracking-label:     0.18em;   /* buttons, nav links, standard UI labels */
+  --tracking-label-lg:  0.24em;   /* navbar tagline, intermediate labels */
+  --tracking-label-wide: 0.28em;  /* meta stamps, dates */
+  --tracking-label-xl:  0.32em;   /* editorial kickers */
+  --tracking-label-max: 0.4em;    /* hero identifiers, max-emphasis labels */
+
+  /* Sub-xs font sizes (below Tailwind's text-xs = 12px) */
+  --text-micro: 10px;   /* smallest UI text: taglines, kicker overlines */
+  --text-stamp: 11px;   /* editorial kickers, meta stamps */
+
+  /* Line heights */
+  --leading-article: 1.8;   /* long-form article body paragraphs */
+
+  /* Display font weight — Bebas Neue has only weight 400 */
+  --weight-display: 400;
 
   /* Grain overlay */
   --grain-opacity: 0.09;

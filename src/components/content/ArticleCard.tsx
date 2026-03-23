@@ -62,7 +62,7 @@ export function ArticleCard({
           </div>
         )}
         {isFeatured && (
-          <div className="absolute left-2 top-2 border border-bmj-red bg-bmj-red/90 px-2 py-1 font-label text-[10px] uppercase tracking-[0.16em] text-bmj-white">
+          <div className="absolute left-2 top-2 border border-bmj-red bg-bmj-red/90 px-2 py-1 font-label text-micro uppercase tracking-label text-bmj-white">
             Featured
           </div>
         )}
@@ -71,7 +71,7 @@ export function ArticleCard({
       <div className="flex flex-1 flex-col p-6">
         <LensBadge lens={lens} className="mb-3 self-start" />
 
-        <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-[0.04em] leading-tight text-bmj-white">
+        <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-display leading-tight text-bmj-white">
           <Link
             href={`/articles/${slug}`}
             className="text-bmj-white no-underline"
@@ -85,10 +85,10 @@ export function ArticleCard({
         </p>
 
         <div className="mt-5 flex items-center justify-between border-t border-bmj-tan/20 pt-4">
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-bmj-cream/80">
+          <span className="font-label text-xs uppercase tracking-label text-bmj-cream/80">
             {Math.max(1, readingTime)} min read
           </span>
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-bmj-cream/80">{formattedDate}</span>
+          <span className="font-mono text-xs uppercase tracking-label text-bmj-cream/80">{formattedDate}</span>
         </div>
       </div>
     </article>

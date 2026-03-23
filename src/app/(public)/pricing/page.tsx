@@ -102,7 +102,7 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
                 tier: plan.id === 'free' ? undefined : plan.id,
                 next,
               });
-          const ctaClass = `mt-8 inline-flex items-center justify-center px-6 py-3 font-label text-xs uppercase tracking-[0.18em] transition-colors no-underline ${
+          const ctaClass = `mt-8 inline-flex items-center justify-center px-6 py-3 font-label text-xs uppercase tracking-label transition-colors no-underline ${
             isCurrentPlan || isIncludedPlan
               ? 'border border-bmj-tan/40 text-bmj-tan'
               : plan.id === 'premium'

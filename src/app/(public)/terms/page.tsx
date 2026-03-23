@@ -31,7 +31,7 @@ export default function TermsOfServicePage() {
         Last updated: March 15, 2026
       </p>
 
-      <p className="mb-8 font-body text-lg leading-[1.8] text-bmj-cream/90">
+      <p className="mb-8 font-body text-lg leading-article text-bmj-cream/90">
         By accessing or using The Black Male Journal (&ldquo;the
         platform&rdquo;), you agree to be bound by these Terms of Service. If
         you do not agree with any part of these terms, you may not use the
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           ACCOUNT TERMS
         </h2>
-        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-article text-bmj-cream/90">
           <li>You must provide a valid email address to create an account.</li>
           <li>
             You are responsible for maintaining the security of your account
@@ -67,7 +67,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           SUBSCRIPTION AND BILLING
         </h2>
-        <p className="mb-4 font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="mb-4 font-body text-lg leading-article text-bmj-cream/90">
           Paid subscriptions are billed in advance on a monthly or annual
           basis. All payments are processed securely through{" "}
           <a
@@ -80,7 +80,7 @@ export default function TermsOfServicePage() {
           </a>
           .
         </p>
-        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-article text-bmj-cream/90">
           <li>
             Subscription fees are non-refundable except as required by law.
           </li>
@@ -104,7 +104,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           CONTENT OWNERSHIP
         </h2>
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="font-body text-lg leading-article text-bmj-cream/90">
           All content published on The Black Male Journal — including articles,
           briefings, images, graphics, and videos — is the intellectual
           property of The Black Male Journal unless otherwise stated. You may
@@ -120,10 +120,10 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           ACCEPTABLE USE
         </h2>
-        <p className="mb-4 font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="mb-4 font-body text-lg leading-article text-bmj-cream/90">
           When using the platform, you agree not to:
         </p>
-        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <ul className="list-disc space-y-2 pl-6 font-body text-lg leading-article text-bmj-cream/90">
           <li>
             Share your account credentials or premium content with
             non-subscribers
@@ -149,7 +149,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           TERMINATION
         </h2>
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="font-body text-lg leading-article text-bmj-cream/90">
           We reserve the right to suspend or terminate your account at our
           discretion if you violate these terms. You may delete your account at
           any time by contacting us. Upon termination, your right to access
@@ -164,7 +164,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           DISCLAIMERS
         </h2>
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="font-body text-lg leading-article text-bmj-cream/90">
           The content published on The Black Male Journal is for informational
           and educational purposes only. It does not constitute medical, legal,
           financial, or professional advice. Health-related content under our
@@ -182,7 +182,7 @@ export default function TermsOfServicePage() {
         <h2 className="mb-4 font-display text-2xl uppercase text-bmj-white">
           CONTACT
         </h2>
-        <p className="font-body text-lg leading-[1.8] text-bmj-cream/90">
+        <p className="font-body text-lg leading-article text-bmj-cream/90">
           Questions about these terms? Reach us at{" "}
           <a
             href="mailto:contact@blackmalejournal.com"
