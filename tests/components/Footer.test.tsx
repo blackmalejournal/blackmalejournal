@@ -13,7 +13,7 @@ describe('Footer', () => {
     expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Academy')).toBeInTheDocument();
     expect(screen.getByText('Downloads')).toBeInTheDocument();
-    expect(screen.getByText('Library')).toBeInTheDocument();
+    expect(screen.getByText('Records')).toBeInTheDocument();
     expect(screen.getByText('Contact')).toBeInTheDocument();
   });
 

@@ -35,10 +35,10 @@ export default function NotFound() {
           Return to the Front Page
         </Link>
         <Link
-          href="/library"
+          href="/records"
           className="inline-block border border-bmj-tan/40 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
-          Browse the Library
+          Browse the Records
         </Link>
       </div>
     </div>

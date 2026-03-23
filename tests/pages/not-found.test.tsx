@@ -29,9 +29,9 @@ describe('404 Page', () => {
     expect(screen.getByTestId('brand-mark')).toBeInTheDocument();
   });
 
-  it('renders a link to the library', () => {
+  it('renders a link to the records', () => {
     render(<NotFound />);
-    const link = screen.getByRole('link', { name: /browse the library/i });
-    expect(link).toHaveAttribute('href', '/library');
+    const link = screen.getByRole('link', { name: /browse the records/i });
+    expect(link).toHaveAttribute('href', '/records');
   });
 });

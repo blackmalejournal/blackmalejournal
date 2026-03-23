@@ -1,6 +1,6 @@
 import { SkeletonCard } from '@/components/ui/Skeleton';
 
-export default function LibraryLoading() {
+export default function RecordsLoading() {
   return (
     <div className="mx-auto max-w-content px-6 py-20">
       <div className="mb-12 space-y-4">

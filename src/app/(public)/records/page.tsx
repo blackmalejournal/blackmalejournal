@@ -7,23 +7,23 @@ import type { Lens } from "@/lib/supabase/types";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Library",
+  title: "Records",
   description:
-    "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
+    "The full content records of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   openGraph: {
-    title: "Library",
+    title: "Records",
     description:
-      "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
+      "The full content records of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Library",
+    title: "Records",
     description:
-      "The full content library of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
+      "The full content records of The Black Male Journal — briefings, articles, dispatches, academy, and video.",
   },
 };
 
-type LibraryHub = {
+type RecordsHub = {
   icon: LucideIcon;
   lens: Lens;
   label: string;
@@ -32,7 +32,7 @@ type LibraryHub = {
   href: string;
 };
 
-const hubs: LibraryHub[] = [
+const hubs: RecordsHub[] = [
   {
     icon: BookOpen,
     lens: "politics",
@@ -85,12 +85,12 @@ const lenses = [
   { label: "Politics", href: "/articles?lens=politics" },
 ];
 
-export default function LibraryPage() {
+export default function RecordsPage() {
   return (
     <div className="page-shell-tight py-16">
       <PageHeader
-        label="Content Library"
-        title="Library"
+        label="Content Records"
+        title="Records"
         description="Everything published under The Black Male Journal banner — briefings, long reads, dispatches, courses, and video."
         dividerClassName="mb-12"
       />
