@@ -1,0 +1,148 @@
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from audits/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/art-direction-spec.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/bmj-palettes-reference.png"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/bmj-palettes.png"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/color-system.html"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/invariants.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from brand/visual-identity-audit.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from deferrals.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from design-system-consolidation.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from DEVELOPER.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from INDEX.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from migration_changelog.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/backup-restore.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/chairman-operator-manual.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/env-audit.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/env-vars.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/inbox-subscriber-sop.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/launch-checklist.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/member-billing-sop.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/nonprofit-setup-guide.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/publishing-sop.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/release-sequence.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from ops/secret-rotation.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from placeholder-tracking.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/2026-03-17-brand-compliance-art-direction.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/2026-03-17-brand-identity-overhaul.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/2026-03-17-site-restructuring.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/2026-03-18-frontend-cinematic-polish.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/2026-03-21-public-visual-refinement-handoff.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/plans/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/prompts/bmj-platform-multiphase-superprompt.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/prompts/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from superpowers/README.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
+{"stage": "intake", "at": "2026-03-22T18:34:40Z", "detail": "ingested from wiring-matrix.md"}
+{"stage": "extract", "at": "2026-03-22T18:34:40Z", "detail": "extracted facts"}
+{"stage": "normalize", "at": "2026-03-22T18:34:40Z", "detail": "standardized record"}
+{"stage": "quality", "at": "2026-03-22T18:34:40Z", "detail": "scored quality"}
