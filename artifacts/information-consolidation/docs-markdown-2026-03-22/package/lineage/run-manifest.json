@@ -1,0 +1,17 @@
+{
+  "run_id": "52972b6f-24a4-42fb-9aa4-da204558e2e5",
+  "started_at": "2026-03-22T18:36:37Z",
+  "finished_at": "2026-03-22T18:36:37Z",
+  "context_name": "bmj_docs_markdown_consolidation",
+  "input_dir": "C:/Users/mesha/Desktop/GitHub/github.com/blackmalejournal/artifacts/information-consolidation/docs-markdown-2026-03-22/input",
+  "output_dir": "C:/Users/mesha/Desktop/GitHub/github.com/blackmalejournal/artifacts/information-consolidation/docs-markdown-2026-03-22/package",
+  "context_profile": "C:/Users/mesha/Desktop/GitHub/github.com/blackmalejournal/artifacts/information-consolidation/docs-markdown-2026-03-22/context-profile.yaml",
+  "schema": "C:/Users/mesha/.codex/skills/information-consolidation/references/canonical-record.schema.json",
+  "input_files_total": 34,
+  "source_records_total": 34,
+  "canonical_entities_total": 34,
+  "relationships_total": 0,
+  "duplicate_candidates_total": 0,
+  "cache_reused_files": 0,
+  "incremental": false
+}
