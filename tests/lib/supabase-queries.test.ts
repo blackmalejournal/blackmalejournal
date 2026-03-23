@@ -368,7 +368,7 @@ describe('getCourseBySlug', () => {
 describe('subscribeToNewsletter', () => {
   it('upserts subscriber successfully', async () => {
     resetClient();
-    await subscribeToNewsletter('test@example.com', 'homepage');
+    await subscribeToNewsletter(' Test@Example.com ', ' homepage ');
     expect(mockClient.from).toHaveBeenCalledWith('newsletter_subscribers');
     expect(mockClient._queryChain.upsert).toHaveBeenCalledWith(
       { email: 'test@example.com', source: 'homepage', unsubscribed_at: null },
@@ -394,7 +394,7 @@ describe('subscribeToNewsletter', () => {
 describe('unsubscribeFromNewsletter', () => {
   it('updates unsubscribed_at', async () => {
     resetClient();
-    await unsubscribeFromNewsletter('test@example.com');
+    await unsubscribeFromNewsletter(' Test@Example.com ');
     expect(mockClient.from).toHaveBeenCalledWith('newsletter_subscribers');
     expect(mockClient._queryChain.update).toHaveBeenCalled();
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('email', 'test@example.com');

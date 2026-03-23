@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { isTierUpgrade } from '@/lib/membership';
 import type { MemberTier, PaidMemberTier } from '@/lib/supabase/types';
 import { TierBadge } from '@/components/portal/TierBadge';
 import { CheckoutButton } from '@/components/portal/CheckoutButton';
@@ -43,8 +44,13 @@ export function SubscriptionManager({
   }
 
   const upgradeTier: PaidMemberTier | null =
-    requestedTier
-    ?? (tier === 'free' ? 'basic' : tier === 'basic' ? 'premium' : null);
+    requestedTier && isTierUpgrade(tier, requestedTier)
+      ? requestedTier
+      : tier === 'free'
+        ? 'basic'
+        : tier === 'basic'
+          ? 'premium'
+          : null;
 
   return (
     <div>

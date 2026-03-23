@@ -4,6 +4,7 @@
 // the result as `{}[]` rather than the full row type. The cast is safe: the runtime
 // data is always the full row because select('*') fetches all columns.
 import { createClient } from '@/lib/supabase/server';
+import { normalizeEmailAddress } from '@/lib/email';
 import type {
   Article,
   Briefing,
@@ -296,10 +297,15 @@ export async function subscribeToNewsletter(
   source?: string,
 ): Promise<void> {
   const supabase = await createClient();
+  const normalizedEmail = normalizeEmailAddress(email);
   const { error } = await supabase
     .from('newsletter_subscribers')
     .upsert(
-      { email, source: source ?? null, unsubscribed_at: null },
+      {
+        email: normalizedEmail,
+        source: source?.trim() || null,
+        unsubscribed_at: null,
+      },
       { onConflict: 'email' },
     );
 
@@ -314,7 +320,7 @@ export async function unsubscribeFromNewsletter(email: string): Promise<void> {
   const { error } = await supabase
     .from('newsletter_subscribers')
     .update({ unsubscribed_at: new Date().toISOString() })
-    .eq('email', email);
+    .eq('email', normalizeEmailAddress(email));
 
   if (error) {
     console.error('[unsubscribeFromNewsletter]', error.message);

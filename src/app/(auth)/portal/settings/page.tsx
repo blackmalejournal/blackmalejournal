@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import { isTierUpgrade } from '@/lib/membership';
 import { getMemberById } from '@/lib/supabase/queries';
 import { SubscriptionManager } from '@/components/portal/SubscriptionManager';
 import { SettingsForm } from './SettingsForm';
@@ -61,6 +62,8 @@ export default async function SettingsPage({
   const member = await getMemberById(user.id);
   const tier = member?.tier ?? 'free';
   const displayName = (user.user_metadata?.display_name as string) || '';
+  const requestedUpgrade =
+    requestedTier && isTierUpgrade(tier, requestedTier) ? requestedTier : undefined;
 
   return (
     <div className="mx-auto max-w-article px-4 py-12 sm:px-6 lg:px-8">
@@ -85,12 +88,12 @@ export default async function SettingsPage({
         </div>
       )}
 
-      {requestedTier && tier !== requestedTier && (
+      {requestedUpgrade && (
         <div className="mb-6 border border-bmj-red/40 bg-bmj-red/10 p-4">
           <p className="font-body text-sm text-bmj-cream">
             Your account is ready. Complete checkout to activate the{' '}
             <span className="font-label uppercase tracking-widest text-bmj-white">
-              {requestedTier}
+              {requestedUpgrade}
             </span>{' '}
             plan.
           </p>
@@ -111,7 +114,7 @@ export default async function SettingsPage({
         <SubscriptionManager
           tier={tier}
           hasSubscription={!!member?.stripe_subscription_id}
-          requestedTier={requestedTier}
+          requestedTier={requestedUpgrade}
           nextHref={nextHref !== '/portal' ? nextHref : undefined}
         />
       </section>

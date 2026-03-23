@@ -66,4 +66,17 @@ describe('SubscriptionManager', () => {
       }));
     });
   });
+
+  it('ignores lower-tier requested states for premium members', () => {
+    render(
+      <SubscriptionManager
+        tier="premium"
+        hasSubscription={true}
+        requestedTier="basic"
+      />,
+    );
+
+    expect(screen.queryByRole('button', { name: /upgrade/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /manage billing/i })).toBeInTheDocument();
+  });
 });
