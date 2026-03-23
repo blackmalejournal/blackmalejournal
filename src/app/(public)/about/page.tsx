@@ -158,7 +158,7 @@ export default function AboutPage() {
               Lens I
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", healthTheme.accentText)}>
-              Health
+              Health/Wellness
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
               The body is the first site of sovereignty. This lens covers
@@ -175,7 +175,7 @@ export default function AboutPage() {
               Lens II
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", politicsTheme.accentText)}>
-              Politics
+              Politics/Law
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
               Power does not wait for you to understand it. This lens examines
@@ -192,7 +192,7 @@ export default function AboutPage() {
               Lens III
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", cultureTheme.accentText)}>
-              Culture
+              Culture/Ideology
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
               Culture is where a people define themselves. This lens covers ideology,
@@ -206,7 +206,7 @@ export default function AboutPage() {
               Lens IV
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", entertainmentTheme.accentText)}>
-              Entertainment
+              Entertainment/Technology
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
               Music, film, sports, and technology — the industries that both represent
@@ -220,7 +220,7 @@ export default function AboutPage() {
               Lens V
             </p>
             <h3 className={cn("mb-4 font-display text-3xl uppercase", commemorationTheme.accentText)}>
-              Commemoration
+              Commemorations/Remembrance
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
               Anniversaries, milestones, and the figures who shaped Black male history.

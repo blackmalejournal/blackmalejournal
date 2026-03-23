@@ -117,11 +117,11 @@ export function HandbookForm({ handbook, action }: HandbookFormProps) {
               defaultValue={handbook?.lens ?? 'health'}
               className={selectClass}
             >
-              <option value="health">Health</option>
-              <option value="politics">Politics</option>
-              <option value="culture">Culture</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="commemoration">Commemoration</option>
+              <option value="health">Health/Wellness</option>
+              <option value="politics">Politics/Law</option>
+              <option value="culture">Culture/Ideology</option>
+              <option value="entertainment">Entertainment/Technology</option>
+              <option value="commemoration">Commemorations/Remembrance</option>
             </select>
           </div>
 

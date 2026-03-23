@@ -4,11 +4,11 @@ import { ThreeLenses } from '@/components/home/ThreeLenses';
 describe('ThreeLenses', () => {
   it('renders all five lens cards', () => {
     render(<ThreeLenses />);
-    expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Politics')).toBeInTheDocument();
-    expect(screen.getByText('Culture')).toBeInTheDocument();
-    expect(screen.getByText('Entertainment')).toBeInTheDocument();
-    expect(screen.getByText('Commemoration')).toBeInTheDocument();
+    expect(screen.getByText('Health/Wellness')).toBeInTheDocument();
+    expect(screen.getByText('Politics/Law')).toBeInTheDocument();
+    expect(screen.getByText('Culture/Ideology')).toBeInTheDocument();
+    expect(screen.getByText('Entertainment/Technology')).toBeInTheDocument();
+    expect(screen.getByText('Commemorations/Remembrance')).toBeInTheDocument();
   });
 
   it('links each lens to the correct articles filter', () => {

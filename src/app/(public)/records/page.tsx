@@ -80,11 +80,11 @@ const hubs: RecordsHub[] = [
 ];
 
 const lenses = [
-  { label: "Health",         href: "/articles?lens=health" },
-  { label: "Politics",       href: "/articles?lens=politics" },
-  { label: "Culture",        href: "/articles?lens=culture" },
-  { label: "Entertainment",  href: "/articles?lens=entertainment" },
-  { label: "Commemoration",  href: "/articles?lens=commemoration" },
+  { label: "Health/Wellness",             href: "/articles?lens=health" },
+  { label: "Politics/Law",                href: "/articles?lens=politics" },
+  { label: "Culture/Ideology",            href: "/articles?lens=culture" },
+  { label: "Entertainment/Technology",    href: "/articles?lens=entertainment" },
+  { label: "Commemorations/Remembrance", href: "/articles?lens=commemoration" },
 ];
 
 export default function RecordsPage() {

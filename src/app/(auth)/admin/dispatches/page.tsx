@@ -33,11 +33,11 @@ function StatusBadge({ status }: { status: ContentStatus }) {
 // ── Lens label ──────────────────────────────────────────────────────────────
 
 const lensLabels: Record<string, string> = {
-  health: 'Health',
-  politics: 'Politics',
-  culture: 'Culture',
-  entertainment: 'Entertainment',
-  commemoration: 'Commemoration',
+  health: 'Health/Wellness',
+  politics: 'Politics/Law',
+  culture: 'Culture/Ideology',
+  entertainment: 'Entertainment/Technology',
+  commemoration: 'Commemorations/Remembrance',
 };
 
 // ── Date formatter ──────────────────────────────────────────────────────────
