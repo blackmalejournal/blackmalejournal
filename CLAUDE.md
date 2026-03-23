@@ -61,7 +61,7 @@ All articles and content are categorized under exactly one lens:
 
 ## Architecture Rules
 - App Router only (no pages/ directory)
-- All routes under src/app/(public)/ for public pages — includes articles/, briefings/, blog/, library/, video/, academy/, downloads/, handbooks/, about/, contact/, pricing/, search/, etc.
+- All routes under src/app/(public)/ for public pages — includes articles/, briefings/, blog/, records/, video/, academy/, downloads/, handbooks/, about/, contact/, pricing/, search/, support/, privacy/, terms/, etc.
 - Auth routes under src/app/(auth)/ — portal (members), login, signup, admin panel
 - Admin panel under src/app/(auth)/admin/ — full CRUD for articles, briefings, dispatches, courses, handbooks, downloads, members, subscribers, messages
 - API routes under src/app/api/
@@ -83,6 +83,10 @@ All articles and content are categorized under exactly one lens:
 - `src/styles/brand.css` — CSS custom properties (--bmj-* variables)
 - `tailwind.config.ts` — Tailwind theme extending brand tokens
 - `supabase/config.toml` — Local Supabase configuration
+- `src/lib/seo.ts` — SEO helpers (SITE_URL, structured data builders)
+- `src/lib/email.ts` — Transactional email via Resend
+- `src/lib/rate-limit.ts` — Request rate limiter for API routes
+- `src/lib/storage-assets.ts` — Supabase Storage asset URL helpers
 
 ## Code Style
 - Use TypeScript strict mode
@@ -121,7 +125,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run seeds: `npx tsx scripts/seed-all.ts`
 
 ## Testing
-- Run `npm test` — Jest with jsdom (72 test files)
+- Run `npm test` — Jest with jsdom (109 test files)
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
@@ -149,6 +153,18 @@ BMJ currently renders from its local brand tokens:
 BMJ has no runtime dependency on any external shared token package. Do not replace BMJ imports with a shared token package unless a future migration is explicitly approved and verified against the brand invariants.
 
 `docs/design-system-consolidation.md` is a historical ADR describing a superseded migration proposal. It does not describe the current application wiring.
+
+## Route Rename Checklist
+When renaming a public route (e.g., /library → /records), update all 5 locations:
+1. `src/app/(public)/<old>/` → rename directory to `<new>/`
+2. `src/lib/nav.ts` — update HEADER_NAV_LINKS label + href
+3. `src/app/sitemap.ts` — update static URL entry
+4. `src/app/not-found.tsx` — update fallback link if it points to the route
+5. `tests/` — grep for old label text and old href strings in component/nav/sitemap tests
+
+## Gotchas
+- After renaming any `src/app/` directory, run `rm -rf .next` before `npx tsc --noEmit` — stale type artifacts in `.next/types/validator.ts` will report `Cannot find module` for the old path.
+- On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
 
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md

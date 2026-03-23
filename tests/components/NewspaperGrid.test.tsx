@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
 
-const makeArticle = (slug: string, title: string, lens: 'health' | 'philosophy' | 'politics' = 'health') => ({
+const makeArticle = (slug: string, title: string, lens: 'health' | 'politics' | 'culture' | 'entertainment' | 'commemoration' = 'health') => ({
   slug,
   title,
   excerpt: `Excerpt for ${title}`,
@@ -41,10 +41,10 @@ describe('NewspaperGrid', () => {
   it('shows lens badges', () => {
     const articles = [
       makeArticle('lead', 'Lead', 'health'),
-      makeArticle('second', 'Second', 'philosophy'),
+      makeArticle('second', 'Second', 'culture'),
     ];
     render(<NewspaperGrid articles={articles} />);
     expect(screen.getByText('Health')).toBeInTheDocument();
-    expect(screen.getByText('Philosophy')).toBeInTheDocument();
+    expect(screen.getByText('Culture')).toBeInTheDocument();
   });
 });

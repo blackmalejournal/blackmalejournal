@@ -5,7 +5,7 @@ const mockDispatch: Dispatch = {
   id: 'dsp-abc-123',
   title: 'Test Dispatch Title',
   slug: 'test-dispatch-title',
-  lens: 'philosophy',
+  lens: 'culture',
   excerpt: 'A short excerpt.',
   body: 'Full dispatch body content here.',
   status: 'published',

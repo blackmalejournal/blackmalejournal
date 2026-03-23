@@ -17,7 +17,7 @@ describe('QuoteCard', () => {
     const { container, rerender } = render(<QuoteCard {...defaultProps} lens="politics" />);
     expect(container.firstChild).toHaveClass('bg-bmj-red/10');
 
-    rerender(<QuoteCard {...defaultProps} lens="philosophy" />);
+    rerender(<QuoteCard {...defaultProps} lens="culture" />);
     expect(container.firstChild).toHaveClass('bg-bmj-tan/10');
   });
 

@@ -6,7 +6,7 @@
 
 // ── Scalar enums ──────────────────────────────────────────────────────────────
 
-export type Lens = 'health' | 'philosophy' | 'politics';
+export type Lens = 'health' | 'politics' | 'culture' | 'entertainment' | 'commemoration';
 export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
 export type AccessTier = 'free' | 'basic' | 'premium';
 export type MemberTier = 'free' | 'basic' | 'premium';

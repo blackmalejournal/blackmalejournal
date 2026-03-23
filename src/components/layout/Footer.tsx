@@ -39,7 +39,7 @@ export function Footer() {
             </div>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
               Independent media house. Revolutionary masculinist platform covering
-              health, philosophy, and politics for Black men.
+              five lenses of Black male life.
             </p>
 
             {/* Patreon — patronage channel */}

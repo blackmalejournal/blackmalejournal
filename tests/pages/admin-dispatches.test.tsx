@@ -6,7 +6,7 @@ const mockDispatches: Dispatch[] = [
     id: 'dsp-1',
     title: 'The State of Black Fatherhood',
     slug: 'the-state-of-black-fatherhood',
-    lens: 'philosophy',
+    lens: 'culture',
     excerpt: 'Examining fatherhood through a revolutionary lens.',
     body: 'Full body text.',
     status: 'published',
@@ -96,7 +96,7 @@ describe('DispatchesAdminPage', () => {
 
   it('renders metadata with lens and date', async () => {
     await renderPage();
-    expect(screen.getByText(/Philosophy/)).toBeInTheDocument();
+    expect(screen.getByText(/Culture/i)).toBeInTheDocument();
     expect(screen.getByText(/Health/)).toBeInTheDocument();
   });
 });

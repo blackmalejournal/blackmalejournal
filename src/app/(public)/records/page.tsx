@@ -44,11 +44,11 @@ const hubs: RecordsHub[] = [
   },
   {
     icon: FileText,
-    lens: "philosophy",
+    lens: "culture",
     label: "Long-Form Analysis",
     title: "Articles",
     description:
-      "Long-form analysis across three lenses: health, philosophy, and politics.",
+      "Long-form analysis across five lenses of Black male life.",
     href: "/articles",
   },
   {
@@ -71,7 +71,7 @@ const hubs: RecordsHub[] = [
   },
   {
     icon: Play,
-    lens: "philosophy",
+    lens: "culture",
     label: "Documentary Video",
     title: "Video",
     description: "Documentary-style video content. Watch. Learn. Build.",
@@ -80,9 +80,11 @@ const hubs: RecordsHub[] = [
 ];
 
 const lenses = [
-  { label: "Health", href: "/articles?lens=health" },
-  { label: "Philosophy", href: "/articles?lens=philosophy" },
-  { label: "Politics", href: "/articles?lens=politics" },
+  { label: "Health",         href: "/articles?lens=health" },
+  { label: "Politics",       href: "/articles?lens=politics" },
+  { label: "Culture",        href: "/articles?lens=culture" },
+  { label: "Entertainment",  href: "/articles?lens=entertainment" },
+  { label: "Commemoration",  href: "/articles?lens=commemoration" },
 ];
 
 export default function RecordsPage() {

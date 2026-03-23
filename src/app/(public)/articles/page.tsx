@@ -16,21 +16,21 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Articles',
   description:
-    'Long-form articles on health, philosophy, and politics for Black men.',
+    'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
   openGraph: {
     title: 'Articles',
     description:
-      'Long-form articles on health, philosophy, and politics for Black men.',
+      'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Articles',
     description:
-      'Long-form articles on health, philosophy, and politics for Black men.',
+      'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
   },
 };
 
-const VALID_LENSES = new Set<string>(['health', 'philosophy', 'politics']);
+const VALID_LENSES = new Set<string>(['health', 'politics', 'culture', 'entertainment', 'commemoration']);
 const PAGE_SIZE = 9;
 
 interface ArticlesPageProps {
@@ -94,7 +94,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
       <PageHeader
         label="The Archive"
         title="Articles"
-        description="Long-form argument across health, philosophy, and politics. This is the slow record of the publication."
+        description="Long-form argument across five lenses. This is the slow record of the publication."
         dividerClassName="mb-8"
       />
 

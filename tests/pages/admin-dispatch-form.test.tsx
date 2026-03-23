@@ -17,7 +17,7 @@ const mockDispatch: Dispatch = {
   id: 'dsp-abc-123',
   title: 'Test Dispatch Title',
   slug: 'test-dispatch-title',
-  lens: 'philosophy',
+  lens: 'culture',
   excerpt: 'A short excerpt.',
   body: 'Full dispatch body content here.',
   status: 'published',
@@ -65,7 +65,7 @@ describe('DispatchForm', () => {
 
     expect(screen.getByLabelText(/title/i)).toHaveValue('Test Dispatch Title');
     expect(screen.getByLabelText(/slug/i)).toHaveValue('test-dispatch-title');
-    expect(screen.getByLabelText(/lens/i)).toHaveValue('philosophy');
+    expect(screen.getByLabelText(/lens/i)).toHaveValue('culture');
     expect(screen.getByLabelText(/excerpt/i)).toHaveValue('A short excerpt.');
     expect(screen.getByLabelText(/body/i)).toHaveValue(
       'Full dispatch body content here.',

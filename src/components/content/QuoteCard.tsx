@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { getLensTheme } from "@/lib/lens-theme";
 import { cn } from "@/lib/utils";
+import type { Lens } from "@/lib/supabase/types";
 
 interface QuoteCardProps {
   quote: string
   attribution: string
   portraitUrl?: string
-  lens?: "health" | "philosophy" | "politics"
+  lens?: Lens
 }
 
 export default function QuoteCard({

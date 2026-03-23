@@ -3,12 +3,13 @@ import Image from "next/image";
 import { LensBadge } from "@/components/brand/LensBadge";
 import { getLensTheme } from "@/lib/lens-theme";
 import { cn } from "@/lib/utils";
+import type { Lens } from "@/lib/supabase/types";
 
 interface Article {
   slug: string;
   title: string;
   excerpt: string | null;
-  lens: "health" | "philosophy" | "politics";
+  lens: Lens;
   cover_image: string | null;
   published_at: string | null;
 }

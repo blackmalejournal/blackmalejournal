@@ -11,7 +11,7 @@ import { requireAdminActor } from '@/lib/admin-auth';
 const articleSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   slug: z.string().optional(),
-  lens: z.enum(['health', 'philosophy', 'politics']),
+  lens: z.enum(['health', 'politics', 'culture', 'entertainment', 'commemoration']),
   tags: z.string().default(''),
   excerpt: z.string().max(500).default(''),
   body: z.string().min(1, 'Body is required'),

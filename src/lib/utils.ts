@@ -69,8 +69,10 @@ export function getLensColor(lens: Lens): LensColors {
 export function getLensEmoji(lens: Lens): string {
   const map: Record<Lens, string> = {
     health: '🫀',
-    philosophy: '🩷',
     politics: '🖤',
+    culture: '🩷',
+    entertainment: '🎬',
+    commemoration: '🕯️',
   };
   return map[lens];
 }

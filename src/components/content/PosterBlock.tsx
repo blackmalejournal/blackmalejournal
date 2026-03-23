@@ -1,20 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
 import { BrandMark } from "@/components/brand/BrandMark"
+import { getLensTheme } from "@/lib/lens-theme"
+import type { Lens } from "@/lib/supabase/types"
 
 interface PosterBlockProps {
   title: string
-  lens: "health" | "philosophy" | "politics"
+  lens: Lens
   excerpt?: string
   backgroundImageUrl?: string
   linkUrl: string
 }
-
-const lensColors = {
-  health: "text-bmj-amber",
-  philosophy: "text-bmj-tan",
-  politics: "text-bmj-red",
-} as const
 
 export default function PosterBlock({
   title,
@@ -23,6 +19,7 @@ export default function PosterBlock({
   backgroundImageUrl,
   linkUrl,
 }: PosterBlockProps) {
+  const theme = getLensTheme(lens);
   return (
     <Link
       href={linkUrl}
@@ -48,7 +45,7 @@ export default function PosterBlock({
         {/* Content overlay */}
         <div className="relative z-10 w-full p-6 sm:p-10">
           <span
-            className={`font-label text-xs uppercase tracking-widest ${lensColors[lens]}`}
+            className={`font-label text-xs uppercase tracking-widest ${theme.accentText}`}
           >
             {lens}
           </span>

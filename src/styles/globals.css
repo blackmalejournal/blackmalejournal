@@ -132,12 +132,20 @@
     color: var(--bmj-amber);
   }
 
-  .lens-philosophy {
+  .lens-culture {
     color: var(--bmj-tan);
   }
 
   .lens-politics {
     color: var(--bmj-red);
+  }
+
+  .lens-entertainment {
+    color: var(--bmj-purple);
+  }
+
+  .lens-commemoration {
+    color: var(--bmj-gold);
   }
 }
 
