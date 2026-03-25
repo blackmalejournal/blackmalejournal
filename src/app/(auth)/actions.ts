@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import type { PaidMemberTier } from '@/lib/supabase/types';
-import { normalizeInternalPath, withQuery } from '@/lib/paths';
+import { PATHS, normalizeInternalPath, withQuery } from '@/lib/paths';
 import { resolveSiteUrl } from '@/lib/site-url';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -10,7 +10,7 @@ import { revalidatePath } from 'next/cache';
 function resolveAuthRedirect(formData: FormData): string {
   return normalizeInternalPath(
     (formData.get('next') as string | null) ?? (formData.get('redirect') as string | null),
-    '/portal',
+    PATHS.PORTAL,
   );
 }
 
@@ -29,9 +29,9 @@ export async function login(formData: FormData) {
   });
 
   if (error) {
-    redirect(withQuery('/login', {
+    redirect(withQuery(PATHS.LOGIN, {
       error: error.message,
-      next: nextHref !== '/portal' ? nextHref : undefined,
+      next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
     }));
   }
 
@@ -45,7 +45,7 @@ export async function signup(formData: FormData) {
   const password = formData.get('password') as string;
   const displayName = formData.get('displayName') as string;
   const selectedTier = resolveSelectedTier(formData);
-  const nextHref = normalizeInternalPath(formData.get('next') as string | null, '/portal');
+  const nextHref = normalizeInternalPath(formData.get('next') as string | null, PATHS.PORTAL);
 
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -56,10 +56,10 @@ export async function signup(formData: FormData) {
   });
 
   if (error) {
-    redirect(withQuery('/signup', {
+    redirect(withQuery(PATHS.SIGNUP, {
       error: error.message,
       tier: selectedTier !== 'free' ? selectedTier : undefined,
-      next: nextHref !== '/portal' ? nextHref : undefined,
+      next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
     }));
   }
 
@@ -75,23 +75,23 @@ export async function signup(formData: FormData) {
     });
 
     if (memberInsertError) {
-      redirect(withQuery('/signup', {
+      redirect(withQuery(PATHS.SIGNUP, {
         error: memberInsertError.message,
         tier: selectedTier !== 'free' ? selectedTier : undefined,
-        next: nextHref !== '/portal' ? nextHref : undefined,
+        next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
       }));
     }
   }
 
   revalidatePath('/', 'layout');
   if (selectedTier !== 'free') {
-    redirect(withQuery('/portal/settings', {
+    redirect(withQuery(PATHS.PORTAL_SETTINGS, {
       upgrade: selectedTier,
-      next: nextHref !== '/portal' ? nextHref : undefined,
+      next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
     }));
   }
 
-  redirect('/portal');
+  redirect(PATHS.PORTAL);
 }
 
 export async function signInWithMagicLink(formData: FormData) {
@@ -106,15 +106,15 @@ export async function signInWithMagicLink(formData: FormData) {
   });
 
   if (error) {
-    redirect(withQuery('/login', {
+    redirect(withQuery(PATHS.LOGIN, {
       error: error.message,
-      next: nextHref !== '/portal' ? nextHref : undefined,
+      next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
     }));
   }
 
-  redirect(withQuery('/login', {
+  redirect(withQuery(PATHS.LOGIN, {
     message: 'Check your email for the magic link',
-    next: nextHref !== '/portal' ? nextHref : undefined,
+    next: nextHref !== PATHS.PORTAL ? nextHref : undefined,
   }));
 }
 
@@ -134,11 +134,11 @@ export async function updateProfile(formData: FormData) {
   });
 
   if (error) {
-    redirect('/portal/settings?error=' + encodeURIComponent(error.message));
+    redirect(`${PATHS.PORTAL_SETTINGS}?error=` + encodeURIComponent(error.message));
   }
 
   revalidatePath('/', 'layout');
-  redirect('/portal/settings?message=Profile updated');
+  redirect(`${PATHS.PORTAL_SETTINGS}?message=Profile updated`);
 }
 
 export async function updatePassword(formData: FormData) {
@@ -148,8 +148,8 @@ export async function updatePassword(formData: FormData) {
   const { error } = await supabase.auth.updateUser({ password });
 
   if (error) {
-    redirect('/portal/settings?error=' + encodeURIComponent(error.message));
+    redirect(`${PATHS.PORTAL_SETTINGS}?error=` + encodeURIComponent(error.message));
   }
 
-  redirect('/portal/settings?message=Password updated');
+  redirect(`${PATHS.PORTAL_SETTINGS}?message=Password updated`);
 }

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { requireAdminActor } from '@/lib/admin-auth';
 import { updateContactSubmission } from '@/lib/supabase/admin-queries';
-import { normalizeInternalPath } from '@/lib/paths';
+import { PATHS, normalizeInternalPath } from '@/lib/paths';
 
 const messageUpdateSchema = z.object({
   id: z.string().min(1, 'Message ID is required'),
@@ -20,8 +20,8 @@ export async function updateContactSubmissionAction(formData: FormData): Promise
   const parsed = messageUpdateSchema.safeParse(raw);
 
   const redirectTo = normalizeInternalPath(
-    (formData.get('returnTo') as string | null) ?? '/admin/messages',
-    '/admin/messages',
+    (formData.get('returnTo') as string | null) ?? PATHS.ADMIN_MESSAGES,
+    PATHS.ADMIN_MESSAGES,
   );
 
   if (!parsed.success) {
@@ -40,6 +40,6 @@ export async function updateContactSubmissionAction(formData: FormData): Promise
     redirect(`${redirectTo}?error=Failed+to+update+message`);
   }
 
-  revalidatePath('/admin/messages');
+  revalidatePath(PATHS.ADMIN_MESSAGES);
   redirect(`${redirectTo}?message=Message+updated`);
 }

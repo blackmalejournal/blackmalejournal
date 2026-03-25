@@ -1,3 +1,5 @@
+import { PATHS } from '@/lib/paths';
+
 export type NavLink = {
   label: string;
   href: string;
@@ -8,11 +10,11 @@ export type NavLink = {
  * Auth CTAs (Log In / Join) are rendered separately by the Navbar component.
  */
 export const HEADER_NAV_LINKS: NavLink[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Academy', href: '/academy' },
-  { label: 'Downloads', href: '/downloads' },
-  { label: 'Records', href: '/records' },
+  { label: 'Home', href: PATHS.HOME },
+  { label: 'About', href: PATHS.ABOUT },
+  { label: 'Academy', href: PATHS.ACADEMY },
+  { label: 'Downloads', href: PATHS.DOWNLOADS },
+  { label: 'Records', href: PATHS.RECORDS },
 ];
 
 /**
@@ -20,5 +22,5 @@ export const HEADER_NAV_LINKS: NavLink[] = [
  */
 export const FOOTER_NAV_LINKS: NavLink[] = [
   ...HEADER_NAV_LINKS,
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact', href: PATHS.CONTACT },
 ];

@@ -9,7 +9,7 @@ import {
   getAdminMemberById,
   updateAdminMember,
 } from '@/lib/supabase/admin-queries';
-import { normalizeInternalPath } from '@/lib/paths';
+import { PATHS, normalizeInternalPath } from '@/lib/paths';
 
 const memberUpdateSchema = z.object({
   memberId: z.string().min(1, 'Member ID is required'),
@@ -24,13 +24,13 @@ export async function updateMemberAction(formData: FormData): Promise<void> {
   const parsed = memberUpdateSchema.safeParse(raw);
 
   if (!parsed.success) {
-    const returnTo = normalizeInternalPath(formData.get('returnTo') as string | null, '/admin/members');
+    const returnTo = normalizeInternalPath(formData.get('returnTo') as string | null, PATHS.ADMIN_MEMBERS);
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
     redirect(`${returnTo}?error=${encodeURIComponent(firstError)}`);
   }
 
   const { memberId, tier, role, returnTo } = parsed.data;
-  const redirectTo = normalizeInternalPath(returnTo, `/admin/members/${memberId}`);
+  const redirectTo = normalizeInternalPath(returnTo, `${PATHS.ADMIN_MEMBERS}/${memberId}`);
   const existing = await getAdminMemberById(memberId);
 
   if (!existing) {
@@ -53,7 +53,7 @@ export async function updateMemberAction(formData: FormData): Promise<void> {
     redirect(`${redirectTo}?error=Failed+to+update+member`);
   }
 
-  revalidatePath('/admin/members');
-  revalidatePath(`/admin/members/${memberId}`);
+  revalidatePath(PATHS.ADMIN_MEMBERS);
+  revalidatePath(`${PATHS.ADMIN_MEMBERS}/${memberId}`);
   redirect(`${redirectTo}?message=Member+updated`);
 }

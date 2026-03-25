@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { PATHS } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: '404 — Page Not Found',
@@ -31,11 +32,11 @@ export default function NotFound() {
       </p>
 
       <div className="flex flex-col items-center gap-4 sm:flex-row">
-        <Link href="/" className="btn-primary btn-lg">
+        <Link href={PATHS.HOME} className="btn-primary btn-lg">
           Return to the Front Page
         </Link>
         <Link
-          href="/records"
+          href={PATHS.RECORDS}
           className="inline-block border border-bmj-tan/40 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Browse the Records

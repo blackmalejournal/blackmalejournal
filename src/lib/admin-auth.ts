@@ -1,3 +1,4 @@
+import { PATHS } from '@/lib/paths';
 import { redirect } from 'next/navigation';
 import type { Member, MemberRole } from '@/lib/supabase/types';
 import { createClient } from '@/lib/supabase/server';
@@ -27,11 +28,11 @@ export async function requireAdminActor(
   const actor = await getAdminActor(allowedRoles);
 
   if (!actor.userId) {
-    redirect('/login?redirect=/admin');
+    redirect(`${PATHS.LOGIN}?redirect=${PATHS.ADMIN}`);
   }
 
   if (!actor.member) {
-    redirect('/portal?error=unauthorized');
+    redirect(`${PATHS.PORTAL}?error=unauthorized`);
   }
 
   return actor as { userId: string; member: Member };

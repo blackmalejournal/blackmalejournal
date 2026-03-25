@@ -1,9 +1,10 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+import { PATHS } from '@/lib/paths';
 
-const PROTECTED_PREFIXES = ['/portal', '/admin'];
-const ADMIN_PREFIXES = ['/admin'];
-const AUTH_PAGES = ['/login', '/signup'];
+const PROTECTED_PREFIXES: string[] = [PATHS.PORTAL, PATHS.ADMIN];
+const ADMIN_PREFIXES: string[] = [PATHS.ADMIN];
+const AUTH_PAGES: string[] = [PATHS.LOGIN, PATHS.SIGNUP];
 
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -39,7 +40,7 @@ export async function proxy(request: NextRequest) {
   const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
   if (isProtected && !user) {
     const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = '/login';
+    loginUrl.pathname = PATHS.LOGIN;
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
   }
@@ -55,7 +56,7 @@ export async function proxy(request: NextRequest) {
 
     if (!member || (member.role !== 'admin' && member.role !== 'editor')) {
       const portalUrl = request.nextUrl.clone();
-      portalUrl.pathname = '/portal';
+      portalUrl.pathname = PATHS.PORTAL;
       portalUrl.searchParams.set('error', 'unauthorized');
       return NextResponse.redirect(portalUrl);
     }
@@ -64,7 +65,7 @@ export async function proxy(request: NextRequest) {
   // Redirect authenticated users away from auth pages
   if (user && AUTH_PAGES.includes(pathname)) {
     const portalUrl = request.nextUrl.clone();
-    portalUrl.pathname = '/portal';
+    portalUrl.pathname = PATHS.PORTAL;
     return NextResponse.redirect(portalUrl);
   }
 
