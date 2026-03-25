@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Article } from '@/lib/supabase/types';
+import { PublishScheduleField } from '@/components/admin/PublishScheduleField';
 import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
@@ -160,6 +161,12 @@ export function ArticleForm({ article, action }: ArticleFormProps) {
             </select>
           </div>
         </div>
+
+        <PublishScheduleField
+          defaultValue={article?.published_at}
+          inputClass={inputClass}
+          labelClass={labelClass}
+        />
 
         {/* Tags (full width) */}
         <div>

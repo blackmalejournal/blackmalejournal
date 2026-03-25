@@ -5,6 +5,7 @@ Use this for tier changes, billing support, and paid-access problems.
 ## Member Lookup
 
 1. Go to `/admin/members`.
+2. Check the billing-exceptions card first if the issue is a paid-access mismatch.
 2. Search by email.
 3. Open the member detail page.
 

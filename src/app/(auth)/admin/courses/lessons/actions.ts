@@ -1,5 +1,7 @@
 'use server';
 
+import { PATHS } from '@/lib/paths';
+
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -31,7 +33,7 @@ export async function createLessonAction(formData: FormData): Promise<void> {
   if (!parsed.success) {
     const courseId = formData.get('course_id') as string;
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    redirect(`/admin/courses/${courseId}/lessons/new?error=${encodeURIComponent(firstError)}`);
+    redirect(`${PATHS.ADMIN_COURSES}/${courseId}/lessons/new?error=${encodeURIComponent(firstError)}`);
   }
 
   const { course_id, title, slug, order_number, body, video_url, duration, published } = parsed.data;
@@ -47,11 +49,11 @@ export async function createLessonAction(formData: FormData): Promise<void> {
   });
 
   if (!lesson) {
-    redirect(`/admin/courses/${course_id}/lessons/new?error=Failed+to+create+lesson`);
+    redirect(`${PATHS.ADMIN_COURSES}/${course_id}/lessons/new?error=Failed+to+create+lesson`);
   }
 
-  revalidatePath(`/admin/courses/${course_id}/edit`);
-  redirect(`/admin/courses/${course_id}/lessons/${lesson.id}/edit?message=Lesson+created`);
+  revalidatePath(`${PATHS.ADMIN_COURSES}/${course_id}/edit`);
+  redirect(`${PATHS.ADMIN_COURSES}/${course_id}/lessons/${lesson.id}/edit?message=Lesson+created`);
 }
 
 export async function updateLessonAction(formData: FormData): Promise<void> {
@@ -59,14 +61,14 @@ export async function updateLessonAction(formData: FormData): Promise<void> {
   const id = formData.get('id') as string;
 
   if (!id) {
-    redirect('/admin/courses?error=Lesson+ID+is+required');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Lesson+ID+is+required`);
   }
 
   const parsed = lessonSchema.safeParse(Object.fromEntries(formData.entries()));
   if (!parsed.success) {
     const courseId = formData.get('course_id') as string;
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    redirect(`/admin/courses/${courseId}/lessons/${id}/edit?error=${encodeURIComponent(firstError)}`);
+    redirect(`${PATHS.ADMIN_COURSES}/${courseId}/lessons/${id}/edit?error=${encodeURIComponent(firstError)}`);
   }
 
   const { course_id, title, slug, order_number, body, video_url, duration, published } = parsed.data;
@@ -81,12 +83,12 @@ export async function updateLessonAction(formData: FormData): Promise<void> {
   });
 
   if (!lesson) {
-    redirect(`/admin/courses/${course_id}/lessons/${id}/edit?error=Failed+to+update+lesson`);
+    redirect(`${PATHS.ADMIN_COURSES}/${course_id}/lessons/${id}/edit?error=Failed+to+update+lesson`);
   }
 
-  revalidatePath(`/admin/courses/${course_id}/edit`);
-  revalidatePath(`/admin/courses/${course_id}/lessons/${id}/edit`);
-  redirect(`/admin/courses/${course_id}/lessons/${id}/edit?message=Lesson+updated`);
+  revalidatePath(`${PATHS.ADMIN_COURSES}/${course_id}/edit`);
+  revalidatePath(`${PATHS.ADMIN_COURSES}/${course_id}/lessons/${id}/edit`);
+  redirect(`${PATHS.ADMIN_COURSES}/${course_id}/lessons/${id}/edit?message=Lesson+updated`);
 }
 
 export async function deleteLessonAction(formData: FormData): Promise<void> {
@@ -95,24 +97,24 @@ export async function deleteLessonAction(formData: FormData): Promise<void> {
   const courseId = formData.get('course_id') as string;
 
   if (!id || !courseId) {
-    redirect('/admin/courses?error=Lesson+ID+is+required');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Lesson+ID+is+required`);
   }
 
   const existing = await getLessonById(id);
   if (!existing) {
-    redirect(`/admin/courses/${courseId}/edit?error=Lesson+not+found`);
+    redirect(`${PATHS.ADMIN_COURSES}/${courseId}/edit?error=Lesson+not+found`);
   }
 
   const course = await getCourseById(courseId);
   if (!course) {
-    redirect('/admin/courses?error=Course+not+found');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Course+not+found`);
   }
 
   const deleted = await deleteLesson(id);
   if (!deleted) {
-    redirect(`/admin/courses/${courseId}/lessons/${id}/edit?error=Failed+to+delete+lesson`);
+    redirect(`${PATHS.ADMIN_COURSES}/${courseId}/lessons/${id}/edit?error=Failed+to+delete+lesson`);
   }
 
-  revalidatePath(`/admin/courses/${courseId}/edit`);
-  redirect(`/admin/courses/${courseId}/edit?message=Lesson+deleted`);
+  revalidatePath(`${PATHS.ADMIN_COURSES}/${courseId}/edit`);
+  redirect(`${PATHS.ADMIN_COURSES}/${courseId}/edit?message=Lesson+deleted`);
 }

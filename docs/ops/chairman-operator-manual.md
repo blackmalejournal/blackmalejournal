@@ -12,6 +12,14 @@ This is the top-level operating guide for BMJ after handoff. Use the SOPs below 
 - Subscribers: `/admin/subscribers`
 - Courses: `/admin/courses`
 
+## Start Of Day
+
+1. Open `/admin` first.
+2. Read the command-center cards for inbox pressure, editorial backlog, scheduled publishing, paying members, and subscriber motion.
+3. Resolve any attention-queue item before creating new content.
+4. Use the linked desk route to handle the actual work, including bulk desk actions when the same update applies to multiple records.
+5. On content edit routes, use the owner audit panel to verify publish timing, recent operator history, blockers, and public or protected route targets before leaving the record.
+
 ## Core Operator Workflows
 
 - Publishing and content updates: [publishing-sop.md](publishing-sop.md)
@@ -30,7 +38,8 @@ This is the top-level operating guide for BMJ after handoff. Use the SOPs below 
 
 ## If Something Looks Wrong
 
-1. Check `/admin/messages` for recent contact issues.
-2. Check the affected member in `/admin/members/[id]`.
-3. Verify the environment and webhook configuration against [env-audit.md](env-audit.md).
-4. If the issue involves checkout or billing, use [member-billing-sop.md](member-billing-sop.md).
+1. Check `/admin` for billing exceptions, stale editorial items, and overdue inbox pressure.
+2. Check `/admin/messages` for recent contact issues.
+3. Check the affected member in `/admin/members/[id]`.
+4. Verify the environment and webhook configuration against [env-audit.md](env-audit.md).
+5. If the issue involves checkout or billing, use [member-billing-sop.md](member-billing-sop.md).

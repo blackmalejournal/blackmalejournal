@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllSubscribers, getSubscriberCounts } from '@/lib/supabase/admin-queries';
+import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
+import {
+  getAllSubscribers,
+  getSubscriberAdminInsights,
+  getSubscriberCounts,
+} from '@/lib/supabase/admin-queries';
 import { withQuery } from '@/lib/paths';
 
 export const metadata: Metadata = {
@@ -8,26 +13,19 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// ── Date formatter ────────────────────────────────────────────────────────────
-
 function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-US', {
+  return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   });
 }
 
-// ── Filter tabs ───────────────────────────────────────────────────────────────
-
 const FILTER_TABS = [
   { label: 'All', value: undefined },
   { label: 'Active', value: 'active' },
   { label: 'Unsubscribed', value: 'unsubscribed' },
 ] as const;
-
-// ── Page ──────────────────────────────────────────────────────────────────────
 
 interface SubscribersAdminPageProps {
   searchParams: Promise<{ filter?: string; q?: string }>;
@@ -41,25 +39,96 @@ export default async function SubscribersAdminPage({
   const activeFilter =
     filter === 'active' ? true : filter === 'unsubscribed' ? false : undefined;
 
-  const [subscribers, counts] = await Promise.all([
+  const [subscribers, counts, insights] = await Promise.all([
     getAllSubscribers({
       active: activeFilter,
       query: q,
     }),
     getSubscriberCounts(),
+    getSubscriberAdminInsights(),
   ]);
 
   return (
     <div>
-      {/* Page header */}
       <div>
         <h1 className="font-display text-3xl tracking-widest text-bmj-white">
           SUBSCRIBERS
         </h1>
         <p className="mt-1 font-mono text-sm text-bmj-tan">
-          {subscribers.length}{' '}
-          {subscribers.length === 1 ? 'subscriber' : 'subscribers'}
+          {subscribers.length} {subscribers.length === 1 ? 'subscriber' : 'subscribers'}
         </p>
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <AdminMetricCard
+          label="Active Base"
+          value={insights.active}
+          helper={`${insights.total} total recorded subscribers`}
+          tone="success"
+        />
+        <AdminMetricCard
+          label="Net 30d"
+          value={`${insights.netPast30Days >= 0 ? '+' : ''}${insights.netPast30Days}`}
+          helper={`${insights.newPast30Days} new · ${insights.churnPast30Days} churn`}
+          tone={insights.netPast30Days < 0 ? 'warning' : 'default'}
+        />
+        <AdminMetricCard
+          label="Churn 30d"
+          value={insights.churnPast30Days}
+          helper="Recent unsubscribe count"
+          tone={insights.churnPast30Days > 0 ? 'warning' : 'default'}
+        />
+        <AdminMetricCard
+          label="Unsubscribed"
+          value={insights.unsubscribed}
+          helper="Inactive records retained for ops history"
+        />
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+        <section className="border border-bmj-tan/20 bg-bmj-brown p-6">
+          <h2 className="font-display text-xl tracking-widest text-bmj-white">
+            GROWTH SNAPSHOT
+          </h2>
+          <p className="mt-2 font-body text-sm text-bmj-cream/80">
+            BMJ added {insights.newPast30Days} subscribers and lost {insights.churnPast30Days}{' '}
+            over the last 30 days, for a net movement of{' '}
+            {insights.netPast30Days >= 0 ? '+' : ''}
+            {insights.netPast30Days}.
+          </p>
+        </section>
+
+        <section className="border border-bmj-tan/20 bg-bmj-brown p-6">
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="font-display text-xl tracking-widest text-bmj-white">
+              TOP SOURCES
+            </h2>
+            <span className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+              Active audience
+            </span>
+          </div>
+          {insights.topSources.length === 0 ? (
+            <p className="mt-4 font-body text-sm text-bmj-cream/70">
+              Source data is not available yet.
+            </p>
+          ) : (
+            <ul className="mt-4 space-y-3">
+              {insights.topSources.map((source) => (
+                <li
+                  key={source.source}
+                  className="flex items-center justify-between border border-bmj-tan/20 bg-bmj-black/25 px-4 py-3"
+                >
+                  <span className="font-mono text-sm text-bmj-cream">
+                    {source.source}
+                  </span>
+                  <span className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+                    {source.count}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -77,7 +146,6 @@ export default async function SubscribersAdminPage({
         </div>
       </div>
 
-      {/* Filter tabs */}
       <nav
         aria-label="Subscriber filter"
         className="mt-6 flex gap-6 border-b border-bmj-tan/20"
@@ -148,7 +216,6 @@ export default async function SubscribersAdminPage({
         </div>
       </div>
 
-      {/* Subscriber list */}
       <div className="mt-6">
         {subscribers.length === 0 ? (
           <p className="py-12 text-center font-body text-bmj-tan">

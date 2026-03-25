@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Briefing, BriefingSection } from '@/lib/supabase/types';
+import { PublishScheduleField } from '@/components/admin/PublishScheduleField';
 import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
@@ -181,6 +182,12 @@ export function BriefingForm({ briefing, action }: BriefingFormProps) {
             </select>
           </div>
         </div>
+
+        <PublishScheduleField
+          defaultValue={briefing?.published_at}
+          inputClass={inputClass}
+          labelClass={labelClass}
+        />
 
         {/* Cover Image */}
         <div>

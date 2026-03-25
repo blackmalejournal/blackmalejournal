@@ -42,6 +42,7 @@ describe('BriefingForm', () => {
     expect(screen.getByLabelText(/slug/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/access tier/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/status/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
     // Default section
     expect(screen.getByText('Section 1')).toBeInTheDocument();
@@ -73,6 +74,9 @@ describe('BriefingForm', () => {
     expect(screen.getByLabelText(/slug/i)).toHaveValue('weekend-briefing-003');
     expect(screen.getByLabelText(/access tier/i)).toHaveValue('free');
     expect(screen.getByLabelText(/status/i)).toHaveValue('published');
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toHaveValue(
+      '2026-03-15T00:00',
+    );
     expect(screen.getByLabelText(/cover image/i)).toHaveValue(
       'covers/briefing-003.webp',
     );

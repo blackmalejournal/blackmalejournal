@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Handbook } from '@/lib/supabase/types';
+import { PublishScheduleField } from '@/components/admin/PublishScheduleField';
 import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
@@ -160,6 +161,12 @@ export function HandbookForm({ handbook, action }: HandbookFormProps) {
             </select>
           </div>
         </div>
+
+        <PublishScheduleField
+          defaultValue={handbook?.published_at}
+          inputClass={inputClass}
+          labelClass={labelClass}
+        />
 
         {/* Description (full width) with character count */}
         <div>

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import type { Article } from '@/lib/supabase/types';
+import type { AdminActivityLog, Article } from '@/lib/supabase/types';
 
 const mockArticle: Article = {
   id: 'abc-123',
@@ -17,6 +17,22 @@ const mockArticle: Article = {
   published_at: '2026-01-15T00:00:00Z',
   created_at: '2026-01-10T00:00:00Z',
 };
+
+const mockActivity: AdminActivityLog[] = [
+  {
+    id: 'activity-article-1',
+    actor_user_id: 'member-1',
+    actor_email: 'operator@blackmalejournal.com',
+    actor_role: 'admin',
+    entity_type: 'article',
+    entity_id: 'abc-123',
+    entity_title: 'Test Article Title',
+    action: 'updated',
+    summary: 'Updated article "Test Article Title": status review -> published.',
+    metadata: {},
+    created_at: '2026-03-25T08:00:00Z',
+  },
+];
 
 const mockNotFound = jest.fn();
 
@@ -101,6 +117,7 @@ describe('EditArticlePage', () => {
   it('renders "EDIT ARTICLE" heading when article exists', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getArticleById: jest.fn().mockResolvedValue(mockArticle),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/articles/actions', () => ({
       updateArticleAction: jest.fn(),
@@ -122,6 +139,7 @@ describe('EditArticlePage', () => {
   it('shows article ID', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getArticleById: jest.fn().mockResolvedValue(mockArticle),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/articles/actions', () => ({
       updateArticleAction: jest.fn(),
@@ -141,6 +159,7 @@ describe('EditArticlePage', () => {
   it('renders ArticleForm in edit mode with "Update Article" button', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getArticleById: jest.fn().mockResolvedValue(mockArticle),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/articles/actions', () => ({
       updateArticleAction: jest.fn(),
@@ -159,11 +178,19 @@ describe('EditArticlePage', () => {
     expect(
       screen.getByRole('button', { name: /update article/i }),
     ).toBeInTheDocument();
+    expect(screen.getByText('Owner Audit')).toBeInTheDocument();
+    expect(screen.getByText('Recent Activity')).toBeInTheDocument();
+    expect(screen.getByText(mockActivity[0].summary)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /public article/i })).toHaveAttribute(
+      'href',
+      '/articles/test-article-title',
+    );
   });
 
   it('calls notFound() when article is null', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getArticleById: jest.fn().mockResolvedValue(null),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue([]),
     }));
     jest.mock('@/app/(auth)/admin/articles/actions', () => ({
       updateArticleAction: jest.fn(),

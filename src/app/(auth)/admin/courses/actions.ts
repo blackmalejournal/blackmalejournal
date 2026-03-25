@@ -1,5 +1,7 @@
 'use server';
 
+import { PATHS } from '@/lib/paths';
+
 import { z } from 'zod';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
@@ -23,7 +25,7 @@ export async function createCourseAction(formData: FormData): Promise<void> {
 
   if (!parsed.success) {
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    redirect(`/admin/courses/new?error=${encodeURIComponent(firstError)}`);
+    redirect(`${PATHS.ADMIN_COURSES}/new?error=${encodeURIComponent(firstError)}`);
   }
 
   const { title, slug, description, category, access_tier, published, cover_image } = parsed.data;
@@ -38,11 +40,11 @@ export async function createCourseAction(formData: FormData): Promise<void> {
   });
 
   if (!course) {
-    redirect('/admin/courses/new?error=Failed+to+create+course');
+    redirect(`${PATHS.ADMIN_COURSES}/new?error=Failed+to+create+course`);
   }
 
-  revalidatePath('/admin/courses');
-  redirect(`/admin/courses/${course.id}/edit?message=Course+created`);
+  revalidatePath(PATHS.ADMIN_COURSES);
+  redirect(`${PATHS.ADMIN_COURSES}/${course.id}/edit?message=Course+created`);
 }
 
 export async function updateCourseAction(formData: FormData): Promise<void> {
@@ -50,13 +52,13 @@ export async function updateCourseAction(formData: FormData): Promise<void> {
   const id = formData.get('id') as string;
 
   if (!id) {
-    redirect('/admin/courses?error=Course+ID+is+required');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Course+ID+is+required`);
   }
 
   const parsed = courseSchema.safeParse(Object.fromEntries(formData.entries()));
   if (!parsed.success) {
     const firstError = parsed.error.issues[0]?.message ?? 'Validation failed';
-    redirect(`/admin/courses/${id}/edit?error=${encodeURIComponent(firstError)}`);
+    redirect(`${PATHS.ADMIN_COURSES}/${id}/edit?error=${encodeURIComponent(firstError)}`);
   }
 
   const { title, slug, description, category, access_tier, published, cover_image } = parsed.data;
@@ -71,12 +73,12 @@ export async function updateCourseAction(formData: FormData): Promise<void> {
   });
 
   if (!course) {
-    redirect(`/admin/courses/${id}/edit?error=Failed+to+update+course`);
+    redirect(`${PATHS.ADMIN_COURSES}/${id}/edit?error=Failed+to+update+course`);
   }
 
-  revalidatePath('/admin/courses');
-  revalidatePath(`/admin/courses/${id}/edit`);
-  redirect(`/admin/courses/${id}/edit?message=Course+updated`);
+  revalidatePath(PATHS.ADMIN_COURSES);
+  revalidatePath(`${PATHS.ADMIN_COURSES}/${id}/edit`);
+  redirect(`${PATHS.ADMIN_COURSES}/${id}/edit?message=Course+updated`);
 }
 
 export async function deleteCourseAction(formData: FormData): Promise<void> {
@@ -84,19 +86,19 @@ export async function deleteCourseAction(formData: FormData): Promise<void> {
   const id = formData.get('id') as string;
 
   if (!id) {
-    redirect('/admin/courses?error=Course+ID+is+required');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Course+ID+is+required`);
   }
 
   const existing = await getCourseById(id);
   if (!existing) {
-    redirect('/admin/courses?error=Course+not+found');
+    redirect(`${PATHS.ADMIN_COURSES}?error=Course+not+found`);
   }
 
   const deleted = await deleteCourse(id);
   if (!deleted) {
-    redirect(`/admin/courses/${id}/edit?error=Failed+to+delete+course`);
+    redirect(`${PATHS.ADMIN_COURSES}/${id}/edit?error=Failed+to+delete+course`);
   }
 
-  revalidatePath('/admin/courses');
-  redirect('/admin/courses?message=Course+deleted');
+  revalidatePath(PATHS.ADMIN_COURSES);
+  redirect(`${PATHS.ADMIN_COURSES}?message=Course+deleted`);
 }

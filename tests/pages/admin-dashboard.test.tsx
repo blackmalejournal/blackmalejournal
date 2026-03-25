@@ -1,16 +1,111 @@
 import { render, screen } from '@testing-library/react';
 
 jest.mock('@/lib/supabase/admin-queries', () => ({
-  getContentCounts: jest.fn().mockResolvedValue({
-    articles: { total: 12, published: 8, draft: 4 },
-    briefings: { total: 5, published: 4, draft: 1 },
-    courses: { total: 6, published: 4, draft: 2 },
-    dispatches: { total: 8, published: 6, draft: 2 },
-    downloads: { total: 15 },
-    handbooks: { total: 3, published: 2, draft: 1 },
-    members: { total: 42 },
-    messages: { total: 7 },
-    subscribers: { total: 99 },
+  getAdminCommandCenterSnapshot: jest.fn().mockResolvedValue({
+    counts: {
+      articles: { total: 12, published: 8, draft: 4 },
+      briefings: { total: 5, published: 4, draft: 1 },
+      courses: { total: 6, published: 4, draft: 2 },
+      dispatches: { total: 8, published: 6, draft: 2 },
+      downloads: { total: 15 },
+      handbooks: { total: 3, published: 2, draft: 1 },
+      members: { total: 42 },
+      messages: { total: 7 },
+      subscribers: { total: 99 },
+    },
+    pipeline: {
+      total: 11,
+      statusCounts: {
+        draft: 4,
+        review: 2,
+        scheduled: 3,
+        published: 1,
+        archived: 1,
+        withdrawn: 0,
+      },
+      scheduledThisWeek: 2,
+      scheduledQueue: [
+        {
+          id: 'briefing-1',
+          title: 'Weekend Briefing 14',
+          href: '/admin/briefings/briefing-1/edit',
+          entity: 'briefing',
+          descriptor: 'Briefing #14 · premium',
+          ageInDays: 2,
+          scheduledFor: '2026-03-29T12:00:00.000Z',
+          reason: 'Scheduled within the next 7 days',
+          severity: 'warning',
+        },
+      ],
+      staleQueue: [
+        {
+          id: 'article-1',
+          title: 'Draft Manifesto',
+          href: '/admin/articles/article-1/edit',
+          entity: 'article',
+          descriptor: 'Article · politics · premium',
+          ageInDays: 21,
+          scheduledFor: null,
+          reason: 'In draft for 21 days',
+          severity: 'critical',
+        },
+      ],
+    },
+    activity: [
+      {
+        id: 'dispatch-2',
+        title: 'Morning Organizing Note',
+        href: '/admin/dispatches/dispatch-2/edit',
+        entity: 'dispatch',
+        descriptor: 'Dispatch · culture',
+        happenedAt: '2026-03-25T08:00:00.000Z',
+        label: 'Published',
+      },
+      {
+        id: 'article-2',
+        title: 'The New Discipline',
+        href: '/admin/articles/article-2/edit',
+        entity: 'article',
+        descriptor: 'Article · philosophy · premium',
+        happenedAt: '2026-03-24T18:00:00.000Z',
+        label: 'Created',
+      },
+    ],
+    members: {
+      total: 42,
+      free: 20,
+      basic: 12,
+      premium: 10,
+      paying: 22,
+      admins: 2,
+      editors: 3,
+      stripeCustomers: 20,
+      stripeSubscriptions: 19,
+      billingExceptions: 3,
+      joinedPast30Days: 6,
+    },
+    messages: {
+      total: 7,
+      newCount: 3,
+      inProgressCount: 2,
+      resolvedCount: 1,
+      spamCount: 1,
+      unresolvedCount: 5,
+      overdueCount: 2,
+      queue: [],
+    },
+    subscribers: {
+      total: 99,
+      active: 87,
+      unsubscribed: 12,
+      newPast30Days: 18,
+      churnPast30Days: 5,
+      netPast30Days: 13,
+      topSources: [
+        { source: 'homepage', count: 20 },
+        { source: 'dispatch', count: 12 },
+      ],
+    },
   }),
 }));
 
@@ -28,68 +123,70 @@ describe('AdminDashboardPage', () => {
     render(await AdminDashboardPage());
   }
 
-  it('renders "DASHBOARD" heading', async () => {
+  it('renders the dashboard heading', async () => {
     await renderPage();
     expect(
       screen.getByRole('heading', { level: 1, name: 'DASHBOARD' }),
     ).toBeInTheDocument();
   });
 
-  it('renders key content count cards', async () => {
+  it('renders command-center metric cards', async () => {
+    await renderPage();
+    expect(screen.getByText('Inbox Pressure')).toBeInTheDocument();
+    expect(screen.getByText('Editorial Backlog')).toBeInTheDocument();
+    expect(screen.getByText('Scheduled This Week')).toBeInTheDocument();
+    expect(screen.getByText('Paying Members')).toBeInTheDocument();
+    expect(screen.getByText('Active Subscribers')).toBeInTheDocument();
+  });
+
+  it('renders attention and publishing sections', async () => {
+    await renderPage();
+    expect(screen.getByText('ATTENTION QUEUE')).toBeInTheDocument();
+    expect(screen.getByText('PUBLISHING QUEUE')).toBeInTheDocument();
+    expect(screen.getByText('Draft Manifesto')).toBeInTheDocument();
+    expect(screen.getByText('Weekend Briefing 14')).toBeInTheDocument();
+  });
+
+  it('renders top subscriber sources', async () => {
+    await renderPage();
+    expect(screen.getByText('TOP SOURCES')).toBeInTheDocument();
+    expect(screen.getByText('homepage')).toBeInTheDocument();
+    expect(screen.getByText('dispatch')).toBeInTheDocument();
+  });
+
+  it('renders recent editorial activity', async () => {
+    await renderPage();
+    expect(screen.getByText('RECENT EDITORIAL ACTIVITY')).toBeInTheDocument();
+    expect(screen.getByText('Morning Organizing Note')).toBeInTheDocument();
+    expect(screen.getByText('The New Discipline')).toBeInTheDocument();
+  });
+
+  it('renders coverage cards for admin sections', async () => {
     await renderPage();
     expect(screen.getByText('Articles')).toBeInTheDocument();
     expect(screen.getByText('Briefings')).toBeInTheDocument();
-    expect(screen.getByText('Courses')).toBeInTheDocument();
-    expect(screen.getByText('Dispatches')).toBeInTheDocument();
     expect(screen.getByText('Downloads')).toBeInTheDocument();
+    expect(screen.getByText('Subscribers')).toBeInTheDocument();
   });
 
-  it('renders article total count', async () => {
+  it('renders quick action links', async () => {
     await renderPage();
-    // "12" appears as the articles total
-    const totals = screen.getAllByText('12');
-    expect(totals.length).toBeGreaterThanOrEqual(1);
-  });
-
-  it('renders published and draft counts for articles', async () => {
-    await renderPage();
-    // published: 8 appears as articles published count (also as briefings total — use getAllByText)
-    const eights = screen.getAllByText('8');
-    expect(eights.length).toBeGreaterThanOrEqual(1);
-    // draft: 4 appears as articles draft count (also as briefings published — use getAllByText)
-    const fours = screen.getAllByText('4');
-    expect(fours.length).toBeGreaterThanOrEqual(1);
-    // confirm "published" and "draft" labels are present
-    expect(screen.getAllByText('published').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/draft/).length).toBeGreaterThanOrEqual(1);
-  });
-
-  it('renders downloads total without published/draft rows', async () => {
-    await renderPage();
-    expect(screen.getByText('15')).toBeInTheDocument();
-  });
-
-  it('renders "New Article" quick action link to /admin/articles/new', async () => {
-    await renderPage();
-    const link = screen.getByRole('link', { name: /new article/i });
-    expect(link).toHaveAttribute('href', '/admin/articles/new');
-  });
-
-  it('renders "New Dispatch" quick action link to /admin/dispatches/new', async () => {
-    await renderPage();
-    const link = screen.getByRole('link', { name: /new dispatch/i });
-    expect(link).toHaveAttribute('href', '/admin/dispatches/new');
-  });
-
-  it('renders "New Course" quick action link to /admin/courses/new', async () => {
-    await renderPage();
-    const link = screen.getByRole('link', { name: /new course/i });
-    expect(link).toHaveAttribute('href', '/admin/courses/new');
+    expect(screen.getByRole('link', { name: /new article/i })).toHaveAttribute(
+      'href',
+      '/admin/articles/new',
+    );
+    expect(screen.getByRole('link', { name: /new course/i })).toHaveAttribute(
+      'href',
+      '/admin/courses/new',
+    );
+    expect(screen.getByRole('link', { name: /new download/i })).toHaveAttribute(
+      'href',
+      '/admin/downloads/new',
+    );
   });
 
   it('renders star dividers', async () => {
     await renderPage();
-    const dividers = screen.getAllByTestId('star-divider');
-    expect(dividers.length).toBeGreaterThanOrEqual(2);
+    expect(screen.getAllByTestId('star-divider').length).toBeGreaterThanOrEqual(3);
   });
 });

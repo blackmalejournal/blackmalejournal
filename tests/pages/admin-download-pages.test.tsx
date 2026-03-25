@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import type { Download } from '@/lib/supabase/types';
+import type { AdminActivityLog, Download } from '@/lib/supabase/types';
 
 const mockDownload: Download = {
   id: 'dl-abc-123',
@@ -15,6 +15,22 @@ const mockDownload: Download = {
   published_at: '2026-01-15T00:00:00Z',
   created_at: '2026-01-10T00:00:00Z',
 };
+
+const mockActivity: AdminActivityLog[] = [
+  {
+    id: 'activity-download-1',
+    actor_user_id: 'member-1',
+    actor_email: 'operator@blackmalejournal.com',
+    actor_role: 'admin',
+    entity_type: 'download',
+    entity_id: 'dl-abc-123',
+    entity_title: 'Test Download Title',
+    action: 'updated',
+    summary: 'Updated download "Test Download Title": publish time 2026-01-15 00:00 UTC -> 2026-01-16 00:00 UTC.',
+    metadata: {},
+    created_at: '2026-03-25T11:00:00Z',
+  },
+];
 
 const mockNotFound = jest.fn();
 
@@ -99,6 +115,7 @@ describe('EditDownloadPage', () => {
   it('renders "EDIT DOWNLOAD" heading when download exists', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDownloadById: jest.fn().mockResolvedValue(mockDownload),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/downloads/actions', () => ({
       updateDownloadAction: jest.fn(),
@@ -120,6 +137,7 @@ describe('EditDownloadPage', () => {
   it('shows download ID', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDownloadById: jest.fn().mockResolvedValue(mockDownload),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/downloads/actions', () => ({
       updateDownloadAction: jest.fn(),
@@ -139,6 +157,7 @@ describe('EditDownloadPage', () => {
   it('renders DownloadForm in edit mode with "Update Download" button', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDownloadById: jest.fn().mockResolvedValue(mockDownload),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/downloads/actions', () => ({
       updateDownloadAction: jest.fn(),
@@ -157,11 +176,19 @@ describe('EditDownloadPage', () => {
     expect(
       screen.getByRole('button', { name: /update download/i }),
     ).toBeInTheDocument();
+    expect(screen.getByText('Owner Audit')).toBeInTheDocument();
+    expect(screen.getByText('Recent Activity')).toBeInTheDocument();
+    expect(screen.getByText(mockActivity[0].summary)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /protected file/i })).toHaveAttribute(
+      'href',
+      '/api/downloads/test-download-title',
+    );
   });
 
   it('calls notFound() when download is null', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDownloadById: jest.fn().mockResolvedValue(null),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue([]),
     }));
     jest.mock('@/app/(auth)/admin/downloads/actions', () => ({
       updateDownloadAction: jest.fn(),

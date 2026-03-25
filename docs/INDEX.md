@@ -13,6 +13,8 @@ This index covers the committed documentation tree under `docs/`.
 ## Audits
 
 - [audits/README.md](audits/README.md) - audit lane index and current audit references.
+- [audits/2026-03-25-codebase-audit.md](audits/2026-03-25-codebase-audit.md) - repository-wide codebase audit covering governance, quality gates, and coverage risk.
+- [audits/2026-03-25-codebase-audit-remediation-plan.md](audits/2026-03-25-codebase-audit-remediation-plan.md) - prioritized remediation roadmap with targets and acceptance criteria from the 2026-03-25 audit.
 - [audits/2026-03-22-release-readiness-and-env-audit.md](audits/2026-03-22-release-readiness-and-env-audit.md) - release-gate results and current Vercel environment/domain findings.
 - [audits/2026-03-22-docs-information-consolidation.md](audits/2026-03-22-docs-information-consolidation.md) - accepted docs Markdown consolidation audit and package manifest.
 
@@ -46,7 +48,9 @@ This index covers the committed documentation tree under `docs/`.
 
 - [superpowers/README.md](superpowers/README.md) - superpowers lane overview.
 - [superpowers/plans/README.md](superpowers/plans/README.md) - implementation plan index.
+- [superpowers/plans/2026-03-25-admin-command-center-roadmap.md](superpowers/plans/2026-03-25-admin-command-center-roadmap.md) - owner-focused admin command-center roadmap and remaining admin-platform batches.
 - [superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md](superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md) - parallel BMJ skill scaffolding and authoring plan.
 - [superpowers/plans/2026-03-22-bmj-skill-workflow.md](superpowers/plans/2026-03-22-bmj-skill-workflow.md) - BMJ Codex workflow and custom skill roadmap.
 - [superpowers/plans/2026-03-21-public-visual-refinement-handoff.md](superpowers/plans/2026-03-21-public-visual-refinement-handoff.md) - current public visual refinement handoff and next-session todo list.
 - [superpowers/prompts/README.md](superpowers/prompts/README.md) - prompt asset index.
+- [superpowers/prompts/bmj-admin-command-center-superprompt.md](superpowers/prompts/bmj-admin-command-center-superprompt.md) - reusable prompt for autonomous BMJ admin command-center work.

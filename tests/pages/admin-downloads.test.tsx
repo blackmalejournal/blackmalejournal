@@ -12,7 +12,7 @@ const mockDownloads: Download[] = [
     file_type: 'pdf',
     file_size: 1048576,
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/covers/planner.jpg',
     published_at: '2026-03-10T00:00:00Z',
     created_at: '2026-03-08T00:00:00Z',
   },
@@ -36,12 +36,18 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
   getAllDownloads: jest.fn().mockResolvedValue(mockDownloads),
 }));
 
+jest.mock('@/app/(auth)/admin/downloads/actions', () => ({
+  bulkUpdateDownloadAccessTierAction: jest.fn(),
+}));
+
 describe('DownloadsAdminPage', () => {
-  async function renderPage(category?: string) {
+  async function renderPage(
+    params?: Partial<{ category: string; tier: string; q: string }>,
+  ) {
     const { default: DownloadsAdminPage } = await import(
       '@/app/(auth)/admin/downloads/page'
     );
-    const searchParams = Promise.resolve(category ? { category } : {});
+    const searchParams = Promise.resolve(params ?? {});
     render(await DownloadsAdminPage({ searchParams }));
   }
 
@@ -87,12 +93,35 @@ describe('DownloadsAdminPage', () => {
 
   it('renders category filter tabs', async () => {
     await renderPage();
-    const nav = screen.getByRole('navigation', { name: /category filter/i });
-    expect(nav).toBeInTheDocument();
-    expect(screen.getByText('All')).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: /category filter/i }),
+    ).toBeInTheDocument();
     expect(screen.getByText('Template')).toBeInTheDocument();
     expect(screen.getByText('Worksheet')).toBeInTheDocument();
     expect(screen.getByText('Handbook')).toBeInTheDocument();
+  });
+
+  it('renders search and access-tier filters', async () => {
+    await renderPage({ q: 'planner', tier: 'free' });
+    expect(screen.getByLabelText('Search')).toHaveValue('planner');
+    expect(screen.getByLabelText('Access Tier')).toHaveValue('free');
+    expect(screen.getByText(/Active Filters/i)).toBeInTheDocument();
+  });
+
+  it('renders publish readiness cards and advisory issues', async () => {
+    await renderPage();
+    expect(screen.getByText('Publish Readiness')).toBeInTheDocument();
+    expect(screen.getAllByText('Ready').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Review').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('No cover image')).toBeInTheDocument();
+  });
+
+  it('renders bulk action controls and row selection checkboxes', async () => {
+    await renderPage();
+    expect(screen.getByText('Bulk Actions')).toBeInTheDocument();
+    expect(screen.getByLabelText('Bulk Access Tier')).toBeInTheDocument();
+    expect(screen.getByLabelText('Select Weekly Planner Template')).toBeInTheDocument();
+    expect(screen.getAllByRole('checkbox')).toHaveLength(3);
   });
 
   it('renders metadata with category, file type, and size', async () => {

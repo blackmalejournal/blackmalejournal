@@ -1,3 +1,4 @@
+import { PATHS } from '@/lib/paths';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getMemberById } from '@/lib/supabase/queries';
@@ -14,13 +15,13 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/login?redirect=/admin');
+    redirect(`${PATHS.LOGIN}?redirect=${PATHS.ADMIN}`);
   }
 
   const member = await getMemberById(user.id);
 
   if (!member || (member.role !== 'admin' && member.role !== 'editor')) {
-    redirect('/portal');
+    redirect(PATHS.PORTAL);
   }
 
   const displayName =

@@ -1,5 +1,6 @@
 import { createMockSupabaseClient, type MockSupabaseClient } from '../helpers/supabase-mock';
 import { mockArticle } from '../helpers/fixtures';
+import type { AdminActivityLog } from '@/lib/supabase/types';
 
 // ── Module-level mock ────────────────────────────────────────────────────────
 let mockClient: MockSupabaseClient;
@@ -12,13 +13,51 @@ jest.mock('@/lib/supabase/admin', () => ({
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
 import {
+  bulkUpdateArticleStatuses,
+  bulkUpdateDownloadAccessTiers,
+  createAdminActivityLogEntry,
   getAllArticles,
+  getAdminActivityLogForEntity,
   getArticleById,
   createArticle,
   updateArticle,
   deleteArticle,
   getContentCounts,
 } from '@/lib/supabase/admin-queries';
+
+const mockAdminActivity: AdminActivityLog = {
+  id: 'activity-1',
+  actor_user_id: 'member-1',
+  actor_email: 'operator@blackmalejournal.com',
+  actor_role: 'admin',
+  entity_type: 'article',
+  entity_id: 'art-1',
+  entity_title: 'The Discipline of Morning Routines',
+  action: 'updated',
+  summary: 'Updated article "The Discipline of Morning Routines": status draft -> published.',
+  metadata: {
+    previous: {
+      title: 'The Discipline of Morning Routines',
+      status: 'draft',
+    },
+    next: {
+      title: 'The Discipline of Morning Routines',
+      status: 'published',
+    },
+  },
+  created_at: '2026-03-25T10:00:00Z',
+};
+
+const mockDraftArticle = {
+  ...mockArticle,
+  status: 'draft' as const,
+  published_at: '',
+};
+
+const mockPublishedArticle = {
+  ...mockArticle,
+  status: 'published' as const,
+};
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -74,6 +113,14 @@ describe('getAllArticles', () => {
     setData([mockArticle]);
     await getAllArticles({ lens: 'culture' });
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'culture');
+  });
+
+  it('applies search query filter', async () => {
+    setData([mockArticle]);
+    await getAllArticles({ query: 'discipline' });
+    expect(mockClient._queryChain.or).toHaveBeenCalledWith(
+      expect.stringContaining('title.ilike.%discipline%'),
+    );
   });
 
   it('applies custom limit and offset', async () => {
@@ -250,6 +297,177 @@ describe('deleteArticle', () => {
     setError('delete failed');
     const result = await deleteArticle('art-1');
     expect(result).toBe(false);
+  });
+});
+
+describe('bulkUpdateArticleStatuses', () => {
+  it('updates selected article statuses and preserves per-row publish timestamps', async () => {
+    resetClient();
+
+    const previous = [
+      { ...mockDraftArticle, id: 'art-1', title: 'Draft One' },
+      { ...mockPublishedArticle, id: 'art-2', title: 'Draft Two' },
+    ];
+    const updated = [
+      { ...mockPublishedArticle, id: 'art-1', title: 'Draft One' },
+      { ...mockPublishedArticle, id: 'art-2', title: 'Draft Two' },
+    ];
+
+    const responses = [
+      { data: previous, error: null },
+      { data: null, error: null },
+      { data: null, error: null },
+      { data: updated, error: null },
+    ];
+    const chains: MockSupabaseClient[] = [];
+    let callIndex = 0;
+
+    mockClient.from = jest.fn().mockImplementation((table: string) => {
+      expect(table).toBe('articles');
+      const response = responses[callIndex++];
+      const chainClient = createMockSupabaseClient(response.error ? { error: response.error } : { data: response.data });
+      chains.push(chainClient);
+      return chainClient._queryChain;
+    });
+
+    const result = await bulkUpdateArticleStatuses(['art-1', 'art-2'], 'published');
+
+    expect(result).toEqual({ previous, updated });
+    expect(chains[0]._queryChain.in).toHaveBeenCalledWith('id', ['art-1', 'art-2']);
+    expect(chains[1]._queryChain.update).toHaveBeenCalledWith({ status: 'published' });
+    expect(chains[1]._queryChain.in).toHaveBeenCalledWith('id', ['art-1', 'art-2']);
+    expect(chains[2]._queryChain.update).toHaveBeenCalledWith(
+      expect.objectContaining({ published_at: expect.any(String) }),
+    );
+    expect(chains[2]._queryChain.in).toHaveBeenCalledWith('id', ['art-1']);
+  });
+});
+
+describe('bulkUpdateDownloadAccessTiers', () => {
+  it('updates the access tier across selected downloads', async () => {
+    resetClient();
+
+    const previous = [
+      {
+        id: 'dl-1',
+        title: 'Planner',
+        slug: 'planner',
+        description: 'Desc',
+        category: 'template',
+        file_url: 'downloads/planner.pdf',
+        file_type: 'pdf',
+        file_size: 1024,
+        access_tier: 'free' as const,
+        cover_image: null,
+        published_at: '2026-01-01T00:00:00Z',
+        created_at: '2026-01-01T00:00:00Z',
+      },
+    ];
+    const updated = [
+      {
+        ...previous[0],
+        access_tier: 'premium' as const,
+      },
+    ];
+
+    const responses = [
+      { data: previous, error: null },
+      { data: null, error: null },
+      { data: updated, error: null },
+    ];
+    const chains: MockSupabaseClient[] = [];
+    let callIndex = 0;
+
+    mockClient.from = jest.fn().mockImplementation((table: string) => {
+      expect(table).toBe('downloads');
+      const response = responses[callIndex++];
+      const chainClient = createMockSupabaseClient(response.error ? { error: response.error } : { data: response.data });
+      chains.push(chainClient);
+      return chainClient._queryChain;
+    });
+
+    const result = await bulkUpdateDownloadAccessTiers(['dl-1'], 'premium');
+
+    expect(result).toEqual({ previous, updated });
+    expect(chains[1]._queryChain.update).toHaveBeenCalledWith({ access_tier: 'premium' });
+    expect(chains[1]._queryChain.in).toHaveBeenCalledWith('id', ['dl-1']);
+  });
+});
+
+// ── admin activity log ───────────────────────────────────────────────────────
+
+describe('createAdminActivityLogEntry', () => {
+  it('inserts a log entry and returns it', async () => {
+    resetClient({ data: mockAdminActivity });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockAdminActivity, error: null });
+
+    const result = await createAdminActivityLogEntry({
+      actor_user_id: 'member-1',
+      actor_email: 'operator@blackmalejournal.com',
+      actor_role: 'admin',
+      entity_type: 'article',
+      entity_id: 'art-1',
+      entity_title: mockArticle.title,
+      action: 'updated',
+      summary: mockAdminActivity.summary,
+      metadata: mockAdminActivity.metadata,
+    });
+
+    expect(result).toEqual(mockAdminActivity);
+    expect(mockClient.from).toHaveBeenCalledWith('admin_activity_log');
+    expect(mockClient._queryChain.insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        actor_email: 'operator@blackmalejournal.com',
+        actor_role: 'admin',
+        entity_type: 'article',
+        entity_id: 'art-1',
+        entity_title: mockArticle.title,
+        action: 'updated',
+        summary: mockAdminActivity.summary,
+        metadata: mockAdminActivity.metadata,
+      }),
+    );
+  });
+
+  it('returns null on insert error', async () => {
+    resetClient();
+    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'insert failed' } });
+
+    const result = await createAdminActivityLogEntry({
+      actor_user_id: null,
+      actor_email: 'operator@blackmalejournal.com',
+      actor_role: 'editor',
+      entity_type: 'dispatch',
+      entity_id: 'dispatch-1',
+      entity_title: 'Dispatch title',
+      action: 'created',
+      summary: 'Created dispatch "Dispatch title".',
+    });
+
+    expect(result).toBeNull();
+  });
+});
+
+describe('getAdminActivityLogForEntity', () => {
+  it('returns activity ordered by created_at desc for one entity', async () => {
+    setData([mockAdminActivity]);
+
+    const result = await getAdminActivityLogForEntity('article', 'art-1', 5);
+
+    expect(result).toEqual([mockAdminActivity]);
+    expect(mockClient.from).toHaveBeenCalledWith('admin_activity_log');
+    expect(mockClient._queryChain.eq).toHaveBeenNthCalledWith(1, 'entity_type', 'article');
+    expect(mockClient._queryChain.eq).toHaveBeenNthCalledWith(2, 'entity_id', 'art-1');
+    expect(mockClient._queryChain.order).toHaveBeenCalledWith('created_at', { ascending: false });
+    expect(mockClient._queryChain.limit).toHaveBeenCalledWith(5);
+  });
+
+  it('returns empty array on query error', async () => {
+    setError('query failed');
+
+    const result = await getAdminActivityLogForEntity('article', 'art-1');
+
+    expect(result).toEqual([]);
   });
 });
 

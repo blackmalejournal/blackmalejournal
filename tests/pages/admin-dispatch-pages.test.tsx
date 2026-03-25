@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import type { Dispatch } from '@/lib/supabase/types';
+import type { AdminActivityLog, Dispatch } from '@/lib/supabase/types';
 
 const mockDispatch: Dispatch = {
   id: 'dsp-abc-123',
@@ -14,6 +14,22 @@ const mockDispatch: Dispatch = {
   published_at: '2026-01-15T00:00:00Z',
   created_at: '2026-01-10T00:00:00Z',
 };
+
+const mockActivity: AdminActivityLog[] = [
+  {
+    id: 'activity-dispatch-1',
+    actor_user_id: 'member-1',
+    actor_email: 'operator@blackmalejournal.com',
+    actor_role: 'admin',
+    entity_type: 'dispatch',
+    entity_id: 'dsp-abc-123',
+    entity_title: 'Test Dispatch Title',
+    action: 'updated',
+    summary: 'Updated dispatch "Test Dispatch Title": slug -> test-dispatch-title.',
+    metadata: {},
+    created_at: '2026-03-25T10:00:00Z',
+  },
+];
 
 const mockNotFound = jest.fn();
 
@@ -98,6 +114,7 @@ describe('EditDispatchPage', () => {
   it('renders "EDIT DISPATCH" heading when dispatch exists', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDispatchById: jest.fn().mockResolvedValue(mockDispatch),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/dispatches/actions', () => ({
       updateDispatchAction: jest.fn(),
@@ -119,6 +136,7 @@ describe('EditDispatchPage', () => {
   it('shows dispatch ID', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDispatchById: jest.fn().mockResolvedValue(mockDispatch),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/dispatches/actions', () => ({
       updateDispatchAction: jest.fn(),
@@ -138,6 +156,7 @@ describe('EditDispatchPage', () => {
   it('renders DispatchForm in edit mode with "Update Dispatch" button', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDispatchById: jest.fn().mockResolvedValue(mockDispatch),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/dispatches/actions', () => ({
       updateDispatchAction: jest.fn(),
@@ -156,11 +175,19 @@ describe('EditDispatchPage', () => {
     expect(
       screen.getByRole('button', { name: /update dispatch/i }),
     ).toBeInTheDocument();
+    expect(screen.getByText('Owner Audit')).toBeInTheDocument();
+    expect(screen.getByText('Recent Activity')).toBeInTheDocument();
+    expect(screen.getByText(mockActivity[0].summary)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /public dispatch/i })).toHaveAttribute(
+      'href',
+      '/blog/test-dispatch-title',
+    );
   });
 
   it('calls notFound() when dispatch is null', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getDispatchById: jest.fn().mockResolvedValue(null),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue([]),
     }));
     jest.mock('@/app/(auth)/admin/dispatches/actions', () => ({
       updateDispatchAction: jest.fn(),

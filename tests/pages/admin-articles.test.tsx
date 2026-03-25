@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import type { Article } from '@/lib/supabase/types';
 
 const mockArticles: Article[] = [
@@ -14,7 +14,7 @@ const mockArticles: Article[] = [
     access_tier: 'free',
     status: 'published',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/covers/stillness.jpg',
     published_at: '2026-03-10T00:00:00Z',
     created_at: '2026-03-08T00:00:00Z',
   },
@@ -40,12 +40,18 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
   getAllArticles: jest.fn().mockResolvedValue(mockArticles),
 }));
 
+jest.mock('@/app/(auth)/admin/articles/actions', () => ({
+  bulkUpdateArticleStatusAction: jest.fn(),
+}));
+
 describe('ArticlesAdminPage', () => {
-  async function renderPage(status?: string) {
+  async function renderPage(
+    params?: Partial<{ status: string; lens: string; q: string }>,
+  ) {
     const { default: ArticlesAdminPage } = await import(
       '@/app/(auth)/admin/articles/page'
     );
-    const searchParams = Promise.resolve(status ? { status } : {});
+    const searchParams = Promise.resolve(params ?? {});
     render(await ArticlesAdminPage({ searchParams }));
   }
 
@@ -91,26 +97,48 @@ describe('ArticlesAdminPage', () => {
 
   it('renders star icon for featured articles', async () => {
     await renderPage();
-    const star = screen.getByLabelText('Featured');
-    expect(star).toBeInTheDocument();
+    expect(screen.getByLabelText('Featured')).toBeInTheDocument();
   });
 
-  it('renders status filter tabs', async () => {
+  it('renders status filter tabs including scheduled', async () => {
     await renderPage();
-    const nav = screen.getByRole('navigation', { name: /status filter/i });
-    expect(nav).toBeInTheDocument();
-    expect(screen.getByText('All')).toBeInTheDocument();
-    expect(screen.getByText('Draft')).toBeInTheDocument();
-    expect(screen.getByText('Review')).toBeInTheDocument();
-    expect(screen.getByText('Published')).toBeInTheDocument();
-    expect(screen.getByText('Archived')).toBeInTheDocument();
+    const statusNav = screen.getByRole('navigation', { name: /status filter/i });
+    expect(statusNav).toBeInTheDocument();
+    expect(within(statusNav).getByText('All')).toBeInTheDocument();
+    expect(within(statusNav).getByText('Draft')).toBeInTheDocument();
+    expect(within(statusNav).getByText('Review')).toBeInTheDocument();
+    expect(within(statusNav).getByText('Scheduled')).toBeInTheDocument();
+    expect(within(statusNav).getByText('Published')).toBeInTheDocument();
+    expect(within(statusNav).getByText('Archived')).toBeInTheDocument();
+  });
+
+  it('renders search and lens filters', async () => {
+    await renderPage({ q: 'discipline', lens: 'culture' });
+    expect(screen.getByLabelText('Search')).toHaveValue('discipline');
+    expect(screen.getByLabelText('Lens')).toHaveValue('culture');
+    expect(screen.getByText(/Active Filters/i)).toBeInTheDocument();
+  });
+
+  it('renders publish readiness cards and issue callouts', async () => {
+    await renderPage();
+    expect(screen.getByText('Publish Readiness')).toBeInTheDocument();
+    expect(screen.getAllByText('Ready').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Needs Work').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('Missing cover image')).toBeInTheDocument();
+  });
+
+  it('renders bulk action controls and row selection checkboxes', async () => {
+    await renderPage();
+    expect(screen.getByText('Bulk Actions')).toBeInTheDocument();
+    expect(screen.getByLabelText('Bulk Status')).toBeInTheDocument();
+    expect(screen.getByLabelText('Select The Discipline of Stillness')).toBeInTheDocument();
+    expect(screen.getAllByRole('checkbox')).toHaveLength(3);
   });
 
   it('renders metadata with lens, tier, and date', async () => {
     await renderPage();
-    // First article metadata
-    expect(screen.getByText(/culture/i)).toBeInTheDocument();
-    expect(screen.getByText(/politics/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Culture\/Ideology/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Politics\/Law/).length).toBeGreaterThanOrEqual(1);
   });
 });
 

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import type { Briefing } from '@/lib/supabase/types';
+import type { AdminActivityLog, Briefing } from '@/lib/supabase/types';
 
 const mockBriefing: Briefing = {
   id: 'br-1',
@@ -16,6 +16,22 @@ const mockBriefing: Briefing = {
   published_at: '2026-03-15T00:00:00Z',
   created_at: '2026-03-14T00:00:00Z',
 };
+
+const mockActivity: AdminActivityLog[] = [
+  {
+    id: 'activity-briefing-1',
+    actor_user_id: 'member-1',
+    actor_email: 'operator@blackmalejournal.com',
+    actor_role: 'editor',
+    entity_type: 'briefing',
+    entity_id: 'br-1',
+    entity_title: 'Weekend Briefing 003',
+    action: 'created',
+    summary: 'Created briefing "Weekend Briefing 003" as published.',
+    metadata: {},
+    created_at: '2026-03-25T09:00:00Z',
+  },
+];
 
 const mockNotFound = jest.fn();
 
@@ -100,6 +116,7 @@ describe('EditBriefingPage', () => {
   it('renders "EDIT BRIEFING" heading when briefing exists', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getBriefingById: jest.fn().mockResolvedValue(mockBriefing),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/briefings/actions', () => ({
       updateBriefingAction: jest.fn(),
@@ -121,6 +138,7 @@ describe('EditBriefingPage', () => {
   it('shows briefing ID', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getBriefingById: jest.fn().mockResolvedValue(mockBriefing),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/briefings/actions', () => ({
       updateBriefingAction: jest.fn(),
@@ -140,6 +158,7 @@ describe('EditBriefingPage', () => {
   it('renders BriefingForm in edit mode with "Update Briefing" button', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getBriefingById: jest.fn().mockResolvedValue(mockBriefing),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue(mockActivity),
     }));
     jest.mock('@/app/(auth)/admin/briefings/actions', () => ({
       updateBriefingAction: jest.fn(),
@@ -158,11 +177,19 @@ describe('EditBriefingPage', () => {
     expect(
       screen.getByRole('button', { name: /update briefing/i }),
     ).toBeInTheDocument();
+    expect(screen.getByText('Owner Audit')).toBeInTheDocument();
+    expect(screen.getByText('Recent Activity')).toBeInTheDocument();
+    expect(screen.getByText(mockActivity[0].summary)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /public briefing/i })).toHaveAttribute(
+      'href',
+      '/briefings/weekend-briefing-003',
+    );
   });
 
   it('calls notFound() when briefing is null', async () => {
     jest.mock('@/lib/supabase/admin-queries', () => ({
       getBriefingById: jest.fn().mockResolvedValue(null),
+      getAdminActivityLogForEntity: jest.fn().mockResolvedValue([]),
     }));
     jest.mock('@/app/(auth)/admin/briefings/actions', () => ({
       updateBriefingAction: jest.fn(),

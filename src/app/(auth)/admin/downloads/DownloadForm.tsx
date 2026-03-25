@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Download } from '@/lib/supabase/types';
+import { PublishScheduleField } from '@/components/admin/PublishScheduleField';
 import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
@@ -162,6 +163,13 @@ export function DownloadForm({ download, action }: DownloadFormProps) {
             </select>
           </div>
         </div>
+
+        <PublishScheduleField
+          defaultValue={download?.published_at}
+          inputClass={inputClass}
+          labelClass={labelClass}
+          helperText="Optional UTC release timestamp for audit history and sorted launch order."
+        />
 
         {/* File URL (full width) */}
         <div>

@@ -20,6 +20,8 @@ export type PaidMemberTier = Exclude<MemberTier, 'free'>;
 export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived' | 'withdrawn';
 export type MemberRole = 'member' | 'editor' | 'admin';
 export type ContactSubmissionStatus = 'new' | 'in_progress' | 'resolved' | 'spam';
+export type AdminActivityEntityType = 'article' | 'briefing' | 'dispatch' | 'handbook' | 'download';
+export type AdminActivityAction = 'created' | 'updated' | 'deleted';
 
 export type BriefingSection = {
   title: string;
@@ -159,6 +161,20 @@ export type ContactSubmission = {
   submitted_at: string;
 };
 
+export type AdminActivityLog = {
+  id: string;
+  actor_user_id: string | null;
+  actor_email: string;
+  actor_role: MemberRole;
+  entity_type: AdminActivityEntityType;
+  entity_id: string;
+  entity_title: string;
+  action: AdminActivityAction;
+  summary: string;
+  metadata: Record<string, unknown>;
+  created_at: string;
+};
+
 // ── Search ───────────────────────────────────────────────────────────────────
 
 export type SearchResult = {
@@ -235,6 +251,12 @@ export type Database = {
         Row: ContactSubmission;
         Insert: Omit<ContactSubmission, 'id' | 'submitted_at' | 'status' | 'internal_notes' | 'handled_at' | 'handled_by'>;
         Update: Partial<Omit<ContactSubmission, 'id'>>;
+        Relationships: [];
+      };
+      admin_activity_log: {
+        Row: AdminActivityLog;
+        Insert: Omit<AdminActivityLog, 'id' | 'created_at'>;
+        Update: Partial<Omit<AdminActivityLog, 'id' | 'created_at'>>;
         Relationships: [];
       };
     };

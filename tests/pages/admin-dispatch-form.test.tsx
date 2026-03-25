@@ -41,6 +41,7 @@ describe('DispatchForm', () => {
     expect(screen.getByLabelText(/excerpt/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/body/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/status/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
   });
 
@@ -71,6 +72,9 @@ describe('DispatchForm', () => {
       'Full dispatch body content here.',
     );
     expect(screen.getByLabelText(/status/i)).toHaveValue('published');
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toHaveValue(
+      '2026-01-15T00:00',
+    );
     expect(screen.getByLabelText(/cover image/i)).toHaveValue(
       'covers/test.webp',
     );

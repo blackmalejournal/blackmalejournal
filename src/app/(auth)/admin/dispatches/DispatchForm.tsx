@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import type { Dispatch } from '@/lib/supabase/types';
+import { PublishScheduleField } from '@/components/admin/PublishScheduleField';
 import { StorageUploadField } from '@/components/admin/StorageUploadField';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
@@ -144,6 +145,12 @@ export function DispatchForm({ dispatch, action }: DispatchFormProps) {
             </select>
           </div>
         </div>
+
+        <PublishScheduleField
+          defaultValue={dispatch?.published_at}
+          inputClass={inputClass}
+          labelClass={labelClass}
+        />
 
         {/* Excerpt (full width) with character count */}
         <div>

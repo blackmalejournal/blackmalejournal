@@ -44,6 +44,7 @@ describe('DownloadForm', () => {
     expect(screen.getByLabelText(/file type/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/file size/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/access tier/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/cover image/i)).toBeInTheDocument();
   });
 
@@ -74,6 +75,9 @@ describe('DownloadForm', () => {
     expect(screen.getByLabelText(/file type/i)).toHaveValue('pdf');
     expect(screen.getByLabelText(/file size/i)).toHaveValue(1048576);
     expect(screen.getByLabelText(/access tier/i)).toHaveValue('free');
+    expect(screen.getByLabelText(/publish at \(utc\)/i)).toHaveValue(
+      '2026-01-15T00:00',
+    );
     expect(screen.getByLabelText(/cover image/i)).toHaveValue('covers/test.webp');
   });
 

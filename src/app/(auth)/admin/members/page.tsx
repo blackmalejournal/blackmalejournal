@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllMembers, getMemberCount } from '@/lib/supabase/admin-queries';
+import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
+import {
+  getAllMembers,
+  getMemberAdminInsights,
+  getMemberCount,
+} from '@/lib/supabase/admin-queries';
 import type { MemberTier, MemberRole } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
   title: 'Members — Admin',
   robots: { index: false, follow: false },
 };
-
-// ── Tier badge ───────────────────────────────────────────────────────────────
 
 const tierStyles: Record<MemberTier, string> = {
   free: 'bg-bmj-tan/20 text-bmj-tan',
@@ -26,8 +29,6 @@ function TierBadge({ tier }: { tier: MemberTier }) {
   );
 }
 
-// ── Role badge ───────────────────────────────────────────────────────────────
-
 const roleStyles: Record<MemberRole, string> = {
   member: 'bg-bmj-tan/10 text-bmj-tan/70',
   editor: 'bg-bmj-amber/10 text-bmj-amber/70',
@@ -44,18 +45,13 @@ function RoleBadge({ role }: { role: MemberRole }) {
   );
 }
 
-// ── Date formatter ──────────────────────────────────────────────────────────
-
 function formatDate(iso: string): string {
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-US', {
+  return new Date(iso).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   });
 }
-
-// ── Page ────────────────────────────────────────────────────────────────────
 
 const TIER_TABS: { label: string; value: string | undefined }[] = [
   { label: 'All', value: undefined },
@@ -72,7 +68,13 @@ const ROLE_FILTERS: { label: string; value: string | undefined }[] = [
 ];
 
 interface MembersAdminPageProps {
-  searchParams: Promise<{ tier?: string; role?: string; q?: string; error?: string; message?: string }>;
+  searchParams: Promise<{
+    tier?: string;
+    role?: string;
+    q?: string;
+    error?: string;
+    message?: string;
+  }>;
 }
 
 export default async function MembersAdminPage({
@@ -89,13 +91,14 @@ export default async function MembersAdminPage({
     ? (role as MemberRole)
     : undefined;
 
-  const [members, totalCount] = await Promise.all([
+  const [members, totalCount, insights] = await Promise.all([
     getAllMembers({
       tier: activeTier,
       role: activeRole,
       query: q,
     }),
     getMemberCount(),
+    getMemberAdminInsights(),
   ]);
 
   function makeHref(nextTier?: string, nextRole = activeRole, nextQuery = q) {
@@ -109,7 +112,6 @@ export default async function MembersAdminPage({
 
   return (
     <div>
-      {/* Page header */}
       <div>
         <h1 className="font-display text-3xl tracking-widest text-bmj-white">
           MEMBERS
@@ -131,7 +133,55 @@ export default async function MembersAdminPage({
         </div>
       )}
 
-      {/* Tier filter tabs */}
+      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <AdminMetricCard
+          label="Paying Members"
+          value={insights.paying}
+          helper={`${insights.basic} basic · ${insights.premium} premium`}
+          tone="success"
+        />
+        <AdminMetricCard
+          label="Billing Exceptions"
+          value={insights.billingExceptions}
+          helper="Paying members missing Stripe references"
+          tone={insights.billingExceptions > 0 ? 'warning' : 'default'}
+        />
+        <AdminMetricCard
+          label="Staff Accounts"
+          value={insights.admins + insights.editors}
+          helper={`${insights.admins} admins · ${insights.editors} editors`}
+        />
+        <AdminMetricCard
+          label="Stripe Customers"
+          value={insights.stripeCustomers}
+          helper={`${insights.stripeSubscriptions} subscription records`}
+        />
+        <AdminMetricCard
+          label="New Members 30d"
+          value={insights.joinedPast30Days}
+          helper={`${insights.free} free members in current base`}
+        />
+        <AdminMetricCard
+          label="Premium Share"
+          value={`${insights.total === 0 ? 0 : Math.round((insights.premium / insights.total) * 100)}%`}
+          helper="Premium tier share of the member base"
+          tone="default"
+        />
+      </div>
+
+      {insights.billingExceptions > 0 && (
+        <div className="mt-6 border border-bmj-amber/30 bg-bmj-amber/10 p-4">
+          <p className="font-label text-xs uppercase tracking-widest text-bmj-amber">
+            Billing Review Needed
+          </p>
+          <p className="mt-2 font-body text-sm text-bmj-cream/80">
+            {insights.billingExceptions} paying members are missing a Stripe
+            customer ID or subscription ID. Use this page to inspect tier and role
+            assignments before making a manual correction.
+          </p>
+        </div>
+      )}
+
       <nav
         aria-label="Tier filter"
         className="mt-6 flex gap-6 border-b border-bmj-tan/20"
@@ -204,7 +254,6 @@ export default async function MembersAdminPage({
         </div>
       </form>
 
-      {/* Member list */}
       <div className="mt-6">
         {members.length === 0 ? (
           <p className="py-12 text-center font-body text-bmj-tan">

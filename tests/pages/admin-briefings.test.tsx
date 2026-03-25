@@ -13,7 +13,7 @@ const mockBriefings: Briefing[] = [
     ],
     access_tier: 'free',
     status: 'published',
-    cover_image: null,
+    cover_image: '/covers/briefing-003.jpg',
     published_at: '2026-03-15T00:00:00Z',
     created_at: '2026-03-14T00:00:00Z',
   },
@@ -35,12 +35,16 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
   getAllBriefings: jest.fn().mockResolvedValue(mockBriefings),
 }));
 
+jest.mock('@/app/(auth)/admin/briefings/actions', () => ({
+  bulkUpdateBriefingStatusAction: jest.fn(),
+}));
+
 describe('BriefingsAdminPage', () => {
-  async function renderPage(status?: string) {
+  async function renderPage(params?: Partial<{ status: string; q: string }>) {
     const { default: BriefingsAdminPage } = await import(
       '@/app/(auth)/admin/briefings/page'
     );
-    const searchParams = Promise.resolve(status ? { status } : {});
+    const searchParams = Promise.resolve(params ?? {});
     render(await BriefingsAdminPage({ searchParams }));
   }
 
@@ -88,15 +92,34 @@ describe('BriefingsAdminPage', () => {
     expect(screen.getByText(/^#2/)).toBeInTheDocument();
   });
 
-  it('renders status filter tabs', async () => {
+  it('renders status filter tabs including scheduled', async () => {
     await renderPage();
-    const nav = screen.getByRole('navigation', { name: /status filter/i });
-    expect(nav).toBeInTheDocument();
-    expect(screen.getByText('All')).toBeInTheDocument();
-    expect(screen.getByText('Draft')).toBeInTheDocument();
-    expect(screen.getByText('Review')).toBeInTheDocument();
-    expect(screen.getByText('Published')).toBeInTheDocument();
-    expect(screen.getByText('Archived')).toBeInTheDocument();
+    expect(
+      screen.getByRole('navigation', { name: /status filter/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Scheduled')).toBeInTheDocument();
+  });
+
+  it('renders the search form and active search state', async () => {
+    await renderPage({ q: 'weekend' });
+    expect(screen.getByRole('textbox')).toHaveValue('weekend');
+    expect(screen.getByText(/Active Search/i)).toBeInTheDocument();
+  });
+
+  it('renders publish readiness cards and blocking issues', async () => {
+    await renderPage();
+    expect(screen.getByText('Publish Readiness')).toBeInTheDocument();
+    expect(screen.getAllByText('Ready').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Needs Work').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('Missing cover image')).toBeInTheDocument();
+  });
+
+  it('renders bulk action controls and row selection checkboxes', async () => {
+    await renderPage();
+    expect(screen.getByText('Bulk Actions')).toBeInTheDocument();
+    expect(screen.getByLabelText('Bulk Status')).toBeInTheDocument();
+    expect(screen.getByLabelText('Select Weekend Briefing 003')).toBeInTheDocument();
+    expect(screen.getAllByRole('checkbox')).toHaveLength(3);
   });
 });
 
