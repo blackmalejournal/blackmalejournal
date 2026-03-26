@@ -15,6 +15,7 @@ import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PaywallGate } from '@/components/content/PaywallGate';
+import { PLACEHOLDERS } from '@/lib/placeholders';
 import type { Briefing } from '@/lib/supabase/types';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
@@ -148,7 +149,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         title={briefing.title}
         date={formatDate(briefing.published_at)}
         issueNumber={briefing.issue_number}
-        coverImageUrl={briefing.cover_image || "/placeholder-cover.svg"}
+        coverImageUrl={briefing.cover_image || PLACEHOLDERS.briefing}
       />
       </ScrollReveal>
 

@@ -92,10 +92,13 @@ See [docs/ops/env-vars.md](ops/env-vars.md) for the canonical environment variab
 
 ### Content Taxonomy
 
-All content is categorized under one of three **lenses**:
+All content is categorized under one of six **lenses**:
 - **Health** — physical/mental wellness, martial arts, discipline
 - **Philosophy** — purpose, identity, masculinity, mindset
 - **Politics** — power, policy, systems, community organizing
+- **Culture** — ideology, editorial, cultural analysis
+- **Entertainment** — media, technology, reviews
+- **Commemoration** — remembrance, tributes, historical markers
 
 ### Access Tiers
 

@@ -5,6 +5,9 @@ This index covers the committed documentation tree under `docs/`.
 ## Root Documents
 
 - [DEVELOPER.md](DEVELOPER.md) - developer workflow, scripts, testing, and deployment notes.
+- [ARCHITECTURE.md](ARCHITECTURE.md) - system design, data flow, database schema, integration patterns.
+- [CONTRIBUTING.md](CONTRIBUTING.md) - code conventions, PR process, file naming, asset naming, testing requirements.
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - common issues and fixes for build, dev server, database, Stripe, tests, and deployment.
 - [deferrals.md](deferrals.md) - external dependencies and configuration tasks blocked outside the repo.
 
 ## Audits

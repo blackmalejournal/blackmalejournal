@@ -62,6 +62,14 @@ All articles and content are categorized under exactly one lens:
 - `src/lib/email.ts` — Transactional email via Resend
 - `src/lib/rate-limit.ts` — Request rate limiter for API routes
 - `src/lib/storage-assets.ts` — Supabase Storage asset URL helpers
+- `src/lib/placeholders.ts` — Centralized placeholder image paths (PLACEHOLDERS constant)
+
+## Placeholder Images
+- All content-type placeholders live in `public/placeholders/{type}.svg`
+- Import `PLACEHOLDERS` from `@/lib/placeholders` — never hardcode placeholder paths
+- Available types: article, briefing, course, handbook, dispatch, download, cover (generic)
+- All SVGs follow BMJ brand identity (brown background, red accents, brand mark)
+- When a content card has no `cover_image`, pass `PLACEHOLDERS.{type}` to the `<Image>` src
 
 ## Code Style
 - Use TypeScript strict mode
@@ -139,6 +147,14 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 - After renaming any `src/app/` directory, run `rm -rf .next` before `npx tsc --noEmit` — stale type artifacts in `.next/types/validator.ts` will report `Cannot find module` for the old path.
 - `tailwind.config.ts` hardcodes hex color values — do NOT replace with `var(--bmj-*)`. Tailwind opacity modifiers (`bg-bmj-red/10`, `text-bmj-cream/80`) require decomposable hex, not CSS variables. The `.claude/hooks/drift-detection.sh` hook guards against the two files diverging.
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
+
+## Documentation
+- Architecture and system design: docs/ARCHITECTURE.md
+- Contributing guide (code style, PR process, naming): docs/CONTRIBUTING.md
+- Troubleshooting common issues: docs/TROUBLESHOOTING.md
+- Developer setup: docs/DEVELOPER.md
+- Operator manual: docs/ops/chairman-operator-manual.md
+- Full documentation index: docs/INDEX.md
 
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md

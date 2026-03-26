@@ -53,7 +53,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
   - `portrait` — `.halftone-heavy` + `.halftone-dots` wrapper (full newsprint treatment)
   - `hero` — `.duotone` filter (full grayscale + contrast, multiply blend)
 - Raw, untreated photographs are not permitted in editorial contexts
-- Placeholder images must use `/placeholder-cover.svg` (branded SVG, not generic gray boxes)
+- Placeholder images must use branded SVGs from `/placeholders/{content-type}.svg` (imported via `PLACEHOLDERS` from `@/lib/placeholders`), not generic gray boxes
 
 ### Section Structure
 - **StarDivider** (`<StarDivider />`) is the canonical section separator — use it between content sections and as editorial break points
@@ -97,11 +97,11 @@ The BMJ color palette in `src/styles/brand.css` is the source of truth for the r
 | Utility classes (grain, halftone, etc.) | `src/styles/globals.css` |
 | Tailwind theme extension | `tailwind.config.ts` |
 | OG image | `public/og-image.svg` |
-| Placeholder cover | `public/placeholder-cover.svg` |
-| Logo / favicon | `public/logo.svg`, `public/favicon.svg` |
-| Logo assets (PNG) | `public/logos/` |
+| Placeholder images | `public/placeholders/*.svg` |
+| Placeholder constants | `src/lib/placeholders.ts` |
+| Logo / favicon | `public/favicon.svg` |
+| Logo assets | `public/logos/` |
 | Brand mark component | `src/components/brand/BrandMark.tsx` |
-| Image treatment component | `src/components/ui/TreatedImage.tsx` |
 | Star divider | `src/components/ui/StarDivider.tsx` |
 | Palette reference image | `docs/brand/bmj-palettes-reference.png` |
 | Font files & licenses | `public/fonts/`, `public/fonts/LICENSES.md` |

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { LensBadge } from "@/components/brand/LensBadge";
 import { getLensTheme } from "@/lib/lens-theme";
+import { PLACEHOLDERS } from "@/lib/placeholders";
 import { cn } from "@/lib/utils";
 import type { Lens } from "@/lib/supabase/types";
 
@@ -34,14 +35,12 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
           leadTheme.hoverBorder,
         )}
       >
-        {lead.cover_image && (
-          <Image
-            src={lead.cover_image}
-            alt=""
-            fill
-            className="halftone object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          />
-        )}
+        <Image
+          src={lead.cover_image || PLACEHOLDERS.article}
+          alt=""
+          fill
+          className="halftone object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+        />
         <div
           className="relative z-10 w-full p-5"
           style={{ backgroundColor: "var(--bmj-feature-overlay)" }}

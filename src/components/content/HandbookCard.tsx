@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Lock, BookOpen } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { LensBadge } from '@/components/brand/LensBadge';
+import { PLACEHOLDERS } from '@/lib/placeholders';
 import { formatDate } from '@/lib/utils';
 import type { AccessTier, Lens } from '@/lib/supabase/types';
 
@@ -31,19 +32,13 @@ export function HandbookCard({
       <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/60 sm:flex-row">
         {/* Cover image or icon */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-bmj-black sm:aspect-auto sm:w-48 sm:shrink-0">
-          {coverImage ? (
-            <Image
-              src={coverImage}
-              alt={title}
-              fill
-              className="halftone object-cover"
-              sizes="(max-width: 640px) 100vw, 192px"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              <BookOpen size={32} className="text-bmj-cream/10" aria-hidden="true" />
-            </div>
-          )}
+          <Image
+            src={coverImage || PLACEHOLDERS.handbook}
+            alt={title}
+            fill
+            className="halftone object-cover"
+            sizes="(max-width: 640px) 100vw, 192px"
+          />
           {isPremium && (
             <div className="absolute right-2 top-2">
               <Lock

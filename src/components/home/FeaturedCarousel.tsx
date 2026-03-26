@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LensBadge } from '@/components/brand/LensBadge';
-import { BrandMark } from '@/components/brand/BrandMark';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { PLACEHOLDERS } from '@/lib/placeholders';
 import type { Article } from '@/lib/supabase/types';
 
 interface FeaturedCarouselProps {
@@ -86,19 +86,13 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
             >
               {/* Image panel */}
               <div className="relative h-48 w-full overflow-hidden bg-bmj-black sm:h-auto sm:w-1/2">
-                {article.cover_image ? (
-                  <Image
-                    src={article.cover_image}
-                    alt={article.title}
-                    fill
-                    className="halftone object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center">
-                    <BrandMark size={80} color="var(--bmj-cream)" className="opacity-10" />
-                  </div>
-                )}
+                <Image
+                  src={article.cover_image || PLACEHOLDERS.article}
+                  alt={article.title}
+                  fill
+                  className="halftone object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
 
               {/* Content panel */}

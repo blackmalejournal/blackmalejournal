@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
-import { BrandMark } from '@/components/brand/BrandMark';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { getLensTheme } from '@/lib/lens-theme';
+import { PLACEHOLDERS } from '@/lib/placeholders';
 import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
 
@@ -43,19 +43,13 @@ export function ArticleCard({
     <article className={cn('group card-media', theme.cardBorderTop, theme.hoverBorder)}>
       {/* Cover image */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
-        {coverImage ? (
-          <Image
-            src={coverImage}
-            alt={coverImageAlt || title}
-            fill
-            className="halftone object-cover"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center">
-            <BrandMark size={48} color="var(--bmj-cream)" className="opacity-20" />
-          </div>
-        )}
+        <Image
+          src={coverImage || PLACEHOLDERS.article}
+          alt={coverImageAlt || title}
+          fill
+          className="halftone object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
         {isPremium && (
           <div className="absolute right-2 top-2 rounded-sm bg-bmj-black/80 p-1">
             <Lock size={12} className="text-bmj-amber" />
