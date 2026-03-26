@@ -19,7 +19,7 @@ npx tsc --noEmit     # TypeScript check
 ## Brand System
 
 Tagline: "Speak the Truth. Navigate the Consequences."
-Logo: Journal/book icon with star + pen nib (see public/logos/)
+Logo: Journal/book icon with star + pen nib (see public/logos/ — curated to 5 files: favicon-red.svg, primary-color.png/svg, primary-light.png, submark-color.svg)
 Aesthetic: Militant print-driven editorial — revolutionary newspapers, political posters.
 Full brand spec (colors, fonts, prohibited styles): `.claude/rules/brand.md`
 Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all colors.
@@ -38,6 +38,7 @@ All articles and content are categorized under exactly one lens:
 - All routes under src/app/(public)/ for public pages — includes articles/, briefings/, blog/, records/, video/, academy/, downloads/, handbooks/, about/, contact/, pricing/, search/, support/, privacy/, terms/, etc.
 - Auth routes under src/app/(auth)/ — portal (members), login, signup, admin panel
 - Admin panel under src/app/(auth)/admin/ — full CRUD for articles, briefings, dispatches, courses, handbooks, downloads, members, subscribers, messages
+- `/blog` route intentionally serves Dispatches (not articles) — this is a branding decision, not a naming error
 - API routes under src/app/api/
 - Components: src/components/ui/ (primitives), /brand/ (logo, headers), /content/ (cards), /home/ (homepage sections), /layout/ (nav, footer), /portal/ (member area), /seo/ (metadata, structured data), /admin/ (admin panel UI), /motion/ (PageTransition, ScrollReveal)
 - Content: database-driven via Supabase (articles, briefings, handbooks, downloads, courses, lessons)
@@ -99,7 +100,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run seeds: `npx tsx scripts/seed-all.ts`
 
 ## Testing
-- Run `npm test` — Jest with jsdom (109 test files)
+- Run `npm test` — Jest with jsdom (116 suites, 867 tests)
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
@@ -136,6 +137,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 
 ## Gotchas
 - After renaming any `src/app/` directory, run `rm -rf .next` before `npx tsc --noEmit` — stale type artifacts in `.next/types/validator.ts` will report `Cannot find module` for the old path.
+- `tailwind.config.ts` hardcodes hex color values — do NOT replace with `var(--bmj-*)`. Tailwind opacity modifiers (`bg-bmj-red/10`, `text-bmj-cream/80`) require decomposable hex, not CSS variables. The `.claude/hooks/drift-detection.sh` hook guards against the two files diverging.
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
 
 ## Operations & Infrastructure
