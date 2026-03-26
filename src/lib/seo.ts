@@ -16,7 +16,7 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
+    logo: `${SITE_URL}/logos/primary-color.png`,
     description: SITE_DESCRIPTION,
     founder: {
       '@type': 'Person',
@@ -52,7 +52,7 @@ export function articleJsonLd(opts: {
       name: SITE_NAME,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logo.svg`,
+        url: `${SITE_URL}/logos/primary-color.png`,
       },
     },
   };

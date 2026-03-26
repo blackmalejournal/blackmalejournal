@@ -20,7 +20,7 @@ export default function QuoteCard({
   const textColor = "text-bmj-cream";
 
   return (
-    <div className={cn(theme.accentSoftBg, "border border-bmj-tan/25 p-6 sm:p-8")}>
+    <div className={cn(theme.accentSoftBg, "paper-texture border border-bmj-tan/25 p-6 sm:p-8")}>
       <div
         className={`flex flex-col ${portraitUrl ? "sm:flex-row sm:items-center sm:gap-6" : ""}`}
       >

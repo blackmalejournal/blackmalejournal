@@ -33,7 +33,7 @@ export default function PullQuoteSidebar({
             {quotes.map((quote, i) => (
               <blockquote
                 key={i}
-                className="border-l-[3px] border-bmj-red pl-4"
+                className="paper-texture border-l-[3px] border-bmj-red pl-4"
               >
                 <p className="font-body text-base italic leading-relaxed text-bmj-amber">
                   &ldquo;{quote}&rdquo;

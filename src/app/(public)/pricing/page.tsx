@@ -7,6 +7,7 @@ import { BrandMark } from '@/components/brand/BrandMark';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { withQuery } from '@/lib/paths';
 import type { MemberTier } from '@/lib/supabase/types';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'Pricing',
@@ -85,6 +86,7 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
         dividerClassName="my-8"
       />
 
+      <ScrollReveal as="div" delay={0.1}>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {PLANS.map((plan) => {
           const memberTier = member?.tier;
@@ -153,10 +155,12 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
           );
         })}
       </div>
+      </ScrollReveal>
 
+      <ScrollReveal as="div" delay={0.15}>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <section className="surface-panel p-8">
-          <h2 className="font-display text-2xl text-bmj-white">WHAT YOU ARE FUNDING</h2>
+        <section className="paper-texture surface-panel p-8">
+          <h2 className="relative z-10 font-display text-2xl text-bmj-white">WHAT YOU ARE FUNDING</h2>
           <p className="mt-4 font-body text-sm leading-relaxed text-bmj-cream/80">
             Membership supports independent editorial work, member resources, and the
             continued buildout of BMJ&apos;s archive, briefings, academy, and private
@@ -164,8 +168,8 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
           </p>
         </section>
 
-        <section className="surface-panel p-8">
-          <h2 className="font-display text-2xl text-bmj-white">FREQUENT QUESTIONS</h2>
+        <section className="paper-texture surface-panel p-8">
+          <h2 className="relative z-10 font-display text-2xl text-bmj-white">FREQUENT QUESTIONS</h2>
           <div className="mt-4 space-y-4 font-body text-sm leading-relaxed text-bmj-cream/80">
             <p>
               <span className="font-label uppercase tracking-widest text-bmj-tan">
@@ -190,6 +194,7 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
           </div>
         </section>
       </div>
+      </ScrollReveal>
     </div>
   );
 }

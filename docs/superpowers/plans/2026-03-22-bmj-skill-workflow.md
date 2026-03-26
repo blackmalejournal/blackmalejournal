@@ -4,7 +4,7 @@ This plan defines a repeatable Codex workflow for The Black Male Journal app usi
 
 ## Source Of Truth
 
-- Product and delivery scope: [../../../BMJ_MASTER_PLAN_v2.md](../../../BMJ_MASTER_PLAN_v2.md)
+- Product and delivery scope: tracked in active implementation plans under `docs/superpowers/plans/`
 - Brand rules and art direction: [../../brand/README.md](../../brand/README.md)
 - Operations and release controls: [../../ops/README.md](../../ops/README.md)
 - Active implementation plans: [README.md](README.md)
@@ -359,7 +359,7 @@ Trigger examples:
 - "Make sure docs are updated before we stop."
 
 Likely bundled resources:
-- `references/closeout.md` with exact BMJ expectations for `docs/INDEX.md`, lane READMEs, audits, and `docs/migration_changelog.md`
+- `references/closeout.md` with exact BMJ expectations for `docs/INDEX.md`, lane READMEs, and audits
 
 ## Recommended Build Order
 

@@ -10,6 +10,7 @@ import {
 import { BrandMark } from '@/components/brand/BrandMark';
 import { ContactForm } from './ContactForm';
 import { SupportCard } from './SupportCard';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'Connect',
@@ -40,17 +41,20 @@ const whatsappHref = process.env.NEXT_PUBLIC_WHATSAPP_LINK ?? '#';
 export default function ContactPage() {
   return (
     <section className="mx-auto max-w-content px-6 py-16">
-      <div className="mb-6">
-        <BrandMark size={40} color="var(--bmj-red)" />
-      </div>
-      <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-        Connect
-      </h1>
-      <p className="mb-12 max-w-xl font-body text-sm leading-relaxed text-bmj-cream/70">
-        Questions, ideas, collaborations, or just want to build with us — reach
-        out. The Chairman reads every message.
-      </p>
+      <ScrollReveal as="div">
+        <div className="mb-6">
+          <BrandMark size={40} color="var(--bmj-red)" />
+        </div>
+        <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
+          Connect
+        </h1>
+        <p className="mb-12 max-w-xl font-body text-sm leading-relaxed text-bmj-cream/70">
+          Questions, ideas, collaborations, or just want to build with us — reach
+          out. The Chairman reads every message.
+        </p>
+      </ScrollReveal>
 
+      <ScrollReveal as="div" delay={0.1}>
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
         <div>
           <h2 className="mb-6 font-label text-xs uppercase tracking-widest text-bmj-tan">
@@ -114,6 +118,7 @@ export default function ContactPage() {
           <SupportCard />
         </div>
       </div>
+      </ScrollReveal>
     </section>
   );
 }

@@ -124,9 +124,7 @@ BMJ currently renders from its local brand tokens:
 - **Mirrored in Tailwind:** `tailwind.config.ts`
 - **Brand guardrail:** `docs/brand/invariants.md`
 
-BMJ has no runtime dependency on any external shared token package. Do not replace BMJ imports with a shared token package unless a future migration is explicitly approved and verified against the brand invariants.
-
-`docs/design-system-consolidation.md` is a historical ADR describing a superseded migration proposal. It does not describe the current application wiring.
+BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 
 ## Route Rename Checklist
 When renaming a public route (e.g., /library → /records), update all 5 locations:

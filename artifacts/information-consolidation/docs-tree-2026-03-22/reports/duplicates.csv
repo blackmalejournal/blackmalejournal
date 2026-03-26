@@ -1,4 +1,0 @@
-left_record_id,right_record_id,match_type,score,decision
-9f78db25-1df6-5450-a579-9c22d684c065,90bc11a6-dcb9-548f-b2f7-7533811e46d4,exact,1.0,auto_merge
-90bc11a6-dcb9-548f-b2f7-7533811e46d4,a96e4e2e-df64-5a5c-9f62-17b3796f9b92,near,0.95,review
-9f78db25-1df6-5450-a579-9c22d684c065,a96e4e2e-df64-5a5c-9f62-17b3796f9b92,near,0.95,review

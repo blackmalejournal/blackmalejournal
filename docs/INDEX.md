@@ -5,10 +5,7 @@ This index covers the committed documentation tree under `docs/`.
 ## Root Documents
 
 - [DEVELOPER.md](DEVELOPER.md) - developer workflow, scripts, testing, and deployment notes.
-- [design-system-consolidation.md](design-system-consolidation.md) - design-system ADR and consolidation plan.
 - [deferrals.md](deferrals.md) - external dependencies and configuration tasks blocked outside the repo.
-- [placeholder-tracking.md](placeholder-tracking.md) - placeholder content inventory and cleanup notes.
-- [migration_changelog.md](migration_changelog.md) - audit history and documentation change log.
 
 ## Audits
 

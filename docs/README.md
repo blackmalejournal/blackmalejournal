@@ -5,10 +5,7 @@ This folder contains the committed BMJ documentation set. Start with [INDEX.md](
 ## Primary References
 
 - [DEVELOPER.md](DEVELOPER.md) for local development, test, and deployment workflow.
-- [design-system-consolidation.md](design-system-consolidation.md) for the design-system ADR and consolidation decisions.
 - [deferrals.md](deferrals.md) for external setup and launch dependencies outside the codebase.
-- [placeholder-tracking.md](placeholder-tracking.md) for unresolved placeholder copy and content follow-up.
-- [migration_changelog.md](migration_changelog.md) for documentation audit and migration notes.
 
 ## Lanes
 

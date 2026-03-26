@@ -6,6 +6,7 @@ import TributeCard from '@/components/content/TributeCard';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { getLensTheme } from '@/lib/lens-theme';
 import { cn } from '@/lib/utils';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -33,6 +34,7 @@ export default function AboutPage() {
 
   return (
     <section className="page-shell-tight py-16">
+      <ScrollReveal as="div">
       <div className="mx-auto mb-12 flex max-w-article flex-col items-center text-center">
         <Image
           src="/logos/primary-color.png"
@@ -50,8 +52,10 @@ export default function AboutPage() {
           dividerClassName="my-10"
         />
       </div>
+      </ScrollReveal>
 
-      <div className="max-w-article space-y-6">
+      <ScrollReveal as="div" delay={0.1}>
+      <div className="paper-texture max-w-article space-y-6">
         <p className="editorial-kicker">
           The Mission
         </p>
@@ -81,10 +85,12 @@ export default function AboutPage() {
           support and the discipline of a singular editorial vision.
         </p>
       </div>
+      </ScrollReveal>
 
       <StarDivider className="my-12" />
 
-      <div className="max-w-article space-y-6">
+      <ScrollReveal as="div" delay={0.1}>
+      <div className="paper-texture max-w-article space-y-6">
         <p className="editorial-kicker">
           The Editor
         </p>
@@ -112,9 +118,11 @@ export default function AboutPage() {
           revised when the evidence demands it, defended until it does.
         </p>
       </div>
+      </ScrollReveal>
 
       <StarDivider className="my-12" />
 
+      <ScrollReveal as="div" delay={0.1}>
       <div className="space-y-8">
         <div>
           <p className="editorial-kicker mb-4">
@@ -139,9 +147,11 @@ export default function AboutPage() {
           />
         </div>
       </div>
+      </ScrollReveal>
 
       <StarDivider className="my-12" />
 
+      <ScrollReveal as="div" delay={0.1}>
       <div className="space-y-12">
         <div>
           <p className="editorial-kicker mb-4">
@@ -230,9 +240,11 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+      </ScrollReveal>
 
       <StarDivider className="my-12" />
 
+      <ScrollReveal as="div" delay={0.1}>
       <div className="max-w-article space-y-8">
         <p className="editorial-kicker">
           Continue
@@ -265,6 +277,7 @@ export default function AboutPage() {
           </Link>
         </div>
       </div>
+      </ScrollReveal>
     </section>
   );
 }

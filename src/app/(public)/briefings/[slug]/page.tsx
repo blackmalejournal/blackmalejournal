@@ -16,6 +16,7 @@ import { ShareButton } from '@/components/ui/ShareButton';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import type { Briefing } from '@/lib/supabase/types';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 interface BriefingPageProps {
   params: Promise<{ slug: string }>;
@@ -142,12 +143,14 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
       </div>
 
       {/* Magazine cover hero */}
+      <ScrollReveal as="div">
       <MagazineCoverHero
         title={briefing.title}
         date={formatDate(briefing.published_at)}
         issueNumber={briefing.issue_number}
         coverImageUrl={briefing.cover_image || "/placeholder-cover.svg"}
       />
+      </ScrollReveal>
 
       {/* Sections */}
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
@@ -157,13 +160,13 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
             {briefing.sections.map((section, index) => (
               <div key={index}>
                 {index > 0 && <StarDivider className="my-10" />}
-                <section>
+                <section className="paper-texture">
                   <div className="accent-border-top mb-6 pt-6">
                     <h2 className="font-display text-3xl text-bmj-white sm:text-4xl">
                       {section.title}
                     </h2>
                   </div>
-                  <div className="mx-auto max-w-article">
+                  <div className="relative z-10 mx-auto max-w-article">
                     <p className="whitespace-pre-line font-body text-lg leading-[1.9] text-bmj-cream/90">
                       {section.body}
                     </p>

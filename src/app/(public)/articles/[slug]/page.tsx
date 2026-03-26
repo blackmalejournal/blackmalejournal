@@ -13,6 +13,7 @@ import { RelatedArticles } from '@/components/content/RelatedArticles';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -86,6 +87,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </div>
 
       {/* Article header */}
+      <ScrollReveal as="div">
       <header className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <LensBadge lens={article.lens} className="mb-4" />
 
@@ -108,6 +110,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className="accent-border-bottom mb-0 pb-0" />
       </header>
+      </ScrollReveal>
 
       {/* Cover image */}
       {article.cover_image && (
@@ -123,6 +126,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       )}
 
       {/* Article body */}
+      <ScrollReveal as="div" delay={0.1}>
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
         {hasAccess ? (
           <PullQuoteSidebar body={article.body}>
@@ -138,9 +142,13 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         )}
       </div>
 
+      </ScrollReveal>
+
+      <ScrollReveal as="div" delay={0.15}>
       <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
         <RelatedArticles articles={relatedFiltered} lens={article.lens} />
       </div>
+      </ScrollReveal>
     </div>
   );
 }

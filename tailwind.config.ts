@@ -17,7 +17,6 @@ const config: Config = {
           brown:         "#3B2417",
           tan:           "#B8986A",
           white:         "#F2EDE4",
-          // Expanded accent palette
           paper:         "#F0DDBC",
           "deep-black":  "#1C130E",
           crimson:       "#712414",

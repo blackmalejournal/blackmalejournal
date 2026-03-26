@@ -3,6 +3,7 @@ import { BrandMark } from '@/components/brand/BrandMark';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { SupportFlow } from './SupportFlow';
 import { AlternativeMethods } from './AlternativeMethods';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 export const metadata: Metadata = {
   title: 'Support the Mission',
@@ -48,24 +49,30 @@ export default async function SupportPage({ searchParams }: SupportPageProps) {
         </div>
       )}
 
-      <div className="mb-6">
-        <BrandMark size={40} color="var(--bmj-red)" />
-      </div>
-      <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-        Fund the Mission
-      </h1>
-      <p className="mb-10 max-w-lg font-body text-sm leading-relaxed text-bmj-cream/70">
-        No corporate sponsors. No advertisers. No compromise. The Black Male
-        Journal runs on the direct support of readers who believe independent
-        media for Black men matters. Every dollar funds reporting, analysis, and
-        the Weekend Briefing.
-      </p>
+      <ScrollReveal as="div">
+        <div className="mb-6">
+          <BrandMark size={40} color="var(--bmj-red)" />
+        </div>
+        <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
+          Fund the Mission
+        </h1>
+        <p className="mb-10 max-w-lg font-body text-sm leading-relaxed text-bmj-cream/70">
+          No corporate sponsors. No advertisers. No compromise. The Black Male
+          Journal runs on the direct support of readers who believe independent
+          media for Black men matters. Every dollar funds reporting, analysis, and
+          the Weekend Briefing.
+        </p>
+      </ScrollReveal>
 
-      <SupportFlow />
+      <ScrollReveal as="div" delay={0.1}>
+        <SupportFlow />
+      </ScrollReveal>
 
       <StarDivider className="my-12" />
 
-      <AlternativeMethods />
+      <ScrollReveal as="div" delay={0.1}>
+        <AlternativeMethods />
+      </ScrollReveal>
     </section>
   );
 }
