@@ -537,3 +537,56 @@ export async function searchContent(
   results.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
   return results.slice(0, limit);
 }
+
+// ── Search (FTS via Supabase RPC) ────────────────────────────────────────────
+
+export type SearchFTSOptions = {
+  lens?: string[];
+  types?: string[];
+  sort?: 'relevance' | 'date';
+  limit?: number;
+};
+
+export async function searchContentFTS(
+  query: string,
+  options: SearchFTSOptions = {},
+): Promise<SearchResult[]> {
+  const { lens, types, sort = 'relevance', limit = 30 } = options;
+  if (!query || query.trim().length < 2) return [];
+
+  const supabase = await createClient();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data, error } = await (supabase as any).rpc('search_content', {
+    query: query.trim(),
+    filter_lens: lens ?? null,
+    filter_types: types ?? null,
+    sort_by: sort,
+    result_limit: limit,
+  });
+
+  if (error) {
+    console.error('[searchContentFTS]', error.message);
+    return [];
+  }
+
+  return ((data ?? []) as Array<{
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    lens: string | null;
+    access_tier: string;
+    published_at: string;
+    content_type: string;
+    relevance: number;
+  }>).map((row) => ({
+    type: row.content_type as SearchResult['type'],
+    title: row.title,
+    slug: row.slug,
+    excerpt: row.excerpt ?? '',
+    lens: (row.lens as Lens) ?? undefined,
+    accessTier: (row.access_tier as AccessTier) ?? undefined,
+    publishedAt: row.published_at,
+    relevance: row.relevance,
+  }));
+}
