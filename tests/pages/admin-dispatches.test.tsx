@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { PATHS, adminEditPath } from '@/lib/paths';
 import type { Dispatch } from '@/lib/supabase/types';
 
 const mockDispatches: Dispatch[] = [
@@ -73,7 +74,7 @@ describe('DispatchesAdminPage', () => {
   it('renders "New Dispatch" link', async () => {
     await renderPage();
     const link = screen.getByRole('link', { name: /new dispatch/i });
-    expect(link).toHaveAttribute('href', '/admin/dispatches/new');
+    expect(link).toHaveAttribute('href', PATHS.ADMIN_DISPATCHES_NEW);
   });
 
   it('renders dispatch count', async () => {
@@ -85,8 +86,8 @@ describe('DispatchesAdminPage', () => {
     await renderPage();
     const editLinks = screen.getAllByRole('link', { name: /edit/i });
     expect(editLinks).toHaveLength(2);
-    expect(editLinks[0]).toHaveAttribute('href', '/admin/dispatches/dsp-1/edit');
-    expect(editLinks[1]).toHaveAttribute('href', '/admin/dispatches/dsp-2/edit');
+    expect(editLinks[0]).toHaveAttribute('href', adminEditPath('dispatches', 'dsp-1'));
+    expect(editLinks[1]).toHaveAttribute('href', adminEditPath('dispatches', 'dsp-2'));
   });
 
   it('renders status filter tabs including scheduled', async () => {

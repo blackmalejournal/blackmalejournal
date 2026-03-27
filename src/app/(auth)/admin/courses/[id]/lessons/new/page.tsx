@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { PATHS } from '@/lib/paths';
 import { getCourseById } from '@/lib/supabase/admin-queries';
 import { LessonForm } from '../../../../courses/LessonForm';
 import { createLessonAction } from '../../../../courses/lessons/actions';
@@ -25,7 +26,7 @@ export default async function NewLessonPage({ params, searchParams }: NewLessonP
   return (
     <div className="mx-auto max-w-4xl">
       <Link
-        href={`/admin/courses/${course.id}/edit`}
+        href={`${PATHS.ADMIN_COURSES}/${course.id}/edit`}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Course

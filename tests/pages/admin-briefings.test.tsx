@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { PATHS, adminEditPath } from '@/lib/paths';
 import type { Briefing } from '@/lib/supabase/types';
 
 const mockBriefings: Briefing[] = [
@@ -70,7 +71,7 @@ describe('BriefingsAdminPage', () => {
   it('renders "New Briefing" link', async () => {
     await renderPage();
     const link = screen.getByRole('link', { name: /new briefing/i });
-    expect(link).toHaveAttribute('href', '/admin/briefings/new');
+    expect(link).toHaveAttribute('href', PATHS.ADMIN_BRIEFINGS_NEW);
   });
 
   it('renders briefing count', async () => {
@@ -82,8 +83,8 @@ describe('BriefingsAdminPage', () => {
     await renderPage();
     const editLinks = screen.getAllByRole('link', { name: /edit/i });
     expect(editLinks).toHaveLength(2);
-    expect(editLinks[0]).toHaveAttribute('href', '/admin/briefings/br-1/edit');
-    expect(editLinks[1]).toHaveAttribute('href', '/admin/briefings/br-2/edit');
+    expect(editLinks[0]).toHaveAttribute('href', adminEditPath('briefings', 'br-1'));
+    expect(editLinks[1]).toHaveAttribute('href', adminEditPath('briefings', 'br-2'));
   });
 
   it('renders issue number in metadata', async () => {

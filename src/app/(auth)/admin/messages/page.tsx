@@ -8,7 +8,7 @@ import {
 } from '@/lib/supabase/admin-queries';
 import type { ContactSubmissionStatus } from '@/lib/supabase/types';
 import { updateContactSubmissionAction } from './actions';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Messages — Admin',
@@ -62,7 +62,7 @@ export default async function MessagesAdminPage({ searchParams }: MessagesAdminP
     getContactSubmissionCounts(),
     getMessageAdminInsights(),
   ]);
-  const returnTo = withQuery('/admin/messages', {
+  const returnTo = withQuery(PATHS.ADMIN_MESSAGES, {
     status: activeStatus,
     q: q || undefined,
   });
@@ -157,7 +157,7 @@ export default async function MessagesAdminPage({ searchParams }: MessagesAdminP
         className="mt-6 flex flex-wrap gap-6 border-b border-bmj-tan/20"
       >
         {STATUS_TABS.map((tab) => {
-          const href = withQuery('/admin/messages', {
+          const href = withQuery(PATHS.ADMIN_MESSAGES, {
             status: tab.value,
             q: q || undefined,
           });

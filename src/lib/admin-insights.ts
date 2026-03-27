@@ -1,3 +1,4 @@
+import { PATHS } from '@/lib/paths';
 import type {
   ContactSubmissionStatus,
   ContentStatus,
@@ -324,7 +325,7 @@ export function summarizeMessageInsights(
         name: record.name,
         email: record.email,
         subject: record.subject,
-        href: '/admin/messages',
+        href: PATHS.ADMIN_MESSAGES,
         status: record.status,
         ageInDays,
         overdue,

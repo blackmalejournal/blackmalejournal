@@ -1,4 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
+import { PATHS, adminEditPath } from '@/lib/paths';
 import type { Article } from '@/lib/supabase/types';
 
 const mockArticles: Article[] = [
@@ -79,7 +80,7 @@ describe('ArticlesAdminPage', () => {
   it('renders "New Article" link', async () => {
     await renderPage();
     const link = screen.getByRole('link', { name: /new article/i });
-    expect(link).toHaveAttribute('href', '/admin/articles/new');
+    expect(link).toHaveAttribute('href', PATHS.ADMIN_ARTICLES_NEW);
   });
 
   it('renders article count', async () => {
@@ -91,8 +92,8 @@ describe('ArticlesAdminPage', () => {
     await renderPage();
     const editLinks = screen.getAllByRole('link', { name: /edit/i });
     expect(editLinks).toHaveLength(2);
-    expect(editLinks[0]).toHaveAttribute('href', '/admin/articles/art-1/edit');
-    expect(editLinks[1]).toHaveAttribute('href', '/admin/articles/art-2/edit');
+    expect(editLinks[0]).toHaveAttribute('href', adminEditPath('articles', 'art-1'));
+    expect(editLinks[1]).toHaveAttribute('href', adminEditPath('articles', 'art-2'));
   });
 
   it('renders star icon for featured articles', async () => {

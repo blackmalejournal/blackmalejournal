@@ -5,6 +5,7 @@ import { Plus } from 'lucide-react';
 import { DeleteButton } from '@/components/admin/DeleteButton';
 import { CourseForm } from '../../CourseForm';
 import { deleteCourseAction, updateCourseAction } from '../../actions';
+import { PATHS } from '@/lib/paths';
 import { getCourseById, getLessonsForAdminCourse } from '@/lib/supabase/admin-queries';
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ export default async function EditCoursePage({ params, searchParams }: EditCours
   return (
     <div className="mx-auto max-w-4xl">
       <Link
-        href="/admin/courses"
+        href={PATHS.ADMIN_COURSES}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Courses
@@ -74,7 +75,7 @@ export default async function EditCoursePage({ params, searchParams }: EditCours
             </p>
           </div>
           <Link
-            href={`/admin/courses/${course.id}/lessons/new`}
+            href={`${PATHS.ADMIN_COURSES}/${course.id}/lessons/new`}
             className="inline-flex items-center gap-2 bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
           >
             <Plus size={16} />
@@ -105,7 +106,7 @@ export default async function EditCoursePage({ params, searchParams }: EditCours
                     </p>
                   </div>
                   <Link
-                    href={`/admin/courses/${course.id}/lessons/${lesson.id}/edit`}
+                    href={`${PATHS.ADMIN_COURSES}/${course.id}/lessons/${lesson.id}/edit`}
                     className="ml-4 shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                   >
                     Edit

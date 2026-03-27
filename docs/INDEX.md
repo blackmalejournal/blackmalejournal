@@ -15,8 +15,8 @@ This index covers the committed documentation tree under `docs/`.
 - [audits/README.md](audits/README.md) - audit lane index and current audit references.
 - [audits/2026-03-25-codebase-audit.md](audits/2026-03-25-codebase-audit.md) - repository-wide codebase audit covering governance, quality gates, and coverage risk.
 - [audits/2026-03-25-codebase-audit-remediation-plan.md](audits/2026-03-25-codebase-audit-remediation-plan.md) - prioritized remediation roadmap with targets and acceptance criteria from the 2026-03-25 audit.
-- [audits/2026-03-22-release-readiness-and-env-audit.md](audits/2026-03-22-release-readiness-and-env-audit.md) - release-gate results and current Vercel environment/domain findings.
-- [audits/2026-03-22-docs-information-consolidation.md](audits/2026-03-22-docs-information-consolidation.md) - accepted docs Markdown consolidation audit and package manifest.
+- [audits/archive/2026-03-22-release-readiness-and-env-audit.md](audits/archive/2026-03-22-release-readiness-and-env-audit.md) - release-gate results and current Vercel environment/domain findings.
+- [audits/archive/2026-03-22-docs-information-consolidation.md](audits/archive/2026-03-22-docs-information-consolidation.md) - accepted docs Markdown consolidation audit and package manifest.
 
 ## Brand
 

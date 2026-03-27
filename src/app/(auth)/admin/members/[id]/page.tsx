@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { PATHS } from '@/lib/paths';
 import { getAdminMemberById } from '@/lib/supabase/admin-queries';
 import { updateMemberAction } from '../actions';
 
@@ -35,7 +36,7 @@ export default async function MemberDetailPage({
   return (
     <div className="mx-auto max-w-3xl">
       <Link
-        href="/admin/members"
+        href={PATHS.ADMIN_MEMBERS}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Members
@@ -61,7 +62,7 @@ export default async function MemberDetailPage({
           <h2 className="mb-6 font-display text-2xl text-bmj-white">ACCESS CONTROL</h2>
           <form action={updateMemberAction} className="space-y-6">
             <input type="hidden" name="memberId" value={member.id} />
-            <input type="hidden" name="returnTo" value={`/admin/members/${member.id}`} />
+            <input type="hidden" name="returnTo" value={`${PATHS.ADMIN_MEMBERS}/${member.id}`} />
 
             <div>
               <label htmlFor="tier" className="mb-1 block font-label text-xs uppercase tracking-widest text-bmj-tan">

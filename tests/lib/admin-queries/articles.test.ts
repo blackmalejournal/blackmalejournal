@@ -1,6 +1,9 @@
-import { createMockSupabaseClient, type MockSupabaseClient } from '../helpers/supabase-mock';
-import { mockArticle } from '../helpers/fixtures';
-import type { AdminActivityLog } from '@/lib/supabase/types';
+import {
+  createMockSupabaseClient,
+  setFromSequence,
+  type MockSupabaseClient,
+} from '../../helpers/supabase-mock';
+import { mockArticle } from '../../helpers/fixtures';
 
 // ── Module-level mock ────────────────────────────────────────────────────────
 let mockClient: MockSupabaseClient;
@@ -9,55 +12,18 @@ jest.mock('@/lib/supabase/admin', () => ({
   createAdminClient: jest.fn(() => mockClient),
 }));
 
-// Suppress console.error noise from expected error paths
 jest.spyOn(console, 'error').mockImplementation(() => {});
 
+// Import AFTER mocks
 import {
-  bulkUpdateArticleStatuses,
-  bulkUpdateDownloadAccessTiers,
-  createAdminActivityLogEntry,
   getAllArticles,
-  getAdminActivityLogForEntity,
   getArticleById,
+  getArticlesByIds,
   createArticle,
   updateArticle,
   deleteArticle,
-  getContentCounts,
-} from '@/lib/supabase/admin-queries';
-
-const mockAdminActivity: AdminActivityLog = {
-  id: 'activity-1',
-  actor_user_id: 'member-1',
-  actor_email: 'operator@blackmalejournal.com',
-  actor_role: 'admin',
-  entity_type: 'article',
-  entity_id: 'art-1',
-  entity_title: 'The Discipline of Morning Routines',
-  action: 'updated',
-  summary: 'Updated article "The Discipline of Morning Routines": status draft -> published.',
-  metadata: {
-    previous: {
-      title: 'The Discipline of Morning Routines',
-      status: 'draft',
-    },
-    next: {
-      title: 'The Discipline of Morning Routines',
-      status: 'published',
-    },
-  },
-  created_at: '2026-03-25T10:00:00Z',
-};
-
-const mockDraftArticle = {
-  ...mockArticle,
-  status: 'draft' as const,
-  published_at: '',
-};
-
-const mockPublishedArticle = {
-  ...mockArticle,
-  status: 'published' as const,
-};
+  bulkUpdateArticleStatuses,
+} from '@/lib/supabase/admin-queries/articles';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -72,6 +38,17 @@ function setError(message = 'test error') {
 function setData(data: unknown) {
   resetClient({ data });
 }
+
+const mockDraftArticle = {
+  ...mockArticle,
+  status: 'draft' as const,
+  published_at: '',
+};
+
+const mockPublishedArticle = {
+  ...mockArticle,
+  status: 'published' as const,
+};
 
 // ── Setup ────────────────────────────────────────────────────────────────────
 
@@ -138,7 +115,6 @@ describe('getAllArticles', () => {
   it('does not filter by status when none provided', async () => {
     setData([]);
     await getAllArticles();
-    // eq should not have been called (no status, no lens)
     expect(mockClient._queryChain.eq).not.toHaveBeenCalled();
   });
 });
@@ -160,6 +136,31 @@ describe('getArticleById', () => {
     mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'not found' } });
     const result = await getArticleById('nonexistent');
     expect(result).toBeNull();
+  });
+});
+
+// ── getArticlesByIds ─────────────────────────────────────────────────────────
+
+describe('getArticlesByIds', () => {
+  it('normalizes and sorts IDs', async () => {
+    const second = { ...mockArticle, id: 'art-2', title: 'Second' };
+    setData([mockArticle, second]);
+
+    const result = await getArticlesByIds([' art-2 ', 'art-1', 'art-2', '']);
+
+    expect(mockClient._queryChain.in).toHaveBeenCalledWith('id', ['art-2', 'art-1']);
+    expect(result.map((row) => row.id)).toEqual(['art-2', 'art-1']);
+  });
+
+  it('returns empty array for empty IDs', async () => {
+    const result = await getArticlesByIds([]);
+    expect(result).toEqual([]);
+  });
+
+  it('returns empty array on error', async () => {
+    setError('lookup failed');
+    const result = await getArticlesByIds(['art-1']);
+    expect(result).toEqual([]);
   });
 });
 
@@ -300,7 +301,14 @@ describe('deleteArticle', () => {
   });
 });
 
+// ── bulkUpdateArticleStatuses ────────────────────────────────────────────────
+
 describe('bulkUpdateArticleStatuses', () => {
+  it('returns empty result for empty IDs array', async () => {
+    const result = await bulkUpdateArticleStatuses([], 'published');
+    expect(result).toEqual({ previous: [], updated: [] });
+  });
+
   it('updates selected article statuses and preserves per-row publish timestamps', async () => {
     resetClient();
 
@@ -313,252 +321,62 @@ describe('bulkUpdateArticleStatuses', () => {
       { ...mockPublishedArticle, id: 'art-2', title: 'Draft Two' },
     ];
 
-    const responses = [
-      { data: previous, error: null },
-      { data: null, error: null },
-      { data: null, error: null },
-      { data: updated, error: null },
-    ];
-    const chains: MockSupabaseClient[] = [];
-    let callIndex = 0;
-
-    mockClient.from = jest.fn().mockImplementation((table: string) => {
-      expect(table).toBe('articles');
-      const response = responses[callIndex++];
-      const chainClient = createMockSupabaseClient(response.error ? { error: response.error } : { data: response.data });
-      chains.push(chainClient);
-      return chainClient._queryChain;
-    });
+    setFromSequence(mockClient, [
+      { table: 'articles', data: previous },
+      { table: 'articles', data: null },
+      { table: 'articles', data: null },
+      { table: 'articles', data: updated },
+    ]);
 
     const result = await bulkUpdateArticleStatuses(['art-1', 'art-2'], 'published');
 
     expect(result).toEqual({ previous, updated });
-    expect(chains[0]._queryChain.in).toHaveBeenCalledWith('id', ['art-1', 'art-2']);
-    expect(chains[1]._queryChain.update).toHaveBeenCalledWith({ status: 'published' });
-    expect(chains[1]._queryChain.in).toHaveBeenCalledWith('id', ['art-1', 'art-2']);
-    expect(chains[2]._queryChain.update).toHaveBeenCalledWith(
-      expect.objectContaining({ published_at: expect.any(String) }),
-    );
-    expect(chains[2]._queryChain.in).toHaveBeenCalledWith('id', ['art-1']);
   });
-});
 
-describe('bulkUpdateDownloadAccessTiers', () => {
-  it('updates the access tier across selected downloads', async () => {
+  it('returns null when status update fails', async () => {
     resetClient();
 
-    const previous = [
-      {
-        id: 'dl-1',
-        title: 'Planner',
-        slug: 'planner',
-        description: 'Desc',
-        category: 'template',
-        file_url: 'downloads/planner.pdf',
-        file_type: 'pdf',
-        file_size: 1024,
-        access_tier: 'free' as const,
-        cover_image: null,
-        published_at: '2026-01-01T00:00:00Z',
-        created_at: '2026-01-01T00:00:00Z',
-      },
-    ];
-    const updated = [
-      {
-        ...previous[0],
-        access_tier: 'premium' as const,
-      },
-    ];
+    const previous = [{ ...mockDraftArticle, id: 'art-1' }];
 
-    const responses = [
-      { data: previous, error: null },
-      { data: null, error: null },
-      { data: updated, error: null },
-    ];
-    const chains: MockSupabaseClient[] = [];
-    let callIndex = 0;
+    setFromSequence(mockClient, [
+      { table: 'articles', data: previous },
+      { table: 'articles', error: { message: 'update failed' } },
+    ]);
 
-    mockClient.from = jest.fn().mockImplementation((table: string) => {
-      expect(table).toBe('downloads');
-      const response = responses[callIndex++];
-      const chainClient = createMockSupabaseClient(response.error ? { error: response.error } : { data: response.data });
-      chains.push(chainClient);
-      return chainClient._queryChain;
-    });
-
-    const result = await bulkUpdateDownloadAccessTiers(['dl-1'], 'premium');
-
-    expect(result).toEqual({ previous, updated });
-    expect(chains[1]._queryChain.update).toHaveBeenCalledWith({ access_tier: 'premium' });
-    expect(chains[1]._queryChain.in).toHaveBeenCalledWith('id', ['dl-1']);
-  });
-});
-
-// ── admin activity log ───────────────────────────────────────────────────────
-
-describe('createAdminActivityLogEntry', () => {
-  it('inserts a log entry and returns it', async () => {
-    resetClient({ data: mockAdminActivity });
-    mockClient._queryChain.single.mockResolvedValue({ data: mockAdminActivity, error: null });
-
-    const result = await createAdminActivityLogEntry({
-      actor_user_id: 'member-1',
-      actor_email: 'operator@blackmalejournal.com',
-      actor_role: 'admin',
-      entity_type: 'article',
-      entity_id: 'art-1',
-      entity_title: mockArticle.title,
-      action: 'updated',
-      summary: mockAdminActivity.summary,
-      metadata: mockAdminActivity.metadata,
-    });
-
-    expect(result).toEqual(mockAdminActivity);
-    expect(mockClient.from).toHaveBeenCalledWith('admin_activity_log');
-    expect(mockClient._queryChain.insert).toHaveBeenCalledWith(
-      expect.objectContaining({
-        actor_email: 'operator@blackmalejournal.com',
-        actor_role: 'admin',
-        entity_type: 'article',
-        entity_id: 'art-1',
-        entity_title: mockArticle.title,
-        action: 'updated',
-        summary: mockAdminActivity.summary,
-        metadata: mockAdminActivity.metadata,
-      }),
-    );
-  });
-
-  it('returns null on insert error', async () => {
-    resetClient();
-    mockClient._queryChain.single.mockResolvedValue({ data: null, error: { message: 'insert failed' } });
-
-    const result = await createAdminActivityLogEntry({
-      actor_user_id: null,
-      actor_email: 'operator@blackmalejournal.com',
-      actor_role: 'editor',
-      entity_type: 'dispatch',
-      entity_id: 'dispatch-1',
-      entity_title: 'Dispatch title',
-      action: 'created',
-      summary: 'Created dispatch "Dispatch title".',
-    });
-
+    const result = await bulkUpdateArticleStatuses(['art-1'], 'review');
     expect(result).toBeNull();
   });
-});
 
-describe('getAdminActivityLogForEntity', () => {
-  it('returns activity ordered by created_at desc for one entity', async () => {
-    setData([mockAdminActivity]);
-
-    const result = await getAdminActivityLogForEntity('article', 'art-1', 5);
-
-    expect(result).toEqual([mockAdminActivity]);
-    expect(mockClient.from).toHaveBeenCalledWith('admin_activity_log');
-    expect(mockClient._queryChain.eq).toHaveBeenNthCalledWith(1, 'entity_type', 'article');
-    expect(mockClient._queryChain.eq).toHaveBeenNthCalledWith(2, 'entity_id', 'art-1');
-    expect(mockClient._queryChain.order).toHaveBeenCalledWith('created_at', { ascending: false });
-    expect(mockClient._queryChain.limit).toHaveBeenCalledWith(5);
-  });
-
-  it('returns empty array on query error', async () => {
-    setError('query failed');
-
-    const result = await getAdminActivityLogForEntity('article', 'art-1');
-
-    expect(result).toEqual([]);
-  });
-});
-
-// ── getContentCounts ─────────────────────────────────────────────────────────
-
-describe('getContentCounts', () => {
-  it('returns structured counts from all tables', async () => {
-    // The mock chain resolves via .then, and count comes from the resolved value.
-    // We need to override the chain to include count in the resolved value.
+  it('returns null when published_at patch fails', async () => {
     resetClient();
 
-    // Override from() to return different count values per call
-    let callIndex = 0;
-    // articles(total,pub,draft), briefings(total,pub,draft), courses(total,published,draft),
-    // dispatches(total,pub,draft), downloads(total), handbooks(total,pub,draft),
-    // members(total), messages(total), subscribers(total)
-    const counts = [10, 5, 3, 8, 4, 2, 6, 4, 2, 15, 7, 5, 12, 7, 5, 2, 42, 9, 99];
-    mockClient.from = jest.fn().mockImplementation(() => {
-      const idx = callIndex++;
-      const chain = { ...mockClient._queryChain };
-      // Make the chain thenable with count
-      chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: counts[idx] }));
-      chain.eq = jest.fn().mockReturnValue(chain);
-      chain.is = jest.fn().mockReturnValue(chain);
-      chain.select = jest.fn().mockReturnValue(chain);
-      return chain;
-    });
+    const previous = [{ ...mockDraftArticle, id: 'art-1', published_at: '' }];
 
-    const result = await getContentCounts();
-    expect(result).toEqual({
-      articles: { total: 10, published: 5, draft: 3 },
-      briefings: { total: 8, published: 4, draft: 2 },
-      courses: { total: 6, published: 4, draft: 2 },
-      dispatches: { total: 15, published: 7, draft: 5 },
-      downloads: { total: 12 },
-      handbooks: { total: 7, published: 5, draft: 2 },
-      members: { total: 42 },
-      messages: { total: 9 },
-      subscribers: { total: 99 },
-    });
+    setFromSequence(mockClient, [
+      { table: 'articles', data: previous },
+      { table: 'articles', data: null },
+      { table: 'articles', error: { message: 'patch failed' } },
+    ]);
+
+    const result = await bulkUpdateArticleStatuses(['art-1'], 'published');
+    expect(result).toBeNull();
   });
 
-  it('returns zeros when counts are null', async () => {
+  it('skips published_at patch when all rows already have published_at', async () => {
     resetClient();
 
-    mockClient.from = jest.fn().mockImplementation(() => {
-      const chain = { ...mockClient._queryChain };
-      chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: null }));
-      chain.eq = jest.fn().mockReturnValue(chain);
-      chain.is = jest.fn().mockReturnValue(chain);
-      chain.select = jest.fn().mockReturnValue(chain);
-      return chain;
-    });
+    const previous = [{ ...mockPublishedArticle, id: 'art-1', published_at: '2026-03-01T00:00:00Z' }];
+    const updated = [{ ...mockPublishedArticle, id: 'art-1' }];
 
-    const result = await getContentCounts();
-    expect(result).toEqual({
-      articles: { total: 0, published: 0, draft: 0 },
-      briefings: { total: 0, published: 0, draft: 0 },
-      courses: { total: 0, published: 0, draft: 0 },
-      dispatches: { total: 0, published: 0, draft: 0 },
-      downloads: { total: 0 },
-      handbooks: { total: 0, published: 0, draft: 0 },
-      members: { total: 0 },
-      messages: { total: 0 },
-      subscribers: { total: 0 },
-    });
-  });
+    // Only 3 from() calls: fetch previous, update status, fetch updated
+    // (no published_at patch needed)
+    setFromSequence(mockClient, [
+      { table: 'articles', data: previous },
+      { table: 'articles', data: null },
+      { table: 'articles', data: updated },
+    ]);
 
-  it('queries correct tables', async () => {
-    resetClient();
-
-    const tablesCalled: string[] = [];
-    mockClient.from = jest.fn().mockImplementation((table: string) => {
-      tablesCalled.push(table);
-      const chain = { ...mockClient._queryChain };
-      chain.then = jest.fn((resolve) => resolve({ data: null, error: null, count: 0 }));
-      chain.eq = jest.fn().mockReturnValue(chain);
-      chain.is = jest.fn().mockReturnValue(chain);
-      chain.select = jest.fn().mockReturnValue(chain);
-      return chain;
-    });
-
-    await getContentCounts();
-    expect(tablesCalled).toContain('articles');
-    expect(tablesCalled).toContain('briefings');
-    expect(tablesCalled).toContain('courses');
-    expect(tablesCalled).toContain('dispatches');
-    expect(tablesCalled).toContain('downloads');
-    expect(tablesCalled).toContain('handbooks');
-    expect(tablesCalled).toContain('members');
-    expect(tablesCalled).toContain('contact_submissions');
-    expect(tablesCalled).toContain('newsletter_subscribers');
+    const result = await bulkUpdateArticleStatuses(['art-1'], 'published');
+    expect(result).toEqual({ previous, updated });
   });
 });

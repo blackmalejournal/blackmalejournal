@@ -12,7 +12,7 @@ import {
   summarizePublishReadiness,
 } from '@/lib/admin-publishing';
 import { getAllBriefings } from '@/lib/supabase/admin-queries';
-import { withQuery } from '@/lib/paths';
+import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import type { ContentStatus } from '@/lib/supabase/types';
 import { bulkUpdateBriefingStatusAction } from './actions';
 
@@ -86,7 +86,7 @@ export default async function BriefingsAdminPage({
   const readinessSummary = summarizePublishReadiness(
     briefingRows.map((row) => row.readiness),
   );
-  const returnPath = withQuery('/admin/briefings', {
+  const returnPath = withQuery(PATHS.ADMIN_BRIEFINGS, {
     status: activeStatus,
     q: q?.trim() || undefined,
   });
@@ -103,7 +103,7 @@ export default async function BriefingsAdminPage({
           </p>
         </div>
         <Link
-          href="/admin/briefings/new"
+          href={PATHS.ADMIN_BRIEFINGS_NEW}
           className="inline-flex items-center gap-2 bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
         >
           <Plus size={16} />
@@ -140,7 +140,7 @@ export default async function BriefingsAdminPage({
           return (
             <Link
               key={tab.label}
-              href={withQuery('/admin/briefings', {
+              href={withQuery(PATHS.ADMIN_BRIEFINGS, {
                 status: tab.value,
                 q: q?.trim() || undefined,
               })}
@@ -173,7 +173,7 @@ export default async function BriefingsAdminPage({
           Search
         </button>
         <Link
-          href="/admin/briefings"
+          href={PATHS.ADMIN_BRIEFINGS}
           className="border border-bmj-tan/30 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Reset
@@ -265,7 +265,7 @@ export default async function BriefingsAdminPage({
                       ) : null}
                     </div>
                     <Link
-                      href={`/admin/briefings/${briefing.id}/edit`}
+                      href={adminEditPath('briefings', briefing.id)}
                       className="shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                     >
                       Edit

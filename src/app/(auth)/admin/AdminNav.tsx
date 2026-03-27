@@ -14,19 +14,20 @@ import {
   MessageSquare,
   Mail,
 } from 'lucide-react';
+import { PATHS } from '@/lib/paths';
 import { BrandMark } from '@/components/brand/BrandMark';
 
 const NAV_ITEMS = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/articles', label: 'Articles', icon: FileText },
-  { href: '/admin/briefings', label: 'Briefings', icon: BookOpen },
-  { href: '/admin/courses', label: 'Courses', icon: GraduationCap },
-  { href: '/admin/dispatches', label: 'Dispatches', icon: PenLine },
-  { href: '/admin/downloads', label: 'Downloads', icon: Download },
-  { href: '/admin/handbooks', label: 'Handbooks', icon: BookMarked },
-  { href: '/admin/members', label: 'Members', icon: Users },
-  { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
-  { href: '/admin/subscribers', label: 'Subscribers', icon: Mail },
+  { href: PATHS.ADMIN, label: 'Dashboard', icon: LayoutDashboard },
+  { href: PATHS.ADMIN_ARTICLES, label: 'Articles', icon: FileText },
+  { href: PATHS.ADMIN_BRIEFINGS, label: 'Briefings', icon: BookOpen },
+  { href: PATHS.ADMIN_COURSES, label: 'Courses', icon: GraduationCap },
+  { href: PATHS.ADMIN_DISPATCHES, label: 'Dispatches', icon: PenLine },
+  { href: PATHS.ADMIN_DOWNLOADS, label: 'Downloads', icon: Download },
+  { href: PATHS.ADMIN_HANDBOOKS, label: 'Handbooks', icon: BookMarked },
+  { href: PATHS.ADMIN_MEMBERS, label: 'Members', icon: Users },
+  { href: PATHS.ADMIN_MESSAGES, label: 'Messages', icon: MessageSquare },
+  { href: PATHS.ADMIN_SUBSCRIBERS, label: 'Subscribers', icon: Mail },
 ] as const;
 
 interface AdminNavProps {
@@ -38,7 +39,7 @@ export function AdminNav({ displayName, role }: AdminNavProps) {
   const pathname = usePathname();
 
   function isActive(href: string): boolean {
-    if (href === '/admin') return pathname === '/admin';
+    if (href === PATHS.ADMIN) return pathname === PATHS.ADMIN;
     return pathname.startsWith(href);
   }
 

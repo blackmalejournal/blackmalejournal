@@ -8,6 +8,7 @@ import type {
   Member,
   NewsletterSubscriber,
 } from '@/lib/supabase/types';
+import { adminEditPath } from '@/lib/paths';
 import {
   summarizeContentActivity,
   summarizeContentPipeline,
@@ -60,7 +61,7 @@ async function getAdminContentRecords(): Promise<AdminContentRecord[]> {
       entity: 'article' as const,
       title: article.title,
       status: article.status,
-      href: `/admin/articles/${article.id}/edit`,
+      href: adminEditPath('articles', article.id),
       descriptor: `Article · ${article.lens} · ${article.access_tier}`,
       createdAt: article.created_at,
       publishedAt: article.published_at ?? null,
@@ -73,7 +74,7 @@ async function getAdminContentRecords(): Promise<AdminContentRecord[]> {
       entity: 'briefing' as const,
       title: briefing.title,
       status: briefing.status,
-      href: `/admin/briefings/${briefing.id}/edit`,
+      href: adminEditPath('briefings', briefing.id),
       descriptor: `Briefing #${briefing.issue_number} · ${briefing.access_tier}`,
       createdAt: briefing.created_at,
       publishedAt: briefing.published_at ?? null,
@@ -86,7 +87,7 @@ async function getAdminContentRecords(): Promise<AdminContentRecord[]> {
       entity: 'dispatch' as const,
       title: dispatch.title,
       status: dispatch.status,
-      href: `/admin/dispatches/${dispatch.id}/edit`,
+      href: adminEditPath('dispatches', dispatch.id),
       descriptor: `Dispatch · ${dispatch.lens}`,
       createdAt: dispatch.created_at,
       publishedAt: dispatch.published_at ?? null,
@@ -99,7 +100,7 @@ async function getAdminContentRecords(): Promise<AdminContentRecord[]> {
       entity: 'handbook' as const,
       title: handbook.title,
       status: handbook.status,
-      href: `/admin/handbooks/${handbook.id}/edit`,
+      href: adminEditPath('handbooks', handbook.id),
       descriptor: `Handbook · ${handbook.lens} · ${handbook.access_tier}`,
       createdAt: handbook.created_at,
       publishedAt: handbook.published_at ?? null,

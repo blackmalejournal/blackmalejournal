@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { PATHS } from '@/lib/paths';
 import { AdminNav } from '@/app/(auth)/admin/AdminNav';
 
 // usePathname is mocked per-test via mockReturnValue
@@ -15,7 +16,7 @@ jest.mock('@/components/brand/BrandMark', () => ({
 
 describe('AdminNav', () => {
   beforeEach(() => {
-    mockUsePathname.mockReturnValue('/admin');
+    mockUsePathname.mockReturnValue(PATHS.ADMIN);
   });
 
   it('renders the "ADMIN" heading', () => {
@@ -67,7 +68,7 @@ describe('AdminNav', () => {
   });
 
   it('highlights Dashboard link when on /admin', () => {
-    mockUsePathname.mockReturnValue('/admin');
+    mockUsePathname.mockReturnValue(PATHS.ADMIN);
     render(<AdminNav displayName="The Chairman" role="admin" />);
     const dashboardLink = screen.getByText('Dashboard').closest('a');
     expect(dashboardLink).toHaveClass('bg-bmj-red/10');
@@ -75,7 +76,7 @@ describe('AdminNav', () => {
   });
 
   it('highlights Articles link when on /admin/articles', () => {
-    mockUsePathname.mockReturnValue('/admin/articles');
+    mockUsePathname.mockReturnValue(PATHS.ADMIN_ARTICLES);
     render(<AdminNav displayName="The Chairman" role="admin" />);
     const articlesLink = screen.getByText('Articles').closest('a');
     expect(articlesLink).toHaveClass('bg-bmj-red/10');
@@ -86,7 +87,7 @@ describe('AdminNav', () => {
   });
 
   it('highlights Articles link on sub-routes like /admin/articles/new', () => {
-    mockUsePathname.mockReturnValue('/admin/articles/new');
+    mockUsePathname.mockReturnValue(PATHS.ADMIN_ARTICLES_NEW);
     render(<AdminNav displayName="The Chairman" role="admin" />);
     const articlesLink = screen.getByText('Articles').closest('a');
     expect(articlesLink).toHaveClass('bg-bmj-red/10');

@@ -11,7 +11,7 @@ import {
   summarizePublishReadiness,
 } from '@/lib/admin-publishing';
 import { getAllDownloads } from '@/lib/supabase/admin-queries';
-import { withQuery } from '@/lib/paths';
+import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import type { AccessTier } from '@/lib/supabase/types';
 import { bulkUpdateDownloadAccessTierAction } from './actions';
 
@@ -104,7 +104,7 @@ export default async function DownloadsAdminPage({
   ]
     .filter(Boolean)
     .join(' · ');
-  const returnPath = withQuery('/admin/downloads', {
+  const returnPath = withQuery(PATHS.ADMIN_DOWNLOADS, {
     category: activeCategory,
     tier: activeTier,
     q: q?.trim() || undefined,
@@ -122,7 +122,7 @@ export default async function DownloadsAdminPage({
           </p>
         </div>
         <Link
-          href="/admin/downloads/new"
+          href={PATHS.ADMIN_DOWNLOADS_NEW}
           className="inline-flex items-center gap-2 bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
         >
           <Plus size={16} />
@@ -159,7 +159,7 @@ export default async function DownloadsAdminPage({
           return (
             <Link
               key={tab.label}
-              href={withQuery('/admin/downloads', {
+              href={withQuery(PATHS.ADMIN_DOWNLOADS, {
                 category: tab.value,
                 tier: activeTier,
                 q: q?.trim() || undefined,
@@ -216,7 +216,7 @@ export default async function DownloadsAdminPage({
             Filter
           </button>
           <Link
-            href="/admin/downloads"
+            href={PATHS.ADMIN_DOWNLOADS}
             className="border border-bmj-tan/30 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
           >
             Reset
@@ -311,7 +311,7 @@ export default async function DownloadsAdminPage({
                       ) : null}
                     </div>
                     <Link
-                      href={`/admin/downloads/${download.id}/edit`}
+                      href={adminEditPath('downloads', download.id)}
                       className="shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                     >
                       Edit

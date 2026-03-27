@@ -6,6 +6,7 @@ import {
   getMemberAdminInsights,
   getMemberCount,
 } from '@/lib/supabase/admin-queries';
+import { PATHS } from '@/lib/paths';
 import type { MemberTier, MemberRole } from '@/lib/supabase/types';
 
 export const metadata: Metadata = {
@@ -107,7 +108,7 @@ export default async function MembersAdminPage({
     if (nextRole) params.set('role', nextRole);
     if (nextQuery) params.set('q', nextQuery);
     const query = params.toString();
-    return query ? `/admin/members?${query}` : '/admin/members';
+    return query ? `${PATHS.ADMIN_MEMBERS}?${query}` : PATHS.ADMIN_MEMBERS;
   }
 
   return (
@@ -246,7 +247,7 @@ export default async function MembersAdminPage({
             Filter
           </button>
           <Link
-            href="/admin/members"
+            href={PATHS.ADMIN_MEMBERS}
             className="border border-bmj-tan/30 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
           >
             Reset
@@ -279,7 +280,7 @@ export default async function MembersAdminPage({
                   </p>
                 </div>
                 <Link
-                  href={`/admin/members/${member.id}`}
+                  href={`${PATHS.ADMIN_MEMBERS}/${member.id}`}
                   className="ml-4 shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                 >
                   Manage

@@ -3,6 +3,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { PATHS } from '@/lib/paths';
 
 const mockGetUser = jest.fn();
 const mockSingle = jest.fn();
@@ -109,7 +110,7 @@ describe('proxy', () => {
     });
 
     it('redirects unauthenticated user from /admin to /login?redirect=/admin', async () => {
-      const response = await proxy(createNextRequest('/admin'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN));
 
       expect(response.status).toBe(307);
       const location = response.headers.get('location');
@@ -128,21 +129,21 @@ describe('proxy', () => {
     it('allows authenticated user with admin role to access /admin', async () => {
       mockSingle.mockResolvedValue({ data: { role: 'admin' } });
 
-      const response = await proxy(createNextRequest('/admin'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN));
       expect(response.status).toBe(200);
     });
 
     it('allows authenticated user with editor role to access /admin', async () => {
       mockSingle.mockResolvedValue({ data: { role: 'editor' } });
 
-      const response = await proxy(createNextRequest('/admin'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN));
       expect(response.status).toBe(200);
     });
 
     it('redirects authenticated user with member role from /admin to /portal?error=unauthorized', async () => {
       mockSingle.mockResolvedValue({ data: { role: 'member' } });
 
-      const response = await proxy(createNextRequest('/admin'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN));
 
       expect(response.status).toBe(307);
       const location = response.headers.get('location');
@@ -153,7 +154,7 @@ describe('proxy', () => {
     it('redirects when member query returns no data (null)', async () => {
       mockSingle.mockResolvedValue({ data: null });
 
-      const response = await proxy(createNextRequest('/admin'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN));
 
       expect(response.status).toBe(307);
       const location = response.headers.get('location');
@@ -164,14 +165,14 @@ describe('proxy', () => {
     it('allows admin to access nested /admin/articles route', async () => {
       mockSingle.mockResolvedValue({ data: { role: 'admin' } });
 
-      const response = await proxy(createNextRequest('/admin/articles'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN_ARTICLES));
       expect(response.status).toBe(200);
     });
 
     it('redirects member from nested /admin/articles route', async () => {
       mockSingle.mockResolvedValue({ data: { role: 'member' } });
 
-      const response = await proxy(createNextRequest('/admin/articles'));
+      const response = await proxy(createNextRequest(PATHS.ADMIN_ARTICLES));
 
       expect(response.status).toBe(307);
       const location = response.headers.get('location');

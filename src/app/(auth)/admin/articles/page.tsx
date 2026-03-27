@@ -13,7 +13,7 @@ import {
 } from '@/lib/admin-publishing';
 import { getAllArticles } from '@/lib/supabase/admin-queries';
 import { getLensTheme } from '@/lib/lens-theme';
-import { withQuery } from '@/lib/paths';
+import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import type { ContentStatus, Lens } from '@/lib/supabase/types';
 import { bulkUpdateArticleStatusAction } from './actions';
 
@@ -100,7 +100,7 @@ export default async function ArticlesAdminPage({
   ]
     .filter(Boolean)
     .join(' · ');
-  const returnPath = withQuery('/admin/articles', {
+  const returnPath = withQuery(PATHS.ADMIN_ARTICLES, {
     status: activeStatus,
     lens: activeLens,
     q: q?.trim() || undefined,
@@ -118,7 +118,7 @@ export default async function ArticlesAdminPage({
           </p>
         </div>
         <Link
-          href="/admin/articles/new"
+          href={PATHS.ADMIN_ARTICLES_NEW}
           className="inline-flex items-center gap-2 bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
         >
           <Plus size={16} />
@@ -155,7 +155,7 @@ export default async function ArticlesAdminPage({
           return (
             <Link
               key={tab.label}
-              href={withQuery('/admin/articles', {
+              href={withQuery(PATHS.ADMIN_ARTICLES, {
                 status: tab.value,
                 lens: activeLens,
                 q: q?.trim() || undefined,
@@ -213,7 +213,7 @@ export default async function ArticlesAdminPage({
             Filter
           </button>
           <Link
-            href="/admin/articles"
+            href={PATHS.ADMIN_ARTICLES}
             className="border border-bmj-tan/30 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
           >
             Reset
@@ -314,7 +314,7 @@ export default async function ArticlesAdminPage({
                       ) : null}
                     </div>
                     <Link
-                      href={`/admin/articles/${article.id}/edit`}
+                      href={adminEditPath('articles', article.id)}
                       className="shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                     >
                       Edit

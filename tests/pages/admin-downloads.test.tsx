@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { PATHS, adminEditPath } from '@/lib/paths';
 import type { Download } from '@/lib/supabase/types';
 
 const mockDownloads: Download[] = [
@@ -75,7 +76,7 @@ describe('DownloadsAdminPage', () => {
   it('renders "New Download" link', async () => {
     await renderPage();
     const link = screen.getByRole('link', { name: /new download/i });
-    expect(link).toHaveAttribute('href', '/admin/downloads/new');
+    expect(link).toHaveAttribute('href', PATHS.ADMIN_DOWNLOADS_NEW);
   });
 
   it('renders download count', async () => {
@@ -87,8 +88,8 @@ describe('DownloadsAdminPage', () => {
     await renderPage();
     const editLinks = screen.getAllByRole('link', { name: /edit/i });
     expect(editLinks).toHaveLength(2);
-    expect(editLinks[0]).toHaveAttribute('href', '/admin/downloads/dl-1/edit');
-    expect(editLinks[1]).toHaveAttribute('href', '/admin/downloads/dl-2/edit');
+    expect(editLinks[0]).toHaveAttribute('href', adminEditPath('downloads', 'dl-1'));
+    expect(editLinks[1]).toHaveAttribute('href', adminEditPath('downloads', 'dl-2'));
   });
 
   it('renders category filter tabs', async () => {

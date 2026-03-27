@@ -30,8 +30,18 @@ export const PATHS = {
   ADMIN_MEMBERS: '/admin/members',
   ADMIN_MESSAGES: '/admin/messages',
   ADMIN_SUBSCRIBERS: '/admin/subscribers',
+  ADMIN_ARTICLES_NEW: '/admin/articles/new',
+  ADMIN_BRIEFINGS_NEW: '/admin/briefings/new',
+  ADMIN_COURSES_NEW: '/admin/courses/new',
+  ADMIN_DISPATCHES_NEW: '/admin/dispatches/new',
+  ADMIN_DOWNLOADS_NEW: '/admin/downloads/new',
+  ADMIN_HANDBOOKS_NEW: '/admin/handbooks/new',
   AUTH_CALLBACK: '/auth/callback',
 } as const;
+
+export function adminEditPath(section: string, id: string): string {
+  return `${PATHS.ADMIN}/${section}/${id}/edit`;
+}
 
 export function normalizeInternalPath(
   value: FormDataEntryValue | string | undefined | null,

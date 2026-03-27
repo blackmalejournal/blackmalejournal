@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
+import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import { getAllCourses } from '@/lib/supabase/admin-queries';
 
 export const metadata: Metadata = {
@@ -31,7 +32,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
           </p>
         </div>
         <Link
-          href="/admin/courses/new"
+          href={PATHS.ADMIN_COURSES_NEW}
           className="inline-flex items-center gap-2 bg-bmj-red px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
         >
           <Plus size={16} />
@@ -53,7 +54,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
 
       <div className="mt-6 flex flex-wrap gap-6 border-b border-bmj-tan/20">
         <Link
-          href={q ? `/admin/courses?q=${encodeURIComponent(q)}` : '/admin/courses'}
+          href={withQuery(PATHS.ADMIN_COURSES, { q: q || undefined })}
           className={`pb-3 font-label text-xs uppercase tracking-widest transition-colors ${
             activePublished === undefined
               ? 'border-b-2 border-bmj-red text-bmj-white'
@@ -63,7 +64,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
           All
         </Link>
         <Link
-          href={`/admin/courses?published=published${q ? `&q=${encodeURIComponent(q)}` : ''}`}
+          href={withQuery(PATHS.ADMIN_COURSES, { published: 'published', q: q || undefined })}
           className={`pb-3 font-label text-xs uppercase tracking-widest transition-colors ${
             activePublished === true
               ? 'border-b-2 border-bmj-red text-bmj-white'
@@ -73,7 +74,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
           Published
         </Link>
         <Link
-          href={`/admin/courses?published=draft${q ? `&q=${encodeURIComponent(q)}` : ''}`}
+          href={withQuery(PATHS.ADMIN_COURSES, { published: 'draft', q: q || undefined })}
           className={`pb-3 font-label text-xs uppercase tracking-widest transition-colors ${
             activePublished === false
               ? 'border-b-2 border-bmj-red text-bmj-white'
@@ -124,7 +125,7 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
                   </p>
                 </div>
                 <Link
-                  href={`/admin/courses/${course.id}/edit`}
+                  href={adminEditPath('courses', course.id)}
                   className="ml-4 shrink-0 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-red"
                 >
                   Edit

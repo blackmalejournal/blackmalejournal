@@ -6,6 +6,7 @@ import {
   getDownloadById,
 } from '@/lib/supabase/admin-queries';
 import { assessDownloadReadiness } from '@/lib/admin-publishing';
+import { PATHS } from '@/lib/paths';
 import { DownloadForm } from '../../DownloadForm';
 import { updateDownloadAction } from '../../actions';
 import { DeleteButton } from '@/components/admin/DeleteButton';
@@ -80,7 +81,7 @@ export default async function EditDownloadPage({ params }: EditDownloadPageProps
             },
           ]}
           links={[
-            { label: 'Download Desk', href: '/admin/downloads' },
+            { label: 'Download Desk', href: PATHS.ADMIN_DOWNLOADS },
             { label: 'Public Downloads', href: '/downloads' },
             { label: 'Protected File', href: `/api/downloads/${download.slug}` },
           ]}

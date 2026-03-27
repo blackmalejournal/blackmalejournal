@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { adminEditPath } from '@/lib/paths';
 import type { Handbook } from '@/lib/supabase/types';
 
 const mockHandbooks: Handbook[] = [
@@ -94,7 +95,7 @@ describe('HandbooksAdminPage', () => {
   it('renders edit links', async () => {
     await renderPage();
     const editLinks = screen.getAllByRole('link', { name: /edit/i });
-    expect(editLinks[0]).toHaveAttribute('href', '/admin/handbooks/hb-1/edit');
-    expect(editLinks[1]).toHaveAttribute('href', '/admin/handbooks/hb-2/edit');
+    expect(editLinks[0]).toHaveAttribute('href', adminEditPath('handbooks', 'hb-1'));
+    expect(editLinks[1]).toHaveAttribute('href', adminEditPath('handbooks', 'hb-2'));
   });
 });

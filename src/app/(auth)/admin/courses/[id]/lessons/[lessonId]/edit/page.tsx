@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { DeleteButton } from '@/components/admin/DeleteButton';
+import { PATHS } from '@/lib/paths';
 import { getCourseById, getLessonById } from '@/lib/supabase/admin-queries';
 import { LessonForm } from '../../../../LessonForm';
 import { deleteLessonAction, updateLessonAction } from '../../../../lessons/actions';
@@ -39,7 +40,7 @@ export default async function EditLessonPage({ params, searchParams }: EditLesso
   return (
     <div className="mx-auto max-w-4xl">
       <Link
-        href={`/admin/courses/${courseRecord.id}/edit`}
+        href={`${PATHS.ADMIN_COURSES}/${courseRecord.id}/edit`}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Course

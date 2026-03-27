@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { PATHS, adminEditPath } from '@/lib/paths';
 
 jest.mock('@/lib/supabase/admin-queries', () => ({
   getAdminCommandCenterSnapshot: jest.fn().mockResolvedValue({
@@ -28,7 +29,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
         {
           id: 'briefing-1',
           title: 'Weekend Briefing 14',
-          href: '/admin/briefings/briefing-1/edit',
+          href: adminEditPath('briefings', 'briefing-1'),
           entity: 'briefing',
           descriptor: 'Briefing #14 · premium',
           ageInDays: 2,
@@ -41,7 +42,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
         {
           id: 'article-1',
           title: 'Draft Manifesto',
-          href: '/admin/articles/article-1/edit',
+          href: adminEditPath('articles', 'article-1'),
           entity: 'article',
           descriptor: 'Article · politics · premium',
           ageInDays: 21,
@@ -55,7 +56,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
       {
         id: 'dispatch-2',
         title: 'Morning Organizing Note',
-        href: '/admin/dispatches/dispatch-2/edit',
+        href: adminEditPath('dispatches', 'dispatch-2'),
         entity: 'dispatch',
         descriptor: 'Dispatch · culture',
         happenedAt: '2026-03-25T08:00:00.000Z',
@@ -64,7 +65,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
       {
         id: 'article-2',
         title: 'The New Discipline',
-        href: '/admin/articles/article-2/edit',
+        href: adminEditPath('articles', 'article-2'),
         entity: 'article',
         descriptor: 'Article · philosophy · premium',
         happenedAt: '2026-03-24T18:00:00.000Z',
@@ -173,15 +174,15 @@ describe('AdminDashboardPage', () => {
     await renderPage();
     expect(screen.getByRole('link', { name: /new article/i })).toHaveAttribute(
       'href',
-      '/admin/articles/new',
+      PATHS.ADMIN_ARTICLES_NEW,
     );
     expect(screen.getByRole('link', { name: /new course/i })).toHaveAttribute(
       'href',
-      '/admin/courses/new',
+      PATHS.ADMIN_COURSES_NEW,
     );
     expect(screen.getByRole('link', { name: /new download/i })).toHaveAttribute(
       'href',
-      '/admin/downloads/new',
+      PATHS.ADMIN_DOWNLOADS_NEW,
     );
   });
 

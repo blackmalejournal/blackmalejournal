@@ -6,7 +6,7 @@ import {
   getSubscriberAdminInsights,
   getSubscriberCounts,
 } from '@/lib/supabase/admin-queries';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Subscribers — Admin',
@@ -157,7 +157,7 @@ export default async function SubscribersAdminPage({
           return (
             <Link
               key={tab.label}
-              href={withQuery('/admin/subscribers', {
+              href={withQuery(PATHS.ADMIN_SUBSCRIBERS, {
                 filter: tab.value,
                 q: q || undefined,
               })}
@@ -208,7 +208,7 @@ export default async function SubscribersAdminPage({
             Export CSV
           </Link>
           <Link
-            href="/admin/subscribers"
+            href={PATHS.ADMIN_SUBSCRIBERS}
             className="inline-flex items-center justify-center border border-bmj-tan/20 px-5 py-3 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:border-bmj-red hover:text-bmj-white"
           >
             Reset
