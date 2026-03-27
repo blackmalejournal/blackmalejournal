@@ -174,6 +174,16 @@ export type AdminActivityLog = {
   created_at: string;
 };
 
+// ── Member Bookmarks ──────────────────────────────────────────────────────────
+
+export type MemberBookmark = {
+  id: string;
+  member_id: string;
+  content_type: string;
+  content_id: string;
+  created_at: string;
+};
+
 // ── Search ───────────────────────────────────────────────────────────────────
 
 export type SearchContentType = 'article' | 'briefing' | 'handbook' | 'dispatch';
@@ -187,6 +197,20 @@ export type SearchResult = {
   accessTier?: AccessTier;
   publishedAt: string;
   relevance?: number;
+};
+
+// ── Bookmarks ─────────────────────────────────────────────────────────────────
+
+export type BookmarkedItem = {
+  bookmarkId: string;
+  contentType: SearchContentType;
+  contentId: string;
+  title: string;
+  slug: string;
+  lens?: Lens;
+  accessTier?: AccessTier;
+  publishedAt: string;
+  bookmarkedAt: string;
 };
 
 // ── Database generic (required by @supabase/supabase-js typed client) ─────────
@@ -260,6 +284,12 @@ export type Database = {
         Row: AdminActivityLog;
         Insert: Omit<AdminActivityLog, 'id' | 'created_at'>;
         Update: Partial<Omit<AdminActivityLog, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      member_bookmarks: {
+        Row: MemberBookmark;
+        Insert: Omit<MemberBookmark, 'id' | 'created_at'>;
+        Update: Partial<Omit<MemberBookmark, 'id' | 'created_at'>>;
         Relationships: [];
       };
     };
