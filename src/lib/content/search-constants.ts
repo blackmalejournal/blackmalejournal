@@ -1,4 +1,5 @@
 import { FileText, BookOpen, Newspaper, Send } from 'lucide-react';
+import type { SearchContentType } from '@/lib/supabase/types';
 
 export const SEARCH_TYPE_ICONS = {
   article: FileText,
@@ -13,3 +14,17 @@ export const SEARCH_TYPE_PATHS = {
   handbook: '/handbooks',
   dispatch: '/blog',
 } as const;
+
+export const SEARCH_TYPE_LABELS: Record<SearchContentType, string> = {
+  article: 'Article',
+  briefing: 'Briefing',
+  handbook: 'Handbook',
+  dispatch: 'Dispatch',
+};
+
+export const SEARCH_SORT_OPTIONS = [
+  { value: 'relevance', label: 'Relevance' },
+  { value: 'date', label: 'Newest first' },
+] as const;
+
+export type SearchSortValue = (typeof SEARCH_SORT_OPTIONS)[number]['value'];

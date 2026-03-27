@@ -176,13 +176,17 @@ export type AdminActivityLog = {
 
 // ── Search ───────────────────────────────────────────────────────────────────
 
+export type SearchContentType = 'article' | 'briefing' | 'handbook' | 'dispatch';
+
 export type SearchResult = {
-  type: 'article' | 'briefing' | 'handbook' | 'dispatch';
+  type: SearchContentType;
   title: string;
   slug: string;
   excerpt: string;
   lens?: Lens;
+  accessTier?: AccessTier;
   publishedAt: string;
+  relevance?: number;
 };
 
 // ── Database generic (required by @supabase/supabase-js typed client) ─────────
