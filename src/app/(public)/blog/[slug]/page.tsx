@@ -9,6 +9,9 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleBody } from '@/components/content/ArticleBody';
+import { BookmarkButton } from '@/components/content/BookmarkButton';
+import { isBookmarked } from '@/lib/supabase/bookmarks';
+import { createClient } from '@/lib/supabase/server';
 import { ShareButton } from '@/components/ui/ShareButton';
 
 interface DispatchPageProps {
@@ -43,6 +46,10 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
   const dispatch = await getDispatchBySlug(slug);
   if (!dispatch) notFound();
 
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const bookmarked = user ? await isBookmarked(user.id, 'dispatch', dispatch.id) : false;
+
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd
@@ -71,6 +78,12 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
           <span className="font-mono text-xs text-bmj-tan">
             {formatDate(dispatch.published_at)}
           </span>
+          <BookmarkButton
+            contentType="dispatch"
+            contentId={dispatch.id}
+            initialBookmarked={bookmarked}
+            isLoggedIn={!!user}
+          />
         </div>
 
         <h1 className="mb-4 font-display text-4xl leading-tight text-bmj-white sm:text-5xl">

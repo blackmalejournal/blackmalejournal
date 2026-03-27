@@ -16,6 +16,9 @@ import { ShareButton } from '@/components/ui/ShareButton';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { BookmarkButton } from '@/components/content/BookmarkButton';
+import { isBookmarked } from '@/lib/supabase/bookmarks';
+import { createClient } from '@/lib/supabase/server';
 import type { Briefing } from '@/lib/supabase/types';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
@@ -115,6 +118,11 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
 
   const { hasAccess, user } = await checkContentAccess(briefing.access_tier);
 
+  // Get authenticated user for bookmark status
+  const supabase = await createClient();
+  const { data: { user: authUser } } = await supabase.auth.getUser();
+  const bookmarked = authUser ? await isBookmarked(authUser.id, 'briefing', briefing.id) : false;
+
   const issueLabel = `No. ${String(briefing.issue_number).padStart(3, '0')}`;
   // PaywallGate preview: first 300 chars of section[1] body if available, else section[0]
   const paywallPreview = briefing.sections[1]?.body.slice(0, 300)
@@ -203,10 +211,18 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
         )}
       </div>
 
-      {/* Share */}
+      {/* Share + Bookmark */}
       <div className="mx-auto max-w-content px-4 pb-8 sm:px-6 lg:px-8">
         <StarDivider className="mb-6" />
-        <ShareButton />
+        <div className="flex items-center gap-6">
+          <ShareButton />
+          <BookmarkButton
+            contentType="briefing"
+            contentId={briefing.id}
+            initialBookmarked={bookmarked}
+            isLoggedIn={!!authUser}
+          />
+        </div>
       </div>
 
       <IssueNavigation prev={prevBriefing} next={nextBriefing} />

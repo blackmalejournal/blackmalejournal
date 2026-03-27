@@ -10,6 +10,9 @@ import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
+import { BookmarkButton } from '@/components/content/BookmarkButton';
+import { isBookmarked } from '@/lib/supabase/bookmarks';
+import { createClient } from '@/lib/supabase/server';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
@@ -48,6 +51,12 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
   if (!handbook) notFound();
 
   const { hasAccess, user } = await checkContentAccess(handbook.access_tier);
+
+  // Get authenticated user for bookmark status
+  const supabase = await createClient();
+  const { data: { user: authUser } } = await supabase.auth.getUser();
+  const bookmarked = authUser ? await isBookmarked(authUser.id, 'handbook', handbook.id) : false;
+
   const readingTime = calculateReadingTime(handbook.body);
   const previewBody = handbook.body.slice(0, 300);
 
@@ -102,6 +111,12 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
           <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
+          <BookmarkButton
+            contentType="handbook"
+            contentId={handbook.id}
+            initialBookmarked={bookmarked}
+            isLoggedIn={!!authUser}
+          />
         </div>
 
         <div className="accent-border-bottom mb-0 pb-0" />

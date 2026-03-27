@@ -13,6 +13,9 @@ import { RelatedArticles } from '@/components/content/RelatedArticles';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
+import { BookmarkButton } from '@/components/content/BookmarkButton';
+import { isBookmarked } from '@/lib/supabase/bookmarks';
+import { createClient } from '@/lib/supabase/server';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 interface ArticlePageProps {
@@ -49,6 +52,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) notFound();
 
   const { hasAccess, user } = await checkContentAccess(article.access_tier);
+
+  // Get authenticated user for bookmark status (checkContentAccess returns null user for free content)
+  const supabase = await createClient();
+  const { data: { user: authUser } } = await supabase.auth.getUser();
+  const bookmarked = authUser ? await isBookmarked(authUser.id, 'article', article.id) : false;
 
   const readingTime = calculateReadingTime(article.body);
 
@@ -106,6 +114,12 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <span className="font-mono text-xs text-bmj-tan">
             {formattedDate} · {readingTime} min read
           </span>
+          <BookmarkButton
+            contentType="article"
+            contentId={article.id}
+            initialBookmarked={bookmarked}
+            isLoggedIn={!!authUser}
+          />
         </div>
 
         <div className="accent-border-bottom mb-0 pb-0" />

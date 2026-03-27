@@ -6,6 +6,7 @@ import { getMemberById, getLatestArticles } from '@/lib/supabase/queries';
 import { TierBadge } from '@/components/portal/TierBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { formatDate } from '@/lib/utils';
+import { getBookmarkCount } from '@/lib/supabase/bookmarks';
 import type { MemberTier } from '@/lib/supabase/types';
 import { normalizeInternalPath } from '@/lib/paths';
 
@@ -60,6 +61,7 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
   const memberSince = member?.created_at ?? user.created_at ?? '';
 
   const latestArticles = await getLatestArticles(5);
+  const bookmarkCount = await getBookmarkCount(user.id);
 
   return (
     <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
@@ -184,6 +186,12 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
 
       {/* Quick links */}
       <div className="flex flex-wrap gap-4 py-10">
+        <Link
+          href="/portal/bookmarks"
+          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
+        >
+          Saved{bookmarkCount > 0 ? ` (${bookmarkCount})` : ''}
+        </Link>
         <Link
           href="/portal/settings"
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
