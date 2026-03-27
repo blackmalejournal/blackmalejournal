@@ -27,11 +27,10 @@ Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all c
 ## Lenses (Content Taxonomy)
 All articles and content are categorized under exactly one lens:
 - health — physical/mental wellness, martial arts, discipline
-- philosophy — purpose, identity, masculinity, mindset
 - politics — power, policy, systems, community organizing
-- culture — ideology, editorial, cultural analysis
+- culture — philosophy, identity, ideology, editorial, cultural analysis
 - entertainment — media, technology, reviews
-- commemoration — remembrance, tributes, historical markers
+- business — finance, economics, entrepreneurship, career strategy
 
 ## Architecture Rules
 - App Router only (no pages/ directory)
@@ -108,7 +107,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run seeds: `npx tsx scripts/seed-all.ts`
 
 ## Testing
-- Run `npm test` — Jest with jsdom (116 suites, 867 tests)
+- Run `npm test` — Jest with jsdom (128 suites, 1094 tests)
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)

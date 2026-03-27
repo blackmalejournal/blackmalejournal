@@ -20,7 +20,7 @@ describe('LensFilterTabs', () => {
     expect(screen.getByText('Politics/Law')).toBeInTheDocument();
     expect(screen.getByText('Culture/Ideology')).toBeInTheDocument();
     expect(screen.getByText('Entertainment/Technology')).toBeInTheDocument();
-    expect(screen.getByText('Commemorations/Remembrance')).toBeInTheDocument();
+    expect(screen.getByText('Business/Finance')).toBeInTheDocument();
   });
 
   it('active lens has aria-selected=true', () => {

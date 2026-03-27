@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
 
-const makeArticle = (slug: string, title: string, lens: 'health' | 'politics' | 'culture' | 'entertainment' | 'commemoration' = 'health') => ({
+const makeArticle = (slug: string, title: string, lens: 'health' | 'politics' | 'culture' | 'entertainment' | 'business' = 'health') => ({
   slug,
   title,
   excerpt: `Excerpt for ${title}`,

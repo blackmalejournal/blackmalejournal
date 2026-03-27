@@ -27,7 +27,7 @@ import { requireAdminActor } from '@/lib/admin-auth';
 const handbookSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   slug: z.string().optional(),
-  lens: z.enum(['health', 'politics', 'culture', 'entertainment', 'commemoration']),
+  lens: z.enum(['health', 'politics', 'culture', 'entertainment', 'business']),
   description: z.string().max(500).default(''),
   body: z.string().min(1, 'Body is required'),
   access_tier: z.enum(['free', 'basic', 'premium']).default('free'),

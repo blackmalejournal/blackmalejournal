@@ -30,7 +30,7 @@ export default function AboutPage() {
   const politicsTheme = getLensTheme('politics');
   const cultureTheme = getLensTheme('culture');
   const entertainmentTheme = getLensTheme('entertainment');
-  const commemorationTheme = getLensTheme('commemoration');
+  const businessTheme = getLensTheme('business');
 
   return (
     <section className="page-shell-tight py-16">
@@ -75,7 +75,7 @@ export default function AboutPage() {
           briefings, and archival commentary that treats Black men as thinkers,
           builders, and historical subjects worthy of serious study. Our work
           operates across five domains of Black male life.
-          Health, politics, culture, entertainment, and commemoration. Every article,
+          Health, politics, culture, entertainment, and business. Every article,
           every briefing, every resource we publish answers to one of these five lenses.
         </p>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
@@ -225,17 +225,17 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className={cn("card-media p-6", commemorationTheme.cardBorderTop, commemorationTheme.hoverBorder)}>
+          <div className={cn("card-media p-6", businessTheme.cardBorderTop, businessTheme.hoverBorder)}>
             <p className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
               Lens V
             </p>
-            <h3 className={cn("mb-4 font-display text-3xl uppercase", commemorationTheme.accentText)}>
-              Commemorations/Remembrance
+            <h3 className={cn("mb-4 font-display text-3xl uppercase", businessTheme.accentText)}>
+              Business/Finance
             </h3>
             <p className="font-body text-sm leading-relaxed text-bmj-cream/80">
-              Anniversaries, milestones, and the figures who shaped Black male history.
-              Remembrance is not nostalgia — it is the strategic preservation of a
-              people&apos;s record against the institutions that would erase it.
+              Wealth, entrepreneurship, and the economics of Black male self-determination.
+              Business at BMJ is not hustle culture — it is the disciplined study of
+              ownership, capital, and the financial infrastructure required for sovereignty.
             </p>
           </div>
         </div>

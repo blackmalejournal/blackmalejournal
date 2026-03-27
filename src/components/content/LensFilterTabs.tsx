@@ -9,9 +9,9 @@ const TABS: Tab[] = [
   { label: 'All',                          value: 'all' },
   { label: 'Health/Wellness',              value: 'health' },
   { label: 'Politics/Law',                 value: 'politics' },
-  { label: 'Culture/Ideology',             value: 'culture' },
+  { label: 'Culture/Ideology',            value: 'culture' },
   { label: 'Entertainment/Technology',     value: 'entertainment' },
-  { label: 'Commemorations/Remembrance',  value: 'commemoration' },
+  { label: 'Business/Finance', value: 'business' },
 ];
 
 interface LensFilterTabsProps {

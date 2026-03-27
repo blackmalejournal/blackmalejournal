@@ -2,7 +2,7 @@ Create a new article record for the Supabase database.
 
 Ask me for:
 1. Title
-2. Lens (health, philosophy, politics, culture, entertainment, or commemoration)
+2. Lens (health, politics, culture, entertainment, or business)
 3. Tags (comma-separated)
 4. Brief excerpt (1-2 sentences)
 5. Access tier (free, basic, or premium — default free)

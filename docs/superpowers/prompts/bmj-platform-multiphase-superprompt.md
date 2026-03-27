@@ -209,7 +209,7 @@ Additional BMJ-specific reminders:
 - Public content lives under `src/app/(public)/`
 - Auth and portal/admin work lives under `src/app/(auth)/`
 - API routes live under `src/app/api/`
-- Respect the three-lens taxonomy: health, philosophy, politics
+- Respect the five-lens taxonomy: health, politics, culture, entertainment, business
 - Do not introduce new design language that conflicts with BMJ visual invariants
 - Do not add secrets or undocumented env vars
 ```

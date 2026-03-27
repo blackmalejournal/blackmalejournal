@@ -67,7 +67,7 @@ jest.mock('@/lib/supabase/admin-queries', () => ({
         title: 'The New Discipline',
         href: adminEditPath('articles', 'article-2'),
         entity: 'article',
-        descriptor: 'Article · philosophy · premium',
+        descriptor: 'Article · culture · premium',
         happenedAt: '2026-03-24T18:00:00.000Z',
         label: 'Created',
       },

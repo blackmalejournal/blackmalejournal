@@ -122,7 +122,7 @@ export function ArticleForm({ article, action }: ArticleFormProps) {
               <option value="politics">Politics/Law</option>
               <option value="culture">Culture/Ideology</option>
               <option value="entertainment">Entertainment/Technology</option>
-              <option value="commemoration">Commemorations/Remembrance</option>
+              <option value="business">Business/Finance</option>
             </select>
           </div>
 

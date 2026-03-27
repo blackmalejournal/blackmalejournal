@@ -9,7 +9,7 @@ as a contemporary media system for Black male thought, discipline, and power. Th
 "bold" branding. It is a visual doctrine: one that communicates seriousness, sovereignty, historical
 consciousness, and refusal. This aligns directly with the publication's own language of being an
 "independent media house" and a "revolutionary masculinist platform," organized around health,
-philosophy, and politics rather than lifestyle content or neutralized commentary.
+politics, culture, entertainment, and business rather than lifestyle content or neutralized commentary.
 
 ## Tone
 
@@ -69,7 +69,7 @@ algorithmic.
 - Amber (#C8852A), Brown (#3B2417), Tan (#B8986A) — editorial support, lens coding, metadata
 
 **Sectional accents (use only when tied to a specific content domain):**
-- Crimson (#712414) — politics/philosophy
+- Crimson (#712414) — politics accent
 - Medium brown (#5D3F2E) — culture/editorial
 - Olive (#416100) — health/wellness
 - Gold (#C77A0E) — finance/business
@@ -143,7 +143,7 @@ neutral, tactile rather than polished, and intellectually forceful rather than l
 It signals a publication with a clear position: uncompromising in tone, historically grounded in
 lineage, and committed to documenting Black male life through power, philosophy, and self-mastery.
 This matches the publication's own framing as an independent, reader-supported media house built
-around health, philosophy, and politics for Black men.
+around health, politics, culture, entertainment, and business for Black men.
 
 ## Elevated Art-Direction Statement
 

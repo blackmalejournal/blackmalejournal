@@ -98,7 +98,7 @@ All content is categorized under one of six **lenses**:
 - **Politics** — power, policy, systems, community organizing
 - **Culture** — ideology, editorial, cultural analysis
 - **Entertainment** — media, technology, reviews
-- **Commemoration** — remembrance, tributes, historical markers
+- **Business** — entrepreneurship, finance, economics, ownership
 
 ### Access Tiers
 

@@ -16,7 +16,7 @@ VALUES
   (
     'Letters to a Young King',
     'letters-to-a-young-king',
-    'philosophy',
+    'culture',
     'Meditations on purpose, identity, and what it means to be a man in a world that fears masculine clarity.',
     'Letter I: On Purpose\n\nYoung king, the world will hand you a thousand scripts and call them freedom. Jobs, titles, accolades — each one a costume someone else designed. Purpose is different. Purpose is the thing you would do if no one was watching, if no one was paying, if no one would ever know.\n\nLetter II: On Identity\n\nYou are not your trauma. You are not your neighborhood. You are not the statistics they print about men who look like you. You are the inheritor of a tradition older than any nation on this continent.\n\nLetter III: On Solitude\n\nEvery king needs a throne room, and every throne room needs a door that closes. Solitude is not loneliness — it is the laboratory where character is refined.',
     'basic',
@@ -36,7 +36,7 @@ VALUES
   (
     'The Relationship Architecture',
     'the-relationship-architecture',
-    'philosophy',
+    'culture',
     'A premium handbook on building and maintaining meaningful relationships as a high-value man.',
     'Foundation: Self-Knowledge\n\nYou cannot build with someone else until you have built yourself. This is not selfishness — it is engineering. A bridge needs two strong foundations.\n\nFramework: Communication as Leadership\n\nLeadership in relationships is not about control. It is about clarity. The man who can articulate his vision, hear his partner without defensiveness, and make decisions that serve the unit — that man builds something that lasts.\n\nMaintenance: The Daily Practice\n\nRelationships do not survive on grand gestures. They survive on daily deposits. Attention, presence, follow-through — these are the currencies of trust.',
     'premium',

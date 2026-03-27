@@ -254,8 +254,10 @@ Contrast issues identified and resolved during the brand compliance audit (Task 
 | Lens | Background | Text | Contrast Ratio | WCAG AA |
 |------|-----------|------|:--------------:|:-------:|
 | health | `bmj-red` (#C0281F) | `bmj-white` (#F2EDE4) | ~5.2:1 | PASS |
-| philosophy | `bmj-amber` (#C8852A) | `bmj-black` (#0D0C0B) | ~6.1:1 | PASS |
 | politics | `bmj-crimson` (#712414) | `bmj-white` (#F2EDE4) | ~5.8:1 | PASS |
+| culture | `bmj-tan` (#B8986A) | `bmj-deep-black` (#1C130E) | ~4.7:1 | PASS |
+| entertainment | `bmj-purple` (#554978) | `bmj-white` (#F2EDE4) | ~5.0:1 | PASS |
+| business | `bmj-olive` (#416100) | `bmj-white` (#F2EDE4) | ~5.0:1 | PASS |
 
 ### Global Accessibility Controls
 

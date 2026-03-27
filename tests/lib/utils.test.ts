@@ -124,7 +124,7 @@ describe('calculateReadingTime', () => {
 // ── getLensColor ──────────────────────────────────────────────────────────────
 
 describe('getLensColor', () => {
-  const lenses: Lens[] = ['health', 'politics', 'culture', 'entertainment', 'commemoration'];
+  const lenses: Lens[] = ['health', 'politics', 'culture', 'entertainment', 'business'];
 
   it.each(lenses)('returns text, border, and bg for "%s"', (lens) => {
     const colors = getLensColor(lens);
@@ -149,8 +149,8 @@ describe('getLensColor', () => {
     expect(getLensColor('entertainment').text).toBe('text-bmj-purple');
   });
 
-  it('returns gold classes for commemoration', () => {
-    expect(getLensColor('commemoration').text).toBe('text-bmj-gold');
+  it('returns olive classes for business', () => {
+    expect(getLensColor('business').text).toBe('text-bmj-olive');
   });
 });
 
@@ -162,7 +162,7 @@ describe('getLensEmoji', () => {
     expect(typeof getLensEmoji('politics')).toBe('string');
     expect(typeof getLensEmoji('culture')).toBe('string');
     expect(typeof getLensEmoji('entertainment')).toBe('string');
-    expect(typeof getLensEmoji('commemoration')).toBe('string');
+    expect(typeof getLensEmoji('business')).toBe('string');
   });
 });
 

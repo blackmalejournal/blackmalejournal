@@ -27,7 +27,7 @@ import { requireAdminActor } from '@/lib/admin-auth';
 const dispatchSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
   slug: z.string().optional(),
-  lens: z.enum(['health', 'politics', 'culture', 'entertainment', 'commemoration']),
+  lens: z.enum(['health', 'politics', 'culture', 'entertainment', 'business']),
   excerpt: z.string().max(500).default(''),
   body: z.string().min(1, 'Body is required'),
   status: z

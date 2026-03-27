@@ -15,11 +15,10 @@ export const ADMIN_CONTENT_STATUS_TABS: Array<{
 
 const ADMIN_LENS_VALUES: Lens[] = [
   'health',
-  'philosophy',
   'politics',
   'culture',
   'entertainment',
-  'commemoration',
+  'business',
 ];
 
 export const ADMIN_LENS_OPTIONS = ADMIN_LENS_VALUES.map((value) => ({

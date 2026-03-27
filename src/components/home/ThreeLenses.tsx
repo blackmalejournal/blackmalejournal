@@ -41,11 +41,11 @@ const LENSES: Lens[] = [
       "Music, film, sports, and technology — the industries that both represent and exploit Black talent. We analyze the economics, the narratives, and the leverage points.",
   },
   {
-    slug: "commemoration",
-    label: "Commemorations/Remembrance",
-    tagline: "History. Memory. Honor.",
+    slug: "business",
+    label: "Business/Finance",
+    tagline: "Wealth. Ownership. Sovereignty.",
     description:
-      "Anniversaries, milestones, and the figures who shaped Black male history. Remembrance is not nostalgia — it is the strategic preservation of a people's record.",
+      "Entrepreneurship, capital strategy, and the economics of Black male self-determination. Business is not hustle culture — it is the disciplined pursuit of ownership and financial infrastructure.",
   },
 ];
 

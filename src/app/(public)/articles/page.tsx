@@ -16,21 +16,21 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Articles',
   description:
-    'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
+    'Long-form articles across five lenses — health, politics, culture, entertainment, and business — for Black men.',
   openGraph: {
     title: 'Articles',
     description:
-      'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
+      'Long-form articles across five lenses — health, politics, culture, entertainment, and business — for Black men.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Articles',
     description:
-      'Long-form articles across five lenses — health, politics, culture, entertainment, and commemoration — for Black men.',
+      'Long-form articles across five lenses — health, politics, culture, entertainment, and business — for Black men.',
   },
 };
 
-const VALID_LENSES = new Set<string>(['health', 'politics', 'culture', 'entertainment', 'commemoration']);
+const VALID_LENSES = new Set<string>(['health', 'politics', 'culture', 'entertainment', 'business']);
 const PAGE_SIZE = 9;
 
 interface ArticlesPageProps {

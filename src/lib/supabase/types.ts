@@ -8,11 +8,10 @@
 
 export type Lens =
   | 'health'
-  | 'philosophy'
   | 'politics'
   | 'culture'
   | 'entertainment'
-  | 'commemoration';
+  | 'business';
 export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
 export type AccessTier = 'free' | 'basic' | 'premium';
 export type MemberTier = 'free' | 'basic' | 'premium';

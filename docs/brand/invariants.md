@@ -14,7 +14,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 - **Sectional accents (use only when tied to a specific content domain):**
   - `#F0DDBC` (paper) — lighter paper ground for card backgrounds
   - `#1C130E` (deep-black) — heavier typographic weight
-  - `#712414` (crimson) — politics/philosophy accent
+  - `#712414` (crimson) — politics accent
   - `#5D3F2E` (medium-brown) — culture/editorial accent
   - `#416100` (olive) — health/wellness accent
   - `#C77A0E` (gold) — finance/business accent
@@ -58,7 +58,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 ### Section Structure
 - **StarDivider** (`<StarDivider />`) is the canonical section separator — use it between content sections and as editorial break points
 - **Red accent borders** (`.accent-border-top`, `.accent-border-bottom`) are used on CTAs and section-level containers, not on individual cards
-- **Lens colors** are scoped to their lens: health (amber), philosophy (tan), politics (red) — never mixed
+- **Lens colors** are scoped to their lens: health (amber), politics (red), culture (tan), entertainment (purple), business (olive) — never mixed
 
 ### Prohibited Patterns
 - Lifestyle photography (smiling, aspirational, consumer-coded)

@@ -84,7 +84,7 @@ const lenses = [
   { label: "Politics/Law",                href: "/articles?lens=politics" },
   { label: "Culture/Ideology",            href: "/articles?lens=culture" },
   { label: "Entertainment/Technology",    href: "/articles?lens=entertainment" },
-  { label: "Commemorations/Remembrance", href: "/articles?lens=commemoration" },
+  { label: "Business/Finance",           href: "/articles?lens=business" },
 ];
 
 export default function RecordsPage() {

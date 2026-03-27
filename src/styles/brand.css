@@ -16,7 +16,7 @@
   /* These are sectional/thematic accents — use sparingly per art-direction-spec.md */
   --bmj-paper:        #F0DDBC;  /* Lighter paper ground — backgrounds, cards */
   --bmj-deep-black:   #1C130E;  /* Near-black — heavier typographic weight */
-  --bmj-crimson:      #712414;  /* Deep crimson — politics/philosophy accent */
+  --bmj-crimson:      #712414;  /* Deep crimson — politics accent */
   --bmj-medium-brown: #5D3F2E;  /* Medium brown — culture/editorial accent */
   --bmj-olive:        #416100;  /* Olive green — health/wellness accent */
   --bmj-gold:         #C77A0E;  /* Warm gold — finance/business accent */

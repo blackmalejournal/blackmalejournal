@@ -35,7 +35,7 @@ draft → review → scheduled → published → archived → withdrawn
 ## Lenses
 
 Every article must have exactly one lens:
-`health | philosophy | politics | culture | entertainment | commemoration`
+`health | politics | culture | entertainment | business`
 
 Use `getLensTheme(lens)` for UI styling. Never hardcode lens colors.
 

@@ -14,7 +14,7 @@ Violations are blocking defects. Source of truth: `src/styles/brand.css`
 ## Sectional Accent Colors (wired in CSS, used only with content domains)
 - --bmj-paper: #F0DDBC (lighter paper ground)
 - --bmj-deep-black: #1C130E (heavier typographic weight)
-- --bmj-crimson: #712414 (politics/philosophy)
+- --bmj-crimson: #712414 (politics accent)
 - --bmj-medium-brown: #5D3F2E (culture/editorial)
 - --bmj-olive: #416100 (health/wellness)
 - --bmj-gold: #C77A0E (finance/business)

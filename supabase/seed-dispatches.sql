@@ -2,7 +2,7 @@ insert into public.dispatches (title, slug, lens, excerpt, body, author, cover_i
 (
   'On the Necessity of Silence',
   'on-the-necessity-of-silence',
-  'philosophy',
+  'culture',
   'Not every thought needs an audience. Some convictions must be carried in silence before they are ready to be spoken.',
   'There is a discipline in restraint that this generation has lost. Every impulse becomes a post. Every reaction becomes a thread. Every wound becomes content.
 
@@ -24,7 +24,7 @@ Practice it. Sit with your thoughts for a week before you share them. Watch how 
 (
   'Dispatch: Weekend Reading List',
   'weekend-reading-list-march-2026',
-  'philosophy',
+  'culture',
   'Five books every man should read this spring. No self-help. No productivity hacks. Just substance.',
   'Spring is the season of renewal, and your reading list should reflect that. Here are five books that will challenge your assumptions and sharpen your mind.
 
@@ -90,7 +90,7 @@ This is how power is built — from the ground up, not the top down.',
 (
   'A Note on Brotherhood',
   'a-note-on-brotherhood',
-  'philosophy',
+  'culture',
   'The men around you are either building you up or holding you back. Choose your circle with the same care you choose your investments.',
   'I received a message last week from a reader who said he had no close male friends. He is thirty-four years old, successful by most measures, and deeply isolated.
 

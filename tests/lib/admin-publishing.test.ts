@@ -13,7 +13,7 @@ describe('admin publishing helpers', () => {
       id: 'article-1',
       title: 'Discipline Is Direction',
       slug: 'discipline-is-direction',
-      lens: 'philosophy',
+      lens: 'culture',
       tags: ['discipline'],
       excerpt: 'A clear editorial line.',
       body: 'Full article body.',
