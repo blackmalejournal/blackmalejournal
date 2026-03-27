@@ -48,6 +48,7 @@ This index covers the committed documentation tree under `docs/`.
 
 - [superpowers/README.md](superpowers/README.md) - superpowers lane overview.
 - [superpowers/plans/README.md](superpowers/plans/README.md) - implementation plan index.
+- [superpowers/plans/2026-03-26-next-session-handoff.md](superpowers/plans/2026-03-26-next-session-handoff.md) - prioritized next-session requests with superpowers skill annotations.
 - [superpowers/plans/2026-03-25-admin-command-center-roadmap.md](superpowers/plans/2026-03-25-admin-command-center-roadmap.md) - owner-focused admin command-center roadmap and remaining admin-platform batches.
 - [superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md](superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md) - parallel BMJ skill scaffolding and authoring plan.
 - [superpowers/plans/2026-03-22-bmj-skill-workflow.md](superpowers/plans/2026-03-22-bmj-skill-workflow.md) - BMJ Codex workflow and custom skill roadmap.

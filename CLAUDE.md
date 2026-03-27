@@ -119,6 +119,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - **CI/CD:** GitHub Actions validates all tests + lint + build on every commit and PR
 
 ## Important Notes
+- When modifying lenses, update all references: `src/lib/supabase/types.ts`, `CLAUDE.md`, `docs/DEVELOPER.md`, `docs/ARCHITECTURE.md`, `src/lib/lens-theme.ts`
 - Weekend Briefing is the flagship content format — it gets special design treatment
 - The Chairman is the sole author for now — default all author fields to "The Chairman"
 - Brand mark (star + pen nib) is used as section dividers via `<StarDivider />` and `<BrandMark />`
@@ -144,6 +145,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 5. `tests/` — grep for old label text and old href strings in component/nav/sitemap tests
 
 ## Gotchas
+- Bash commands with App Router paths (parentheses, brackets) require double quotes: `git add "src/app/(public)/briefings/[slug]/page.tsx"` — unquoted `(` and `[` cause shell syntax errors.
 - After renaming any `src/app/` directory, run `rm -rf .next` before `npx tsc --noEmit` — stale type artifacts in `.next/types/validator.ts` will report `Cannot find module` for the old path.
 - `tailwind.config.ts` hardcodes hex color values — do NOT replace with `var(--bmj-*)`. Tailwind opacity modifiers (`bg-bmj-red/10`, `text-bmj-cream/80`) require decomposable hex, not CSS variables. The `.claude/hooks/drift-detection.sh` hook guards against the two files diverging.
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
