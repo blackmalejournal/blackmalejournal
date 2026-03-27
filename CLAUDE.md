@@ -107,7 +107,7 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run seeds: `npx tsx scripts/seed-all.ts`
 
 ## Testing
-- Run `npm test` — Jest with jsdom (128 suites, 1094 tests)
+- Run `npm test` — Jest with jsdom (133 suites, 1149 tests)
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
