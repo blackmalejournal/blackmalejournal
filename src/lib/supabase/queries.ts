@@ -555,8 +555,7 @@ export async function searchContentFTS(
   if (!query || query.trim().length < 2) return [];
 
   const supabase = await createClient();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (supabase as any).rpc('search_content', {
+  const { data, error } = await (supabase as unknown as { rpc: (fn: string, params: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string } | null }> }).rpc('search_content', {
     query: query.trim(),
     filter_lens: lens ?? null,
     filter_types: types ?? null,
