@@ -1,4 +1,5 @@
 import { PATHS } from '@/lib/paths';
+import { Instagram, Youtube, Linkedin, Twitter, type LucideIcon } from 'lucide-react';
 
 export type NavLink = {
   label: string;
@@ -23,4 +24,21 @@ export const HEADER_NAV_LINKS: NavLink[] = [
 export const FOOTER_NAV_LINKS: NavLink[] = [
   ...HEADER_NAV_LINKS,
   { label: 'Contact', href: PATHS.CONTACT },
+];
+
+export type SocialLink = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+/**
+ * Social media links — shared between Footer, MobileMenu, and anywhere else.
+ * Update hrefs here when real accounts are created.
+ */
+export const SOCIAL_LINKS: SocialLink[] = [
+  { label: 'Instagram', href: '#', icon: Instagram },
+  { label: 'YouTube', href: '#', icon: Youtube },
+  { label: 'LinkedIn', href: '#', icon: Linkedin },
+  { label: 'Twitter / X', href: '#', icon: Twitter },
 ];

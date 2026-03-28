@@ -2,9 +2,9 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { X, Instagram, Youtube, Linkedin, Twitter } from 'lucide-react';
+import { X } from 'lucide-react';
 import { signOut } from '@/app/(auth)/actions';
-import { HEADER_NAV_LINKS } from '@/lib/nav';
+import { HEADER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
 import type { NavUser } from './Navbar';
 
 interface MobileMenuProps {
@@ -12,13 +12,6 @@ interface MobileMenuProps {
   onClose: () => void;
   user?: NavUser;
 }
-
-const SOCIAL_LINKS = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'Twitter / X' },
-];
 
 export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
   return (
