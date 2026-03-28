@@ -76,9 +76,13 @@ export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
               required
               minLength={6}
               autoComplete="new-password"
+              aria-describedby="password-hint"
               className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="Create a password"
             />
+            <p id="password-hint" className="mt-1 font-mono text-xs text-bmj-tan/60">
+              Minimum 6 characters
+            </p>
           </div>
 
           {selectedTier !== 'free' && (
@@ -92,10 +96,7 @@ export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
             </div>
           )}
 
-          <button
-            type="submit"
-            className="w-full bg-bmj-red py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
-          >
+          <button type="submit" className="btn-primary w-full py-3 text-sm">
             Create Account
           </button>
         </form>
