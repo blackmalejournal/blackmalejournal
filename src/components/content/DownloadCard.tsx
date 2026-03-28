@@ -59,7 +59,7 @@ export function DownloadCard({
             href={`/api/downloads/${slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-bmj-red px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
+            className="btn-primary btn-sm inline-flex items-center gap-2"
           >
             <Download size={14} />
             Download
@@ -67,7 +67,7 @@ export function DownloadCard({
         ) : (
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-2 border border-bmj-red/40 px-4 py-2 font-label text-xs uppercase tracking-widest text-bmj-red no-underline transition-colors hover:bg-bmj-red/10"
+            className="btn-secondary btn-sm inline-flex items-center gap-2"
           >
             <Lock size={14} />
             Upgrade
