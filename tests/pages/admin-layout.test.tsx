@@ -29,11 +29,11 @@ describe('AdminNav', () => {
     expect(screen.getByTestId('brand-mark')).toBeInTheDocument();
   });
 
-  it('renders all 10 nav links', () => {
+  it('renders all 11 nav links', () => {
     render(<AdminNav displayName="The Chairman" role="admin" />);
     const nav = screen.getByRole('navigation', { name: /admin navigation/i });
     const links = nav.querySelectorAll('a');
-    expect(links).toHaveLength(10);
+    expect(links).toHaveLength(11);
 
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Articles')).toBeInTheDocument();
@@ -45,6 +45,7 @@ describe('AdminNav', () => {
     expect(screen.getByText('Members')).toBeInTheDocument();
     expect(screen.getByText('Messages')).toBeInTheDocument();
     expect(screen.getByText('Subscribers')).toBeInTheDocument();
+    expect(screen.getByText('Campaigns')).toBeInTheDocument();
   });
 
   it('renders the user display name', () => {
