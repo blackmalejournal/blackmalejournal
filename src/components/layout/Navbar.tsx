@@ -9,6 +9,7 @@ import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
+import { SCROLL_THRESHOLD_NAV } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 export type NavUser = {
@@ -27,7 +28,7 @@ export function Navbar({ user = null }: NavbarProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > SCROLL_THRESHOLD_NAV);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { SCROLL_THRESHOLD_BACK_TO_TOP } from '@/lib/constants';
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     function handleScroll() {
-      setVisible(window.scrollY > 400);
+      setVisible(window.scrollY > SCROLL_THRESHOLD_BACK_TO_TOP);
     }
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);

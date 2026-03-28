@@ -45,10 +45,10 @@ export function CategoryFilterTabs({ activeCategory }: CategoryFilterTabsProps) 
             aria-selected={isActive}
             onClick={() => handleSelect(tab.value)}
             className={[
-              'whitespace-nowrap pb-3 font-label text-sm uppercase tracking-widest transition-colors',
+              'filter-tab whitespace-nowrap',
               isActive
                 ? 'border-b-2 border-bmj-red text-bmj-white'
-                : 'text-bmj-tan hover:text-bmj-cream',
+                : 'filter-tab-inactive',
             ].join(' ')}
           >
             {tab.label}
