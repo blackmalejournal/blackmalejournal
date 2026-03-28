@@ -127,26 +127,6 @@
     border-bottom: 3px solid var(--bmj-red);
   }
 
-  /* Lens color classes */
-  .lens-health {
-    color: var(--bmj-amber);
-  }
-
-  .lens-culture {
-    color: var(--bmj-tan);
-  }
-
-  .lens-politics {
-    color: var(--bmj-red);
-  }
-
-  .lens-entertainment {
-    color: var(--bmj-purple);
-  }
-
-  .lens-business {
-    color: var(--bmj-olive);
-  }
 }
 
 /* ─── Button patterns ────────────────────────────────────── */
@@ -196,6 +176,16 @@
     color: var(--bmj-deep-black);
   }
 
+  /*
+   * Card border hierarchy — intentional editorial variation.
+   *
+   * .card-media    — top-heavy border (3px top, 1px sides/bottom): headline content, articles
+   * .card-stripe   — left accent (4px left): briefings, dispatches, sidebar items
+   * .card-feature  — uniform border (1px all sides): featured content, standalone panels
+   * .card-offer    — top-heavy + gradient bg: pricing cards, membership offers
+   *
+   * Each mimics a different print-era layout convention (broadsheet vs. bulletin vs. poster).
+   */
   .card-media {
     @apply flex flex-col overflow-hidden transition-[transform,border-color,background-color] duration-300;
     border-width: 1px;
