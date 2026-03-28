@@ -8,6 +8,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { CONTACT_EMAILS } from '@/lib/seo';
 import { ContactForm } from './ContactForm';
 import { SupportCard } from './SupportCard';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -72,10 +73,10 @@ export default function ContactPage() {
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-bmj-red" />
                 <a
-                  href="mailto:chairman@blackmalejournal.com"
+                  href={`mailto:${CONTACT_EMAILS.general}`}
                   className="font-mono text-sm text-bmj-cream transition-colors hover:text-bmj-red"
                 >
-                  chairman@blackmalejournal.com
+                  {CONTACT_EMAILS.general}
                 </a>
               </li>
               <li className="flex items-center gap-3">

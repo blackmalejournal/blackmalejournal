@@ -10,6 +10,7 @@ import { SearchDialog } from '@/components/ui/SearchDialog';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
 import { SCROLL_THRESHOLD_NAV } from '@/lib/constants';
+import { SITE_TAGLINE } from '@/lib/seo';
 import { cn } from '@/lib/utils';
 
 export type NavUser = {
@@ -66,7 +67,7 @@ export function Navbar({ user = null }: NavbarProps) {
                 The Black Male Journal
               </span>
               <span className="hidden xl:block font-label text-micro uppercase tracking-label-lg text-bmj-tan">
-                Speak the Truth. Navigate the Consequences.
+                {SITE_TAGLINE}
               </span>
             </div>
           </Link>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StarDivider } from "@/components/ui/StarDivider";
+import { CONTACT_EMAILS } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -199,10 +200,10 @@ export default function PrivacyPolicyPage() {
         <p className="font-body text-lg leading-article text-bmj-cream/90">
           For any privacy-related questions or requests, contact us at{" "}
           <a
-            href="mailto:privacy@blackmalejournal.com"
+            href={`mailto:${CONTACT_EMAILS.privacy}`}
             className="text-bmj-amber underline underline-offset-2 transition-colors hover:text-bmj-cream"
           >
-            privacy@blackmalejournal.com
+            {CONTACT_EMAILS.privacy}
           </a>{" "}
           or through our{" "}
           <a

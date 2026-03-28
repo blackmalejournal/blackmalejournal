@@ -8,6 +8,13 @@ export const SITE_NAME = 'The Black Male Journal';
 export const SITE_DESCRIPTION =
   'Independent media house and revolutionary masculinist platform covering five lenses of Black male life.';
 export const SITE_AUTHOR = 'The Chairman';
+export const SITE_TAGLINE = 'Speak the Truth. Navigate the Consequences.';
+
+export const CONTACT_EMAILS = {
+  general: 'chairman@blackmalejournal.com',
+  privacy: 'privacy@blackmalejournal.com',
+  support: 'contact@blackmalejournal.com',
+} as const;
 
 // ── JSON-LD: Organization ───────────────────────────────────────────────────
 export function organizationJsonLd() {
