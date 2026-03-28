@@ -1,16 +1,9 @@
 // src/components/layout/Footer.tsx
 import Link from "next/link";
 import { NewsletterForm } from './NewsletterForm';
-import { Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
 import { BrandMark } from '@/components/brand/BrandMark';
-import { FOOTER_NAV_LINKS } from '@/lib/nav';
-
-const SOCIAL_LINKS = [
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube,   href: "#", label: "YouTube" },
-  { icon: Linkedin,  href: "#", label: "LinkedIn" },
-  { icon: Twitter,   href: "#", label: "Twitter / X" },
-];
+import { FOOTER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
+import { SITE_TAGLINE } from '@/lib/seo';
 
 const DIRECT_SUPPORT_LINKS = [
   { label: "PayPal",   href: "https://paypal.me/BlackMaleJournal" },
@@ -33,7 +26,7 @@ export function Footer() {
                   The Black Male Journal
                 </span>
                 <p className="mt-1 font-label text-xs uppercase tracking-label text-bmj-tan/70">
-                  Speak the Truth. Navigate the Consequences.
+                  {SITE_TAGLINE}
                 </p>
               </div>
             </div>

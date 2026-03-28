@@ -125,12 +125,15 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
             <X size={18} aria-hidden="true" />
           </button>
         </div>
-        <div className="max-h-[50vh] overflow-y-auto overscroll-contain">
+        <div className="max-h-[50vh] overflow-y-auto overscroll-contain" aria-live="polite">
           {loading && (
-            <p className="px-6 py-4 font-mono text-xs text-bmj-tan" role="status">Searching…</p>
+            <p className="flex items-center gap-2 px-6 py-4 font-mono text-xs text-bmj-tan" role="status">
+              <span className="inline-block h-3 w-3 animate-spin border border-bmj-tan/60 border-t-bmj-red" />
+              Searching…
+            </p>
           )}
           {!loading && query.trim().length >= 2 && results.length === 0 && (
-            <p className="px-6 py-8 text-center font-body text-sm text-bmj-tan">
+            <p className="px-6 py-8 text-center font-body text-sm text-bmj-tan" role="status">
               No results for &ldquo;{query}&rdquo;
             </p>
           )}

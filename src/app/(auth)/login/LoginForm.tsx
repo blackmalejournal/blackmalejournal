@@ -15,9 +15,11 @@ export function LoginForm({ nextHref }: LoginFormProps) {
   return (
     <div className="border border-bmj-red/20 bg-bmj-brown p-8">
       {/* Mode toggle */}
-      <div className="mb-6 flex gap-4 border-b border-bmj-tan/20 pb-4">
+      <div className="mb-6 flex gap-4 border-b border-bmj-tan/20 pb-4" role="tablist" aria-label="Login method">
         <button
           type="button"
+          role="tab"
+          aria-selected={mode === 'password'}
           onClick={() => setMode('password')}
           className={`font-label text-xs uppercase tracking-widest transition-colors ${
             mode === 'password'
@@ -29,6 +31,8 @@ export function LoginForm({ nextHref }: LoginFormProps) {
         </button>
         <button
           type="button"
+          role="tab"
+          aria-selected={mode === 'magic'}
           onClick={() => setMode('magic')}
           className={`font-label text-xs uppercase tracking-widest transition-colors ${
             mode === 'magic'
@@ -80,10 +84,7 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-bmj-red py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
-          >
+          <button type="submit" className="btn-primary w-full py-3 text-sm">
             Log In
           </button>
         </form>
@@ -109,10 +110,7 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-bmj-red py-3 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
-          >
+          <button type="submit" className="btn-primary w-full py-3 text-sm">
             Send Magic Link
           </button>
         </form>

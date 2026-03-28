@@ -7,13 +7,12 @@ import Link from 'next/link';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { CAROUSEL_INTERVAL_MS } from '@/lib/constants';
 import type { Article } from '@/lib/supabase/types';
 
 interface FeaturedCarouselProps {
   articles: Article[];
 }
-
-const INTERVAL_MS = 6000;
 
 export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
   const [index, setIndex] = useState(0);
@@ -28,7 +27,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
     }
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % articles.length);
-    }, INTERVAL_MS);
+    }, CAROUSEL_INTERVAL_MS);
     return () => clearInterval(timer);
   }, [articles.length]);
 

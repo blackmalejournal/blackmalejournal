@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StarDivider } from "@/components/ui/StarDivider";
+import { CONTACT_EMAILS } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -185,10 +186,10 @@ export default function TermsOfServicePage() {
         <p className="font-body text-lg leading-article text-bmj-cream/90">
           Questions about these terms? Reach us at{" "}
           <a
-            href="mailto:contact@blackmalejournal.com"
+            href={`mailto:${CONTACT_EMAILS.support}`}
             className="text-bmj-amber underline underline-offset-2 transition-colors hover:text-bmj-cream"
           >
-            contact@blackmalejournal.com
+            {CONTACT_EMAILS.support}
           </a>{" "}
           or through our{" "}
           <a

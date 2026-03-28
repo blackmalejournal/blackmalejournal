@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import QuoteCard from "@/components/content/QuoteCard";
+import { QUOTE_ROTATION_INTERVAL_MS } from "@/lib/constants";
 
 interface Quote {
   text: string;
@@ -42,7 +43,7 @@ export function RotatingQuote() {
     }
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % QUOTES.length);
-    }, 8000);
+    }, QUOTE_ROTATION_INTERVAL_MS);
     return () => clearInterval(timer);
   }, []);
 

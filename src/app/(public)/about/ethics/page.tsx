@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { CONTACT_EMAILS } from '@/lib/seo';
 import { PageHeader } from '@/components/layout/PageHeader';
 
 export const metadata: Metadata = {
@@ -79,7 +80,7 @@ export default function EthicsPage() {
         </h2>
         <p className="font-body text-base leading-relaxed text-bmj-cream/80">
           If you identify a factual error in any published piece, contact the
-          Chairman directly at chairman@blackmalejournal.com. All credible
+          Chairman directly at {CONTACT_EMAILS.general}. All credible
           corrections will be investigated within 48 hours. Confirmed errors will
           be corrected in the original text with a dated correction note. We do
           not silently edit published work.
