@@ -10,3 +10,4 @@ export * from './subscribers';
 export * from './activity-log';
 export * from './counts';
 export * from './insights';
+export * from './campaigns';

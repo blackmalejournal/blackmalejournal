@@ -213,6 +213,24 @@ export type BookmarkedItem = {
   bookmarkedAt: string;
 };
 
+// ── Campaigns ────────────────────────────────────────────────────────────────
+
+export type CampaignStatus = 'draft' | 'scheduled' | 'sent' | 'failed';
+export type AudienceFilter = { source?: string; activeOnly?: boolean };
+export type Campaign = {
+  id: string;
+  title: string;
+  subject: string;
+  body: string;
+  audience_filter: AudienceFilter;
+  recipient_count: number;
+  status: CampaignStatus;
+  scheduled_at: string | null;
+  sent_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
 // ── Database generic (required by @supabase/supabase-js typed client) ─────────
 // Maps table names to their Row/Insert/Update shapes so every
 // supabase.from('articles').select() call returns Article[] automatically.
@@ -290,6 +308,12 @@ export type Database = {
         Row: MemberBookmark;
         Insert: Omit<MemberBookmark, 'id' | 'created_at'>;
         Update: Partial<Omit<MemberBookmark, 'id' | 'created_at'>>;
+        Relationships: [];
+      };
+      campaigns: {
+        Row: Campaign;
+        Insert: Omit<Campaign, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<Campaign, 'id' | 'created_at'>>;
         Relationships: [];
       };
     };

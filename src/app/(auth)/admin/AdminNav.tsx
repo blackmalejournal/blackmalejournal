@@ -13,6 +13,7 @@ import {
   Users,
   MessageSquare,
   Mail,
+  Megaphone,
 } from 'lucide-react';
 import { PATHS } from '@/lib/paths';
 import { BrandMark } from '@/components/brand/BrandMark';
@@ -28,6 +29,7 @@ const NAV_ITEMS = [
   { href: PATHS.ADMIN_MEMBERS, label: 'Members', icon: Users },
   { href: PATHS.ADMIN_MESSAGES, label: 'Messages', icon: MessageSquare },
   { href: PATHS.ADMIN_SUBSCRIBERS, label: 'Subscribers', icon: Mail },
+  { href: PATHS.ADMIN_CAMPAIGNS, label: 'Campaigns', icon: Megaphone },
 ] as const;
 
 interface AdminNavProps {

@@ -36,6 +36,8 @@ export const PATHS = {
   ADMIN_DISPATCHES_NEW: '/admin/dispatches/new',
   ADMIN_DOWNLOADS_NEW: '/admin/downloads/new',
   ADMIN_HANDBOOKS_NEW: '/admin/handbooks/new',
+  ADMIN_CAMPAIGNS: '/admin/campaigns',
+  ADMIN_CAMPAIGNS_NEW: '/admin/campaigns/new',
   AUTH_CALLBACK: '/auth/callback',
 } as const;
 
