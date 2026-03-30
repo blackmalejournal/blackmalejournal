@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality:
     name: Lint, Type Check, Test, Build
     runs-on: ubuntu-latest
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
@@ -24,11 +29,17 @@ jobs:
       - name: Secrets Check
         run: npm run secrets:check
 
+      - name: Verify BMJ SSOT docs layout
+        run: npm run verify:ssot-bmj
+
       - name: Lint
         run: npm run lint
 
       - name: Type Check
         run: npx tsc --noEmit
+
+      - name: npm audit (no known vulnerabilities)
+        run: npm audit --audit-level=moderate
 
       - name: Unit & Integration Tests
         run: npm test -- --ci --coverage
@@ -51,6 +62,7 @@ jobs:
     name: E2E Tests
     needs: quality
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4

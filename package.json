@@ -10,6 +10,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "secrets:check": "npx secretlint \"**/*\"",
+    "verify:ssot-bmj": "node scripts/verify-ssot-bmj.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
