@@ -108,14 +108,16 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 
 ## Testing
 - Run `npm test` — Jest with jsdom (136 suites, 1185 tests)
+- Run `npm run test:counts` — prints current suite/test totals for updating `README.md` and this file
 - Run `npm run test:watch` — Jest watch mode for development
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
+- Run `npm run verify:docs-links` — relative links under `docs/` resolve (`docs/templates/` skipped)
 - Verify `npm run build` passes before any commit
 - Check TypeScript with `npx tsc --noEmit`
 - Run `npm run lint` — ESLint checks
 - Visual check: every page must look correct at 375px (mobile) and 1440px (desktop)
-- **CI/CD:** GitHub Actions validates all tests + lint + build on every commit and PR
+- **CI/CD:** GitHub Actions validates all tests + lint + build + docs link check on every commit and PR
 
 ## Important Notes
 - When modifying lenses, update all references: `src/lib/supabase/types.ts`, `CLAUDE.md`, `docs/DEVELOPER.md`, `docs/ARCHITECTURE.md`, `src/lib/lens-theme.ts`

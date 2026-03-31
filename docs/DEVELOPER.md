@@ -40,9 +40,11 @@
 ### Unit & Integration Tests (Jest)
 
 ```bash
-npm test              # Run all tests
-npm run test:watch    # Watch mode
-npm test -- --coverage  # With coverage report
+npm test                 # Run all tests
+npm run test:counts      # Print suite/test totals for README / CLAUDE.md
+npm run test:watch       # Watch mode
+npm test -- --coverage   # With coverage report
+npm run verify:docs-links # Relative links in docs/ (templates/ excluded)
 ```
 
 ### E2E Tests (Playwright)

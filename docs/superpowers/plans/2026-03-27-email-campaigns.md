@@ -198,7 +198,7 @@ Create `tests/lib/email-template.test.ts`:
 - Returns HTML string containing the subject
 - Renders **bold** as `<strong>`
 - Renders *italic* as `<em>`
-- Renders [text](url) as `<a href="url">`
+- Renders Markdown links as `<a href="...">...</a>` elements
 - Contains BMJ branding text "THE BLACK MALE JOURNAL"
 - Contains unsubscribe footer text
 - Contains inline CSS with bmj-black background color

@@ -7,7 +7,7 @@ Run this checklist after any integration change and before launch.
 - Canonical variable list: [env-vars.md](env-vars.md)
 - Stripe runtime use: [helpers.ts](../../src/lib/stripe/helpers.ts)
 - Metadata and analytics wiring: [layout.tsx](../../src/app/layout.tsx)
-- Auth callback route: [route.ts](../../src/app/(auth)/auth/callback/route.ts)
+- Auth callback route: [route.ts](<../../src/app/(auth)/auth/callback/route.ts>)
 
 ## Audit Steps
 

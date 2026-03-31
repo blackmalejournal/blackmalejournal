@@ -37,6 +37,9 @@ jobs:
       - name: Verify BMJ SSOT docs layout
         run: npm run verify:ssot-bmj
 
+      - name: Verify docs internal links
+        run: npm run verify:docs-links
+
       - name: Verify REP Issue Form files (on-disk; label check is local-only)
         run: npm run verify:rep-governance
         env:

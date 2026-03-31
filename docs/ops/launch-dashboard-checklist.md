@@ -138,7 +138,7 @@ Steps:
 
 BMJ route reference:
 
-- the app exchanges the auth code at `/auth/callback` in [route.ts](../../src/app/(auth)/auth/callback/route.ts)
+- the app exchanges the auth code at `/auth/callback` in [route.ts](<../../src/app/(auth)/auth/callback/route.ts>)
 
 Expected result:
 

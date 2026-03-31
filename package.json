@@ -11,7 +11,9 @@
     "test:watch": "jest --watch",
     "secrets:check": "npx secretlint \"**/*\"",
     "verify:ssot-bmj": "node scripts/verify-ssot-bmj.mjs",
+    "verify:docs-links": "node scripts/verify-docs-links.mjs",
     "verify:rep-governance": "node scripts/rep-governance-verify.mjs",
+    "test:counts": "node scripts/jest-test-counts.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {

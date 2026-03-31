@@ -121,6 +121,9 @@ Before any commit:
 2. `npm run lint` — no ESLint errors
 3. `npx tsc --noEmit` — no TypeScript errors
 4. `npm run build` — clean production build
+5. `npm run verify:docs-links` — relative links in `docs/` resolve (CI enforces this)
+
+To refresh the **suite and test counts** printed in `README.md` and `CLAUDE.md` after the suite grows or shrinks, run `npm run test:counts` and copy the suggested lines from the output.
 
 ### Test Structure
 
