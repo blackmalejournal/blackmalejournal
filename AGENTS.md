@@ -19,6 +19,7 @@ This project follows the **Morphism Categorical Governance Framework**.
 | Project instructions | [CLAUDE.md](CLAUDE.md) |
 | Brand invariants | [docs/brand/invariants.md](docs/brand/invariants.md) |
 | Operations | [docs/ops/](docs/ops/) |
+| Repository governance reference | [docs/standards/README.md](docs/standards/README.md) (optional; use for cross-repo/platform alignment) |
 
 ## Scope
 
