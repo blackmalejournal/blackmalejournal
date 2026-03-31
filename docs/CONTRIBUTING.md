@@ -117,7 +117,7 @@ docs/operator-manual
 ### Requirements
 
 Before any commit:
-1. `npm test` — all 867 tests must pass
+1. `npm test` — all Jest tests must pass
 2. `npm run lint` — no ESLint errors
 3. `npx tsc --noEmit` — no TypeScript errors
 4. `npm run build` — clean production build

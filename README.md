@@ -21,7 +21,7 @@ npm run dev                   # http://localhost:3000
 | `npm run dev` | Development server |
 | `npm run build` | Production build |
 | `npm run lint` | ESLint |
-| `npm test` | Jest (116 suites, 867 tests) |
+| `npm test` | Jest (136 suites, 1185 tests) |
 | `npm run test:e2e` | Playwright E2E |
 | `npx tsc --noEmit` | TypeScript check |
 

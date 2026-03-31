@@ -1242,7 +1242,7 @@ Expected: PASS
 - [ ] **Step 3: Run full test suite**
 
 Run: `npm test`
-Expected: All 133+ suites pass, 1149+ tests pass
+Expected: Full Jest suite passes (see root `README.md` for current suite and test counts)
 
 - [ ] **Step 4: Run production build**
 

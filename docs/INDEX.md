@@ -17,6 +17,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [policy/sample-repository-policy-outline.md](policy/sample-repository-policy-outline.md) - sample formal policy outline.
 - [roadmaps/repo-governance-90-day-plan.md](roadmaps/repo-governance-90-day-plan.md) - 90-day plan and sample template tree.
 - [roadmaps/repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md) - org rollout for Issue Forms, labels, and default community files.
+- [roadmaps/repo-governance-launch-kit.md](roadmaps/repo-governance-launch-kit.md) - kickoff email, Slack, checklist, and decision log for REP rollout.
 - [metrics/compliance-dashboard-schema.md](metrics/compliance-dashboard-schema.md) - compliance dashboard data schema.
 
 ## Root Documents
@@ -61,14 +62,14 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [ops/secret-rotation.md](ops/secret-rotation.md) - secret rotation procedure.
 - [ops/nonprofit-setup-guide.md](ops/nonprofit-setup-guide.md) - nonprofit setup guidance.
 
+## SSOT (mirrored reference)
+
+- [ssot-bmj/README.md](ssot-bmj/README.md) - how mirrored BMJ SSOT Markdown is synced into the repo; individual `bmj-*` files in this folder.
+
 ## Superpowers
 
-- [superpowers/README.md](superpowers/README.md) - superpowers lane overview.
-- [superpowers/plans/README.md](superpowers/plans/README.md) - implementation plan index.
-- [superpowers/plans/2026-03-26-next-session-handoff.md](superpowers/plans/2026-03-26-next-session-handoff.md) - prioritized next-session requests with superpowers skill annotations.
-- [superpowers/plans/2026-03-25-admin-command-center-roadmap.md](superpowers/plans/2026-03-25-admin-command-center-roadmap.md) - owner-focused admin command-center roadmap and remaining admin-platform batches.
-- [superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md](superpowers/plans/2026-03-22-bmj-skill-batch-build-plan.md) - parallel BMJ skill scaffolding and authoring plan.
-- [superpowers/plans/2026-03-22-bmj-skill-workflow.md](superpowers/plans/2026-03-22-bmj-skill-workflow.md) - BMJ Codex workflow and custom skill roadmap.
-- [superpowers/plans/2026-03-21-public-visual-refinement-handoff.md](superpowers/plans/2026-03-21-public-visual-refinement-handoff.md) - current public visual refinement handoff and next-session todo list.
+- [superpowers/README.md](superpowers/README.md) - lane overview.
+- [superpowers/plans/README.md](superpowers/plans/README.md) - implementation plan index (canonical list of dated plans).
+- [superpowers/specs/README.md](superpowers/specs/README.md) - design specs paired with plans.
 - [superpowers/prompts/README.md](superpowers/prompts/README.md) - prompt asset index.
 - [superpowers/prompts/bmj-admin-command-center-superprompt.md](superpowers/prompts/bmj-admin-command-center-superprompt.md) - reusable prompt for autonomous BMJ admin command-center work.
