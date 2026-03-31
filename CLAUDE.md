@@ -151,7 +151,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 
 ## Documentation
 - Architecture and system design: docs/ARCHITECTURE.md
-- Contributing guide (code style, PR process, naming): docs/CONTRIBUTING.md
+- Contributing guide (code style, PR process, naming — includes canonical `docs/` Markdown naming): docs/CONTRIBUTING.md
 - Troubleshooting common issues: docs/TROUBLESHOOTING.md
 - Developer setup: docs/DEVELOPER.md
 - Operator manual: docs/ops/chairman-operator-manual.md

@@ -2,6 +2,8 @@
 
 This folder contains the committed BMJ documentation set. Start with [INDEX.md](INDEX.md) for the full map.
 
+**Naming:** Markdown and directory naming for `docs/` is defined in [CONTRIBUTING.md](CONTRIBUTING.md) (File naming — documentation).
+
 ## Primary References
 
 - [DEVELOPER.md](DEVELOPER.md) for local development, test, and deployment workflow.

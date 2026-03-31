@@ -1,6 +1,6 @@
 # Documentation Index
 
-This index covers the committed documentation tree under `docs/`. For a **single entry point** to the org-wide repository governance package, see [standards/README.md](standards/README.md).
+This index covers the committed documentation tree under `docs/`. For **how to name new Markdown files and directories** under `docs/`, see [CONTRIBUTING.md](CONTRIBUTING.md) (File naming — documentation). For a **single entry point** to the org-wide repository governance package, see [standards/README.md](standards/README.md).
 
 ## Repository standards and governance (reference)
 
