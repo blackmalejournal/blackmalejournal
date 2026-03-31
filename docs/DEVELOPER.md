@@ -114,7 +114,7 @@ If you are validating **Repo Excellence Program** GitHub Issue Forms and the `do
 npm run verify:rep-governance
 ```
 
-See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md).
+See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md). The same check runs in **CI** (`.github/workflows/ci.yml`) on every push and PR.
 
 ## Conventions
 

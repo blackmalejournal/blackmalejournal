@@ -2,7 +2,7 @@
  * Verifies REP GitHub Issue Form files and the `documentation` label via `gh` CLI.
  * Manual UI check still required: open the printed "new issue" chooser URL.
  *
- * Prerequisites: GitHub CLI (`gh`) authenticated (`gh auth status`).
+ * Prerequisites: GitHub CLI (`gh`) authenticated (`gh auth status`), unless running in GitHub Actions (`GITHUB_ACTIONS` + `GH_TOKEN`).
  */
 import { execSync } from "child_process";
 
@@ -21,19 +21,23 @@ const REQUIRED_TEMPLATES = [
   "rep-weekly-status.yml",
 ];
 
-try {
-  sh("gh auth status");
-} catch {
-  console.error("Run `gh auth login` first, then retry.");
-  process.exit(1);
+if (process.env.GITHUB_ACTIONS !== "true") {
+  try {
+    sh("gh auth status");
+  } catch {
+    console.error("Run `gh auth login` first, then retry.");
+    process.exit(1);
+  }
 }
 
-let nameWithOwner;
-try {
-  nameWithOwner = sh("gh repo view --json nameWithOwner -q .nameWithOwner");
-} catch (e) {
-  console.error("Could not resolve repo with `gh repo view`.", e.message);
-  process.exit(1);
+let nameWithOwner = process.env.GITHUB_REPOSITORY?.trim();
+if (!nameWithOwner) {
+  try {
+    nameWithOwner = sh("gh repo view --json nameWithOwner -q .nameWithOwner");
+  } catch (e) {
+    console.error("Could not resolve repo with `gh repo view`.", e.message);
+    process.exit(1);
+  }
 }
 
 let entries;

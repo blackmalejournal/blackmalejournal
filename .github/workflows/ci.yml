@@ -32,6 +32,11 @@ jobs:
       - name: Verify BMJ SSOT docs layout
         run: npm run verify:ssot-bmj
 
+      - name: Verify REP Issue Forms and documentation label
+        run: npm run verify:rep-governance
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Lint
         run: npm run lint
 
