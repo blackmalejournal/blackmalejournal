@@ -32,7 +32,7 @@ jobs:
       - name: Verify BMJ SSOT docs layout
         run: npm run verify:ssot-bmj
 
-      - name: Verify REP Issue Forms and documentation label
+      - name: Verify REP Issue Form files (on-disk; label check is local-only)
         run: npm run verify:rep-governance
         env:
           GH_TOKEN: ${{ github.token }}
