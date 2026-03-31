@@ -57,7 +57,8 @@
 
 - **Map:** [INDEX.md](INDEX.md) is the committed inventory of `docs/`. Prefer linking new docs from there (and from [README.md](README.md) when it is a primary entry).
 - **Root handbooks:** short, stable, `UPPERCASE.md` filenames only at `docs/` root — not inside lane folders.
-- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed (e.g. `ssot-bmj/`).
+- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed (e.g. `ssot-bmj/`). Each lane should have a **README.md** entry point (see [ARCHITECTURE.md](ARCHITECTURE.md) — *Repository layout — monorepo root*).
+- **Repo root map (non-docs):** same section in [ARCHITECTURE.md](ARCHITECTURE.md); shallow tree: `npm run docs:layout`.
 
 ## Asset Naming Convention
 

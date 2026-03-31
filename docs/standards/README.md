@@ -24,6 +24,9 @@ This folder holds **Repo Excellence Program (REP)** reference material for multi
 | Location | Purpose |
 |----------|---------|
 | [../templates/README.md](../templates/README.md) | Copy-ready README, CONTRIBUTING, CODEOWNERS, PR/issue, ADR, runbook, SECURITY, `service-metadata.yaml`. |
+| [../policy/README.md](../policy/README.md) | Policy lane index (links [sample-repository-policy-outline.md](../policy/sample-repository-policy-outline.md)). |
+| [../roadmaps/README.md](../roadmaps/README.md) | Roadmaps lane index (90-day plan, org rollout, launch kit). |
+| [../metrics/README.md](../metrics/README.md) | Metrics lane index (compliance dashboard schema). |
 | [../policy/sample-repository-policy-outline.md](../policy/sample-repository-policy-outline.md) | Formal policy outline for Legal/Eng review. |
 | [../roadmaps/repo-governance-90-day-plan.md](../roadmaps/repo-governance-90-day-plan.md) | **90-day** phased rollout + sample GitHub template tree. |
 | [../roadmaps/repo-governance-launch-kit.md](../roadmaps/repo-governance-launch-kit.md) | Leadership email, Slack launch post, kickoff agenda, week-1 checklist. |

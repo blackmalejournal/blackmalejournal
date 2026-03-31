@@ -152,6 +152,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
 
 ## Documentation
+- Repo root + `docs/` lanes (curated map): docs/ARCHITECTURE.md — *Repository layout — monorepo root*; optional snapshot: `npm run docs:layout`
 - Architecture and system design: docs/ARCHITECTURE.md
 - Contributing guide (code style, PR process, naming — includes canonical `docs/` Markdown naming): docs/CONTRIBUTING.md
 - Troubleshooting common issues: docs/TROUBLESHOOTING.md

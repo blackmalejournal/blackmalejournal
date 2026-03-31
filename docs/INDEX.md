@@ -6,6 +6,8 @@ This index covers the committed documentation tree under `docs/`. For **how to n
 
 Cross-org / leadership reference for repository standardization (templates, policy outlines, metrics). Not BMJ-app-specific.
 
+**Lane entry points:** [policy/README.md](policy/README.md), [roadmaps/README.md](roadmaps/README.md), [metrics/README.md](metrics/README.md), [standards/README.md](standards/README.md), [templates/README.md](templates/README.md).
+
 - [standards/repo-governance-program.md](standards/repo-governance-program.md) - executive program narrative, operating model, rollout, KPIs.
 - [standards/repo-governance-exec-readout.md](standards/repo-governance-exec-readout.md) - 1–2 page VP/Platform briefing (decision asks and guardrails).
 - [standards/repo-taxonomy.md](standards/repo-taxonomy.md) - repo categories and standards matrix.

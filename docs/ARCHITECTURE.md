@@ -71,6 +71,43 @@ public/
   fonts/               Self-hosted Highrise typeface
 ```
 
+## Repository layout — monorepo root
+
+This section is the **curated map** of what lives at the repo root and how **`docs/`** is organized by lane. It complements the application tree above and [`AGENTS.md`](../AGENTS.md) (top-level governance domains). **Do not** treat this as an exhaustive file listing; for a shallow on-disk snapshot run `npm run docs:layout`.
+
+### Root entries
+
+| Path | Role |
+|------|------|
+| [`AGENTS.md`](../AGENTS.md) | Normative repo governance (domains, invariants, protocol). |
+| [`CLAUDE.md`](../CLAUDE.md) | Assistant and contributor project instructions. |
+| `.github/` | CI workflows, Issue templates, PR template, governance verify inputs. |
+| `docs/` | Committed documentation — see **Documentation lanes** below and [`INDEX.md`](INDEX.md). |
+| `public/` | Static assets (logos, placeholders, fonts, textures). |
+| `scripts/` | Automation — seeds, verify scripts, `print-repo-layout.mjs`. |
+| `src/` | Next.js application (see **Directory Structure** above). |
+| `supabase/` | Local config, migrations, seed SQL. |
+| `tests/` | Jest (`**/*.test.ts`), Playwright E2E. |
+
+### Documentation lanes (`docs/`)
+
+Each lane has a **README.md** entry point (naming rules: [`CONTRIBUTING.md`](CONTRIBUTING.md) — *File naming — documentation*). Cross-org REP reference modules live under **`standards/`**; BMJ product/deep docs live in root handbooks and lanes like **`ops/`**, **`brand/`**.
+
+| Lane | Entry | Contents |
+|------|--------|----------|
+| Audits | [`audits/README.md`](audits/README.md) | Audit reports and archive. |
+| Brand | [`brand/README.md`](brand/README.md) | Invariants, art direction, visual audits. |
+| Operations | [`ops/README.md`](ops/README.md) | Runbooks, env vars SSOT, launch/release SOPs. |
+| Policy | [`policy/README.md`](policy/README.md) | Formal policy outlines (REP). |
+| Roadmaps | [`roadmaps/README.md`](roadmaps/README.md) | REP rollout and org-enablement roadmaps. |
+| Metrics | [`metrics/README.md`](metrics/README.md) | Compliance dashboard schema. |
+| Standards | [`standards/README.md`](standards/README.md) | REP program modules (rubric, hygiene, automation). |
+| SSOT (mirrored) | [`ssot-bmj/README.md`](ssot-bmj/README.md) | Mirrored BMJ SSOT Markdown. |
+| Superpowers | [`superpowers/README.md`](superpowers/README.md) | Plans, specs, prompts for major delivery passes. |
+| Templates | [`templates/README.md`](templates/README.md) | Copy-ready org templates (not link-checked as live paths). |
+
+**Canonical inventory:** [`INDEX.md`](INDEX.md). **Application-only depth:** section *Directory Structure* in this file.
+
 ## Request Flow
 
 ```

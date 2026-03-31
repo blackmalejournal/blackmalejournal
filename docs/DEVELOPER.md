@@ -47,6 +47,12 @@ npm test -- --coverage   # With coverage report
 npm run verify:docs-links # Relative links in docs/ (templates/ excluded)
 ```
 
+### Documentation
+
+```bash
+npm run docs:layout        # Shallow tree of key dirs (see docs/ARCHITECTURE.md for narrative)
+```
+
 ### E2E Tests (Playwright)
 
 ```bash

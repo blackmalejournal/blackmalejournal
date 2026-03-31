@@ -2,7 +2,7 @@
 type: normative
 authority: canonical
 audience: [agents, contributors]
-last-verified: 2026-03-23
+last-verified: 2026-03-31
 ---
 
 # AGENTS -- The Black Male Journal Governance
@@ -56,5 +56,7 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 3. Verify the path (which files, which routes)
 4. Execute incrementally
 5. Refuse scope creep
+
+**Deeper layout (repo root, `docs/` lanes, tooling paths):** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — *Repository layout — monorepo root*. Optional on-disk snapshot: `npm run docs:layout`.
 
 See [CLAUDE.md](CLAUDE.md) for brand constraints, validation commands, content model, and architecture rules.
