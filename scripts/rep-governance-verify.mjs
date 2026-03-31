@@ -64,7 +64,9 @@ if (missing.length > 0) {
 
 let labels;
 try {
-  labels = JSON.parse(sh(`gh label list --repo "${nameWithOwner}" --json name`));
+  // Use REST API — `gh label list` uses GraphQL and can fail in Actions with default GITHUB_TOKEN.
+  const raw = sh(`gh api "repos/${nameWithOwner}/labels"`);
+  labels = JSON.parse(raw);
 } catch (e) {
   console.error("Could not list labels:", e.message);
   process.exit(1);
