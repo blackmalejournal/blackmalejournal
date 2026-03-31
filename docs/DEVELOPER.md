@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- **Node.js** 20+ (LTS recommended)
+- **Node.js** 20+ locally; **CI** uses **22** (Active LTS) — match CI for fewest surprises
 - **npm** (comes with Node.js)
 - **Git**
 
