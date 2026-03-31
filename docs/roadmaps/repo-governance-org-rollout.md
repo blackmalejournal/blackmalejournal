@@ -35,7 +35,15 @@ gh label create documentation --repo OWNER/REPO --color "0075ca" --description "
 
 After merging `.github/ISSUE_TEMPLATE/*.yml`:
 
-1. Open **`https://github.com/OWNER/REPO/issues/new/choose`**
+**Automated check (templates + `documentation` label):**
+
+```bash
+npm run verify:rep-governance
+```
+
+Then complete the **manual UI check**:
+
+1. Open **`https://github.com/OWNER/REPO/issues/new/choose`** (URL is printed by the script)
 2. Confirm you see:
    - **REP pilot nomination**
    - **REP weekly status**

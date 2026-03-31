@@ -148,7 +148,9 @@ REP Issue Forms apply the **`documentation`** label. On **blackmalejournal/black
 2. Confirm **REP pilot nomination** and **REP weekly status** appear.
 3. Open each form; optionally submit a test issue and close it, or verify fields render.
 
-CLI sanity check (files on default branch):
+CLI check (templates + `documentation` label): `npm run verify:rep-governance` (requires `gh` auth).
+
+Legacy one-liner (files on default branch):
 
 ```bash
 gh api repos/blackmalejournal/blackmalejournal/contents/.github/ISSUE_TEMPLATE --jq ".[].name"
