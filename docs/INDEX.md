@@ -16,6 +16,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [templates/README.md](templates/README.md) - copy-ready README, CONTRIBUTING, CODEOWNERS, PR/issue, ADR, runbook, SECURITY, service metadata.
 - [policy/sample-repository-policy-outline.md](policy/sample-repository-policy-outline.md) - sample formal policy outline.
 - [roadmaps/repo-governance-90-day-plan.md](roadmaps/repo-governance-90-day-plan.md) - 90-day plan and sample template tree.
+- [roadmaps/repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md) - org rollout for Issue Forms, labels, and default community files.
 - [metrics/compliance-dashboard-schema.md](metrics/compliance-dashboard-schema.md) - compliance dashboard data schema.
 
 ## Root Documents

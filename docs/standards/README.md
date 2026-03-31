@@ -27,4 +27,5 @@ This folder holds **Repo Excellence Program (REP)** reference material for multi
 | [../policy/sample-repository-policy-outline.md](../policy/sample-repository-policy-outline.md) | Formal policy outline for Legal/Eng review. |
 | [../roadmaps/repo-governance-90-day-plan.md](../roadmaps/repo-governance-90-day-plan.md) | **90-day** phased rollout + sample GitHub template tree. |
 | [../roadmaps/repo-governance-launch-kit.md](../roadmaps/repo-governance-launch-kit.md) | Leadership email, Slack launch post, kickoff agenda, week-1 checklist. |
+| [../roadmaps/repo-governance-org-rollout.md](../roadmaps/repo-governance-org-rollout.md) | Org rollout: labels, Issue Form smoke test, `.github` org repo, template repos. |
 | [../metrics/compliance-dashboard-schema.md](../metrics/compliance-dashboard-schema.md) | Warehouse schema for compliance dashboards. |

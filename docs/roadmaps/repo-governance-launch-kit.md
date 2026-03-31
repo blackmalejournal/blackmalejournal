@@ -134,3 +134,27 @@ Use this in meeting notes or as an issue template:
 - Weekly EM/repo owner status template: `docs/templates/rep-weekly-status.template.md`
 - GitHub Issue Forms (YAML): `.github/ISSUE_TEMPLATE/rep-pilot-nomination.yml`, `.github/ISSUE_TEMPLATE/rep-weekly-status.yml`, `.github/ISSUE_TEMPLATE/config.yml`
 
+---
+
+## 7) Label, smoke test, and org rollout
+
+### `documentation` label
+
+REP Issue Forms apply the **`documentation`** label. On **blackmalejournal/blackmalejournal** this label already exists (default GitHub palette). For other repositories, create it before relying on auto-labeling — see [repo-governance-org-rollout.md](./repo-governance-org-rollout.md) §1.
+
+### Smoke test (5 minutes)
+
+1. Open **`https://github.com/blackmalejournal/blackmalejournal/issues/new/choose`**
+2. Confirm **REP pilot nomination** and **REP weekly status** appear.
+3. Open each form; optionally submit a test issue and close it, or verify fields render.
+
+CLI sanity check (files on default branch):
+
+```bash
+gh api repos/blackmalejournal/blackmalejournal/contents/.github/ISSUE_TEMPLATE --jq ".[].name"
+```
+
+### Org-wide rollout
+
+Use [repo-governance-org-rollout.md](./repo-governance-org-rollout.md) for org `.github` default repo, template repositories, URL replacements, and bulk label creation.
+
