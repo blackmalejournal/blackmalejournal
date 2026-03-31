@@ -126,3 +126,10 @@ Use this in meeting notes or as an issue template:
 - Due date:
 ```
 
+---
+
+## 6) Ready-to-copy rollout templates
+
+- Pilot nomination template: `docs/templates/rep-pilot-nomination.template.md`
+- Weekly EM/repo owner status template: `docs/templates/rep-weekly-status.template.md`
+

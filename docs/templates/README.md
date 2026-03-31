@@ -15,5 +15,7 @@ Copy these files into new or existing repositories and adjust placeholders marke
 | [docs-index.template.md](./docs-index.template.md) | `docs/README.md` |
 | [runbook-template.md](./runbook-template.md) | `docs/runbooks/<service>-operations.md` |
 | [SECURITY.template.md](./SECURITY.template.md) | `SECURITY.md` |
+| [rep-pilot-nomination.template.md](./rep-pilot-nomination.template.md) | issue for pilot candidate intake (`.github/ISSUE_TEMPLATE/`) |
+| [rep-weekly-status.template.md](./rep-weekly-status.template.md) | weekly status update note for EMs/owners |
 
 **Organization standards:** See [docs/standards/repo-governance-program.md](../standards/repo-governance-program.md).
