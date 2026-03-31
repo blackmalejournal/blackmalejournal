@@ -132,4 +132,5 @@ Use this in meeting notes or as an issue template:
 
 - Pilot nomination template: `docs/templates/rep-pilot-nomination.template.md`
 - Weekly EM/repo owner status template: `docs/templates/rep-weekly-status.template.md`
+- GitHub Issue Forms (YAML): `.github/ISSUE_TEMPLATE/rep-pilot-nomination.yml`, `.github/ISSUE_TEMPLATE/rep-weekly-status.yml`, `.github/ISSUE_TEMPLATE/config.yml`
 

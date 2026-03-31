@@ -18,4 +18,6 @@ Copy these files into new or existing repositories and adjust placeholders marke
 | [rep-pilot-nomination.template.md](./rep-pilot-nomination.template.md) | issue for pilot candidate intake (`.github/ISSUE_TEMPLATE/`) |
 | [rep-weekly-status.template.md](./rep-weekly-status.template.md) | weekly status update note for EMs/owners |
 
+**GitHub Issue Forms (native UI):** copy from this repo’s `.github/ISSUE_TEMPLATE/rep-pilot-nomination.yml` and `rep-weekly-status.yml` (or open issues here and use the templates).
+
 **Organization standards:** See [docs/standards/repo-governance-program.md](../standards/repo-governance-program.md).
