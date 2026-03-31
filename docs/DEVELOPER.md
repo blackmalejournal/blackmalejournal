@@ -35,6 +35,10 @@
    ```
    Open [http://localhost:3000](http://localhost:3000).
 
+## Repository scripts
+
+Automation and seeds live in [`scripts/`](../scripts/README.md) (verify helpers, Jest counts, repo layout printer, TypeScript seed runners). See that README for `npm run` mappings and `npx tsx` usage.
+
 ## Testing
 
 **Test layouts:** [tests/README.md](../tests/README.md) (repo root).

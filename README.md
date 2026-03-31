@@ -82,6 +82,7 @@ public/
 | [docs/standards/README.md](docs/standards/README.md) | Platform / multi-repo leads | Optional **Repo Excellence Program** reference (templates, rollout, governance) — not required for routine BMJ app work |
 | [CLAUDE.md](CLAUDE.md) | AI assistants | Project instructions for Claude Code |
 | [tests/README.md](tests/README.md) | Developers | Test folder layout and commands |
+| [scripts/README.md](scripts/README.md) | Developers | Verify scripts, seeds, `docs:layout` |
 
 ## For the Admin (Non-Technical Operator)
 

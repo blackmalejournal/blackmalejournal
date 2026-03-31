@@ -35,7 +35,7 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 | `tests/` | **Testing** | Jest + Playwright — [`tests/README.md`](tests/README.md) |
 | `docs/` | **Documentation** | Operations, brand, audits |
 | `public/` | **Assets** | Logos, fonts, images |
-| `scripts/` | **Automation** | Seed scripts, utilities |
+| `scripts/` | **Automation** | [`scripts/README.md`](scripts/README.md) — verify, seeds, layout |
 
 ## Seven Invariants
 

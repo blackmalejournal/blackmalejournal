@@ -84,7 +84,7 @@ This section is the **curated map** of what lives at the repo root and how **`do
 | `.github/` | CI workflows, Issue templates, PR template, governance verify inputs. |
 | `docs/` | Committed documentation — see **Documentation lanes** below and [`INDEX.md`](INDEX.md). |
 | `public/` | Static assets (logos, placeholders, fonts, textures). |
-| `scripts/` | Automation — seeds, verify scripts, `print-repo-layout.mjs`. |
+| `scripts/` | Automation — [`scripts/README.md`](../scripts/README.md) (verify, seeds, layout printer). |
 | `src/` | Next.js application (see **Directory Structure** above). |
 | `supabase/` | Local config, migrations, seed SQL. |
 | `tests/` | Jest + Playwright — layout: [`tests/README.md`](../tests/README.md). |
