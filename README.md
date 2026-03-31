@@ -76,6 +76,7 @@ public/
 | [docs/ops/chairman-operator-manual.md](docs/ops/chairman-operator-manual.md) | Admin/Operator | Daily operations, SOPs |
 | [docs/ops/env-vars.md](docs/ops/env-vars.md) | DevOps | Environment variable reference |
 | [docs/brand/invariants.md](docs/brand/invariants.md) | Designers | Visual identity rules |
+| [docs/standards/README.md](docs/standards/README.md) | Platform / multi-repo leads | Optional **Repo Excellence Program** reference (templates, rollout, governance) — not required for routine BMJ app work |
 | [CLAUDE.md](CLAUDE.md) | AI assistants | Project instructions for Claude Code |
 
 ## For the Admin (Non-Technical Operator)
