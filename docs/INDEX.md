@@ -25,7 +25,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [ARCHITECTURE.md](ARCHITECTURE.md) - system design, data flow, database schema, integration patterns.
 - [CONTRIBUTING.md](CONTRIBUTING.md) - code conventions, PR process, file naming, asset naming, testing requirements.
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - common issues and fixes for build, dev server, database, Stripe, tests, and deployment.
-- [deferrals.md](deferrals.md) - external dependencies and configuration tasks blocked outside the repo.
+- [DEFERRALS.md](DEFERRALS.md) - external dependencies and configuration tasks blocked outside the repo.
 
 ## Audits
 

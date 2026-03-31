@@ -25,7 +25,7 @@ tells Claude which workflow to follow. Items are ordered by priority within each
 >
 > **Blocked on:** Stripe Dashboard access, Vercel env var write access.
 >
-> **References:** `docs/deferrals.md`, `docs/ops/env-vars.md`, `src/app/api/stripe/webhook/route.ts`
+> **References:** `docs/DEFERRALS.md`, `docs/ops/env-vars.md`, `src/app/api/stripe/webhook/route.ts`
 
 ### 2. DNS and Custom Domain Cutover
 
@@ -37,7 +37,7 @@ tells Claude which workflow to follow. Items are ordered by priority within each
 >
 > **Blocked on:** Domain registrar access.
 >
-> **References:** `docs/deferrals.md`, `docs/ops/launch-dashboard-checklist.md`
+> **References:** `docs/DEFERRALS.md`, `docs/ops/launch-dashboard-checklist.md`
 
 ### 3. Launch Operator Drill
 
@@ -118,7 +118,7 @@ tells Claude which workflow to follow. Items are ordered by priority within each
 >
 > **Blocked on:** Plausible account and `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` env var.
 >
-> **References:** `docs/deferrals.md`, `docs/superpowers/plans/2026-03-25-admin-command-center-roadmap.md` (Batch 6)
+> **References:** `docs/DEFERRALS.md`, `docs/superpowers/plans/2026-03-25-admin-command-center-roadmap.md` (Batch 6)
 
 ### 9. Search Enhancement
 

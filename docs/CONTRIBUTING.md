@@ -47,7 +47,7 @@
 | Database slugs | kebab-case | `weekend-briefing-001` |
 | Placeholder images | `{content-type}.svg` | `article.svg` |
 | Test files | `*.test.ts` or `*.test.tsx` | `ArticleCard.test.tsx` |
-| Docs — `docs/` root handbooks | `UPPERCASE.md` | `DEVELOPER.md`, `ARCHITECTURE.md` |
+| Docs — `docs/` root handbooks | `UPPERCASE.md` | `DEVELOPER.md`, `ARCHITECTURE.md`, `DEFERRALS.md` |
 | Docs — under a lane folder (`docs/ops/`, `docs/brand/`, …) | kebab-case | `chairman-operator-manual.md`, `invariants.md` |
 | Docs — dated plans/specs (`docs/superpowers/`) | `YYYY-MM-DD-topic.md` | `2026-03-27-email-campaigns.md` |
 | Docs — imported / mirrored SSOT (`docs/ssot-bmj/`) | `bmj-` + kebab-case | `bmj-comprehensive-platform-audit.md` |
@@ -58,7 +58,6 @@
 - **Map:** [INDEX.md](INDEX.md) is the committed inventory of `docs/`. Prefer linking new docs from there (and from [README.md](README.md) when it is a primary entry).
 - **Root handbooks:** short, stable, `UPPERCASE.md` filenames only at `docs/` root — not inside lane folders.
 - **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed (e.g. `ssot-bmj/`).
-- **Legacy name:** [`deferrals.md`](deferrals.md) at `docs/` root is the historical filename; keep it unless you are doing a deliberate migration (update all in-repo links and any external bookmarks).
 
 ## Asset Naming Convention
 

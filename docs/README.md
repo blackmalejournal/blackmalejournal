@@ -10,7 +10,7 @@ This folder contains the committed BMJ documentation set. Start with [INDEX.md](
 - [ARCHITECTURE.md](ARCHITECTURE.md) for system design, data flow, schema, and integration patterns.
 - [CONTRIBUTING.md](CONTRIBUTING.md) for code style, PR process, naming conventions, and testing.
 - [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for common issues and fixes.
-- [deferrals.md](deferrals.md) for external setup and launch dependencies outside the codebase.
+- [DEFERRALS.md](DEFERRALS.md) for external setup and launch dependencies outside the codebase.
 
 ## Lanes
 
