@@ -32,7 +32,7 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 | `src/lib/` | **Library** | Supabase queries, Stripe config, utilities |
 | `src/styles/` | **Brand** | CSS custom properties, globals -- brand SSOT |
 | `supabase/` | **Database** | Migrations, seed data, config |
-| `tests/` | **Testing** | Jest unit tests, Playwright E2E |
+| `tests/` | **Testing** | Jest + Playwright — [`tests/README.md`](tests/README.md) |
 | `docs/` | **Documentation** | Operations, brand, audits |
 | `public/` | **Assets** | Logos, fonts, images |
 | `scripts/` | **Automation** | Seed scripts, utilities |

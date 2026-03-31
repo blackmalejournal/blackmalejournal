@@ -87,7 +87,7 @@ This section is the **curated map** of what lives at the repo root and how **`do
 | `scripts/` | Automation — seeds, verify scripts, `print-repo-layout.mjs`. |
 | `src/` | Next.js application (see **Directory Structure** above). |
 | `supabase/` | Local config, migrations, seed SQL. |
-| `tests/` | Jest (`**/*.test.ts`), Playwright E2E. |
+| `tests/` | Jest + Playwright — layout: [`tests/README.md`](../tests/README.md). |
 
 ### Documentation lanes (`docs/`)
 

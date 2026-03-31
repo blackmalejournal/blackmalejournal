@@ -25,10 +25,7 @@ const ROOTS = [
   "docs",
   "public",
   "scripts",
-  "src/app",
-  "src/components",
-  "src/lib",
-  "src/styles",
+  "src",
   "supabase",
   "tests",
 ];

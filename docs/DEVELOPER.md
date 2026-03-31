@@ -37,6 +37,8 @@
 
 ## Testing
 
+**Test layouts:** [tests/README.md](../tests/README.md) (repo root).
+
 ### Unit & Integration Tests (Jest)
 
 ```bash

@@ -23,6 +23,8 @@ npm run dev                   # http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm test` | Jest (136 suites, 1185 tests) |
 | `npm run test:e2e` | Playwright E2E |
+| `npm run verify:docs-links` | Validate relative links under `docs/` (CI) |
+| `npm run docs:layout` | Shallow directory tree of key folders (see `docs/ARCHITECTURE.md`) |
 | `npx tsc --noEmit` | TypeScript check |
 
 ## Architecture at a Glance
@@ -69,8 +71,9 @@ public/
 
 | Document | Audience | Purpose |
 |----------|----------|---------|
+| [docs/INDEX.md](docs/INDEX.md) | Everyone | Map of `docs/`, lanes, and governance entry points |
 | [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Code style, PR process, conventions |
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Everyone | Common issues and fixes |
 | [docs/ops/chairman-operator-manual.md](docs/ops/chairman-operator-manual.md) | Admin/Operator | Daily operations, SOPs |
@@ -78,6 +81,7 @@ public/
 | [docs/brand/invariants.md](docs/brand/invariants.md) | Designers | Visual identity rules |
 | [docs/standards/README.md](docs/standards/README.md) | Platform / multi-repo leads | Optional **Repo Excellence Program** reference (templates, rollout, governance) — not required for routine BMJ app work |
 | [CLAUDE.md](CLAUDE.md) | AI assistants | Project instructions for Claude Code |
+| [tests/README.md](tests/README.md) | Developers | Test folder layout and commands |
 
 ## For the Admin (Non-Technical Operator)
 
