@@ -7,6 +7,7 @@ This index covers the committed documentation tree under `docs/`.
 Cross-org / leadership reference for repository standardization (templates, policy outlines, metrics). Not BMJ-app-specific.
 
 - [standards/repo-governance-program.md](standards/repo-governance-program.md) - executive program narrative, operating model, rollout, KPIs.
+- [standards/repo-governance-exec-readout.md](standards/repo-governance-exec-readout.md) - 1–2 page VP/Platform briefing (decision asks and guardrails).
 - [standards/repo-taxonomy.md](standards/repo-taxonomy.md) - repo categories and standards matrix.
 - [standards/documentation-rubric.md](standards/documentation-rubric.md) - documentation standards and quality rubric.
 - [standards/hygiene-baseline.md](standards/hygiene-baseline.md) - baseline vs recommended hygiene controls.
