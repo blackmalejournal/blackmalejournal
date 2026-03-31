@@ -19,4 +19,6 @@ This folder contains the committed BMJ documentation set. Start with [INDEX.md](
 
 ## Repository governance (reference)
 
-Reusable **Repo Excellence Program (REP)** standards, copy-ready templates, 90-day rollout plan, and compliance dashboard schema for multi-repo engineering orgs. Start with [INDEX.md](INDEX.md) § *Repository standards and governance*, or the executive briefing [standards/repo-governance-exec-readout.md](standards/repo-governance-exec-readout.md). These artifacts are **not** BMJ-specific product requirements unless adopted explicitly.
+Reusable **Repo Excellence Program (REP)** standards, copy-ready templates, 90-day rollout plan, and compliance dashboard schema for multi-repo engineering orgs. Hub: [standards/README.md](standards/README.md).
+
+Also listed in [INDEX.md](INDEX.md) § *Repository standards and governance*; quick VP briefing: [standards/repo-governance-exec-readout.md](standards/repo-governance-exec-readout.md). These artifacts are **not** BMJ-specific product requirements unless adopted explicitly.

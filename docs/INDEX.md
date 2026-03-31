@@ -1,6 +1,6 @@
 # Documentation Index
 
-This index covers the committed documentation tree under `docs/`.
+This index covers the committed documentation tree under `docs/`. For a **single entry point** to the org-wide repository governance package, see [standards/README.md](standards/README.md).
 
 ## Repository standards and governance (reference)
 
