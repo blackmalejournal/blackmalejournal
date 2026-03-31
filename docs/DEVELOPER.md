@@ -106,6 +106,16 @@ All content is categorized under one of six **lenses**:
 - **Basic** — Full briefing archive, select handbooks
 - **Premium** — Everything (all handbooks, downloads, early access)
 
+## Optional: REP governance verification
+
+If you are validating **Repo Excellence Program** GitHub Issue Forms and the `documentation` label (requires [GitHub CLI](https://cli.github.com/) and `gh auth login`):
+
+```bash
+npm run verify:rep-governance
+```
+
+See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md).
+
 ## Conventions
 
 ### Brand System
