@@ -2,6 +2,21 @@
 
 This index covers the committed documentation tree under `docs/`.
 
+## Repository standards and governance (reference)
+
+Cross-org / leadership reference for repository standardization (templates, policy outlines, metrics). Not BMJ-app-specific.
+
+- [standards/repo-governance-program.md](standards/repo-governance-program.md) - executive program narrative, operating model, rollout, KPIs.
+- [standards/repo-taxonomy.md](standards/repo-taxonomy.md) - repo categories and standards matrix.
+- [standards/documentation-rubric.md](standards/documentation-rubric.md) - documentation standards and quality rubric.
+- [standards/hygiene-baseline.md](standards/hygiene-baseline.md) - baseline vs recommended hygiene controls.
+- [standards/migration-framework.md](standards/migration-framework.md) - migration, checklist, audit scorecard.
+- [standards/automation-enforcement.md](standards/automation-enforcement.md) - automation catalog and severity ramp.
+- [templates/README.md](templates/README.md) - copy-ready README, CONTRIBUTING, CODEOWNERS, PR/issue, ADR, runbook, SECURITY, service metadata.
+- [policy/sample-repository-policy-outline.md](policy/sample-repository-policy-outline.md) - sample formal policy outline.
+- [roadmaps/repo-governance-90-day-plan.md](roadmaps/repo-governance-90-day-plan.md) - 90-day plan and sample template tree.
+- [metrics/compliance-dashboard-schema.md](metrics/compliance-dashboard-schema.md) - compliance dashboard data schema.
+
 ## Root Documents
 
 - [DEVELOPER.md](DEVELOPER.md) - developer workflow, scripts, testing, and deployment notes.
