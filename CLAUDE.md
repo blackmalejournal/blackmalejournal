@@ -156,6 +156,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 - Developer setup: docs/DEVELOPER.md
 - Operator manual: docs/ops/chairman-operator-manual.md
 - Full documentation index: docs/INDEX.md
+- Repository governance reference (org-wide standards, templates, rollout): docs/standards/repo-governance-program.md — optional for day-to-day BMJ feature work; use when aligning multiple repos or platform policy
 
 ## Operations & Infrastructure
 - Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md
