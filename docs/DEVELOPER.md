@@ -114,7 +114,7 @@ If you are validating **Repo Excellence Program** GitHub Issue Forms and the `do
 npm run verify:rep-governance
 ```
 
-See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md). The same check runs in **CI** (`.github/workflows/ci.yml`) on every push and PR.
+See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md). **CI** verifies Issue Form files on disk; a **local** run also checks the `documentation` label via `gh` (the Actions token cannot list labels in many setups).
 
 ## Conventions
 

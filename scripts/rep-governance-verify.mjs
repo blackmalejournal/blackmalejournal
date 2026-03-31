@@ -1,10 +1,13 @@
 /**
- * Verifies REP GitHub Issue Form files and the `documentation` label via `gh` CLI.
+ * Verifies REP GitHub Issue Form files exist and (locally) that the `documentation` label exists.
  * Manual UI check still required: open the printed "new issue" chooser URL.
  *
- * Prerequisites: GitHub CLI (`gh`) authenticated (`gh auth status`), unless running in GitHub Actions (`GITHUB_ACTIONS` + `GH_TOKEN`).
+ * In GitHub Actions, the default `GITHUB_TOKEN` often cannot list labels (403). CI therefore
+ * checks only committed files under `.github/ISSUE_TEMPLATE/`. Run locally for full checks.
  */
 import { execSync } from "child_process";
+import fs from "fs";
+import path from "path";
 
 function sh(cmd) {
   try {
@@ -21,11 +24,11 @@ const REQUIRED_TEMPLATES = [
   "rep-weekly-status.yml",
 ];
 
-if (process.env.GITHUB_ACTIONS !== "true") {
-  try {
-    sh("gh auth status");
-  } catch {
-    console.error("Run `gh auth login` first, then retry.");
+const templateDir = path.join(process.cwd(), ".github", "ISSUE_TEMPLATE");
+for (const f of REQUIRED_TEMPLATES) {
+  const p = path.join(templateDir, f);
+  if (!fs.existsSync(p)) {
+    console.error(`Missing Issue Template file: ${p}`);
     process.exit(1);
   }
 }
@@ -40,31 +43,27 @@ if (!nameWithOwner) {
   }
 }
 
-let entries;
-try {
-  const raw = sh(`gh api "repos/${nameWithOwner}/contents/.github/ISSUE_TEMPLATE"`);
-  entries = JSON.parse(raw);
-} catch (e) {
-  console.error(
-    `Missing or unreadable .github/ISSUE_TEMPLATE for ${nameWithOwner}:`,
-    e.message,
+const chooseUrl = `https://github.com/${nameWithOwner}/issues/new/choose`;
+
+if (process.env.GITHUB_ACTIONS === "true") {
+  console.log(`OK (CI): ${nameWithOwner}`);
+  console.log(`  Issue templates (on disk): ${REQUIRED_TEMPLATES.join(", ")}`);
+  console.log(
+    `  Note: "documentation" label is not verified in CI (token cannot list labels). Run locally: npm run verify:rep-governance`,
   );
-  process.exit(1);
+  console.log(`  Next (browser): ${chooseUrl}`);
+  process.exit(0);
 }
 
-const names = entries.map((f) => f.name).filter(Boolean);
-const missing = REQUIRED_TEMPLATES.filter((r) => !names.includes(r));
-if (missing.length > 0) {
-  console.error(
-    `Missing Issue Template file(s) in ${nameWithOwner}: ${missing.join(", ")}`,
-  );
-  console.error("Found:", names.sort().join(", ") || "(none)");
+try {
+  sh("gh auth status");
+} catch {
+  console.error("Run `gh auth login` first, then retry.");
   process.exit(1);
 }
 
 let labels;
 try {
-  // Use REST API — `gh label list` uses GraphQL and can fail in Actions with default GITHUB_TOKEN.
   const raw = sh(`gh api "repos/${nameWithOwner}/labels"`);
   labels = JSON.parse(raw);
 } catch (e) {
@@ -77,11 +76,14 @@ if (!hasDocumentation) {
   console.error(
     `Repo ${nameWithOwner} is missing the "documentation" label (used by REP Issue Forms).`,
   );
-  console.error('Create with: gh label create documentation --repo "' + nameWithOwner + '" --color "0075ca"');
+  console.error(
+    'Create with: gh label create documentation --repo "' +
+      nameWithOwner +
+      '" --color "0075ca"',
+  );
   process.exit(1);
 }
 
-const chooseUrl = `https://github.com/${nameWithOwner}/issues/new/choose`;
 console.log(`OK: ${nameWithOwner}`);
 console.log(`  Issue templates: ${REQUIRED_TEMPLATES.join(", ")}`);
 console.log(`  Label "documentation": present`);

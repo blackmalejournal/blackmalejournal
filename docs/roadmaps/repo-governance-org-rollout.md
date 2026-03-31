@@ -35,11 +35,14 @@ gh label create documentation --repo OWNER/REPO --color "0075ca" --description "
 
 After merging `.github/ISSUE_TEMPLATE/*.yml`:
 
-**Automated check (templates + `documentation` label):**
+**Automated check:**
 
 ```bash
 npm run verify:rep-governance
 ```
+
+- **GitHub Actions:** verifies `.github/ISSUE_TEMPLATE/*` files are present in the checkout (default `GITHUB_TOKEN` often cannot list labels).
+- **Local / developer machine:** same file checks **plus** verifies the `documentation` label exists via `gh api`.
 
 Then complete the **manual UI check**:
 
