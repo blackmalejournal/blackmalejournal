@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ChevronRight, Home } from 'lucide-react';
+import { PATHS } from '@/lib/paths';
 
 export interface BreadcrumbItem {
   label: string;
@@ -16,7 +17,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       <ol className="flex flex-wrap items-center gap-1 font-mono text-xs text-bmj-tan">
         <li className="flex items-center gap-1">
           <Link
-            href="/"
+            href={PATHS.HOME}
             className="flex items-center gap-1 text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             aria-label="Home"
           >

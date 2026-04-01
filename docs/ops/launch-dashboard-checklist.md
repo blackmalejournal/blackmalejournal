@@ -1,3 +1,10 @@
+---
+title: Launch dashboard checklist
+status: operational
+audience: [operators, engineers]
+last-verified: 2026-03-31
+---
+
 # Launch Dashboard Checklist
 
 Use this runbook when BMJ is actually preparing to launch on the public production domain. This is the exact dashboard-by-dashboard follow-through for the external systems that are not stored in git.

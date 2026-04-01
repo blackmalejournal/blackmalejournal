@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { handbookPath } from '@/lib/paths';
 import Image from 'next/image';
 import { Lock } from 'lucide-react';
 import { LensBadge } from '@/components/brand/LensBadge';
@@ -28,7 +29,7 @@ export function HandbookCard({
   const isPremium = accessTier !== 'free';
 
   return (
-    <Link href={`/handbooks/${slug}`} className="group no-underline">
+    <Link href={handbookPath(slug)} className="group no-underline">
       <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/60 sm:flex-row">
         {/* Cover image or icon */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-bmj-black sm:aspect-auto sm:w-48 sm:shrink-0">

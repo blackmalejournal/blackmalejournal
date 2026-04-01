@@ -7,6 +7,10 @@ description: Use when building a new public-facing content page — listing page
 
 How to build public content pages following established patterns.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md); CLAUDE.md (Route Rename Checklist); `src/lib/seo.ts` for metadata helpers.
+
 ## Listing Page Pattern
 
 Location: `src/app/(public)/<content-type>/page.tsx`

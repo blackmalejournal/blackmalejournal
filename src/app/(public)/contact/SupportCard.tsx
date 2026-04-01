@@ -1,5 +1,9 @@
 import Link from 'next/link';
 import { Heart } from 'lucide-react';
+import { PATHS } from '@/lib/paths';
+import { SUPPORT_PAYMENT_METHODS } from '@/lib/seo';
+
+const QUICK_SUPPORT_METHODS = SUPPORT_PAYMENT_METHODS.slice(0, 2);
 
 export function SupportCard() {
   return (
@@ -16,29 +20,23 @@ export function SupportCard() {
       </p>
 
       <Link
-        href="/support"
+        href={PATHS.SUPPORT}
         className="mb-4 block bg-bmj-red py-3 text-center font-label text-xs uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
       >
         Fund the Mission
       </Link>
 
       <div className="flex justify-between text-center">
-        <div>
-          <span className="block font-label text-micro uppercase tracking-widest text-bmj-cream/80">
-            CashApp
-          </span>
-          <span className="font-mono text-xs text-bmj-cream">
-            $BlackMaleJournal
-          </span>
-        </div>
-        <div>
-          <span className="block font-label text-micro uppercase tracking-widest text-bmj-cream/80">
-            Venmo
-          </span>
-          <span className="font-mono text-xs text-bmj-cream">
-            @BlackMaleJournal
-          </span>
-        </div>
+        {QUICK_SUPPORT_METHODS.map((method) => (
+          <div key={method.label}>
+            <span className="block font-label text-micro uppercase tracking-widest text-bmj-cream/80">
+              {method.label}
+            </span>
+            <span className="font-mono text-xs text-bmj-cream">
+              {method.handle}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

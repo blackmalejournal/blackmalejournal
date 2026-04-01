@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { X } from 'lucide-react';
 import { signOut } from '@/app/(auth)/actions';
 import { HEADER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
+import { PATHS } from '@/lib/paths';
 import type { NavUser } from './Navbar';
 
 interface MobileMenuProps {
@@ -67,7 +68,7 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
               {user && (
                 <li>
                   <Link
-                    href="/portal"
+                    href={PATHS.PORTAL}
                     onClick={onClose}
                     className="font-display text-5xl uppercase tracking-wordmark text-bmj-amber transition-colors hover:text-bmj-red"
                   >
@@ -90,14 +91,14 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
             ) : (
               <div className="mb-8 flex flex-col gap-3">
                 <Link
-                  href="/signup"
+                  href={PATHS.SIGNUP}
                   onClick={onClose}
                   className="btn-primary block py-3 text-center text-sm"
                 >
                   Join
                 </Link>
                 <Link
-                  href="/login"
+                  href={PATHS.LOGIN}
                   onClick={onClose}
                   className="btn-secondary block py-3 text-center text-sm"
                 >

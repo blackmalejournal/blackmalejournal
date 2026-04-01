@@ -8,7 +8,7 @@ import { StarDivider } from '@/components/ui/StarDivider';
 import { formatDate } from '@/lib/utils';
 import { getBookmarkCount } from '@/lib/supabase/bookmarks';
 import type { MemberTier } from '@/lib/supabase/types';
-import { normalizeInternalPath } from '@/lib/paths';
+import { articlePath, normalizeInternalPath, PATHS } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Member Portal',
@@ -50,7 +50,7 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect('/login');
+  if (!user) redirect(PATHS.LOGIN);
 
   const member = await getMemberById(user.id);
   const tier: MemberTier = member?.tier ?? 'free';
@@ -148,7 +148,7 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
               : 'Upgrade to Premium for complete access to everything.'}
           </p>
           <Link
-            href="/pricing"
+            href={PATHS.PRICING}
             className="inline-block bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
           >
             Upgrade Now
@@ -165,7 +165,7 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
           {latestArticles.map((article) => (
             <Link
               key={article.id}
-              href={`/articles/${article.slug}`}
+              href={articlePath(article.slug)}
               className="block border-l-4 border-bmj-red bg-bmj-brown p-4 no-underline transition-colors hover:bg-bmj-brown/80"
             >
               <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
@@ -187,37 +187,37 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
       {/* Quick links */}
       <div className="flex flex-wrap gap-4 py-10">
         <Link
-          href="/portal/bookmarks"
+          href={PATHS.PORTAL_BOOKMARKS}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Saved{bookmarkCount > 0 ? ` (${bookmarkCount})` : ''}
         </Link>
         <Link
-          href="/portal/settings"
+          href={PATHS.PORTAL_SETTINGS}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Settings
         </Link>
         <Link
-          href="/briefings"
+          href={PATHS.BRIEFINGS}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Briefings
         </Link>
         <Link
-          href="/academy"
+          href={PATHS.ACADEMY}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Academy
         </Link>
         <Link
-          href="/handbooks"
+          href={PATHS.HANDBOOKS}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Handbooks
         </Link>
         <Link
-          href="/downloads"
+          href={PATHS.DOWNLOADS}
           className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Downloads

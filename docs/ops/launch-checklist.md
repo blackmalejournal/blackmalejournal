@@ -1,3 +1,10 @@
+---
+title: Launch checklist
+status: operational
+audience: [operators, engineers]
+last-verified: 2026-03-31
+---
+
 # Launch Checklist
 
 Use this checklist before any production launch, relaunch, or major campaign push.

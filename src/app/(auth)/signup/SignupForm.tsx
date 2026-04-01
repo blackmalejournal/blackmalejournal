@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { signup } from '../actions';
 import { TierSelector, type TierId } from './TierSelector';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 
 interface SignupFormProps {
   preselectedTier?: TierId;
@@ -80,7 +80,11 @@ export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
               className="w-full border border-bmj-tan/30 bg-bmj-black px-4 py-3 font-body text-sm text-bmj-cream placeholder:text-bmj-tan/70 focus:border-bmj-red focus:outline-none"
               placeholder="Create a password"
             />
-            <p id="password-hint" className="mt-1 font-mono text-xs text-bmj-tan/60">
+            <p
+              id="password-hint"
+              role="note"
+              className="mt-1 font-mono text-xs text-bmj-tan/60"
+            >
               Minimum 6 characters
             </p>
           </div>
@@ -104,7 +108,7 @@ export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
         <p className="mt-6 text-center font-body text-sm text-bmj-tan">
           Already a member?{' '}
           <Link
-            href={withQuery('/login', { next: nextHref })}
+            href={withQuery(PATHS.LOGIN, { next: nextHref })}
             className="text-bmj-red hover:text-bmj-cream"
           >
             Log in &rarr;

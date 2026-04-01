@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { academyCoursePath } from '@/lib/paths';
 import { getCategoryLabel } from '@/lib/utils';
 import type { AccessTier } from '@/lib/supabase/types';
 
@@ -85,7 +86,7 @@ export function CourseCard({
   if (!published) return card;
 
   return (
-    <Link href={`/academy/${slug}`} className="no-underline">
+    <Link href={academyCoursePath(slug)} className="no-underline">
       {card}
     </Link>
   );

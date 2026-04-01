@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { academyLessonPath } from '@/lib/paths';
 import { Lock, Play, Clock } from 'lucide-react';
 
 interface LessonCardProps {
@@ -70,7 +71,7 @@ export function LessonCard({
 
   return (
     <Link
-      href={`/academy/${courseSlug}/${slug}`}
+      href={academyLessonPath(courseSlug, slug)}
       className="no-underline"
     >
       {content}

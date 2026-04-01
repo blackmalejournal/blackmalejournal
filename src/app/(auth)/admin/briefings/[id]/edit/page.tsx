@@ -6,7 +6,7 @@ import {
   getBriefingById,
 } from '@/lib/supabase/admin-queries';
 import { assessBriefingReadiness } from '@/lib/admin-publishing';
-import { PATHS } from '@/lib/paths';
+import { briefingPath, PATHS } from '@/lib/paths';
 import { BriefingForm } from '../../BriefingForm';
 import { updateBriefingAction } from '../../actions';
 import { DeleteButton } from '@/components/admin/DeleteButton';
@@ -86,7 +86,7 @@ export default async function EditBriefingPage({ params }: EditBriefingPageProps
           ]}
           links={[
             { label: 'Briefing Desk', href: PATHS.ADMIN_BRIEFINGS },
-            { label: 'Public Briefing', href: `/briefings/${briefing.slug}` },
+            { label: 'Public Briefing', href: briefingPath(briefing.slug) },
           ]}
           activity={activity}
         />

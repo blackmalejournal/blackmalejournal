@@ -40,6 +40,12 @@ jobs:
       - name: Verify docs internal links
         run: npm run verify:docs-links
 
+      - name: Verify docs YAML frontmatter (ops, brand, root handbooks)
+        run: npm run verify:docs-frontmatter
+
+      - name: Docs duplicate audit (informational)
+        run: npm run docs:duplicate-audit:ci
+
       - name: Verify REP Issue Form files (on-disk; label check is local-only)
         run: npm run verify:rep-governance
         env:

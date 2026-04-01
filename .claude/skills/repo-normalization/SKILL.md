@@ -7,6 +7,10 @@ description: Use when the repo feels cluttered, files seem duplicated, directori
 
 Audit and clean the repo so every file has exactly one reason to exist, in exactly one place.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md) (anti-fragmentation, INDEX rules). **Task-scoped:** [docs/CONTRIBUTING.md](../../docs/CONTRIBUTING.md) (layout, naming); `npm run docs:inventory` for doc counts.
+
 ## Operations (apply in order)
 
 ### 1. Deduplicate

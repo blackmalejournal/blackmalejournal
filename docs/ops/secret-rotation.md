@@ -1,3 +1,10 @@
+---
+title: Secret rotation procedure
+status: operational
+audience: [engineers, operators]
+last-verified: 2026-03-31
+---
+
 # Secret Rotation Procedure
 
 > Reference for rotating API keys and secrets used by The Black Male Journal.

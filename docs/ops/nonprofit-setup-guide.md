@@ -1,3 +1,10 @@
+---
+title: Nonprofit organization setup guide
+status: reference
+audience: [chairman, operators, engineers]
+last-verified: 2026-03-31
+---
+
 # Nonprofit Organization Setup Guide
 
 > Comprehensive setup guide for The Black Male Journal as a nonprofit entity.

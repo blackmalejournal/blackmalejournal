@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import type { CourseCategory } from '@/lib/supabase/types';
+import { FILTER_TABLIST_ROW_CLASS } from '@/lib/constants';
 import { getCategoryLabel } from '@/lib/utils';
 
 type Tab = { label: string; value: CourseCategory | 'all' };
@@ -35,7 +36,11 @@ export function CategoryFilterTabs({ activeCategory }: CategoryFilterTabsProps) 
   }
 
   return (
-    <div className="flex gap-6 overflow-x-auto border-b border-bmj-tan/20 pb-0" role="tablist">
+    <div
+      className={FILTER_TABLIST_ROW_CLASS}
+      role="tablist"
+      aria-label="Filter courses by category"
+    >
       {TABS.map((tab) => {
         const isActive = tab.value === activeCategory;
         return (

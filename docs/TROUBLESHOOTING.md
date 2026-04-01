@@ -1,3 +1,10 @@
+---
+title: Troubleshooting
+status: canonical
+audience: [engineers, contributors]
+last-verified: 2026-03-31
+---
+
 # Troubleshooting
 
 > Common issues and fixes. Check here before filing a bug.

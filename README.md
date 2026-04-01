@@ -24,6 +24,13 @@ npm run dev                   # http://localhost:3000
 | `npm test` | Jest (136 suites, 1185 tests) |
 | `npm run test:e2e` | Playwright E2E |
 | `npm run verify:docs-links` | Validate relative links under `docs/` (CI) |
+| `npm run verify:docs-frontmatter` | Require YAML frontmatter on `docs/ops/`, `docs/brand/`, and root `docs/*.md` (CI) |
+| `npm run verify:docs-ops-frontmatter` | Ops lane only (same checker) |
+| `npm run verify:docs-brand-frontmatter` | Brand lane only (same checker) |
+| `npm run verify:docs-root-frontmatter` | Root `docs/*.md` only (same checker) |
+| `npm run docs:inventory` | Print Markdown counts by bucket (sprawl / inventory) |
+| `npm run docs:duplicate-audit` | Heuristic near-duplicate pairs under `docs/` (informational; optional `--fail`) |
+| `npm run docs:duplicate-audit:ci` | Short duplicate-audit report (used in CI; `--max-report=5`) |
 | `npm run docs:layout` | Shallow directory tree of key folders (see `docs/ARCHITECTURE.md`) |
 | `npx tsc --noEmit` | TypeScript check |
 
@@ -71,6 +78,7 @@ public/
 
 | Document | Audience | Purpose |
 |----------|----------|---------|
+| **[docs/BMJ-SSOT.md](docs/BMJ-SSOT.md)** | **Everyone** | **Single comprehensive SSOT** — product, program, roadmap, where truth lives (**share this file**) |
 | [docs/INDEX.md](docs/INDEX.md) | Everyone | Map of `docs/`, lanes, and governance entry points |
 | [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |

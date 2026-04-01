@@ -1,11 +1,11 @@
 import { createClient } from '@/lib/supabase/server';
 import { NextResponse } from 'next/server';
-import { normalizeInternalPath, withQuery } from '@/lib/paths';
+import { normalizeInternalPath, PATHS, withQuery } from '@/lib/paths';
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
-  const next = normalizeInternalPath(searchParams.get('next'), '/portal');
+  const next = normalizeInternalPath(searchParams.get('next'), PATHS.PORTAL);
 
   if (code) {
     const supabase = await createClient();
@@ -16,9 +16,9 @@ export async function GET(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${origin}${withQuery('/login', {
+    `${origin}${withQuery(PATHS.LOGIN, {
       error: 'Could not authenticate',
-      next: next !== '/portal' ? next : undefined,
+      next: next !== PATHS.PORTAL ? next : undefined,
     })}`,
   );
 }

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
 import { checkContentAccess } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
-import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -16,6 +16,7 @@ import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { createClient } from '@/lib/supabase/server';
+import { articlePath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
 interface ArticlePageProps {
@@ -78,7 +79,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         data={articleJsonLd({
           title: article.title,
           description: article.excerpt,
-          url: `${SITE_URL}/articles/${article.slug}`,
+          url: siteAbsoluteUrl(articlePath(article.slug)),
           imageUrl: article.cover_image,
           publishedAt: article.published_at,
           author: article.author,
@@ -88,7 +89,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Breadcrumbs
           items={[
-            { label: 'Articles', href: '/articles' },
+            { label: 'Articles', href: PATHS.ARTICLES },
             { label: article.title },
           ]}
         />
@@ -151,7 +152,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             requiredTier={article.access_tier}
             previewBody={previewBody}
             isLoggedIn={!!user}
-            nextHref={`/articles/${article.slug}`}
+            nextHref={articlePath(article.slug)}
           />
         )}
       </div>

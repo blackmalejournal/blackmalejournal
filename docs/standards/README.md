@@ -15,6 +15,7 @@ This folder holds **Repo Excellence Program (REP)** reference material for multi
 |----------|---------|
 | [repo-taxonomy.md](./repo-taxonomy.md) | Service vs library vs infra vs monorepo; what is mandatory per category. |
 | [documentation-rubric.md](./documentation-rubric.md) | Doc types + **Poor / Acceptable / Strong / Exemplary** rubric. |
+| [agent-knowledge-protocol.md](./agent-knowledge-protocol.md) | **Tier A–D** doc loading, conflict order, anti-sprawl; pair with `npm run docs:inventory`. |
 | [hygiene-baseline.md](./hygiene-baseline.md) | Required vs recommended hygiene (branch protection, secrets, deps). |
 | [migration-framework.md](./migration-framework.md) | Assessment, prioritization, checklist, **audit scorecard**. |
 | [automation-enforcement.md](./automation-enforcement.md) | Automation catalog, **severity ramp**, remediation. |

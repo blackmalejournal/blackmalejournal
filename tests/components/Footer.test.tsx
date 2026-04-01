@@ -75,4 +75,15 @@ describe('Footer support links', () => {
     expect(screen.getByRole('link', { name: /CashApp/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Venmo/i })).toBeInTheDocument();
   });
+
+  it('lists direct support in PayPal, CashApp, Venmo order', () => {
+    render(<Footer />);
+    const section = screen.getByText('Direct Support').parentElement!;
+    const links = within(section).getAllByRole('link');
+    expect(links.map((a) => a.textContent)).toEqual([
+      'PayPal',
+      'CashApp',
+      'Venmo',
+    ]);
+  });
 });

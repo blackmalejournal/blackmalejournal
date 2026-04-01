@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Download, Lock, FileText } from 'lucide-react';
+import { PATHS } from '@/lib/paths';
 import { getDownloadCategoryLabel, formatFileSize } from '@/lib/utils';
 import type { AccessTier } from '@/lib/supabase/types';
 
@@ -66,7 +67,7 @@ export function DownloadCard({
           </a>
         ) : (
           <Link
-            href="/pricing"
+            href={PATHS.PRICING}
             className="btn-secondary btn-sm inline-flex items-center gap-2"
           >
             <Lock size={14} />

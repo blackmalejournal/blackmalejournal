@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server';
 import { getMemberById } from '@/lib/supabase/queries';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { PageHeader } from '@/components/layout/PageHeader';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 import type { MemberTier } from '@/lib/supabase/types';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
@@ -96,11 +96,11 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
             : false;
           const canChoosePlan = !memberTier || !includesTier(memberTier, plan.id);
           const href = user
-            ? withQuery('/portal/settings', {
+            ? withQuery(PATHS.PORTAL_SETTINGS, {
                 upgrade: plan.id === 'free' ? undefined : plan.id,
                 next,
               })
-            : withQuery('/signup', {
+            : withQuery(PATHS.SIGNUP, {
                 tier: plan.id === 'free' ? undefined : plan.id,
                 next,
               });

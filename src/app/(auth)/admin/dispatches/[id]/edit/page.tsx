@@ -7,7 +7,7 @@ import {
 } from '@/lib/supabase/admin-queries';
 import { assessDispatchReadiness } from '@/lib/admin-publishing';
 import { getLensTheme } from '@/lib/lens-theme';
-import { PATHS } from '@/lib/paths';
+import { dispatchPath, PATHS } from '@/lib/paths';
 import { DispatchForm } from '../../DispatchForm';
 import { updateDispatchAction } from '../../actions';
 import { DeleteButton } from '@/components/admin/DeleteButton';
@@ -84,7 +84,7 @@ export default async function EditDispatchPage({ params }: EditDispatchPageProps
           ]}
           links={[
             { label: 'Dispatch Desk', href: PATHS.ADMIN_DISPATCHES },
-            { label: 'Public Dispatch', href: `/blog/${dispatch.slug}` },
+            { label: 'Public Dispatch', href: dispatchPath(dispatch.slug) },
           ]}
           activity={activity}
         />

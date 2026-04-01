@@ -4,6 +4,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { PATHS } from "@/lib/paths";
 
 export function HeroBanner() {
   const prefersReduced = useReducedMotion();
@@ -83,7 +84,7 @@ export function HeroBanner() {
 
           <div className="mt-12">
             <Link
-              href="/briefings"
+              href={PATHS.BRIEFINGS}
               className="inline-block btn-primary btn-lg"
             >
               Read the Latest Briefing

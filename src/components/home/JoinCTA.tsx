@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { PATHS, withQuery } from "@/lib/paths";
 
 export function JoinCTA() {
   return (
@@ -19,13 +20,13 @@ export function JoinCTA() {
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="/signup"
+            href={PATHS.SIGNUP}
             className="btn-secondary btn-lg"
           >
             Subscribe Free
           </Link>
           <Link
-            href="/signup?tier=premium"
+            href={withQuery(PATHS.SIGNUP, { tier: 'premium' })}
             className="btn-primary btn-lg"
           >
             Go Premium

@@ -7,59 +7,27 @@ description: Use when creating content records, managing the editorial pipeline,
 
 How content is structured, created, and moved through the editorial pipeline.
 
-## Content Types
+## Doc context (Tier A/B)
 
-| Type | Schema | Key Fields | Seed File |
-|------|--------|------------|-----------|
-| Article | `src/lib/supabase/types.ts` | title, slug, lens, tags[], excerpt, body, access_tier, status, author, cover_image, published_at | `scripts/seed-all.ts` |
-| Briefing | `src/lib/supabase/types.ts` | title, slug, issue_number, sections[{title,body}], access_tier, status, cover_image, published_at | `scripts/seed-all.ts` |
-| Dispatch | `src/lib/supabase/types.ts` | title, slug, body, access_tier, status, published_at | `supabase/seed-dispatches.sql` |
-| Handbook | `src/lib/supabase/types.ts` | title, slug, description, body, access_tier, status, cover_image | `supabase/seed-handbooks.sql` |
-| Download | `src/lib/supabase/types.ts` | title, slug, description, file_url, category, access_tier | `supabase/seed-downloads.sql` |
-| Course | `src/lib/supabase/types.ts` | title, slug, description, access_tier, status | `supabase/seed-courses.sql` |
-| Lesson | `src/lib/supabase/types.ts` | title, slug, body, course_id, order, access_tier | `supabase/seed-lessons.sql` |
+Before changing rules: [AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** field-level truth in `src/lib/supabase/types.ts` and CLAUDE.md (Content Model); operator workflow in [docs/ops/publishing-sop.md](../../docs/ops/publishing-sop.md).
 
-## Status Workflow
+## Content types
 
-```
-draft → review → scheduled → published → archived → withdrawn
-```
+Use `src/lib/supabase/types.ts` for Article, Briefing, Dispatch, Handbook, Download, Course, Lesson shapes. Seeds: `scripts/seed-all.ts`, `scripts/seed.ts`, and `supabase/seed-*.sql` per table.
 
-- **draft**: Work in progress, not visible to public
-- **review**: Ready for editorial review
-- **scheduled**: Approved, `published_at` set in future
-- **published**: Live on the site
-- **archived**: Removed from listings but accessible via direct URL
-- **withdrawn**: Fully hidden
+## Status workflow
+
+`draft → review → scheduled → published → archived → withdrawn` — meanings and gates match CLAUDE.md and admin publishing helpers (`src/lib/admin-publishing.ts`).
 
 ## Lenses
 
-Every article must have exactly one lens:
-`health | politics | culture | entertainment | business`
+Exactly one lens per article: `health | politics | culture | entertainment | business`. Use `getLensTheme(lens)`; never hardcode lens colors.
 
-Use `getLensTheme(lens)` for UI styling. Never hardcode lens colors.
+## CLI and seeding
 
-## Creating Content via CLI
+- `/new-article`, `/new-briefing` — SQL insert stubs for articles / briefings
+- `npx tsx scripts/seed-all.ts` (full scripted tables) · `npx tsx scripts/seed.ts` (articles upsert)
 
-Use the Claude commands:
-- `/new-article` — generates SQL INSERT for articles table
-- `/new-briefing` — generates SQL INSERT for Weekend Briefing table
+## Author default and slugs
 
-## Seeding the Database
-
-```bash
-npx tsx scripts/seed-all.ts    # All tables (delete + insert, clean slate)
-npx tsx scripts/seed.ts         # Articles only (upsert, non-destructive)
-```
-
-SQL seeds in `supabase/seed-*.sql` for individual tables.
-
-## Author Default
-
-All content defaults to `author: "The Chairman"` — sole author for now.
-
-## Slugs
-
-Format: kebab-case. Examples: `weekend-briefing-001`, `the-discipline-of-documentation`
-
-Must be unique per content type. Used in URLs.
+Default author: `"The Chairman"`. Slugs: kebab-case, unique per content type, used in URLs.

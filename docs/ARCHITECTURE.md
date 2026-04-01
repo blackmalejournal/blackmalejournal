@@ -1,3 +1,10 @@
+---
+title: Architecture
+status: canonical
+audience: [engineers, agents]
+last-verified: 2026-03-31
+---
+
 # Architecture
 
 > System design reference for The Black Male Journal. Read this to understand how the pieces fit together.
@@ -44,7 +51,7 @@ src/
       queries.ts       All public-facing database queries
       access.ts        Tier-based content access control
       types.ts         TypeScript types for all database tables
-      admin-queries/   Admin CRUD queries (one file per domain)
+      admin-queries/   Admin CRUD queries — one TS module per domain, barrel via `admin-queries.ts` (service-role client stays in `admin.ts` )
     stripe/
       config.ts        Stripe client, price IDs, tier mapping
       helpers.ts       Checkout session and billing portal creation
@@ -102,11 +109,11 @@ Each lane has a **README.md** entry point (naming rules: [`CONTRIBUTING.md`](CON
 | Roadmaps | [`roadmaps/README.md`](roadmaps/README.md) | REP rollout and org-enablement roadmaps. |
 | Metrics | [`metrics/README.md`](metrics/README.md) | Compliance dashboard schema. |
 | Standards | [`standards/README.md`](standards/README.md) | REP program modules (rubric, hygiene, automation). |
-| SSOT (mirrored) | [`ssot-bmj/README.md`](ssot-bmj/README.md) | Mirrored BMJ SSOT Markdown. |
+| SSOT (mirrored) | [`ssot-bmj/README.md`](ssot-bmj/README.md) | Reference archive (prompts/audits); program SSOT is [`BMJ-SSOT.md`](BMJ-SSOT.md). |
 | Superpowers | [`superpowers/README.md`](superpowers/README.md) | Plans, specs, prompts for major delivery passes. |
 | Templates | [`templates/README.md`](templates/README.md) | Copy-ready org templates (not link-checked as live paths). |
 
-**Canonical inventory:** [`INDEX.md`](INDEX.md). **Application-only depth:** section *Directory Structure* in this file.
+**Canonical inventory:** [`INDEX.md`](INDEX.md). **BMJ comprehensive SSOT:** [`BMJ-SSOT.md`](BMJ-SSOT.md) — single entry for what BMJ is, what we are building, where truth lives, and what is next. **Application-only depth:** section *Directory Structure* in this file.
 
 ## Request Flow
 

@@ -1,5 +1,6 @@
-jest.mock('@/lib/seo', () => ({
+jest.mock('@/lib/site-url', () => ({
   SITE_URL: 'https://blackmalejournal.com',
+  resolveSiteUrl: () => 'https://blackmalejournal.com',
 }));
 
 import robots from '@/app/robots';

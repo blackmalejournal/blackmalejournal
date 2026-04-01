@@ -9,6 +9,13 @@ jest.mock('next/navigation', () => ({
 import { DownloadCategoryTabs } from '@/components/content/DownloadCategoryTabs';
 
 describe('DownloadCategoryTabs', () => {
+  it('tablist has an accessible name', () => {
+    render(<DownloadCategoryTabs activeCategory="all" />);
+    expect(
+      screen.getByRole('tablist', { name: /filter downloads by category/i }),
+    ).toBeInTheDocument();
+  });
+
   it('renders a Handbooks tab', () => {
     render(<DownloadCategoryTabs activeCategory="all" />);
     expect(screen.getByRole('tab', { name: /Handbooks/i })).toBeInTheDocument();

@@ -7,6 +7,10 @@ description: Use when building or extending the academy — courses, lessons, le
 
 How courses and lessons are structured and rendered.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md) (routing, data flow); types in `src/lib/supabase/types.ts`.
+
 ## Data Model
 
 ```

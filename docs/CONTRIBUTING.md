@@ -1,3 +1,10 @@
+---
+title: Contributing
+status: canonical
+audience: [contributors, agents]
+last-verified: 2026-03-31
+---
+
 # Contributing
 
 > Code conventions, PR process, and quality standards for The Black Male Journal.
@@ -59,6 +66,22 @@
 - **Root handbooks:** short, stable, `UPPERCASE.md` filenames only at `docs/` root — not inside lane folders.
 - **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed (e.g. `ssot-bmj/`). Each lane should have a **README.md** entry point (see [ARCHITECTURE.md](ARCHITECTURE.md) — *Repository layout — monorepo root*).
 - **Repo root map (non-docs):** same section in [ARCHITECTURE.md](ARCHITECTURE.md); shallow tree: `npm run docs:layout`.
+- **Living counts:** `npm run docs:inventory` — Markdown totals and bucket breakdown (not duplicated in prose).
+
+### Documentation frontmatter (`docs/ops/`, `docs/brand/`, `docs/*.md` root)
+
+Every file in `docs/ops/`, `docs/brand/`, and **top-level** `docs/*.md` (handbooks such as `ARCHITECTURE.md`, `INDEX.md`, `BMJ-SSOT.md`, etc.) **must** begin with YAML frontmatter delimited by `---` lines, immediately followed by the Markdown body. CI enforces all three via `npm run verify:docs-frontmatter` (or `verify:docs-ops-frontmatter`, `verify:docs-brand-frontmatter`, `verify:docs-root-frontmatter` for a single lane).
+
+| Key | Required | Notes |
+|-----|----------|--------|
+| `last-verified` or `last-updated` | Yes | ISO date `YYYY-MM-DD` (at least one of these keys) |
+| `title` | Recommended | Short human title |
+| `status` | Recommended | e.g. `canonical`, `operational`, `reference`, `draft`, `archived` |
+| `audience` | Recommended | Who should read the doc |
+| `authority` | Optional | e.g. `canonical` when the file is SSOT for a domain (see [AGENTS.md](../AGENTS.md)) |
+| `supersedes` | Optional | Relative path to the file this doc replaces; target must exist under the **same lane** (`docs/ops/`, `docs/brand/`, or `docs/` root) when set |
+
+**Duplication:** Prefer linking Tier B SSOTs (see [standards/agent-knowledge-protocol.md](standards/agent-knowledge-protocol.md)) instead of copying long tables. When retiring a duplicate doc, mark it `status: archived` and set `supersedes` on the replacement.
 
 ## Asset Naming Convention
 

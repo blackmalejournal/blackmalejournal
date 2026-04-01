@@ -1,3 +1,11 @@
+---
+title: BMJ visual identity audit
+authority: reference
+status: reference
+audience: [designers, engineers]
+last-verified: 2026-03-17
+---
+
 # Visual Identity Audit
 
 Systematic brand compliance review of every component and page in the BMJ codebase.

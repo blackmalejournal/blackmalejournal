@@ -9,6 +9,7 @@ import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
+import { PATHS } from '@/lib/paths';
 import { SCROLL_THRESHOLD_NAV } from '@/lib/constants';
 import { SITE_TAGLINE } from '@/lib/seo';
 import { cn } from '@/lib/utils';
@@ -57,7 +58,7 @@ export function Navbar({ user = null }: NavbarProps) {
         <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 lg:py-5">
           {/* Logo / Wordmark */}
           <Link
-            href="/"
+            href={PATHS.HOME}
             className="flex items-center gap-3 no-underline"
             aria-label="The Black Male Journal — Home"
           >
@@ -111,13 +112,13 @@ export function Navbar({ user = null }: NavbarProps) {
             ) : (
               <>
                 <Link
-                  href="/login"
+                  href={PATHS.LOGIN}
                   className="nav-link hidden sm:block"
                 >
                   Log In
                 </Link>
                 <Link
-                  href="/signup"
+                  href={PATHS.SIGNUP}
                   className="hidden btn-primary sm:block"
                 >
                   Join

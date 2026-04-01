@@ -8,7 +8,7 @@ import { SubscriptionManager } from '@/components/portal/SubscriptionManager';
 import { SettingsForm } from './SettingsForm';
 import { signOut } from '../../actions';
 import type { PaidMemberTier } from '@/lib/supabase/types';
-import { normalizeInternalPath } from '@/lib/paths';
+import { normalizeInternalPath, PATHS } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Settings',
@@ -46,7 +46,7 @@ export default async function SettingsPage({
   const params = await searchParams;
   const error = resolveError(params.error);
   const message = resolveMessage(params.message);
-  const nextHref = normalizeInternalPath(params.next, '/portal');
+  const nextHref = normalizeInternalPath(params.next, PATHS.PORTAL);
   const requestedTier: PaidMemberTier | undefined =
     params.upgrade === 'basic' || params.upgrade === 'premium'
       ? params.upgrade
@@ -57,7 +57,7 @@ export default async function SettingsPage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect('/login');
+  if (!user) redirect(PATHS.LOGIN);
 
   const member = await getMemberById(user.id);
   const tier = member?.tier ?? 'free';
@@ -68,7 +68,7 @@ export default async function SettingsPage({
   return (
     <div className="mx-auto max-w-article px-4 py-12 sm:px-6 lg:px-8">
       <Link
-        href="/portal"
+        href={PATHS.PORTAL}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Portal

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { LensBadge } from "@/components/brand/LensBadge";
 import { getLensTheme } from "@/lib/lens-theme";
 import { PLACEHOLDERS } from "@/lib/placeholders";
+import { articlePath } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 import type { Lens } from "@/lib/supabase/types";
 
@@ -28,7 +29,7 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1.5fr_1fr] lg:grid-rows-2">
       {/* Lead story — spans 2 rows on desktop */}
       <Link
-        href={`/articles/${lead.slug}`}
+        href={articlePath(lead.slug)}
         className={cn(
           "group relative flex min-h-[280px] items-end overflow-hidden card-media lg:row-span-2 lg:min-h-0",
           leadTheme.cardBorderTop,
@@ -64,7 +65,7 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
         return (
           <Link
             key={article.slug}
-            href={`/articles/${article.slug}`}
+            href={articlePath(article.slug)}
             className={cn(
               "group card-media p-4",
               theme.cardBorderTop,

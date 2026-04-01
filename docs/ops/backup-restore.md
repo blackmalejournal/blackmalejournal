@@ -1,3 +1,10 @@
+---
+title: Backup and restore
+status: operational
+audience: [engineers, operators]
+last-verified: 2026-03-31
+---
+
 # Backup and Restore
 
 This project depends on Supabase Postgres, Supabase Storage, and Vercel environment variables. Backups are only useful if all three are recoverable.

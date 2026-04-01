@@ -17,7 +17,10 @@ This project follows the **Morphism Categorical Governance Framework**.
 |-----------|----------|
 | Root governance | [AGENTS.md](AGENTS.md) (this file) |
 | Project instructions | [CLAUDE.md](CLAUDE.md) |
+| Agent/contributor doc tiers (A–D) and conflict order | [docs/standards/agent-knowledge-protocol.md](docs/standards/agent-knowledge-protocol.md) |
+| **BMJ comprehensive documentation SSOT** | [docs/BMJ-SSOT.md](docs/BMJ-SSOT.md) |
 | Brand invariants | [docs/brand/invariants.md](docs/brand/invariants.md) |
+| Visual identity index (tokens, logos, placeholders, lenses) | [docs/brand/VISUAL-SSOT.md](docs/brand/VISUAL-SSOT.md) |
 | Operations | [docs/ops/](docs/ops/) |
 | Repository governance reference | [docs/standards/README.md](docs/standards/README.md) (optional; use for cross-repo/platform alignment) |
 
@@ -41,7 +44,7 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| I-1 | One Truth Per Domain | `src/styles/brand.css` is SSOT for brand tokens; `docs/ops/env-vars.md` is SSOT for env vars |
+| I-1 | One Truth Per Domain | `src/styles/brand.css` is SSOT for brand **tokens**; `docs/brand/VISUAL-SSOT.md` indexes logos, placeholders, lenses, and links the colorful gallery; `docs/ops/env-vars.md` is SSOT for env vars |
 | I-2 | Drift Is Debt | Brand tokens in `tailwind.config.ts` must mirror `brand.css`; run `/brand-check` |
 | I-3 | Observability | Log what changed, why, who, when -- conventional commits required |
 | I-4 | Scope Binding | Changes must have clear, narrow boundaries -- one logical unit per commit |
@@ -57,6 +60,6 @@ This file governs the blackmalejournal repository -- a Next.js 16 web applicatio
 4. Execute incrementally
 5. Refuse scope creep
 
-**Deeper layout (repo root, `docs/` lanes, tooling paths):** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — *Repository layout — monorepo root*. Optional on-disk snapshot: `npm run docs:layout`.
+**Deeper layout (repo root, `docs/` lanes, tooling paths):** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — *Repository layout — monorepo root*. Optional on-disk snapshot: `npm run docs:layout`. **Documentation hygiene:** counts `npm run docs:inventory`; SSOT frontmatter for `docs/ops/`, `docs/brand/`, and root `docs/*.md` via `npm run verify:docs-frontmatter` (CI); CI also prints top overlap pairs via `npm run docs:duplicate-audit:ci`; full audit `npm run docs:duplicate-audit` (see [docs/standards/agent-knowledge-protocol.md](docs/standards/agent-knowledge-protocol.md)).
 
 See [CLAUDE.md](CLAUDE.md) for brand constraints, validation commands, content model, and architecture rules.

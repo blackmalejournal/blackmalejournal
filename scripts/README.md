@@ -11,6 +11,11 @@ Node and TypeScript utilities run from the **repository root**. They complement 
 | `rep-governance-verify.mjs` | `npm run verify:rep-governance` | **REP:** Issue Form files on disk; locally can also check GitHub labels via `gh` (see [docs/DEVELOPER.md](../docs/DEVELOPER.md) — *Optional: REP governance verification*). |
 | `jest-test-counts.mjs` | `npm run test:counts` | Runs Jest with JSON output to print suite/test totals for `README.md` / `CLAUDE.md`. |
 | `print-repo-layout.mjs` | `npm run docs:layout` | Prints a shallow tree of key directories (override depth: `--depth=4`). |
+| `docs-inventory.mjs` | `npm run docs:inventory` | Counts all repo `.md` files (bucket breakdown) and `docs/brand/*.html`. |
+| `verify-docs-frontmatter.mjs` | `npm run verify:docs-frontmatter` | YAML frontmatter on `docs/ops/`, `docs/brand/`, and root `docs/*.md` (default CI). |
+| `verify-docs-frontmatter.mjs` | `verify:docs-ops-frontmatter` / `verify:docs-brand-frontmatter` / `verify:docs-root-frontmatter` | Single-lane checks (`docs-root` = top-level `docs/*.md` only). |
+| `audit-docs-duplicates.mjs` | `npm run docs:duplicate-audit` | Heuristic pairs under `docs/` (skips `docs/templates/`); optional `--fail`. |
+| `audit-docs-duplicates.mjs` | `npm run docs:duplicate-audit:ci` | CI: `--max-report=5` (informational). |
 
 Run any `.mjs` directly with `node scripts/<name>.mjs` if needed.
 

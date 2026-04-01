@@ -2,10 +2,32 @@ import {
   SITE_URL,
   SITE_NAME,
   SITE_AUTHOR,
+  SUPPORT_PAYMENT_METHODS,
+  SUPPORT_PATREON_URL,
   organizationJsonLd,
   articleJsonLd,
   breadcrumbJsonLd,
 } from '@/lib/seo';
+
+// ── support copy SSOT ────────────────────────────────────────────────────────
+
+describe('SUPPORT_PAYMENT_METHODS', () => {
+  it('lists CashApp, Venmo, PayPal with stable handles', () => {
+    expect(SUPPORT_PAYMENT_METHODS.map((m) => m.label)).toEqual([
+      'CashApp',
+      'Venmo',
+      'PayPal',
+    ]);
+    expect(SUPPORT_PAYMENT_METHODS[0].handle).toBe('$BlackMaleJournal');
+    expect(SUPPORT_PAYMENT_METHODS[1].handle).toBe('@BlackMaleJournal');
+  });
+});
+
+describe('SUPPORT_PATREON_URL', () => {
+  it('points at org Patreon', () => {
+    expect(SUPPORT_PATREON_URL).toMatch(/^https:\/\/patreon\.com\//);
+  });
+});
 
 // ── organizationJsonLd ───────────────────────────────────────────────────────
 

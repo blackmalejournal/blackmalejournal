@@ -1,3 +1,10 @@
+---
+title: Environment audit checklist
+status: operational
+audience: [engineers, operators]
+last-verified: 2026-03-31
+---
+
 # Environment Audit
 
 Run this checklist after any integration change and before launch.

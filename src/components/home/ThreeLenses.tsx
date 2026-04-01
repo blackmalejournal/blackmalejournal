@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { getLensTheme } from "@/lib/lens-theme";
+import { PATHS, withQuery } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 import type { Lens as LensSlug } from "@/lib/supabase/types";
 
@@ -71,7 +72,7 @@ export function ThreeLenses() {
             return (
               <Link
                 key={lens.slug}
-                href={`/articles?lens=${lens.slug}`}
+                href={withQuery(PATHS.ARTICLES, { lens: lens.slug })}
                 className={cn(
                   "group card-media block p-8 no-underline",
                   theme.cardBorderTop,

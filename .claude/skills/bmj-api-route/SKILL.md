@@ -7,6 +7,10 @@ description: Use when building or modifying API routes — input validation, rat
 
 How to build API routes following established patterns.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/ops/env-vars.md](../../docs/ops/env-vars.md) (secrets vs `NEXT_PUBLIC_*`); [CLAUDE.md](../../CLAUDE.md) (API route patterns if extended there).
+
 ## Location
 
 All API routes: `src/app/api/<path>/route.ts`

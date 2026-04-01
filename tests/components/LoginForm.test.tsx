@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import { LoginForm } from '@/app/(auth)/login/LoginForm';
 
 jest.mock('@/app/(auth)/actions', () => ({
@@ -14,8 +14,9 @@ describe('LoginForm', () => {
 
   it('renders email and password fields in password mode', () => {
     render(<LoginForm />);
-    expect(screen.getByLabelText('Email')).toBeInTheDocument();
-    expect(screen.getByLabelText('Password')).toBeInTheDocument();
+    const passwordPanel = screen.getByRole('tabpanel', { name: /^password$/i });
+    expect(within(passwordPanel).getByLabelText('Email')).toBeInTheDocument();
+    expect(within(passwordPanel).getByLabelText('Password')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Enter your password')).toBeInTheDocument();
   });
 
@@ -28,8 +29,9 @@ describe('LoginForm', () => {
   it('magic link mode shows only email field', () => {
     render(<LoginForm />);
     fireEvent.click(screen.getByRole('tab', { name: /magic link/i }));
-    expect(screen.getByLabelText('Email')).toBeInTheDocument();
-    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+    const magicPanel = screen.getByRole('tabpanel', { name: /magic link/i });
+    expect(within(magicPanel).getByLabelText('Email')).toBeInTheDocument();
+    expect(within(magicPanel).queryByLabelText('Password')).not.toBeInTheDocument();
   });
 
   it('shows "Log In" and "Send Magic Link" buttons respectively', () => {

@@ -5,6 +5,7 @@ import { LENS_THEMES } from '@/lib/lens-theme';
 import { SEARCH_TYPE_LABELS, SEARCH_SORT_OPTIONS } from '@/lib/content/search-constants';
 import type { Lens, SearchContentType } from '@/lib/supabase/types';
 import type { SearchSortValue } from '@/lib/content/search-constants';
+import { PATHS, withQuery } from '@/lib/paths';
 
 type SearchFiltersProps = {
   query: string;
@@ -28,7 +29,7 @@ function buildHref(
   if (types.length > 0) params.set('type', types.join(','));
   if (sort && sort !== 'relevance') params.set('sort', sort);
   const qs = params.toString();
-  return qs ? `/search?${qs}` : '/search';
+  return qs ? `${PATHS.SEARCH}?${qs}` : PATHS.SEARCH;
 }
 
 function toggleItem(list: string[], item: string): string[] {
@@ -56,11 +57,9 @@ export function SearchFilters({
               key={lens}
               href={buildHref(query, toggleItem(activeLenses, lens), activeTypes, activeSort)}
               aria-pressed={isActive}
-              className={
-                isActive
-                  ? 'bg-bmj-red px-3 py-1 font-label text-xs uppercase tracking-widest text-bmj-white'
-                  : 'border border-bmj-tan/30 px-3 py-1 font-label text-xs uppercase tracking-widest text-bmj-cream hover:border-bmj-tan/60'
-              }
+              className={`filter-chip no-underline ${
+                isActive ? 'filter-chip-active' : 'filter-chip-inactive'
+              }`}
             >
               {theme.label}
             </Link>
@@ -78,11 +77,9 @@ export function SearchFilters({
               key={type}
               href={buildHref(query, activeLenses, toggleItem(activeTypes, type), activeSort)}
               aria-pressed={isActive}
-              className={
-                isActive
-                  ? 'bg-bmj-red px-3 py-1 font-label text-xs uppercase tracking-widest text-bmj-white'
-                  : 'border border-bmj-tan/30 px-3 py-1 font-label text-xs uppercase tracking-widest text-bmj-cream hover:border-bmj-tan/60'
-              }
+              className={`filter-chip no-underline ${
+                isActive ? 'filter-chip-active' : 'filter-chip-inactive'
+              }`}
             >
               {SEARCH_TYPE_LABELS[type]}
             </Link>
@@ -111,7 +108,7 @@ export function SearchFilters({
 
         {hasFilters && (
           <Link
-            href={`/search?q=${encodeURIComponent(query)}`}
+            href={withQuery(PATHS.SEARCH, { q: query || undefined })}
             className="font-label text-xs uppercase tracking-widest text-bmj-red hover:text-bmj-red/80"
           >
             Clear all

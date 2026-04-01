@@ -1,6 +1,15 @@
+---
+title: Documentation index
+status: reference
+audience: [contributors, agents]
+last-verified: 2026-03-31
+---
+
 # Documentation Index
 
-This index covers the committed documentation tree under `docs/`. For **how to name new Markdown files and directories** under `docs/`, see [CONTRIBUTING.md](CONTRIBUTING.md) (File naming — documentation). For a **single entry point** to the org-wide repository governance package, see [standards/README.md](standards/README.md).
+This index covers the committed documentation tree under `docs/`. For **how to name new Markdown files and directories** under `docs/`, see [CONTRIBUTING.md](CONTRIBUTING.md) (File naming — documentation). For **agents and contributors — which docs to load first (tiers A–D), conflict order, and anti-sprawl rules**, see [standards/agent-knowledge-protocol.md](standards/agent-knowledge-protocol.md). For a **single entry point** to the org-wide repository governance package, see [standards/README.md](standards/README.md).
+
+**Living inventory:** run `npm run docs:inventory` from the repo root for current `.md` counts (and `docs/brand` HTML). Totals are not duplicated here to avoid stale numbers. **Frontmatter (CI):** `npm run verify:docs-frontmatter` (`docs/ops/`, `docs/brand/`, root `docs/*.md`). **Overlap scan:** `npm run docs:duplicate-audit`; CI sample: `npm run docs:duplicate-audit:ci`.
 
 ## Repository standards and governance (reference)
 
@@ -12,6 +21,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [standards/repo-governance-exec-readout.md](standards/repo-governance-exec-readout.md) - 1–2 page VP/Platform briefing (decision asks and guardrails).
 - [standards/repo-taxonomy.md](standards/repo-taxonomy.md) - repo categories and standards matrix.
 - [standards/documentation-rubric.md](standards/documentation-rubric.md) - documentation standards and quality rubric.
+- [standards/agent-knowledge-protocol.md](standards/agent-knowledge-protocol.md) - tiered reading model for agents/contributors, conflict resolution, anti-sprawl controls.
 - [standards/hygiene-baseline.md](standards/hygiene-baseline.md) - baseline vs recommended hygiene controls.
 - [standards/migration-framework.md](standards/migration-framework.md) - migration, checklist, audit scorecard.
 - [standards/automation-enforcement.md](standards/automation-enforcement.md) - automation catalog and severity ramp.
@@ -24,6 +34,8 @@ Cross-org / leadership reference for repository standardization (templates, poli
 
 ## Root Documents
 
+- [BMJ-SSOT.md](BMJ-SSOT.md) - **Single comprehensive documentation SSOT** for BMJ (product, program, repo map, governance digest, roadmap). **Share this file.**
+- [bmj-platform-brief.md](bmj-platform-brief.md) - stable alias → [BMJ-SSOT.md](BMJ-SSOT.md) (legacy links).
 - [DEVELOPER.md](DEVELOPER.md) - developer workflow, scripts, testing, and deployment notes.
 - [ARCHITECTURE.md](ARCHITECTURE.md) - system design, data flow, database schema, integration patterns.
 - [CONTRIBUTING.md](CONTRIBUTING.md) - code conventions, PR process, file naming, asset naming, testing requirements.
@@ -41,6 +53,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 ## Brand
 
 - [brand/README.md](brand/README.md) - brand lane overview.
+- [brand/VISUAL-SSOT.md](brand/VISUAL-SSOT.md) - **visual & verbal identity SSOT index** (tokens authority, logos, placeholders, lenses; links [visual-ssot.html](brand/visual-ssot.html) for colorful gallery).
 - [brand/art-direction-spec.md](brand/art-direction-spec.md) - visual tone and art direction spec.
 - [brand/invariants.md](brand/invariants.md) - non-negotiable visual invariants.
 - [brand/visual-identity-audit.md](brand/visual-identity-audit.md) - visual audit findings.
@@ -51,6 +64,8 @@ Cross-org / leadership reference for repository standardization (templates, poli
 ## Operations
 
 - [ops/README.md](ops/README.md) - operations lane overview.
+- [ops/chairman-consistency-reference.md](ops/chairman-consistency-reference.md) - **Chairman consistency SSOT** (domains, emails, third-party handles, brand copy, lenses, analytics; Google Doc fork note; Appendix A for technical lead).
+- [ops/chairman-handbook-shareable.md](ops/chairman-handbook-shareable.md) - **Shareable Chairman one-pager** (Google Doc/Word): public identity, slim nonprofit checklist, simple habits.
 - [ops/chairman-operator-manual.md](ops/chairman-operator-manual.md) - top-level operator handbook.
 - [ops/publishing-sop.md](ops/publishing-sop.md) - publishing workflow.
 - [ops/member-billing-sop.md](ops/member-billing-sop.md) - member billing workflow.

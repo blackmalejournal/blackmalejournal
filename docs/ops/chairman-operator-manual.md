@@ -1,3 +1,10 @@
+---
+title: Chairman operator manual
+status: operational
+audience: [chairman, operators]
+last-verified: 2026-03-31
+---
+
 # Chairman Operator Manual
 
 This is the top-level operating guide for BMJ after handoff. Use the SOPs below for the step-by-step workflows.

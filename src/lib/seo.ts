@@ -1,7 +1,7 @@
 // src/lib/seo.ts
 
 export { SITE_URL } from '@/lib/site-url';
-import { SITE_URL } from '@/lib/site-url';
+import { PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
 // ── Site constants ──────────────────────────────────────────────────────────
 export const SITE_NAME = 'The Black Male Journal';
@@ -16,14 +16,38 @@ export const CONTACT_EMAILS = {
   support: 'contact@blackmalejournal.com',
 } as const;
 
+/** CashApp / Venmo / PayPal — contact SupportCard + `/support` AlternativeMethods (single source). */
+export const SUPPORT_PAYMENT_METHODS = [
+  {
+    label: 'CashApp',
+    handle: '$BlackMaleJournal',
+    href: 'https://cash.app/$BlackMaleJournal',
+    description: 'Tap to open CashApp',
+  },
+  {
+    label: 'Venmo',
+    handle: '@BlackMaleJournal',
+    href: 'https://venmo.com/BlackMaleJournal',
+    description: 'Tap to open Venmo',
+  },
+  {
+    label: 'PayPal',
+    handle: 'paypal.me/BlackMaleJournal',
+    href: 'https://paypal.me/BlackMaleJournal',
+    description: 'One-time or recurring',
+  },
+] as const;
+
+export const SUPPORT_PATREON_URL = 'https://patreon.com/BlackMaleJournal' as const;
+
 // ── JSON-LD: Organization ───────────────────────────────────────────────────
 export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_NAME,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logos/primary-color.png`,
+    url: siteAbsoluteUrl(PATHS.HOME),
+    logo: siteAbsoluteUrl('/logos/primary-color.png'),
     description: SITE_DESCRIPTION,
     founder: {
       '@type': 'Person',
@@ -59,7 +83,7 @@ export function articleJsonLd(opts: {
       name: SITE_NAME,
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logos/primary-color.png`,
+        url: siteAbsoluteUrl('/logos/primary-color.png'),
       },
     },
   };

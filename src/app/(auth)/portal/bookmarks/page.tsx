@@ -7,6 +7,7 @@ import { LensBadge } from '@/components/brand/LensBadge';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { SEARCH_TYPE_PATHS } from '@/lib/content/search-constants';
 import type { BookmarkedItem, Lens, SearchContentType } from '@/lib/supabase/types';
+import { PATHS } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Saved — Member Portal',
@@ -35,7 +36,7 @@ export default async function SavedPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) redirect('/login');
+  if (!user) redirect(PATHS.LOGIN);
 
   const bookmarks = await getBookmarksForMember(user.id);
 
@@ -52,7 +53,7 @@ export default async function SavedPage() {
     <div className="mx-auto max-w-content px-4 py-12 sm:px-6 lg:px-8">
       {/* Breadcrumb */}
       <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
-        <Link href="/portal" className="text-bmj-tan hover:text-bmj-cream">
+        <Link href={PATHS.PORTAL} className="text-bmj-tan hover:text-bmj-cream">
           Portal
         </Link>{' '}
         / Saved
@@ -68,7 +69,7 @@ export default async function SavedPage() {
             No saved content yet. Bookmark articles and handbooks as you read.
           </p>
           <Link
-            href="/articles"
+            href={PATHS.ARTICLES}
             className="inline-block bg-bmj-red px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
           >
             Browse Articles

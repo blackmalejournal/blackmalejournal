@@ -12,6 +12,14 @@ import { StarDivider } from '@/components/ui/StarDivider';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { PaywallGate } from '@/components/content/PaywallGate';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { breadcrumbJsonLd } from '@/lib/seo';
+import {
+  academyCoursePath,
+  academyLessonPath,
+  PATHS,
+  siteAbsoluteUrl,
+} from '@/lib/paths';
 
 function isDirectVideoFile(url: string): boolean {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(url);
@@ -70,10 +78,26 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   return (
     <div className="mx-auto max-w-article px-4 py-16 sm:px-6 lg:px-8">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: 'Academy', url: siteAbsoluteUrl(PATHS.ACADEMY) },
+          {
+            name: course.title,
+            url: siteAbsoluteUrl(academyCoursePath(course.slug)),
+          },
+          {
+            name: lesson.title,
+            url: siteAbsoluteUrl(
+              academyLessonPath(course.slug, lesson.slug),
+            ),
+          },
+        ])}
+      />
+
       <Breadcrumbs
         items={[
-          { label: 'Academy', href: '/academy' },
-          { label: course.title, href: `/academy/${course.slug}` },
+          { label: 'Academy', href: PATHS.ACADEMY },
+          { label: course.title, href: academyCoursePath(course.slug) },
           { label: `Lesson ${paddedNumber}` },
         ]}
       />
@@ -129,7 +153,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
           requiredTier={course.access_tier}
           previewBody={previewBody}
           isLoggedIn={!!user}
-          nextHref={`/academy/${course.slug}/${lesson.slug}`}
+          nextHref={academyLessonPath(course.slug, lesson.slug)}
         />
       )}
 
@@ -139,14 +163,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
       <div className="flex items-center justify-between">
         {prevLesson ? (
           <Link
-            href={`/academy/${course.slug}/${prevLesson.slug}`}
+            href={academyLessonPath(course.slug, prevLesson.slug)}
             className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
           >
             &larr; Lesson {String(prevLesson.order_number).padStart(2, '0')}
           </Link>
         ) : (
           <Link
-            href={`/academy/${course.slug}`}
+            href={academyCoursePath(course.slug)}
             className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
           >
             &larr; Course Overview
@@ -155,14 +179,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
         {nextLesson ? (
           <Link
-            href={`/academy/${course.slug}/${nextLesson.slug}`}
+            href={academyLessonPath(course.slug, nextLesson.slug)}
             className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
           >
             Lesson {String(nextLesson.order_number).padStart(2, '0')} &rarr;
           </Link>
         ) : (
           <Link
-            href={`/academy/${course.slug}`}
+            href={academyCoursePath(course.slug)}
             className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
           >
             Back to Course &rarr;

@@ -1,3 +1,10 @@
+---
+title: Member billing SOP
+status: operational
+audience: [operators]
+last-verified: 2026-03-31
+---
+
 # Member Billing SOP
 
 Use this for tier changes, billing support, and paid-access problems.

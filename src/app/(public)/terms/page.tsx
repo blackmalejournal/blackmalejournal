@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { StarDivider } from "@/components/ui/StarDivider";
+import { PATHS } from '@/lib/paths';
 import { CONTACT_EMAILS } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -193,7 +194,7 @@ export default function TermsOfServicePage() {
           </a>{" "}
           or through our{" "}
           <a
-            href="/contact"
+            href={PATHS.CONTACT}
             className="text-bmj-amber underline underline-offset-2 transition-colors hover:text-bmj-cream"
           >
             contact page

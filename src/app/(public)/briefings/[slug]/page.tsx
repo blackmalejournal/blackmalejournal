@@ -9,7 +9,7 @@ import {
 } from '@/lib/supabase/queries';
 import { checkContentAccess } from '@/lib/supabase/access';
 import { formatDate } from '@/lib/utils';
-import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
@@ -21,6 +21,7 @@ import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { createClient } from '@/lib/supabase/server';
 import type { Briefing } from '@/lib/supabase/types';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
+import { briefingPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
 interface BriefingPageProps {
   params: Promise<{ slug: string }>;
@@ -69,7 +70,7 @@ function IssueNavigation({
       <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         {prev ? (
           <Link
-            href={`/briefings/${prev.slug}`}
+            href={briefingPath(prev.slug)}
             className="group flex flex-col no-underline"
           >
             <span className="mb-1 font-mono text-xs text-bmj-tan">
@@ -85,7 +86,7 @@ function IssueNavigation({
 
         {next ? (
           <Link
-            href={`/briefings/${next.slug}`}
+            href={briefingPath(next.slug)}
             className="group flex flex-col items-start text-left no-underline sm:items-end sm:text-right"
           >
             <span className="mb-1 font-mono text-xs text-bmj-tan">
@@ -136,7 +137,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
           title: `Weekend Briefing ${issueLabel}: ${briefing.title}`,
           description:
             briefing.sections[0]?.body.slice(0, 160) ?? briefing.title,
-          url: `${SITE_URL}/briefings/${briefing.slug}`,
+          url: siteAbsoluteUrl(briefingPath(briefing.slug)),
           imageUrl: briefing.cover_image,
           publishedAt: briefing.published_at,
         })}
@@ -145,7 +146,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Breadcrumbs
           items={[
-            { label: 'Briefings', href: '/briefings' },
+            { label: 'Briefings', href: PATHS.BRIEFINGS },
             { label: briefing.title },
           ]}
         />
@@ -205,7 +206,7 @@ export default async function BriefingPage({ params }: BriefingPageProps) {
               requiredTier={briefing.access_tier}
               previewBody={paywallPreview}
               isLoggedIn={!!user}
-              nextHref={`/briefings/${briefing.slug}`}
+              nextHref={briefingPath(briefing.slug)}
             />
           </div>
         )}

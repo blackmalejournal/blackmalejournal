@@ -6,6 +6,9 @@ allowed-tools:
   - Grep
   - Glob
 ---
+
+**Canonical list:** [docs/ops/env-vars.md](../../docs/ops/env-vars.md). **Tiers:** [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md).
+
 Cross-check environment variables between code and documentation. Run these checks:
 
 1. Scan source code for all environment variable references

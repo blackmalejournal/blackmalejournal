@@ -15,7 +15,8 @@ import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { createClient } from '@/lib/supabase/server';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { articleJsonLd, breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
+import { articleJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+import { handbookPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
 interface HandbookPageProps {
   params: Promise<{ slug: string }>;
@@ -71,7 +72,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
         data={articleJsonLd({
           title: handbook.title,
           description: handbook.description,
-          url: `${SITE_URL}/handbooks/${handbook.slug}`,
+          url: siteAbsoluteUrl(handbookPath(handbook.slug)),
           imageUrl: handbook.cover_image,
           publishedAt: handbook.published_at,
           author: handbook.author,
@@ -79,14 +80,14 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
       />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: 'Handbooks', url: `${SITE_URL}/handbooks` },
-          { name: handbook.title, url: `${SITE_URL}/handbooks/${handbook.slug}` },
+          { name: 'Handbooks', url: siteAbsoluteUrl(PATHS.HANDBOOKS) },
+          { name: handbook.title, url: siteAbsoluteUrl(handbookPath(handbook.slug)) },
         ])}
       />
       <div className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
         <Breadcrumbs
           items={[
-            { label: 'Handbooks', href: '/handbooks' },
+            { label: 'Handbooks', href: PATHS.HANDBOOKS },
             { label: handbook.title },
           ]}
         />
@@ -161,7 +162,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
             requiredTier={handbook.access_tier}
             previewBody={previewBody}
             isLoggedIn={!!user}
-            nextHref={`/handbooks/${handbook.slug}`}
+            nextHref={handbookPath(handbook.slug)}
           />
         )}
       </div>
@@ -170,7 +171,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
 
       <div className="mx-auto max-w-content px-4 pb-12 sm:px-6 lg:px-8">
         <Link
-          href="/handbooks"
+          href={PATHS.HANDBOOKS}
           className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
         >
           ← Back to Handbooks

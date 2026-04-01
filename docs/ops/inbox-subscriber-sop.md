@@ -1,3 +1,10 @@
+---
+title: Inbox and subscriber SOP
+status: operational
+audience: [operators]
+last-verified: 2026-03-31
+---
+
 # Inbox and Subscriber SOP
 
 Use this workflow for contact messages and newsletter list operations.

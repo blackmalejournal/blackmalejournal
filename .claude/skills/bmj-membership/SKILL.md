@@ -7,6 +7,10 @@ description: Use when working with membership tiers, content access control, Str
 
 How tiers, billing, and content gating work.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** Stripe and tiers in CLAUDE.md; billing ops in [docs/ops/member-billing-sop.md](../../docs/ops/member-billing-sop.md); env names in [docs/ops/env-vars.md](../../docs/ops/env-vars.md).
+
 ## Tier Hierarchy
 
 ```

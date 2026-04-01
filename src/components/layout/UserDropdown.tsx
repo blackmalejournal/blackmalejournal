@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { signOut } from '@/app/(auth)/actions';
+import { PATHS } from '@/lib/paths';
 
 interface UserDropdownProps {
   email: string;
@@ -46,14 +47,14 @@ export function UserDropdown({ email, displayName }: UserDropdownProps) {
 
           <nav className="py-1">
             <Link
-              href="/portal"
+              href={PATHS.PORTAL}
               onClick={() => setOpen(false)}
               className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-brown/60 hover:text-bmj-white"
             >
               Portal
             </Link>
             <Link
-              href="/portal/settings"
+              href={PATHS.PORTAL_SETTINGS}
               onClick={() => setOpen(false)}
               className="block px-4 py-2 font-body text-sm text-bmj-cream no-underline transition-colors hover:bg-bmj-brown/60 hover:text-bmj-white"
             >

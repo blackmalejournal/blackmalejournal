@@ -10,6 +10,7 @@ import NewspaperGrid from '@/components/content/NewspaperGrid';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
 import type { Article, Lens } from '@/lib/supabase/types';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const revalidate = 60;
 
@@ -133,11 +134,11 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
           {hasMore && (
             <div className="mt-12 text-center">
               <Link
-                href={`/articles?${new URLSearchParams({
-                  ...(activeLens ? { lens: activeLens } : {}),
-                  ...(activeTag ? { tag: activeTag } : {}),
+                href={withQuery(PATHS.ARTICLES, {
+                  lens: activeLens ?? undefined,
+                  tag: activeTag ?? undefined,
                   page: String(page + 1),
-                }).toString()}`}
+                })}
                 className="btn-ghost"
               >
                 Load More

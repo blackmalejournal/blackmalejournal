@@ -1,3 +1,5 @@
+import { SITE_URL } from '@/lib/site-url';
+
 export const PATHS = {
   HOME: '/',
   ABOUT: '/about',
@@ -19,6 +21,7 @@ export const PATHS = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   PORTAL: '/portal',
+  PORTAL_BOOKMARKS: '/portal/bookmarks',
   PORTAL_SETTINGS: '/portal/settings',
   ADMIN: '/admin',
   ADMIN_ARTICLES: '/admin/articles',
@@ -43,6 +46,43 @@ export const PATHS = {
 
 export function adminEditPath(section: string, id: string): string {
   return `${PATHS.ADMIN}/${section}/${id}/edit`;
+}
+
+/** Public detail URLs — keep in sync with App Router segments under `(public)/`. */
+export function articlePath(slug: string): string {
+  return `${PATHS.ARTICLES}/${slug}`;
+}
+
+export function briefingPath(slug: string): string {
+  return `${PATHS.BRIEFINGS}/${slug}`;
+}
+
+/** Dispatches (blog route). */
+export function dispatchPath(slug: string): string {
+  return `${PATHS.BLOG}/${slug}`;
+}
+
+export function handbookPath(slug: string): string {
+  return `${PATHS.HANDBOOKS}/${slug}`;
+}
+
+export function academyCoursePath(slug: string): string {
+  return `${PATHS.ACADEMY}/${slug}`;
+}
+
+export function academyLessonPath(courseSlug: string, lessonSlug: string): string {
+  return `${PATHS.ACADEMY}/${courseSlug}/${lessonSlug}`;
+}
+
+/** Canonical absolute URL for an internal path (`/` → `SITE_URL` without double slash). */
+export function siteAbsoluteUrl(path: string): string {
+  if (!path.startsWith('/')) {
+    throw new Error(`siteAbsoluteUrl: expected path starting with /, got "${path}"`);
+  }
+  if (path === '/') {
+    return SITE_URL;
+  }
+  return `${SITE_URL}${path}`;
 }
 
 export function normalizeInternalPath(

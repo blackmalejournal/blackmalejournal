@@ -1,13 +1,7 @@
 import type { Metadata } from 'next';
-import {
-  Mail,
-  MessageCircle,
-  Instagram,
-  Youtube,
-  Linkedin,
-  Twitter,
-} from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { SOCIAL_LINKS } from '@/lib/nav';
 import { CONTACT_EMAILS } from '@/lib/seo';
 import { ContactForm } from './ContactForm';
 import { SupportCard } from './SupportCard';
@@ -29,13 +23,6 @@ export const metadata: Metadata = {
       'Reach the Chairman. Contact The Black Male Journal for inquiries, collaborations, and press.',
   },
 };
-
-const SOCIAL_LINKS = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Twitter, href: '#', label: 'X (Twitter)' },
-];
 
 const whatsappHref = process.env.NEXT_PUBLIC_WHATSAPP_LINK ?? '#';
 

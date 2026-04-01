@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getDispatches } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { DispatchCard } from '@/components/content/DispatchCard';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const revalidate = 60;
 
@@ -77,7 +78,7 @@ export default async function DispatchesPage({
           {hasMore && (
             <div className="mt-12 text-center">
               <Link
-                href={`/blog?page=${page + 1}`}
+                href={withQuery(PATHS.BLOG, { page: String(page + 1) })}
                 className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
               >
                 Older Posts &rarr;

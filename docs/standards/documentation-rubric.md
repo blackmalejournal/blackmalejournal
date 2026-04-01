@@ -14,6 +14,8 @@ last-updated: 2026-03-31
 3. **Actionable** — Steps, commands, and failure modes—not essays.
 4. **Scoped** — Separate “getting started” from “deep architecture.”
 
+**Agents and AI context:** Tiered reading (A–D), conflict resolution when sources disagree, and sprawl controls are defined in [agent-knowledge-protocol.md](agent-knowledge-protocol.md). **Ops, brand, and root `docs/*.md` frontmatter** is enforced in CI (`npm run verify:docs-frontmatter`); CI prints a short duplicate-audit sample (`docs:duplicate-audit:ci`); full heuristic: `npm run docs:duplicate-audit`. See [CONTRIBUTING.md](../CONTRIBUTING.md) (Documentation frontmatter).
+
 ---
 
 ## Required README structure

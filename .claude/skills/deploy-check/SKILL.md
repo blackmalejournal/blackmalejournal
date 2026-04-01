@@ -7,6 +7,9 @@ allowed-tools:
   - Bash(npm run build *)
   - Read
 ---
+
+**Tiers / verification:** [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md); CLAUDE.md Testing section for full gate list (includes `verify:docs-links`, `verify:docs-frontmatter` for ops + brand + root `docs/*.md`, and informational `docs:duplicate-audit:ci` in CI).
+
 Run the full pre-deployment checklist in this exact order:
 
 1. Run `npx tsc --noEmit` -- report any TypeScript errors

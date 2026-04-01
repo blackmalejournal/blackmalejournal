@@ -8,7 +8,8 @@ import { getCategoryLabel } from '@/lib/utils';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { LessonCard } from '@/components/content/LessonCard';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
+import { breadcrumbJsonLd } from '@/lib/seo';
+import { academyCoursePath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -55,8 +56,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
     <div className="mx-auto max-w-article px-4 py-16 sm:px-6 lg:px-8">
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: 'Academy', url: `${SITE_URL}/academy` },
-          { name: course.title, url: `${SITE_URL}/academy/${course.slug}` },
+          { name: 'Academy', url: siteAbsoluteUrl(PATHS.ACADEMY) },
+          { name: course.title, url: siteAbsoluteUrl(academyCoursePath(course.slug)) },
         ])}
       />
       <span className="inline-block rounded-sm border border-bmj-tan/40 px-2 py-0.5 font-label text-xs uppercase tracking-widest text-bmj-tan">
@@ -118,7 +119,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
       <div className="mt-10">
         <Link
-          href="/academy"
+          href={PATHS.ACADEMY}
           className="font-label text-sm uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
         >
           &larr; Back to Academy

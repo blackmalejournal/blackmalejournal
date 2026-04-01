@@ -1,3 +1,11 @@
+---
+title: Environment variables reference
+authority: canonical
+status: canonical
+audience: [engineers, operators, agents]
+last-verified: 2026-03-31
+---
+
 # Environment Variables Reference
 
 > Canonical list of every environment variable used by The Black Male Journal.
@@ -37,6 +45,15 @@
 | `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Preferred canonical site URL (e.g., `https://blackmalejournal.com` or `https://blackmalejournal.vercel.app`). When unset on Vercel, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` and then `VERCEL_URL`. |
 | `NEXT_PUBLIC_WHATSAPP_LINK` | Client | `contact/page.tsx` | WhatsApp contact link |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Client | `layout.tsx` | Optional Plausible domain. When set, the analytics script is injected into the root layout. |
+
+## Local E2E (optional)
+
+| Variable | Scope | Used In | Description |
+|----------|-------|---------|-------------|
+| `E2E_ADMIN_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/admin.setup.ts` | Email for an existing Supabase auth user whose `members.role` is `admin` or `editor`. When set together with `E2E_ADMIN_PASSWORD`, Playwright runs the authenticated admin article workflow. |
+| `E2E_ADMIN_PASSWORD` | Local / CI secret | Same as above | Password for that user. Never commit real values; use `.env.local` or CI secrets. |
+| `E2E_MEMBER_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/member.setup.ts` | Email for a normal member (`members.role` `member`). With `E2E_MEMBER_PASSWORD`, runs portal E2E (`portal.spec.ts`). Use a different account than the admin E2E user when both suites are enabled. |
+| `E2E_MEMBER_PASSWORD` | Local / CI secret | Same as above | Password for the member test account. |
 
 ## Environment-Specific Values
 
@@ -81,6 +98,7 @@
 
 ## Total Count
 
-- **13 variables** (5 client-safe, 8 server-only)
+- **17 documented variables** for CI parity (5 client-safe, 8 server-only, 4 optional E2E secrets)
 - **Required for the core app:** Supabase (3), Stripe (4), site URL (1)
 - **Optional integrations:** Resend (3), WhatsApp (1), Plausible (1)
+- **Optional local/CI:** E2E admin + member credentials (4) — see Local E2E table

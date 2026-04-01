@@ -82,7 +82,7 @@ export default async function EditDownloadPage({ params }: EditDownloadPageProps
           ]}
           links={[
             { label: 'Download Desk', href: PATHS.ADMIN_DOWNLOADS },
-            { label: 'Public Downloads', href: '/downloads' },
+            { label: 'Public Downloads', href: PATHS.DOWNLOADS },
             { label: 'Protected File', href: `/api/downloads/${download.slug}` },
           ]}
           activity={activity}

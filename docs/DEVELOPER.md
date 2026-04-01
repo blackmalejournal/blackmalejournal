@@ -1,3 +1,10 @@
+---
+title: Developer guide
+status: canonical
+audience: [engineers, contributors]
+last-verified: 2026-03-31
+---
+
 # Developer Guide
 
 > Getting started with The Black Male Journal codebase.

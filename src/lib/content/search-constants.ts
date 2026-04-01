@@ -1,4 +1,5 @@
 import { FileText, BookOpen, Newspaper, Send } from 'lucide-react';
+import { PATHS } from '@/lib/paths';
 import type { SearchContentType } from '@/lib/supabase/types';
 
 export const SEARCH_TYPE_ICONS = {
@@ -9,10 +10,10 @@ export const SEARCH_TYPE_ICONS = {
 } as const;
 
 export const SEARCH_TYPE_PATHS = {
-  article: '/articles',
-  briefing: '/briefings',
-  handbook: '/handbooks',
-  dispatch: '/blog',
+  article: PATHS.ARTICLES,
+  briefing: PATHS.BRIEFINGS,
+  handbook: PATHS.HANDBOOKS,
+  dispatch: PATHS.BLOG,
 } as const;
 
 export const SEARCH_TYPE_LABELS: Record<SearchContentType, string> = {

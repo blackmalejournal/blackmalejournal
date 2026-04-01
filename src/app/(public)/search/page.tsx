@@ -7,6 +7,7 @@ import { SearchFilters } from '@/components/search/SearchFilters';
 import { SEARCH_TYPE_ICONS, SEARCH_TYPE_PATHS, SEARCH_SORT_OPTIONS } from '@/lib/content/search-constants';
 import type { Lens, SearchResult, SearchContentType } from '@/lib/supabase/types';
 import type { SearchSortValue } from '@/lib/content/search-constants';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const metadata: Metadata = {
   title: 'Search — The Black Male Journal',
@@ -137,14 +138,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           {hasFilters ? (
             <p className="mt-2 font-body text-sm text-bmj-tan">
               Try removing some filters.{' '}
-              <Link href={`/search?q=${encodeURIComponent(query)}`} className="text-bmj-red">
+              <Link href={withQuery(PATHS.SEARCH, { q: query })} className="text-bmj-red">
                 Clear filters
               </Link>
             </p>
           ) : (
             <p className="mt-2 font-body text-sm text-bmj-tan">
               Try different keywords or browse our{' '}
-              <Link href="/articles" className="text-bmj-red">articles</Link>.
+              <Link href={PATHS.ARTICLES} className="text-bmj-red">articles</Link>.
             </p>
           )}
         </div>

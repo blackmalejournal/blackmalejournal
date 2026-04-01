@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { PATHS } from '@/lib/paths';
 import TributeCard from '@/components/content/TributeCard';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { getLensTheme } from '@/lib/lens-theme';
@@ -258,19 +259,19 @@ export default function AboutPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           <Link
-            href="/articles"
+            href={PATHS.ARTICLES}
             className="btn-primary px-8 py-4 text-sm"
           >
             Read Articles
           </Link>
           <Link
-            href="/briefings"
+            href={PATHS.BRIEFINGS}
             className="btn-ghost px-8 py-4 text-sm"
           >
             Weekend Briefing
           </Link>
           <Link
-            href="/support"
+            href={PATHS.SUPPORT}
             className="btn-ghost px-8 py-4 text-sm"
           >
             Support the Mission

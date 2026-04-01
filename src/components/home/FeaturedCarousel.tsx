@@ -8,6 +8,7 @@ import { LensBadge } from '@/components/brand/LensBadge';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { PLACEHOLDERS } from '@/lib/placeholders';
 import { CAROUSEL_INTERVAL_MS } from '@/lib/constants';
+import { articlePath } from '@/lib/paths';
 import type { Article } from '@/lib/supabase/types';
 
 interface FeaturedCarouselProps {
@@ -116,7 +117,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
                 </div>
 
                 <Link
-                  href={`/articles/${article.slug}`}
+                  href={articlePath(article.slug)}
                   className="btn-secondary self-start"
                   aria-label="Read article"
                 >

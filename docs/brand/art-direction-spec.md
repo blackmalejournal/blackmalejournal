@@ -1,3 +1,11 @@
+---
+title: BMJ art direction spec
+authority: reference
+status: canonical
+audience: [designers, engineers, agents]
+last-verified: 2026-03-31
+---
+
 # Black Male Journal — Visual Tone & Art Direction Spec
 
 ## Core Positioning

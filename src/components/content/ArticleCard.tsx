@@ -4,6 +4,7 @@ import { Lock } from 'lucide-react';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { getLensTheme } from '@/lib/lens-theme';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { articlePath } from '@/lib/paths';
 import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
 
@@ -67,7 +68,7 @@ export function ArticleCard({
 
         <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-display leading-tight text-bmj-white">
           <Link
-            href={`/articles/${slug}`}
+            href={articlePath(slug)}
             className="text-bmj-white no-underline"
           >
             {title}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { FILTER_TABLIST_ROW_CLASS } from '@/lib/constants';
 
 type DownloadCat = 'template' | 'worksheet' | 'guide' | 'toolkit' | 'handbook' | 'all';
 
@@ -35,7 +36,11 @@ export function DownloadCategoryTabs({ activeCategory }: DownloadCategoryTabsPro
   }
 
   return (
-    <div className="flex gap-6 overflow-x-auto border-b border-bmj-tan/20 pb-0" role="tablist">
+    <div
+      className={FILTER_TABLIST_ROW_CLASS}
+      role="tablist"
+      aria-label="Filter downloads by category"
+    >
       {TABS.map((tab) => {
         const isActive = tab.value === activeCategory;
         return (

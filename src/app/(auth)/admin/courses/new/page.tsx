@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PATHS } from '@/lib/paths';
 import { CourseForm } from '../CourseForm';
 import { createCourseAction } from '../actions';
 
@@ -18,7 +19,7 @@ export default async function NewCoursePage({ searchParams }: NewCoursePageProps
   return (
     <div className="mx-auto max-w-3xl">
       <Link
-        href="/admin/courses"
+        href={PATHS.ADMIN_COURSES}
         className="mb-6 inline-block font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; Back to Courses

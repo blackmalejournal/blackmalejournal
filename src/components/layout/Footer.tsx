@@ -3,13 +3,26 @@ import Link from "next/link";
 import { NewsletterForm } from './NewsletterForm';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { FOOTER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
-import { SITE_TAGLINE } from '@/lib/seo';
+import { PATHS } from '@/lib/paths';
+import {
+  SITE_NAME,
+  SITE_TAGLINE,
+  SUPPORT_PAYMENT_METHODS,
+  SUPPORT_PATREON_URL,
+} from '@/lib/seo';
 
-const DIRECT_SUPPORT_LINKS = [
-  { label: "PayPal",   href: "https://paypal.me/BlackMaleJournal" },
-  { label: "CashApp",  href: "https://cash.app/$BlackMaleJournal" },
-  { label: "Venmo",    href: "https://venmo.com/BlackMaleJournal" },
-];
+type SupportPaymentMethod = (typeof SUPPORT_PAYMENT_METHODS)[number];
+
+/** Same URLs as `SUPPORT_PAYMENT_METHODS`; footer prefers this display order. */
+const FOOTER_DIRECT_SUPPORT_METHODS: SupportPaymentMethod[] = (
+  ['PayPal', 'CashApp', 'Venmo'] as const
+).map((label) => {
+  const method = SUPPORT_PAYMENT_METHODS.find((m) => m.label === label);
+  if (!method) {
+    throw new Error(`Footer: missing SUPPORT_PAYMENT_METHODS entry for ${label}`);
+  }
+  return method;
+});
 
 export function Footer() {
   return (
@@ -23,7 +36,7 @@ export function Footer() {
               <BrandMark size={28} color="var(--bmj-red)" />
               <div className="flex flex-col">
                 <span className="font-display text-lg uppercase tracking-wordmark text-bmj-white">
-                  The Black Male Journal
+                  {SITE_NAME}
                 </span>
                 <p className="mt-1 font-label text-xs uppercase tracking-label text-bmj-tan/70">
                   {SITE_TAGLINE}
@@ -41,7 +54,7 @@ export function Footer() {
                 Support the Work
               </p>
               <a
-                href="https://patreon.com/BlackMaleJournal"
+                href={SUPPORT_PATREON_URL}
                 className="inline-block self-start border border-bmj-amber/40 bg-bmj-amber/10 px-5 py-2 font-label text-xs uppercase tracking-label text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-amber hover:bg-bmj-amber/20 hover:text-bmj-white"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -56,15 +69,15 @@ export function Footer() {
                 Direct Support
               </p>
               <div className="flex flex-wrap gap-3">
-                {DIRECT_SUPPORT_LINKS.map((link) => (
+                {FOOTER_DIRECT_SUPPORT_METHODS.map((method) => (
                   <a
-                    key={link.label}
-                    href={link.href}
+                    key={method.label}
+                    href={method.href}
                     className="font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {link.label}
+                    {method.label}
                   </a>
                 ))}
               </div>
@@ -123,17 +136,17 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-10 flex flex-col gap-3 border-t border-bmj-tan/20 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-bmj-tan">
-            © 2026 The Black Male Journal. All rights reserved.
+            © 2026 {SITE_NAME}. All rights reserved.
           </p>
           <div className="flex gap-6">
             <Link
-              href="/privacy"
+              href={PATHS.PRIVACY}
               className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Privacy Policy
             </Link>
             <Link
-              href="/terms"
+              href={PATHS.TERMS}
               className="font-mono text-xs text-bmj-tan no-underline transition-colors hover:text-bmj-cream"
             >
               Terms of Service

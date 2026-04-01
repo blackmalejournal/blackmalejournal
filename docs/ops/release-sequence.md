@@ -1,3 +1,10 @@
+---
+title: Release sequence
+status: operational
+audience: [operators, engineers]
+last-verified: 2026-03-31
+---
+
 # Release Sequence
 
 Use this exact order to move BMJ from code-complete to launch-ready.

@@ -7,7 +7,7 @@ import {
 } from '@/lib/supabase/admin-queries';
 import { assessArticleReadiness } from '@/lib/admin-publishing';
 import { getLensTheme } from '@/lib/lens-theme';
-import { PATHS } from '@/lib/paths';
+import { articlePath, PATHS } from '@/lib/paths';
 import { ArticleForm } from '../../ArticleForm';
 import { updateArticleAction } from '../../actions';
 import { DeleteButton } from '@/components/admin/DeleteButton';
@@ -92,7 +92,7 @@ export default async function EditArticlePage({ params }: EditArticlePageProps) 
           ]}
           links={[
             { label: 'Article Desk', href: PATHS.ADMIN_ARTICLES },
-            { label: 'Public Article', href: `/articles/${article.slug}` },
+            { label: 'Public Article', href: articlePath(article.slug) },
           ]}
           activity={activity}
         />

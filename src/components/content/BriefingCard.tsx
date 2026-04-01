@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { briefingPath } from '@/lib/paths';
 import { Lock } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import type { Briefing } from '@/lib/supabase/types';
@@ -15,7 +16,7 @@ export function BriefingCard({ briefing }: BriefingCardProps) {
   return (
     <article className="group relative card-stripe border border-bmj-tan/15 border-l-bmj-red">
       <Link
-        href={`/briefings/${briefing.slug}`}
+        href={briefingPath(briefing.slug)}
         className="block p-6 no-underline sm:p-8"
         aria-label={briefing.title}
       >

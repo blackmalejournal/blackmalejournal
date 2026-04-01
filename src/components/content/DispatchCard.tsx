@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { getLensTheme } from '@/lib/lens-theme';
+import { dispatchPath } from '@/lib/paths';
 import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
 
@@ -31,7 +32,7 @@ export function DispatchCard({
       )}
     >
       <Link
-        href={`/blog/${slug}`}
+        href={dispatchPath(slug)}
         className="block p-6 no-underline sm:p-8"
         aria-label={title}
       >

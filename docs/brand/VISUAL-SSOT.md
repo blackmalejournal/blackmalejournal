@@ -1,0 +1,100 @@
+---
+type: normative
+authority: canonical
+status: canonical
+audience: [designers, engineers, operators, agents]
+last-verified: 2026-03-31
+---
+
+# BMJ visual and verbal identity — SSOT index
+
+This document is the **documentation single source of truth** for *where* identity lives and *what files* must stay aligned. Numeric colors, CSS variables, and Tailwind mirrors are **not** redefined here as a second authority — see the table below.
+
+---
+
+## Authority chain (governance I-1)
+
+| What | Canonical file (truth) | This doc + HTML gallery |
+|------|--------------------------|-------------------------|
+| **Color tokens & semantic CSS variables** (`--bmj-*`, surfaces, text, borders) | [`src/styles/brand.css`](../../src/styles/brand.css) | Describes and links; [visual-ssot.html](visual-ssot.html) loads that stylesheet for live swatches |
+| **Tailwind color names** (`bg-bmj-red`, `text-bmj-amber`, …) | [`tailwind.config.ts`](../../tailwind.config.ts) | Hex must **mirror** `brand.css` (opacity modifiers require hex in Tailwind — see root `CLAUDE.md`) |
+| **Lens → UI classes** (badges, borders) | [`src/lib/lens-theme.ts`](../../src/lib/lens-theme.ts) | Lens table below matches shipped UI |
+| **Verbal identity** (name, tagline, default author, public emails) | [`src/lib/seo.ts`](../../src/lib/seo.ts) | Quoted below for convenience only |
+| **Placeholder image paths** | [`src/lib/placeholders.ts`](../../src/lib/placeholders.ts) → `public/placeholders/*.svg` | Gallery in [visual-ssot.html](visual-ssot.html) |
+| **Logo / favicon / OG art files on disk** | `public/logos/*`, `public/favicon.svg`, `public/og-image.svg` | Shown below and in gallery |
+| **Rules humans must not break** (no gradients in brand components, type roles, etc.) | [invariants.md](invariants.md) | Complements this index |
+
+**If anything disagrees:** **`brand.css` wins** for tokens until you intentionally change it **and** update `tailwind.config.ts` and this index in the same maintenance pass. Run `/brand-check` or the project’s drift hook where applicable.
+
+---
+
+## Verbal identity (mirror of `src/lib/seo.ts`)
+
+| Field | Value |
+|-------|--------|
+| Site name | The Black Male Journal |
+| Tagline | Speak the Truth. Navigate the Consequences. |
+| Default author | The Chairman |
+
+Public emails and support handles are listed in **`seo.ts`** (`CONTACT_EMAILS`, `SUPPORT_PAYMENT_METHODS`, `SUPPORT_PATREON_URL`) and in [../ops/chairman-consistency-reference.md](../ops/chairman-consistency-reference.md).
+
+---
+
+## Lenses (content taxonomy + accent color in UI)
+
+Each piece of content uses **exactly one** lens. UI accents come from `LENS_THEMES` (Tailwind `bmj-*` colors).
+
+| Lens key | Reader-facing label (in UI) | Accent (Tailwind) | Hex (from `tailwind.config.ts`) |
+|----------|-----------------------------|-------------------|----------------------------------|
+| `health` | Health/Wellness | `bmj-amber` | `#C8852A` |
+| `politics` | Politics/Law | `bmj-red` | `#C0281F` |
+| `culture` | Culture/Ideology | `bmj-tan` | `#B8986A` |
+| `entertainment` | Entertainment/Technology | `bmj-purple` | `#554978` |
+| `business` | Business/Finance | `bmj-olive` | `#416100` |
+
+---
+
+## Logos, favicon, and social preview art
+
+**Shipped files in `public/` (reference visuals):**
+
+| Role | Path |
+|------|------|
+| Primary logo (color SVG) | ![Primary logo](../../public/logos/primary-color.svg) `public/logos/primary-color.svg` |
+| Submark (color SVG) | ![Submark](../../public/logos/submark-color.svg) `public/logos/submark-color.svg` |
+| Favicon variant (red) | ![Favicon red](../../public/logos/favicon-red.svg) `public/logos/favicon-red.svg` |
+| Site favicon | ![Favicon](../../public/favicon.svg) `public/favicon.svg` |
+| Default OG image | ![OG placeholder](../../public/og-image.svg) `public/og-image.svg` |
+
+*If images do not render in your viewer, open [visual-ssot.html](visual-ssot.html) in a browser from a clone of the repo.*
+
+---
+
+## Content-type placeholders (`PLACEHOLDERS` in code)
+
+| Type | File | Preview |
+|------|------|---------|
+| Article | `public/placeholders/article.svg` | ![article](../../public/placeholders/article.svg) |
+| Briefing | `public/placeholders/briefing.svg` | ![briefing](../../public/placeholders/briefing.svg) |
+| Course | `public/placeholders/course.svg` | ![course](../../public/placeholders/course.svg) |
+| Handbook | `public/placeholders/handbook.svg` | ![handbook](../../public/placeholders/handbook.svg) |
+| Dispatch | `public/placeholders/dispatch.svg` | ![dispatch](../../public/placeholders/dispatch.svg) |
+| Download | `public/placeholders/download.svg` | ![download](../../public/placeholders/download.svg) |
+| Generic cover | `public/placeholders/cover.svg` | ![cover](../../public/placeholders/cover.svg) |
+
+---
+
+## Colorful reference (open in browser)
+
+- **[visual-ssot.html](visual-ssot.html)** — one page: tagline banner, logo/placeholder gallery, **live** swatches from `brand.css`, lens strips.  
+- **[color-system.html](color-system.html)** — older, detailed palette / specimen artifact (still useful; does not replace `brand.css`).
+
+Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click or via a static server). The page links to `../../src/styles/brand.css` so swatches track the runtime SSOT.
+
+---
+
+## Revision log
+
+| Date | Note |
+|------|------|
+| 2026-03-31 | Initial VISUAL-SSOT index + visual-ssot.html gallery; I-1 authority table. |

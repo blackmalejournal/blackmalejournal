@@ -122,7 +122,7 @@ export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut();
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect(PATHS.HOME);
 }
 
 export async function updateProfile(formData: FormData) {

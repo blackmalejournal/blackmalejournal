@@ -7,7 +7,7 @@ import {
 } from '@/lib/supabase/admin-queries';
 import { assessHandbookReadiness } from '@/lib/admin-publishing';
 import { getLensTheme } from '@/lib/lens-theme';
-import { PATHS } from '@/lib/paths';
+import { handbookPath, PATHS } from '@/lib/paths';
 import { HandbookForm } from '../../HandbookForm';
 import { updateHandbookAction } from '../../actions';
 import { DeleteButton } from '@/components/admin/DeleteButton';
@@ -87,7 +87,7 @@ export default async function EditHandbookPage({ params }: EditHandbookPageProps
           ]}
           links={[
             { label: 'Handbook Desk', href: PATHS.ADMIN_HANDBOOKS },
-            { label: 'Public Handbook', href: `/handbooks/${handbook.slug}` },
+            { label: 'Public Handbook', href: handbookPath(handbook.slug) },
             {
               label: 'Protected Download',
               href: `/api/handbooks/${handbook.slug}/download`,

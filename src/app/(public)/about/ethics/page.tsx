@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { PATHS } from '@/lib/paths';
 import { CONTACT_EMAILS } from '@/lib/seo';
 import { PageHeader } from '@/components/layout/PageHeader';
 
@@ -142,7 +143,7 @@ export default function EthicsPage() {
           on this page, we want to hear about it.
         </p>
         <Link
-          href="/contact"
+          href={PATHS.CONTACT}
           className="inline-block bg-bmj-red px-8 py-4 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90"
         >
           Contact Us

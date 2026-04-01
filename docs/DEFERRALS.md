@@ -1,3 +1,10 @@
+---
+title: External configuration checklist (deferrals)
+status: reference
+audience: [operators, engineers]
+last-verified: 2026-03-31
+---
+
 # External Configuration Checklist
 
 Code wiring for Stripe checkout, portal redirects, Plausible, and site metadata is now in the repo. The remaining work is dashboard and environment configuration outside source control. Each entry below lists the exact external tasks that still need to be completed.

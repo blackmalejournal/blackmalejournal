@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getDispatchBySlug } from '@/lib/supabase/queries';
 import { formatDate } from '@/lib/utils';
-import { SITE_URL, articleJsonLd } from '@/lib/seo';
+import { articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
@@ -13,6 +13,7 @@ import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { createClient } from '@/lib/supabase/server';
 import { ShareButton } from '@/components/ui/ShareButton';
+import { dispatchPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
 interface DispatchPageProps {
   params: Promise<{ slug: string }>;
@@ -56,7 +57,7 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
         data={articleJsonLd({
           title: dispatch.title,
           description: dispatch.excerpt,
-          url: `${SITE_URL}/blog/${dispatch.slug}`,
+          url: siteAbsoluteUrl(dispatchPath(dispatch.slug)),
           imageUrl: dispatch.cover_image,
           publishedAt: dispatch.published_at,
           author: dispatch.author,
@@ -65,7 +66,7 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
 
       {/* Back link */}
       <Link
-        href="/blog"
+        href={PATHS.BLOG}
         className="font-label text-xs uppercase tracking-widest text-bmj-tan hover:text-bmj-cream"
       >
         &larr; All Dispatches

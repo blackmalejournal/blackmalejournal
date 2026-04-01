@@ -26,6 +26,13 @@ beforeEach(() => {
 });
 
 describe('CategoryFilterTabs', () => {
+  it('tablist has an accessible name', () => {
+    render(<CategoryFilterTabs activeCategory="all" />);
+    expect(
+      screen.getByRole('tablist', { name: /filter courses by category/i }),
+    ).toBeInTheDocument();
+  });
+
   it('renders all 6 category tabs', () => {
     render(<CategoryFilterTabs activeCategory="all" />);
     expect(screen.getByText('All')).toBeInTheDocument();

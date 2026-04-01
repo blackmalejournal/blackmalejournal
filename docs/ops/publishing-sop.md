@@ -1,3 +1,10 @@
+---
+title: Publishing SOP
+status: operational
+audience: [operators, editors]
+last-verified: 2026-03-31
+---
+
 # Publishing SOP
 
 Use this workflow for articles, briefings, dispatches, handbooks, downloads, courses, and lessons.

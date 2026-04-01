@@ -7,6 +7,10 @@ description: Use when building or improving admin panel features — CRUD screen
 
 The admin panel is a complete no-code CMS. The operator (a non-technical person) will write, edit, schedule, and publish content entirely through the UI. No terminal, no SQL, no code.
 
+## Doc context (Tier A/B)
+
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/ops/publishing-sop.md](../../docs/ops/publishing-sop.md); [docs/CONTRIBUTING.md](../../docs/CONTRIBUTING.md) (conventions).
+
 ## Architecture
 
 - Routes: `src/app/(auth)/admin/<domain>/`
@@ -58,11 +62,7 @@ admin/<domain>/
 
 ## Publishing Workflow
 
-Status values: `draft → review → scheduled → published → archived → withdrawn`
-
-- Validation: `src/lib/admin-publishing.ts` checks readiness before publish
-- Scheduling: `PublishScheduleField` sets `published_at` in the future
-- The `EditorialAuditPanel` shows all issues that block publishing
+Same status chain as content authoring skill; readiness and validation live in `src/lib/admin-publishing.ts`, `PublishScheduleField`, and `EditorialAuditPanel` (see code).
 
 ## Media Upload
 

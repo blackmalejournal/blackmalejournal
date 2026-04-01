@@ -1,25 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-
-const METHODS = [
-  {
-    label: 'CashApp',
-    handle: '$BlackMaleJournal',
-    href: 'https://cash.app/$BlackMaleJournal',
-    description: 'Tap to open CashApp',
-  },
-  {
-    label: 'Venmo',
-    handle: '@BlackMaleJournal',
-    href: 'https://venmo.com/BlackMaleJournal',
-    description: 'Tap to open Venmo',
-  },
-  {
-    label: 'PayPal',
-    handle: 'paypal.me/BlackMaleJournal',
-    href: 'https://paypal.me/BlackMaleJournal',
-    description: 'One-time or recurring',
-  },
-];
+import { SUPPORT_PAYMENT_METHODS, SUPPORT_PATREON_URL } from '@/lib/seo';
 
 export function AlternativeMethods() {
   return (
@@ -29,7 +9,7 @@ export function AlternativeMethods() {
       </h2>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {METHODS.map((method) => (
+        {SUPPORT_PAYMENT_METHODS.map((method) => (
           <a
             key={method.label}
             href={method.href}
@@ -51,7 +31,7 @@ export function AlternativeMethods() {
       </div>
 
       <a
-        href="https://patreon.com/BlackMaleJournal"
+        href={SUPPORT_PATREON_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="block border border-bmj-amber/30 bg-bmj-brown px-4 py-4 text-center transition-colors hover:border-bmj-amber/60"

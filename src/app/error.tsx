@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { PATHS } from '@/lib/paths';
 
 export default function GlobalError({
   reset,
@@ -35,7 +36,7 @@ export default function GlobalError({
           Try Again
         </button>
         <Link
-          href="/"
+          href={PATHS.HOME}
           className="inline-block border border-bmj-tan/40 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
         >
           Return to the Front Page

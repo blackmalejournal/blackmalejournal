@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { login, signInWithMagicLink } from '../actions';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 
 interface LoginFormProps {
   nextHref?: string;
@@ -14,12 +14,18 @@ export function LoginForm({ nextHref }: LoginFormProps) {
 
   return (
     <div className="border border-bmj-red/20 bg-bmj-brown p-8">
-      {/* Mode toggle */}
-      <div className="mb-6 flex gap-4 border-b border-bmj-tan/20 pb-4" role="tablist" aria-label="Login method">
+      <div
+        className="mb-6 flex gap-4 border-b border-bmj-tan/20 pb-4"
+        role="tablist"
+        aria-label="Login method"
+      >
         <button
           type="button"
           role="tab"
+          id="login-tab-password"
           aria-selected={mode === 'password'}
+          aria-controls="login-panel-password"
+          tabIndex={mode === 'password' ? 0 : -1}
           onClick={() => setMode('password')}
           className={`font-label text-xs uppercase tracking-widest transition-colors ${
             mode === 'password'
@@ -32,7 +38,10 @@ export function LoginForm({ nextHref }: LoginFormProps) {
         <button
           type="button"
           role="tab"
+          id="login-tab-magic"
           aria-selected={mode === 'magic'}
+          aria-controls="login-panel-magic"
+          tabIndex={mode === 'magic' ? 0 : -1}
           onClick={() => setMode('magic')}
           className={`font-label text-xs uppercase tracking-widest transition-colors ${
             mode === 'magic'
@@ -44,7 +53,12 @@ export function LoginForm({ nextHref }: LoginFormProps) {
         </button>
       </div>
 
-      {mode === 'password' ? (
+      <div
+        role="tabpanel"
+        id="login-panel-password"
+        aria-labelledby="login-tab-password"
+        hidden={mode !== 'password'}
+      >
         <form action={login} className="space-y-4">
           {nextHref && <input type="hidden" name="next" value={nextHref} />}
           <div>
@@ -88,7 +102,14 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             Log In
           </button>
         </form>
-      ) : (
+      </div>
+
+      <div
+        role="tabpanel"
+        id="login-panel-magic"
+        aria-labelledby="login-tab-magic"
+        hidden={mode !== 'magic'}
+      >
         <form action={signInWithMagicLink} className="space-y-4">
           {nextHref && <input type="hidden" name="next" value={nextHref} />}
           <div>
@@ -114,12 +135,12 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             Send Magic Link
           </button>
         </form>
-      )}
+      </div>
 
       <p className="mt-6 text-center font-body text-sm text-bmj-tan">
         Don&apos;t have an account?{' '}
         <Link
-          href={withQuery('/signup', { next: nextHref })}
+          href={withQuery(PATHS.SIGNUP, { next: nextHref })}
           className="text-bmj-red hover:text-bmj-cream"
         >
           Join the movement &rarr;

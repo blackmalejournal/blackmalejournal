@@ -4,6 +4,7 @@ import { BookOpen, FileText, Zap, GraduationCap, Play, type LucideIcon } from "l
 import { PageHeader } from "@/components/layout/PageHeader";
 import { getLensTheme } from "@/lib/lens-theme";
 import type { Lens } from "@/lib/supabase/types";
+import { PATHS, withQuery } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -40,7 +41,7 @@ const hubs: RecordsHub[] = [
     title: "Weekend Briefings",
     description:
       "Our flagship weekly publication. A curated briefing on the issues, ideas, and culture shaping Black male life.",
-    href: "/briefings",
+    href: PATHS.BRIEFINGS,
   },
   {
     icon: FileText,
@@ -49,7 +50,7 @@ const hubs: RecordsHub[] = [
     title: "Articles",
     description:
       "Long-form analysis across five lenses of Black male life.",
-    href: "/articles",
+    href: PATHS.ARTICLES,
   },
   {
     icon: Zap,
@@ -58,7 +59,7 @@ const hubs: RecordsHub[] = [
     title: "Dispatches",
     description:
       "Short-form commentary and rapid analysis. The field notes of revolutionary media.",
-    href: "/blog",
+    href: PATHS.BLOG,
   },
   {
     icon: GraduationCap,
@@ -67,7 +68,7 @@ const hubs: RecordsHub[] = [
     title: "Academy",
     description:
       "Structured learning: courses in martial arts, mental health, relationships, purpose, and personal branding.",
-    href: "/academy",
+    href: PATHS.ACADEMY,
   },
   {
     icon: Play,
@@ -75,16 +76,16 @@ const hubs: RecordsHub[] = [
     label: "Documentary Video",
     title: "Video",
     description: "Documentary-style video content. Watch. Learn. Build.",
-    href: "/video",
+    href: PATHS.VIDEO,
   },
 ];
 
 const lenses = [
-  { label: "Health/Wellness",             href: "/articles?lens=health" },
-  { label: "Politics/Law",                href: "/articles?lens=politics" },
-  { label: "Culture/Ideology",            href: "/articles?lens=culture" },
-  { label: "Entertainment/Technology",    href: "/articles?lens=entertainment" },
-  { label: "Business/Finance",           href: "/articles?lens=business" },
+  { label: "Health/Wellness",          href: withQuery(PATHS.ARTICLES, { lens: "health" }) },
+  { label: "Politics/Law",             href: withQuery(PATHS.ARTICLES, { lens: "politics" }) },
+  { label: "Culture/Ideology",         href: withQuery(PATHS.ARTICLES, { lens: "culture" }) },
+  { label: "Entertainment/Technology", href: withQuery(PATHS.ARTICLES, { lens: "entertainment" }) },
+  { label: "Business/Finance",         href: withQuery(PATHS.ARTICLES, { lens: "business" }) },
 ];
 
 export default function RecordsPage() {
@@ -166,7 +167,7 @@ export default function RecordsPage() {
           reader support. If this work matters to you, fund it.
         </p>
         <Link
-          href="/support"
+          href={PATHS.SUPPORT}
           className="btn-primary inline-block px-8 py-4 text-sm"
         >
           Support the Mission

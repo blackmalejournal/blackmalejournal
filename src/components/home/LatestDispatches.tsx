@@ -1,6 +1,7 @@
 // src/components/home/LatestDispatches.tsx
 import Link from 'next/link';
 import { DispatchCard } from '@/components/content/DispatchCard';
+import { PATHS } from '@/lib/paths';
 import { PageHeader } from '@/components/layout/PageHeader';
 import type { Dispatch } from '@/lib/supabase/types';
 
@@ -45,7 +46,7 @@ export function LatestDispatches({ dispatches }: LatestDispatchesProps) {
         {dispatches.length > 0 && (
           <div className="mt-10 text-center">
             <Link
-              href="/blog"
+              href={PATHS.BLOG}
               className="btn-ghost"
             >
               All Dispatches &rarr;

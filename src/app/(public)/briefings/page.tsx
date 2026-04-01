@@ -5,6 +5,7 @@ import { getBriefings } from '@/lib/supabase/queries';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { BriefingCard } from '@/components/content/BriefingCard';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { PATHS, withQuery } from '@/lib/paths';
 
 export const revalidate = 60;
 
@@ -69,7 +70,7 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
           {hasMore && (
             <div className="mt-12 text-center">
               <Link
-                href={`/briefings?page=${page + 1}`}
+                href={withQuery(PATHS.BRIEFINGS, { page: String(page + 1) })}
                 className="btn-ghost"
               >
                 Load More

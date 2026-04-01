@@ -113,11 +113,14 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Run `npm test -- --coverage` — Coverage report
 - Run `npm run test:e2e` — E2E tests with Playwright (chromium)
 - Run `npm run verify:docs-links` — relative links under `docs/` resolve (`docs/templates/` skipped)
+- Run `npm run verify:docs-frontmatter` — every `docs/ops/*.md`, `docs/brand/*.md`, and root `docs/*.md` handbook has YAML frontmatter with `last-verified` or `last-updated`
+- Run `npm run docs:duplicate-audit` — heuristic overlap report for `docs/` (optional; exits 0 unless `--fail`)
+- Run `npm run docs:inventory` — print Markdown counts and bucket breakdown (sprawl tracking)
 - Verify `npm run build` passes before any commit
 - Check TypeScript with `npx tsc --noEmit`
 - Run `npm run lint` — ESLint checks
 - Visual check: every page must look correct at 375px (mobile) and 1440px (desktop)
-- **CI/CD:** GitHub Actions validates all tests + lint + build + docs link check on every commit and PR
+- **CI/CD:** GitHub Actions validates all tests + lint + build + docs link check + docs frontmatter (ops, brand, root handbooks) and a short informational duplicate-audit print on every commit and PR
 
 ## Important Notes
 - When modifying lenses, update all references: `src/lib/supabase/types.ts`, `CLAUDE.md`, `docs/DEVELOPER.md`, `docs/ARCHITECTURE.md`, `src/lib/lens-theme.ts`
@@ -134,14 +137,15 @@ BMJ currently renders from its local brand tokens:
 - **Imported by:** `src/styles/globals.css`
 - **Mirrored in Tailwind:** `tailwind.config.ts`
 - **Brand guardrail:** `docs/brand/invariants.md`
+- **Visual SSOT index (logos, placeholders, lenses, tagline mirror, gallery):** `docs/brand/VISUAL-SSOT.md` and `docs/brand/visual-ssot.html`
 
 BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 
 ## Route Rename Checklist
 When renaming a public route (e.g., /library → /records), update all 5 locations:
 1. `src/app/(public)/<old>/` → rename directory to `<new>/`
-2. `src/lib/nav.ts` — update HEADER_NAV_LINKS label + href
-3. `src/app/sitemap.ts` — update static URL entry
+2. `src/lib/paths.ts` — add or update `PATHS` entries; `src/lib/nav.ts` should use `PATHS` for `href` values
+3. `src/app/sitemap.ts` — update static URL entry (prefer `PATHS` constants)
 4. `src/app/not-found.tsx` — update fallback link if it points to the route
 5. `tests/` — grep for old label text and old href strings in component/nav/sitemap tests
 
@@ -152,6 +156,7 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
 
 ## Documentation
+- BMJ comprehensive documentation SSOT (share this): docs/BMJ-SSOT.md — stable alias: docs/bmj-platform-brief.md
 - Repo root + `docs/` lanes (curated map): docs/ARCHITECTURE.md — *Repository layout — monorepo root*; optional snapshot: `npm run docs:layout`
 - Architecture and system design: docs/ARCHITECTURE.md
 - Contributing guide (code style, PR process, naming — includes canonical `docs/` Markdown naming): docs/CONTRIBUTING.md

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { AccessTier } from '@/lib/supabase/types';
 import { StarDivider } from '@/components/ui/StarDivider';
-import { withQuery } from '@/lib/paths';
+import { PATHS, withQuery } from '@/lib/paths';
 
 interface PaywallGateProps {
   requiredTier: AccessTier;
@@ -18,11 +18,11 @@ export function PaywallGate({
 }: PaywallGateProps) {
   const tierLabel = requiredTier === 'basic' ? 'Basic' : 'Premium';
   const ctaHref = isLoggedIn
-    ? withQuery('/portal/settings', {
+    ? withQuery(PATHS.PORTAL_SETTINGS, {
         upgrade: requiredTier === 'free' ? undefined : requiredTier,
         next: nextHref,
       })
-    : withQuery('/signup', {
+    : withQuery(PATHS.SIGNUP, {
         tier: requiredTier,
         next: nextHref,
       });
@@ -62,7 +62,7 @@ export function PaywallGate({
           </Link>
           {!isLoggedIn && (
             <Link
-              href={withQuery('/login', { next: nextHref })}
+              href={withQuery(PATHS.LOGIN, { next: nextHref })}
               className="font-body text-sm text-bmj-tan underline hover:text-bmj-cream"
             >
               Already a member? Log in

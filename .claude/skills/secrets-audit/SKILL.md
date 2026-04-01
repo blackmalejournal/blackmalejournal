@@ -8,6 +8,9 @@ allowed-tools:
   - Bash(git ls-files *)
   - Bash(git log *)
 ---
+
+**Tier B:** [docs/ops/env-vars.md](../../docs/ops/env-vars.md) (what may be `NEXT_PUBLIC_`). **Tiers:** [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md).
+
 Audit the project for secrets safety. Run these checks in order:
 
 1. Verify no secrets are tracked in git

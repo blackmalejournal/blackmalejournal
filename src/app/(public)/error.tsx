@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { PATHS } from '@/lib/paths';
 
 export default function PublicError({
   error,
@@ -37,7 +38,7 @@ export default function PublicError({
         <button onClick={reset} className="btn-ghost">
           Try Again
         </button>
-        <Link href="/" className="btn-secondary">
+        <Link href={PATHS.HOME} className="btn-secondary">
           Back to Home
         </Link>
       </div>

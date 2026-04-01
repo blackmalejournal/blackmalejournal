@@ -1,4 +1,14 @@
+---
+title: BMJ visual invariants
+authority: canonical
+status: canonical
+audience: [designers, engineers, agents]
+last-verified: 2026-03-31
+---
+
 # BMJ Visual Invariants
+
+**Asset index, embedded previews, and colorful gallery:** [VISUAL-SSOT.md](VISUAL-SSOT.md) (normative doc SSOT) and [visual-ssot.html](visual-ssot.html) (browser gallery loading `src/styles/brand.css`).
 
 Implementation law for The Black Male Journal's visual system.
 These rules apply to all components, pages, and future contributors.
