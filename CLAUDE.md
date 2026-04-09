@@ -19,7 +19,7 @@ npx tsc --noEmit     # TypeScript check
 ## Brand System
 
 Tagline: "Speak the Truth. Navigate the Consequences."
-Logo: Journal/book icon with star + pen nib (see public/logos/ — curated to 5 files: favicon-red.svg, primary-color.png/svg, primary-light.png, submark-color.svg)
+Logo: Journal/book icon with star + pen nib (see `public/logos/` — primary, submark, monogram, b-mark, wordmark variants). Full inventory: `docs/brand/IMAGE-ASSET-ORGANIZATION.md`. Use `src/lib/images.ts` for logo paths.
 Aesthetic: Militant print-driven editorial — revolutionary newspapers, political posters.
 Full brand spec (colors, fonts, prohibited styles): `.claude/rules/brand.md`
 Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all colors.
@@ -63,12 +63,15 @@ All articles and content are categorized under exactly one lens:
 - `src/lib/storage-assets.ts` — Supabase Storage asset URL helpers
 - `src/lib/placeholders.ts` — Centralized placeholder image paths (PLACEHOLDERS constant)
 
-## Placeholder Images
-- All content-type placeholders live in `public/placeholders/{type}.svg`
-- Import `PLACEHOLDERS` from `@/lib/placeholders` — never hardcode placeholder paths
-- Available types: article, briefing, course, handbook, dispatch, download, cover (generic)
-- All SVGs follow BMJ brand identity (brown background, red accents, brand mark)
+## Image Assets
+- **Logo assets:** `public/logos/` — use `LOGOS` from `@/lib/images` for type-safe paths
+- **Placeholders:** `public/placeholders/{type}.svg` — use `PLACEHOLDERS` from `@/lib/placeholders`
+- **Textures:** `public/textures/` — use `TEXTURES` from `@/lib/images`
+- **Full documentation:** `docs/brand/IMAGE-ASSET-ORGANIZATION.md` — complete inventory, naming conventions, optimization standards
+- **Image gallery:** `/brand/images` route — visual reference of all assets
+- Available placeholder types: article, briefing, course, handbook, dispatch, download, cover (generic)
 - When a content card has no `cover_image`, pass `PLACEHOLDERS.{type}` to the `<Image>` src
+- Use `IMAGE_SIZES` from `@/lib/images` for responsive image sizing presets
 
 ## Code Style
 - Use TypeScript strict mode
@@ -129,15 +132,117 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Brand mark (star + pen nib) is used as section dividers via `<StarDivider />` and `<BrandMark />`
 - All images should have grain/halftone treatment applied via CSS
 
-## Design System
+## Visual & Animation System
 
-BMJ currently renders from its local brand tokens:
+### Beautification Enhancements (10 comprehensive improvements)
+1. **Enhanced Animations** — Framer Motion presets, smooth transitions (150-500ms), hover effects
+2. **Typography** — Fluid responsive sizing with clamp(), semantic classes (`.page-title`, `.card-title`, etc.)
+3. **Depth Effects** — Multi-layer shadows (elevation scale), glow effects, glass backdrop effects
+4. **Button Consistency** — 5 button variants (primary, secondary, ghost, amber, outline) with unified behavior
+5. **Navigation** — Underline animations, filter tabs, filter chips with smooth transitions
+6. **Accessibility** — `:focus-visible` red outline, screen reader text (`.sr-only`), `prefers-reduced-motion` support
+7. **Responsive Design** — Mobile-first with 48px+ touch targets, 3 breakpoints (mobile/tablet/desktop)
+8. **Image Optimization** — Halftone filters, duotone effects, responsive grids, lazy loading
+9. **Depth & Dimension** — Z-index scale, card lift effects, shadow layering, border glow
+10. **Responsive Typography** — Heading sizes adapt via clamp() from mobile to desktop
 
-- **Runtime source of truth:** `src/styles/brand.css`
-- **Imported by:** `src/styles/globals.css`
-- **Mirrored in Tailwind:** `tailwind.config.ts`
-- **Brand guardrail:** `docs/brand/invariants.md`
-- **Visual SSOT index (logos, placeholders, lenses, tagline mirror, gallery):** `docs/brand/VISUAL-SSOT.md` and `docs/brand/visual-ssot.html`
+### Animation Utilities
+- `src/lib/animations.ts` — Framer Motion presets and Tailwind animation classes
+- Classes: `.transition-smooth`, `.transition-micro`, `.transition-dramatic`, `.hover-lift`, `.hover-scale`
+- Framer Motion variants: `pageTransition`, `fadeInUp`, `slideInRight`, `staggerContainer`
+
+### Typography System
+- Semantic classes: `.page-title`, `.section-title`, `.card-title`, `.editorial-kicker`, `.lead-text`, `.body-text`, `.quote-text`
+- All headings use `clamp()` for fluid responsive sizing
+- Letter-spacing varies per hierarchy level
+- Text shadows on headings for visual depth
+
+### Shadow & Depth
+- Shadow tokens: `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`, `--shadow-card`, `--shadow-glow-red`, `--shadow-glow-amber`
+- Card variants: `.card-media` (3px top), `.card-stripe` (4px left), `.card-feature` (1px uniform), `.card-offer` (gradient)
+- Surfaces: `.surface-panel`, `.surface-panel-strong`, `.surface-elevated`, `.surface-glass`
+
+### Button System
+- Variants: `.btn-primary` (red), `.btn-secondary` (ghost red), `.btn-ghost` (outline), `.btn-amber` (premium), `.btn-outline`
+- Sizes: `.btn-xs`, `.btn-sm`, `.btn-lg`, `.btn-xl`
+- Icon buttons: `.btn-icon`, `.btn-icon-square`
+- All buttons have unified hover (lift + shadow increase) and active (scale 0.98) states
+
+### Responsive & Accessibility
+- Breakpoints: Mobile (<641px), Tablet (641-1024px), Desktop (>1025px)
+- Touch-friendly: 48px minimum on mobile via `@media (hover: none) and (pointer: coarse)`
+- Focus rings: Red `:focus-visible` outline with 2px offset
+- Motion: Automatically disabled for `prefers-reduced-motion: reduce`
+- Screen reader: `.sr-only` for hidden text
+- High contrast mode: 3px outline, thicker borders
+
+### Advanced Stylistic Enhancements
+
+Beyond the 10 core beautification improvements, advanced CSS features for premium visual appeal:
+
+**Dynamic Typography Effects:**
+- `.text-gradient-animate` — Animated gradient text for hero headlines (shifts through red, amber, white)
+- `.headline-breathe` — Letter-spacing animation on hover (0.1em expand)
+- `.text-glow-red` / `.text-glow-amber` — Text shadow glow effects for emphasis
+
+**Advanced Micro-Interactions:**
+- `.icon-bounce` — Bouncing icon animation (8px lift on hover)
+- `.btn-press-feedback` — Press feedback with scale (0.95) and inset shadow
+- `.tooltip-pop` — Pop-in animation with cubic-bezier easing
+- `.ripple` — Material Design ripple effect on click (300px spread)
+
+**Modern UI Elements:**
+- `.card-glass` — Glassmorphism with 12px backdrop blur, refined border
+- `.btn-neumorphic` — Subtle 3D neumorphic effect with dual shadow
+- `.modal-modern` — Gradient modal background with refined border
+- `.card-border-animate` — Animated rotating gradient border (3s duration)
+
+**Background Patterns:**
+- `.pattern-diagonal` — Subtle 45° diagonal lines (35px spacing, 2% opacity)
+- `.duotone` — Color overlay for magazine-style effect (multiply blend)
+
+**State & Feedback Indicators:**
+- `.state-success` / `.state-error` / `.state-warning` — Colored left border with background tint
+- `.loading-pulse` — Pulse animation (1.5s, 0.5-1 opacity)
+- `.progress-bar` — Animated gradient progress (red→amber) with smooth width transition
+- `.progress-shimmer` — Shimmer animation on progress bar
+
+**Navigation Visual Cues:**
+- `.breadcrumb-item` — Navigation breadcrumbs with arrows (→) between items
+- `.breadcrumb-item.active` — Bold white highlight for current breadcrumb
+- `.keyboard-focused` — Keyboard navigation indicator (red left border)
+
+**Responsive Typography:**
+- `.hero-title` — Fluid heading: clamp(2rem, 8vw + 1rem, 5rem)
+- `.hero-subtitle` — Fluid subtitle: clamp(1rem, 4vw + 0.5rem, 2rem)
+- `.section-headline` — Fluid section: clamp(1.5rem, 5vw + 0.5rem, 3rem)
+
+**New Tailwind Animations:**
+- `gradientShift` — 6s background position shift for gradient text
+- `bounce` — Icon bounce (8px amplitude, 600ms)
+- `tooltipPop` — Pop-in with scale (0.8 → 1)
+- `rippleEffect` — Ripple spread (0 → 300px diameter)
+- `borderShift` — Rotating hue animation (0 → 360°)
+- `loadingPulse` — Opacity pulse (0.5 → 1)
+
+**High Contrast & Accessibility:**
+- `@media (prefers-contrast: more)` — Thicker borders, enhanced shadows
+- `:focus-visible` — 3px red outline with 4px offset
+- High contrast fonts (500+ weight boost)
+
+---
+
+### Documentation Links
+
+**Core Beauty Enhancements:**
+- **BEAUTIFICATION-ENHANCEMENTS.md** — 10 core improvements (animations, typography, depth, buttons, accessibility, responsive)
+- **BEAUTIFICATION-IMPLEMENTATION-GUIDE.md** — 100+ code examples
+- **CSS-CLASSES-REFERENCE.md** — Quick lookup for 50+ CSS classes
+
+**Advanced Enhancements:**
+- **ADVANCED-STYLISTIC-ENHANCEMENTS.md** — 8 advanced features (typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators)
+
+**See also:** `docs/brand/` for brand redesign strategy, image assets, and visual identity
 
 BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 

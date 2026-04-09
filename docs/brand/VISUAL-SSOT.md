@@ -62,9 +62,24 @@ Each piece of content uses **exactly one** lens. UI accents come from `LENS_THEM
 |------|------|
 | Primary logo (color SVG) | ![Primary logo](../../public/logos/primary-color.svg) `public/logos/primary-color.svg` |
 | Submark (color SVG) | ![Submark](../../public/logos/submark-color.svg) `public/logos/submark-color.svg` |
+| **Monogram (BMJ)** | ![Monogram](../../public/logos/monogram-color.svg) `public/logos/monogram-color.svg` |
+| **B Mark (compact)** | ![B Mark](../../public/logos/b-mark.svg) `public/logos/b-mark.svg` |
+| **Wordmark (light)** | ![Wordmark light](../../public/logos/wordmark-light.svg) `public/logos/wordmark-light.svg` |
+| **Wordmark (dark)** | ![Wordmark dark](../../public/logos/wordmark-dark.svg) `public/logos/wordmark-dark.svg` |
 | Favicon variant (red) | ![Favicon red](../../public/logos/favicon-red.svg) `public/logos/favicon-red.svg` |
 | Site favicon | ![Favicon](../../public/favicon.svg) `public/favicon.svg` |
 | Default OG image | ![OG placeholder](../../public/og-image.svg) `public/og-image.svg` |
+
+**Logo Usage Matrix:**
+
+| Context | Asset | Notes |
+|---------|-------|-------|
+| Website header | Primary logo or Wordmark | Full brand presence |
+| Favicon/App icon | B Mark or Monogram | 16–64px recognition |
+| Social avatars | Monogram | Square format |
+| Email signature | Submark | Compact horizontal |
+| Print masthead | Wordmark (dark) | On cream/light paper |
+| Merchandise | Any variant | Context-dependent |
 
 *If images do not render in your viewer, open [visual-ssot.html](visual-ssot.html) in a browser from a clone of the repo.*
 
@@ -93,8 +108,24 @@ Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click 
 
 ---
 
+---
+
+## Related documentation
+
+| Document | Purpose |
+|----------|---------|
+| [BMJ-BRAND-REDESIGN-STRATEGY.md](BMJ-BRAND-REDESIGN-STRATEGY.md) | Comprehensive brand redesign strategy with logo system, typography, color rationale, and implementation roadmap |
+| [IMAGE-ASSET-ORGANIZATION.md](IMAGE-ASSET-ORGANIZATION.md) | Complete image asset inventory, naming conventions, optimization standards, and usage guidelines |
+| [art-direction-spec.md](art-direction-spec.md) | Visual tone and art direction principles |
+| [invariants.md](invariants.md) | Design rules and constraints |
+| `/brand` route in app | Interactive brand showcase page |
+| `src/lib/images.ts` | Centralized image utilities, logo paths, and sizing presets |
+
+---
+
 ## Revision log
 
 | Date | Note |
 |------|------|
+| 2026-04-08 | Added comprehensive brand redesign strategy; new logo variants (monogram, B mark, wordmarks); interactive brand showcase page at `/brand`; image asset organization documentation; centralized image utilities (`src/lib/images.ts`) |
 | 2026-03-31 | Initial VISUAL-SSOT index + visual-ssot.html gallery; I-1 authority table. |
