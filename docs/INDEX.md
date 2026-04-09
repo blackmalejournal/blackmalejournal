@@ -36,6 +36,13 @@ Cross-org / leadership reference for repository standardization (templates, poli
 
 - [BMJ-SSOT.md](BMJ-SSOT.md) - **Single comprehensive documentation SSOT** for BMJ (product, program, repo map, governance digest, roadmap). **Share this file.**
 - [bmj-platform-brief.md](bmj-platform-brief.md) - stable alias → [BMJ-SSOT.md](BMJ-SSOT.md) (legacy links).
+- [BEAUTIFICATION-SUMMARY.md](BEAUTIFICATION-SUMMARY.md) - overview of 10 core beautification enhancements.
+- [BEAUTIFICATION-ENHANCEMENTS.md](BEAUTIFICATION-ENHANCEMENTS.md) - complete technical guide to animations, typography, depth, buttons, accessibility, responsive design.
+- [BEAUTIFICATION-IMPLEMENTATION-GUIDE.md](BEAUTIFICATION-IMPLEMENTATION-GUIDE.md) - 100+ implementation examples for every CSS class.
+- [CSS-CLASSES-REFERENCE.md](CSS-CLASSES-REFERENCE.md) - quick lookup for all 50+ CSS classes and animations.
+- [ADVANCED-STYLISTIC-ENHANCEMENTS.md](ADVANCED-STYLISTIC-ENHANCEMENTS.md) - advanced features (typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators).
+- [ADVANCED-STYLISTIC-ENHANCEMENTS-SUMMARY.md](ADVANCED-STYLISTIC-ENHANCEMENTS-SUMMARY.md) - implementation summary with code examples and performance notes.
+- [ADVANCED-ENHANCEMENTS-QUICK-START.md](ADVANCED-ENHANCEMENTS-QUICK-START.md) - quick-reference guide with copy-paste CSS classes and component examples.
 - [DEVELOPER.md](DEVELOPER.md) - developer workflow, scripts, testing, and deployment notes.
 - [ARCHITECTURE.md](ARCHITECTURE.md) - system design, data flow, database schema, integration patterns.
 - [CONTRIBUTING.md](CONTRIBUTING.md) - code conventions, PR process, file naming, asset naming, testing requirements.

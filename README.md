@@ -84,6 +84,7 @@ public/
 | [docs/BEAUTIFICATION-ENHANCEMENTS.md](docs/BEAUTIFICATION-ENHANCEMENTS.md) | Designers / Developers | Complete technical guide: animations, typography, depth, buttons, accessibility, responsive design |
 | [docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md](docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md) | Developers | Code examples for every CSS class and animation (100+ patterns) |
 | [docs/CSS-CLASSES-REFERENCE.md](docs/CSS-CLASSES-REFERENCE.md) | Developers | Quick lookup for all 50+ CSS classes, animations, and responsive utilities |
+| [docs/ADVANCED-STYLISTIC-ENHANCEMENTS.md](docs/ADVANCED-STYLISTIC-ENHANCEMENTS.md) | Designers / Developers | Advanced features: typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators |
 | [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Code style, PR process, conventions |

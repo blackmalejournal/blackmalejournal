@@ -577,7 +577,7 @@
     width: 100%;
   }
 
-  /* ──��� Filter Tabs ──────────────────────────────────────────── */
+  /* ──����� Filter Tabs ──────────────────────────────────────────── */
 
   .filter-tab {
     @apply pb-3 font-label text-sm uppercase tracking-widest;
@@ -1149,4 +1149,351 @@ picture {
   .wide-card-grid {
     @apply grid-cols-1;
   }
+}
+
+/* ─── ADVANCED STYLISTIC ENHANCEMENTS ──────────────────────── */
+
+/* ─── Custom Typography Effects ────────────────────────────── */
+
+/* Text gradient animation for hero headlines */
+.text-gradient-animate {
+  background: linear-gradient(
+    90deg,
+    var(--bmj-white),
+    var(--bmj-red),
+    var(--bmj-amber),
+    var(--bmj-white)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+/* Headline with breathing letter-spacing on hover */
+.headline-breathe:hover {
+  letter-spacing: 0.1em;
+  transition: letter-spacing var(--transition-normal);
+}
+
+/* Text shadow glow for emphasis */
+.text-glow-red {
+  text-shadow:
+    0 0 10px rgba(192, 40, 31, 0.3),
+    0 0 20px rgba(192, 40, 31, 0.15);
+}
+
+.text-glow-amber {
+  text-shadow:
+    0 0 10px rgba(200, 133, 42, 0.3),
+    0 0 20px rgba(200, 133, 42, 0.15);
+}
+
+/* ─── Advanced Micro-Interactions ──────────────────────────── */
+
+/* Icon bounce animation */
+.icon-bounce:hover {
+  animation: bounce 600ms ease-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Button press feedback with scale and shadow */
+.btn-press-feedback:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Tooltip pop animation */
+.tooltip-pop {
+  animation: tooltipPop 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tooltipPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Ripple effect for buttons and interactive elements */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ripple:active::after {
+  animation: rippleEffect 600ms ease-out;
+}
+
+@keyframes rippleEffect {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+/* ─── Background Patterns & Textures ───────────────────────── */
+
+/* Diagonal lines pattern */
+.pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 35px,
+    rgba(184, 152, 106, 0.02) 35px,
+    rgba(184, 152, 106, 0.02) 70px
+  );
+}
+
+/* Duotone color overlay */
+.duotone {
+  position: relative;
+}
+
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 36, 23, 0.7), rgba(192, 40, 31, 0.2));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* ─── Modern UI Elements ───────────────────────────────────── */
+
+/* Glassmorphism cards with backdrop blur */
+.card-glass {
+  background: rgba(28, 19, 14, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(184, 152, 106, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.card-glass:hover {
+  border-color: rgba(184, 152, 106, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Neumorphic buttons (subtle 3D effect) */
+.btn-neumorphic {
+  background: linear-gradient(145deg, #1C130E, #0D0C0B);
+  box-shadow:
+    5px 5px 15px rgba(0, 0, 0, 0.5),
+    -5px -5px 15px rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-normal);
+}
+
+.btn-neumorphic:hover {
+  box-shadow:
+    7px 7px 20px rgba(0, 0, 0, 0.6),
+    -7px -7px 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Modern modal design */
+.modal-modern {
+  background: linear-gradient(135deg, rgba(28, 19, 14, 0.95) 0%, rgba(13, 12, 11, 0.95) 100%);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(184, 152, 106, 0.15);
+}
+
+/* Animated card borders */
+.card-border-animate {
+  position: relative;
+  background: var(--bmj-black);
+}
+
+.card-border-animate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, var(--bmj-red), var(--bmj-amber), var(--bmj-red));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  animation: borderShift 3s linear infinite;
+}
+
+@keyframes borderShift {
+  0% { filter: hue-rotate(0deg); opacity: 1; }
+  100% { filter: hue-rotate(360deg); opacity: 1; }
+}
+
+/* ─── Enhanced Accessibility ──────────────────────────────── */
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  :root {
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(184, 152, 106, 0.2);
+  }
+
+  body {
+    font-weight: 500;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    border-width: 2px;
+  }
+
+  .page-title,
+  .section-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Focus state enhancements */
+:focus-visible {
+  outline: 3px solid var(--bmj-red);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Keyboard navigation indicator */
+.keyboard-focused {
+  background-color: rgba(192, 40, 31, 0.1);
+  border-left: 4px solid var(--bmj-red);
+  padding-left: var(--space-md);
+}
+
+/* ─── Loading & State Indicators ──────────────────────────── */
+
+/* Loading pulse animation */
+.loading-pulse {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Success state indicator */
+.state-success {
+  border-left: 4px solid #4CAF50;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding-left: var(--space-md);
+}
+
+/* Error state indicator */
+.state-error {
+  border-left: 4px solid var(--bmj-red);
+  background-color: rgba(192, 40, 31, 0.1);
+  padding-left: var(--space-md);
+}
+
+/* Warning state indicator */
+.state-warning {
+  border-left: 4px solid var(--bmj-amber);
+  background-color: rgba(200, 133, 42, 0.1);
+  padding-left: var(--space-md);
+}
+
+/* ─── Progress Indicators ──────────────────────────────────── */
+
+/* Progress bar */
+.progress-bar {
+  height: 4px;
+  background-color: rgba(184, 152, 106, 0.2);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.progress-bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--bmj-red), var(--bmj-amber));
+  width: var(--progress, 0%);
+  transition: width 300ms ease;
+  border-radius: inherit;
+}
+
+/* Animated progress shimmer */
+.progress-shimmer::after {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+/* ─── Navigation Visual Cues ──────────────────────────────– */
+
+/* Breadcrumb with visual flow */
+.breadcrumb-item::before {
+  content: "→";
+  margin: 0 var(--space-md);
+  color: var(--bmj-tan);
+  opacity: 0.5;
+  transition: opacity var(--transition-fast);
+}
+
+.breadcrumb-item:hover::before {
+  opacity: 1;
+  color: var(--bmj-red);
+}
+
+.breadcrumb-item.active {
+  color: var(--bmj-white);
+  font-weight: 600;
+}
+
+.breadcrumb-item.active::before {
+  display: none;
+}
+
+/* ─── Responsive Text Sizes ───────────────────────────────── */
+
+/* Fluid typography for hero sections */
+.hero-title {
+  font-size: clamp(2rem, 8vw + 1rem, 5rem);
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 4vw + 0.5rem, 2rem);
+  line-height: 1.3;
+}
+
+.section-headline {
+  font-size: clamp(1.5rem, 5vw + 0.5rem, 3rem);
+  line-height: 1.2;
 }

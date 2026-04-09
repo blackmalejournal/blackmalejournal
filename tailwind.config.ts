@@ -132,6 +132,30 @@ const config: Config = {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
+        gradientShift: {
+          '0%, 100%': { backgroundPosition: '0% center' },
+          '50%': { backgroundPosition: '100% center' },
+        },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        tooltipPop: {
+          '0%': { opacity: '0', transform: 'scale(0.8) translateY(8px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
+        rippleEffect: {
+          '0%': { width: '0', height: '0', opacity: '1' },
+          '100%': { width: '300px', height: '300px', opacity: '0' },
+        },
+        borderShift: {
+          '0%': { filter: 'hue-rotate(0deg)', opacity: '1' },
+          '100%': { filter: 'hue-rotate(360deg)', opacity: '1' },
+        },
+        loadingPulse: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
       },
     },
   },

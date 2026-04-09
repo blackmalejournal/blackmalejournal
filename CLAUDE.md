@@ -176,10 +176,73 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Screen reader: `.sr-only` for hidden text
 - High contrast mode: 3px outline, thicker borders
 
-### Documentation
-- **BEAUTIFICATION-ENHANCEMENTS.md** — Complete guide to all 10 enhancements with implementation details
-- **BEAUTIFICATION-IMPLEMENTATION-GUIDE.md** — Code examples for every CSS class and animation
-- **See**: `docs/brand/` for brand redesign strategy, image assets, and visual identity
+### Advanced Stylistic Enhancements
+
+Beyond the 10 core beautification improvements, advanced CSS features for premium visual appeal:
+
+**Dynamic Typography Effects:**
+- `.text-gradient-animate` — Animated gradient text for hero headlines (shifts through red, amber, white)
+- `.headline-breathe` — Letter-spacing animation on hover (0.1em expand)
+- `.text-glow-red` / `.text-glow-amber` — Text shadow glow effects for emphasis
+
+**Advanced Micro-Interactions:**
+- `.icon-bounce` — Bouncing icon animation (8px lift on hover)
+- `.btn-press-feedback` — Press feedback with scale (0.95) and inset shadow
+- `.tooltip-pop` — Pop-in animation with cubic-bezier easing
+- `.ripple` — Material Design ripple effect on click (300px spread)
+
+**Modern UI Elements:**
+- `.card-glass` — Glassmorphism with 12px backdrop blur, refined border
+- `.btn-neumorphic` — Subtle 3D neumorphic effect with dual shadow
+- `.modal-modern` — Gradient modal background with refined border
+- `.card-border-animate` — Animated rotating gradient border (3s duration)
+
+**Background Patterns:**
+- `.pattern-diagonal` — Subtle 45° diagonal lines (35px spacing, 2% opacity)
+- `.duotone` — Color overlay for magazine-style effect (multiply blend)
+
+**State & Feedback Indicators:**
+- `.state-success` / `.state-error` / `.state-warning` — Colored left border with background tint
+- `.loading-pulse` — Pulse animation (1.5s, 0.5-1 opacity)
+- `.progress-bar` — Animated gradient progress (red→amber) with smooth width transition
+- `.progress-shimmer` — Shimmer animation on progress bar
+
+**Navigation Visual Cues:**
+- `.breadcrumb-item` — Navigation breadcrumbs with arrows (→) between items
+- `.breadcrumb-item.active` — Bold white highlight for current breadcrumb
+- `.keyboard-focused` — Keyboard navigation indicator (red left border)
+
+**Responsive Typography:**
+- `.hero-title` — Fluid heading: clamp(2rem, 8vw + 1rem, 5rem)
+- `.hero-subtitle` — Fluid subtitle: clamp(1rem, 4vw + 0.5rem, 2rem)
+- `.section-headline` — Fluid section: clamp(1.5rem, 5vw + 0.5rem, 3rem)
+
+**New Tailwind Animations:**
+- `gradientShift` — 6s background position shift for gradient text
+- `bounce` — Icon bounce (8px amplitude, 600ms)
+- `tooltipPop` — Pop-in with scale (0.8 → 1)
+- `rippleEffect` — Ripple spread (0 → 300px diameter)
+- `borderShift` — Rotating hue animation (0 → 360°)
+- `loadingPulse` — Opacity pulse (0.5 → 1)
+
+**High Contrast & Accessibility:**
+- `@media (prefers-contrast: more)` — Thicker borders, enhanced shadows
+- `:focus-visible` — 3px red outline with 4px offset
+- High contrast fonts (500+ weight boost)
+
+---
+
+### Documentation Links
+
+**Core Beauty Enhancements:**
+- **BEAUTIFICATION-ENHANCEMENTS.md** — 10 core improvements (animations, typography, depth, buttons, accessibility, responsive)
+- **BEAUTIFICATION-IMPLEMENTATION-GUIDE.md** — 100+ code examples
+- **CSS-CLASSES-REFERENCE.md** — Quick lookup for 50+ CSS classes
+
+**Advanced Enhancements:**
+- **ADVANCED-STYLISTIC-ENHANCEMENTS.md** — 8 advanced features (typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators)
+
+**See also:** `docs/brand/` for brand redesign strategy, image assets, and visual identity
 
 BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 
