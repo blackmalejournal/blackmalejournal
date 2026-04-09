@@ -516,7 +516,7 @@ These shadow and animation classes are available via extended Tailwind config:
 
 **Animations not working?**
 - Check if `prefers-reduced-motion` is enabled in OS settings
-- Ensure Framer Motion is installed: `pnpm add framer-motion`
+- Run `npm install` to ensure project dependencies are installed
 
 **Focus rings not visible?**
 - Check browser DevTools: Focus rings appear with `:focus-visible`
