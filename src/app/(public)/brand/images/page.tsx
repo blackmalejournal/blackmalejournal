@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, Download, Copy, Check } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { LOGOS, SOCIAL, TEXTURES } from '@/lib/images';
 import { PLACEHOLDERS } from '@/lib/placeholders';
 
