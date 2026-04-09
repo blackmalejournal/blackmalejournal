@@ -1,3 +1,11 @@
+---
+title: Advanced Stylistic & Functional Enhancements Guide
+authority: reference
+status: active
+audience: [engineers, designers]
+last-updated: 2026-04-09
+---
+
 # Advanced Stylistic & Functional Enhancements Guide
 
 This document covers advanced features to further elevate the Black Male Journal's visual appeal and user experience, building on the 10 core beautification enhancements.

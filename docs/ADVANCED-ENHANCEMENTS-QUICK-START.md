@@ -1,3 +1,11 @@
+---
+title: Advanced Stylistic Enhancements — Quick Start Guide
+authority: reference
+status: active
+audience: [engineers, designers]
+last-updated: 2026-04-09
+---
+
 # Advanced Stylistic Enhancements — Quick Start Guide
 
 **Location:** CSS features added to `src/styles/globals.css` (lines 1153-1499, 347 lines)  

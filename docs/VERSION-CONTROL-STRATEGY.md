@@ -2,6 +2,7 @@
 title: Version Control & Git Strategy
 status: canonical
 audience: [developers, devops]
+last-verified: 2026-04-09
 ---
 
 # Version Control & Git Strategy Guide

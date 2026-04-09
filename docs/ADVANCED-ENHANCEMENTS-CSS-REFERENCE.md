@@ -1,3 +1,11 @@
+---
+title: Advanced Enhancements — Visual & CSS Reference Card
+authority: reference
+status: active
+audience: [engineers, designers]
+last-updated: 2026-04-08
+---
+
 # Advanced Enhancements — Visual & CSS Reference Card
 
 Quick reference for all advanced CSS classes and their properties.

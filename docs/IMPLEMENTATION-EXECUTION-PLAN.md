@@ -1,3 +1,11 @@
+---
+title: Detailed Deployment Execution Plan for BMJ Website Updates
+authority: reference
+status: active
+audience: [devops, engineers]
+last-updated: 2026-04-09
+---
+
 # Detailed Deployment Execution Plan for BMJ Website Updates
 
 ## Executive Overview

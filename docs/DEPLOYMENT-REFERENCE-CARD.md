@@ -2,6 +2,7 @@
 title: Deployment Reference Card
 status: canonical
 audience: [everyone]
+last-verified: 2026-04-09
 ---
 
 # DEPLOYMENT REFERENCE CARD

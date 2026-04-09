@@ -1,3 +1,11 @@
+---
+title: CSS Classes Reference - Quick Lookup
+authority: reference
+status: active
+audience: [engineers]
+last-updated: 2026-04-09
+---
+
 # CSS Classes Reference - Quick Lookup
 
 ## Animation & Transition Classes

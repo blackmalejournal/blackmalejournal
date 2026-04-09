@@ -2,6 +2,7 @@
 title: Deployment Quick Checklist
 status: canonical
 audience: [devops, deployment-team]
+last-verified: 2026-04-09
 ---
 
 # Deployment Quick Reference Checklist

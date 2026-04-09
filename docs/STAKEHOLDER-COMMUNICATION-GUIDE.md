@@ -2,6 +2,7 @@
 title: Stakeholder Communication Guide
 status: canonical
 audience: [project-managers, leadership]
+last-verified: 2026-04-09
 ---
 
 # Stakeholder Communication & Rollout Strategy

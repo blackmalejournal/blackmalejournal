@@ -1,8 +1,12 @@
-# BMJ Image Asset Organization
+---
+title: BMJ Image Asset Organization
+authority: canonical
+status: active
+audience: [designers, engineers]
+last-updated: 2026-04-08
+---
 
-> **Last Updated:** 2026-04-08  
-> **Status:** Canonical  
-> **Authority:** This document defines the organization, naming conventions, and usage patterns for all image assets in the Black Male Journal project.
+# BMJ Image Asset Organization
 
 ---
 

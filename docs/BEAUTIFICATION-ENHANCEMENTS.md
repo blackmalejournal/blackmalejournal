@@ -1,3 +1,11 @@
+---
+title: BMJ Website Beautification Enhancements
+authority: reference
+status: active
+audience: [engineers, designers]
+last-updated: 2026-04-09
+---
+
 # BMJ Website Beautification Enhancements
 
 ## Overview
