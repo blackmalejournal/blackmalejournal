@@ -19,7 +19,7 @@ npx tsc --noEmit     # TypeScript check
 ## Brand System
 
 Tagline: "Speak the Truth. Navigate the Consequences."
-Logo: Journal/book icon with star + pen nib (see public/logos/ — curated to 5 files: favicon-red.svg, primary-color.png/svg, primary-light.png, submark-color.svg)
+Logo: Journal/book icon with star + pen nib (see `public/logos/` — primary, submark, monogram, b-mark, wordmark variants). Full inventory: `docs/brand/IMAGE-ASSET-ORGANIZATION.md`. Use `src/lib/images.ts` for logo paths.
 Aesthetic: Militant print-driven editorial — revolutionary newspapers, political posters.
 Full brand spec (colors, fonts, prohibited styles): `.claude/rules/brand.md`
 Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all colors.
@@ -63,12 +63,15 @@ All articles and content are categorized under exactly one lens:
 - `src/lib/storage-assets.ts` — Supabase Storage asset URL helpers
 - `src/lib/placeholders.ts` — Centralized placeholder image paths (PLACEHOLDERS constant)
 
-## Placeholder Images
-- All content-type placeholders live in `public/placeholders/{type}.svg`
-- Import `PLACEHOLDERS` from `@/lib/placeholders` — never hardcode placeholder paths
-- Available types: article, briefing, course, handbook, dispatch, download, cover (generic)
-- All SVGs follow BMJ brand identity (brown background, red accents, brand mark)
+## Image Assets
+- **Logo assets:** `public/logos/` — use `LOGOS` from `@/lib/images` for type-safe paths
+- **Placeholders:** `public/placeholders/{type}.svg` — use `PLACEHOLDERS` from `@/lib/placeholders`
+- **Textures:** `public/textures/` — use `TEXTURES` from `@/lib/images`
+- **Full documentation:** `docs/brand/IMAGE-ASSET-ORGANIZATION.md` — complete inventory, naming conventions, optimization standards
+- **Image gallery:** `/brand/images` route — visual reference of all assets
+- Available placeholder types: article, briefing, course, handbook, dispatch, download, cover (generic)
 - When a content card has no `cover_image`, pass `PLACEHOLDERS.{type}` to the `<Image>` src
+- Use `IMAGE_SIZES` from `@/lib/images` for responsive image sizing presets
 
 ## Code Style
 - Use TypeScript strict mode

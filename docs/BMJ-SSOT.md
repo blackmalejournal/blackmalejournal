@@ -171,6 +171,8 @@ Every lens-classified piece uses **exactly one** lens. **UI** accents come from 
 
 **Files:** `public/logos/*` (naming `{type}-{variant}.{ext}`), `public/favicon.svg`, `public/og-image.svg`. **Placeholders:** `public/placeholders/{article|briefing|course|handbook|dispatch|download|cover}.svg` via `PLACEHOLDERS` in `src/lib/placeholders.ts`.
 
+> **Extended Documentation:** See [`docs/brand/IMAGE-ASSET-ORGANIZATION.md`](brand/IMAGE-ASSET-ORGANIZATION.md) for complete asset inventory, naming conventions, and optimization standards. Use `src/lib/images.ts` for centralized logo paths and image utilities.
+
 ---
 
 ## 8. Non-negotiable UI / imagery rules (digest)

@@ -1,5 +1,7 @@
 // src/app/(public)/brand/page.tsx
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Image as ImageIcon, FileText, Palette, Type } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Brand Identity System",
@@ -54,9 +56,9 @@ function ColorSwatch({ name, hex, usage, large = false }: { name: string; hex: s
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="border-t border-bmj-tan/20 py-16">
+    <section id={id} className="border-t border-bmj-tan/20 py-16 scroll-mt-24">
       <h2 className="section-title mb-8">{title}</h2>
       {children}
     </section>
@@ -78,6 +80,50 @@ export default function BrandPage() {
         <p className="mt-8 font-label text-sm uppercase tracking-label-lg text-bmj-tan">
           Speak the Truth. Navigate the Consequences.
         </p>
+
+        {/* Quick Links */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Link 
+            href="/brand/images" 
+            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-red/50 hover:bg-bmj-black/50"
+          >
+            <ImageIcon className="h-8 w-8 text-bmj-red" />
+            <div>
+              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-red">Image Assets</p>
+              <p className="text-xs text-bmj-cream/60">Logos, placeholders, textures</p>
+            </div>
+          </Link>
+          <Link 
+            href="#color-system" 
+            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-amber/50 hover:bg-bmj-black/50"
+          >
+            <Palette className="h-8 w-8 text-bmj-amber" />
+            <div>
+              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-amber">Color System</p>
+              <p className="text-xs text-bmj-cream/60">Palettes and usage</p>
+            </div>
+          </Link>
+          <Link 
+            href="#typography-system" 
+            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-tan/50 hover:bg-bmj-black/50"
+          >
+            <Type className="h-8 w-8 text-bmj-tan" />
+            <div>
+              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-tan">Typography</p>
+              <p className="text-xs text-bmj-cream/60">Fonts and type scale</p>
+            </div>
+          </Link>
+          <Link 
+            href="#implementation-reference" 
+            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-olive/50 hover:bg-bmj-black/50"
+          >
+            <FileText className="h-8 w-8 text-bmj-olive" />
+            <div>
+              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-olive">Implementation</p>
+              <p className="text-xs text-bmj-cream/60">CSS variables and code</p>
+            </div>
+          </Link>
+        </div>
       </header>
 
       {/* Brand Attributes */}
@@ -158,7 +204,7 @@ export default function BrandPage() {
       </Section>
 
       {/* Color System */}
-      <Section title="Color System">
+      <Section id="color-system" title="Color System">
         {/* Core Palette */}
         <div className="mb-12">
           <h3 className="mb-6 font-label text-sm uppercase tracking-label-lg text-bmj-tan">Core Palette</h3>
@@ -211,7 +257,7 @@ export default function BrandPage() {
       </Section>
 
       {/* Typography */}
-      <Section title="Typography System">
+      <Section id="typography-system" title="Typography System">
         {/* Font Families */}
         <div className="mb-12 grid gap-8 lg:grid-cols-2">
           <div className="surface-panel p-8">
@@ -523,7 +569,7 @@ export default function BrandPage() {
       </Section>
 
       {/* Implementation */}
-      <Section title="Implementation Reference">
+      <Section id="implementation-reference" title="Implementation Reference">
         <div className="surface-panel-strong p-8">
           <h3 className="mb-6 font-label text-sm uppercase tracking-label-lg text-bmj-tan">CSS Custom Properties</h3>
           <pre className="overflow-x-auto rounded bg-bmj-black p-6 font-mono text-sm text-bmj-cream/90">

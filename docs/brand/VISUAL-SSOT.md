@@ -115,9 +115,11 @@ Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click 
 | Document | Purpose |
 |----------|---------|
 | [BMJ-BRAND-REDESIGN-STRATEGY.md](BMJ-BRAND-REDESIGN-STRATEGY.md) | Comprehensive brand redesign strategy with logo system, typography, color rationale, and implementation roadmap |
+| [IMAGE-ASSET-ORGANIZATION.md](IMAGE-ASSET-ORGANIZATION.md) | Complete image asset inventory, naming conventions, optimization standards, and usage guidelines |
 | [art-direction-spec.md](art-direction-spec.md) | Visual tone and art direction principles |
 | [invariants.md](invariants.md) | Design rules and constraints |
 | `/brand` route in app | Interactive brand showcase page |
+| `src/lib/images.ts` | Centralized image utilities, logo paths, and sizing presets |
 
 ---
 
@@ -125,5 +127,5 @@ Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click 
 
 | Date | Note |
 |------|------|
-| 2026-04-08 | Added comprehensive brand redesign strategy; new logo variants (monogram, B mark, wordmarks); interactive brand showcase page at `/brand` |
+| 2026-04-08 | Added comprehensive brand redesign strategy; new logo variants (monogram, B mark, wordmarks); interactive brand showcase page at `/brand`; image asset organization documentation; centralized image utilities (`src/lib/images.ts`) |
 | 2026-03-31 | Initial VISUAL-SSOT index + visual-ssot.html gallery; I-1 authority table. |

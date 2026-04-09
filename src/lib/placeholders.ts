@@ -3,6 +3,9 @@
  * All SVGs live in public/placeholders/ and follow BMJ brand identity.
  *
  * Naming convention: /placeholders/{content-type}.svg
+ * 
+ * @see docs/brand/IMAGE-ASSET-ORGANIZATION.md for full asset documentation
+ * @see src/lib/images.ts for logo assets and image utilities
  */
 
 export const PLACEHOLDERS = {
@@ -23,3 +26,14 @@ export const PLACEHOLDERS = {
 } as const;
 
 export type PlaceholderType = keyof typeof PLACEHOLDERS;
+
+/**
+ * Get placeholder image for a content type.
+ * Returns the generic cover if type is not found.
+ * 
+ * @param type - Content type key
+ * @returns Placeholder image path
+ */
+export function getPlaceholder(type: string): string {
+  return PLACEHOLDERS[type as PlaceholderType] ?? PLACEHOLDERS.cover;
+}
