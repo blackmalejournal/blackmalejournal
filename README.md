@@ -80,6 +80,10 @@ public/
 |----------|----------|---------|
 | **[docs/BMJ-SSOT.md](docs/BMJ-SSOT.md)** | **Everyone** | **Single comprehensive SSOT** — product, program, roadmap, where truth lives (**share this file**) |
 | [docs/INDEX.md](docs/INDEX.md) | Everyone | Map of `docs/`, lanes, and governance entry points |
+| [docs/BEAUTIFICATION-SUMMARY.md](docs/BEAUTIFICATION-SUMMARY.md) | Everyone | Overview of 10 beautification enhancements (implementation summary) |
+| [docs/BEAUTIFICATION-ENHANCEMENTS.md](docs/BEAUTIFICATION-ENHANCEMENTS.md) | Designers / Developers | Complete technical guide: animations, typography, depth, buttons, accessibility, responsive design |
+| [docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md](docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md) | Developers | Code examples for every CSS class and animation (100+ patterns) |
+| [docs/CSS-CLASSES-REFERENCE.md](docs/CSS-CLASSES-REFERENCE.md) | Developers | Quick lookup for all 50+ CSS classes, animations, and responsive utilities |
 | [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Code style, PR process, conventions |
@@ -87,6 +91,8 @@ public/
 | [docs/ops/chairman-operator-manual.md](docs/ops/chairman-operator-manual.md) | Admin/Operator | Daily operations, SOPs |
 | [docs/ops/env-vars.md](docs/ops/env-vars.md) | DevOps | Environment variable reference |
 | [docs/brand/invariants.md](docs/brand/invariants.md) | Designers | Visual identity rules |
+| [docs/brand/IMAGE-ASSET-ORGANIZATION.md](docs/brand/IMAGE-ASSET-ORGANIZATION.md) | Designers | Image asset inventory and optimization standards |
+| [docs/brand/BMJ-BRAND-REDESIGN-STRATEGY.md](docs/brand/BMJ-BRAND-REDESIGN-STRATEGY.md) | Everyone | Comprehensive brand identity system |
 | [docs/standards/README.md](docs/standards/README.md) | Platform / multi-repo leads | Optional **Repo Excellence Program** reference (templates, rollout, governance) — not required for routine BMJ app work |
 | [CLAUDE.md](CLAUDE.md) | AI assistants | Project instructions for Claude Code |
 | [tests/README.md](tests/README.md) | Developers | Test folder layout and commands |

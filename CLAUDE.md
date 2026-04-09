@@ -132,15 +132,54 @@ Example: "feat: add Weekend Briefing archive page with lens filter"
 - Brand mark (star + pen nib) is used as section dividers via `<StarDivider />` and `<BrandMark />`
 - All images should have grain/halftone treatment applied via CSS
 
-## Design System
+## Visual & Animation System
 
-BMJ currently renders from its local brand tokens:
+### Beautification Enhancements (10 comprehensive improvements)
+1. **Enhanced Animations** — Framer Motion presets, smooth transitions (150-500ms), hover effects
+2. **Typography** — Fluid responsive sizing with clamp(), semantic classes (`.page-title`, `.card-title`, etc.)
+3. **Depth Effects** — Multi-layer shadows (elevation scale), glow effects, glass backdrop effects
+4. **Button Consistency** — 5 button variants (primary, secondary, ghost, amber, outline) with unified behavior
+5. **Navigation** — Underline animations, filter tabs, filter chips with smooth transitions
+6. **Accessibility** — `:focus-visible` red outline, screen reader text (`.sr-only`), `prefers-reduced-motion` support
+7. **Responsive Design** — Mobile-first with 48px+ touch targets, 3 breakpoints (mobile/tablet/desktop)
+8. **Image Optimization** — Halftone filters, duotone effects, responsive grids, lazy loading
+9. **Depth & Dimension** — Z-index scale, card lift effects, shadow layering, border glow
+10. **Responsive Typography** — Heading sizes adapt via clamp() from mobile to desktop
 
-- **Runtime source of truth:** `src/styles/brand.css`
-- **Imported by:** `src/styles/globals.css`
-- **Mirrored in Tailwind:** `tailwind.config.ts`
-- **Brand guardrail:** `docs/brand/invariants.md`
-- **Visual SSOT index (logos, placeholders, lenses, tagline mirror, gallery):** `docs/brand/VISUAL-SSOT.md` and `docs/brand/visual-ssot.html`
+### Animation Utilities
+- `src/lib/animations.ts` — Framer Motion presets and Tailwind animation classes
+- Classes: `.transition-smooth`, `.transition-micro`, `.transition-dramatic`, `.hover-lift`, `.hover-scale`
+- Framer Motion variants: `pageTransition`, `fadeInUp`, `slideInRight`, `staggerContainer`
+
+### Typography System
+- Semantic classes: `.page-title`, `.section-title`, `.card-title`, `.editorial-kicker`, `.lead-text`, `.body-text`, `.quote-text`
+- All headings use `clamp()` for fluid responsive sizing
+- Letter-spacing varies per hierarchy level
+- Text shadows on headings for visual depth
+
+### Shadow & Depth
+- Shadow tokens: `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`, `--shadow-card`, `--shadow-glow-red`, `--shadow-glow-amber`
+- Card variants: `.card-media` (3px top), `.card-stripe` (4px left), `.card-feature` (1px uniform), `.card-offer` (gradient)
+- Surfaces: `.surface-panel`, `.surface-panel-strong`, `.surface-elevated`, `.surface-glass`
+
+### Button System
+- Variants: `.btn-primary` (red), `.btn-secondary` (ghost red), `.btn-ghost` (outline), `.btn-amber` (premium), `.btn-outline`
+- Sizes: `.btn-xs`, `.btn-sm`, `.btn-lg`, `.btn-xl`
+- Icon buttons: `.btn-icon`, `.btn-icon-square`
+- All buttons have unified hover (lift + shadow increase) and active (scale 0.98) states
+
+### Responsive & Accessibility
+- Breakpoints: Mobile (<641px), Tablet (641-1024px), Desktop (>1025px)
+- Touch-friendly: 48px minimum on mobile via `@media (hover: none) and (pointer: coarse)`
+- Focus rings: Red `:focus-visible` outline with 2px offset
+- Motion: Automatically disabled for `prefers-reduced-motion: reduce`
+- Screen reader: `.sr-only` for hidden text
+- High contrast mode: 3px outline, thicker borders
+
+### Documentation
+- **BEAUTIFICATION-ENHANCEMENTS.md** — Complete guide to all 10 enhancements with implementation details
+- **BEAUTIFICATION-IMPLEMENTATION-GUIDE.md** — Code examples for every CSS class and animation
+- **See**: `docs/brand/` for brand redesign strategy, image assets, and visual identity
 
 BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 

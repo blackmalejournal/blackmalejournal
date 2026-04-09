@@ -577,7 +577,7 @@
     width: 100%;
   }
 
-  /* ─── Filter Tabs ──────────────────────────────────────────── */
+  /* ──��� Filter Tabs ──────────────────────────────────────────── */
 
   .filter-tab {
     @apply pb-3 font-label text-sm uppercase tracking-widest;
@@ -794,4 +794,359 @@
 /* Eliminate 300ms double-tap delay on mobile */
 button, a, [role="button"] {
   touch-action: manipulation;
+}
+
+/* ─── Enhanced Accessibility ──────────────────────────────── */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  :focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+
+  .btn-primary {
+    border-width: 2px;
+  }
+
+  .card-media,
+  .card-stripe,
+  .card-feature {
+    border-width: 2px;
+  }
+
+  body {
+    text-shadow: none;
+  }
+
+  h1, h2, h3 {
+    text-shadow: none;
+  }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ─── Touch Device Optimizations ──────────────────────────── */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Mobile: Increase touch target sizes */
+  button,
+  a[role="button"],
+  .btn-icon,
+  .filter-chip,
+  .nav-link {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Reduce hover effects on touch devices */
+  .card-media:hover {
+    transform: none;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    transform: none;
+  }
+
+  /* Add active state feedback instead */
+  .card-media:active {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  /* Remove lift animations but keep color changes */
+  .hover-lift,
+  .hover-lift-sm,
+  .hover-scale {
+    transition: color var(--transition-normal), background-color var(--transition-normal), border-color var(--transition-normal);
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+
+  .hover-lift-sm:hover {
+    transform: none;
+  }
+
+  .hover-scale:hover {
+    transform: none;
+  }
+}
+
+/* ─── Responsive Typography ──────────────────────────────── */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.1;
+    letter-spacing: var(--tracking-display);
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: var(--tracking-display);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-display);
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    line-height: 1.25;
+  }
+
+  .page-title {
+    @apply text-3xl;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .section-title {
+    @apply text-2xl;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .subsection-title {
+    @apply text-lg;
+  }
+
+  .card-title {
+    @apply text-base;
+  }
+
+  .editorial-deck {
+    @apply text-sm leading-7;
+  }
+
+  .lead-text {
+    @apply text-base;
+  }
+
+  .body-text {
+    @apply text-sm;
+  }
+
+  .small-text {
+    @apply text-xs;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .page-title {
+    @apply text-4xl;
+  }
+
+  .section-title {
+    @apply text-3xl;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  body {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  .page-title {
+    @apply text-5xl sm:text-6xl lg:text-7xl;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl;
+  }
+}
+
+/* ─── Responsive Images ───────────────────────────────────── */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+picture {
+  display: block;
+}
+
+/* Image in grid contexts */
+.image-grid {
+  @apply grid gap-4 sm:gap-6;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Responsive Spacing ──────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .page-shell {
+    @apply px-3 sm:px-4;
+  }
+
+  /* Full-width cards on mobile */
+  .card-media,
+  .card-stripe,
+  .card-feature {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  /* Larger gaps on mobile */
+  .gap-responsive {
+    @apply gap-3;
+  }
+
+  .grid-responsive-2,
+  .grid-responsive-3 {
+    @apply grid-cols-1;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .gap-responsive {
+    @apply gap-4;
+  }
+
+  .grid-responsive-3 {
+    @apply grid-cols-2;
+  }
+
+  .grid-responsive-2 {
+    @apply grid-cols-2;
+  }
+}
+
+@media (min-width: 1025px) {
+  .gap-responsive {
+    @apply gap-6;
+  }
+
+  .grid-responsive-2 {
+    @apply grid-cols-2;
+  }
+
+  .grid-responsive-3 {
+    @apply grid-cols-3;
+  }
+}
+
+/* ─── Container Queries ──────────────────────────────────── */
+
+@supports (container-type: inline-size) {
+  .card-container {
+    container-type: inline-size;
+  }
+
+  @container (max-width: 350px) {
+    .card-container .card-title {
+      @apply text-sm;
+    }
+
+    .card-container .small-text {
+      @apply text-xs;
+    }
+  }
+
+  @container (min-width: 351px) and (max-width: 600px) {
+    .card-container .card-title {
+      @apply text-base;
+    }
+  }
+
+  @container (min-width: 601px) {
+    .card-container .card-title {
+      @apply text-lg;
+    }
+  }
+}
+
+/* ─── Orientation Support ────────────────────────────────── */
+
+@media (orientation: landscape) and (max-height: 500px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .page-shell {
+    @apply py-2;
+  }
+}
+
+@media (orientation: portrait) {
+  .wide-card-grid {
+    @apply grid-cols-1;
+  }
 }
