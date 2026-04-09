@@ -47,6 +47,7 @@ Cross-org / leadership reference for repository standardization (templates, poli
 - [ADVANCED-ENHANCEMENTS-QUICK-START.md](ADVANCED-ENHANCEMENTS-QUICK-START.md) - quick-reference guide with copy-paste CSS classes and component examples.
 
 ### Deployment & Operations
+- [IMPLEMENTATION-EXECUTION-PLAN.md](IMPLEMENTATION-EXECUTION-PLAN.md) - **MASTER DEPLOYMENT GUIDE** with 9 comprehensive phases: development setup, testing strategy, code review, staging validation, pre-production preparation, production deployment, monitoring/incident response, rollback procedures, and post-deployment stabilization. Includes detailed step-by-step procedures, checklists, communication templates, and success criteria.
 - [DEPLOYMENT-AND-MONITORING-PLAN.md](DEPLOYMENT-AND-MONITORING-PLAN.md) - comprehensive 7-phase deployment plan with monitoring, rollback, and incident response strategies.
 - [DEPLOYMENT-QUICK-CHECKLIST.md](DEPLOYMENT-QUICK-CHECKLIST.md) - printable checklist for deployment day (pre-deployment, health checks, monitoring).
 - [VERSION-CONTROL-STRATEGY.md](VERSION-CONTROL-STRATEGY.md) - git workflow, branching strategy, commit conventions, code review process, rollback procedures.

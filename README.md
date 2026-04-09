@@ -85,6 +85,12 @@ public/
 | [docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md](docs/BEAUTIFICATION-IMPLEMENTATION-GUIDE.md) | Developers | Code examples for every CSS class and animation (100+ patterns) |
 | [docs/CSS-CLASSES-REFERENCE.md](docs/CSS-CLASSES-REFERENCE.md) | Developers | Quick lookup for all 50+ CSS classes, animations, and responsive utilities |
 | [docs/ADVANCED-STYLISTIC-ENHANCEMENTS.md](docs/ADVANCED-STYLISTIC-ENHANCEMENTS.md) | Designers / Developers | Advanced features: typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators |
+| **[docs/IMPLEMENTATION-EXECUTION-PLAN.md](docs/IMPLEMENTATION-EXECUTION-PLAN.md)** | **Team Leads** | **MASTER DEPLOYMENT GUIDE** — 9 comprehensive phases: development setup, testing strategy, code review, staging, pre-deployment prep, production deployment, monitoring, rollback, stabilization. Includes step-by-step procedures, checklists, communication templates. **START HERE for deployment.** |
+| [docs/DEPLOYMENT-READY-SUMMARY.md](docs/DEPLOYMENT-READY-SUMMARY.md) | Everyone | Quick overview of what's ready to deploy and next steps |
+| [docs/DEPLOYMENT-AND-MONITORING-PLAN.md](docs/DEPLOYMENT-AND-MONITORING-PLAN.md) | DevOps / Operators | Comprehensive 7-phase deployment plan with monitoring, alerts, incident response |
+| [docs/DEPLOYMENT-QUICK-CHECKLIST.md](docs/DEPLOYMENT-QUICK-CHECKLIST.md) | Team | Printable checklist for deployment day (pre-deployment, health checks, monitoring) |
+| [docs/VERSION-CONTROL-STRATEGY.md](docs/VERSION-CONTROL-STRATEGY.md) | Developers | Git workflow, branching strategy, commit conventions, code review, rollback |
+| [docs/STAKEHOLDER-COMMUNICATION-GUIDE.md](docs/STAKEHOLDER-COMMUNICATION-GUIDE.md) | Product / Marketing | Communication templates for all deployment phases |
 | [docs/DEVELOPER.md](docs/DEVELOPER.md) | Developers | Local setup, testing, deployment |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Developers | System design, data flow, schema, **repo root layout** |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Code style, PR process, conventions |
