@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById, getLatestArticles } from '@/lib/supabase/queries';
 import { TierBadge } from '@/components/portal/TierBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
@@ -45,10 +45,7 @@ interface PortalPageProps {
 export default async function PortalPage({ searchParams }: PortalPageProps) {
   const params = await searchParams;
   const nextHref = normalizeInternalPath(params.next, '/portal');
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) redirect(PATHS.LOGIN);
 

@@ -46,18 +46,53 @@ export type Article = {
   created_at: string;
 };
 
+/** Archive/card queries — no `body` (smaller payloads). */
+export type ArticleListItem = Pick<
+  Article,
+  | 'id'
+  | 'title'
+  | 'slug'
+  | 'lens'
+  | 'tags'
+  | 'excerpt'
+  | 'featured'
+  | 'access_tier'
+  | 'cover_image'
+  | 'published_at'
+  | 'author'
+>;
+
 export type Briefing = {
   id: string;
   issue_number: number;
   title: string;
   slug: string;
   sections: BriefingSection[];
+  /** Mirrors first section title; generated column — see migrations (omitted on INSERT). */
+  lead_kicker?: string | null;
   access_tier: AccessTier;
   status: ContentStatus;
   cover_image: string | null;
   published_at: string;
   created_at: string;
 };
+
+/** Archive / homepage cards — no `sections` jsonb. */
+export type BriefingListItem = Pick<
+  Briefing,
+  | 'id'
+  | 'issue_number'
+  | 'title'
+  | 'slug'
+  | 'access_tier'
+  | 'status'
+  | 'cover_image'
+  | 'published_at'
+  | 'created_at'
+> & { lead_kicker: string | null };
+
+/** Sitemap / URL enumeration — no sections or heavy fields. */
+export type BriefingSitemapRow = Pick<Briefing, 'slug' | 'published_at'>;
 
 export type Member = {
   id: string;
@@ -108,6 +143,12 @@ export type Dispatch = {
   created_at: string;
 };
 
+/** Blog listing — no `body`. */
+export type DispatchListItem = Pick<
+  Dispatch,
+  'id' | 'title' | 'slug' | 'lens' | 'excerpt' | 'published_at'
+>;
+
 export type Handbook = {
   id: string;
   title: string;
@@ -123,6 +164,8 @@ export type Handbook = {
   published_at: string;
   created_at: string;
 };
+
+export type HandbookSitemapRow = Pick<Handbook, 'slug' | 'published_at'>;
 
 export type Download = {
   id: string;
@@ -246,7 +289,7 @@ export type Database = {
       };
       briefings: {
         Row: Briefing;
-        Insert: Omit<Briefing, 'id' | 'created_at'>;
+        Insert: Omit<Briefing, 'id' | 'created_at' | 'lead_kicker'>;
         Update: Partial<Omit<Briefing, 'id' | 'created_at'>>;
         Relationships: [];
       };

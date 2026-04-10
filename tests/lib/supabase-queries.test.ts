@@ -3,6 +3,7 @@ import {
   mockArticle,
   mockArticleCulture,
   mockBriefing,
+  mockBriefingListItem,
   mockMember,
   mockMemberPremium,
   mockCourse,
@@ -25,10 +26,13 @@ jest.spyOn(console, 'error').mockImplementation(() => {});
 
 import {
   getArticles,
+  getArticlesForListing,
+  getArticleTagFacets,
   getArticleBySlug,
   getFeaturedArticles,
   getLatestArticles,
   getBriefings,
+  getBriefingsForSitemap,
   getBriefingBySlug,
   getLatestBriefing,
   getBriefingByIssue,
@@ -41,8 +45,10 @@ import {
   unsubscribeFromNewsletter,
   submitContactForm,
   getDispatches,
+  getDispatchesForListing,
   getDispatchBySlug,
   getHandbooks,
+  getHandbooksForSitemap,
   getHandbookBySlug,
 } from '@/lib/supabase/queries';
 
@@ -126,6 +132,42 @@ describe('getArticles', () => {
   });
 });
 
+describe('getArticlesForListing', () => {
+  it('returns rows on success', async () => {
+    setData([mockArticle]);
+    const result = await getArticlesForListing();
+    expect(result).toEqual([mockArticle]);
+    expect(mockClient.from).toHaveBeenCalledWith('articles');
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,title,slug,lens,tags,excerpt,featured,access_tier,cover_image,published_at,author',
+    );
+    expectPublicVisibilityApplied();
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getArticlesForListing();
+    expect(result).toEqual([]);
+  });
+});
+
+describe('getArticleTagFacets', () => {
+  it('returns tag rows', async () => {
+    setData([{ tags: ['alpha'] }, { tags: ['beta'] }]);
+    const result = await getArticleTagFacets({ limit: 50 });
+    expect(result).toEqual([{ tags: ['alpha'] }, { tags: ['beta'] }]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith('tags');
+    expect(mockClient._queryChain.range).toHaveBeenCalledWith(0, 49);
+    expectPublicVisibilityApplied();
+  });
+
+  it('applies lens filter', async () => {
+    setData([]);
+    await getArticleTagFacets({ lens: 'culture' });
+    expect(mockClient._queryChain.eq).toHaveBeenCalledWith('lens', 'culture');
+  });
+});
+
 describe('getArticleBySlug', () => {
   it('returns article on success', async () => {
     resetClient({ data: mockArticle });
@@ -149,6 +191,9 @@ describe('getFeaturedArticles', () => {
     setData([mockArticle]);
     const result = await getFeaturedArticles();
     expect(result).toEqual([mockArticle]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,title,slug,lens,tags,excerpt,featured,access_tier,cover_image,published_at,author',
+    );
     expect(mockClient._queryChain.eq).toHaveBeenCalledWith('featured', true);
     expectPublicVisibilityApplied();
   });
@@ -171,6 +216,9 @@ describe('getLatestArticles', () => {
     setData([mockArticle]);
     const result = await getLatestArticles();
     expect(result).toEqual([mockArticle]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,title,slug,lens,tags,excerpt,featured,access_tier,cover_image,published_at,author',
+    );
     expectPublicVisibilityApplied();
   });
 
@@ -185,16 +233,35 @@ describe('getLatestArticles', () => {
 
 describe('getBriefings', () => {
   it('returns briefings on success', async () => {
-    setData([mockBriefing]);
+    setData([mockBriefingListItem]);
     const result = await getBriefings();
-    expect(result).toEqual([mockBriefing]);
+    expect(result).toEqual([mockBriefingListItem]);
     expect(mockClient.from).toHaveBeenCalledWith('briefings');
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,issue_number,slug,title,lead_kicker,access_tier,status,cover_image,published_at,created_at',
+    );
     expectPublicVisibilityApplied();
   });
 
   it('returns empty array on error', async () => {
     setError();
     const result = await getBriefings();
+    expect(result).toEqual([]);
+  });
+});
+
+describe('getBriefingsForSitemap', () => {
+  it('returns slug rows only', async () => {
+    setData([{ slug: 'b-1', published_at: '2026-01-01' }]);
+    const result = await getBriefingsForSitemap({ limit: 10 });
+    expect(result).toEqual([{ slug: 'b-1', published_at: '2026-01-01' }]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith('slug,published_at');
+    expectPublicVisibilityApplied();
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getBriefingsForSitemap();
     expect(result).toEqual([]);
   });
 });
@@ -219,10 +286,13 @@ describe('getBriefingBySlug', () => {
 
 describe('getLatestBriefing', () => {
   it('returns latest briefing', async () => {
-    resetClient({ data: mockBriefing });
-    mockClient._queryChain.single.mockResolvedValue({ data: mockBriefing, error: null });
+    resetClient({ data: mockBriefingListItem });
+    mockClient._queryChain.single.mockResolvedValue({ data: mockBriefingListItem, error: null });
     const result = await getLatestBriefing();
-    expect(result).toEqual(mockBriefing);
+    expect(result).toEqual(mockBriefingListItem);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,issue_number,slug,title,lead_kicker,access_tier,status,cover_image,published_at,created_at',
+    );
     expectPublicVisibilityApplied();
   });
 
@@ -325,6 +395,9 @@ describe('getCourses', () => {
     const result = await getCourses();
     expect(result).toEqual([mockCourse]);
     expect(mockClient.from).toHaveBeenCalledWith('courses');
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,title,slug,description,category,access_tier,published,cover_image,created_at',
+    );
   });
 
   it('returns empty array on error', async () => {
@@ -474,6 +547,24 @@ describe('getDispatches', () => {
   });
 });
 
+describe('getDispatchesForListing', () => {
+  it('returns dispatches without full row assumption', async () => {
+    setData([mockDispatch]);
+    const result = await getDispatchesForListing();
+    expect(result).toEqual([mockDispatch]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith(
+      'id,title,slug,lens,excerpt,published_at',
+    );
+    expectPublicVisibilityApplied();
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getDispatchesForListing();
+    expect(result).toEqual([]);
+  });
+});
+
 describe('getDispatchBySlug', () => {
   it('returns dispatch on success', async () => {
     resetClient({ data: mockDispatch });
@@ -519,6 +610,22 @@ describe('getHandbooks', () => {
     setData([]);
     await getHandbooks();
     expect(mockClient._queryChain.range).toHaveBeenCalledWith(0, 19);
+  });
+});
+
+describe('getHandbooksForSitemap', () => {
+  it('returns slug rows only', async () => {
+    setData([{ slug: 'hb-1', published_at: '2026-02-01' }]);
+    const result = await getHandbooksForSitemap({ limit: 50 });
+    expect(result).toEqual([{ slug: 'hb-1', published_at: '2026-02-01' }]);
+    expect(mockClient._queryChain.select).toHaveBeenCalledWith('slug,published_at');
+    expectPublicVisibilityApplied();
+  });
+
+  it('returns empty array on error', async () => {
+    setError();
+    const result = await getHandbooksForSitemap();
+    expect(result).toEqual([]);
   });
 });
 

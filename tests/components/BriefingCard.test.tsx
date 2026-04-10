@@ -8,6 +8,7 @@ const baseBriefing: Briefing = {
   title: 'Weekend Briefing No. 1',
   slug: 'weekend-briefing-001',
   sections: [{ title: 'First Section', body: 'Body text' }],
+  lead_kicker: 'First Section',
   access_tier: 'free',
   status: 'published',
   cover_image: null,

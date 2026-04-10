@@ -11,7 +11,7 @@ import { StarDivider } from '@/components/ui/StarDivider';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { dispatchPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 
@@ -47,9 +47,10 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
   const dispatch = await getDispatchBySlug(slug);
   if (!dispatch) notFound();
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const bookmarked = user ? await isBookmarked(user.id, 'dispatch', dispatch.id) : false;
+  const user = await getAuthUser();
+  const bookmarked = user
+    ? await isBookmarked(user.id, 'dispatch', dispatch.id)
+    : false;
 
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">

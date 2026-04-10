@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState, useSyncExternalStore, type ElementType } from 'react';
 import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -14,17 +14,38 @@ interface ScrollRevealProps {
   /** Duration in seconds */
   duration?: number;
   /** Render as a different element (default: div) */
-  as?: 'div' | 'section' | 'article' | 'aside';
+  as?: ElementType;
   /** How much of the element must be visible to trigger (0-1) */
   threshold?: number;
 }
 
-const offsets = {
-  up: { y: 40 },
-  left: { x: -40 },
-  right: { x: 40 },
-  none: {},
-} as const;
+const hiddenTransform: Record<NonNullable<ScrollRevealProps['direction']>, string> = {
+  up: 'translate-y-10',
+  left: '-translate-x-10',
+  right: 'translate-x-10',
+  none: '',
+};
+
+function subscribePrefersReducedMotion(onChange: () => void) {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return () => {};
+  }
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', onChange);
+  return () => mq.removeEventListener('change', onChange);
+}
+
+function getPrefersReducedMotionSnapshot() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return false;
+  }
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/** Must match the first client `getPrefersReducedMotionSnapshot()` for hydration. */
+function getPrefersReducedMotionServerSnapshot() {
+  return false;
+}
 
 export function ScrollReveal({
   children,
@@ -32,38 +53,63 @@ export function ScrollReveal({
   direction = 'up',
   delay = 0,
   duration = 0.6,
-  as = 'div',
+  as: Tag = 'div',
   threshold = 0.15,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: threshold });
-  const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLElement | null>(null);
+  const [revealed, setRevealed] = useState(false);
 
-  const MotionTag = motion[as] as typeof motion.div;
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribePrefersReducedMotion,
+    getPrefersReducedMotionSnapshot,
+    getPrefersReducedMotionServerSnapshot,
+  );
 
-  const hidden = { opacity: 0, ...offsets[direction] };
-  const visible = {
-    opacity: 1,
-    ...Object.fromEntries(Object.keys(offsets[direction]).map((k) => [k, 0])),
-  };
-
-  if (prefersReducedMotion) {
-    return (
-      <MotionTag ref={ref} className={className} initial={{ opacity: 1 }} animate={{ opacity: 1 }}>
-        {children}
-      </MotionTag>
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver !== 'function') {
+      queueMicrotask(() => setRevealed(true));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setRevealed(true);
+          io.disconnect();
+        }
+      },
+      { threshold },
     );
-  }
+    io.observe(el);
+    return () => io.disconnect();
+  }, [prefersReducedMotion, threshold]);
+
+  const transitionStyle = {
+    transitionProperty: 'opacity, transform',
+    transitionDuration: `${duration}s`,
+    transitionDelay: `${delay}s`,
+    transitionTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+  } as const;
+
+  const animating = !prefersReducedMotion;
+  const hidden = animating && !revealed;
+  const tf = hiddenTransform[direction];
 
   return (
-    <MotionTag
-      ref={ref}
-      className={className}
-      initial={hidden}
-      animate={isInView ? visible : hidden}
-      transition={{ duration, delay, ease: 'easeOut' }}
+    <Tag
+      ref={ref as never}
+      className={cn(
+        className,
+        animating && 'will-change-[opacity,transform]',
+        hidden
+          ? cn('opacity-0', direction !== 'none' && tf)
+          : 'opacity-100 translate-x-0 translate-y-0',
+      )}
+      style={animating ? transitionStyle : undefined}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

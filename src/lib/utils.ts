@@ -2,7 +2,7 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { getLensTheme } from '@/lib/lens-theme';
-import type { Article, Lens } from '@/lib/supabase/types';
+import type { Lens } from '@/lib/supabase/types';
 
 // Merges Tailwind classes safely — conditional classes without specificity conflicts.
 // Usage: cn('base-class', isActive && 'active-class', className)
@@ -77,11 +77,11 @@ export function getLensEmoji(lens: Lens): string {
   return map[lens];
 }
 
-// Returns a sorted, de-duplicated list of all tags across the given articles.
-export function extractTags(articles: Article[]): string[] {
+// Returns a sorted, de-duplicated list of all tags across the given rows.
+export function extractTags(rows: { tags: string[] }[]): string[] {
   const set = new Set<string>();
-  for (const a of articles) {
-    for (const t of a.tags) set.add(t);
+  for (const row of rows) {
+    for (const t of row.tags) set.add(t);
   }
   return Array.from(set).sort();
 }

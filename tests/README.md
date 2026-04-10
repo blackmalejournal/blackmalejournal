@@ -32,6 +32,22 @@ Full workflow: [docs/DEVELOPER.md](../docs/DEVELOPER.md) — *Testing*.
 
 ## Playwright layout
 
+Unauthenticated specs run in the default `chromium` project. Authenticated specs require env vars — each tier is independent.
+
+| Spec pattern | Project | Env vars required |
+|---|---|---|
+| `tests/e2e/*.spec.ts` | `chromium` | none |
+| `authenticated/admin-*.spec.ts` | `chromium-admin` | `E2E_ADMIN_EMAIL`, `E2E_ADMIN_PASSWORD` |
+| `authenticated/member-*.spec.ts` | `chromium-member` | `E2E_MEMBER_EMAIL`, `E2E_MEMBER_PASSWORD` |
+| `authenticated/basic-*.spec.ts` | `chromium-basic` | `E2E_BASIC_EMAIL`, `E2E_BASIC_PASSWORD` |
+| `authenticated/premium-*.spec.ts` | `chromium-premium` | `E2E_PREMIUM_EMAIL`, `E2E_PREMIUM_PASSWORD` |
+
+**Test accounts:** seed with `supabase/seed-test-users.sql` (local/staging only). See `.env.example` for credential defaults. Run `npm run check:no-test-users` before any production deploy.
+
+---
+
+## Playwright layout (legacy notes)
+
 - **Default project (`chromium`):** all specs except `tests/e2e/authenticated/**` (smoke, guards, public flows).
 - **Authenticated admin:** when `E2E_ADMIN_EMAIL` and `E2E_ADMIN_PASSWORD` are set, Playwright adds `setup-admin` and `chromium-admin`, which runs `admin-article.spec.ts` with `.auth/admin.json`.
 - **Authenticated member:** when `E2E_MEMBER_EMAIL` and `E2E_MEMBER_PASSWORD` are set, Playwright adds `setup-member` and `chromium-member` for `portal.spec.ts` with `.auth/member.json`. Prefer a **different** Supabase user than the admin E2E account when both are enabled.

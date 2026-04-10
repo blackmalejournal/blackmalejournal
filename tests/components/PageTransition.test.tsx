@@ -5,17 +5,6 @@ jest.mock('next/navigation', () => ({
   usePathname: jest.fn(() => '/'),
 }));
 
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: jest.fn(({ children, className }: Record<string, unknown>) => (
-      <div data-testid="page-transition" className={className as string}>
-        {children as React.ReactNode}
-      </div>
-    )),
-  },
-  useReducedMotion: jest.fn(() => false),
-}));
-
 describe('PageTransition', () => {
   it('renders children', () => {
     render(
@@ -26,12 +15,14 @@ describe('PageTransition', () => {
     expect(screen.getByText('Page content')).toBeInTheDocument();
   });
 
-  it('wraps content in motion div', () => {
-    render(
+  it('wraps content in a div with fade-in animation classes', () => {
+    const { container } = render(
       <PageTransition>
         <p>Content</p>
       </PageTransition>,
     );
-    expect(screen.getByTestId('page-transition')).toBeInTheDocument();
+    const wrapper = container.querySelector('.animate-fade-in');
+    expect(wrapper).toBeTruthy();
+    expect(wrapper).toHaveTextContent('Content');
   });
 });

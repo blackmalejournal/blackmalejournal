@@ -22,6 +22,7 @@ const mockBriefing: Briefing = {
     { title: 'Opening', body: 'Welcome to issue 3.' },
     { title: 'Politics', body: 'Political analysis here.' },
   ],
+  lead_kicker: 'Opening',
   access_tier: 'free',
   status: 'published',
   cover_image: 'covers/briefing-003.webp',

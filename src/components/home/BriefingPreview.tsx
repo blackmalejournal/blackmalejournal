@@ -1,10 +1,10 @@
 // src/components/home/BriefingPreview.tsx
 import { BriefingCard } from "@/components/content/BriefingCard";
 import { PageHeader } from "@/components/layout/PageHeader";
-import type { Briefing } from "@/lib/supabase/types";
+import type { BriefingListItem } from "@/lib/supabase/types";
 
 interface BriefingPreviewProps {
-  briefing: Briefing | null;
+  briefing: BriefingListItem | null;
 }
 
 export function BriefingPreview({ briefing }: BriefingPreviewProps) {

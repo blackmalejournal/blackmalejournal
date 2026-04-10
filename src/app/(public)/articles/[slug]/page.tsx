@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { getArticleBySlug, getArticles } from '@/lib/supabase/queries';
-import { checkContentAccess } from '@/lib/supabase/access';
+import { getArticleBySlug, getArticlesForListing } from '@/lib/supabase/queries';
+import { checkContentAccess, getAuthUser } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -15,7 +15,6 @@ import { PaywallGate } from '@/components/content/PaywallGate';
 import PullQuoteSidebar from '@/components/content/PullQuoteSidebar';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
-import { createClient } from '@/lib/supabase/server';
 import { articlePath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
@@ -54,14 +53,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   const { hasAccess, user } = await checkContentAccess(article.access_tier);
 
-  // Get authenticated user for bookmark status (checkContentAccess returns null user for free content)
-  const supabase = await createClient();
-  const { data: { user: authUser } } = await supabase.auth.getUser();
-  const bookmarked = authUser ? await isBookmarked(authUser.id, 'article', article.id) : false;
+  const authUser = await getAuthUser();
+  const bookmarked = authUser
+    ? await isBookmarked(authUser.id, 'article', article.id)
+    : false;
 
   const readingTime = calculateReadingTime(article.body);
 
-  const related = await getArticles({ lens: article.lens, limit: 4 });
+  const related = await getArticlesForListing({ lens: article.lens, limit: 4 });
   const relatedFiltered = related
     .filter((a) => a.slug !== article.slug)
     .slice(0, 3);

@@ -10,11 +10,11 @@ import {
   academyLessonPath,
 } from '@/lib/paths';
 import {
-  getArticles,
-  getBriefings,
+  getArticlesForListing,
+  getBriefingsForSitemap,
   getCourses,
-  getDispatches,
-  getHandbooks,
+  getDispatchesForListing,
+  getHandbooksForSitemap,
   getLessonsByCourse,
 } from '@/lib/supabase/queries';
 
@@ -38,11 +38,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const [articles, briefings, courses, dispatches, handbooks] = await Promise.all([
-    getArticles({ limit: 500 }),
-    getBriefings({ limit: 200 }),
+    getArticlesForListing({ limit: 500 }),
+    getBriefingsForSitemap({ limit: 200 }),
     getCourses({ published: true }),
-    getDispatches({ limit: 500 }),
-    getHandbooks({ limit: 200 }),
+    getDispatchesForListing({ limit: 500 }),
+    getHandbooksForSitemap({ limit: 200 }),
   ]);
 
   // Fetch lessons for each published course

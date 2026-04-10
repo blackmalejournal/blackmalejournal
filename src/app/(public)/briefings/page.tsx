@@ -37,11 +37,12 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
   const parsedPage = parseInt(rawPage ?? '1', 10);
   const page = Math.max(1, isNaN(parsedPage) ? 1 : parsedPage);
 
-  // Fetch one extra to detect if more pages exist
-  const briefings = await getBriefings({ limit: PAGE_SIZE * page + 1, offset: 0 });
+  const offset = (page - 1) * PAGE_SIZE;
+  const briefings = await getBriefings({ limit: PAGE_SIZE + 1, offset });
 
-  const hasMore = briefings.length > PAGE_SIZE * page;
-  const visible = briefings.slice(0, PAGE_SIZE * page);
+  const hasNext = briefings.length > PAGE_SIZE;
+  const hasPrev = page > 1;
+  const visible = briefings.slice(0, PAGE_SIZE);
 
   return (
     <div className="page-shell py-16">
@@ -67,14 +68,26 @@ export default async function BriefingsPage({ searchParams }: BriefingsPageProps
             ))}
           </div>
 
-          {hasMore && (
-            <div className="mt-12 text-center">
-              <Link
-                href={withQuery(PATHS.BRIEFINGS, { page: String(page + 1) })}
-                className="btn-ghost"
-              >
-                Load More
-              </Link>
+          {(hasNext || hasPrev) && (
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              {hasPrev && (
+                <Link
+                  href={withQuery(PATHS.BRIEFINGS, {
+                    page: page > 2 ? String(page - 1) : undefined,
+                  })}
+                  className="btn-ghost"
+                >
+                  Newer briefings
+                </Link>
+              )}
+              {hasNext && (
+                <Link
+                  href={withQuery(PATHS.BRIEFINGS, { page: String(page + 1) })}
+                  className="btn-ghost"
+                >
+                  Older briefings
+                </Link>
+              )}
             </div>
           )}
         </>

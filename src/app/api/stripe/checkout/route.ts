@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { createCheckoutSession } from '@/lib/stripe/helpers';
 import { normalizeInternalPath } from '@/lib/paths';
 
 export async function POST(request: Request) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user || !user.email) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });

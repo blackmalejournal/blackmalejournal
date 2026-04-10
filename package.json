@@ -23,7 +23,8 @@
     "verify:rep-governance": "node scripts/rep-governance-verify.mjs",
     "test:counts": "node scripts/jest-test-counts.mjs",
     "docs:layout": "node scripts/print-repo-layout.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "check:no-test-users": "node scripts/check-no-test-users.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.9.0",

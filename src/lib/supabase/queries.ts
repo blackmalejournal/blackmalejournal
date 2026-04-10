@@ -3,15 +3,21 @@
 // supabase-js v2.99's column-parser for select('*') with custom Database types infers
 // the result as `{}[]` rather than the full row type. The cast is safe: the runtime
 // data is always the full row because select('*') fetches all columns.
+import { cache } from 'react';
 import { createClient } from '@/lib/supabase/server';
 import { normalizeEmailAddress } from '@/lib/email';
 import type {
   Article,
+  ArticleListItem,
   Briefing,
+  BriefingListItem,
+  BriefingSitemapRow,
   Course,
   Dispatch,
+  DispatchListItem,
   Download,
   Handbook,
+  HandbookSitemapRow,
   Lesson,
   Member,
   MemberTier,
@@ -64,7 +70,67 @@ export async function getArticles(
   return (data ?? []) as Article[];
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
+const ARTICLE_LIST_SELECT =
+  'id,title,slug,lens,tags,excerpt,featured,access_tier,cover_image,published_at,author';
+
+export async function getArticlesForListing(
+  options: {
+    lens?: Lens;
+    tag?: string;
+    limit?: number;
+    offset?: number;
+    tier?: AccessTier;
+  } = {},
+): Promise<ArticleListItem[]> {
+  const { lens, tag, limit = 20, offset = 0, tier } = options;
+  const supabase = await createClient();
+  const nowIso = new Date().toISOString();
+
+  let query = applyPublicContentVisibility(supabase
+    .from('articles')
+    .select(ARTICLE_LIST_SELECT)
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1), nowIso);
+
+  if (lens) query = query.eq('lens', lens);
+  if (tag) query = query.contains('tags', [tag]);
+  if (tier) query = query.eq('access_tier', tier);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getArticlesForListing]', error.message);
+    return [];
+  }
+  return (data ?? []) as ArticleListItem[];
+}
+
+export async function getArticleTagFacets(
+  options: { lens?: Lens; limit?: number } = {},
+): Promise<Array<{ tags: string[] }>> {
+  const { lens, limit = 200 } = options;
+  const supabase = await createClient();
+  const nowIso = new Date().toISOString();
+
+  let query = applyPublicContentVisibility(supabase
+    .from('articles')
+    .select('tags')
+    .order('published_at', { ascending: false })
+    .range(0, limit - 1), nowIso);
+
+  if (lens) query = query.eq('lens', lens);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[getArticleTagFacets]', error.message);
+    return [];
+  }
+  return (data ?? []) as Array<{ tags: string[] }>;
+}
+
+/** Per-request dedupe: `generateMetadata` and the page both call this for the same slug. */
+export const getArticleBySlug = cache(async function getArticleBySlug(
+  slug: string,
+): Promise<Article | null> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
@@ -74,13 +140,15 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
   if (error) return null;
   return data as Article;
-}
+});
 
-export async function getFeaturedArticles(limit = 3): Promise<Article[]> {
+export async function getFeaturedArticles(
+  limit = 3,
+): Promise<ArticleListItem[]> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
-    .select('*')
+    .select(ARTICLE_LIST_SELECT)
     .eq('featured', true)
     .order('published_at', { ascending: false })
     .limit(limit));
@@ -89,14 +157,16 @@ export async function getFeaturedArticles(limit = 3): Promise<Article[]> {
     console.error('[getFeaturedArticles]', error.message);
     return [];
   }
-  return (data ?? []) as Article[];
+  return (data ?? []) as ArticleListItem[];
 }
 
-export async function getLatestArticles(limit = 10): Promise<Article[]> {
+export async function getLatestArticles(
+  limit = 10,
+): Promise<ArticleListItem[]> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('articles')
-    .select('*')
+    .select(ARTICLE_LIST_SELECT)
     .order('published_at', { ascending: false })
     .limit(limit));
 
@@ -104,19 +174,22 @@ export async function getLatestArticles(limit = 10): Promise<Article[]> {
     console.error('[getLatestArticles]', error.message);
     return [];
   }
-  return (data ?? []) as Article[];
+  return (data ?? []) as ArticleListItem[];
 }
 
 // ── Briefings ─────────────────────────────────────────────────────────────────
 
+const BRIEFING_LIST_SELECT =
+  'id,issue_number,slug,title,lead_kicker,access_tier,status,cover_image,published_at,created_at';
+
 export async function getBriefings(
   options: { limit?: number; offset?: number } = {},
-): Promise<Briefing[]> {
+): Promise<BriefingListItem[]> {
   const { limit = 20, offset = 0 } = options;
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
-    .select('*')
+    .select(BRIEFING_LIST_SELECT)
     .order('issue_number', { ascending: false })
     .range(offset, offset + limit - 1));
 
@@ -124,10 +197,28 @@ export async function getBriefings(
     console.error('[getBriefings]', error.message);
     return [];
   }
-  return (data ?? []) as Briefing[];
+  return (data ?? []) as BriefingListItem[];
 }
 
-export async function getBriefingBySlug(
+export async function getBriefingsForSitemap(
+  options: { limit?: number; offset?: number } = {},
+): Promise<BriefingSitemapRow[]> {
+  const { limit = 200, offset = 0 } = options;
+  const supabase = await createClient();
+  const { data, error } = await applyPublicContentVisibility(supabase
+    .from('briefings')
+    .select('slug,published_at')
+    .order('issue_number', { ascending: false })
+    .range(offset, offset + limit - 1));
+
+  if (error) {
+    console.error('[getBriefingsForSitemap]', error.message);
+    return [];
+  }
+  return (data ?? []) as BriefingSitemapRow[];
+}
+
+export const getBriefingBySlug = cache(async function getBriefingBySlug(
   slug: string,
 ): Promise<Briefing | null> {
   const supabase = await createClient();
@@ -139,19 +230,19 @@ export async function getBriefingBySlug(
 
   if (error) return null;
   return data as Briefing;
-}
+});
 
-export async function getLatestBriefing(): Promise<Briefing | null> {
+export async function getLatestBriefing(): Promise<BriefingListItem | null> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('briefings')
-    .select('*')
+    .select(BRIEFING_LIST_SELECT)
     .order('issue_number', { ascending: false })
     .limit(1))
     .single();
 
   if (error) return null;
-  return data as Briefing;
+  return data as BriefingListItem;
 }
 
 export async function getBriefingByIssue(
@@ -221,6 +312,10 @@ export async function updateMemberTier(
 
 // ── Courses ───────────────────────────────────────────────────────────────────
 
+/** Matches `public.courses` columns used by `Course` — no extra DB fields over the wire. */
+const COURSE_LIST_SELECT =
+  'id,title,slug,description,category,access_tier,published,cover_image,created_at';
+
 export async function getCourses(
   options: { category?: string; published?: boolean } = {},
 ): Promise<Course[]> {
@@ -229,7 +324,7 @@ export async function getCourses(
 
   let query = supabase
     .from('courses')
-    .select('*')
+    .select(COURSE_LIST_SELECT)
     .order('created_at', { ascending: false });
 
   if (category) query = query.eq('category', category);
@@ -243,7 +338,9 @@ export async function getCourses(
   return (data ?? []) as Course[];
 }
 
-export async function getCourseBySlug(slug: string): Promise<Course | null> {
+export const getCourseBySlug = cache(async function getCourseBySlug(
+  slug: string,
+): Promise<Course | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('courses')
@@ -253,7 +350,7 @@ export async function getCourseBySlug(slug: string): Promise<Course | null> {
 
   if (error) return null;
   return data as Course;
-}
+});
 
 // ── Lessons ──────────────────────────────────────────────────────────────
 
@@ -273,7 +370,7 @@ export async function getLessonsByCourse(courseId: string): Promise<Lesson[]> {
   return (data ?? []) as Lesson[];
 }
 
-export async function getLessonBySlug(
+export const getLessonBySlug = cache(async function getLessonBySlug(
   courseId: string,
   lessonSlug: string,
 ): Promise<Lesson | null> {
@@ -288,7 +385,7 @@ export async function getLessonBySlug(
 
   if (error) return null;
   return data as Lesson;
-}
+});
 
 // ── Newsletter ────────────────────────────────────────────────────────────────
 
@@ -351,6 +448,26 @@ export async function submitContactForm(data: {
 
 // ── Dispatches ──────────────────────────────────────────────────────────────
 
+const DISPATCH_LIST_SELECT = 'id,title,slug,lens,excerpt,published_at';
+
+export async function getDispatchesForListing(
+  options: { limit?: number; offset?: number } = {},
+): Promise<DispatchListItem[]> {
+  const { limit = 20, offset = 0 } = options;
+  const supabase = await createClient();
+  const { data, error } = await applyPublicContentVisibility(supabase
+    .from('dispatches')
+    .select(DISPATCH_LIST_SELECT)
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1));
+
+  if (error) {
+    console.error('[getDispatchesForListing]', error.message);
+    return [];
+  }
+  return (data ?? []) as DispatchListItem[];
+}
+
 export async function getDispatches(
   options: { limit?: number; offset?: number } = {},
 ): Promise<Dispatch[]> {
@@ -369,7 +486,7 @@ export async function getDispatches(
   return (data ?? []) as Dispatch[];
 }
 
-export async function getDispatchBySlug(
+export const getDispatchBySlug = cache(async function getDispatchBySlug(
   slug: string,
 ): Promise<Dispatch | null> {
   const supabase = await createClient();
@@ -381,13 +498,15 @@ export async function getDispatchBySlug(
 
   if (error) return null;
   return data as Dispatch;
-}
+});
 
-export async function getLatestDispatches(limit = 3): Promise<Dispatch[]> {
+export async function getLatestDispatches(
+  limit = 3,
+): Promise<DispatchListItem[]> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('dispatches')
-    .select('*')
+    .select(DISPATCH_LIST_SELECT)
     .order('published_at', { ascending: false })
     .limit(limit));
 
@@ -395,7 +514,7 @@ export async function getLatestDispatches(limit = 3): Promise<Dispatch[]> {
     console.error('[getLatestDispatches]', error.message);
     return [];
   }
-  return (data ?? []) as Dispatch[];
+  return (data ?? []) as DispatchListItem[];
 }
 
 // ── Handbooks ─────────────────────────────────────────────────────────────
@@ -426,7 +545,28 @@ export async function getHandbooks(
   return (data ?? []) as Handbook[];
 }
 
-export async function getHandbookBySlug(slug: string): Promise<Handbook | null> {
+export async function getHandbooksForSitemap(
+  options: { limit?: number; offset?: number } = {},
+): Promise<HandbookSitemapRow[]> {
+  const { limit = 200, offset = 0 } = options;
+  const supabase = await createClient();
+
+  const { data, error } = await applyPublicContentVisibility(supabase
+    .from('handbooks')
+    .select('slug,published_at')
+    .order('published_at', { ascending: false })
+    .range(offset, offset + limit - 1));
+
+  if (error) {
+    console.error('[getHandbooksForSitemap]', error.message);
+    return [];
+  }
+  return (data ?? []) as HandbookSitemapRow[];
+}
+
+export const getHandbookBySlug = cache(async function getHandbookBySlug(
+  slug: string,
+): Promise<Handbook | null> {
   const supabase = await createClient();
   const { data, error } = await applyPublicContentVisibility(supabase
     .from('handbooks')
@@ -436,7 +576,7 @@ export async function getHandbookBySlug(slug: string): Promise<Handbook | null> 
 
   if (error) return null;
   return data as Handbook;
-}
+});
 
 // ── Downloads ─────────────────────────────────────────────────────────────
 
@@ -466,7 +606,9 @@ export async function getDownloads(
   return (data ?? []) as Download[];
 }
 
-export async function getDownloadBySlug(slug: string): Promise<Download | null> {
+export const getDownloadBySlug = cache(async function getDownloadBySlug(
+  slug: string,
+): Promise<Download | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('downloads')
@@ -476,7 +618,7 @@ export async function getDownloadBySlug(slug: string): Promise<Download | null> 
 
   if (error) return null;
   return data as Download;
-}
+});
 
 // ── Search ──────────────────────────────────────────────────────────────────
 

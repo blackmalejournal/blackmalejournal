@@ -39,6 +39,7 @@ describe('admin publishing helpers', () => {
       title: 'Weekend Briefing 010',
       slug: 'weekend-briefing-010',
       sections: [{ title: '', body: '' }],
+      lead_kicker: '',
       access_tier: 'basic',
       status: 'scheduled',
       cover_image: null,

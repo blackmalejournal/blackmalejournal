@@ -1,5 +1,6 @@
 'use server';
 
+import { getAuthUser } from '@/lib/supabase/access';
 import { createClient } from '@/lib/supabase/server';
 
 type ToggleResult =
@@ -10,15 +11,14 @@ export async function toggleBookmark(
   contentType: string,
   contentId: string,
 ): Promise<ToggleResult> {
-  const supabase = await createClient();
+  const user = await getAuthUser();
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-  if (authError || !user) {
+  if (!user) {
     return { error: 'Not authenticated' };
   }
 
   const memberId = user.id;
+  const supabase = await createClient();
 
   // Check if bookmark already exists
   const { data: existing, error: selectError } = await supabase

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
 import { getHandbookBySlug } from '@/lib/supabase/queries';
-import { checkContentAccess } from '@/lib/supabase/access';
+import { checkContentAccess, getAuthUser } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
@@ -12,7 +12,6 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ArticleBody } from '@/components/content/ArticleBody';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
-import { createClient } from '@/lib/supabase/server';
 import { PaywallGate } from '@/components/content/PaywallGate';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/seo';
@@ -53,10 +52,10 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
 
   const { hasAccess, user } = await checkContentAccess(handbook.access_tier);
 
-  // Get authenticated user for bookmark status
-  const supabase = await createClient();
-  const { data: { user: authUser } } = await supabase.auth.getUser();
-  const bookmarked = authUser ? await isBookmarked(authUser.id, 'handbook', handbook.id) : false;
+  const authUser = await getAuthUser();
+  const bookmarked = authUser
+    ? await isBookmarked(authUser.id, 'handbook', handbook.id)
+    : false;
 
   const readingTime = calculateReadingTime(handbook.body);
   const previewBody = handbook.body.slice(0, 300);

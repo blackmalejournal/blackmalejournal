@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { getDownloads, getHandbooks, getMemberById } from '@/lib/supabase/queries';
 import { HandbookCard } from '@/components/content/HandbookCard';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { DownloadCard } from '@/components/content/DownloadCard';
@@ -59,8 +59,7 @@ export default async function DownloadsPage({ searchParams }: DownloadsPageProps
   const TIER_RANK: Record<string, number> = { free: 0, basic: 1, premium: 2 };
   let userTierRank = 0;
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   if (user) {
     const member = await getMemberById(user.id);
     userTierRank = TIER_RANK[member?.tier ?? 'free'] ?? 0;

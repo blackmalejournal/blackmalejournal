@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getDispatches } from '@/lib/supabase/queries';
+import { getDispatchesForListing } from '@/lib/supabase/queries';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { DispatchCard } from '@/components/content/DispatchCard';
 import { PATHS, withQuery } from '@/lib/paths';
@@ -37,13 +37,15 @@ export default async function DispatchesPage({
   const parsedPage = parseInt(rawPage ?? '1', 10);
   const page = Math.max(1, isNaN(parsedPage) ? 1 : parsedPage);
 
-  const dispatches = await getDispatches({
-    limit: PAGE_SIZE * page + 1,
-    offset: 0,
+  const offset = (page - 1) * PAGE_SIZE;
+  const dispatches = await getDispatchesForListing({
+    limit: PAGE_SIZE + 1,
+    offset,
   });
 
-  const hasMore = dispatches.length > PAGE_SIZE * page;
-  const visible = dispatches.slice(0, PAGE_SIZE * page);
+  const hasNext = dispatches.length > PAGE_SIZE;
+  const hasPrev = page > 1;
+  const visible = dispatches.slice(0, PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
@@ -75,14 +77,26 @@ export default async function DispatchesPage({
             ))}
           </div>
 
-          {hasMore && (
-            <div className="mt-12 text-center">
-              <Link
-                href={withQuery(PATHS.BLOG, { page: String(page + 1) })}
-                className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
-              >
-                Older Posts &rarr;
-              </Link>
+          {(hasNext || hasPrev) && (
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              {hasPrev && (
+                <Link
+                  href={withQuery(PATHS.BLOG, {
+                    page: page > 2 ? String(page - 1) : undefined,
+                  })}
+                  className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                >
+                  &larr; Newer posts
+                </Link>
+              )}
+              {hasNext && (
+                <Link
+                  href={withQuery(PATHS.BLOG, { page: String(page + 1) })}
+                  className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                >
+                  Older posts &rarr;
+                </Link>
+              )}
             </div>
           )}
         </>

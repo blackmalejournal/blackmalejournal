@@ -2,23 +2,31 @@
 import { render, screen } from '@testing-library/react';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
 
-// Mock framer-motion with Proxy to handle motion.div, motion.section, etc.
-jest.mock('framer-motion', () => {
-  const React = require('react');
-  return {
-    motion: new Proxy({}, {
-      get: (_target: unknown, prop: string) =>
-        React.forwardRef((props: Record<string, unknown>, ref: React.Ref<unknown>) => {
-          const { initial: _i, animate: _a, exit: _e, transition: _t, ...rest } = props;
-          return React.createElement(prop, { ...rest, ref, 'data-testid': `motion-${prop}` });
-        }),
-    }),
-    useInView: jest.fn(() => true),
-    useReducedMotion: jest.fn(() => false),
-  };
-});
-
 describe('ScrollReveal', () => {
+  beforeEach(() => {
+    window.matchMedia = jest.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })) as unknown as typeof window.matchMedia;
+
+    global.IntersectionObserver = class {
+      readonly root = null;
+      readonly rootMargin = '';
+      readonly thresholds = [];
+      disconnect() {}
+      observe() {}
+      takeRecords() {
+        return [];
+      }
+      unobserve() {}
+    } as unknown as typeof IntersectionObserver;
+  });
+
   it('renders children', () => {
     render(
       <ScrollReveal>
@@ -29,33 +37,22 @@ describe('ScrollReveal', () => {
   });
 
   it('passes className to wrapper', () => {
-    render(
+    const { container } = render(
       <ScrollReveal className="mt-8">
         <p>Content</p>
       </ScrollReveal>,
     );
-    expect(screen.getByTestId('motion-div')).toHaveClass('mt-8');
+    const el = container.firstElementChild;
+    expect(el).toHaveClass('mt-8');
   });
 
   it('renders as a section element when as="section"', () => {
-    render(
+    const { container } = render(
       <ScrollReveal as="section">
         <p>Section content</p>
       </ScrollReveal>,
     );
-    expect(screen.getByTestId('motion-section')).toBeInTheDocument();
+    expect(container.querySelector('section')).toBeTruthy();
     expect(screen.getByText('Section content')).toBeInTheDocument();
-  });
-
-  it('still renders children when not in view', () => {
-    const { useInView } = require('framer-motion');
-    (useInView as jest.Mock).mockReturnValueOnce(false);
-
-    render(
-      <ScrollReveal>
-        <p>Hidden content</p>
-      </ScrollReveal>,
-    );
-    expect(screen.getByText('Hidden content')).toBeInTheDocument();
   });
 });

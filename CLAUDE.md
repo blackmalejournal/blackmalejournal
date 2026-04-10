@@ -19,7 +19,7 @@ npx tsc --noEmit     # TypeScript check
 ## Brand System
 
 Tagline: "Speak the Truth. Navigate the Consequences."
-Logo: Journal/book icon with star + pen nib (see `public/logos/` — primary, submark, monogram, b-mark, wordmark variants). Full inventory: `docs/brand/IMAGE-ASSET-ORGANIZATION.md`. Use `src/lib/images.ts` for logo paths.
+Logo: Journal/book icon with star + pen nib (see `public/logos/` — primary, submark, monogram, b-mark, wordmark variants). Use `src/lib/images.ts` for logo paths.
 Aesthetic: Militant print-driven editorial — revolutionary newspapers, political posters.
 Full brand spec (colors, fonts, prohibited styles): `.claude/rules/brand.md`
 Runtime source of truth: `src/styles/brand.css` — use `var(--bmj-*)` for all colors.
@@ -67,7 +67,6 @@ All articles and content are categorized under exactly one lens:
 - **Logo assets:** `public/logos/` — use `LOGOS` from `@/lib/images` for type-safe paths
 - **Placeholders:** `public/placeholders/{type}.svg` — use `PLACEHOLDERS` from `@/lib/placeholders`
 - **Textures:** `public/textures/` — use `TEXTURES` from `@/lib/images`
-- **Full documentation:** `docs/brand/IMAGE-ASSET-ORGANIZATION.md` — complete inventory, naming conventions, optimization standards
 - **Image gallery:** `/brand/images` route — visual reference of all assets
 - Available placeholder types: article, briefing, course, handbook, dispatch, download, cover (generic)
 - When a content card has no `cover_image`, pass `PLACEHOLDERS.{type}` to the `<Image>` src
@@ -234,15 +233,7 @@ Beyond the 10 core beautification improvements, advanced CSS features for premiu
 
 ### Documentation Links
 
-**Core Beauty Enhancements:**
-- **BEAUTIFICATION-ENHANCEMENTS.md** — 10 core improvements (animations, typography, depth, buttons, accessibility, responsive)
-- **BEAUTIFICATION-IMPLEMENTATION-GUIDE.md** — 100+ code examples
-- **CSS-CLASSES-REFERENCE.md** — Quick lookup for 50+ CSS classes
-
-**Advanced Enhancements:**
-- **ADVANCED-STYLISTIC-ENHANCEMENTS.md** — 8 advanced features (typography effects, micro-interactions, patterns, modern UI, accessibility, dark mode, state indicators)
-
-**See also:** `docs/brand/` for brand redesign strategy, image assets, and visual identity
+**See also:** `docs/brand/` for visual identity, art direction, and palette references.
 
 BMJ has no runtime dependency on any external shared token package. Do not adopt a shared external token package unless a new ADR is approved with: (1) an explicit architectural decision, (2) proof that every BMJ token maps exactly without visual drift, and (3) updated tests and docs showing the migration is fully independent. A previous proposal to use a shared package was rejected because the vendored subtree was not a runtime dependency and leaked into repository maintenance.
 
@@ -261,18 +252,15 @@ When renaming a public route (e.g., /library → /records), update all 5 locatio
 - On Windows, `pkill` and `taskkill /F /IM node.exe` do not reliably kill the Next.js dev server. Use: `powershell -Command "Get-Process node"` to find the PID, then `powershell -Command "Stop-Process -Id <PID> -Force"`.
 
 ## Documentation
-- BMJ comprehensive documentation SSOT (share this): docs/BMJ-SSOT.md — stable alias: docs/bmj-platform-brief.md
-- Repo root + `docs/` lanes (curated map): docs/ARCHITECTURE.md — *Repository layout — monorepo root*; optional snapshot: `npm run docs:layout`
+- BMJ comprehensive documentation SSOT (share this): docs/BMJ-SSOT.md
 - Architecture and system design: docs/ARCHITECTURE.md
-- Contributing guide (code style, PR process, naming — includes canonical `docs/` Markdown naming): docs/CONTRIBUTING.md
+- Contributing guide (code style, PR process, naming): docs/CONTRIBUTING.md
 - Troubleshooting common issues: docs/TROUBLESHOOTING.md
 - Developer setup: docs/DEVELOPER.md
-- Operator manual: docs/ops/chairman-operator-manual.md
-- Full documentation index: docs/INDEX.md
-- Repository governance reference (hub: docs/standards/README.md; full program: docs/standards/repo-governance-program.md) — optional for day-to-day BMJ feature work; use when aligning multiple repos or platform policy
+- Operations: docs/ops/ (chairman reference, SOPs, env vars)
+- Agent knowledge protocol: docs/standards/agent-knowledge-protocol.md
 
 ## Operations & Infrastructure
-- Full nonprofit setup guide: docs/ops/nonprofit-setup-guide.md
 - Environment variable reference: docs/ops/env-vars.md (canonical source of truth)
 - When adding a new environment variable: add it to docs/ops/env-vars.md first, then set it in Vercel
 - Never commit .env files, API keys, or credentials — .gitignore must cover .env*

@@ -11,9 +11,9 @@ export const SITE_AUTHOR = 'The Chairman';
 export const SITE_TAGLINE = 'Speak the Truth. Navigate the Consequences.';
 
 export const CONTACT_EMAILS = {
-  general: 'chairman@blackmalejournal.com',
-  privacy: 'privacy@blackmalejournal.com',
-  support: 'contact@blackmalejournal.com',
+  general: 'chairman@blackmalejournal.org',
+  privacy: 'privacy@blackmalejournal.org',
+  support: 'contact@blackmalejournal.org',
 } as const;
 
 /** CashApp / Venmo / PayPal — contact SupportCard + `/support` AlternativeMethods (single source). */

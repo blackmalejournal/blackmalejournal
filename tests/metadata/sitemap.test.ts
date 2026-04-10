@@ -3,19 +3,22 @@ jest.mock('@/lib/site-url', () => ({
   resolveSiteUrl: () => 'https://blackmalejournal.com',
 }));
 
-const mockGetArticles = jest.fn();
-const mockGetBriefings = jest.fn();
+const mockGetArticlesForListing = jest.fn();
+const mockGetBriefingsForSitemap = jest.fn();
 const mockGetCourses = jest.fn();
-const mockGetDispatches = jest.fn();
-const mockGetHandbooks = jest.fn();
+const mockGetDispatchesForListing = jest.fn();
+const mockGetHandbooksForSitemap = jest.fn();
 const mockGetLessonsByCourse = jest.fn();
 
 jest.mock('@/lib/supabase/queries', () => ({
-  getArticles: (...args: unknown[]) => mockGetArticles(...args),
-  getBriefings: (...args: unknown[]) => mockGetBriefings(...args),
+  getArticlesForListing: (...args: unknown[]) => mockGetArticlesForListing(...args),
+  getBriefingsForSitemap: (...args: unknown[]) =>
+    mockGetBriefingsForSitemap(...args),
   getCourses: (...args: unknown[]) => mockGetCourses(...args),
-  getDispatches: (...args: unknown[]) => mockGetDispatches(...args),
-  getHandbooks: (...args: unknown[]) => mockGetHandbooks(...args),
+  getDispatchesForListing: (...args: unknown[]) =>
+    mockGetDispatchesForListing(...args),
+  getHandbooksForSitemap: (...args: unknown[]) =>
+    mockGetHandbooksForSitemap(...args),
   getLessonsByCourse: (...args: unknown[]) => mockGetLessonsByCourse(...args),
 }));
 
@@ -23,11 +26,11 @@ import sitemap from '@/app/sitemap';
 
 beforeEach(() => {
   jest.clearAllMocks();
-  mockGetArticles.mockResolvedValue([]);
-  mockGetBriefings.mockResolvedValue([]);
+  mockGetArticlesForListing.mockResolvedValue([]);
+  mockGetBriefingsForSitemap.mockResolvedValue([]);
   mockGetCourses.mockResolvedValue([]);
-  mockGetDispatches.mockResolvedValue([]);
-  mockGetHandbooks.mockResolvedValue([]);
+  mockGetDispatchesForListing.mockResolvedValue([]);
+  mockGetHandbooksForSitemap.mockResolvedValue([]);
   mockGetLessonsByCourse.mockResolvedValue([]);
 });
 
@@ -54,7 +57,7 @@ describe('sitemap.ts', () => {
   });
 
   it('includes dynamic article entries with correct URL format', async () => {
-    mockGetArticles.mockResolvedValue([
+    mockGetArticlesForListing.mockResolvedValue([
       { slug: 'first-article', published_at: '2025-01-01' },
       { slug: 'second-article', published_at: '2025-02-01' },
     ]);
@@ -67,7 +70,7 @@ describe('sitemap.ts', () => {
   });
 
   it('includes dynamic briefing entries', async () => {
-    mockGetBriefings.mockResolvedValue([
+    mockGetBriefingsForSitemap.mockResolvedValue([
       { slug: 'weekend-briefing-001', published_at: '2025-01-15' },
     ]);
 
@@ -89,7 +92,7 @@ describe('sitemap.ts', () => {
   });
 
   it('includes dynamic dispatch entries under /blog/', async () => {
-    mockGetDispatches.mockResolvedValue([
+    mockGetDispatchesForListing.mockResolvedValue([
       { slug: 'weekly-dispatch-5', published_at: '2025-04-01' },
     ]);
 
@@ -100,7 +103,7 @@ describe('sitemap.ts', () => {
   });
 
   it('includes dynamic handbook entries under /handbooks/', async () => {
-    mockGetHandbooks.mockResolvedValue([
+    mockGetHandbooksForSitemap.mockResolvedValue([
       { slug: 'discipline-codex', published_at: '2026-03-01' },
     ]);
 
@@ -129,10 +132,10 @@ describe('sitemap.ts', () => {
   it('calls queries with correct params', async () => {
     await sitemap();
 
-    expect(mockGetArticles).toHaveBeenCalledWith({ limit: 500 });
-    expect(mockGetBriefings).toHaveBeenCalledWith({ limit: 200 });
+    expect(mockGetArticlesForListing).toHaveBeenCalledWith({ limit: 500 });
+    expect(mockGetBriefingsForSitemap).toHaveBeenCalledWith({ limit: 200 });
     expect(mockGetCourses).toHaveBeenCalledWith({ published: true });
-    expect(mockGetDispatches).toHaveBeenCalledWith({ limit: 500 });
-    expect(mockGetHandbooks).toHaveBeenCalledWith({ limit: 200 });
+    expect(mockGetDispatchesForListing).toHaveBeenCalledWith({ limit: 500 });
+    expect(mockGetHandbooksForSitemap).toHaveBeenCalledWith({ limit: 200 });
   });
 });

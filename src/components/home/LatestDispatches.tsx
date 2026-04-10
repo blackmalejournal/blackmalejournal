@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { DispatchCard } from '@/components/content/DispatchCard';
 import { PATHS } from '@/lib/paths';
 import { PageHeader } from '@/components/layout/PageHeader';
-import type { Dispatch } from '@/lib/supabase/types';
+import type { DispatchListItem } from '@/lib/supabase/types';
 
 interface LatestDispatchesProps {
-  dispatches: Dispatch[];
+  dispatches: DispatchListItem[];
 }
 
 export function LatestDispatches({ dispatches }: LatestDispatchesProps) {

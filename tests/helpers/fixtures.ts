@@ -1,4 +1,12 @@
-import type { Article, Briefing, Member, Course, Dispatch, Handbook } from '@/lib/supabase/types';
+import type {
+  Article,
+  Briefing,
+  BriefingListItem,
+  Member,
+  Course,
+  Dispatch,
+  Handbook,
+} from '@/lib/supabase/types';
 
 export const mockArticle: Article = {
   id: 'art-1',
@@ -54,11 +62,26 @@ export const mockBriefing: Briefing = {
     { title: 'The Week in Review', body: 'Summary of events.' },
     { title: 'Deep Dive', body: 'In-depth analysis.' },
   ],
+  lead_kicker: 'The Week in Review',
   access_tier: 'free',
   status: 'published',
   cover_image: '/images/briefing-001.jpg',
   published_at: '2026-03-01T00:00:00Z',
   created_at: '2026-02-28T00:00:00Z',
+};
+
+/** Shape returned by `getBriefings` / `getLatestBriefing` (no `sections` json). */
+export const mockBriefingListItem: BriefingListItem = {
+  id: mockBriefing.id,
+  issue_number: mockBriefing.issue_number,
+  title: mockBriefing.title,
+  slug: mockBriefing.slug,
+  lead_kicker: mockBriefing.lead_kicker ?? mockBriefing.sections[0]?.title ?? null,
+  access_tier: mockBriefing.access_tier,
+  status: mockBriefing.status,
+  cover_image: mockBriefing.cover_image,
+  published_at: mockBriefing.published_at,
+  created_at: mockBriefing.created_at,
 };
 
 export const mockBriefingPremium: Briefing = {

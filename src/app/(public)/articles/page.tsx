@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { getArticles } from '@/lib/supabase/queries';
+import { getArticlesForListing, getArticleTagFacets } from '@/lib/supabase/queries';
 import { extractTags, calculateReadingTime } from '@/lib/utils';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -9,7 +9,7 @@ import { ArticleCard } from '@/components/content/ArticleCard';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
-import type { Article, Lens } from '@/lib/supabase/types';
+import type { ArticleListItem, Lens } from '@/lib/supabase/types';
 import { PATHS, withQuery } from '@/lib/paths';
 
 export const revalidate = 60;
@@ -38,7 +38,7 @@ interface ArticlesPageProps {
   searchParams: Promise<{ lens?: string; tag?: string; page?: string }>;
 }
 
-function ArticleCardGrid({ articles }: { articles: Article[] }) {
+function ArticleCardGrid({ articles }: { articles: ArticleListItem[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {articles.map((article) => (
@@ -48,7 +48,7 @@ function ArticleCardGrid({ articles }: { articles: Article[] }) {
           slug={article.slug}
           lens={article.lens}
           excerpt={article.excerpt}
-          readingTime={calculateReadingTime(article.body)}
+          readingTime={calculateReadingTime(article.excerpt)}
           publishedAt={article.published_at}
           coverImage={article.cover_image}
           isPremium={article.access_tier !== 'free'}
@@ -69,22 +69,23 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
   const parsedPage = parseInt(rawPage ?? '1', 10);
   const page = Math.max(1, isNaN(parsedPage) ? 1 : parsedPage);
 
-  // Fetch one extra to know if there's a next page
-  const articles = await getArticles({
+  const offset = (page - 1) * PAGE_SIZE;
+  const articles = await getArticlesForListing({
     lens: activeLens,
     tag: activeTag ?? undefined,
-    limit: PAGE_SIZE * page + 1,
-    offset: 0,
+    limit: PAGE_SIZE + 1,
+    offset,
   });
 
-  const hasMore = articles.length > PAGE_SIZE * page;
-  const visible = articles.slice(0, PAGE_SIZE * page);
+  const hasNext = articles.length > PAGE_SIZE;
+  const hasPrev = page > 1;
+  const visible = articles.slice(0, PAGE_SIZE);
 
-  // Extract tags from the full unfiltered set for the tag row
-  const allArticles = activeLens
-    ? await getArticles({ lens: activeLens, limit: 200 })
-    : await getArticles({ limit: 200 });
-  const tags = extractTags(allArticles);
+  const tagFacetRows = await getArticleTagFacets({
+    lens: activeLens,
+    limit: 200,
+  });
+  const tags = extractTags(tagFacetRows);
 
   // Split visible articles into newspaper grid (first 3) and standard grid (rest)
   const newspaperArticles = visible.slice(0, 3);
@@ -131,18 +132,32 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
             </div>
           )}
 
-          {hasMore && (
-            <div className="mt-12 text-center">
-              <Link
-                href={withQuery(PATHS.ARTICLES, {
-                  lens: activeLens ?? undefined,
-                  tag: activeTag ?? undefined,
-                  page: String(page + 1),
-                })}
-                className="btn-ghost"
-              >
-                Load More
-              </Link>
+          {(hasNext || hasPrev) && (
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              {hasPrev && (
+                <Link
+                  href={withQuery(PATHS.ARTICLES, {
+                    lens: activeLens ?? undefined,
+                    tag: activeTag ?? undefined,
+                    page: page > 2 ? String(page - 1) : undefined,
+                  })}
+                  className="btn-ghost"
+                >
+                  Newer articles
+                </Link>
+              )}
+              {hasNext && (
+                <Link
+                  href={withQuery(PATHS.ARTICLES, {
+                    lens: activeLens ?? undefined,
+                    tag: activeTag ?? undefined,
+                    page: String(page + 1),
+                  })}
+                  className="btn-ghost"
+                >
+                  Older articles
+                </Link>
+              )}
             </div>
           )}
         </>

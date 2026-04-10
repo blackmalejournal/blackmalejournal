@@ -63,12 +63,19 @@ jobs:
       - name: Unit & Integration Tests
         run: npm test -- --ci --coverage
 
+      - name: Check no test users in production
+        run: npm run check:no-test-users
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
       - name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
-          NEXT_PUBLIC_SITE_URL: https://blackmalejournal.com
+          NEXT_PUBLIC_SITE_URL: https://blackmalejournal.org
 
       - name: Upload Coverage
         uses: actions/upload-artifact@v7

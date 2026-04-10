@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { isTierUpgrade } from '@/lib/membership';
 import { getMemberById } from '@/lib/supabase/queries';
 import { SubscriptionManager } from '@/components/portal/SubscriptionManager';
@@ -52,10 +52,7 @@ export default async function SettingsPage({
       ? params.upgrade
       : undefined;
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) redirect(PATHS.LOGIN);
 

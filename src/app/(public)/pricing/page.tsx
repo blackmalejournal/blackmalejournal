@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { compareTiers, includesTier } from '@/lib/membership';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById } from '@/lib/supabase/queries';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { PageHeader } from '@/components/layout/PageHeader';
@@ -70,10 +70,7 @@ interface PricingPageProps {
 
 export default async function PricingPage({ searchParams }: PricingPageProps) {
   const { next } = await searchParams;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   const member = user ? await getMemberById(user.id) : null;
 
   return (

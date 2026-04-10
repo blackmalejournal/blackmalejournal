@@ -2,15 +2,18 @@ import Link from 'next/link';
 import { briefingPath } from '@/lib/paths';
 import { Lock } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
-import type { Briefing } from '@/lib/supabase/types';
+import type { Briefing, BriefingListItem } from '@/lib/supabase/types';
 
 interface BriefingCardProps {
-  briefing: Briefing;
+  briefing: Briefing | BriefingListItem;
 }
 
 export function BriefingCard({ briefing }: BriefingCardProps) {
   const issueLabel = `No. ${String(briefing.issue_number).padStart(3, '0')}`;
-  const previewText = briefing.sections[0]?.title ?? '';
+  const previewText =
+    briefing.lead_kicker?.trim() ||
+    ('sections' in briefing ? briefing.sections[0]?.title : '') ||
+    '';
   const isPremium = briefing.access_tier !== 'free';
 
   return (

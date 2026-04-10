@@ -8,7 +8,7 @@ import {
 } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/supabase/access";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/ui/BackToTop";
@@ -91,10 +91,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   const navUser = user
     ? {

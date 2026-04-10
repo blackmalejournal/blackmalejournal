@@ -1,16 +1,13 @@
 import { PATHS } from '@/lib/paths';
 import { redirect } from 'next/navigation';
 import type { Member, MemberRole } from '@/lib/supabase/types';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById } from '@/lib/supabase/queries';
 
 export async function getAdminActor(
   allowedRoles: MemberRole[] = ['admin', 'editor'],
 ): Promise<{ userId: string; member: Member | null }> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) return { userId: '', member: null };
 

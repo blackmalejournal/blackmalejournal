@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
+import { getAuthUser } from '@/lib/supabase/access';
 import { getBookmarksForMember } from '@/lib/supabase/bookmarks';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { BookmarkButton } from '@/components/content/BookmarkButton';
@@ -31,10 +31,7 @@ function daysAgo(dateStr: string): string {
 }
 
 export default async function SavedPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) redirect(PATHS.LOGIN);
 

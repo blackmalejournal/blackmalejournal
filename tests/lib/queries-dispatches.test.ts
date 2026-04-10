@@ -35,7 +35,14 @@ describe('getLatestDispatches', () => {
 
   it('returns dispatches with default limit of 3', async () => {
     const mockData = [
-      { id: '1', title: 'D1', slug: 'd1', lens: 'health', excerpt: '', body: '', status: 'published', author: 'The Chairman', cover_image: null, published_at: '2026-03-18', created_at: '2026-03-18' },
+      {
+        id: '1',
+        title: 'D1',
+        slug: 'd1',
+        lens: 'health',
+        excerpt: '',
+        published_at: '2026-03-18',
+      },
     ];
     setupChain(mockData);
 
