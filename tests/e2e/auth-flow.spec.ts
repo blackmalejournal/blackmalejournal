@@ -5,16 +5,24 @@ const supabaseIsCiPlaceholder = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').inc
   'placeholder.supabase.co',
 );
 
+const hasMemberE2eCredentials = Boolean(
+  process.env.E2E_MEMBER_EMAIL?.trim() && process.env.E2E_MEMBER_PASSWORD?.trim(),
+);
+
 test.describe('Authentication', () => {
   test('valid login redirects to portal', async ({ page }) => {
     test.skip(
       supabaseIsCiPlaceholder,
       'Requires a real NEXT_PUBLIC_SUPABASE_URL (CI uses placeholder.supabase.co).',
     );
+    test.skip(
+      !hasMemberE2eCredentials,
+      'Requires E2E_MEMBER_EMAIL and E2E_MEMBER_PASSWORD (e.g. GitHub Actions secrets or .env.local).',
+    );
     await page.goto('/login');
     // Password form + magic-link form both use name="email" — target the password field (#email).
-    await page.locator('#email').fill(process.env.E2E_MEMBER_EMAIL ?? 'free@bmj.test');
-    await page.locator('#password').fill(process.env.E2E_MEMBER_PASSWORD ?? 'TestOnly!1');
+    await page.locator('#email').fill(process.env.E2E_MEMBER_EMAIL!);
+    await page.locator('#password').fill(process.env.E2E_MEMBER_PASSWORD!);
     await page.getByRole('button', { name: /^log in$/i }).click();
     await expect(page).toHaveURL(/\/portal/, { timeout: 30_000 });
   });

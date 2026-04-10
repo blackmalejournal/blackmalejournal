@@ -3,7 +3,7 @@ title: Environment variables reference
 authority: canonical
 status: canonical
 audience: [engineers, operators, agents]
-last-verified: 2026-04-09
+last-verified: 2026-04-10
 ---
 
 # Environment Variables Reference
@@ -52,8 +52,27 @@ last-verified: 2026-04-09
 |----------|-------|---------|-------------|
 | `E2E_ADMIN_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/admin.setup.ts` | Email for an existing Supabase auth user whose `members.role` is `admin` or `editor`. When set together with `E2E_ADMIN_PASSWORD`, Playwright runs the authenticated admin article workflow. |
 | `E2E_ADMIN_PASSWORD` | Local / CI secret | Same as above | Password for that user. Never commit real values; use `.env.local` or CI secrets. |
-| `E2E_MEMBER_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/member.setup.ts` | Email for a normal member (`members.role` `member`). With `E2E_MEMBER_PASSWORD`, runs portal E2E (`portal.spec.ts`). Use a different account than the admin E2E user when both suites are enabled. |
+| `E2E_MEMBER_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/member.setup.ts`, `tests/e2e/auth-flow.spec.ts` | Email for a normal member (`members.role` `member`). With `E2E_MEMBER_PASSWORD`, runs portal E2E and the “valid login” auth-flow test. Use a different account than the admin E2E user when both suites are enabled. |
 | `E2E_MEMBER_PASSWORD` | Local / CI secret | Same as above | Password for the member test account. |
+| `E2E_BASIC_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/basic.setup.ts` | Basic-tier test user email (with `E2E_BASIC_PASSWORD`). |
+| `E2E_BASIC_PASSWORD` | Local / CI secret | Same as above | Password for the basic-tier E2E account. |
+| `E2E_PREMIUM_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/premium.setup.ts` | Premium-tier test user email (with `E2E_PREMIUM_PASSWORD`). |
+| `E2E_PREMIUM_PASSWORD` | Local / CI secret | Same as above | Password for the premium-tier E2E account. |
+
+### GitHub Actions (`.github/workflows/ci.yml` — E2E job)
+
+Add these as **repository secrets** (Settings → Secrets and variables → Actions) so CI can run Supabase-backed tests instead of only the placeholder build:
+
+| Secret | Purpose |
+|--------|---------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Real project URL (same value as Vercel / local). When unset, E2E falls back to `https://placeholder.supabase.co` and login-related tests are skipped. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key for that project. Required when `NEXT_PUBLIC_SUPABASE_URL` is real. |
+| `E2E_MEMBER_EMAIL` / `E2E_MEMBER_PASSWORD` | Member account for “valid login” and member Playwright projects. |
+| `E2E_ADMIN_EMAIL` / `E2E_ADMIN_PASSWORD` | Optional — enables admin authenticated E2E when both set. |
+| `E2E_BASIC_EMAIL` / `E2E_BASIC_PASSWORD` | Optional — enables basic-tier authenticated E2E. |
+| `E2E_PREMIUM_EMAIL` / `E2E_PREMIUM_PASSWORD` | Optional — enables premium-tier authenticated E2E. |
+
+Fork pull requests do not receive repository secrets; E2E continues to use placeholders and skips tests that need a live Supabase host.
 
 ## Environment-Specific Values
 
@@ -98,7 +117,7 @@ last-verified: 2026-04-09
 
 ## Total Count
 
-- **17 documented variables** for CI parity (5 client-safe, 8 server-only, 4 optional E2E secrets)
+- **21 documented variables** for CI parity (5 client-safe, 8 server-only, 8 optional E2E secrets)
 - **Required for the core app:** Supabase (3), Stripe (4), site URL (1)
 - **Optional integrations:** Resend (3), WhatsApp (1), Plausible (1)
-- **Optional local/CI:** E2E admin + member credentials (4) — see Local E2E table
+- **Optional local/CI:** E2E credentials (8) — see Local E2E table and GitHub Actions subsection
