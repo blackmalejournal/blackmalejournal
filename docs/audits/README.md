@@ -21,4 +21,4 @@ This lane indexes audit-oriented documentation in the committed BMJ docs tree.
 
 ## Archive
 
-Historical artifacts from earlier audit passes are preserved in [archive/](archive/).
+Historical artifacts from earlier audit passes are preserved under [../archive/2026-04-08-cleanup/](../archive/2026-04-08-cleanup/).

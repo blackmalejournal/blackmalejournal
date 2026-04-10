@@ -11,6 +11,6 @@ This folder holds **mirrored and historical** BMJ Markdown: session notes, strat
 - [../ops/chairman-consistency-reference.md](../ops/chairman-consistency-reference.md) — operational identity SSOT (domains, public emails, handles, checklists; Appendix A for SWE)
 - [../archive/2026-04-08-cleanup/ops/chairman-handbook-shareable.md](../archive/2026-04-08-cleanup/ops/chairman-handbook-shareable.md) — short Chairman one-pager for Google Doc/Word (archived)
 - [../../src/styles/brand.css](../../src/styles/brand.css) — brand token SSOT
-- [../brand/VISUAL-SSOT.md](../brand/VISUAL-SSOT.md) — visual identity doc SSOT (logos, placeholders, lenses; gallery HTML linked inside)
+- [../brand/visual-ssot.md](../brand/visual-ssot.md) — visual identity doc SSOT (logos, placeholders, lenses; gallery HTML linked inside)
 
 Edit the platform brief and linked canonical docs when operational truth changes; use this lane for archival prompts and long-form audits you still want versioned beside the repo.
