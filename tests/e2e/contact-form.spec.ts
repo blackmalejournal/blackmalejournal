@@ -9,19 +9,26 @@ test.describe('Contact form', () => {
   });
 
   test('submits successfully and shows confirmation', async ({ page }) => {
+    // CI uses placeholder Supabase/Resend — stub the API so we exercise client success UI.
+    await page.route('**/api/contact', (route) => {
+      if (route.request().method() !== 'POST') return route.continue();
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true }),
+      });
+    });
+
     await page.goto('/contact');
     await page.locator('input[name="name"]').fill('E2E Test');
     await page.locator('input[name="email"]').fill('e2e@bmj.test');
+    await page.locator('select[name="subject"]').selectOption('General Inquiry');
     await page.locator('textarea[name="message"]').fill('Automated E2E contact form submission.');
-
-    const subject = page.locator('input[name="subject"]');
-    if (await subject.count()) await subject.fill('E2E Test Subject');
 
     await page.getByRole('button', { name: /send|submit/i }).click();
 
-    // Expect a success message or redirect — not an error
-    await expect(
-      page.getByText(/thank you|message sent|received/i).or(page.locator('[data-success]'))
-    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText('Message Sent', { exact: true })).toBeVisible({
+      timeout: 15_000,
+    });
   });
 });
