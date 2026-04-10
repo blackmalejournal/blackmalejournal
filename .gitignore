@@ -56,6 +56,9 @@ next-env.d.ts
 playwright-report/
 test-results/
 
+# Cursor IDE (local)
+.cursor/
+
 # Claude Code personal overrides
 CLAUDE.local.md
 .claude/settings.local.json
