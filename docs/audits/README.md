@@ -1,3 +1,10 @@
+---
+title: Audit docs
+status: reference
+audience: [engineers, agents]
+last-verified: 2026-04-08
+---
+
 # Audit Docs
 
 This lane indexes audit-oriented documentation in the committed BMJ docs tree.
@@ -7,12 +14,11 @@ This lane indexes audit-oriented documentation in the committed BMJ docs tree.
 - [2026-03-25-codebase-audit-remediation-plan.md](2026-03-25-codebase-audit-remediation-plan.md) - prioritized remediation roadmap with targets and acceptance criteria for the 2026-03-25 codebase audit.
 - [2026-03-25-codebase-audit.md](2026-03-25-codebase-audit.md) - repository-wide audit covering quality gates, governance alignment, complexity concentration, and coverage risk.
 
-## Current Audit References
+## Related
 
-- [../brand/visual-identity-audit.md](../brand/visual-identity-audit.md) - visual identity audit findings.
-- [../ops/env-audit.md](../ops/env-audit.md) - environment verification checklist used at release time.
+- Brand visual identity: [../brand/visual-ssot.md](../brand/visual-ssot.md)
+- Environment SSOT: [../ops/env-vars.md](../ops/env-vars.md)
 
 ## Archive
 
-- [archive/2026-03-22-release-readiness-and-env-audit.md](archive/2026-03-22-release-readiness-and-env-audit.md) - release-gate results and verified external environment findings from Vercel.
-- [archive/2026-03-22-docs-information-consolidation.md](archive/2026-03-22-docs-information-consolidation.md) - accepted Markdown-only consolidation package for the committed docs tree.
+Historical artifacts from earlier audit passes are preserved in [archive/](archive/).

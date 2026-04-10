@@ -1,5 +1,7 @@
 # 2026-03-25 Codebase Audit Remediation Plan
 
+> **Status: closed** — all items completed; outcomes folded into BMJ-SSOT.md §12.
+
 This plan operationalizes findings from [2026-03-25-codebase-audit.md](2026-03-25-codebase-audit.md).
 
 ## Baseline

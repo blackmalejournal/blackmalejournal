@@ -2,14 +2,14 @@
 title: Release sequence
 status: operational
 audience: [operators, engineers]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Release Sequence
 
 Use this exact order to move BMJ from code-complete to launch-ready.
 
-Use [launch-dashboard-checklist.md](launch-dashboard-checklist.md) alongside this sequence when the work moves out of the repo and into external dashboards.
+Use the chairman consistency reference ([chairman-consistency-reference.md](chairman-consistency-reference.md)) alongside this sequence when the work moves out of the repo and into external dashboards.
 
 ## 1. Database and Seeds
 
@@ -78,4 +78,37 @@ Ship only after these are true:
 - Webhooks update `members.tier` correctly.
 - Signed downloads work.
 - The Chairman can complete the operator drill without direct database access.
-- [launch-checklist.md](launch-checklist.md) is fully checked off.
+- All items in **Pre-Launch Checklist** below are checked off.
+
+---
+
+## Pre-Launch Checklist
+
+Run before any production launch, relaunch, or major campaign push.
+
+### Application
+
+- [ ] `npm run secrets:check`
+- [ ] `npm run lint`
+- [ ] `npx tsc --noEmit`
+- [ ] `npm test -- --ci --coverage`
+- [ ] `npm run build`
+
+### Runtime
+
+- [ ] `NEXT_PUBLIC_SITE_URL` matches the production domain
+- [ ] Supabase auth callback URLs include the production callback
+- [ ] Stripe webhook endpoint is live at `/api/stripe/webhook`
+- [ ] `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set for production
+- [ ] Staging or preview checkout succeeds and returns to `/portal`
+
+### Operator
+
+- [ ] Sign in to `/admin`
+- [ ] Open `/admin/messages`
+- [ ] Open `/admin/members`
+- [ ] Open `/admin/subscribers`
+- [ ] Open `/admin/courses`
+- [ ] Publish or update one non-critical record in staging and verify the public route
+
+**Go only if all checks pass.** If Stripe, auth callbacks, or signed downloads fail, stop and fix configuration first.

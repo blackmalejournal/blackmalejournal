@@ -2,7 +2,7 @@
 title: Backup and restore
 status: operational
 audience: [engineers, operators]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Backup and Restore

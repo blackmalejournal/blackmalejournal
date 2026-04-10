@@ -3,7 +3,7 @@ type: normative
 authority: canonical
 status: canonical
 audience: [designers, engineers, operators, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-09
 ---
 
 # BMJ visual and verbal identity — SSOT index
@@ -16,12 +16,12 @@ This document is the **documentation single source of truth** for *where* identi
 
 | What | Canonical file (truth) | This doc + HTML gallery |
 |------|--------------------------|-------------------------|
-| **Color tokens & semantic CSS variables** (`--bmj-*`, surfaces, text, borders) | [`src/styles/brand.css`](../../src/styles/brand.css) | Describes and links; [visual-ssot.html](visual-ssot.html) loads that stylesheet for live swatches |
+| **Color tokens & semantic CSS variables** (`--bmj-*`, surfaces, text, borders) | [`src/styles/brand.css`](../../src/styles/brand.css) | Describes and links |
 | **Tailwind color names** (`bg-bmj-red`, `text-bmj-amber`, …) | [`tailwind.config.ts`](../../tailwind.config.ts) | Hex must **mirror** `brand.css` (opacity modifiers require hex in Tailwind — see root `CLAUDE.md`) |
 | **Lens → UI classes** (badges, borders) | [`src/lib/lens-theme.ts`](../../src/lib/lens-theme.ts) | Lens table below matches shipped UI |
 | **Verbal identity** (name, tagline, default author, public emails) | [`src/lib/seo.ts`](../../src/lib/seo.ts) | Quoted below for convenience only |
-| **Placeholder image paths** | [`src/lib/placeholders.ts`](../../src/lib/placeholders.ts) → `public/placeholders/*.svg` | Gallery in [visual-ssot.html](visual-ssot.html) |
-| **Logo / favicon / OG art files on disk** | `public/logos/*`, `public/favicon.svg`, `public/og-image.svg` | Shown below and in gallery |
+| **Placeholder image paths** | [`src/lib/placeholders.ts`](../../src/lib/placeholders.ts) → `public/placeholders/*.svg` | Previews below |
+| **Logo / favicon / OG art files on disk** | `public/logos/*`, `public/favicon.svg`, `public/og-image.svg` | Shown below |
 | **Rules humans must not break** (no gradients in brand components, type roles, etc.) | [invariants.md](invariants.md) | Complements this index |
 
 **If anything disagrees:** **`brand.css` wins** for tokens until you intentionally change it **and** update `tailwind.config.ts` and this index in the same maintenance pass. Run `/brand-check` or the project’s drift hook where applicable.
@@ -33,7 +33,7 @@ This document is the **documentation single source of truth** for *where* identi
 | Field | Value |
 |-------|--------|
 | Site name | The Black Male Journal |
-| Tagline | Speak the Truth. Navigate the Consequences. |
+| Tagline | Study Well. Speak the Truth. Navigate the Consequences. |
 | Default author | The Chairman |
 
 Public emails and support handles are listed in **`seo.ts`** (`CONTACT_EMAILS`, `SUPPORT_PAYMENT_METHODS`, `SUPPORT_PATREON_URL`) and in [../ops/chairman-consistency-reference.md](../ops/chairman-consistency-reference.md).
@@ -81,7 +81,7 @@ Each piece of content uses **exactly one** lens. UI accents come from `LENS_THEM
 | Print masthead | Wordmark (dark) | On cream/light paper |
 | Merchandise | Any variant | Context-dependent |
 
-*If images do not render in your viewer, open [visual-ssot.html](visual-ssot.html) in a browser from a clone of the repo.*
+*If images do not render in your viewer, open the repo in a browser-based IDE or use a Markdown preview tool.*
 
 ---
 
@@ -99,14 +99,11 @@ Each piece of content uses **exactly one** lens. UI accents come from `LENS_THEM
 
 ---
 
-## Colorful reference (open in browser)
+## Palette reference
 
-- **[visual-ssot.html](visual-ssot.html)** — one page: tagline banner, logo/placeholder gallery, **live** swatches from `brand.css`, lens strips.  
-- **[color-system.html](color-system.html)** — older, detailed palette / specimen artifact (still useful; does not replace `brand.css`).
+- **[bmj-palettes-reference.png](bmj-palettes-reference.png)** — palette comparison sheet.
 
-Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click or via a static server). The page links to `../../src/styles/brand.css` so swatches track the runtime SSOT.
-
----
+> Archived HTML galleries (`visual-ssot.html`, `color-system.html`) are in `../archive/2026-04-08-cleanup/brand/`.
 
 ---
 
@@ -114,8 +111,6 @@ Local use: from the repo root, open `docs/brand/visual-ssot.html` (double-click 
 
 | Document | Purpose |
 |----------|---------|
-| [BMJ-BRAND-REDESIGN-STRATEGY.md](BMJ-BRAND-REDESIGN-STRATEGY.md) | Comprehensive brand redesign strategy with logo system, typography, color rationale, and implementation roadmap |
-| [IMAGE-ASSET-ORGANIZATION.md](IMAGE-ASSET-ORGANIZATION.md) | Complete image asset inventory, naming conventions, optimization standards, and usage guidelines |
 | [art-direction-spec.md](art-direction-spec.md) | Visual tone and art direction principles |
 | [invariants.md](invariants.md) | Design rules and constraints |
 | `/brand` route in app | Interactive brand showcase page |

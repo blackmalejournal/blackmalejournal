@@ -2,14 +2,14 @@
 title: External configuration checklist (deferrals)
 status: reference
 audience: [operators, engineers]
-last-verified: 2026-03-31
+last-verified: 2026-04-09
 ---
 
 # External Configuration Checklist
 
 Code wiring for Stripe checkout, portal redirects, Plausible, and site metadata is now in the repo. The remaining work is dashboard and environment configuration outside source control. Each entry below lists the exact external tasks that still need to be completed.
 
-For the exact future launch runbook, use [ops/launch-dashboard-checklist.md](ops/launch-dashboard-checklist.md).
+For the exact future launch runbook, see the ops lane ([ops/README.md](ops/README.md)).
 
 ---
 
@@ -23,7 +23,7 @@ For the exact future launch runbook, use [ops/launch-dashboard-checklist.md](ops
 3. Set `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_BASIC_PRICE_ID`, and `STRIPE_PREMIUM_PRICE_ID` in Vercel for Development, Preview, and Production
 4. Register webhook endpoints:
    - Preview: `https://<preview-domain>/api/stripe/webhook`
-   - Production: `https://blackmalejournal.com/api/stripe/webhook`
+   - Production: `https://blackmalejournal.org/api/stripe/webhook`
 5. Subscribe the webhook to:
    - `checkout.session.completed`
    - `customer.subscription.updated`
@@ -44,11 +44,11 @@ For the exact future launch runbook, use [ops/launch-dashboard-checklist.md](ops
 3. Set `NEXT_PUBLIC_SITE_URL`:
    - Development: `http://localhost:3000`
    - Preview: optional if the Vercel deployment URL fallback is acceptable
-   - Production: `https://blackmalejournal.com` once the custom domain is live, otherwise `https://blackmalejournal.vercel.app`
+   - Production: `https://blackmalejournal.org` once the custom domain is live, otherwise `https://blackmalejournal.vercel.app`
 4. Add auth callback URL to Supabase:
    - `http://localhost:3000/auth/callback`
    - preview deployment callback URL
-   - `https://blackmalejournal.com/auth/callback`
+   - `https://blackmalejournal.org/auth/callback`
 
 **Unblocks:** Canonical URLs in SEO/JSON-LD, email deliverability for auth emails
 
@@ -63,7 +63,7 @@ For the exact future launch runbook, use [ops/launch-dashboard-checklist.md](ops
 2. Set `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`:
    - Development: leave unset
    - Preview: leave unset unless preview analytics is intentional
-   - Production: `blackmalejournal.com`
+   - Production: `blackmalejournal.org`
 3. The `<Script>` tag in `src/app/layout.tsx` is already wired — no code changes needed
 
 **Unblocks:** Traffic analytics, goal tracking for sign-up conversions

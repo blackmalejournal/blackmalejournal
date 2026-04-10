@@ -2,7 +2,7 @@
 title: Secret rotation procedure
 status: operational
 audience: [engineers, operators]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Secret Rotation Procedure

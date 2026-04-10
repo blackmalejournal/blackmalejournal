@@ -2,7 +2,7 @@
 title: Contributing
 status: canonical
 audience: [contributors, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-09
 ---
 
 # Contributing
@@ -55,22 +55,20 @@ last-verified: 2026-03-31
 | Placeholder images | `{content-type}.svg` | `article.svg` |
 | Test files | `*.test.ts` or `*.test.tsx` | `ArticleCard.test.tsx` |
 | Docs — `docs/` root handbooks | `UPPERCASE.md` | `DEVELOPER.md`, `ARCHITECTURE.md`, `DEFERRALS.md` |
-| Docs — under a lane folder (`docs/ops/`, `docs/brand/`, …) | kebab-case | `chairman-operator-manual.md`, `invariants.md` |
-| Docs — dated plans/specs (`docs/superpowers/`) | `YYYY-MM-DD-topic.md` | `2026-03-27-email-campaigns.md` |
-| Docs — imported / mirrored SSOT (`docs/ssot-bmj/`) | `bmj-` + kebab-case | `bmj-comprehensive-platform-audit.md` |
-| Docs — copy-ready templates (`docs/templates/`) | `*.template.md` or GitHub-shaped names | `README.template.md`, `issue_template_bug.md` |
+| Docs — under a lane folder (`docs/ops/`, `docs/brand/`, …) | kebab-case | `env-vars.md`, `invariants.md` |
+| Docs — archived artifacts (`docs/archive/`) | `YYYY-MM-DD-cleanup/` subdirs | `2026-04-08-cleanup/` |
 
 ### Documentation layout (canonical)
 
-- **Map:** [INDEX.md](INDEX.md) is the committed inventory of `docs/`. Prefer linking new docs from there (and from [README.md](README.md) when it is a primary entry).
+- **Map:** [README.md](README.md) is the entry point for `docs/`. Link new docs from there when they are a primary entry.
 - **Root handbooks:** short, stable, `UPPERCASE.md` filenames only at `docs/` root — not inside lane folders.
-- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed (e.g. `ssot-bmj/`). Each lane should have a **README.md** entry point (see [ARCHITECTURE.md](ARCHITECTURE.md) — *Repository layout — monorepo root*).
+- **Lane folders:** use **lowercase** directory names (`ops/`, `brand/`, `audits/`). Multi-word directories use **kebab-case** if needed. Each lane should have a **README.md** entry point (see [ARCHITECTURE.md](ARCHITECTURE.md) — *Repository layout — monorepo root*).
 - **Repo root map (non-docs):** same section in [ARCHITECTURE.md](ARCHITECTURE.md); shallow tree: `npm run docs:layout`.
 - **Living counts:** `npm run docs:inventory` — Markdown totals and bucket breakdown (not duplicated in prose).
 
 ### Documentation frontmatter (`docs/ops/`, `docs/brand/`, `docs/*.md` root)
 
-Every file in `docs/ops/`, `docs/brand/`, and **top-level** `docs/*.md` (handbooks such as `ARCHITECTURE.md`, `INDEX.md`, `BMJ-SSOT.md`, etc.) **must** begin with YAML frontmatter delimited by `---` lines, immediately followed by the Markdown body. CI enforces all three via `npm run verify:docs-frontmatter` (or `verify:docs-ops-frontmatter`, `verify:docs-brand-frontmatter`, `verify:docs-root-frontmatter` for a single lane).
+Every file in `docs/ops/`, `docs/brand/`, and **top-level** `docs/*.md` (handbooks such as `ARCHITECTURE.md`, `DEFERRALS.md`, `BMJ-SSOT.md`, etc.) **must** begin with YAML frontmatter delimited by `---` lines, immediately followed by the Markdown body. CI enforces all three via `npm run verify:docs-frontmatter` (or `verify:docs-ops-frontmatter`, `verify:docs-brand-frontmatter`, `verify:docs-root-frontmatter` for a single lane).
 
 | Key | Required | Notes |
 |-----|----------|--------|

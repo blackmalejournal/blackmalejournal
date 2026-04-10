@@ -2,7 +2,7 @@
 title: Developer guide
 status: canonical
 audience: [engineers, contributors]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Developer Guide
@@ -57,7 +57,7 @@ npm test                 # Run all tests
 npm run test:counts      # Print suite/test totals for README / CLAUDE.md
 npm run test:watch       # Watch mode
 npm test -- --coverage   # With coverage report
-npm run verify:docs-links # Relative links in docs/ (templates/ excluded)
+npm run verify:docs-links # Relative links in docs/
 ```
 
 ### Documentation
@@ -113,11 +113,10 @@ See [docs/ops/env-vars.md](ops/env-vars.md) for the canonical environment variab
 
 ### Content Taxonomy
 
-All content is categorized under one of six **lenses**:
+All content is categorized under one of five **lenses**:
 - **Health** — physical/mental wellness, martial arts, discipline
-- **Philosophy** — purpose, identity, masculinity, mindset
 - **Politics** — power, policy, systems, community organizing
-- **Culture** — ideology, editorial, cultural analysis
+- **Culture** — philosophy, identity, ideology, cultural analysis
 - **Entertainment** — media, technology, reviews
 - **Business** — entrepreneurship, finance, economics, ownership
 
@@ -135,7 +134,7 @@ If you are validating **Repo Excellence Program** GitHub Issue Forms and the `do
 npm run verify:rep-governance
 ```
 
-See [repo-governance-org-rollout.md](roadmaps/repo-governance-org-rollout.md). **CI** verifies Issue Form files on disk; a **local** run also checks the `documentation` label via `gh` (the Actions token cannot list labels in many setups).
+**CI** verifies Issue Form files on disk; a **local** run also checks the `documentation` label via `gh` (the Actions token cannot list labels in many setups).
 
 ## Conventions
 

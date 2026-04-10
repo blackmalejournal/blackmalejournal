@@ -1,5 +1,5 @@
 /**
- * Heuristic near-duplicate detector for all Markdown under docs/ (recursive; skips docs/templates/).
+ * Heuristic near-duplicate detector for all Markdown under docs/ (recursive; skips docs/archive/).
  * Uses Jaccard similarity and containment on word sets (length >= 4, light stopwords).
  *
  * Default: print findings, exit 0. Use --fail to exit 1 when any pair exceeds --fail-jaccard
@@ -16,7 +16,7 @@ import path from "path";
 const repoRoot = process.cwd();
 const docsRoot = path.join(repoRoot, "docs");
 
-const SKIP_DIR_NAMES = new Set(["templates"]);
+const SKIP_DIR_NAMES = new Set(["archive"]);
 
 const STOPWORDS = new Set([
   "that",
@@ -193,7 +193,7 @@ function main() {
     "BMJ docs duplicate / near-duplicate audit (heuristic; review manually)\n",
   );
   console.log(
-    `Scanned ${entries.length} Markdown file(s) under docs/ (skipped docs/templates/).\n`,
+    `Scanned ${entries.length} Markdown file(s) under docs/ (skipped docs/archive/).\n`,
   );
 
   if (hits.length === 0) {

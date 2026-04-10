@@ -2,7 +2,7 @@
 title: Architecture
 status: canonical
 audience: [engineers, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Architecture
@@ -89,7 +89,7 @@ This section is the **curated map** of what lives at the repo root and how **`do
 | [`AGENTS.md`](../AGENTS.md) | Normative repo governance (domains, invariants, protocol). |
 | [`CLAUDE.md`](../CLAUDE.md) | Assistant and contributor project instructions. |
 | `.github/` | CI workflows, Issue templates, PR template, governance verify inputs. |
-| `docs/` | Committed documentation — see **Documentation lanes** below and [`INDEX.md`](INDEX.md). |
+| `docs/` | Committed documentation — see **Documentation lanes** below and [`README.md`](README.md). |
 | `public/` | Static assets (logos, placeholders, fonts, textures). |
 | `scripts/` | Automation — [`scripts/README.md`](../scripts/README.md) (verify, seeds, layout printer). |
 | `src/` | Next.js application (see **Directory Structure** above). |
@@ -103,17 +103,12 @@ Each lane has a **README.md** entry point (naming rules: [`CONTRIBUTING.md`](CON
 | Lane | Entry | Contents |
 |------|--------|----------|
 | Audits | [`audits/README.md`](audits/README.md) | Audit reports and archive. |
-| Brand | [`brand/README.md`](brand/README.md) | Invariants, art direction, visual audits. |
+| Brand | [`brand/README.md`](brand/README.md) | Invariants, art direction, palette references. |
 | Operations | [`ops/README.md`](ops/README.md) | Runbooks, env vars SSOT, launch/release SOPs. |
-| Policy | [`policy/README.md`](policy/README.md) | Formal policy outlines (REP). |
-| Roadmaps | [`roadmaps/README.md`](roadmaps/README.md) | REP rollout and org-enablement roadmaps. |
-| Metrics | [`metrics/README.md`](metrics/README.md) | Compliance dashboard schema. |
-| Standards | [`standards/README.md`](standards/README.md) | REP program modules (rubric, hygiene, automation). |
-| SSOT (mirrored) | [`ssot-bmj/README.md`](ssot-bmj/README.md) | Reference archive (prompts/audits); program SSOT is [`BMJ-SSOT.md`](BMJ-SSOT.md). |
-| Superpowers | [`superpowers/README.md`](superpowers/README.md) | Plans, specs, prompts for major delivery passes. |
-| Templates | [`templates/README.md`](templates/README.md) | Copy-ready org templates (not link-checked as live paths). |
+| Standards | [`standards/README.md`](standards/README.md) | Agent knowledge protocol. |
+| Archive | [`archive/2026-04-08-cleanup/`](archive/2026-04-08-cleanup/README.md) | Historical artifacts (deployment, beautification, REP governance, session notes). |
 
-**Canonical inventory:** [`INDEX.md`](INDEX.md). **BMJ comprehensive SSOT:** [`BMJ-SSOT.md`](BMJ-SSOT.md) — single entry for what BMJ is, what we are building, where truth lives, and what is next. **Application-only depth:** section *Directory Structure* in this file.
+**BMJ comprehensive SSOT:** [`BMJ-SSOT.md`](BMJ-SSOT.md) — single entry for what BMJ is, what we are building, where truth lives, and what is next. **Application-only depth:** section *Directory Structure* in this file.
 
 ## Request Flow
 

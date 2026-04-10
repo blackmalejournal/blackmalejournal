@@ -3,7 +3,7 @@ title: Environment variables reference
 authority: canonical
 status: canonical
 audience: [engineers, operators, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-09
 ---
 
 # Environment Variables Reference
@@ -42,7 +42,7 @@ last-verified: 2026-03-31
 
 | Variable | Scope | Used In | Description |
 |----------|-------|---------|-------------|
-| `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Preferred canonical site URL (e.g., `https://blackmalejournal.com` or `https://blackmalejournal.vercel.app`). When unset on Vercel, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` and then `VERCEL_URL`. |
+| `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Preferred canonical site URL (e.g., `https://blackmalejournal.org` or `https://blackmalejournal.vercel.app`). When unset on Vercel, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` and then `VERCEL_URL`. |
 | `NEXT_PUBLIC_WHATSAPP_LINK` | Client | `contact/page.tsx` | WhatsApp contact link |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Client | `layout.tsx` | Optional Plausible domain. When set, the analytics script is injected into the root layout. |
 
@@ -59,20 +59,20 @@ last-verified: 2026-03-31
 
 | Variable | Development | Preview | Production |
 |----------|-------------|---------|------------|
-| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` | Optional if Vercel fallback is acceptable | `https://blackmalejournal.com` or `https://blackmalejournal.vercel.app` until the custom domain is live |
+| `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` | Optional if Vercel fallback is acceptable | `https://blackmalejournal.org` or `https://blackmalejournal.vercel.app` until the custom domain is live |
 | `STRIPE_WEBHOOK_SECRET` | Local Stripe CLI or dev endpoint secret | Preview webhook secret | Production webhook secret |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Unset | Usually unset | `blackmalejournal.com` |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Unset | Usually unset | `blackmalejournal.org` |
 
 ## Callback and Webhook URLs
 
 - Supabase auth callback:
   - `http://localhost:3000/auth/callback`
   - `https://<preview-domain>/auth/callback`
-  - `https://blackmalejournal.com/auth/callback`
+  - `https://blackmalejournal.org/auth/callback`
 - Stripe webhook endpoint:
   - `http://localhost:3000/api/stripe/webhook` when using a local tunnel or Stripe CLI
   - `https://<preview-domain>/api/stripe/webhook`
-  - `https://blackmalejournal.com/api/stripe/webhook`
+  - `https://blackmalejournal.org/api/stripe/webhook`
 
 ---
 

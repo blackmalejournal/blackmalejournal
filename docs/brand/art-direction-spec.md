@@ -3,7 +3,7 @@ title: BMJ art direction spec
 authority: reference
 status: canonical
 audience: [designers, engineers, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Black Male Journal — Visual Tone & Art Direction Spec

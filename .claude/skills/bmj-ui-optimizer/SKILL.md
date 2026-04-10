@@ -9,7 +9,7 @@ Make every page usable, accessible, and visually polished across devices.
 
 ## Doc context (Tier A/B)
 
-[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/brand/invariants.md](../../docs/brand/invariants.md), [docs/brand/VISUAL-SSOT.md](../../docs/brand/VISUAL-SSOT.md), `.claude/rules/brand.md` — do not paraphrase palette or prohibited styles; read those files for disputes.
+[AGENTS.md](../../AGENTS.md), [CLAUDE.md](../../CLAUDE.md), [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md). **Task-scoped:** [docs/brand/invariants.md](../../docs/brand/invariants.md), [docs/brand/visual-ssot.md](../../docs/brand/visual-ssot.md), `.claude/rules/brand.md` — do not paraphrase palette or prohibited styles; read those files for disputes.
 
 ## Brand Constraints (non-negotiable)
 

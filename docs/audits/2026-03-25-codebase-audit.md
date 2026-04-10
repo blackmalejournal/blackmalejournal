@@ -1,5 +1,7 @@
 # 2026-03-25 Codebase Audit
 
+> **Status: closed** — remediation completed; see [2026-03-25-codebase-audit-remediation-plan.md](2026-03-25-codebase-audit-remediation-plan.md) and BMJ-SSOT.md §12.
+
 This audit reviews the current BMJ repository state on `2026-03-25` with emphasis on governance alignment, quality gates, test depth, and structural risk.
 
 ## Scope

@@ -3,12 +3,12 @@ title: BMJ visual invariants
 authority: canonical
 status: canonical
 audience: [designers, engineers, agents]
-last-verified: 2026-03-31
+last-verified: 2026-04-09
 ---
 
 # BMJ Visual Invariants
 
-**Asset index, embedded previews, and colorful gallery:** [VISUAL-SSOT.md](VISUAL-SSOT.md) (normative doc SSOT) and [visual-ssot.html](visual-ssot.html) (browser gallery loading `src/styles/brand.css`).
+**Asset index and embedded previews:** [visual-ssot.md](visual-ssot.md) (normative doc SSOT).
 
 Implementation law for The Black Male Journal's visual system.
 These rules apply to all components, pages, and future contributors.
@@ -48,7 +48,7 @@ When in doubt, default to the militant print culture spec in docs/brand/art-dire
 - **BrandMark component** (`src/components/brand/BrandMark.tsx`) is the canonical inline SVG — use it instead of inline SVG paths in components
 - Logo files: `public/logos/` (PNG + SVG for each variant: color, dark, light), `public/favicon.svg`, `public/logo.svg`
 - Naming convention: `{type}-{variant}.{ext}` — e.g., `primary-color.svg`, `submark-dark.png`, `favicon-red.svg`
-- **Tagline:** "Speak the Truth. Navigate the Consequences." — displayed in Navbar (desktop) and Footer
+- **Tagline:** "Study Well. Speak the Truth. Navigate the Consequences." — displayed in Navbar (desktop) and Footer
 
 ### Surfaces & Effects
 - **NO drop shadows** — `shadow-*` Tailwind classes are prohibited on brand components

@@ -3,14 +3,14 @@
  * Skips http(s)://, mailto:, and fragment-only URLs. Does not fetch the network.
  *
  * Supports [text](<path with (parens)>) for paths that contain ")".
- * Skips docs/templates/ (copy-paste stubs with placeholder paths).
+ * Skips docs/archive/ (historical artifacts with stale internal links).
  */
 import fs from "fs";
 import path from "path";
 
 const repoRoot = process.cwd();
 const docsRoot = path.join(repoRoot, "docs");
-const templatesRoot = path.join(docsRoot, "templates");
+const archiveRoot = path.join(docsRoot, "archive");
 
 function* walkMarkdownFiles(dir) {
   if (!fs.existsSync(dir)) return;
@@ -82,7 +82,7 @@ function checkTarget(fromFile, rawUrl, failures, relFile) {
 const failures = [];
 
 for (const file of walkMarkdownFiles(docsRoot)) {
-  if (file.startsWith(templatesRoot + path.sep)) continue;
+  if (file.startsWith(archiveRoot + path.sep)) continue;
 
   const relFile = path.relative(repoRoot, file);
   const text = fs.readFileSync(file, "utf8");
@@ -98,4 +98,4 @@ if (failures.length) {
 
 let mdCount = 0;
 for (const _ of walkMarkdownFiles(docsRoot)) mdCount++;
-console.log(`OK: verified relative links in ${mdCount} Markdown file(s) under docs/ (templates/ skipped).`);
+console.log(`OK: verified relative links in ${mdCount} Markdown file(s) under docs/ (archive/ skipped).`);

@@ -7,7 +7,7 @@ allowed-tools:
   - Glob
 ---
 
-**Canonical docs:** [docs/brand/invariants.md](../../docs/brand/invariants.md), [docs/brand/VISUAL-SSOT.md](../../docs/brand/VISUAL-SSOT.md), `src/styles/brand.css`, `.claude/rules/brand.md`. **Tiers:** [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md).
+**Canonical docs:** [docs/brand/invariants.md](../../docs/brand/invariants.md), [docs/brand/visual-ssot.md](../../docs/brand/visual-ssot.md), `src/styles/brand.css`, `.claude/rules/brand.md`. **Tiers:** [docs/standards/agent-knowledge-protocol.md](../../docs/standards/agent-knowledge-protocol.md).
 
 Audit the entire project for brand compliance. Reference .claude/rules/brand.md for the full spec.
 

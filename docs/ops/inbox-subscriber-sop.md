@@ -2,7 +2,7 @@
 title: Inbox and subscriber SOP
 status: operational
 audience: [operators]
-last-verified: 2026-03-31
+last-verified: 2026-04-08
 ---
 
 # Inbox and Subscriber SOP
