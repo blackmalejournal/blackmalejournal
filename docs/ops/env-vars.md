@@ -3,7 +3,7 @@ title: Environment variables reference
 authority: canonical
 status: canonical
 audience: [engineers, operators, agents]
-last-verified: 2026-04-10
+last-verified: 2026-04-11
 ---
 
 # Environment Variables Reference
@@ -59,18 +59,20 @@ last-verified: 2026-04-10
 | `E2E_PREMIUM_EMAIL` | Local / CI secret | `playwright.config.ts`, `tests/e2e/authenticated/premium.setup.ts` | Premium-tier test user email (with `E2E_PREMIUM_PASSWORD`). |
 | `E2E_PREMIUM_PASSWORD` | Local / CI secret | Same as above | Password for the premium-tier E2E account. |
 
-### GitHub Actions (`.github/workflows/ci.yml` — E2E job)
+### GitHub Actions (`.github/workflows/ci.yml`)
 
-Add these as **repository secrets** (Settings → Secrets and variables → Actions) so CI can run Supabase-backed tests instead of only the placeholder build:
+Add **repository secrets** (Settings → Secrets and variables → Actions) so CI can run Supabase-backed E2E. Full checklist, seed instructions, security boundaries, and workflow nuances (quality job vs E2E job, fork PRs): **[playwright-e2e-github-actions.md](playwright-e2e-github-actions.md)**.
+
+Summary — secrets used by CI:
 
 | Secret | Purpose |
 |--------|---------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Real project URL (same value as Vercel / local). When unset, E2E falls back to `https://placeholder.supabase.co` and login-related tests are skipped. |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key for that project. Required when `NEXT_PUBLIC_SUPABASE_URL` is real. |
-| `E2E_MEMBER_EMAIL` / `E2E_MEMBER_PASSWORD` | Member account for “valid login” and member Playwright projects. |
-| `E2E_ADMIN_EMAIL` / `E2E_ADMIN_PASSWORD` | Optional — enables admin authenticated E2E when both set. |
-| `E2E_BASIC_EMAIL` / `E2E_BASIC_PASSWORD` | Optional — enables basic-tier authenticated E2E. |
-| `E2E_PREMIUM_EMAIL` / `E2E_PREMIUM_PASSWORD` | Optional — enables premium-tier authenticated E2E. |
+| `NEXT_PUBLIC_SUPABASE_URL` | Real project URL (Vercel / local). When unset, E2E falls back to `https://placeholder.supabase.co` and login-related tests are skipped. |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key for that project when URL is real. |
+| `NEXT_PUBLIC_SITE_URL` | **Quality** job: `check:no-test-users` (with `SUPABASE_SERVICE_ROLE_KEY`) when verifying production has no test accounts. Not the same value as the E2E job’s localhost site URL. |
+| `SUPABASE_SERVICE_ROLE_KEY` | **Quality** job only for `check:no-test-users` — never pass to the E2E job. |
+| `E2E_MEMBER_EMAIL` / `E2E_MEMBER_PASSWORD` | Member account for “valid login” (`auth-flow.spec.ts`) and member Playwright projects. |
+| `E2E_ADMIN_*`, `E2E_BASIC_*`, `E2E_PREMIUM_*` | Optional — enable matching Playwright projects when both email and password are set. |
 
 Fork pull requests do not receive repository secrets; E2E continues to use placeholders and skips tests that need a live Supabase host.
 

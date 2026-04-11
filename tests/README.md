@@ -42,7 +42,7 @@ Unauthenticated specs run in the default `chromium` project. Authenticated specs
 | `authenticated/basic-*.spec.ts` | `chromium-basic` | `E2E_BASIC_EMAIL`, `E2E_BASIC_PASSWORD` |
 | `authenticated/premium-*.spec.ts` | `chromium-premium` | `E2E_PREMIUM_EMAIL`, `E2E_PREMIUM_PASSWORD` |
 
-`auth-flow.spec.ts` exercises login when `NEXT_PUBLIC_SUPABASE_URL` is not the CI placeholder and member credentials are set; see [docs/ops/env-vars.md](../docs/ops/env-vars.md) (GitHub Actions subsection) for repository secrets used by `.github/workflows/ci.yml`.
+`auth-flow.spec.ts` exercises login when `NEXT_PUBLIC_SUPABASE_URL` is not the CI placeholder and member credentials are set. **Full wiring guide:** [docs/ops/playwright-e2e-github-actions.md](../docs/ops/playwright-e2e-github-actions.md). Variable list: [docs/ops/env-vars.md](../docs/ops/env-vars.md) (GitHub Actions subsection).
 
 **Test accounts:** seed with `supabase/seed-test-users.sql` (local/staging only). See `.env.example` for credential defaults. Run `npm run check:no-test-users` before any production deploy.
 
