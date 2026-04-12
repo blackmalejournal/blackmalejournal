@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { PATHS } from '@/lib/paths';
+import { Button, ButtonLink } from '@/components/ui/Button';
 
 export default function PublicError({
   error,
@@ -35,12 +35,12 @@ export default function PublicError({
       </p>
 
       <div className="flex flex-col items-center gap-4 sm:flex-row">
-        <button onClick={reset} className="btn-ghost">
+        <Button onClick={reset} variant="ghost">
           Try Again
-        </button>
-        <Link href={PATHS.HOME} className="btn-secondary">
+        </Button>
+        <ButtonLink href={PATHS.HOME} variant="secondary">
           Back to Home
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

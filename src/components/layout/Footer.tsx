@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { NewsletterForm } from './NewsletterForm';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { ButtonLink } from '@/components/ui/Button';
 import { FOOTER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
 import { PATHS } from '@/lib/paths';
 import {
@@ -53,14 +54,14 @@ export function Footer() {
               <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
                 Support the Work
               </p>
-              <a
+              <ButtonLink
                 href={SUPPORT_PATREON_URL}
-                className="inline-block self-start border border-bmj-amber/40 bg-bmj-amber/10 px-5 py-2 font-label text-xs uppercase tracking-label text-bmj-cream no-underline transition-[border-color,background-color,color,transform] duration-200 hover:-translate-y-px hover:border-bmj-amber hover:bg-bmj-amber/20 hover:text-bmj-white"
-                target="_blank"
-                rel="noopener noreferrer"
+                external
+                variant="amber"
+                size="sm"
               >
                 Patreon — Join the Inner Circle
-              </a>
+              </ButtonLink>
             </div>
 
             {/* Direct support */}
@@ -116,7 +117,7 @@ export function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="border border-bmj-tan/20 p-2 text-bmj-tan transition-[border-color,color,background-color] duration-200 hover:border-bmj-red/50 hover:bg-bmj-black/30 hover:text-bmj-cream"
+                  className="border border-bmj-tan/20 p-2 text-bmj-tan transition-[border-color,color,background-color,box-shadow] duration-200 hover:border-bmj-red/50 hover:bg-bmj-black/30 hover:text-bmj-cream hover:shadow-[0_0_8px_rgba(192,40,31,0.3)]"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

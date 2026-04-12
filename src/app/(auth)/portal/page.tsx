@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById, getLatestArticles } from '@/lib/supabase/queries';
+import { ButtonLink } from '@/components/ui/Button';
 import { TierBadge } from '@/components/portal/TierBadge';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { formatDate } from '@/lib/utils';
@@ -144,12 +145,9 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
               ? 'Upgrade to Basic or Premium to access the full archive.'
               : 'Upgrade to Premium for complete access to everything.'}
           </p>
-          <Link
-            href={PATHS.PRICING}
-            className="inline-block bg-bmj-red px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-white no-underline transition-opacity hover:opacity-90"
-          >
+          <ButtonLink href={PATHS.PRICING} variant="primary">
             Upgrade Now
-          </Link>
+          </ButtonLink>
         </section>
       )}
 
@@ -183,42 +181,24 @@ export default async function PortalPage({ searchParams }: PortalPageProps) {
 
       {/* Quick links */}
       <div className="flex flex-wrap gap-4 py-10">
-        <Link
-          href={PATHS.PORTAL_BOOKMARKS}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        <ButtonLink href={PATHS.PORTAL_BOOKMARKS} variant="ghost">
           Saved{bookmarkCount > 0 ? ` (${bookmarkCount})` : ''}
-        </Link>
-        <Link
-          href={PATHS.PORTAL_SETTINGS}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.PORTAL_SETTINGS} variant="ghost">
           Settings
-        </Link>
-        <Link
-          href={PATHS.BRIEFINGS}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.BRIEFINGS} variant="ghost">
           Briefings
-        </Link>
-        <Link
-          href={PATHS.ACADEMY}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.ACADEMY} variant="ghost">
           Academy
-        </Link>
-        <Link
-          href={PATHS.HANDBOOKS}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.HANDBOOKS} variant="ghost">
           Handbooks
-        </Link>
-        <Link
-          href={PATHS.DOWNLOADS}
-          className="border border-bmj-tan/30 px-6 py-3 font-label text-xs uppercase tracking-widest text-bmj-cream no-underline transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.DOWNLOADS} variant="ghost">
           Downloads
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

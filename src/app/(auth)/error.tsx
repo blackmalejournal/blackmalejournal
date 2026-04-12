@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { PATHS } from '@/lib/paths';
+import { Button, ButtonLink } from '@/components/ui/Button';
 
 export default function AuthError({
   reset,
@@ -29,18 +29,12 @@ export default function AuthError({
       </p>
 
       <div className="flex flex-col items-center gap-4 sm:flex-row">
-        <button
-          onClick={reset}
-          className="border border-bmj-red bg-bmj-red/10 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:bg-bmj-red hover:text-bmj-white"
-        >
+        <Button onClick={reset} variant="secondary">
           Try Again
-        </button>
-        <Link
-          href={PATHS.PORTAL}
-          className="inline-block border border-bmj-tan/40 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </Button>
+        <ButtonLink href={PATHS.PORTAL} variant="ghost">
           Back to Portal
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

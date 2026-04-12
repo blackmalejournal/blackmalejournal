@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { compareTiers, includesTier } from '@/lib/membership';
 import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById } from '@/lib/supabase/queries';
 import { BrandMark } from '@/components/brand/BrandMark';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { ButtonLink } from '@/components/ui/Button';
 import { PATHS, withQuery } from '@/lib/paths';
 import type { MemberTier } from '@/lib/supabase/types';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -101,13 +101,6 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
                 tier: plan.id === 'free' ? undefined : plan.id,
                 next,
               });
-          const ctaClass = `mt-8 inline-flex items-center justify-center px-6 py-3 font-label text-xs uppercase tracking-label transition-colors no-underline ${
-            isCurrentPlan || isIncludedPlan
-              ? 'border border-bmj-tan/40 text-bmj-tan'
-              : plan.id === 'premium'
-                ? 'btn-primary'
-                : 'btn-ghost'
-          }`;
           const ctaLabel = isCurrentPlan
             ? 'Current Plan'
             : isIncludedPlan && memberTier
@@ -142,11 +135,17 @@ export default async function PricingPage({ searchParams }: PricingPageProps) {
               </ul>
 
               {canChoosePlan ? (
-                <Link href={href} className={ctaClass}>
+                <ButtonLink
+                  href={href}
+                  variant={plan.id === 'premium' ? 'primary' : 'ghost'}
+                  className="mt-8"
+                >
                   {ctaLabel}
-                </Link>
+                </ButtonLink>
               ) : (
-                <span className={ctaClass}>{ctaLabel}</span>
+                <span className="mt-8 inline-flex items-center justify-center border border-bmj-tan/40 px-6 py-3 font-label text-xs uppercase tracking-label text-bmj-tan">
+                  {ctaLabel}
+                </span>
               )}
             </section>
           );

@@ -6,6 +6,7 @@ import { getLensTheme } from "@/lib/lens-theme";
 import type { Lens } from "@/lib/supabase/types";
 import { PATHS, withQuery } from "@/lib/paths";
 import { cn } from "@/lib/utils";
+import { ButtonLink } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Records",
@@ -144,13 +145,13 @@ export default function RecordsPage() {
         </p>
         <div className="flex flex-wrap gap-4">
           {lenses.map(({ label, href }) => (
-            <Link
+            <ButtonLink
               key={href}
               href={href}
-              className="btn-ghost"
+              variant="ghost"
             >
               {label}
-            </Link>
+            </ButtonLink>
           ))}
         </div>
       </section>
@@ -166,12 +167,9 @@ export default function RecordsPage() {
           No sponsors. No advertisers. The Black Male Journal runs on direct
           reader support. If this work matters to you, fund it.
         </p>
-        <Link
-          href={PATHS.SUPPORT}
-          className="btn-primary inline-block px-8 py-4 text-sm"
-        >
+        <ButtonLink href={PATHS.SUPPORT} variant="primary" size="lg">
           Support the Mission
-        </Link>
+        </ButtonLink>
       </section>
     </div>
   );

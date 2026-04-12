@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getDispatchesForListing } from '@/lib/supabase/queries';
+import { ButtonLink } from '@/components/ui/Button';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { DispatchCard } from '@/components/content/DispatchCard';
 import { PATHS, withQuery } from '@/lib/paths';
@@ -80,22 +80,22 @@ export default async function DispatchesPage({
           {(hasNext || hasPrev) && (
             <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
               {hasPrev && (
-                <Link
+                <ButtonLink
                   href={withQuery(PATHS.BLOG, {
                     page: page > 2 ? String(page - 1) : undefined,
                   })}
-                  className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                  variant="ghost"
                 >
                   &larr; Newer posts
-                </Link>
+                </ButtonLink>
               )}
               {hasNext && (
-                <Link
+                <ButtonLink
                   href={withQuery(PATHS.BLOG, { page: String(page + 1) })}
-                  className="inline-block border border-bmj-tan/40 px-8 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
+                  variant="ghost"
                 >
                   Older posts &rarr;
-                </Link>
+                </ButtonLink>
               )}
             </div>
           )}

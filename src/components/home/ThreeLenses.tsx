@@ -74,18 +74,18 @@ export function ThreeLenses() {
                 key={lens.slug}
                 href={withQuery(PATHS.ARTICLES, { lens: lens.slug })}
                 className={cn(
-                  "group card-media block p-8 no-underline",
+                  "group card-media block p-8 no-underline transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg",
                   theme.cardBorderTop,
                   theme.hoverBorder,
                 )}
               >
-                <p className={cn("mb-3 font-label text-xs uppercase tracking-label", theme.accentText)}>
+                <p className={cn("mb-3 font-label text-xs uppercase tracking-label transition-colors duration-200 group-hover:text-bmj-white", theme.accentText)}>
                   {lens.label}
                 </p>
                 <h3 className="mb-4 font-display text-2xl uppercase tracking-display text-bmj-white">
                   {lens.tagline}
                 </h3>
-                <p className="font-body text-sm leading-relaxed text-bmj-cream/70">
+                <p className="font-body text-sm leading-relaxed text-bmj-cream/70 transition-colors duration-200 group-hover:text-bmj-cream/90">
                   {lens.description}
                 </p>
               </Link>

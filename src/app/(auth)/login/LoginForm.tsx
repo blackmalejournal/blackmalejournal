@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { login, signInWithMagicLink } from '../actions';
 import { PATHS, withQuery } from '@/lib/paths';
+import { Button } from '@/components/ui/Button';
 
 interface LoginFormProps {
   nextHref?: string;
@@ -98,9 +99,9 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             />
           </div>
 
-          <button type="submit" className="btn-primary w-full py-3 text-sm">
+          <Button type="submit" variant="primary" fullWidth>
             Log In
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -131,9 +132,9 @@ export function LoginForm({ nextHref }: LoginFormProps) {
             />
           </div>
 
-          <button type="submit" className="btn-primary w-full py-3 text-sm">
+          <Button type="submit" variant="primary" fullWidth>
             Send Magic Link
-          </button>
+          </Button>
         </form>
       </div>
 

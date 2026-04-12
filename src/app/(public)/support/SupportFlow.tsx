@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { isValidEmailAddress, normalizeEmailAddress } from '@/lib/email';
 import { calculateFeeAdjustedAmount } from '@/lib/utils';
+import { Button } from '@/components/ui/Button';
 
 const PRESETS = [
   { amount: 5, label: '$5' },
@@ -364,16 +365,18 @@ export function SupportFlow() {
         onEmailChange={setNewsletterEmail}
       />
       {status === 'error' && <p className="font-mono text-xs text-bmj-red">{errorMsg}</p>}
-      <button
-        type="button"
+      <Button
+        variant="primary"
+        fullWidth
+        size="lg"
+        loading={status === 'loading'}
+        disabled={activeAmount < 1}
         onClick={() => submit({ activeAmount, frequency, coverFees, note, subscribeNewsletter, newsletterEmail })}
-        disabled={status === 'loading' || activeAmount < 1}
-        className="w-full bg-bmj-red py-4 font-label text-sm uppercase tracking-widest text-bmj-white transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'loading'
           ? 'Redirecting to checkout...'
           : `Support BMJ \u2014 $${activeAmount >= 1 ? (coverFees ? feeAdjusted.toFixed(2) : activeAmount.toFixed(2)) : '0.00'}${frequency === 'monthly' ? '/mo' : ''}`}
-      </button>
+      </Button>
       <p className="text-center font-mono text-micro text-bmj-tan/50">
         Secure payment via Stripe. Apple Pay &amp; Google Pay accepted.
       </p>

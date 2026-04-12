@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import Link from 'next/link';
 import { getArticlesForListing, getArticleTagFacets } from '@/lib/supabase/queries';
+import { ButtonLink } from '@/components/ui/Button';
 import { extractTags, calculateReadingTime } from '@/lib/utils';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -136,28 +136,28 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
           {(hasNext || hasPrev) && (
             <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
               {hasPrev && (
-                <Link
+                <ButtonLink
                   href={withQuery(PATHS.ARTICLES, {
                     lens: activeLens ?? undefined,
                     tag: activeTag ?? undefined,
                     page: page > 2 ? String(page - 1) : undefined,
                   })}
-                  className="btn-ghost"
+                  variant="ghost"
                 >
                   Newer articles
-                </Link>
+                </ButtonLink>
               )}
               {hasNext && (
-                <Link
+                <ButtonLink
                   href={withQuery(PATHS.ARTICLES, {
                     lens: activeLens ?? undefined,
                     tag: activeTag ?? undefined,
                     page: String(page + 1),
                   })}
-                  className="btn-ghost"
+                  variant="ghost"
                 >
                   Older articles
-                </Link>
+                </ButtonLink>
               )}
             </div>
           )}

@@ -6,6 +6,7 @@ import { X } from 'lucide-react';
 import { signOut } from '@/app/(auth)/actions';
 import { HEADER_NAV_LINKS, SOCIAL_LINKS } from '@/lib/nav';
 import { PATHS } from '@/lib/paths';
+import { Button, ButtonLink } from '@/components/ui/Button';
 import type { NavUser } from './Navbar';
 
 interface MobileMenuProps {
@@ -81,29 +82,30 @@ export function MobileMenu({ isOpen, onClose, user = null }: MobileMenuProps) {
             {/* Auth CTA */}
             {user ? (
               <form action={signOut} className="mb-8">
-                <button
+                <Button
                   type="submit"
-                  className="btn-secondary block w-full py-3 text-center text-sm"
+                  variant="secondary"
+                  fullWidth
                 >
                   Log Out
-                </button>
+                </Button>
               </form>
             ) : (
               <div className="mb-8 flex flex-col gap-3">
-                <Link
+                <ButtonLink
                   href={PATHS.SIGNUP}
-                  onClick={onClose}
-                  className="btn-primary block py-3 text-center text-sm"
+                  variant="primary"
+                  fullWidth
                 >
                   Join
-                </Link>
-                <Link
+                </ButtonLink>
+                <ButtonLink
                   href={PATHS.LOGIN}
-                  onClick={onClose}
-                  className="btn-secondary block py-3 text-center text-sm"
+                  variant="secondary"
+                  fullWidth
                 >
                   Log In
-                </Link>
+                </ButtonLink>
               </div>
             )}
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { signup } from '../actions';
 import { TierSelector, type TierId } from './TierSelector';
 import { PATHS, withQuery } from '@/lib/paths';
+import { Button } from '@/components/ui/Button';
 
 interface SignupFormProps {
   preselectedTier?: TierId;
@@ -100,9 +101,9 @@ export function SignupForm({ preselectedTier, nextHref }: SignupFormProps) {
             </div>
           )}
 
-          <button type="submit" className="btn-primary w-full py-3 text-sm">
+          <Button type="submit" variant="primary" fullWidth>
             Create Account
-          </button>
+          </Button>
         </form>
 
         <p className="mt-6 text-center font-body text-sm text-bmj-tan">

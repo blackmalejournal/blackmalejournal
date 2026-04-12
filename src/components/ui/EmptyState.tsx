@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { ButtonLink } from '@/components/ui/Button';
 
 interface EmptyStateProps {
   heading: string;
@@ -22,12 +22,9 @@ export function EmptyState({ heading, description, actionLabel, actionHref }: Em
       <h2 className="font-display text-2xl text-bmj-white">{heading}</h2>
       <p className="mt-2 max-w-md font-body text-sm text-bmj-tan">{description}</p>
       {actionLabel && actionHref && (
-        <Link
-          href={actionHref}
-          className="btn-ghost mt-6"
-        >
+        <ButtonLink href={actionHref} variant="ghost" className="mt-6">
           {actionLabel}
-        </Link>
+        </ButtonLink>
       )}
     </div>
   );

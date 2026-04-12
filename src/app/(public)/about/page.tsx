@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { PATHS } from '@/lib/paths';
+import { ButtonLink } from '@/components/ui/Button';
 import TributeCard from '@/components/content/TributeCard';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { getLensTheme } from '@/lib/lens-theme';
@@ -258,24 +258,15 @@ export default function AboutPage() {
           Briefing. If this publication matters to you, support it directly.
         </p>
         <div className="flex flex-wrap gap-4">
-          <Link
-            href={PATHS.ARTICLES}
-            className="btn-primary px-8 py-4 text-sm"
-          >
+          <ButtonLink href={PATHS.ARTICLES} variant="primary" size="lg">
             Read Articles
-          </Link>
-          <Link
-            href={PATHS.BRIEFINGS}
-            className="btn-ghost px-8 py-4 text-sm"
-          >
+          </ButtonLink>
+          <ButtonLink href={PATHS.BRIEFINGS} variant="ghost" size="lg">
             Weekend Briefing
-          </Link>
-          <Link
-            href={PATHS.SUPPORT}
-            className="btn-ghost px-8 py-4 text-sm"
-          >
+          </ButtonLink>
+          <ButtonLink href={PATHS.SUPPORT} variant="ghost" size="lg">
             Support the Mission
-          </Link>
+          </ButtonLink>
         </div>
       </div>
       </ScrollReveal>
