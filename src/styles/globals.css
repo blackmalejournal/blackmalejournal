@@ -89,7 +89,7 @@
 /* ─── Utility classes ──────────────────────────────────────── */
 @layer utilities {
   /* ─── Enhanced Transition Classes ─────────────────────────── */
-  
+
   /* Smooth transition for interactive elements */
   .transition-smooth {
     transition-property: color, background-color, border-color, box-shadow, transform, opacity;
@@ -112,17 +112,17 @@
   }
 
   /* ─── Shadow & Depth Classes ──────────────────────────────── */
-  
+
   /* Subtle elevation — cards at rest */
   .shadow-elevation-1 {
-    box-shadow: 
+    box-shadow:
       0 1px 2px rgba(0, 0, 0, 0.3),
       0 1px 3px rgba(0, 0, 0, 0.15);
   }
 
   /* Medium elevation — cards on hover */
   .shadow-elevation-2 {
-    box-shadow: 
+    box-shadow:
       0 4px 6px rgba(0, 0, 0, 0.35),
       0 2px 4px rgba(0, 0, 0, 0.2),
       0 0 0 1px rgba(184, 152, 106, 0.08);
@@ -130,7 +130,7 @@
 
   /* High elevation — modals, dropdowns */
   .shadow-elevation-3 {
-    box-shadow: 
+    box-shadow:
       0 10px 25px rgba(0, 0, 0, 0.45),
       0 6px 10px rgba(0, 0, 0, 0.3),
       0 0 0 1px rgba(184, 152, 106, 0.1);
@@ -138,14 +138,14 @@
 
   /* Brand glow — subtle red ambient */
   .shadow-glow-red {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(192, 40, 31, 0.15),
       0 0 40px rgba(192, 40, 31, 0.08);
   }
 
   /* Amber glow for premium elements */
   .shadow-glow-amber {
-    box-shadow: 
+    box-shadow:
       0 0 20px rgba(200, 133, 42, 0.15),
       0 0 40px rgba(200, 133, 42, 0.08);
   }
@@ -156,7 +156,7 @@
   }
 
   /* ─── Hover Transform Classes ─────────────────────────────── */
-  
+
   /* Lift on hover — standard cards */
   .hover-lift {
     transition: transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -190,7 +190,7 @@
   }
 
   /* ─── Underline Animation ─────────────────────────────────── */
-  
+
   .underline-animate {
     position: relative;
   }
@@ -211,7 +211,7 @@
   }
 
   /* ─── Glass Effect ────────────────────────────────────────── */
-  
+
   .glass {
     background: rgba(28, 19, 14, 0.8);
     backdrop-filter: blur(12px);
@@ -225,7 +225,7 @@
   }
 
   /* ─── Gradient Overlays ───────────────────────────────────── */
-  
+
   .gradient-fade-up {
     background: linear-gradient(to top, var(--bmj-black), transparent);
   }
@@ -245,7 +245,7 @@
   }
 
   /* ─── Border Glow ─────────────────────────────────────────── */
-  
+
   .border-glow {
     position: relative;
   }
@@ -366,27 +366,60 @@
   }
 
   .page-title {
-    @apply font-display text-5xl uppercase tracking-section text-bmj-white sm:text-6xl lg:text-7xl;
+    @apply font-display uppercase tracking-section text-bmj-white;
+    font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    line-height: 1.05;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   .section-title {
-    @apply font-display text-4xl uppercase tracking-section text-bmj-white md:text-5xl;
+    @apply font-display uppercase tracking-section text-bmj-white;
+    font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+    line-height: 1.1;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
   /* Subsection title — smaller than section, larger than card */
   .subsection-title {
-    @apply font-display text-2xl uppercase tracking-display text-bmj-white md:text-3xl;
+    @apply font-display uppercase tracking-display text-bmj-white;
+    font-size: clamp(1.5rem, 3vw + 0.25rem, 2.25rem);
+    line-height: 1.15;
   }
 
   /* Card title — compact display for cards */
   .card-title {
-    @apply font-display text-xl uppercase tracking-display leading-tight text-bmj-white;
+    @apply font-display uppercase tracking-display leading-tight text-bmj-white;
+    font-size: clamp(1.125rem, 2vw + 0.25rem, 1.5rem);
   }
 
   .editorial-deck {
-    @apply max-w-2xl font-body text-base leading-8 text-bmj-cream/80 md:text-lg;
+    @apply max-w-2xl font-body leading-8 text-bmj-cream/80;
+    font-size: clamp(1rem, 1.5vw + 0.25rem, 1.125rem);
+  }
+
+  /* Hero title — full-screen impact headlines */
+  .hero-title {
+    @apply font-display uppercase text-bmj-white;
+    font-size: clamp(2rem, 8vw + 1rem, 5rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-section);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Hero subtitle */
+  .hero-subtitle {
+    @apply font-body italic text-bmj-cream/70;
+    font-size: clamp(1rem, 4vw + 0.5rem, 2rem);
+    line-height: 1.3;
+  }
+
+  /* Section headline — for major section breaks */
+  .section-headline {
+    @apply font-display uppercase text-bmj-white;
+    font-size: clamp(1.5rem, 5vw + 0.5rem, 3rem);
+    line-height: 1.1;
+    letter-spacing: var(--tracking-section);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   }
 
   /* Lead paragraph — opening text, larger than body */
@@ -649,7 +682,7 @@
   }
 
   /* ─── Button Base ─────────────────────────────────────────── */
-  
+
   .btn-base {
     @apply inline-flex items-center justify-center font-label text-xs uppercase tracking-label no-underline;
     transition: all var(--transition-normal);
@@ -814,25 +847,47 @@ button, a, [role="button"] {
 @media (prefers-contrast: more) {
   :focus-visible {
     outline-width: 3px;
-    outline-offset: 3px;
+    outline-offset: 4px;
   }
 
-  .btn-primary {
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost,
+  .btn-amber,
+  .btn-outline {
     border-width: 2px;
+    font-weight: 600;
   }
 
   .card-media,
   .card-stripe,
-  .card-feature {
+  .card-feature,
+  .card-offer {
     border-width: 2px;
+  }
+
+  .nav-link::after {
+    height: 3px;
+  }
+
+  .filter-tab::after {
+    height: 4px;
   }
 
   body {
     text-shadow: none;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     text-shadow: none;
+  }
+
+  /* Increase text contrast */
+  .editorial-kicker,
+  .meta-stamp,
+  .byline {
+    opacity: 1;
+    color: var(--bmj-cream);
   }
 }
 
@@ -855,8 +910,10 @@ button, a, [role="button"] {
   /* Mobile: Increase touch target sizes */
   button,
   a[role="button"],
+  .btn-base,
   .btn-icon,
   .filter-chip,
+  .filter-tab,
   .nav-link {
     min-height: 48px;
     min-width: 48px;

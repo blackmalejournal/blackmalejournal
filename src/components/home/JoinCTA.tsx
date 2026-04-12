@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { ButtonLink } from "@/components/ui/Button";
 import { PATHS, withQuery } from "@/lib/paths";
 
 export function JoinCTA() {
@@ -19,18 +19,12 @@ export function JoinCTA() {
         />
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href={PATHS.SIGNUP}
-            className="btn-secondary btn-lg"
-          >
+          <ButtonLink href={PATHS.SIGNUP} variant="secondary" size="lg">
             Subscribe Free
-          </Link>
-          <Link
-            href={withQuery(PATHS.SIGNUP, { tier: 'premium' })}
-            className="btn-primary btn-lg"
-          >
+          </ButtonLink>
+          <ButtonLink href={withQuery(PATHS.SIGNUP, { tier: 'premium' })} variant="primary" size="lg">
             Go Premium
-          </Link>
+          </ButtonLink>
         </div>
       </div>
     </section>

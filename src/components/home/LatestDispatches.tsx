@@ -1,8 +1,9 @@
 // src/components/home/LatestDispatches.tsx
-import Link from 'next/link';
 import { DispatchCard } from '@/components/content/DispatchCard';
+import { ButtonLink } from '@/components/ui/Button';
 import { PATHS } from '@/lib/paths';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import type { DispatchListItem } from '@/lib/supabase/types';
 
 interface LatestDispatchesProps {
@@ -26,15 +27,16 @@ export function LatestDispatches({ dispatches }: LatestDispatchesProps) {
 
         {dispatches.length > 0 ? (
           <div className="mx-auto max-w-article space-y-4">
-            {dispatches.map((dispatch) => (
-              <DispatchCard
-                key={dispatch.id}
-                title={dispatch.title}
-                slug={dispatch.slug}
-                lens={dispatch.lens}
-                excerpt={dispatch.excerpt}
-                publishedAt={dispatch.published_at}
-              />
+            {dispatches.map((dispatch, i) => (
+              <ScrollReveal key={dispatch.id} delay={i * 0.08} direction="up">
+                <DispatchCard
+                  title={dispatch.title}
+                  slug={dispatch.slug}
+                  lens={dispatch.lens}
+                  excerpt={dispatch.excerpt}
+                  publishedAt={dispatch.published_at}
+                />
+              </ScrollReveal>
             ))}
           </div>
         ) : (
@@ -45,12 +47,9 @@ export function LatestDispatches({ dispatches }: LatestDispatchesProps) {
 
         {dispatches.length > 0 && (
           <div className="mt-10 text-center">
-            <Link
-              href={PATHS.BLOG}
-              className="btn-ghost"
-            >
+            <ButtonLink href={PATHS.BLOG} variant="ghost">
               All Dispatches &rarr;
-            </Link>
+            </ButtonLink>
           </div>
         )}
       </div>

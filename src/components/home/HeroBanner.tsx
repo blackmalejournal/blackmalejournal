@@ -4,6 +4,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { BrandMark } from "@/components/brand/BrandMark";
+import { ButtonLink } from "@/components/ui/Button";
 import { PATHS } from "@/lib/paths";
 
 export function HeroBanner() {
@@ -45,12 +46,13 @@ export function HeroBanner() {
           Vol. I &nbsp;&middot;&nbsp; Est. MMXXV &nbsp;&middot;&nbsp; Independent
         </motion.p>
 
-        {/* Main headline */}
+        {/* Main headline with breathing letter-spacing */}
         <motion.h1
           initial={slideUp30.initial}
           animate={{ opacity: 1, y: 0 }}
           transition={slideUp30.transition}
-          className="font-display text-6xl leading-none tracking-wide text-bmj-white sm:text-7xl md:text-9xl"
+          whileHover={prefersReduced ? undefined : { letterSpacing: '0.12em', transition: { duration: 0.6 } }}
+          className="font-display text-6xl leading-none tracking-wide text-bmj-white transition-[letter-spacing] duration-700 sm:text-7xl md:text-9xl"
         >
           THE BLACK MALE JOURNAL
         </motion.h1>
@@ -83,12 +85,9 @@ export function HeroBanner() {
           </p>
 
           <div className="mt-12">
-            <Link
-              href={PATHS.BRIEFINGS}
-              className="inline-block btn-primary btn-lg"
-            >
+            <ButtonLink href={PATHS.BRIEFINGS} variant="primary" size="lg">
               Read the Latest Briefing
-            </Link>
+            </ButtonLink>
           </div>
         </motion.div>
       </div>

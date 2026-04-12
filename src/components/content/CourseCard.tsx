@@ -30,9 +30,9 @@ export function CourseCard({
   const card = (
     <article
       className={[
-        'flex flex-col border-t-[3px] border-t-bmj-red border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200',
+        'group flex flex-col card-media border-t-bmj-red',
         published
-          ? 'hover:-translate-y-1 hover:border-bmj-red/60'
+          ? 'hover:border-bmj-red/60'
           : 'opacity-60 cursor-default',
       ].join(' ')}
     >
@@ -42,8 +42,12 @@ export function CourseCard({
           src={coverImage || PLACEHOLDERS.course}
           alt={title}
           fill
-          className="halftone object-cover"
+          className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
+          aria-hidden="true"
         />
         {!published && (
           <div className="absolute inset-0 flex items-center justify-center bg-bmj-black/70">

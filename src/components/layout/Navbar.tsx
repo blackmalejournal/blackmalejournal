@@ -8,6 +8,7 @@ import { MobileMenu } from './MobileMenu';
 import { UserDropdown } from './UserDropdown';
 import { SearchDialog } from '@/components/ui/SearchDialog';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { ButtonLink } from '@/components/ui/Button';
 import { HEADER_NAV_LINKS } from '@/lib/nav';
 import { PATHS } from '@/lib/paths';
 import { SCROLL_THRESHOLD_NAV } from '@/lib/constants';
@@ -117,12 +118,13 @@ export function Navbar({ user = null }: NavbarProps) {
                 >
                   Log In
                 </Link>
-                <Link
+                <ButtonLink
                   href={PATHS.SIGNUP}
-                  className="hidden btn-primary sm:block"
+                  variant="primary"
+                  className="hidden sm:inline-flex"
                 >
                   Join
-                </Link>
+                </ButtonLink>
               </>
             )}
 

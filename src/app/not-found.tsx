@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { ButtonLink } from '@/components/ui/Button';
 import { PATHS } from '@/lib/paths';
 
 export const metadata: Metadata = {
@@ -32,15 +32,12 @@ export default function NotFound() {
       </p>
 
       <div className="flex flex-col items-center gap-4 sm:flex-row">
-        <Link href={PATHS.HOME} className="btn-primary btn-lg">
+        <ButtonLink href={PATHS.HOME} variant="primary" size="lg">
           Return to the Front Page
-        </Link>
-        <Link
-          href={PATHS.RECORDS}
-          className="inline-block border border-bmj-tan/40 px-6 py-3 font-label text-sm uppercase tracking-widest text-bmj-cream transition-colors hover:border-bmj-red hover:text-bmj-white"
-        >
+        </ButtonLink>
+        <ButtonLink href={PATHS.RECORDS} variant="outline">
           Browse the Records
-        </Link>
+        </ButtonLink>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { calculateReadingTime } from '@/lib/utils';
 import { articleJsonLd } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
+import { LensSection, LensKicker, getLensTheme } from '@/components/content/LensSection';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { RelatedArticles } from '@/components/content/RelatedArticles';
 import { ArticleBody } from '@/components/content/ArticleBody';
@@ -73,7 +74,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   const previewBody = article.body.slice(0, 300);
 
   return (
-    <div className="mx-auto max-w-wide">
+    <LensSection lens={article.lens} className="mx-auto max-w-wide">
       <JsonLd
         data={articleJsonLd({
           title: article.title,
@@ -97,6 +98,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       {/* Article header */}
       <ScrollReveal as="div">
       <header className="mx-auto max-w-content px-4 pt-8 sm:px-6 lg:px-8">
+        <LensKicker lens={article.lens} className="mb-3 block">
+          {getLensTheme(article.lens).label}
+        </LensKicker>
         <LensBadge lens={article.lens} className="mb-4" />
 
         <h1 className="mb-4 font-display text-4xl leading-tight text-bmj-white sm:text-5xl lg:text-6xl">
@@ -163,6 +167,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <RelatedArticles articles={relatedFiltered} lens={article.lens} />
       </div>
       </ScrollReveal>
-    </div>
+    </LensSection>
   );
 }

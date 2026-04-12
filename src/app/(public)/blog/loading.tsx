@@ -1,18 +1,19 @@
-import { SkeletonCard } from '@/components/ui/Skeleton';
+import { Skeleton, SkeletonDispatchCard } from '@/components/ui/Skeleton';
 
 export default function DispatchesLoading() {
   return (
     <div className="mx-auto max-w-content px-6 py-20" aria-busy="true">
       <div className="mb-12 space-y-4">
-        <div className="h-12 w-48 animate-pulse bg-bmj-tan/10" />
-        <div className="h-4 w-96 max-w-full animate-pulse bg-bmj-tan/10" />
+        <Skeleton shimmer className="h-3 w-20" />
+        <Skeleton shimmer className="h-12 w-48" />
+        <Skeleton shimmer className="h-4 w-96 max-w-full" />
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto max-w-article space-y-4">
         {Array.from({ length: 6 }).map((_, i) => (
-          <SkeletonCard key={i} />
+          <SkeletonDispatchCard key={i} />
         ))}
       </div>
-      <span className="sr-only" role="status">Loading…</span>
+      <span className="sr-only" role="status">Loading dispatches…</span>
     </div>
   );
 }

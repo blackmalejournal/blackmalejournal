@@ -42,14 +42,19 @@ export function ArticleCard({
 
   return (
     <article className={cn('group card-media', theme.cardBorderTop, theme.hoverBorder)}>
-      {/* Cover image */}
+      {/* Cover image with grain overlay */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
         <Image
           src={coverImage || PLACEHOLDERS.article}
           alt={coverImageAlt || title}
           fill
-          className="halftone object-cover"
+          className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        {/* Grain overlay on image */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
+          aria-hidden="true"
         />
         {isPremium && (
           <div className="absolute right-2 top-2 rounded-sm bg-bmj-black/80 p-1">

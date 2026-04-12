@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Download, Lock, FileText } from 'lucide-react';
+import { Button, ButtonLink } from '@/components/ui/Button';
 import { PATHS } from '@/lib/paths';
 import { getDownloadCategoryLabel, formatFileSize } from '@/lib/utils';
 import type { AccessTier } from '@/lib/supabase/types';
@@ -56,23 +56,24 @@ export function DownloadCard({
       {/* Action */}
       <div className="shrink-0 self-center">
         {hasAccess ? (
-          <a
+          <ButtonLink
             href={`/api/downloads/${slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary btn-sm inline-flex items-center gap-2"
+            external
+            variant="primary"
+            size="sm"
+            iconLeft={<Download size={14} />}
           >
-            <Download size={14} />
             Download
-          </a>
+          </ButtonLink>
         ) : (
-          <Link
+          <ButtonLink
             href={PATHS.PRICING}
-            className="btn-secondary btn-sm inline-flex items-center gap-2"
+            variant="secondary"
+            size="sm"
+            iconLeft={<Lock size={14} />}
           >
-            <Lock size={14} />
             Upgrade
-          </Link>
+          </ButtonLink>
         )}
       </div>
     </article>

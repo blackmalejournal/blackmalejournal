@@ -1,17 +1,15 @@
-import { SkeletonCard } from '@/components/ui/Skeleton';
+import { Skeleton, SkeletonCardGrid } from '@/components/ui/Skeleton';
 
 export default function ArticlesLoading() {
   return (
-    <div className="mx-auto max-w-content px-6 py-20">
+    <div className="mx-auto max-w-content px-6 py-20" aria-busy="true">
       <div className="mb-12 space-y-4">
-        <div className="h-12 w-48 animate-pulse bg-bmj-tan/10" />
-        <div className="h-4 w-96 animate-pulse bg-bmj-tan/10" />
+        <Skeleton shimmer className="h-3 w-20" />
+        <Skeleton shimmer className="h-12 w-48" />
+        <Skeleton shimmer className="h-4 w-96 max-w-full" />
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
-      </div>
+      <SkeletonCardGrid count={6} columns={3} />
+      <span className="sr-only" role="status">Loading articles…</span>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { PageHeader } from '@/components/layout/PageHeader';
+import { ButtonLink } from '@/components/ui/Button';
 import { PLACEHOLDERS } from '@/lib/placeholders';
 import { CAROUSEL_INTERVAL_MS } from '@/lib/constants';
 import { articlePath } from '@/lib/paths';
@@ -74,14 +75,18 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
           dividerClassName="mb-10"
         />
 
-        <div className="card-feature relative min-h-[320px] overflow-hidden sm:min-h-[400px]">
+        <motion.div
+          className="card-feature relative min-h-[320px] overflow-hidden sm:min-h-[400px]"
+          whileHover={{ scale: 1.01, boxShadow: '0 8px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(184,152,106,0.12)' }}
+          transition={{ duration: 0.2 }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={article.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: 'easeInOut' }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               className="flex min-h-[320px] flex-col sm:min-h-[400px] sm:flex-row"
             >
               {/* Image panel */}
@@ -90,8 +95,12 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
                   src={article.cover_image || PLACEHOLDERS.article}
                   alt={article.title}
                   fill
-                  className="halftone object-cover"
+                  className="halftone object-cover transition-transform duration-700 hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
+                  aria-hidden="true"
                 />
               </div>
 
@@ -116,13 +125,14 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
                   </span>
                 </div>
 
-                <Link
+                <ButtonLink
                   href={articlePath(article.slug)}
-                  className="btn-secondary self-start"
+                  variant="secondary"
+                  className="self-start"
                   aria-label="Read article"
                 >
                   Read Article
-                </Link>
+                </ButtonLink>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -150,7 +160,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

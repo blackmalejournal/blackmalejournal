@@ -1,10 +1,13 @@
 import Image from "next/image"
+import { BrandMark } from "@/components/brand/BrandMark"
 
 interface MagazineCoverHeroProps {
   title: string
   date: string
   issueNumber: number
   coverImageUrl: string
+  /** Optional lens label for the kicker */
+  lens?: string
 }
 
 export default function MagazineCoverHero({
@@ -12,44 +15,79 @@ export default function MagazineCoverHero({
   date,
   issueNumber,
   coverImageUrl,
+  lens,
 }: MagazineCoverHeroProps) {
   const formattedIssue = String(issueNumber).padStart(3, "0")
 
   return (
-    <div className="mx-auto max-w-content bg-bmj-cream">
-      {/* Header bar */}
-      <div className="flex items-center gap-3 px-6 pt-6">
-        <svg
-          className="h-7 w-7 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="var(--bmj-red)"
-        >
-          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-        </svg>
-        <h1 className="font-display text-3xl text-bmj-black sm:text-4xl md:text-5xl">
-          Weekend Briefing
-        </h1>
-      </div>
-
-      {/* Red rule */}
-      <div className="mx-6 mt-2 h-[3px] bg-bmj-red" />
-
-      {/* Date + issue */}
-      <div className="px-6 py-2">
-        <span className="font-mono text-xs uppercase tracking-widest text-bmj-brown">
-          {date} &middot; Issue No. {formattedIssue}
-        </span>
-      </div>
-
-      {/* Cover image */}
-      <div className="paper-texture relative mx-6 mb-6 aspect-[16/10] overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-bmj-black">
+      {/* Full-bleed cover image */}
+      <div className="relative h-[60vh] min-h-[400px] w-full sm:h-[70vh] lg:h-[80vh]">
         <Image
           src={coverImageUrl}
           alt={title}
           fill
-          className="halftone object-cover"
+          className="object-cover"
+          priority
+          sizes="100vw"
         />
+
+        {/* Halftone dot overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 halftone-dots"
+          aria-hidden="true"
+        />
+
+        {/* Grain overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.08] mix-blend-overlay"
+          aria-hidden="true"
+        />
+
+        {/* Gradient scrim for text readability */}
+        <div className="absolute inset-0 gradient-scrim" />
+
+        {/* "FEATURED" diagonal stamp badge */}
+        <div className="absolute right-6 top-6 sm:right-8 sm:top-8">
+          <div className="relative rotate-[-8deg]">
+            <div className="border-2 border-bmj-red bg-bmj-red/90 px-4 py-1.5 font-display text-sm uppercase tracking-label text-bmj-white shadow-elevation-2 sm:text-base">
+              Featured
+            </div>
+          </div>
+        </div>
+
+        {/* Content overlay — positioned at bottom */}
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-8 sm:px-10 sm:pb-12 lg:px-16 lg:pb-16">
+          <div className="mx-auto max-w-content">
+            {/* Small brand mark */}
+            <BrandMark size={28} color="var(--bmj-red)" className="mb-4" />
+
+            {/* Kicker label */}
+            <p className="mb-3 font-label text-stamp uppercase tracking-label-xl text-bmj-red">
+              {lens || "Weekend Briefing"}
+            </p>
+
+            {/* Headline */}
+            <h1 className="hero-title mb-4 max-w-3xl">
+              {title}
+            </h1>
+
+            {/* Metadata line */}
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-mono text-xs uppercase tracking-label-wide text-bmj-tan">
+                {date}
+              </span>
+              <span className="text-bmj-tan/40" aria-hidden="true">&middot;</span>
+              <span className="font-mono text-xs uppercase tracking-label-wide text-bmj-tan">
+                Issue No. {formattedIssue}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* Red rule below hero */}
+      <div className="h-[3px] bg-bmj-red" />
+    </section>
   )
 }

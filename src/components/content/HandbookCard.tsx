@@ -30,15 +30,19 @@ export function HandbookCard({
 
   return (
     <Link href={handbookPath(slug)} className="group no-underline">
-      <article className="flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/60 sm:flex-row">
+      <article className="card-media flex flex-col border-t-bmj-red sm:flex-row">
         {/* Cover image or icon */}
         <div className="relative aspect-[4/3] w-full overflow-hidden bg-bmj-black sm:aspect-auto sm:w-48 sm:shrink-0">
           <Image
             src={coverImage || PLACEHOLDERS.handbook}
             alt={title}
             fill
-            className="halftone object-cover"
+            className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, 192px"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
+            aria-hidden="true"
           />
           {isPremium && (
             <div className="absolute right-2 top-2">

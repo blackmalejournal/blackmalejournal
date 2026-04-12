@@ -8,6 +8,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { ArticleCard } from '@/components/content/ArticleCard';
 import NewspaperGrid from '@/components/content/NewspaperGrid';
 import { LensFilterTabs } from '@/components/content/LensFilterTabs';
+import { LensSection } from '@/components/content/LensSection';
 import { TagFilterRow } from '@/components/content/TagFilterRow';
 import type { ArticleListItem, Lens } from '@/lib/supabase/types';
 import { PATHS, withQuery } from '@/lib/paths';
@@ -91,7 +92,7 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
   const newspaperArticles = visible.slice(0, 3);
   const remainingArticles = visible.slice(3);
 
-  return (
+  const content = (
     <div className="page-shell py-16">
       <PageHeader
         label="The Archive"
@@ -164,4 +165,14 @@ export default async function ArticlesPage({ searchParams }: ArticlesPageProps) 
       )}
     </div>
   );
+
+  if (activeLens) {
+    return (
+      <LensSection lens={activeLens} accentBorder={false} tintedBackground={false}>
+        {content}
+      </LensSection>
+    );
+  }
+
+  return content;
 }
