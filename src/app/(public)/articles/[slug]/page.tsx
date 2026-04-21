@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { getArticleBySlug, getArticlesForListing } from '@/lib/supabase/queries';
 import { checkContentAccess, getAuthUser } from '@/lib/supabase/access';
 import { calculateReadingTime } from '@/lib/utils';
-import { articleJsonLd } from '@/lib/seo';
+import { articleJsonLd, dynamicOgImageUrl } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { LensSection, LensKicker, getLensTheme } from '@/components/content/LensSection';
@@ -18,6 +18,7 @@ import { BookmarkButton } from '@/components/content/BookmarkButton';
 import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { articlePath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
+import { IMAGE_SIZES } from '@/lib/images';
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -30,19 +31,26 @@ export async function generateMetadata(
   const article = await getArticleBySlug(slug);
   if (!article) return { title: 'Article Not Found' };
 
+  const ogImage = dynamicOgImageUrl({
+    title: article.title,
+    type: 'article',
+    lens: article.lens,
+    author: article.author,
+  });
+
   return {
     title: article.title,
     description: article.excerpt,
     openGraph: {
       title: article.title,
       description: article.excerpt,
-      images: article.cover_image ? [{ url: article.cover_image }] : [],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: article.title,
       description: article.excerpt,
-      images: article.cover_image ? [article.cover_image] : [],
+      images: [ogImage],
     },
   };
 }
@@ -139,6 +147,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             fill
             className="halftone-heavy object-cover"
             priority
+            sizes={IMAGE_SIZES.hero}
           />
         </div>
       )}

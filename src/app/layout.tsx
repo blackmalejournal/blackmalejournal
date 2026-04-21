@@ -5,6 +5,7 @@ import {
   Oswald,
   IBM_Plex_Mono,
   Libre_Baskerville,
+  Courier_Prime,
 } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
@@ -50,6 +51,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
+
+const courierPrime = Courier_Prime({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-typewriter",
   display: "swap",
 });
 
@@ -105,6 +113,7 @@ export default async function RootLayout({
     libreBaskerville.variable,
     oswald.variable,
     ibmPlexMono.variable,
+    courierPrime.variable,
   ].join(" ");
 
   return (

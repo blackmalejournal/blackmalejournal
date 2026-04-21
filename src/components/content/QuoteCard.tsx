@@ -30,6 +30,7 @@ export default function QuoteCard({
               src={portraitUrl}
               alt={attribution}
               fill
+              sizes="112px"
               className="halftone-heavy object-cover"
             />
           </div>

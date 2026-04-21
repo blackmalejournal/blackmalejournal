@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import { AdminNotice } from '@/components/admin/AdminNotice';
 import { DeleteButton } from '@/components/admin/DeleteButton';
+import { StatusBadge } from '@/components/admin/StatusBadge';
 import { getAllCampaigns } from '@/lib/supabase/admin-queries/campaigns';
 import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import type { CampaignStatus } from '@/lib/supabase/types';
@@ -12,25 +13,6 @@ export const metadata: Metadata = {
   title: 'Campaigns — Admin',
   robots: { index: false, follow: false },
 };
-
-// ── Status badge ────────────────────────────────────────────────────────────────
-
-const statusStyles: Record<CampaignStatus, string> = {
-  draft: 'bg-bmj-tan/20 text-bmj-tan',
-  scheduled: 'bg-[#416100]/20 text-[#416100]',
-  sent: 'bg-bmj-red/20 text-bmj-red',
-  failed: 'bg-bmj-crimson/20 text-bmj-crimson',
-};
-
-function StatusBadge({ status }: { status: CampaignStatus }) {
-  return (
-    <span
-      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${statusStyles[status]}`}
-    >
-      {status}
-    </span>
-  );
-}
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {

@@ -159,8 +159,8 @@
 
   /* Lift on hover — standard cards */
   .hover-lift {
-    transition: transform 200ms cubic-bezier(0.25, 0.1, 0.25, 1),
-                box-shadow 200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition: transform var(--transition-normal),
+                box-shadow var(--transition-normal);
   }
 
   .hover-lift:hover {
@@ -169,7 +169,7 @@
 
   /* Subtle lift — smaller elements */
   .hover-lift-sm {
-    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--transition-fast);
   }
 
   .hover-lift-sm:hover {
@@ -178,7 +178,7 @@
 
   /* Scale on hover — buttons, icons */
   .hover-scale {
-    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--transition-fast);
   }
 
   .hover-scale:hover {
@@ -510,13 +510,13 @@
   }
 
   .card-media:hover {
-    transform: translateY(-6px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-card-hover);
     border-color: var(--bmj-border-strong);
   }
 
   .card-media:active {
-    transform: translateY(-2px);
+    transform: translateY(0px);
   }
 
   .card-stripe {
@@ -530,7 +530,7 @@
   }
 
   .card-stripe:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     border-color: var(--bmj-border-strong);
   }
@@ -539,11 +539,13 @@
     border: 1px solid var(--bmj-border-strong);
     background-color: var(--bmj-surface-panel-strong);
     box-shadow: var(--shadow-card);
-    transition: box-shadow var(--transition-normal),
+    transition: transform var(--transition-normal),
+                box-shadow var(--transition-normal),
                 border-color var(--transition-normal);
   }
 
   .card-feature:hover {
+    transform: translateY(-2px);
     box-shadow: var(--shadow-card-hover);
   }
 
@@ -559,7 +561,7 @@
   }
 
   .card-offer:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: inset 0 1px 0 rgba(242, 237, 228, 0.06), var(--shadow-card-hover);
   }
 
@@ -1212,33 +1214,6 @@ picture {
 
 /* ─── Custom Typography Effects ────────────────────────────── */
 
-/* Text gradient animation for hero headlines */
-.text-gradient-animate {
-  background: linear-gradient(
-    90deg,
-    var(--bmj-white),
-    var(--bmj-red),
-    var(--bmj-amber),
-    var(--bmj-white)
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 6s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-}
-
-/* Headline with breathing letter-spacing on hover */
-.headline-breathe:hover {
-  letter-spacing: 0.1em;
-  transition: letter-spacing var(--transition-normal);
-}
-
 /* Text shadow glow for emphasis */
 .text-glow-red {
   text-shadow:
@@ -1253,16 +1228,6 @@ picture {
 }
 
 /* ─── Advanced Micro-Interactions ──────────────────────────── */
-
-/* Icon bounce animation */
-.icon-bounce:hover {
-  animation: bounce 600ms ease-out;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
 
 /* Button press feedback with scale and shadow */
 .btn-press-feedback:active {
@@ -1387,33 +1352,6 @@ picture {
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(184, 152, 106, 0.15);
-}
-
-/* Animated card borders */
-.card-border-animate {
-  position: relative;
-  background: var(--bmj-black);
-}
-
-.card-border-animate::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(90deg, var(--bmj-red), var(--bmj-amber), var(--bmj-red));
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  animation: borderShift 3s linear infinite;
-}
-
-@keyframes borderShift {
-  0% { filter: hue-rotate(0deg); opacity: 1; }
-  100% { filter: hue-rotate(360deg); opacity: 1; }
 }
 
 /* ─── Enhanced Accessibility ──────────────────────────────── */

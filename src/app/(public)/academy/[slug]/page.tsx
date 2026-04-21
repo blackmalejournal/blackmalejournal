@@ -10,6 +10,7 @@ import { LessonCard } from '@/components/content/LessonCard';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbJsonLd } from '@/lib/seo';
 import { academyCoursePath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
+import { IMAGE_SIZES } from '@/lib/images';
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -78,8 +79,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
             src={course.cover_image}
             alt={course.title}
             fill
+            priority
             className="halftone object-cover"
-            sizes="(max-width: 768px) 100vw, 720px"
+            sizes={IMAGE_SIZES.hero}
           />
         </div>
       )}
@@ -111,6 +113,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 duration={lesson.duration}
                 hasAccess={hasAccess}
                 hasVideo={!!lesson.video_url}
+                courseCoverImage={course.cover_image}
+                accentBorderClass="border-l-4 border-l-bmj-red"
               />
             ))}
           </div>

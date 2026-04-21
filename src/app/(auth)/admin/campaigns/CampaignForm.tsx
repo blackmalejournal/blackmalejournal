@@ -10,6 +10,7 @@ import {
   previewCampaignEmail,
   fetchAudienceCount,
 } from './actions';
+import { CampaignPreviewPane } from './CampaignPreviewPane';
 
 // ── Types ───────────────────────────────────────────────────────────────────────
 
@@ -65,7 +66,13 @@ export function CampaignForm({
   // Audience count display
   const [audienceCount, setAudienceCount] = useState(initialAudienceCount);
 
-  // Preview state
+  // Live preview state — mirrored onto every keystroke so the preview
+  // pane updates as the editor types.
+  const [liveTitle, setLiveTitle] = useState(campaign?.title ?? '');
+  const [liveSubject, setLiveSubject] = useState(campaign?.subject ?? '');
+  const [liveBody, setLiveBody] = useState(campaign?.body ?? '');
+
+  // Full-render iframe preview state (kept for legacy "Preview Email" button)
   const [previewHtml, setPreviewHtml] = useState<string | null>(null);
   const [previewing, setPreviewing] = useState(false);
 
@@ -127,13 +134,14 @@ export function CampaignForm({
   }
 
   return (
-    <form
-      action={formAction}
-      className="border border-bmj-red/20 bg-bmj-brown p-8"
-    >
-      {/* Hidden fields */}
-      {campaign && <input type="hidden" name="id" value={campaign.id} />}
-      <input type="hidden" name="audience_filter" value={audienceFilterJson} />
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+      <form
+        action={formAction}
+        className="border border-bmj-red/20 bg-bmj-brown p-8"
+      >
+        {/* Hidden fields */}
+        {campaign && <input type="hidden" name="id" value={campaign.id} />}
+        <input type="hidden" name="audience_filter" value={audienceFilterJson} />
 
       {state?.error && (
         <div className="mb-6 border border-bmj-red/40 bg-bmj-red/10 p-4">
@@ -158,6 +166,7 @@ export function CampaignForm({
             type="text"
             required
             defaultValue={campaign?.title ?? ''}
+            onChange={(event) => setLiveTitle(event.target.value)}
             className={inputClass}
             placeholder="Campaign title (internal)"
           />
@@ -174,6 +183,7 @@ export function CampaignForm({
             type="text"
             required
             defaultValue={campaign?.subject ?? ''}
+            onChange={(event) => setLiveSubject(event.target.value)}
             className={inputClass}
             placeholder="Email subject line"
           />
@@ -189,6 +199,7 @@ export function CampaignForm({
             name="body"
             rows={16}
             defaultValue={campaign?.body ?? ''}
+            onChange={(event) => setLiveBody(event.target.value)}
             className={inputClass}
             placeholder="Campaign email body in Markdown"
           />
@@ -300,6 +311,15 @@ export function CampaignForm({
           </Link>
         </div>
       </div>
-    </form>
+      </form>
+
+      {/* Live preview pane — renders client-side so it updates per keystroke. */}
+      <CampaignPreviewPane
+        title={liveTitle}
+        subject={liveSubject}
+        body={liveBody}
+        audienceCount={audienceCount}
+      />
+    </div>
   );
 }

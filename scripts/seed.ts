@@ -45,7 +45,7 @@ Do not let this be optional.`,
     featured: true,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-01T09:00:00Z',
   },
   {
@@ -73,7 +73,7 @@ This is the work. Not the sets and reps. The relationship with that voice.`,
     featured: false,
     access_tier: 'basic',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-15T09:00:00Z',
   },
   {
@@ -103,7 +103,7 @@ The body you build through fasting is not just leaner. It is more capable of ope
     featured: false,
     access_tier: 'premium',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-01-20T09:00:00Z',
   },
 
@@ -135,7 +135,7 @@ That is the entire practice. Unremarkable in description. Transformative in exec
     featured: true,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-28T09:00:00Z',
   },
   {
@@ -165,7 +165,7 @@ The examined life is uncomfortable. That is the point.`,
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-10T09:00:00Z',
   },
   {
@@ -193,7 +193,7 @@ What you will discover, in the silence, is what you actually think. And then the
     featured: false,
     access_tier: 'basic',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-01-05T09:00:00Z',
   },
 
@@ -227,7 +227,7 @@ The mass rally is the output of months of one-on-ones. It is not the beginning. 
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-10T09:00:00Z',
   },
   {
@@ -255,7 +255,7 @@ Do not wait for permission. Do not wait for the system to become what it was nev
     featured: false,
     access_tier: 'basic',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-01T09:00:00Z',
   },
   {
@@ -285,7 +285,7 @@ Both organizing for policy change and redirecting economic activity toward commu
     featured: false,
     access_tier: 'premium',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-01-15T09:00:00Z',
   },
 ];
@@ -312,7 +312,7 @@ const briefings = [
       },
     ],
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-03-10T09:00:00Z',
   },
   {
@@ -334,7 +334,7 @@ const briefings = [
       },
     ],
     access_tier: 'basic',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-03-03T09:00:00Z',
   },
   {
@@ -356,7 +356,7 @@ const briefings = [
       },
     ],
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-02-24T09:00:00Z',
   },
 ];
@@ -372,7 +372,7 @@ const courses = [
     category: 'health',
     access_tier: 'basic',
     published: true,
-    cover_image: null,
+    cover_image: '/placeholders/course.svg',
   },
   {
     title: 'Stoic Foundations: A 30-Day Philosophical Practice',
@@ -382,7 +382,7 @@ const courses = [
     category: 'philosophy',
     access_tier: 'free',
     published: true,
-    cover_image: null,
+    cover_image: '/placeholders/course.svg',
   },
   {
     title: 'Organizing 101: Building Power in Your Community',
@@ -392,7 +392,7 @@ const courses = [
     category: 'politics',
     access_tier: 'basic',
     published: true,
-    cover_image: null,
+    cover_image: '/placeholders/course.svg',
   },
   {
     title: 'The Reading Room: Essential Black Political Thought',
@@ -402,7 +402,7 @@ const courses = [
     category: 'philosophy',
     access_tier: 'premium',
     published: true,
-    cover_image: null,
+    cover_image: '/placeholders/course.svg',
   },
   {
     title: 'Economic Sovereignty: Money, Ownership, and Community Wealth',
@@ -412,7 +412,7 @@ const courses = [
     category: 'politics',
     access_tier: 'premium',
     published: false,
-    cover_image: null,
+    cover_image: '/placeholders/course.svg',
   },
 ];
 

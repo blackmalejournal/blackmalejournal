@@ -35,6 +35,7 @@ export default function PosterBlock({
             src={backgroundImageUrl}
             alt=""
             fill
+            sizes="100vw"
             className="duotone object-cover"
           />
         )}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { LensBadge } from "@/components/brand/LensBadge";
 import { getLensTheme } from "@/lib/lens-theme";
 import { PLACEHOLDERS } from "@/lib/placeholders";
+import { IMAGE_SIZES } from "@/lib/images";
 import { articlePath } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 import type { Lens } from "@/lib/supabase/types";
@@ -40,6 +41,8 @@ export default function NewspaperGrid({ articles }: NewspaperGridProps) {
           src={lead.cover_image || PLACEHOLDERS.article}
           alt=""
           fill
+          priority
+          sizes={IMAGE_SIZES.cardLarge}
           className="halftone object-cover transition-transform duration-300 group-hover:scale-[1.02]"
         />
         <div

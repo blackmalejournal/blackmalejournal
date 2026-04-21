@@ -27,6 +27,7 @@
   --font-body:    var(--font-libre-baskerville), 'Libre Baskerville', 'Linux Libertine', serif;
   --font-label:   var(--font-oswald), 'Oswald', sans-serif;
   --font-mono:    var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  --font-typewriter: var(--font-typewriter), 'Courier Prime', 'Courier New', Courier, monospace;
 
   /* ─── Typography scale tokens ─── */
 

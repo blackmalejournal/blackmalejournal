@@ -16,6 +16,7 @@ import { PaywallGate } from '@/components/content/PaywallGate';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { articleJsonLd, breadcrumbJsonLd } from '@/lib/seo';
 import { handbookPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
+import { IMAGE_SIZES } from '@/lib/images';
 
 interface HandbookPageProps {
   params: Promise<{ slug: string }>;
@@ -131,6 +132,7 @@ export default async function HandbookPage({ params }: HandbookPageProps) {
             fill
             className="halftone-heavy object-cover"
             priority
+            sizes={IMAGE_SIZES.hero}
           />
         </div>
       )}

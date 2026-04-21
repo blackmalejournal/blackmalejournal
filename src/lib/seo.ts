@@ -89,6 +89,27 @@ export function articleJsonLd(opts: {
   };
 }
 
+// ── Dynamic OG image URLs ───────────────────────────────────────────────────
+
+/**
+ * Build a URL pointing at the dynamic OG image route for a piece of content.
+ * Call from `generateMetadata` and spread into `openGraph.images` /
+ * `twitter.images`. The endpoint lives at `/api/og` (see route.tsx).
+ */
+export function dynamicOgImageUrl(opts: {
+  title: string;
+  type?: 'article' | 'briefing' | 'dispatch' | 'handbook' | 'course';
+  lens?: string | null;
+  author?: string | null;
+}): string {
+  const params = new URLSearchParams();
+  params.set('title', opts.title);
+  if (opts.type) params.set('type', opts.type);
+  if (opts.lens) params.set('lens', opts.lens);
+  if (opts.author) params.set('author', opts.author);
+  return siteAbsoluteUrl(`/api/og?${params.toString()}`);
+}
+
 // ── JSON-LD: BreadcrumbList ─────────────────────────────────────────────────
 export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {

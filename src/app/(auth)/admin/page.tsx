@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { PATHS } from '@/lib/paths';
 import { getAdminCommandCenterSnapshot } from '@/lib/supabase/admin-queries';
 import { StarDivider } from '@/components/ui/StarDivider';
+import { BrandMark } from '@/components/brand/BrandMark';
+import { ScrollReveal } from '@/components/motion/ScrollReveal';
 import {
   KeyMetricsGrid,
   AttentionQueueSection,
@@ -118,47 +120,64 @@ export default async function AdminDashboardPage() {
 
   return (
     <div>
-      <div>
-        <h1 className="font-display text-3xl tracking-widest text-bmj-white">
-          DASHBOARD
-        </h1>
-        <p className="mt-2 max-w-3xl font-body text-sm text-bmj-cream/75">
-          Owner command center for publishing, audience, billing follow-up, and
-          inbox pressure.
-        </p>
-      </div>
-
-      <KeyMetricsGrid
-        messages={messages}
-        pipeline={pipeline}
-        members={members}
-        subscribers={subscribers}
-      />
-
-      <StarDivider className="my-6" />
-
-      <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <AttentionQueueSection items={attentionItems} />
-        <PublishingQueueSection scheduledQueue={pipeline.scheduledQueue} />
-      </div>
-
-      <div className="mt-6 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-        <EditorialPipelineSection pipeline={pipeline} />
-
-        <div className="space-y-6">
-          <AudienceBillingSection members={members} subscribers={subscribers} />
-          <RecentActivitySection activity={activity} />
-          <TopSourcesSection topSources={subscribers.topSources} />
+      <ScrollReveal as="div" direction="none">
+        <div className="flex items-start gap-4">
+          <div className="mt-1 shrink-0">
+            <BrandMark size={32} color="var(--bmj-red)" />
+          </div>
+          <div>
+            <h1 className="font-display text-3xl tracking-widest text-bmj-white">
+              DASHBOARD
+            </h1>
+            <p className="mt-2 max-w-3xl font-body text-sm text-bmj-cream/75">
+              Owner command center for publishing, audience, billing follow-up, and
+              inbox pressure.
+            </p>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
 
-      <StarDivider className="my-6" />
+      <ScrollReveal as="div" delay={0.05}>
+        <KeyMetricsGrid
+          messages={messages}
+          pipeline={pipeline}
+          members={members}
+          subscribers={subscribers}
+        />
+      </ScrollReveal>
 
-      <AdminCoverageSection contentCards={contentCards} />
+      <StarDivider className="my-12" />
 
-      <StarDivider className="my-6" />
+      <ScrollReveal as="div" delay={0.1}>
+        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+          <AttentionQueueSection items={attentionItems} />
+          <PublishingQueueSection scheduledQueue={pipeline.scheduledQueue} />
+        </div>
+      </ScrollReveal>
 
-      <QuickActionsSection />
+      <ScrollReveal as="div" delay={0.15}>
+        <div className="mt-12 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+          <EditorialPipelineSection pipeline={pipeline} />
+
+          <div className="space-y-6">
+            <AudienceBillingSection members={members} subscribers={subscribers} />
+            <RecentActivitySection activity={activity} />
+            <TopSourcesSection topSources={subscribers.topSources} />
+          </div>
+        </div>
+      </ScrollReveal>
+
+      <StarDivider className="my-12" />
+
+      <ScrollReveal as="div" delay={0.2}>
+        <AdminCoverageSection contentCards={contentCards} />
+      </ScrollReveal>
+
+      <StarDivider className="my-12" />
+
+      <ScrollReveal as="div" delay={0.25}>
+        <QuickActionsSection />
+      </ScrollReveal>
     </div>
   );
 }

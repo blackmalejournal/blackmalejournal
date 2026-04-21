@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { IMAGE_SIZES } from '@/lib/images';
 import { formatDate } from '@/lib/utils';
 
 interface VideoCardProps {
@@ -9,7 +10,7 @@ interface VideoCardProps {
 
 export function VideoCard({ title, youtubeId, publishedAt }: VideoCardProps) {
   return (
-    <article className="group flex flex-col border border-bmj-tan/20 bg-bmj-brown transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/40">
+    <article className="group flex flex-col surface-panel transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/40">
       {/* Thumbnail with play overlay */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
         <Image
@@ -17,7 +18,7 @@ export function VideoCard({ title, youtubeId, publishedAt }: VideoCardProps) {
           alt={title}
           fill
           className="halftone object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes={IMAGE_SIZES.card}
         />
         {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -38,7 +39,7 @@ export function VideoCard({ title, youtubeId, publishedAt }: VideoCardProps) {
       </div>
 
       <div className="p-6">
-        <h3 className="mb-3 line-clamp-2 font-display text-xl leading-tight text-bmj-white">
+        <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-display leading-tight text-bmj-white">
           {title}
         </h3>
         <span className="font-mono text-xs text-bmj-tan">

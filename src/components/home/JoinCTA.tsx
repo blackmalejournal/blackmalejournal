@@ -15,10 +15,11 @@ export function JoinCTA() {
           description="Get access to the Weekend Briefing, handbooks, private resources, and a growing archive built for the deliberate Black man."
           showDivider={false}
           titleClassName="mb-0"
+          className="mb-12"
           descriptionClassName="mx-auto mt-5 max-w-xl"
         />
 
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <ButtonLink href={PATHS.SIGNUP} variant="secondary" size="lg">
             Subscribe Free
           </ButtonLink>

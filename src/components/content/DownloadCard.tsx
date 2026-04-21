@@ -26,7 +26,7 @@ export function DownloadCard({
   hasAccess,
 }: DownloadCardProps) {
   return (
-    <article className="flex items-start gap-4 border border-bmj-tan/20 bg-bmj-brown p-6 transition-colors hover:border-bmj-tan/40">
+    <article className="flex items-start gap-4 surface-panel-strong p-6 transition-colors hover:border-bmj-border-strong">
       {/* File icon */}
       <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-bmj-black">
         <FileText size={24} className="text-bmj-cream/30" aria-hidden="true" />
@@ -44,7 +44,7 @@ export function DownloadCard({
           </span>
         </div>
 
-        <h3 className="mb-1 font-display text-lg text-bmj-white">
+        <h3 className="mb-1 font-display text-lg uppercase tracking-display text-bmj-white">
           {title}
         </h3>
 

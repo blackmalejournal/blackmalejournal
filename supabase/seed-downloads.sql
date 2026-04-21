@@ -2,7 +2,7 @@
 -- Safe to re-run: uses ON CONFLICT DO NOTHING.
 -- NOTE: file_url values are placeholders. Replace with Supabase Storage or CDN URLs in production.
 
-INSERT INTO public.downloads (title, slug, description, category, file_url, file_type, file_size, access_tier, published_at)
+INSERT INTO public.downloads (title, slug, description, category, file_url, file_type, file_size, access_tier, cover_image, published_at)
 VALUES
   (
     'Morning Routine Template',
@@ -13,6 +13,7 @@ VALUES
     'pdf',
     245760,
     'premium',
+    '/placeholders/download.svg',
     '2026-03-10T08:00:00Z'
   ),
   (
@@ -24,6 +25,7 @@ VALUES
     'pdf',
     184320,
     'premium',
+    '/placeholders/download.svg',
     '2026-03-05T08:00:00Z'
   ),
   (
@@ -35,6 +37,7 @@ VALUES
     'pdf',
     512000,
     'premium',
+    '/placeholders/download.svg',
     '2026-02-28T08:00:00Z'
   ),
   (
@@ -46,6 +49,7 @@ VALUES
     'pdf',
     102400,
     'basic',
+    '/placeholders/download.svg',
     '2026-02-20T08:00:00Z'
   ),
   (
@@ -57,6 +61,7 @@ VALUES
     'pdf',
     358400,
     'premium',
+    '/placeholders/download.svg',
     '2026-02-15T08:00:00Z'
   ),
   (
@@ -68,6 +73,7 @@ VALUES
     'pdf',
     409600,
     'premium',
+    '/placeholders/download.svg',
     '2026-01-30T08:00:00Z'
   )
 ON CONFLICT (slug) DO NOTHING;

@@ -94,6 +94,16 @@ export default function BrandPage() {
             </div>
           </Link>
           <Link 
+            href="/brand/movement-literature" 
+            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-white/50 hover:bg-bmj-black/50"
+          >
+            <FileText className="h-8 w-8 text-bmj-white" />
+            <div>
+              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-white">Literature Spec</p>
+              <p className="text-xs text-bmj-cream/60">Documents and presentations</p>
+            </div>
+          </Link>
+          <Link 
             href="#color-system" 
             className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-amber/50 hover:bg-bmj-black/50"
           >
@@ -111,16 +121,6 @@ export default function BrandPage() {
             <div>
               <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-tan">Typography</p>
               <p className="text-xs text-bmj-cream/60">Fonts and type scale</p>
-            </div>
-          </Link>
-          <Link 
-            href="#implementation-reference" 
-            className="group flex items-center gap-4 rounded border border-bmj-tan/20 bg-bmj-black/30 p-4 transition-colors hover:border-bmj-olive/50 hover:bg-bmj-black/50"
-          >
-            <FileText className="h-8 w-8 text-bmj-olive" />
-            <div>
-              <p className="font-label text-sm uppercase tracking-label text-bmj-white group-hover:text-bmj-olive">Implementation</p>
-              <p className="text-xs text-bmj-cream/60">CSS variables and code</p>
             </div>
           </Link>
         </div>

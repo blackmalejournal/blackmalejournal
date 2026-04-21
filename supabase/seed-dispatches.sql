@@ -18,7 +18,7 @@ Silence builds discernment. It teaches you to separate the urgent from the impor
 
 Practice it. Sit with your thoughts for a week before you share them. Watch how they change. Watch how the weak ones die and the strong ones sharpen.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-03-14T08:00:00Z'
 ),
 (
@@ -40,7 +40,7 @@ The Art of War by Sun Tzu — Strategy is not just for the battlefield.
 
 Read one per month. Take notes. Discuss with your circle. Knowledge without application is entertainment.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-03-10T08:00:00Z'
 ),
 (
@@ -64,7 +64,7 @@ A strong body builds a strong mind. The discipline required to maintain physical
 
 This is not vanity. This is infrastructure.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-03-07T08:00:00Z'
 ),
 (
@@ -84,7 +84,7 @@ Then identify one issue that affects your neighborhood directly. Housing, polici
 
 This is how power is built — from the ground up, not the top down.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-03-03T08:00:00Z'
 ),
 (
@@ -104,7 +104,7 @@ Find one man you respect and invite him to train with you. Or read with you. Or 
 
 Do not wait for community to find you. Build it.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-02-25T08:00:00Z'
 ),
 (
@@ -124,6 +124,6 @@ A member portal is coming that will give premium subscribers access to exclusive
 
 None of this happens without your support. If this work matters to you, share it with one person today.',
   'The Chairman',
-  null,
+  '/placeholders/dispatch.svg',
   '2026-02-18T08:00:00Z'
 );

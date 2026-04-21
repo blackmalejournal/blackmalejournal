@@ -54,7 +54,7 @@ Discipline is not about being harder on yourself. It is about being smarter abou
     featured: true,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-12T08:00:00Z',
   },
   {
@@ -87,7 +87,7 @@ Begin with Brazilian Jiu-Jitsu or boxing. Both are accessible, have strong commu
     featured: true,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-08T08:00:00Z',
   },
   {
@@ -120,7 +120,7 @@ This is not a problem that will be solved by hoping the system changes. It requi
     featured: true,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-05T08:00:00Z',
   },
   {
@@ -153,7 +153,7 @@ Stop overcomplicating nutrition. Master these three rules before you worry about
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-03-01T08:00:00Z',
   },
   {
@@ -190,7 +190,7 @@ The Stoics were not cold. They were clear. In a world designed to keep you react
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-25T08:00:00Z',
   },
   {
@@ -225,7 +225,7 @@ You cannot control which generation you are. But you can start wherever you are.
     featured: false,
     access_tier: 'basic',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-20T08:00:00Z',
   },
   {
@@ -262,7 +262,7 @@ No caffeine after 2 PM. No alcohol within three hours of bed. Both destroy sleep
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-15T08:00:00Z',
   },
   {
@@ -291,7 +291,7 @@ Your job is not to raise children. Your job is to raise adults. Every interactio
     featured: false,
     access_tier: 'premium',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-10T08:00:00Z',
   },
   {
@@ -324,7 +324,7 @@ The most durable form of power is organized people. Not social media followers �
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-05T08:00:00Z',
   },
   {
@@ -365,7 +365,7 @@ That is it. No elaborate system. No expensive notebook. Five minutes and three q
     featured: false,
     access_tier: 'free',
     author: 'The Chairman',
-    cover_image: null,
+    cover_image: '/placeholders/article.svg',
     published_at: '2026-02-01T08:00:00Z',
   },
 ];
@@ -383,7 +383,7 @@ const briefings = [
       { title: 'Book of the Week', body: 'This week we recommend "The Warrior Ethos" by Steven Pressfield. A short, powerful meditation on what it means to carry yourself as a warrior in a world that wants you comfortable and compliant. Read it in one sitting.' },
     ],
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-03-15T08:00:00Z',
   },
   {
@@ -396,7 +396,7 @@ const briefings = [
       { title: "The Chairman's Desk", body: 'A personal note on why this publication exists. The Black Male Journal is not a lifestyle brand. It is not a content farm. It is an attempt to build a space where Black men can think seriously about their lives without the noise of social media, the condescension of mainstream media, or the superficiality of the self-help industry.' },
     ],
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-03-08T08:00:00Z',
   },
   {
@@ -409,7 +409,7 @@ const briefings = [
       { title: 'Required Reading', body: "This week we recommend \"Between the World and Me\" by Ta-Nehisi Coates. Not because it has all the answers, but because it asks the right questions. Pair it with James Baldwin's \"The Fire Next Time\" for a conversation across generations about what it means to inhabit a Black body in America." },
     ],
     access_tier: 'free',
-    cover_image: null,
+    cover_image: '/placeholders/briefing.svg',
     published_at: '2026-03-01T08:00:00Z',
   },
 ];
@@ -417,23 +417,23 @@ const briefings = [
 // ── Courses (6) ─────────────────────────────────────────────────────────────
 
 const courses = [
-  { title: 'Fundamentals of Combat Discipline', slug: 'fundamentals-of-combat-discipline', description: "Build a warrior's foundation. This course covers striking fundamentals, defensive positioning, and the mental discipline that separates fighters from practitioners.", category: 'martial-arts', access_tier: 'free', published: true, cover_image: null },
-  { title: "The Stoic Man's Framework", slug: 'the-stoic-mans-framework', description: 'Ancient philosophy meets modern manhood. Learn to apply Stoic principles to daily decisions, emotional regulation, and long-term purpose.', category: 'purpose', access_tier: 'free', published: true, cover_image: null },
-  { title: 'Building Your Personal Brand', slug: 'building-your-personal-brand', description: 'Your name is your currency. Master the fundamentals of personal branding — from visual identity to voice, positioning, and platform strategy.', category: 'branding', access_tier: 'premium', published: true, cover_image: null },
-  { title: 'Emotional Intelligence for Men', slug: 'emotional-intelligence-for-men', description: "Strength isn't silence. Develop emotional literacy, learn to read social dynamics, and build the communication skills that command respect.", category: 'mental-health', access_tier: 'free', published: true, cover_image: null },
-  { title: 'Partnership & Power Dynamics', slug: 'partnership-and-power-dynamics', description: 'Navigate relationships with intention. Explore attachment theory, conflict resolution, and the dynamics of power and vulnerability in partnership.', category: 'relationships', access_tier: 'premium', published: false, cover_image: null },
-  { title: 'Advanced Self-Defense Systems', slug: 'advanced-self-defense-systems', description: 'Beyond the basics. Integrate Krav Maga, Brazilian Jiu-Jitsu, and situational awareness into a personal defense system built for real-world scenarios.', category: 'martial-arts', access_tier: 'premium', published: false, cover_image: null },
+  { title: 'Fundamentals of Combat Discipline', slug: 'fundamentals-of-combat-discipline', description: "Build a warrior's foundation. This course covers striking fundamentals, defensive positioning, and the mental discipline that separates fighters from practitioners.", category: 'martial-arts', access_tier: 'free', published: true, cover_image: '/placeholders/course.svg' },
+  { title: "The Stoic Man's Framework", slug: 'the-stoic-mans-framework', description: 'Ancient philosophy meets modern manhood. Learn to apply Stoic principles to daily decisions, emotional regulation, and long-term purpose.', category: 'purpose', access_tier: 'free', published: true, cover_image: '/placeholders/course.svg' },
+  { title: 'Building Your Personal Brand', slug: 'building-your-personal-brand', description: 'Your name is your currency. Master the fundamentals of personal branding — from visual identity to voice, positioning, and platform strategy.', category: 'branding', access_tier: 'premium', published: true, cover_image: '/placeholders/course.svg' },
+  { title: 'Emotional Intelligence for Men', slug: 'emotional-intelligence-for-men', description: "Strength isn't silence. Develop emotional literacy, learn to read social dynamics, and build the communication skills that command respect.", category: 'mental-health', access_tier: 'free', published: true, cover_image: '/placeholders/course.svg' },
+  { title: 'Partnership & Power Dynamics', slug: 'partnership-and-power-dynamics', description: 'Navigate relationships with intention. Explore attachment theory, conflict resolution, and the dynamics of power and vulnerability in partnership.', category: 'relationships', access_tier: 'premium', published: false, cover_image: '/placeholders/course.svg' },
+  { title: 'Advanced Self-Defense Systems', slug: 'advanced-self-defense-systems', description: 'Beyond the basics. Integrate Krav Maga, Brazilian Jiu-Jitsu, and situational awareness into a personal defense system built for real-world scenarios.', category: 'martial-arts', access_tier: 'premium', published: false, cover_image: '/placeholders/course.svg' },
 ];
 
 // ── Dispatches (6) ──────────────────────────────────────────────────────────
 
 const dispatches = [
-  { title: 'On the Necessity of Silence', slug: 'on-the-necessity-of-silence', lens: 'philosophy', excerpt: 'Not every thought needs an audience. Some convictions must be carried in silence before they are ready to be spoken.', body: "There is a discipline in restraint that this generation has lost. Every impulse becomes a post. Every reaction becomes a thread. Every wound becomes content.\n\n## The Problem with Performative Thought\n\nWhen you externalize every idea the moment it forms, you never develop the internal pressure that forges conviction. You get applause for half-formed thoughts and mistake engagement for understanding.\n\nThe men who shaped history understood this. They sat with ideas for years before acting. They let silence do the work that noise cannot.\n\n## What Silence Builds\n\nSilence builds discernment. It teaches you to separate the urgent from the important. It creates space for the kind of thinking that cannot happen in public.\n\nPractice it. Sit with your thoughts for a week before you share them. Watch how they change. Watch how the weak ones die and the strong ones sharpen.", author: 'The Chairman', cover_image: null, published_at: '2026-03-14T08:00:00Z' },
-  { title: 'Dispatch: Weekend Reading List', slug: 'weekend-reading-list-march-2026', lens: 'philosophy', excerpt: 'Five books every man should read this spring. No self-help. No productivity hacks. Just substance.', body: "Spring is the season of renewal, and your reading list should reflect that. Here are five books that will challenge your assumptions and sharpen your mind.\n\nThe Autobiography of Malcolm X — If you have not read this, stop everything and start now.\n\nMeditations by Marcus Aurelius — The original manual for composure under pressure.\n\nThe Wretched of the Earth by Frantz Fanon — Understanding the psychology of oppression.\n\nMan's Search for Meaning by Viktor Frankl — Suffering has purpose, but only if you choose it.\n\nThe Art of War by Sun Tzu — Strategy is not just for the battlefield.\n\nRead one per month. Take notes. Discuss with your circle. Knowledge without application is entertainment.", author: 'The Chairman', cover_image: null, published_at: '2026-03-10T08:00:00Z' },
-  { title: 'The Gym Is Not Optional', slug: 'the-gym-is-not-optional', lens: 'health', excerpt: 'Your body is the first thing the world sees. It is also the vehicle for everything you want to accomplish. Treat it accordingly.', body: "I am tired of the conversation about whether men should prioritize fitness. This is not a debate. Your physical condition is the foundation upon which everything else is built.\n\n## The Non-Negotiables\n\nTrain at least four days per week. This is not negotiable. The form does not matter — weights, calisthenics, martial arts, swimming. What matters is consistency and intensity.\n\nEat clean six days out of seven. You know what clean means. Stop pretending you do not.\n\nSleep seven to eight hours. Your phone does not need you at midnight.\n\n## Why This Matters\n\nA strong body builds a strong mind. The discipline required to maintain physical fitness transfers to every other area of your life. When you can push through the last set, you can push through the hard conversation, the difficult decision, the long night of work.\n\nThis is not vanity. This is infrastructure.", author: 'The Chairman', cover_image: null, published_at: '2026-03-07T08:00:00Z' },
-  { title: 'Local Politics Matter More Than National', slug: 'local-politics-matter-more', lens: 'politics', excerpt: 'You are not going to change Washington from your living room. But you can change your city council district by showing up.', body: "Every election cycle, the same pattern repeats. Black men get energized about the presidential race, argue on social media for six months, vote (or do not), and then disappear from political engagement for four years.\n\nMeanwhile, your city council passes zoning laws that determine where your children go to school. Your county board allocates police budgets. Your state legislature draws the maps that decide whether your vote counts.\n\n## What You Can Actually Do\n\nAttend one city council meeting this month. Just one. Sit in the back and listen. Learn who the players are. Understand how decisions get made.\n\nThen identify one issue that affects your neighborhood directly. Housing, policing, schools, infrastructure. Pick one and follow it.\n\nThis is how power is built — from the ground up, not the top down.", author: 'The Chairman', cover_image: null, published_at: '2026-03-03T08:00:00Z' },
-  { title: 'A Note on Brotherhood', slug: 'a-note-on-brotherhood', lens: 'philosophy', excerpt: 'The men around you are either building you up or holding you back. Choose your circle with the same care you choose your investments.', body: "I received a message last week from a reader who said he had no close male friends. He is thirty-four years old, successful by most measures, and deeply isolated.\n\nThis is more common than anyone wants to admit. The epidemic of male loneliness is not an abstraction — it is your neighbor, your coworker, your brother.\n\n## The Solution Is Uncomfortable\n\nBuilding brotherhood requires vulnerability, and vulnerability requires courage. You must be willing to say: I need people. I cannot do this alone.\n\nFind one man you respect and invite him to train with you. Or read with you. Or build something with you. Shared purpose is the foundation of every lasting bond between men.\n\nDo not wait for community to find you. Build it.", author: 'The Chairman', cover_image: null, published_at: '2026-02-25T08:00:00Z' },
-  { title: 'Site Update: What Is Coming', slug: 'site-update-what-is-coming', lens: 'politics', excerpt: 'The Black Male Journal is growing. Here is what we are building and why.', body: "This platform started as an idea — a place where Black men could find substantive content that respects their intelligence and challenges their comfort.\n\nWe are building several new features:\n\nThe Academy will offer structured courses on martial arts, mental health, financial literacy, and leadership. These are not motivational videos — they are curricula.\n\nThe Weekend Briefing will expand to include audio editions for those who prefer to listen on their commute.\n\nA member portal is coming that will give premium subscribers access to exclusive content, downloads, and a private discussion space.\n\nNone of this happens without your support. If this work matters to you, share it with one person today.", author: 'The Chairman', cover_image: null, published_at: '2026-02-18T08:00:00Z' },
+  { title: 'On the Necessity of Silence', slug: 'on-the-necessity-of-silence', lens: 'philosophy', excerpt: 'Not every thought needs an audience. Some convictions must be carried in silence before they are ready to be spoken.', body: "There is a discipline in restraint that this generation has lost. Every impulse becomes a post. Every reaction becomes a thread. Every wound becomes content.\n\n## The Problem with Performative Thought\n\nWhen you externalize every idea the moment it forms, you never develop the internal pressure that forges conviction. You get applause for half-formed thoughts and mistake engagement for understanding.\n\nThe men who shaped history understood this. They sat with ideas for years before acting. They let silence do the work that noise cannot.\n\n## What Silence Builds\n\nSilence builds discernment. It teaches you to separate the urgent from the important. It creates space for the kind of thinking that cannot happen in public.\n\nPractice it. Sit with your thoughts for a week before you share them. Watch how they change. Watch how the weak ones die and the strong ones sharpen.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-03-14T08:00:00Z' },
+  { title: 'Dispatch: Weekend Reading List', slug: 'weekend-reading-list-march-2026', lens: 'philosophy', excerpt: 'Five books every man should read this spring. No self-help. No productivity hacks. Just substance.', body: "Spring is the season of renewal, and your reading list should reflect that. Here are five books that will challenge your assumptions and sharpen your mind.\n\nThe Autobiography of Malcolm X — If you have not read this, stop everything and start now.\n\nMeditations by Marcus Aurelius — The original manual for composure under pressure.\n\nThe Wretched of the Earth by Frantz Fanon — Understanding the psychology of oppression.\n\nMan's Search for Meaning by Viktor Frankl — Suffering has purpose, but only if you choose it.\n\nThe Art of War by Sun Tzu — Strategy is not just for the battlefield.\n\nRead one per month. Take notes. Discuss with your circle. Knowledge without application is entertainment.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-03-10T08:00:00Z' },
+  { title: 'The Gym Is Not Optional', slug: 'the-gym-is-not-optional', lens: 'health', excerpt: 'Your body is the first thing the world sees. It is also the vehicle for everything you want to accomplish. Treat it accordingly.', body: "I am tired of the conversation about whether men should prioritize fitness. This is not a debate. Your physical condition is the foundation upon which everything else is built.\n\n## The Non-Negotiables\n\nTrain at least four days per week. This is not negotiable. The form does not matter — weights, calisthenics, martial arts, swimming. What matters is consistency and intensity.\n\nEat clean six days out of seven. You know what clean means. Stop pretending you do not.\n\nSleep seven to eight hours. Your phone does not need you at midnight.\n\n## Why This Matters\n\nA strong body builds a strong mind. The discipline required to maintain physical fitness transfers to every other area of your life. When you can push through the last set, you can push through the hard conversation, the difficult decision, the long night of work.\n\nThis is not vanity. This is infrastructure.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-03-07T08:00:00Z' },
+  { title: 'Local Politics Matter More Than National', slug: 'local-politics-matter-more', lens: 'politics', excerpt: 'You are not going to change Washington from your living room. But you can change your city council district by showing up.', body: "Every election cycle, the same pattern repeats. Black men get energized about the presidential race, argue on social media for six months, vote (or do not), and then disappear from political engagement for four years.\n\nMeanwhile, your city council passes zoning laws that determine where your children go to school. Your county board allocates police budgets. Your state legislature draws the maps that decide whether your vote counts.\n\n## What You Can Actually Do\n\nAttend one city council meeting this month. Just one. Sit in the back and listen. Learn who the players are. Understand how decisions get made.\n\nThen identify one issue that affects your neighborhood directly. Housing, policing, schools, infrastructure. Pick one and follow it.\n\nThis is how power is built — from the ground up, not the top down.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-03-03T08:00:00Z' },
+  { title: 'A Note on Brotherhood', slug: 'a-note-on-brotherhood', lens: 'philosophy', excerpt: 'The men around you are either building you up or holding you back. Choose your circle with the same care you choose your investments.', body: "I received a message last week from a reader who said he had no close male friends. He is thirty-four years old, successful by most measures, and deeply isolated.\n\nThis is more common than anyone wants to admit. The epidemic of male loneliness is not an abstraction — it is your neighbor, your coworker, your brother.\n\n## The Solution Is Uncomfortable\n\nBuilding brotherhood requires vulnerability, and vulnerability requires courage. You must be willing to say: I need people. I cannot do this alone.\n\nFind one man you respect and invite him to train with you. Or read with you. Or build something with you. Shared purpose is the foundation of every lasting bond between men.\n\nDo not wait for community to find you. Build it.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-02-25T08:00:00Z' },
+  { title: 'Site Update: What Is Coming', slug: 'site-update-what-is-coming', lens: 'politics', excerpt: 'The Black Male Journal is growing. Here is what we are building and why.', body: "This platform started as an idea — a place where Black men could find substantive content that respects their intelligence and challenges their comfort.\n\nWe are building several new features:\n\nThe Academy will offer structured courses on martial arts, mental health, financial literacy, and leadership. These are not motivational videos — they are curricula.\n\nThe Weekend Briefing will expand to include audio editions for those who prefer to listen on their commute.\n\nA member portal is coming that will give premium subscribers access to exclusive content, downloads, and a private discussion space.\n\nNone of this happens without your support. If this work matters to you, share it with one person today.", author: 'The Chairman', cover_image: '/placeholders/dispatch.svg', published_at: '2026-02-18T08:00:00Z' },
 ];
 
 // ── Seed function ───────────────────────────────────────────────────────────

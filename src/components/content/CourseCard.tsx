@@ -1,7 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { IMAGE_SIZES } from '@/lib/images';
+import { StylizedImage } from '@/components/ui/StylizedImage';
 import { academyCoursePath } from '@/lib/paths';
 import { getCategoryLabel } from '@/lib/utils';
 import type { AccessTier } from '@/lib/supabase/types';
@@ -36,22 +37,22 @@ export function CourseCard({
           : 'opacity-60 cursor-default',
       ].join(' ')}
     >
-      {/* Cover image */}
-      <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
-        <Image
+      {/* Cover image with halftone treatment */}
+      <div className="relative">
+        <StylizedImage
           src={coverImage || PLACEHOLDERS.course}
           alt={title}
           fill
-          className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
-          aria-hidden="true"
+          effect="halftone"
+          grain
+          dots
+          aspect="video"
+          sizes={IMAGE_SIZES.card}
+          imageClassName="transition-transform duration-500 group-hover:scale-105"
         />
         {!published && (
-          <div className="absolute inset-0 flex items-center justify-center bg-bmj-black/70">
-            <span className="font-label text-xs uppercase tracking-widest text-bmj-cream">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-bmj-black/70">
+            <span className="font-label text-xs uppercase tracking-label text-bmj-cream">
               Coming Soon
             </span>
           </div>
@@ -59,11 +60,11 @@ export function CourseCard({
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <span className="mb-3 inline-block self-start rounded-sm border border-bmj-tan/40 px-2 py-0.5 font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <span className="mb-3 inline-block self-start rounded-sm border border-bmj-tan/40 px-2 py-0.5 font-label text-xs uppercase tracking-label text-bmj-tan">
           {getCategoryLabel(category)}
         </span>
 
-        <h3 className="mb-3 line-clamp-2 font-display text-xl leading-tight text-bmj-white">
+        <h3 className="mb-3 line-clamp-2 font-display text-xl uppercase tracking-display leading-tight text-bmj-white">
           {title}
         </h3>
 
@@ -73,12 +74,12 @@ export function CourseCard({
 
         <div className="mt-4 flex items-center border-t border-bmj-tan/20 pt-4">
           {isPremium ? (
-            <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-widest text-bmj-amber">
+            <span className="flex items-center gap-1.5 font-label text-xs uppercase tracking-label text-bmj-amber">
               <Lock size={12} />
               Premium
             </span>
           ) : (
-            <span className="font-label text-xs uppercase tracking-widest text-bmj-cream">
+            <span className="font-label text-xs uppercase tracking-label text-bmj-cream">
               Free
             </span>
           )}

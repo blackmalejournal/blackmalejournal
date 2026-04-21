@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
+import { AdminContentThumbnail } from '@/components/admin/AdminContentThumbnail';
+import { StatusBadge } from '@/components/admin/StatusBadge';
 import { PATHS, adminEditPath, withQuery } from '@/lib/paths';
 import { getAllCourses } from '@/lib/supabase/admin-queries';
 
@@ -110,14 +112,15 @@ export default async function CoursesAdminPage({ searchParams }: CoursesAdminPag
         ) : (
           <ul>
             {courses.map((course) => (
-              <li key={course.id} className="flex items-center justify-between border-b border-bmj-tan/10 py-4">
+              <li key={course.id} className="flex items-center gap-4 border-b border-bmj-tan/10 py-4">
+                <AdminContentThumbnail
+                  src={course.cover_image}
+                  alt={course.title}
+                  type="course"
+                />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-3">
-                    <span className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${
-                      course.published ? 'bg-bmj-red/20 text-bmj-red' : 'bg-bmj-tan/20 text-bmj-tan'
-                    }`}>
-                      {course.published ? 'published' : 'draft'}
-                    </span>
+                    <StatusBadge status={course.published ? 'published' : 'draft'} />
                     <h2 className="truncate font-display text-lg text-bmj-white">{course.title}</h2>
                   </div>
                   <p className="mt-1 font-mono text-xs text-bmj-tan">

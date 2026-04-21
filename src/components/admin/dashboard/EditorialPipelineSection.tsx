@@ -13,26 +13,26 @@ export function EditorialPipelineSection({
   pipeline,
 }: EditorialPipelineSectionProps) {
   return (
-    <section className="border border-bmj-tan/20 bg-bmj-brown p-6">
+    <section className="surface-panel p-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h2 className="font-display text-xl tracking-widest text-bmj-white">
+          <h2 className="font-display text-2xl uppercase tracking-section text-bmj-white">
             EDITORIAL PIPELINE
           </h2>
-          <p className="mt-1 font-body text-sm text-bmj-cream/70">
+          <p className="mt-2 font-body text-sm text-bmj-text-muted">
             Status pressure across articles, briefings, dispatches, and handbooks.
           </p>
         </div>
         <Link
           href={PATHS.ADMIN_ARTICLES}
-          className="inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-white"
+          className="nav-link text-sm"
         >
           Manage Content
-          <ArrowRight size={14} />
+          <ArrowRight size={14} className="ml-2 inline" />
         </Link>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
         <AdminMetricCard
           label="Draft"
           value={pipeline.statusCounts.draft}
@@ -59,40 +59,40 @@ export function EditorialPipelineSection({
         />
       </div>
 
-      <div className="mt-6">
-        <h3 className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+      <div className="mt-10">
+        <h3 className="font-label text-micro uppercase tracking-label-xl text-bmj-tan">
           Stale Or Missed Items
         </h3>
         {pipeline.staleQueue.length === 0 ? (
-          <p className="mt-4 border border-bmj-tan/20 bg-bmj-black/30 p-4 font-body text-sm text-bmj-cream/70">
+          <p className="mt-4 border border-bmj-border-subtle bg-bmj-black/30 p-6 font-body text-sm text-bmj-text-muted">
             No stale drafts or missed scheduled items are visible right now.
           </p>
         ) : (
-          <ul className="mt-4 space-y-3">
+          <ul className="mt-6 space-y-4">
             {pipeline.staleQueue.map((item) => (
               <li
                 key={item.id}
-                className={`border p-4 ${
+                className={`border border-l-[4px] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
                   item.severity === 'critical'
-                    ? 'border-bmj-red/30 bg-bmj-red/10'
-                    : 'border-bmj-amber/30 bg-bmj-amber/10'
+                    ? 'border-bmj-red/30 border-l-bmj-red bg-bmj-red/10'
+                    : 'border-bmj-amber/30 border-l-bmj-amber bg-bmj-amber/10'
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+                    <p className="font-label text-micro uppercase tracking-label-xl text-bmj-tan">
                       {contentLabels[item.entity]}
                     </p>
                     <Link
                       href={item.href}
-                      className="mt-2 block font-display text-lg tracking-wider text-bmj-white transition-colors hover:text-bmj-red"
+                      className="mt-3 block font-display text-xl uppercase tracking-display text-bmj-white transition-colors hover:text-bmj-red"
                     >
                       {item.title}
                     </Link>
-                    <p className="mt-2 font-mono text-xs text-bmj-tan">
+                    <p className="mt-2 font-typewriter text-xs text-bmj-text-muted">
                       {item.descriptor}
                     </p>
-                    <p className="mt-2 font-body text-sm text-bmj-cream/80">
+                    <p className="mt-3 font-body text-sm text-bmj-cream">
                       {item.reason}
                     </p>
                   </div>

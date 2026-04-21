@@ -26,7 +26,7 @@ export function LatestDispatches({ dispatches }: LatestDispatchesProps) {
         />
 
         {dispatches.length > 0 ? (
-          <div className="mx-auto max-w-article space-y-4">
+          <div className="mt-12 mx-auto max-w-article space-y-4">
             {dispatches.map((dispatch, i) => (
               <ScrollReveal key={dispatch.id} delay={i * 0.08} direction="up">
                 <DispatchCard

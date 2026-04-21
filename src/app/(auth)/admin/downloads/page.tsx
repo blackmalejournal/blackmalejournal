@@ -5,6 +5,7 @@ import { AdminBulkActionForm } from '@/components/admin/AdminBulkActionForm';
 import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
 import { AdminNotice } from '@/components/admin/AdminNotice';
 import { PublishReadinessBadge } from '@/components/admin/PublishReadinessBadge';
+import { AdminContentThumbnail } from '@/components/admin/AdminContentThumbnail';
 import { ADMIN_BULK_DOWNLOAD_TIER_OPTIONS } from '@/lib/admin-bulk-actions';
 import {
   assessDownloadReadiness,
@@ -284,6 +285,11 @@ export default async function DownloadsAdminPage({
                         className="h-4 w-4 border border-bmj-tan/40 bg-bmj-black accent-bmj-red"
                       />
                     </label>
+                    <AdminContentThumbnail
+                      src={download.cover_image}
+                      alt={download.title}
+                      type="download"
+                    />
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-3">
                         <TierBadge tier={download.access_tier} />

@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { Mail, MessageCircle } from 'lucide-react';
 import { BrandMark } from '@/components/brand/BrandMark';
+import { StarDivider } from '@/components/ui/StarDivider';
+import { StylizedImage } from '@/components/ui/StylizedImage';
 import { SOCIAL_LINKS } from '@/lib/nav';
 import { CONTACT_EMAILS } from '@/lib/seo';
+import { PLACEHOLDERS } from '@/lib/placeholders';
 import { ContactForm } from './ContactForm';
 import { SupportCard } from './SupportCard';
 import { ScrollReveal } from '@/components/motion/ScrollReveal';
@@ -29,31 +32,67 @@ const whatsappHref = process.env.NEXT_PUBLIC_WHATSAPP_LINK ?? '#';
 export default function ContactPage() {
   return (
     <section className="mx-auto max-w-content px-6 py-16">
+      {/* Split-layout hero */}
       <ScrollReveal as="div">
-        <div className="mb-6">
-          <BrandMark size={40} color="var(--bmj-red)" />
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          {/* Left — tagline, brand mark, stylized image */}
+          <div className="flex flex-col">
+            <div className="mb-6">
+              <BrandMark size={48} color="var(--bmj-red)" />
+            </div>
+            <span className="font-label text-xs uppercase tracking-label text-bmj-tan">
+              Reach the Chairman
+            </span>
+            <h1 className="mt-4 font-display text-5xl uppercase leading-[0.95] text-bmj-white md:text-7xl">
+              Connect
+            </h1>
+            <p className="mt-6 max-w-md font-body text-sm italic leading-relaxed text-bmj-cream/80">
+              &ldquo;Speak the Truth. Navigate the Consequences.&rdquo;
+            </p>
+            <p className="mt-4 max-w-md font-body text-sm leading-relaxed text-bmj-cream/70">
+              Questions, ideas, collaborations, or just want to build with us — reach
+              out. The Chairman reads every message.
+            </p>
+
+            {/* Stylized image anchor */}
+            <div className="mt-8 max-w-md">
+              <StylizedImage
+                src={PLACEHOLDERS.cover}
+                alt=""
+                width={560}
+                height={420}
+                effect="halftone-heavy"
+                grain
+                dots
+                aspect="video"
+                className="border border-bmj-red/30"
+              />
+            </div>
+          </div>
+
+          {/* Right — form on a paper-texture panel */}
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.05] mix-blend-overlay"
+            />
+            <div className="relative border border-bmj-tan/20 bg-bmj-brown/50 p-6 sm:p-8 surface-panel">
+              <h2 className="mb-6 font-label text-xs uppercase tracking-label text-bmj-tan">
+                Send a Message
+              </h2>
+              <ContactForm />
+            </div>
+          </div>
         </div>
-        <h1 className="mb-2 font-display text-5xl uppercase text-bmj-white md:text-7xl">
-          Connect
-        </h1>
-        <p className="mb-12 max-w-xl font-body text-sm leading-relaxed text-bmj-cream/70">
-          Questions, ideas, collaborations, or just want to build with us — reach
-          out. The Chairman reads every message.
-        </p>
       </ScrollReveal>
 
-      <ScrollReveal as="div" delay={0.1}>
-      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-        <div>
-          <h2 className="mb-6 font-label text-xs uppercase tracking-widest text-bmj-tan">
-            Send a Message
-          </h2>
-          <ContactForm />
-        </div>
+      <StarDivider className="my-16" />
 
-        <div className="space-y-8">
+      {/* Direct contact + socials + support */}
+      <ScrollReveal as="div" delay={0.1}>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr_1fr]">
           <div>
-            <h2 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+            <h2 className="mb-4 font-label text-xs uppercase tracking-label text-bmj-tan">
               Direct
             </h2>
             <ul className="space-y-3">
@@ -81,10 +120,10 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <h2 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+            <h2 className="mb-4 font-label text-xs uppercase tracking-label text-bmj-tan">
               Follow
             </h2>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -95,7 +134,7 @@ export default function ContactPage() {
                   className="flex items-center gap-2 text-bmj-tan transition-colors hover:text-bmj-cream"
                 >
                   <Icon size={18} />
-                  <span className="font-label text-xs uppercase tracking-widest">
+                  <span className="font-label text-xs uppercase tracking-label">
                     {label}
                   </span>
                 </a>
@@ -105,7 +144,6 @@ export default function ContactPage() {
 
           <SupportCard />
         </div>
-      </div>
       </ScrollReveal>
     </section>
   );

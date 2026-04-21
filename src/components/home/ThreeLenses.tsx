@@ -65,7 +65,7 @@ export function ThreeLenses() {
           dividerClassName="mb-10"
         />
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {LENSES.map((lens) => {
             const theme = getLensTheme(lens.slug);
 
@@ -74,7 +74,7 @@ export function ThreeLenses() {
                 key={lens.slug}
                 href={withQuery(PATHS.ARTICLES, { lens: lens.slug })}
                 className={cn(
-                  "group card-media block p-8 no-underline transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg",
+                  "group card-media block p-8 no-underline transition-colors duration-300",
                   theme.cardBorderTop,
                   theme.hoverBorder,
                 )}

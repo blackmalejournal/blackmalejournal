@@ -51,7 +51,7 @@ export function Footer() {
 
             {/* Patreon — patronage channel */}
             <div className="pt-2">
-              <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
+              <p className="mb-2 font-label text-xs uppercase tracking-label text-bmj-tan">
                 Support the Work
               </p>
               <ButtonLink
@@ -66,7 +66,7 @@ export function Footer() {
 
             {/* Direct support */}
             <div className="pt-2">
-              <p className="mb-2 font-label text-xs uppercase tracking-widest text-bmj-tan">
+              <p className="mb-2 font-label text-xs uppercase tracking-label text-bmj-tan">
                 Direct Support
               </p>
               <div className="flex flex-wrap gap-3">
@@ -74,7 +74,7 @@ export function Footer() {
                   <a
                     key={method.label}
                     href={method.href}
-                    className="font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-cream"
+                    className="font-label text-xs uppercase tracking-label text-bmj-tan transition-colors hover:text-bmj-cream"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -87,7 +87,7 @@ export function Footer() {
 
           {/* Column 2 — Navigation */}
           <nav aria-label="Footer navigation" className="surface-panel p-6">
-            <h3 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+            <h3 className="mb-4 font-label text-xs uppercase tracking-label text-bmj-tan">
               Navigate
             </h3>
             <ul className="flex flex-col gap-2">
@@ -106,7 +106,7 @@ export function Footer() {
 
           {/* Column 3 — Connect */}
           <div className="surface-panel p-6">
-            <h3 className="mb-4 font-label text-xs uppercase tracking-widest text-bmj-tan">
+            <h3 className="mb-4 font-label text-xs uppercase tracking-label text-bmj-tan">
               Connect
             </h3>
 
@@ -127,7 +127,7 @@ export function Footer() {
             </div>
 
             {/* Newsletter signup */}
-            <h4 className="mb-3 font-label text-xs uppercase tracking-widest text-bmj-tan">
+            <h4 className="mb-3 font-label text-xs uppercase tracking-label text-bmj-tan">
               Newsletter
             </h4>
             <NewsletterForm source="footer" />

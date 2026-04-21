@@ -9,7 +9,7 @@ interface BriefingPreviewProps {
 
 export function BriefingPreview({ briefing }: BriefingPreviewProps) {
   return (
-    <section className="bg-bmj-brown py-20">
+    <section className="bg-bmj-deep-black py-20">
       <div className="page-shell-tight">
         <PageHeader
           as="h2"
@@ -23,7 +23,7 @@ export function BriefingPreview({ briefing }: BriefingPreviewProps) {
         />
 
         {briefing ? (
-          <div className="mx-auto max-w-article">
+          <div className="mt-12 mx-auto max-w-article">
             <BriefingCard briefing={briefing} />
           </div>
         ) : (

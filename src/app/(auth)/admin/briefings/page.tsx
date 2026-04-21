@@ -5,6 +5,8 @@ import { AdminBulkActionForm } from '@/components/admin/AdminBulkActionForm';
 import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
 import { AdminNotice } from '@/components/admin/AdminNotice';
 import { PublishReadinessBadge } from '@/components/admin/PublishReadinessBadge';
+import { StatusBadge } from '@/components/admin/StatusBadge';
+import { AdminContentThumbnail } from '@/components/admin/AdminContentThumbnail';
 import { ADMIN_BULK_STATUS_OPTIONS } from '@/lib/admin-bulk-actions';
 import { ADMIN_CONTENT_STATUS_TABS } from '@/lib/admin-list-filters';
 import {
@@ -20,25 +22,6 @@ export const metadata: Metadata = {
   title: 'Briefings — Admin',
   robots: { index: false, follow: false },
 };
-
-const statusStyles: Record<ContentStatus, string> = {
-  published: 'bg-bmj-red/20 text-bmj-red',
-  draft: 'bg-bmj-tan/20 text-bmj-tan',
-  review: 'bg-bmj-amber/20 text-bmj-amber',
-  scheduled: 'bg-[#416100]/20 text-[#416100]',
-  archived: 'bg-bmj-tan/10 text-bmj-tan/50',
-  withdrawn: 'bg-bmj-crimson/20 text-bmj-crimson',
-};
-
-function StatusBadge({ status }: { status: ContentStatus }) {
-  return (
-    <span
-      className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${statusStyles[status]}`}
-    >
-      {status}
-    </span>
-  );
-}
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -240,6 +223,11 @@ export default async function BriefingsAdminPage({
                         className="h-4 w-4 border border-bmj-tan/40 bg-bmj-black accent-bmj-red"
                       />
                     </label>
+                    <AdminContentThumbnail
+                      src={briefing.cover_image}
+                      alt={briefing.title}
+                      type="briefing"
+                    />
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-3">
                         <StatusBadge status={briefing.status} />

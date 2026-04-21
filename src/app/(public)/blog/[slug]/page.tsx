@@ -14,6 +14,7 @@ import { isBookmarked } from '@/lib/supabase/bookmarks';
 import { getAuthUser } from '@/lib/supabase/access';
 import { ShareButton } from '@/components/ui/ShareButton';
 import { dispatchPath, PATHS, siteAbsoluteUrl } from '@/lib/paths';
+import { IMAGE_SIZES } from '@/lib/images';
 
 interface DispatchPageProps {
   params: Promise<{ slug: string }>;
@@ -108,6 +109,7 @@ export default async function DispatchPage({ params }: DispatchPageProps) {
             fill
             className="halftone object-cover"
             priority
+            sizes={IMAGE_SIZES.hero}
           />
         </div>
       )}

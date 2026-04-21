@@ -20,9 +20,9 @@ interface ScrollRevealProps {
 }
 
 const hiddenTransform: Record<NonNullable<ScrollRevealProps['direction']>, string> = {
-  up: 'translate-y-10',
-  left: '-translate-x-10',
-  right: 'translate-x-10',
+  up: '',
+  left: '',
+  right: '',
   none: '',
 };
 

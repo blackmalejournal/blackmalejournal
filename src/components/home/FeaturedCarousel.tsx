@@ -8,6 +8,7 @@ import { LensBadge } from '@/components/brand/LensBadge';
 import { PageHeader } from '@/components/layout/PageHeader';
 import { ButtonLink } from '@/components/ui/Button';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { IMAGE_SIZES } from '@/lib/images';
 import { CAROUSEL_INTERVAL_MS } from '@/lib/constants';
 import { articlePath } from '@/lib/paths';
 import type { ArticleListItem } from '@/lib/supabase/types';
@@ -76,8 +77,7 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
         />
 
         <motion.div
-          className="card-feature relative min-h-[320px] overflow-hidden sm:min-h-[400px]"
-          whileHover={{ scale: 1.01, boxShadow: '0 8px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(184,152,106,0.12)' }}
+          className="mt-12 card-feature relative min-h-[320px] overflow-hidden sm:min-h-[400px]"
           transition={{ duration: 0.2 }}
         >
           <AnimatePresence mode="wait">
@@ -95,8 +95,9 @@ export function FeaturedCarousel({ articles }: FeaturedCarouselProps) {
                   src={article.cover_image || PLACEHOLDERS.article}
                   alt={article.title}
                   fill
+                  priority
                   className="halftone object-cover transition-transform duration-700 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes={IMAGE_SIZES.cardLarge}
                 />
                 <div
                   className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"

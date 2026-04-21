@@ -48,7 +48,7 @@ export function RotatingQuote() {
   }, []);
 
   return (
-    <section className="bg-bmj-brown py-24">
+    <section className="bg-bmj-black py-24">
       <div className="mx-auto max-w-article px-6">
         <AnimatePresence mode="wait">
           <motion.div

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { BrandMark } from "@/components/brand/BrandMark"
+import { IMAGE_SIZES } from "@/lib/images"
 
 interface MagazineCoverHeroProps {
   title: string
@@ -29,7 +30,7 @@ export default function MagazineCoverHero({
           fill
           className="object-cover"
           priority
-          sizes="100vw"
+          sizes={IMAGE_SIZES.hero}
         />
 
         {/* Halftone dot overlay */}

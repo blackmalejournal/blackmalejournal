@@ -4,6 +4,7 @@ import { Lock } from 'lucide-react';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { getLensTheme } from '@/lib/lens-theme';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { IMAGE_SIZES } from '@/lib/images';
 import { articlePath } from '@/lib/paths';
 import { cn } from '@/lib/utils';
 import type { Lens } from '@/lib/supabase/types';
@@ -49,7 +50,7 @@ export function ArticleCard({
           alt={coverImageAlt || title}
           fill
           className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes={IMAGE_SIZES.card}
         />
         {/* Grain overlay on image */}
         <div

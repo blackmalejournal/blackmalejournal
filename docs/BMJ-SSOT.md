@@ -94,7 +94,7 @@ BMJ looks like revolutionary editorial culture — militant in posture, print-le
 6. **Pan-African historical consciousness** — iconic portraiture, movement visuals
 7. **Editorial authority** — journal/briefing organ, not generic content brand
 
-Full spec: [`brand/art-direction-spec.md`](brand/art-direction-spec.md) · Implementation law: [`brand/invariants.md`](brand/invariants.md)
+Full spec: [`brand/art-direction-spec.md`](brand/art-direction-spec.md) · Movement literature spec: [`brand/movement-literature-spec.md`](brand/movement-literature-spec.md) · Implementation law: [`brand/invariants.md`](brand/invariants.md)
 
 ---
 
@@ -133,7 +133,8 @@ All values are canonical in `src/styles/brand.css`. Tailwind hex in `tailwind.co
 | Display / headlines | Highrise → Bebas Neue (`font-display`) — uppercase |
 | Body | Libre Baskerville (`font-body`) |
 | Labels / buttons | Oswald (`font-label`) — uppercase, wide tracking |
-| Dates / stamps | IBM Plex Mono (`font-mono`) — *under review: seeking a more typewriter-like alternative* |
+| Dates / stamps | IBM Plex Mono (`font-mono`) — *under review: seeking a more typewriter-like alternative (e.g., Courier Prime)* |
+| Literature Meta | IBM Plex Mono / Oswald |
 
 ### Key Metrics
 
@@ -193,6 +194,7 @@ Full list: [`brand/invariants.md`](brand/invariants.md)
 | `/search` | Global search |
 | `/about` `/about/ethics` | About and ethics |
 | `/contact` `/support` | Contact and support |
+| `/brand/movement-literature` | Movement Literature showcase |
 | `/pricing` | Membership pricing |
 | `/privacy` `/terms` | Legal |
 

@@ -23,12 +23,13 @@ export default function TributeCard({
             src={imageUrl}
             alt={name}
             fill
+            sizes="(max-width: 640px) 100vw, 40vw"
             className="halftone-heavy object-cover"
           />
         )}
       </div>
       <div className="flex flex-1 flex-col justify-center border-bmj-red bg-bmj-black p-6 sm:border-l-[3px] sm:p-8">
-        <span className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+        <span className="font-label text-xs uppercase tracking-label text-bmj-tan">
           In Memoriam
         </span>
         {honorific && (
@@ -36,7 +37,7 @@ export default function TributeCard({
             {honorific}
           </span>
         )}
-        <h3 className="mt-1 font-display text-2xl text-bmj-white sm:text-3xl">
+        <h3 className="mt-1 font-display text-2xl uppercase tracking-display text-bmj-white sm:text-3xl">
           {name}
         </h3>
         <div className="mt-3 h-px w-full bg-bmj-tan/30" />

@@ -15,22 +15,22 @@ type AttentionQueueSectionProps = {
 
 export function AttentionQueueSection({ items }: AttentionQueueSectionProps) {
   return (
-    <section className="border border-bmj-tan/20 bg-bmj-brown p-6">
+    <section className="surface-panel p-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h2 className="font-display text-xl tracking-widest text-bmj-white">
+          <h2 className="font-display text-2xl uppercase tracking-section text-bmj-white">
             ATTENTION QUEUE
           </h2>
-          <p className="mt-1 font-body text-sm text-bmj-cream/70">
+          <p className="mt-2 font-body text-sm text-bmj-text-muted">
             Resolve these items before adding new content.
           </p>
         </div>
         <Link
           href={PATHS.ADMIN_MESSAGES}
-          className="inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-white"
+          className="nav-link text-sm"
         >
           Open Inbox
-          <ArrowRight size={14} />
+          <ArrowRight size={14} className="ml-2 inline" />
         </Link>
       </div>
 
@@ -45,10 +45,10 @@ export function AttentionQueueSection({ items }: AttentionQueueSectionProps) {
           {items.map((item) => (
             <li
               key={item.label}
-              className={`border p-4 ${
+              className={`border border-l-[4px] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] ${
                 item.tone === 'critical'
-                  ? 'border-bmj-red/30 bg-bmj-red/10'
-                  : 'border-bmj-amber/30 bg-bmj-amber/10'
+                  ? 'border-bmj-red/30 border-l-bmj-red bg-bmj-red/10'
+                  : 'border-bmj-amber/30 border-l-bmj-amber bg-bmj-amber/10'
               }`}
             >
               <div className="flex items-start justify-between gap-4">

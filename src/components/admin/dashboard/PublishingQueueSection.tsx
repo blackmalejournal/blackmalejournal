@@ -12,22 +12,22 @@ export function PublishingQueueSection({
   scheduledQueue,
 }: PublishingQueueSectionProps) {
   return (
-    <section className="border border-bmj-tan/20 bg-bmj-brown p-6">
+    <section className="surface-panel p-8">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h2 className="font-display text-xl tracking-widest text-bmj-white">
+          <h2 className="font-display text-2xl uppercase tracking-section text-bmj-white">
             PUBLISHING QUEUE
           </h2>
-          <p className="mt-1 font-body text-sm text-bmj-cream/70">
+          <p className="mt-2 font-body text-sm text-bmj-text-muted">
             Upcoming scheduled items across the editorial stack.
           </p>
         </div>
         <Link
           href={PATHS.ADMIN_ARTICLES}
-          className="inline-flex items-center gap-2 font-label text-xs uppercase tracking-widest text-bmj-tan transition-colors hover:text-bmj-white"
+          className="nav-link text-sm"
         >
           View Content
-          <ArrowRight size={14} />
+          <ArrowRight size={14} className="ml-2 inline" />
         </Link>
       </div>
 
@@ -36,26 +36,26 @@ export function PublishingQueueSection({
           No scheduled items are currently queued.
         </p>
       ) : (
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-8 space-y-4">
           {scheduledQueue.map((item) => (
-            <li key={item.id} className="border border-bmj-tan/20 bg-bmj-black/25 p-4">
+            <li key={item.id} className="border border-bmj-border-subtle bg-bmj-black/40 p-5 hover:border-bmj-border-strong transition-colors">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="font-label text-xs uppercase tracking-widest text-bmj-tan">
+                  <p className="font-label text-micro uppercase tracking-label-xl text-bmj-tan">
                     {contentLabels[item.entity]}
                   </p>
                   <Link
                     href={item.href}
-                    className="mt-2 block font-display text-lg tracking-wider text-bmj-white transition-colors hover:text-bmj-red"
+                    className="mt-3 block font-display text-xl uppercase tracking-display text-bmj-white transition-colors hover:text-bmj-red"
                   >
                     {item.title}
                   </Link>
-                  <p className="mt-2 font-mono text-xs text-bmj-tan">
+                  <p className="mt-2 font-typewriter text-xs text-bmj-text-muted">
                     {item.descriptor}
                   </p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <p className="font-label text-micro uppercase tracking-widest text-bmj-amber">
+                  <p className="font-label text-micro uppercase tracking-label text-bmj-amber font-bold">
                     Scheduled
                   </p>
                   <p className="mt-2 font-mono text-sm text-bmj-white">

@@ -31,6 +31,7 @@ const config: Config = {
         body:    ["var(--font-body)",    "Libre Baskerville", "serif"],
         label:   ["var(--font-label)",   "Oswald", "sans-serif"],
         mono:    ["var(--font-mono)",    "IBM Plex Mono", "monospace"],
+        typewriter: ["var(--font-typewriter)", "Courier Prime", "monospace"],
       },
       letterSpacing: {
         display:       "var(--tracking-display)",

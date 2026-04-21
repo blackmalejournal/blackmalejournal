@@ -35,6 +35,7 @@ export function KeyMetricsGrid({
         helper={`${pipeline.statusCounts.draft} drafts · ${pipeline.statusCounts.review} in review`}
         href={pipeline.staleQueue[0]?.href ?? PATHS.ADMIN_ARTICLES}
         tone={pipeline.staleQueue.length > 0 ? 'critical' : 'default'}
+        trend={pipeline.contentTrend}
       />
       <AdminMetricCard
         label="Scheduled This Week"
@@ -42,6 +43,7 @@ export function KeyMetricsGrid({
         helper={`${pipeline.statusCounts.scheduled} total scheduled`}
         href={pipeline.scheduledQueue[0]?.href ?? PATHS.ADMIN_BRIEFINGS}
         tone={pipeline.scheduledThisWeek > 0 ? 'warning' : 'default'}
+        trend={pipeline.publishedTrend}
       />
       <AdminMetricCard
         label="Paying Members"
@@ -56,6 +58,7 @@ export function KeyMetricsGrid({
         helper={`${subscribers.netPast30Days >= 0 ? '+' : ''}${subscribers.netPast30Days} net over 30 days`}
         href={PATHS.ADMIN_SUBSCRIBERS}
         tone={subscribers.netPast30Days < 0 ? 'warning' : 'success'}
+        trend={subscribers.subscriberTrend}
       />
       <AdminMetricCard
         label="New Members 30d"

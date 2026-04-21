@@ -16,11 +16,11 @@ export function AdminCoverageSection({ contentCards }: AdminCoverageSectionProps
     <section aria-labelledby="coverage-heading">
       <h2
         id="coverage-heading"
-        className="font-label text-xs uppercase tracking-widest text-bmj-tan"
+        className="font-label text-micro uppercase tracking-label-xl text-bmj-tan"
       >
         Admin Coverage
       </h2>
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {contentCards.map((card) => (
           <AdminMetricCard
             key={card.label}

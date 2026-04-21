@@ -65,6 +65,10 @@ export type AdminPipelineInsights = {
   scheduledThisWeek: number;
   scheduledQueue: AdminQueueItem[];
   staleQueue: AdminQueueItem[];
+  /** 7-day trend — content items created per day, oldest → newest. */
+  contentTrend: number[];
+  /** 7-day trend — content items published per day, oldest → newest. */
+  publishedTrend: number[];
 };
 
 export type AdminContentActivityItem = {
@@ -121,6 +125,8 @@ export type AdminSubscriberInsights = {
   churnPast30Days: number;
   netPast30Days: number;
   topSources: Array<{ source: string; count: number }>;
+  /** 7-day trend — new subscribers per day, oldest → newest. */
+  subscriberTrend: number[];
 };
 
 function diffInDays(iso: string, now: Date): number {
@@ -141,6 +147,31 @@ function initContentStatusCounts(): Record<ContentStatus, number> {
     archived: 0,
     withdrawn: 0,
   };
+}
+
+/**
+ * Bucket ISO timestamps into a 7-day trend array (oldest → newest).
+ * Day 0 = 6 days ago, Day 6 = today. Used to power dashboard sparklines.
+ */
+function bucketSevenDayTrend(isoTimestamps: Array<string | null | undefined>, now: Date): number[] {
+  const buckets = new Array<number>(7).fill(0);
+  const nowStart = new Date(now);
+  nowStart.setHours(0, 0, 0, 0);
+  const nowMs = nowStart.getTime();
+
+  for (const iso of isoTimestamps) {
+    if (!iso) continue;
+    const ts = new Date(iso).getTime();
+    if (Number.isNaN(ts)) continue;
+    const ageDays = Math.floor((nowMs - ts) / DAY_IN_MS);
+    // Today = index 6, yesterday = 5, etc.
+    const bucketIndex = 6 - ageDays;
+    if (bucketIndex >= 0 && bucketIndex <= 6) {
+      buckets[bucketIndex] += 1;
+    }
+  }
+
+  return buckets;
 }
 
 export function summarizeContentPipeline(
@@ -237,6 +268,15 @@ export function summarizeContentPipeline(
     return right.ageInDays - left.ageInDays;
   });
 
+  const contentTrend = bucketSevenDayTrend(
+    records.map((record) => record.createdAt),
+    now,
+  );
+  const publishedTrend = bucketSevenDayTrend(
+    records.map((record) => (record.status === 'published' ? record.publishedAt : null)),
+    now,
+  );
+
   return {
     total: records.length,
     statusCounts,
@@ -247,6 +287,8 @@ export function summarizeContentPipeline(
     }).length,
     scheduledQueue: scheduledQueue.slice(0, 8),
     staleQueue: staleQueue.slice(0, 8),
+    contentTrend,
+    publishedTrend,
   };
 }
 
@@ -429,6 +471,11 @@ export function summarizeSubscriberInsights(
     .slice(0, 5)
     .map(([source, count]) => ({ source, count }));
 
+  const subscriberTrend = bucketSevenDayTrend(
+    records.map((record) => record.subscribedAt),
+    now,
+  );
+
   return {
     total: records.length,
     active,
@@ -437,5 +484,6 @@ export function summarizeSubscriberInsights(
     churnPast30Days,
     netPast30Days: newPast30Days - churnPast30Days,
     topSources,
+    subscriberTrend,
   };
 }

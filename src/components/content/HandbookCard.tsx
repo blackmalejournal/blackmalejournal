@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Lock } from 'lucide-react';
 import { LensBadge } from '@/components/brand/LensBadge';
 import { PLACEHOLDERS } from '@/lib/placeholders';
+import { IMAGE_SIZES } from '@/lib/images';
 import { formatDate } from '@/lib/utils';
 import type { AccessTier, Lens } from '@/lib/supabase/types';
 
@@ -38,7 +39,7 @@ export function HandbookCard({
             alt={title}
             fill
             className="halftone object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, 192px"
+            sizes={IMAGE_SIZES.card}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-grain-texture opacity-[0.06] mix-blend-overlay"
@@ -59,13 +60,13 @@ export function HandbookCard({
           <div className="mb-3 flex items-center gap-3">
             <LensBadge lens={lens} />
             {isPremium && (
-              <span className="font-label text-xs uppercase tracking-widest text-bmj-amber">
+              <span className="font-label text-xs uppercase tracking-label text-bmj-amber">
                 {accessTier === 'premium' ? 'Premium' : 'Basic'}
               </span>
             )}
           </div>
 
-          <h3 className="mb-2 font-display text-xl leading-tight text-bmj-white group-hover:text-bmj-cream">
+          <h3 className="mb-2 font-display text-xl uppercase tracking-display leading-tight text-bmj-white group-hover:text-bmj-cream">
             {title}
           </h3>
 

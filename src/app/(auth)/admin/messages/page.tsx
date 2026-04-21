@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
+import { StatusBadge } from '@/components/admin/StatusBadge';
 import {
   getAllContactSubmissions,
   getContactSubmissionCounts,
@@ -35,13 +36,6 @@ const STATUS_TABS: { label: string; value: ContactSubmissionStatus | undefined }
   { label: 'Resolved', value: 'resolved' },
   { label: 'Spam', value: 'spam' },
 ];
-
-const statusStyles: Record<ContactSubmissionStatus, string> = {
-  new: 'bg-bmj-red/20 text-bmj-red',
-  in_progress: 'bg-bmj-amber/20 text-bmj-amber',
-  resolved: 'bg-[#416100]/20 text-[#416100]',
-  spam: 'bg-bmj-tan/20 text-bmj-tan',
-};
 
 interface MessagesAdminPageProps {
   searchParams: Promise<{
@@ -232,11 +226,7 @@ export default async function MessagesAdminPage({ searchParams }: MessagesAdminP
                         </p>
                       )}
                       <div className="mt-2 flex flex-wrap items-center gap-3">
-                        <span
-                          className={`inline-block px-2 py-0.5 font-label text-micro uppercase tracking-widest ${statusStyles[submission.status]}`}
-                        >
-                          {submission.status.replace('_', ' ')}
-                        </span>
+                        <StatusBadge status={submission.status} />
                         {submission.handled_at && (
                           <span className="font-mono text-stamp text-bmj-tan">
                             Updated {formatDate(submission.handled_at)}

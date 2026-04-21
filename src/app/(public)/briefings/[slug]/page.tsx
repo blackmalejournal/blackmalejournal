@@ -9,7 +9,7 @@ import {
 } from '@/lib/supabase/queries';
 import { checkContentAccess, getAuthUser } from '@/lib/supabase/access';
 import { formatDate } from '@/lib/utils';
-import { articleJsonLd } from '@/lib/seo';
+import { articleJsonLd, dynamicOgImageUrl } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { StarDivider } from '@/components/ui/StarDivider';
 import { ShareButton } from '@/components/ui/ShareButton';
@@ -37,19 +37,25 @@ export async function generateMetadata(
   const description =
     briefing.sections[0]?.body.slice(0, 160) ?? briefing.title;
 
+  const ogImage = dynamicOgImageUrl({
+    title: `${issueLabel} — ${briefing.title}`,
+    type: 'briefing',
+    author: 'The Chairman',
+  });
+
   return {
     title: `${issueLabel} — ${briefing.title}`,
     description,
     openGraph: {
       title: `Weekend Briefing ${issueLabel}: ${briefing.title}`,
       description,
-      images: briefing.cover_image ? [{ url: briefing.cover_image }] : [],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: briefing.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `Weekend Briefing ${issueLabel}: ${briefing.title}`,
       description,
-      images: briefing.cover_image ? [briefing.cover_image] : [],
+      images: [ogImage],
     },
   };
 }
