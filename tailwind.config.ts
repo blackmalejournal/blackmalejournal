@@ -24,6 +24,7 @@ const config: Config = {
           olive:         "#416100",
           gold:          "#C77A0E",
           purple:        "#554978",
+          "text-body":   "rgba(232, 220, 200, 0.84)",
         },
       },
       fontFamily: {
