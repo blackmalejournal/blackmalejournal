@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: '/resources', destination: '/library', permanent: true },
+      { source: '/resources', destination: '/records', permanent: true },
     ];
   },
   async headers() {
