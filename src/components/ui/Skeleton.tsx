@@ -3,19 +3,12 @@ import { cn } from '@/lib/utils';
 
 interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
-  /** Use shimmer gradient instead of pulse */
-  shimmer?: boolean;
 }
 
-export function Skeleton({ className = '', shimmer = false, ...props }: SkeletonProps) {
+export function Skeleton({ className = '', ...props }: SkeletonProps) {
   return (
     <div
-      className={cn(
-        shimmer
-          ? 'animate-shimmer bg-gradient-to-r from-bmj-tan/5 via-bmj-tan/15 via-50% to-bmj-tan/5 bg-[length:200%_100%]'
-          : 'animate-pulse bg-bmj-tan/10',
-        className,
-      )}
+      className={cn('animate-pulse bg-bmj-tan/10', className)}
       aria-hidden="true"
       {...props}
     />
@@ -26,15 +19,15 @@ export function Skeleton({ className = '', shimmer = false, ...props }: Skeleton
 export function SkeletonCard(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="card-media border-t-bmj-tan/20" {...props}>
-      <Skeleton shimmer className="aspect-[16/9] w-full" />
+      <Skeleton className="aspect-[16/9] w-full" />
       <div className="space-y-3 p-6">
-        <Skeleton shimmer className="h-5 w-16 rounded-sm" />
-        <Skeleton shimmer className="h-6 w-3/4" />
-        <Skeleton shimmer className="h-3 w-full" />
-        <Skeleton shimmer className="h-3 w-2/3" />
+        <Skeleton className="h-5 w-16 rounded-sm" />
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-2/3" />
         <div className="flex justify-between border-t border-bmj-tan/10 pt-4">
-          <Skeleton shimmer className="h-3 w-16" />
-          <Skeleton shimmer className="h-3 w-20" />
+          <Skeleton className="h-3 w-16" />
+          <Skeleton className="h-3 w-20" />
         </div>
       </div>
     </div>
@@ -46,11 +39,11 @@ export function SkeletonBriefingCard(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="card-stripe border border-bmj-tan/10 border-l-bmj-red/30 p-6 sm:p-8" {...props}>
       <div className="mb-4 flex items-center gap-4">
-        <Skeleton shimmer className="h-3 w-12" />
-        <Skeleton shimmer className="h-3 w-24" />
+        <Skeleton className="h-3 w-12" />
+        <Skeleton className="h-3 w-24" />
       </div>
-      <Skeleton shimmer className="h-8 w-2/3" />
-      <Skeleton shimmer className="mt-3 h-3 w-full" />
+      <Skeleton className="h-8 w-2/3" />
+      <Skeleton className="mt-3 h-3 w-full" />
     </div>
   );
 }
@@ -60,12 +53,12 @@ export function SkeletonDispatchCard(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="card-stripe border border-bmj-tan/10 border-l-bmj-tan/30 p-6 sm:p-8" {...props}>
       <div className="mb-3 flex items-center gap-4">
-        <Skeleton shimmer className="h-5 w-20 rounded-sm" />
-        <Skeleton shimmer className="h-3 w-16" />
+        <Skeleton className="h-5 w-20 rounded-sm" />
+        <Skeleton className="h-3 w-16" />
       </div>
-      <Skeleton shimmer className="mb-3 h-7 w-3/4" />
-      <Skeleton shimmer className="h-3 w-full" />
-      <Skeleton shimmer className="h-3 w-2/3" />
+      <Skeleton className="mb-3 h-7 w-3/4" />
+      <Skeleton className="h-3 w-full" />
+      <Skeleton className="h-3 w-2/3" />
     </div>
   );
 }
@@ -74,17 +67,17 @@ export function SkeletonDispatchCard(props: HTMLAttributes<HTMLDivElement>) {
 export function SkeletonHandbookCard(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="card-media flex flex-col border-t-bmj-tan/20 sm:flex-row" {...props}>
-      <Skeleton shimmer className="aspect-[4/3] w-full sm:aspect-auto sm:w-48 sm:shrink-0" />
+      <Skeleton className="aspect-[4/3] w-full sm:aspect-auto sm:w-48 sm:shrink-0" />
       <div className="flex flex-1 flex-col p-6">
         <div className="mb-3 flex items-center gap-3">
-          <Skeleton shimmer className="h-5 w-20 rounded-sm" />
-          <Skeleton shimmer className="h-3 w-12" />
+          <Skeleton className="h-5 w-20 rounded-sm" />
+          <Skeleton className="h-3 w-12" />
         </div>
-        <Skeleton shimmer className="mb-2 h-6 w-2/3" />
-        <Skeleton shimmer className="h-3 w-full" />
-        <Skeleton shimmer className="h-3 w-3/4" />
+        <Skeleton className="mb-2 h-6 w-2/3" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-3/4" />
         <div className="mt-4 border-t border-bmj-tan/10 pt-3">
-          <Skeleton shimmer className="h-3 w-16" />
+          <Skeleton className="h-3 w-16" />
         </div>
       </div>
     </div>
@@ -95,14 +88,14 @@ export function SkeletonHandbookCard(props: HTMLAttributes<HTMLDivElement>) {
 export function SkeletonCourseCard(props: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className="card-media border-t-bmj-tan/20" {...props}>
-      <Skeleton shimmer className="aspect-[16/9] w-full" />
+      <Skeleton className="aspect-[16/9] w-full" />
       <div className="space-y-3 p-6">
-        <Skeleton shimmer className="h-5 w-20 rounded-sm" />
-        <Skeleton shimmer className="h-6 w-3/4" />
-        <Skeleton shimmer className="h-3 w-full" />
-        <Skeleton shimmer className="h-3 w-2/3" />
+        <Skeleton className="h-5 w-20 rounded-sm" />
+        <Skeleton className="h-6 w-3/4" />
+        <Skeleton className="h-3 w-full" />
+        <Skeleton className="h-3 w-2/3" />
         <div className="border-t border-bmj-tan/10 pt-4">
-          <Skeleton shimmer className="h-3 w-16" />
+          <Skeleton className="h-3 w-16" />
         </div>
       </div>
     </div>
