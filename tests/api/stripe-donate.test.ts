@@ -11,6 +11,18 @@ jest.mock('@/lib/stripe/config', () => ({
   getStripe: () => mockStripe,
 }));
 
+const mockRateLimitCheck = jest.fn();
+jest.mock('@/lib/rate-limit', () => ({
+  rateLimit: () => ({ check: (...args: unknown[]) => mockRateLimitCheck(...args) }),
+}));
+
+jest.mock('next/headers', () => ({
+  headers: () =>
+    Promise.resolve({
+      get: (name: string) => (name === 'x-forwarded-for' ? '127.0.0.1' : null),
+    }),
+}));
+
 import { POST } from '@/app/api/stripe/donate/route';
 
 function makeRequest(body: unknown) {
@@ -45,6 +57,7 @@ describe('POST /api/stripe/donate', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockCheckoutCreate.mockResolvedValue({ url: 'https://checkout.stripe.com/donate_123' });
+    mockRateLimitCheck.mockResolvedValue({ success: true, remaining: 9 });
   });
 
   it('returns 400 for invalid JSON', async () => {
@@ -129,5 +142,14 @@ describe('POST /api/stripe/donate', () => {
     mockCheckoutCreate.mockRejectedValue(new Error('Stripe error'));
     const res = await POST(makeRequest(validOneTime));
     expect(res.status).toBe(500);
+  });
+
+  it('returns 429 when rate limit exceeded', async () => {
+    mockRateLimitCheck.mockResolvedValue({ success: false, remaining: 0 });
+    const req = makeRequest(validOneTime);
+    const res = await POST(req);
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toBe('Too many requests');
   });
 });
