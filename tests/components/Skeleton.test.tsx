@@ -18,6 +18,13 @@ describe('Skeleton', () => {
     render(<Skeleton data-testid="skeleton" />);
     expect(screen.getByTestId('skeleton')).toHaveAttribute('aria-hidden', 'true');
   });
+
+  test('always uses pulse animation regardless of props passed', () => {
+    render(<Skeleton data-testid="skeleton" />);
+    const el = screen.getByTestId('skeleton');
+    expect(el.className).toContain('animate-pulse');
+    expect(el.className).toContain('bg-bmj-tan/10');
+  });
 });
 
 describe('SkeletonCard', () => {
