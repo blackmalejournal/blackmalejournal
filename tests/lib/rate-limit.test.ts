@@ -1,31 +1,31 @@
 import { rateLimit } from '@/lib/rate-limit';
 
 describe('rateLimit', () => {
-  it('allows requests under the limit', () => {
+  it('allows requests under the limit', async () => {
     const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 100 });
-    const result = limiter.check(10, 'test-token-1');
+    const result = await limiter.check(10, 'test-token-1');
     expect(result.success).toBe(true);
     expect(result.remaining).toBe(9);
   });
 
-  it('blocks requests over the limit', () => {
+  it('blocks requests over the limit', async () => {
     const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 100 });
     for (let i = 0; i < 5; i++) {
-      limiter.check(5, 'test-token-2');
+      await limiter.check(5, 'test-token-2');
     }
-    const result = limiter.check(5, 'test-token-2');
+    const result = await limiter.check(5, 'test-token-2');
     expect(result.success).toBe(false);
   });
 
-  it('tracks different tokens independently', () => {
+  it('tracks different tokens independently', async () => {
     const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 100 });
     for (let i = 0; i < 3; i++) {
-      limiter.check(3, 'token-a');
+      await limiter.check(3, 'token-a');
     }
-    const blocked = limiter.check(3, 'token-a');
+    const blocked = await limiter.check(3, 'token-a');
     expect(blocked.success).toBe(false);
 
-    const allowed = limiter.check(3, 'token-b');
+    const allowed = await limiter.check(3, 'token-b');
     expect(allowed.success).toBe(true);
   });
 });
