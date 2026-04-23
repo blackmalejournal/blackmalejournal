@@ -63,3 +63,6 @@ test-results/
 CLAUDE.local.md
 .claude/settings.local.json
 BMJ-SSOT.docx
+
+# Git worktrees
+.worktrees/
