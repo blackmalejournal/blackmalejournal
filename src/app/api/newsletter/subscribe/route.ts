@@ -8,14 +8,14 @@ import { rateLimit } from '@/lib/rate-limit';
 const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 500 });
 
 const subscribeSchema = z.object({
-  email: z.string().email('Please enter a valid email address'),
-  source: z.string().optional(),
+  email: z.string().trim().email('Please enter a valid email address').transform(normalizeEmailAddress),
+  source: z.string().optional().transform((s) => s?.trim()),
 });
 
 export async function POST(request: Request) {
   const headerList = await headers();
   const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
-  const { success } = limiter.check(5, ip);
+  const { success } = await limiter.check(5, ip);
   if (!success) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
@@ -27,18 +27,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const payload = typeof body === 'object' && body !== null
-    ? body as Record<string, unknown>
-    : {};
-  const result = subscribeSchema.safeParse({
-    ...payload,
-    email: typeof payload.email === 'string'
-      ? normalizeEmailAddress(payload.email)
-      : payload.email,
-    source: typeof payload.source === 'string'
-      ? payload.source.trim()
-      : payload.source,
-  });
+  const result = subscribeSchema.safeParse(body);
   if (!result.success) {
     const firstError = result.error.issues[0]?.message ?? 'Validation failed';
     return NextResponse.json({ error: firstError }, { status: 400 });
