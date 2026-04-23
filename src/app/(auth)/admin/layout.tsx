@@ -21,8 +21,7 @@ export default async function AdminLayout({
     redirect(PATHS.PORTAL);
   }
 
-  const displayName =
-    (user.user_metadata?.display_name as string) || user.email || 'Admin';
+  const displayName = member.role === 'admin' ? 'The Chairman' : 'Editor';
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
