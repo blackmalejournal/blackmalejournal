@@ -33,7 +33,7 @@ const toneClasses: Record<AuditTone, string> = {
   default: 'border-bmj-tan/20 bg-bmj-black/25 text-bmj-cream',
   warning: 'border-bmj-amber/30 bg-bmj-amber/10 text-bmj-amber',
   critical: 'border-bmj-red/30 bg-bmj-red/10 text-bmj-red',
-  success: 'border-[#416100]/30 bg-[#416100]/10 text-[#9fcb51]',
+  success: 'border-bmj-olive/30 bg-bmj-olive/10 text-[#9fcb51]',
 };
 
 function formatDateTime(iso: string | null | undefined): string {
@@ -154,7 +154,7 @@ export function EditorialAuditPanel({
           Open Issues
         </h3>
         {issueItems.length === 0 ? (
-          <p className="mt-3 border border-[#416100]/30 bg-[#416100]/10 px-4 py-3 font-body text-sm text-bmj-cream/80">
+          <p className="mt-3 border border-bmj-olive/30 bg-bmj-olive/10 px-4 py-3 font-body text-sm text-bmj-cream/80">
             No publish blockers are visible right now.
           </p>
         ) : (

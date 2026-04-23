@@ -5,7 +5,7 @@ interface AdminNoticeProps {
 }
 
 const toneClasses: Record<AdminNoticeProps['tone'], string> = {
-  success: 'border-[#416100]/40 bg-[#416100]/10 text-bmj-cream',
+  success: 'border-bmj-olive/40 bg-bmj-olive/10 text-bmj-cream',
   error: 'border-bmj-red/40 bg-bmj-red/10 text-bmj-cream',
 };
 
