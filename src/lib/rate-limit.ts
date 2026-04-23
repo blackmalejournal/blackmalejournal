@@ -85,7 +85,6 @@ async function getDistributedLimit(
       };
 
       // api_rate_limits is not in the generated schema; cast via unknown is intentional
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { error: upsertError } = await (supabase as any)
         .from(table)
         .upsert(upsertPayload, { onConflict: 'bucket_key,token' });
@@ -103,7 +102,6 @@ async function getDistributedLimit(
     };
 
     // api_rate_limits is not in the generated schema; cast via unknown is intentional
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error: updateError } = await (supabase as any)
       .from(table)
       .update(updatePayload)
