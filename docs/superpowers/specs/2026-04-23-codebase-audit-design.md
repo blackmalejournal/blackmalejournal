@@ -2,7 +2,7 @@
 title: BMJ Codebase Audit — Full System Review
 date: 2026-04-23
 author: Claude Sonnet 4.6 (audit) / Meshal Alawein (review)
-status: draft
+status: approved
 ---
 
 # BMJ Codebase Audit — Full System Review
