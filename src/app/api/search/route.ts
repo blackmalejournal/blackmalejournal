@@ -20,7 +20,7 @@ function parseCommaSeparated(value: string | null, validSet: Set<string>): strin
 export async function GET(request: Request) {
   const headerList = await headers();
   const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
-  const { success } = limiter.check(30, ip);
+  const { success } = await limiter.check(30, ip);
   if (!success) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }

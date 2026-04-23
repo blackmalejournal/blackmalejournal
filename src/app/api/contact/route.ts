@@ -17,7 +17,7 @@ const contactSchema = z.object({
 export async function POST(request: Request) {
   const headerList = await headers();
   const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
-  const { success } = limiter.check(5, ip);
+  const { success } = await limiter.check(5, ip);
   if (!success) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
