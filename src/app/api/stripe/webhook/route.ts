@@ -18,6 +18,14 @@ function assertMutationSucceeded(result: MutationResult, context: string) {
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session, supabase: AdminClient) {
+  // Donation payments: log and return — they do not update membership tier
+  if (session.metadata?.type === 'donation') {
+    const amount = session.amount_total ?? 0;
+    const email = session.customer_email ?? 'anonymous';
+    console.info(`[webhook] donation.completed: amount=${amount} email=${email}`);
+    return;
+  }
+
   const userId = session.metadata?.userId;
   const tier = session.metadata?.tier as 'basic' | 'premium' | undefined;
 

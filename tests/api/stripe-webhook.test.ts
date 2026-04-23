@@ -137,6 +137,23 @@ describe('POST /api/stripe/webhook', () => {
       expect(res.status).toBe(200);
       expect(mockAdminUpdate).not.toHaveBeenCalled();
     });
+
+    it('returns 200 and skips DB update for donation type', async () => {
+      mockConstructEvent.mockReturnValue(
+        makeEvent('checkout.session.completed', {
+          customer: 'cus_donor',
+          subscription: null,
+          amount_total: 2500,
+          customer_email: 'donor@example.com',
+          metadata: { type: 'donation', frequency: 'once' },
+        }),
+      );
+      const res = await POST(makeWebhookRequest('raw-body', 'test_sig'));
+      expect(res.status).toBe(200);
+      const body = await res.json();
+      expect(body.received).toBe(true);
+      expect(mockAdminUpdate).not.toHaveBeenCalled();
+    });
   });
 
   describe('customer.subscription.updated', () => {
