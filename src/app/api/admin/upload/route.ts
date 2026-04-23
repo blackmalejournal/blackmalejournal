@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { headers } from 'next/headers';
 import { getAdminActor } from '@/lib/admin-auth';
 import { getPublicUrl, uploadFile } from '@/lib/supabase/storage';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 100 });
 
 const uploadSchema = z.object({
   bucket: z.enum(['covers', 'downloads', 'media']),
@@ -37,6 +41,13 @@ export async function POST(request: Request) {
   }
   if (!actor.member) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
+  const headerList = await headers();
+  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const { success } = await limiter.check(20, ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   const formData = await request.formData();
