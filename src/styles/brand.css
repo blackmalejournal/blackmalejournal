@@ -48,7 +48,7 @@
   /* Line heights */
   --leading-article: 1.8;   /* long-form article body paragraphs */
 
-  /* Display font weight — Bebas Neue has only weight 400 */
+  /* Display font weight — Highrise ships 400 (regular) and 700 (bold) */
   --weight-display: 400;
 
   /* Grain overlay */
