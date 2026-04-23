@@ -10,7 +10,7 @@ interface VideoCardProps {
 
 export function VideoCard({ title, youtubeId, publishedAt }: VideoCardProps) {
   return (
-    <article className="group flex flex-col surface-panel transition-[transform,border-color] duration-200 hover:-translate-y-1 hover:border-bmj-red/40">
+    <article className="group flex flex-col surface-panel hover-lift hover:border-bmj-red/40">
       {/* Thumbnail with play overlay */}
       <div className="relative aspect-[16/9] overflow-hidden bg-bmj-black">
         <Image

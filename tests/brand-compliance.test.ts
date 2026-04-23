@@ -56,6 +56,48 @@ const ALLOWED_EXCEPTIONS: Record<string, RegExp[]> = {
 
 const componentFiles = collectTsxFiles(COMPONENTS_DIR);
 
+// Files that intentionally use raw hover transforms with non-standard values
+// Paths are normalized to forward slashes for cross-platform matching
+const KNOWN_UTILITY_BYPASSES = new Set<string>([
+  // hover:scale-105 on image inside carousel — intentional image zoom, not a card lift
+  'home/FeaturedCarousel.tsx',
+  // hover:scale-150 on pagination dot — intentional dramatic scale for dot indicator
+  'home/RotatingQuote.tsx',
+  // hover:-translate-y-px — 1px micro-lift on avatar button, approved per design
+  'layout/UserDropdown.tsx',
+]);
+
+describe('Brand Token Enforcement', () => {
+  it('no component uses raw hover-translate or hover-scale (use .hover-lift / .hover-scale instead)', () => {
+    // Matches standalone hover: but not group-hover: or peer-hover: variants
+    const hoverTransformPattern = /(?<![a-z-])hover:(?:-?)(?:translate-[xy]|scale)-/g;
+    const violations: string[] = [];
+
+    for (const filePath of componentFiles) {
+      const relPath = relative(COMPONENTS_DIR, filePath).replace(/\\/g, '/');
+      if (KNOWN_UTILITY_BYPASSES.has(relPath)) continue;
+
+      const content = readFileSync(filePath as string, 'utf-8');
+      hoverTransformPattern.lastIndex = 0;
+      const matches = content.match(hoverTransformPattern) ?? [];
+
+      if (matches.length > 0) {
+        violations.push(
+          `${relPath}: found ${matches.join(', ')} — use hover-lift or hover-scale instead`,
+        );
+      }
+    }
+
+    if (violations.length > 0) {
+      throw new Error(
+        'Hover transform violations (use semantic utilities):\n' +
+          violations.map((v) => `  - ${v}`).join('\n') +
+          '\n\nBrand system: .hover-lift = hover:-translate-y-1, .hover-lift-sm = hover:-translate-y-0.5, .hover-scale = hover:scale-[1.02]',
+      );
+    }
+  });
+});
+
 describe('Brand Compliance Guard', () => {
   it.each(componentFiles.map((f) => [relative(COMPONENTS_DIR, f), f]))(
     '%s has no prohibited CSS patterns',
