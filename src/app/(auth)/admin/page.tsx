@@ -14,6 +14,7 @@ import {
   TopSourcesSection,
   AdminCoverageSection,
   QuickActionsSection,
+  DashboardSection,
   type AttentionItem,
 } from '@/components/admin/dashboard';
 
@@ -23,7 +24,22 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminDashboardPage() {
-  const snapshot = await getAdminCommandCenterSnapshot();
+  let snapshot;
+  try {
+    snapshot = await getAdminCommandCenterSnapshot();
+  } catch (err) {
+    console.error('[AdminDashboard] snapshot failed', err);
+    return (
+      <div className="surface-panel p-8">
+        <p className="font-display text-xl uppercase tracking-widest text-bmj-red">
+          DASHBOARD UNAVAILABLE
+        </p>
+        <p className="mt-3 font-body text-sm text-bmj-cream/60">
+          Failed to load dashboard data. Check the server logs and try refreshing.
+        </p>
+      </div>
+    );
+  }
   const { counts, pipeline, activity, members, messages, subscribers } = snapshot;
 
   const contentCards = [
@@ -138,45 +154,55 @@ export default async function AdminDashboardPage() {
       </ScrollReveal>
 
       <ScrollReveal as="div" delay={0.05}>
-        <KeyMetricsGrid
-          messages={messages}
-          pipeline={pipeline}
-          members={members}
-          subscribers={subscribers}
-        />
+        <DashboardSection title="Key Metrics">
+          <KeyMetricsGrid
+            messages={messages}
+            pipeline={pipeline}
+            members={members}
+            subscribers={subscribers}
+          />
+        </DashboardSection>
       </ScrollReveal>
 
       <StarDivider className="my-12" />
 
       <ScrollReveal as="div" delay={0.1}>
-        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <AttentionQueueSection items={attentionItems} />
-          <PublishingQueueSection scheduledQueue={pipeline.scheduledQueue} />
-        </div>
+        <DashboardSection title="Attention Queue">
+          <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+            <AttentionQueueSection items={attentionItems} />
+            <PublishingQueueSection scheduledQueue={pipeline.scheduledQueue} />
+          </div>
+        </DashboardSection>
       </ScrollReveal>
 
       <ScrollReveal as="div" delay={0.15}>
-        <div className="mt-12 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <EditorialPipelineSection pipeline={pipeline} />
+        <DashboardSection title="Editorial Pipeline">
+          <div className="mt-12 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+            <EditorialPipelineSection pipeline={pipeline} />
 
-          <div className="space-y-6">
-            <AudienceBillingSection members={members} subscribers={subscribers} />
-            <RecentActivitySection activity={activity} />
-            <TopSourcesSection topSources={subscribers.topSources} />
+            <div className="space-y-6">
+              <AudienceBillingSection members={members} subscribers={subscribers} />
+              <RecentActivitySection activity={activity} />
+              <TopSourcesSection topSources={subscribers.topSources} />
+            </div>
           </div>
-        </div>
+        </DashboardSection>
       </ScrollReveal>
 
       <StarDivider className="my-12" />
 
       <ScrollReveal as="div" delay={0.2}>
-        <AdminCoverageSection contentCards={contentCards} />
+        <DashboardSection title="Admin Coverage">
+          <AdminCoverageSection contentCards={contentCards} />
+        </DashboardSection>
       </ScrollReveal>
 
       <StarDivider className="my-12" />
 
       <ScrollReveal as="div" delay={0.25}>
-        <QuickActionsSection />
+        <DashboardSection title="Quick Actions">
+          <QuickActionsSection />
+        </DashboardSection>
       </ScrollReveal>
     </div>
   );

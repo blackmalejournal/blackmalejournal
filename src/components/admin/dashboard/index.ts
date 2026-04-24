@@ -7,3 +7,4 @@ export { RecentActivitySection } from './RecentActivitySection';
 export { TopSourcesSection } from './TopSourcesSection';
 export { AdminCoverageSection } from './AdminCoverageSection';
 export { QuickActionsSection } from './QuickActionsSection';
+export { DashboardSection } from './DashboardSection';
