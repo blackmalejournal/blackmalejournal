@@ -9,14 +9,14 @@ const toneClasses: Record<AdminMetricTone, string> = {
   default: 'border-bmj-tan/20 text-bmj-tan',
   warning: 'border-bmj-amber/30 text-bmj-amber',
   critical: 'border-bmj-red/30 text-bmj-red',
-  success: 'border-[#416100]/30 text-[#416100]',
+  success: 'border-bmj-olive/30 text-bmj-olive',
 };
 
 const sparklineBarByTone: Record<AdminMetricTone, string> = {
   default: 'bg-bmj-tan/60',
   warning: 'bg-bmj-amber/70',
   critical: 'bg-bmj-red/70',
-  success: 'bg-[#416100]/70',
+  success: 'bg-bmj-olive/70',
 };
 
 interface AdminMetricCardProps {
@@ -41,7 +41,7 @@ export function AdminMetricCard({
 
   const content = (
     <div
-      className={`h-full border surface-panel p-6 hover-lift-sm hover:border-bmj-border-strong hover:shadow-md ${toneClasses[tone]}`}
+      className={`h-full border surface-panel p-6 hover-lift-sm hover:border-bmj-border-strong hover:shadow-[var(--shadow-md)] ${toneClasses[tone]}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
