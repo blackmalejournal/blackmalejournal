@@ -1,3 +1,6 @@
+import { createAdminClient } from '@/lib/supabase/admin';
+import { withRetry } from '@/lib/retry';
+
 interface RateLimitOptions {
   interval: number; // Time window in milliseconds
   uniqueTokenPerInterval: number; // Max unique tokens tracked
@@ -8,32 +11,17 @@ interface RateLimitResult {
   remaining: number;
 }
 
-import { createAdminClient } from '@/lib/supabase/admin';
-
 interface MemoryRateLimitBucket {
   count: number;
   resetAt: number;
 }
 
-interface SupabaseRateLimitBucket {
-  token: string;
-  request_count: number;
-  reset_at: string;
-}
-
-// api_rate_limits is an operational table not present in the generated schema.
-// ApiRateLimitUpsert provides local type safety for all write operations.
-interface ApiRateLimitUpsert {
-  bucket_key: string;
-  token: string;
-  request_count: number;
-  reset_at: string;
+interface RateLimitRpcRow {
+  success: boolean;
+  remaining: number;
 }
 
 const memoryStore = new Map<string, MemoryRateLimitBucket>();
-const defaultOptions = {
-  table: 'api_rate_limits',
-};
 
 function clampToken(rawToken: string): string {
   const normalized = String(rawToken ?? '').trim();
@@ -52,6 +40,37 @@ function nextWindowStart(now: number, interval: number): number {
   return Math.floor(now / interval) * interval;
 }
 
+async function callIncrementRateLimit(
+  bucketKey: string,
+  token: string,
+  limit: number,
+  resetAt: string,
+): Promise<RateLimitResult> {
+  const supabase = createAdminClient();
+
+  // increment_rate_limit RPC is defined in
+  // supabase/migrations/20260424000000_create_atomic_rate_limit.sql.
+  // Not in the generated schema types; cast via unknown is intentional.
+  const { data, error } = await (supabase as unknown as {
+    rpc: (
+      fn: string,
+      args: Record<string, unknown>,
+    ) => Promise<{ data: RateLimitRpcRow[] | null; error: Error | null }>;
+  }).rpc('increment_rate_limit', {
+    p_bucket_key: bucketKey,
+    p_token: token,
+    p_limit: limit,
+    p_reset_at: resetAt,
+  });
+
+  if (error) throw error;
+
+  const row = data?.[0];
+  if (!row) throw new Error('increment_rate_limit returned no row');
+
+  return { success: row.success, remaining: row.remaining };
+}
+
 async function getDistributedLimit(
   token: string,
   interval: number,
@@ -59,60 +78,16 @@ async function getDistributedLimit(
 ): Promise<RateLimitResult | null> {
   const now = Date.now();
   const windowStart = nextWindowStart(now, interval);
-  const resetAt = windowStart + interval;
-  const key = `${windowStart}:${token}`;
-
-  const supabase = createAdminClient();
-  const table = process.env.API_RATE_LIMITS_TABLE ?? defaultOptions.table;
+  const resetAt = new Date(windowStart + interval).toISOString();
+  const bucketKey = `${windowStart}:${token}`;
 
   try {
-    const { data: existingRecords, error: fetchError } = await supabase
-      .from(table)
-      .select('token, request_count, reset_at')
-      .eq('bucket_key', key)
-      .eq('token', token)
-      .limit(1);
-
-    if (fetchError) throw fetchError;
-
-    const existing = (existingRecords as unknown as SupabaseRateLimitBucket[] | null)?.[0];
-    if (!existing || new Date(existing.reset_at).getTime() <= now) {
-      const upsertPayload: ApiRateLimitUpsert = {
-        bucket_key: key,
-        token,
-        request_count: 1,
-        reset_at: new Date(resetAt).toISOString(),
-      };
-
-      // api_rate_limits is not in the generated schema; cast via unknown is intentional
-      const { error: upsertError } = await (supabase as any)
-        .from(table)
-        .upsert(upsertPayload, { onConflict: 'bucket_key,token' });
-
-      if (upsertError) throw upsertError;
-      return { success: true, remaining: limit - 1 };
-    }
-
-    if (existing.request_count >= limit) {
-      return { success: false, remaining: 0 };
-    }
-
-    const updatePayload: Partial<ApiRateLimitUpsert> = {
-      request_count: existing.request_count + 1,
-    };
-
-    // api_rate_limits is not in the generated schema; cast via unknown is intentional
-    const { error: updateError } = await (supabase as any)
-      .from(table)
-      .update(updatePayload)
-      .eq('bucket_key', key)
-      .eq('token', token)
-      .eq('reset_at', existing.reset_at);
-
-    if (updateError) throw updateError;
-    return { success: true, remaining: limit - (existing.request_count + 1) };
+    return await withRetry(
+      () => callIncrementRateLimit(bucketKey, token, limit, resetAt),
+      { attempts: 3, delayMs: 50, jitterMs: 25, label: 'rate-limit-rpc' },
+    );
   } catch (error) {
-    console.error('[rateLimit] distributed check failed, falling back to in-memory', error);
+    console.error('[rateLimit] RPC failed after retries, falling back to in-memory', error);
     return null;
   }
 }

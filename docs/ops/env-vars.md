@@ -3,7 +3,7 @@ title: Environment variables reference
 authority: canonical
 status: canonical
 audience: [engineers, operators, agents]
-last-verified: 2026-04-11
+last-verified: 2026-04-24
 ---
 
 # Environment Variables Reference
@@ -45,6 +45,16 @@ last-verified: 2026-04-11
 | `NEXT_PUBLIC_SITE_URL` | Client + Server | `seo.ts`, `auth/actions.ts`, `stripe/helpers.ts`, `donate/route.ts` | Preferred canonical site URL (e.g., `https://blackmalejournal.org` or `https://blackmalejournal.vercel.app`). When unset on Vercel, the app falls back to `VERCEL_PROJECT_PRODUCTION_URL` and then `VERCEL_URL`. |
 | `NEXT_PUBLIC_WHATSAPP_LINK` | Client | `contact/page.tsx` | WhatsApp contact link |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Client | `layout.tsx` | Optional Plausible domain. When set, the analytics script is injected into the root layout. |
+
+## Sentry (optional — no-op unless DSN is set)
+
+| Variable | Scope | Used In | Description |
+|----------|-------|---------|-------------|
+| `NEXT_PUBLIC_SENTRY_DSN` | Client | `sentry.client.config.ts` | Client-side DSN. Safe to expose. When unset, client Sentry init is skipped. |
+| `SENTRY_DSN` | Server + Edge | `sentry.server.config.ts`, `sentry.edge.config.ts` | Server/edge DSN (can match `NEXT_PUBLIC_SENTRY_DSN`). When unset, server Sentry init is skipped. |
+| `SENTRY_ORG` | Build-time | `next.config.ts` (via `withSentryConfig`) | Sentry org slug for sourcemap upload. Build skips upload when unset. |
+| `SENTRY_PROJECT` | Build-time | `next.config.ts` | Sentry project slug. |
+| `SENTRY_AUTH_TOKEN` | Build-time (CI only) | `next.config.ts` | Auth token for sourcemap upload. Never commit. Configure in Vercel and GitHub Actions secrets. Sourcemap upload is disabled when unset. |
 
 ## Local E2E (optional)
 
