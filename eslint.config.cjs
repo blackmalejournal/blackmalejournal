@@ -28,6 +28,14 @@ module.exports = defineConfig([
     rules: {
       ...reactHooksPlugin.configs.flat.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "TSAsExpression[typeAnnotation.type='TSNeverKeyword']",
+          message:
+            "`as never` is forbidden — it suppresses all type safety. Fix the underlying type mismatch or use `as unknown as TargetType` with an explanatory comment.",
+        },
+      ],
     },
   },
 ]);

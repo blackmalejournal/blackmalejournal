@@ -36,7 +36,7 @@ describe('PricingPage', () => {
           data: { user: null },
         }),
       },
-    } as never);
+    } as unknown as Awaited<ReturnType<typeof createClient>>);
     mockGetMemberById.mockResolvedValue(null);
 
     const { default: PricingPage } = await import('@/app/(public)/pricing/page');
@@ -62,7 +62,7 @@ describe('PricingPage', () => {
           },
         }),
       },
-    } as never);
+    } as unknown as Awaited<ReturnType<typeof createClient>>);
     mockGetMemberById.mockResolvedValue({
       id: 'member-1',
       email: 'member@example.com',
@@ -102,7 +102,7 @@ describe('PricingPage', () => {
           },
         }),
       },
-    } as never);
+    } as unknown as Awaited<ReturnType<typeof createClient>>);
     mockGetMemberById.mockResolvedValue({
       id: 'member-2',
       email: 'premium@example.com',

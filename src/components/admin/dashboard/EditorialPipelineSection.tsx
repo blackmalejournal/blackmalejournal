@@ -72,7 +72,7 @@ export function EditorialPipelineSection({
             {pipeline.staleQueue.map((item) => (
               <li
                 key={item.id}
-                className={`border border-l-[4px] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] ${
+                className={`border border-l-[4px] p-6 hover-lift-sm hover:shadow-[var(--shadow-md)] ${
                   item.severity === 'critical'
                     ? 'border-bmj-red/30 border-l-bmj-red bg-bmj-red/10'
                     : 'border-bmj-amber/30 border-l-bmj-amber bg-bmj-amber/10'

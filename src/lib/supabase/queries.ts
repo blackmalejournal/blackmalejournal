@@ -261,7 +261,7 @@ export async function getBriefingByIssue(
 
 // ── Members ───────────────────────────────────────────────────────────────────
 
-export async function getMemberById(userId: string): Promise<Member | null> {
+export const getMemberById = cache(async function getMemberById(userId: string): Promise<Member | null> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from('members')
@@ -271,7 +271,7 @@ export async function getMemberById(userId: string): Promise<Member | null> {
 
   if (error) return null;
   return data as Member;
-}
+});
 
 export async function getMemberByEmail(email: string): Promise<Member | null> {
   const supabase = await createClient();

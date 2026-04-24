@@ -1,52 +1,75 @@
 // src/lib/supabase/types.ts
-// NOTE: All row shapes are defined as `type` aliases (not `interface`) intentionally.
-// TypeScript treats interfaces as "open" (subject to declaration merging), so they
-// cannot satisfy `Record<string, unknown>` constraints that supabase-js uses internally
-// to type INSERT/UPDATE operations. `type` aliases are closed and pass the check.
+// Domain type aliases derived from the generated Supabase schema.
+//
+// Re-generate the schema file whenever migrations change:
+//   npx supabase gen types typescript --local > src/lib/supabase/database.types.ts
+// Then run `npx tsc --noEmit` to catch column drift.
+//
+// NOTE: All row shapes are derived from `Database['public']['Tables'][...]['Row']`
+// so TypeScript enforces that every alias stays in sync with the actual schema.
+// TypeScript `type` aliases (not `interface`) are used throughout — interfaces
+// are "open" (subject to declaration merging) and cannot satisfy the
+// `Record<string, unknown>` constraints that supabase-js uses internally for
+// INSERT/UPDATE operations.
 
-// ── Scalar enums ──────────────────────────────────────────────────────────────
+import type { Database } from '@/lib/supabase/database.types';
 
-export type Lens =
-  | 'health'
-  | 'politics'
-  | 'culture'
-  | 'entertainment'
-  | 'business';
-export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
+// Re-export Database so existing callers (client.ts, server.ts, admin.ts) need
+// no import-path changes.
+export type { Database };
+
+type Tables = Database['public']['Tables'];
+
+// ── Raw row types (private to this file) ─────────────────────────────────────
+
+type ArticleRow    = Tables['articles']['Row'];
+type BriefingRow   = Tables['briefings']['Row'];
+type DispatchRow   = Tables['dispatches']['Row'];
+type HandbookRow   = Tables['handbooks']['Row'];
+type DownloadRow   = Tables['downloads']['Row'];
+type CourseRow     = Tables['courses']['Row'];
+type LessonRow     = Tables['lessons']['Row'];
+type MemberRow     = Tables['members']['Row'];
+
+// ── Scalar enums — narrow string literals ─────────────────────────────────────
+// These remain hand-rolled because the schema uses text + CHECK constraints
+// (not Postgres enums), so the generated DB types use `string` for those
+// columns. Narrowing them here keeps all existing call sites unchanged.
+
+export type Lens = 'health' | 'politics' | 'culture' | 'entertainment' | 'business';
 export type AccessTier = 'free' | 'basic' | 'premium';
+export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived' | 'withdrawn';
 export type MemberTier = 'free' | 'basic' | 'premium';
 export type PaidMemberTier = Exclude<MemberTier, 'free'>;
-export type ContentStatus = 'draft' | 'review' | 'scheduled' | 'published' | 'archived' | 'withdrawn';
 export type MemberRole = 'member' | 'editor' | 'admin';
+export type CourseCategory = 'martial-arts' | 'mental-health' | 'relationships' | 'purpose' | 'branding';
 export type ContactSubmissionStatus = 'new' | 'in_progress' | 'resolved' | 'spam';
 export type AdminActivityEntityType = 'article' | 'briefing' | 'dispatch' | 'handbook' | 'download';
 export type AdminActivityAction = 'created' | 'updated' | 'deleted';
+
+// ── Composite types ───────────────────────────────────────────────────────────
 
 export type BriefingSection = {
   title: string;
   body: string;
 };
 
-// ── Application row types ─────────────────────────────────────────────────────
+// ── Domain aliases — same exported names as before ────────────────────────────
+// The schema tables use plain `string` for columns that have CHECK constraints
+// (lens, access_tier, status, tier, role). We layer our narrow union types on
+// top via intersection/override so callers get precise types without changing
+// any call sites.
 
-export type Article = {
-  id: string;
-  title: string;
-  slug: string;
+export type Article = Omit<
+  ArticleRow,
+  'lens' | 'access_tier' | 'status' | 'search_vector'
+> & {
   lens: Lens;
-  tags: string[];
-  excerpt: string;
-  body: string;
-  featured: boolean;
   access_tier: AccessTier;
   status: ContentStatus;
-  author: string;
-  cover_image: string | null;
-  published_at: string;
-  created_at: string;
 };
 
-/** Archive/card queries — no `body` (smaller payloads). */
+/** Archive/card queries — no `body` or `search_vector` (smaller payloads). */
 export type ArticleListItem = Pick<
   Article,
   | 'id'
@@ -62,19 +85,17 @@ export type ArticleListItem = Pick<
   | 'author'
 >;
 
-export type Briefing = {
-  id: string;
-  issue_number: number;
-  title: string;
-  slug: string;
-  sections: BriefingSection[];
-  /** Mirrors first section title; generated column — see migrations (omitted on INSERT). */
-  lead_kicker?: string | null;
+// Briefing narrows the DB row's string columns and aliases sections to BriefingSection[].
+// database.types.ts types sections concretely as { title: string; body: string }[]
+// (rather than Json) so this derivation works without double-casting at call sites.
+export type Briefing = Omit<
+  BriefingRow,
+  'access_tier' | 'status' | 'search_vector'
+> & {
   access_tier: AccessTier;
   status: ContentStatus;
-  cover_image: string | null;
-  published_at: string;
-  created_at: string;
+  /** Mirrors first section title; generated column — see migrations (omit on INSERT). */
+  lead_kicker?: string | null;
 };
 
 /** Archive / homepage cards — no `sections` jsonb. */
@@ -94,53 +115,24 @@ export type BriefingListItem = Pick<
 /** Sitemap / URL enumeration — no sections or heavy fields. */
 export type BriefingSitemapRow = Pick<Briefing, 'slug' | 'published_at'>;
 
-export type Member = {
-  id: string;
-  email: string;
+export type Member = Omit<MemberRow, 'tier' | 'role'> & {
   tier: MemberTier;
   role: MemberRole;
-  stripe_customer_id: string | null;
-  stripe_subscription_id: string | null;
-  created_at: string;
 };
 
-export type Course = {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  category: string;
+export type Course = Omit<CourseRow, 'access_tier'> & {
   access_tier: AccessTier;
-  published: boolean;
-  cover_image: string | null;
-  created_at: string;
 };
 
-export type Lesson = {
-  id: string;
-  course_id: string;
-  title: string;
-  slug: string;
-  order_number: number;
-  body: string;
-  video_url: string | null;
-  duration: number;
-  published: boolean;
-  created_at: string;
-};
+export type Lesson = LessonRow;
 
-export type Dispatch = {
-  id: string;
-  title: string;
-  slug: string;
+// NOTE: dispatches does NOT have an `access_tier` column in the database schema.
+// The search_content() RPC returns 'free' as a sentinel for dispatches, but the
+// actual table has no such column. `search_vector` is a generated column, omit
+// from business logic.
+export type Dispatch = Omit<DispatchRow, 'lens' | 'status' | 'search_vector'> & {
   lens: Lens;
-  excerpt: string;
-  body: string;
   status: ContentStatus;
-  author: string;
-  cover_image: string | null;
-  published_at: string;
-  created_at: string;
 };
 
 /** Blog listing — no `body`. */
@@ -149,85 +141,62 @@ export type DispatchListItem = Pick<
   'id' | 'title' | 'slug' | 'lens' | 'excerpt' | 'published_at'
 >;
 
-export type Handbook = {
-  id: string;
-  title: string;
-  slug: string;
+export type Handbook = Omit<
+  HandbookRow,
+  'lens' | 'access_tier' | 'status' | 'search_vector'
+> & {
   lens: Lens;
-  description: string;
-  body: string;
   access_tier: AccessTier;
   status: ContentStatus;
-  author: string;
-  cover_image: string | null;
-  file_url: string | null;
-  published_at: string;
-  created_at: string;
 };
 
 export type HandbookSitemapRow = Pick<Handbook, 'slug' | 'published_at'>;
 
-export type Download = {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  category: string;
-  file_url: string;
-  file_type: string;
-  file_size: number;
+export type Download = Omit<DownloadRow, 'access_tier'> & {
   access_tier: AccessTier;
-  cover_image: string | null;
-  published_at: string;
-  created_at: string;
 };
 
-export type NewsletterSubscriber = {
-  id: string;
-  email: string;
-  source: string | null;
-  subscribed_at: string;
-  unsubscribed_at: string | null;
-};
+export type NewsletterSubscriber = Tables['newsletter_subscribers']['Row'];
 
-export type ContactSubmission = {
-  id: string;
-  name: string;
-  email: string;
-  subject: string | null;
-  message: string;
+export type ContactSubmission = Omit<
+  Tables['contact_submissions']['Row'],
+  'status'
+> & {
   status: ContactSubmissionStatus;
-  internal_notes: string | null;
-  handled_at: string | null;
-  handled_by: string | null;
-  submitted_at: string;
 };
 
-export type AdminActivityLog = {
-  id: string;
-  actor_user_id: string | null;
-  actor_email: string;
+// AdminActivityLog narrows the actor_role/entity_type/action string columns to
+// their precise union types, and overrides `metadata` from `Json` to
+// `Record<string, unknown>` — the shape the application layer actually uses.
+// The database.types.ts Insert type for metadata is `Json | undefined`, but
+// `Record<string, unknown>` is the practical runtime contract.
+export type AdminActivityLog = Omit<
+  Tables['admin_activity_log']['Row'],
+  'actor_role' | 'entity_type' | 'action' | 'metadata'
+> & {
   actor_role: MemberRole;
   entity_type: AdminActivityEntityType;
-  entity_id: string;
-  entity_title: string;
   action: AdminActivityAction;
-  summary: string;
   metadata: Record<string, unknown>;
-  created_at: string;
+};
+
+// Narrow Insert type so call sites can pass Record<string, unknown> for metadata
+// without casting. The database accepts any JSON object there.
+export type AdminActivityLogInsert = Omit<
+  Tables['admin_activity_log']['Insert'],
+  'actor_role' | 'entity_type' | 'action' | 'metadata'
+> & {
+  actor_role: MemberRole;
+  entity_type: AdminActivityEntityType;
+  action: AdminActivityAction;
+  metadata?: Record<string, unknown>;
 };
 
 // ── Member Bookmarks ──────────────────────────────────────────────────────────
 
-export type MemberBookmark = {
-  id: string;
-  member_id: string;
-  content_type: string;
-  content_id: string;
-  created_at: string;
-};
+export type MemberBookmark = Tables['member_bookmarks']['Row'];
 
-// ── Search ───────────────────────────────────────────────────────────────────
+// ── Search ────────────────────────────────────────────────────────────────────
 
 export type SearchContentType = 'article' | 'briefing' | 'handbook' | 'dispatch';
 
@@ -256,112 +225,14 @@ export type BookmarkedItem = {
   bookmarkedAt: string;
 };
 
-// ── Campaigns ────────────────────────────────────────────────────────────────
+// ── Campaigns ─────────────────────────────────────────────────────────────────
 
 export type CampaignStatus = 'draft' | 'scheduled' | 'sent' | 'failed';
 export type AudienceFilter = { source?: string; activeOnly?: boolean };
-export type Campaign = {
-  id: string;
-  title: string;
-  subject: string;
-  body: string;
-  audience_filter: AudienceFilter;
-  recipient_count: number;
+export type Campaign = Omit<
+  Tables['campaigns']['Row'],
+  'status' | 'audience_filter'
+> & {
   status: CampaignStatus;
-  scheduled_at: string | null;
-  sent_at: string | null;
-  created_at: string;
-  updated_at: string;
-};
-
-// ── Database generic (required by @supabase/supabase-js typed client) ─────────
-// Maps table names to their Row/Insert/Update shapes so every
-// supabase.from('articles').select() call returns Article[] automatically.
-
-export type Database = {
-  public: {
-    Tables: {
-      articles: {
-        Row: Article;
-        Insert: Omit<Article, 'id' | 'created_at'>;
-        Update: Partial<Omit<Article, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      briefings: {
-        Row: Briefing;
-        Insert: Omit<Briefing, 'id' | 'created_at' | 'lead_kicker'>;
-        Update: Partial<Omit<Briefing, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      members: {
-        Row: Member;
-        Insert: Omit<Member, 'created_at'>;
-        Update: Partial<Omit<Member, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      courses: {
-        Row: Course;
-        Insert: Omit<Course, 'id' | 'created_at'>;
-        Update: Partial<Omit<Course, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      lessons: {
-        Row: Lesson;
-        Insert: Omit<Lesson, 'id' | 'created_at'>;
-        Update: Partial<Omit<Lesson, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      dispatches: {
-        Row: Dispatch;
-        Insert: Omit<Dispatch, 'id' | 'created_at'>;
-        Update: Partial<Omit<Dispatch, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      handbooks: {
-        Row: Handbook;
-        Insert: Omit<Handbook, 'id' | 'created_at'>;
-        Update: Partial<Omit<Handbook, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      downloads: {
-        Row: Download;
-        Insert: Omit<Download, 'id' | 'created_at'>;
-        Update: Partial<Omit<Download, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      newsletter_subscribers: {
-        Row: NewsletterSubscriber;
-        Insert: Omit<NewsletterSubscriber, 'id' | 'subscribed_at'>;
-        Update: Partial<Omit<NewsletterSubscriber, 'id'>>;
-        Relationships: [];
-      };
-      contact_submissions: {
-        Row: ContactSubmission;
-        Insert: Omit<ContactSubmission, 'id' | 'submitted_at' | 'status' | 'internal_notes' | 'handled_at' | 'handled_by'>;
-        Update: Partial<Omit<ContactSubmission, 'id'>>;
-        Relationships: [];
-      };
-      admin_activity_log: {
-        Row: AdminActivityLog;
-        Insert: Omit<AdminActivityLog, 'id' | 'created_at'>;
-        Update: Partial<Omit<AdminActivityLog, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      member_bookmarks: {
-        Row: MemberBookmark;
-        Insert: Omit<MemberBookmark, 'id' | 'created_at'>;
-        Update: Partial<Omit<MemberBookmark, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-      campaigns: {
-        Row: Campaign;
-        Insert: Omit<Campaign, 'id' | 'created_at' | 'updated_at'>;
-        Update: Partial<Omit<Campaign, 'id' | 'created_at'>>;
-        Relationships: [];
-      };
-    };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
-  };
+  audience_filter: AudienceFilter;
 };

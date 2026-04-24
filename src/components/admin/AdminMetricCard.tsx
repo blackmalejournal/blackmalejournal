@@ -41,7 +41,7 @@ export function AdminMetricCard({
 
   const content = (
     <div
-      className={`h-full border surface-panel p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-bmj-border-strong hover:shadow-[var(--shadow-md)] ${toneClasses[tone]}`}
+      className={`h-full border surface-panel p-6 hover-lift-sm hover:border-bmj-border-strong hover:shadow-[var(--shadow-md)] ${toneClasses[tone]}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">

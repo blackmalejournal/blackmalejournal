@@ -68,7 +68,7 @@ describe('searchContentFTS', () => {
 
   test('calls RPC with correct params and default options', async () => {
     const mockSupabase = makeMockSupabase({ data: [], error: null });
-    mockCreateClient.mockResolvedValue(mockSupabase as never);
+    mockCreateClient.mockResolvedValue(mockSupabase as unknown as Awaited<ReturnType<typeof createClient>>);
 
     await searchContentFTS('masculinity');
 
@@ -83,7 +83,7 @@ describe('searchContentFTS', () => {
 
   test('passes null for omitted lens and types filters', async () => {
     const mockSupabase = makeMockSupabase({ data: [], error: null });
-    mockCreateClient.mockResolvedValue(mockSupabase as never);
+    mockCreateClient.mockResolvedValue(mockSupabase as unknown as Awaited<ReturnType<typeof createClient>>);
 
     await searchContentFTS('discipline', { sort: 'date', limit: 10 });
 
@@ -98,7 +98,7 @@ describe('searchContentFTS', () => {
 
   test('passes provided lens and types filters', async () => {
     const mockSupabase = makeMockSupabase({ data: [], error: null });
-    mockCreateClient.mockResolvedValue(mockSupabase as never);
+    mockCreateClient.mockResolvedValue(mockSupabase as unknown as Awaited<ReturnType<typeof createClient>>);
 
     await searchContentFTS('health', { lens: ['health', 'culture'], types: ['article'] });
 
@@ -113,7 +113,7 @@ describe('searchContentFTS', () => {
 
   test('returns empty array on RPC error', async () => {
     const mockSupabase = makeMockSupabase({ data: null, error: { message: 'RPC failed' } });
-    mockCreateClient.mockResolvedValue(mockSupabase as never);
+    mockCreateClient.mockResolvedValue(mockSupabase as unknown as Awaited<ReturnType<typeof createClient>>);
 
     const result = await searchContentFTS('discipline');
     expect(result).toEqual([]);
@@ -134,7 +134,7 @@ describe('searchContentFTS', () => {
       },
     ];
     const mockSupabase = makeMockSupabase({ data: rows, error: null });
-    mockCreateClient.mockResolvedValue(mockSupabase as never);
+    mockCreateClient.mockResolvedValue(mockSupabase as unknown as Awaited<ReturnType<typeof createClient>>);
 
     const results = await searchContentFTS('discipline');
     expect(results).toHaveLength(1);

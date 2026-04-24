@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore, type ElementType } from 'react';
+import React, { useEffect, useRef, useState, useSyncExternalStore, type ElementType } from 'react';
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -99,7 +99,7 @@ export function ScrollReveal({
 
   return (
     <Tag
-      ref={ref as never}
+      ref={ref as unknown as React.RefObject<HTMLElement>}
       className={cn(
         className,
         animating && 'will-change-[opacity,transform]',
