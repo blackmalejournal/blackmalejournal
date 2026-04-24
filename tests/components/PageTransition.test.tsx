@@ -16,6 +16,17 @@ describe('PageTransition', () => {
   });
 
   it('wraps content in a div with fade-in animation classes', () => {
+    (window as any).matchMedia = jest.fn().mockImplementation((query: string) => ({
+      media: query,
+      matches: true,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
     const { container } = render(
       <PageTransition>
         <p>Content</p>
