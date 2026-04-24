@@ -151,5 +151,6 @@ describe('POST /api/stripe/donate', () => {
     expect(res.status).toBe(429);
     const body = await res.json();
     expect(body.error).toBe('Too many requests');
+    expect(mockRateLimitCheck).toHaveBeenCalledWith(10, '127.0.0.1');
   });
 });

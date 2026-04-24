@@ -35,19 +35,19 @@ function normalizeFolder(folder: string): string {
 }
 
 export async function POST(request: Request) {
+  const headerList = await headers();
+  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const { success } = await limiter.check(20, ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   const actor = await getAdminActor(['admin', 'editor']);
   if (!actor.userId) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
   }
   if (!actor.member) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
-  }
-
-  const headerList = await headers();
-  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
-  const { success } = await limiter.check(20, ip);
-  if (!success) {
-    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
   const formData = await request.formData();
