@@ -5,7 +5,7 @@ interface PublishReadinessBadgeProps {
 }
 
 const readinessClasses: Record<PublishReadiness['status'], string> = {
-  ready: 'bg-[#416100]/20 text-[#416100]',
+  ready: 'bg-bmj-olive/20 text-bmj-olive',
   warning: 'bg-bmj-amber/20 text-bmj-amber',
   blocked: 'bg-bmj-red/20 text-bmj-red',
 };

@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import {
-  Bebas_Neue,
   Oswald,
   IBM_Plex_Mono,
   Libre_Baskerville,
@@ -18,12 +18,22 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PageTransition } from "@/components/motion/PageTransition";
 
 /*
- * Bebas Neue — display/headline font
- * LICENSE: SIL Open Font License — free for commercial use
+ * Highrise — display/headline font (self-hosted)
+ * LICENSE: see public/fonts/LICENSES.md
  */
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
+const highrise = localFont({
+  src: [
+    {
+      path: "../../public/fonts/highrise-regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/highrise-bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-bebas-neue",
   display: "swap",
 });
@@ -109,7 +119,7 @@ export default async function RootLayout({
     : null;
 
   const fontVars = [
-    bebasNeue.variable,
+    highrise.variable,
     libreBaskerville.variable,
     oswald.variable,
     ibmPlexMono.variable,

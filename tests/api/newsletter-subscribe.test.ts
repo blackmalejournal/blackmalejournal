@@ -4,9 +4,16 @@ jest.mock('@/lib/supabase/queries', () => ({
   subscribeToNewsletter: (...args: unknown[]) => mockSubscribe(...args),
 }));
 
-let _ipCounter = 0;
+const mockRateLimitCheck = jest.fn();
+jest.mock('@/lib/rate-limit', () => ({
+  rateLimit: () => ({ check: (...args: unknown[]) => mockRateLimitCheck(...args) }),
+}));
+
 jest.mock('next/headers', () => ({
-  headers: () => Promise.resolve(new Map([['x-forwarded-for', `10.0.0.${++_ipCounter}`]])),
+  headers: () =>
+    Promise.resolve({
+      get: (name: string) => (name === 'x-forwarded-for' ? '10.0.0.1' : null),
+    }),
 }));
 
 import { POST } from '@/app/api/newsletter/subscribe/route';
@@ -31,6 +38,16 @@ describe('POST /api/newsletter/subscribe', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockSubscribe.mockResolvedValue({ id: 'sub-1' });
+    mockRateLimitCheck.mockResolvedValue({ success: true, remaining: 4 });
+  });
+
+  it('returns 429 when rate limit exceeded', async () => {
+    mockRateLimitCheck.mockResolvedValue({ success: false, remaining: 0 });
+    const res = await POST(makeRequest({ email: 'user@example.com' }));
+    expect(res.status).toBe(429);
+    const body = await res.json();
+    expect(body.error).toBe('Too many requests');
+    expect(mockRateLimitCheck).toHaveBeenCalledWith(5, '10.0.0.1');
   });
 
   it('returns 400 for invalid JSON', async () => {

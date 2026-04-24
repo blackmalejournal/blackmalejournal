@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import Stripe from 'stripe';
+import { headers } from 'next/headers';
 import { getStripe } from '@/lib/stripe/config';
 import { resolveSiteUrl } from '@/lib/site-url';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({ interval: 60_000, uniqueTokenPerInterval: 500 });
 
 const donateSchema = z.object({
   amount: z.number().min(1, 'Minimum $1').max(10000, 'Maximum $10,000'),
@@ -14,6 +18,14 @@ const donateSchema = z.object({
 
 export async function POST(request: Request) {
   const siteUrl = resolveSiteUrl();
+
+  const headerList = await headers();
+  const ip = headerList.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous';
+  const { success } = await limiter.check(10, ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

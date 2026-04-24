@@ -21,17 +21,17 @@ const STATUS_STYLES: Record<AdminStatus, string> = {
   // Content lifecycle
   draft: 'border-bmj-tan/30 bg-bmj-tan/15 text-bmj-tan',
   review: 'border-bmj-amber/40 bg-bmj-amber/15 text-bmj-amber',
-  scheduled: 'border-[#C77A0E]/40 bg-[#C77A0E]/15 text-[#C77A0E]',
-  published: 'border-[#416100]/40 bg-[#416100]/15 text-[#416100]',
+  scheduled: 'border-bmj-gold/40 bg-bmj-gold/15 text-bmj-gold',
+  published: 'border-bmj-olive/40 bg-bmj-olive/15 text-bmj-olive',
   archived: 'border-bmj-tan/20 bg-bmj-tan/10 text-bmj-tan/60',
   withdrawn: 'border-bmj-red/40 bg-bmj-red/15 text-bmj-red',
   // Campaign extras
-  sent: 'border-[#416100]/40 bg-[#416100]/15 text-[#416100]',
+  sent: 'border-bmj-olive/40 bg-bmj-olive/15 text-bmj-olive',
   failed: 'border-bmj-red/40 bg-bmj-red/15 text-bmj-red',
   // Contact submission extras
   new: 'border-bmj-amber/40 bg-bmj-amber/15 text-bmj-amber',
-  in_progress: 'border-[#C77A0E]/40 bg-[#C77A0E]/15 text-[#C77A0E]',
-  resolved: 'border-[#416100]/40 bg-[#416100]/15 text-[#416100]',
+  in_progress: 'border-bmj-gold/40 bg-bmj-gold/15 text-bmj-gold',
+  resolved: 'border-bmj-olive/40 bg-bmj-olive/15 text-bmj-olive',
   spam: 'border-bmj-tan/20 bg-bmj-tan/10 text-bmj-tan/60',
 };
 

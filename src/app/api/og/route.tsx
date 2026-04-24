@@ -15,6 +15,7 @@ const COLORS = {
   olive: '#416100',
   purple: '#554978',
   white: '#F2EDE4',
+  paper: '#F0DDBC',
 } as const;
 
 const LENS_ACCENTS: Record<string, string> = {
@@ -106,7 +107,7 @@ export async function GET(request: NextRequest) {
               Strictly Confidential
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', borderBottom: `2px solid rgba(28, 19, 14, 0.1)`, pb: 20, mb: 40 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', borderBottom: `2px solid rgba(28, 19, 14, 0.1)`, paddingBottom: 20, marginBottom: 40 }}>
               <span style={{ fontSize: 16, fontWeight: 700, opacity: 0.6, letterSpacing: 2 }}>INTEL BRIEFING // BMJ-A-001</span>
               <span style={{ fontSize: 14, opacity: 0.4 }}>DATE: APRIL 20, 2026</span>
             </div>
@@ -116,7 +117,7 @@ export async function GET(request: NextRequest) {
               <div style={{ fontSize: 64, lineHeight: 1.1, fontWeight: 700, textTransform: 'uppercase' }}>{title}</div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: `1px solid rgba(28, 19, 14, 0.1)`, pt: 20 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: `1px solid rgba(28, 19, 14, 0.1)`, paddingTop: 20 }}>
               <span style={{ fontSize: 14, opacity: 0.4 }}>OFFICIAL CORRESPONDENCE</span>
               <span style={{ fontSize: 14, opacity: 0.4 }}>THE CHAIRMAN // BMJ</span>
             </div>

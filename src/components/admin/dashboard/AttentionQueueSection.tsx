@@ -35,7 +35,7 @@ export function AttentionQueueSection({ items }: AttentionQueueSectionProps) {
       </div>
 
       {items.length === 0 ? (
-        <p className="mt-6 border border-[#416100]/30 bg-[#416100]/10 p-4 font-body text-sm text-bmj-cream/80">
+        <p className="mt-6 border border-bmj-olive/30 bg-bmj-olive/10 p-4 font-body text-sm text-bmj-cream/80">
           No urgent admin blockers are visible right now. The inbox is under
           control and there are no stale editorial or billing exceptions in
           the current snapshot.

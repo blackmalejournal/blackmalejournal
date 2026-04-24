@@ -29,8 +29,10 @@ function collectTsxFiles(dir: string): string[] {
 
 const PROHIBITED = [
   {
-    pattern: /\bshadow-(?:sm|md|lg|xl|2xl|inner)\b/g,
-    name: 'drop shadows (shadow-sm/md/lg/xl/2xl/inner)',
+    // Matches Tailwind shadow utilities directly. Excludes CSS-variable references
+    // like shadow-[var(--shadow-md)] which are the correct token-based approach.
+    pattern: /(?<!\[var\(--)shadow-(?:sm|md|lg|xl|2xl|inner)\b/g,
+    name: 'drop shadows (shadow-sm/md/lg/xl/2xl/inner) — use shadow-[var(--shadow-*)] instead',
   },
   {
     pattern: /\bbg-gradient-/g,
@@ -42,10 +44,14 @@ const PROHIBITED = [
   },
 ];
 
-// Files with known, explicitly allowed exceptions
-const ALLOWED: Record<string, RegExp[]> = {
-  // Navbar backdrop-blur-sm on scroll is allowed per invariants.md
-  'Navbar.tsx': [],
+// Files with intentional exceptions — functional UI elements that require gradients
+// or shadows. Each entry lists the specific prohibited patterns that are allowed
+// in that file. Do NOT add new entries without a design review.
+const ALLOWED_EXCEPTIONS: Record<string, RegExp[]> = {
+  // Upload field shimmer: animated gradient communicates upload progress state
+  'StorageUploadField.tsx': [/\bbg-gradient-/],
+  // Lesson progress bar: gradient fill communicates completion percentage
+  'LessonCard.tsx': [/\bbg-gradient-/],
 };
 
 const componentFiles = collectTsxFiles(COMPONENTS_DIR);
@@ -53,22 +59,25 @@ const componentFiles = collectTsxFiles(COMPONENTS_DIR);
 describe('Brand Compliance Guard', () => {
   it.each(componentFiles.map((f) => [relative(COMPONENTS_DIR, f), f]))(
     '%s has no prohibited CSS patterns',
-    (_relPath, filePath) => {
+    (relPath, filePath) => {
+      const fileName = (relPath as string).split(/[/\\]/).pop() ?? '';
+      const exceptions = ALLOWED_EXCEPTIONS[fileName] ?? [];
       const content = readFileSync(filePath as string, 'utf-8');
       const violations: string[] = [];
 
       for (const { pattern, name } of PROHIBITED) {
-        // Reset regex state for each file
         pattern.lastIndex = 0;
-        const matches = content.match(pattern);
-        if (matches && matches.length > 0) {
+        const matches = (content.match(pattern) ?? []).filter(
+          (m) => !exceptions.some((ex) => ex.test(m)),
+        );
+        if (matches.length > 0) {
           violations.push(`${name}: ${matches.join(', ')}`);
         }
       }
 
       if (violations.length > 0) {
-        fail(
-          `Brand violation in ${_relPath}:\n` +
+        throw new Error(
+          `Brand violation in ${relPath}:\n` +
             violations.map((v) => `  - ${v}`).join('\n') +
             '\n\nSee docs/brand/invariants.md for rules.',
         );
@@ -77,7 +86,52 @@ describe('Brand Compliance Guard', () => {
   );
 
   it('scanned at least 30 component files', () => {
-    // Sanity check — if file count drops dramatically, something is wrong
     expect(componentFiles.length).toBeGreaterThanOrEqual(30);
+  });
+});
+
+describe('Brand Token Enforcement', () => {
+  const BRAND_HEX_VALUES = new Set([
+    // Primary colors — must use bmj-* tokens, not raw hex
+    '0D0C0B', 'E8DCC8', 'C0281F', 'C8852A', '3B2417', 'B8986A', 'F2EDE4',
+    // Sectional accent colors
+    'F0DDBC', '1C130E', '712414', '5D3F2E', '416100', 'C77A0E', '554978',
+  ]);
+
+  it('no component uses hardcoded brand hex in Tailwind arbitrary value syntax', () => {
+    // Pattern: [#416100] or [#C0281F] — Tailwind arbitrary hex values
+    const inlineHexPattern = /\[#([0-9A-Fa-f]{6})\]/g;
+    const violations: string[] = [];
+
+    for (const filePath of componentFiles) {
+      const content = readFileSync(filePath as string, 'utf-8');
+      const relPath = relative(COMPONENTS_DIR, filePath);
+      const matches = content.match(inlineHexPattern) ?? [];
+
+      for (const match of matches) {
+        // match is like [#416100] — extract the 6-char hex
+        const hex = match.slice(2, -1).toUpperCase();
+        if (BRAND_HEX_VALUES.has(hex)) {
+          violations.push(`${relPath}: found ${match} — use bmj-* token instead`);
+        }
+      }
+    }
+
+    if (violations.length > 0) {
+      throw new Error(
+        'Brand hex violations (use token classes, not raw hex):\n' +
+          violations.map((v) => `  - ${v}`).join('\n') +
+          '\n\nSee .claude/rules/brand.md for token names.',
+      );
+    }
+  });
+
+  it('root layout loads Highrise via next/font/local, not Bebas Neue from Google', () => {
+    const layoutPath = join(__dirname, '..', 'src', 'app', 'layout.tsx');
+    const content = readFileSync(layoutPath, 'utf-8');
+
+    expect(content).toContain('next/font/local');
+    expect(content).toContain('highrise-regular.otf');
+    expect(content).not.toContain('Bebas_Neue');
   });
 });
