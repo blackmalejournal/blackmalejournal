@@ -1,12 +1,14 @@
 // src/lib/supabase/database.types.ts
 // ─────────────────────────────────────────────────────────────────────────────
-// GENERATED FROM MIGRATIONS — do not edit by hand.
-// Regenerate when the schema changes:
-//   npx supabase gen types typescript --local > src/lib/supabase/database.types.ts
-// (requires Docker Desktop + local Supabase running)
+// GENERATED FROM MIGRATIONS — hand-authored, kept in sync with remote schema.
 //
-// Until Docker is available this file was hand-authored from:
-//   supabase/migrations/*.sql  (all migrations applied in order)
+// To regenerate from remote (no Docker required):
+//   supabase gen types typescript --linked > src/lib/supabase/database.types.ts
+// Then strip the two CLI banner lines the tool adds at top and bottom and
+// **re-narrow the jsonb columns back to their concrete shapes** — the raw
+// generator types them as `Json`, but the rest of the codebase depends on:
+//   - briefings.sections: { title: string; body: string }[]
+//   - admin_activity_log.metadata: Record<string, unknown> | null (via Json)
 // Run `npx tsc --noEmit` after any schema change to catch column drift.
 // ─────────────────────────────────────────────────────────────────────────────
 
