@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getAuthUser } from '@/lib/supabase/access';
 import { getMemberById } from '@/lib/supabase/queries';
 import { AdminNav } from './AdminNav';
+import { ToastProvider } from '@/lib/toast';
 
 export default async function AdminLayout({
   children,
@@ -24,9 +25,11 @@ export default async function AdminLayout({
   const displayName = member.role === 'admin' ? 'The Chairman' : 'Editor';
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)]">
-      <AdminNav displayName={displayName} role={member.role} />
-      <div className="flex-1 bg-bmj-brown/30 p-8">{children}</div>
-    </div>
+    <ToastProvider>
+      <div className="flex min-h-[calc(100vh-4rem)]">
+        <AdminNav displayName={displayName} role={member.role} />
+        <div className="flex-1 bg-bmj-brown/30 p-8">{children}</div>
+      </div>
+    </ToastProvider>
   );
 }
