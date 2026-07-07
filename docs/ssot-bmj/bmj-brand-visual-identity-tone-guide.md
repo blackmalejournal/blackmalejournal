@@ -1,7 +1,7 @@
 
 Regarding tone:
 
-The Black Male Journal’s visual identity draws from revolutionary print culture—combining militant typography, posterized portraiture, and tactile newspaper textures to communicate ideological clarity, Pan-African consciousness, and unapologetic Black male intellectual authority.
+The Black Male Journal’s visual identity draws from revolutionary print culture: militant typography, posterized portraiture, and tactile newspaper textures to communicate ideological clarity, Pan-African consciousness, and unapologetic Black male intellectual authority.
 Polemic
 Bold
 Revolutionary/communist inspired 
