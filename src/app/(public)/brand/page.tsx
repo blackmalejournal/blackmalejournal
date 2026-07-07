@@ -5,7 +5,7 @@ import { Image as ImageIcon, FileText, Palette, Type } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Brand Identity System",
-  description: "Black Male Journal comprehensive brand identity and visual system showcase.",
+  description: "Black Male Journal brand identity and visual system showcase.",
 };
 
 const CORE_COLORS = [
@@ -73,8 +73,7 @@ export default function BrandPage() {
         <p className="editorial-kicker mb-4">Brand Identity System</p>
         <h1 className="page-title mb-6">The Black Male Journal</h1>
         <p className="editorial-deck">
-          A comprehensive visual identity system rooted in revolutionary print culture—combining 
-          militant typography, posterized portraiture, and tactile newspaper textures to communicate 
+          A visual identity system rooted in revolutionary print culture: militant typography, posterized portraiture, and tactile newspaper textures to communicate 
           ideological clarity, Pan-African consciousness, and unapologetic Black male intellectual authority.
         </p>
         <p className="mt-8 font-label text-sm uppercase tracking-label-lg text-bmj-tan">
